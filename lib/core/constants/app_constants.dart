@@ -34,4 +34,33 @@ final class _RegExp {
   );
 
   final RegExp number = RegExp(r'\d');
+
+    // App info
+  static const String appName = 'Cravvy';
+  static const String appTagline = 'Your AI Meal Planner';
+  static const String bundleId = 'com.tside07.cravvy';
+
+  // Nutrition defaults
+  static const int defaultCalorieGoal = 2200;
+  static const int defaultProteinGoal = 150;
+  static const int defaultCarbsGoal = 220;
+  static const int defaultFatGoal = 70;
+
+  // UI
+  static const double horizontalPadding = 24.0;
+  static const double cardRadius = 20.0;
+  static const double chipRadius = 12.0;
+  static const double buttonHeight = 56.0;
+  static const double bottomNavHeight = 72.0;
+
+  // Animation durations
+  static const int splashDuration = 3000;
+  static const int pageTransition = 300;
+  static const int microAnimation = 200;
+
+  // SharedPreferences keys
+  static const String keyOnboardingDone = 'onboarding_done';
+  static const String keySelectedGoal = 'selected_goal';
+  static const String keySelectedDiets = 'selected_diets';
+  static const String keyCalorieGoal = 'calorie_goal';
 }

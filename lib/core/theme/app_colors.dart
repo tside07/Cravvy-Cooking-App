@@ -23,9 +23,9 @@ class AppColors {
 
   //
 
-  static const Color brand = electricBlue;
+  // static const Color brand = electricBlue;
 
-  static const Color primary = electricBlue; // Dark Gunmetal 34281C
+  // static const Color primary = electricBlue; // Dark Gunmetal 34281C
 
   // static const Color secondary = ;
 
@@ -92,4 +92,43 @@ class AppColors {
   static const Color shimmerBaseColor = Color(0xFFF1F2F3);
 
   static const Color shimmerHighlightColor = Color(0xFFE3E6E8);
+
+    // Brand
+  static const Color primary = Color(0xFFFF6B35);
+  static const Color primaryLight = Color(0xFFFFEDE6);
+  static const Color primaryDark = Color(0xFFCC4D1A);
+
+  static const Color secondary = Color(0xFF2EC4B6);
+  static const Color secondaryLight = Color(0xFFE0F7F5);
+  static const Color secondaryDark = Color(0xFF1A9D91);
+
+  static const Color accent = Color(0xFFFFE66D);
+  static const Color accentDark = Color(0xFFF0C800);
+
+  // Neutrals
+  // static const Color background = Color(0xFFF8F9FA);
+  static const Color surface = Color(0xFFFFFFFF);
+  static const Color surfaceVariant = Color(0xFFF1F3F5);
+
+  static const Color textPrimary = Color(0xFF1A1A2E);
+  static const Color textSecondary = Color(0xFF6B7280);
+  static const Color textHint = Color(0xFFADB5BD);
+
+  // Semantic
+  static const Color successLight = Color(0xFFDCFCE7);
+  static const Color warning = Color(0xFFF59E0B);
+  static const Color warningLight = Color(0xFFFEF3C7);
+  static const Color errorLight = Color(0xFFFEE2E2);
+
+  // Macro colors
+  static const Color protein = Color(0xFF2EC4B6);
+  static const Color carbs = Color(0xFFFFE66D);
+  static const Color fat = Color(0xFFFF6B35);
+
+  // Meal type colors
+  static const Color breakfast = Color(0xFFFF6B35);
+  static const Color lunch = Color(0xFF2EC4B6);
+  static const Color dinner = Color(0xFF7C3AED);
+  static const Color snack = Color(0xFFF59E0B);
+
 }
