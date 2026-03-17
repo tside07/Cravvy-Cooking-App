@@ -1,0 +1,94 @@
+import 'package:flutter/material.dart';
+import 'package:cravvy_cooking_app/core/theme/app_colors.dart';
+
+class OnboardingSlide {
+  final String emoji;
+  final String title;
+  final String subtitle;
+  final Color bgColor;
+  final Color accentColor;
+
+  const OnboardingSlide({
+    required this.emoji,
+    required this.title,
+    required this.subtitle,
+    required this.bgColor,
+    required this.accentColor,
+  });
+}
+
+const kOnboardingSlides = [
+  OnboardingSlide(
+    emoji: '🍽️',
+    title: 'What should\nI eat today?',
+    subtitle:
+        'Tell us what\'s in your fridge and we\'ll suggest delicious, healthy meals tailored just for you.',
+    bgColor: Color(0xFFFFF3EE),
+    accentColor: AppColors.primary,
+  ),
+  OnboardingSlide(
+    emoji: '📅',
+    title: 'Plan your\nweek effortlessly',
+    subtitle:
+        'Get a personalized 7-day meal plan based on your health goals, diet type, and cooking time.',
+    bgColor: Color(0xFFE8FAF8),
+    accentColor: AppColors.secondary,
+  ),
+  OnboardingSlide(
+    emoji: '🎯',
+    title: 'Track nutrition\nwith ease',
+    subtitle:
+        'Monitor calories, macros and streaks automatically — no manual logging required.',
+    bgColor: Color(0xFFFFFAE6),
+    accentColor: AppColors.accentDark,
+  ),
+];
+
+class SlidePage extends StatelessWidget {
+  const SlidePage({super.key, required this.slide});
+
+  final OnboardingSlide slide;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 32),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            width: 200,
+            height: 200,
+            decoration: BoxDecoration(
+              color: slide.accentColor.withOpacity(0.12),
+              shape: BoxShape.circle,
+            ),
+            child: Center(
+              child: Text(
+                slide.emoji,
+                style: const TextStyle(fontSize: 90),
+              ),
+            ),
+          ),
+          const SizedBox(height: 48),
+          Text(
+            slide.title,
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.displayMedium?.copyWith(
+                  color: AppColors.textPrimary,
+                  height: 1.2,
+                ),
+          ),
+          const SizedBox(height: 16),
+          Text(
+            slide.subtitle,
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                  color: AppColors.textSecondary,
+                ),
+          ),
+        ],
+      ),
+    );
+  }
+}

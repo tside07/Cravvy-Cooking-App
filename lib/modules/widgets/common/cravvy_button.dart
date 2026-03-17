@@ -22,10 +22,7 @@ class CravvyButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (isOutlined) {
-      return OutlinedButton(
-        onPressed: isLoading ? null : onTap,
-        child: _child,
-      );
+      return OutlinedButton(onPressed: isLoading ? null : onTap, child: _child);
     }
     return ElevatedButton(
       onPressed: isLoading ? null : onTap,
@@ -41,18 +38,15 @@ class CravvyButton extends StatelessWidget {
   Widget get _child {
     if (isLoading) {
       return const SizedBox(
-        height: 22, width: 22,
+        height: 22,
+        width: 22,
         child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2.5),
       );
     }
     if (icon != null) {
       return Row(
         mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(icon, size: 20),
-          const SizedBox(width: 8),
-          Text(label),
-        ],
+        children: [Icon(icon, size: 20), const SizedBox(width: 8), Text(label)],
       );
     }
     return Text(label);

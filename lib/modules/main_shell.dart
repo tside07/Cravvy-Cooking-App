@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../core/theme/app_colors.dart';
 import '../modules/meal_plan/screen/meal_plan_screen.dart';
-import 'home/home_screen.dart';
+import 'home/screen/home_screen.dart';
 import '../modules/search/screen/search_screen.dart';
 import '../modules/progress/screen/progress_screen.dart';
 import '../modules/profile/screen/profile_screen.dart';

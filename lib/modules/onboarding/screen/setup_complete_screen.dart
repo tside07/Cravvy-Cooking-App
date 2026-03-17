@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
-import '../../../core/constants/app_colors.dart';
-import '../../../core/router/app_router.dart';
-import '../../providers/onboarding_provider.dart';
-import '../../widgets/common/cravvy_button.dart';
+import 'package:cravvy_cooking_app/core/theme/app_colors.dart';
+import 'package:cravvy_cooking_app/core/routes/app_routers.dart';
+import 'package:cravvy_cooking_app/modules/widgets/common/cravvy_button.dart';
+import '../widgets/summary_row.dart';
+import 'package:cravvy_cooking_app/modules/onboarding/provider/onboarding_provider.dart';
 
 class SetupCompleteScreen extends StatefulWidget {
-  const SetupCompleteScreen({super.key});
+  const SetupCompleteScreen({super.key, required this.args});
+
+  final OnboardingArgs args;
 
   @override
   State<SetupCompleteScreen> createState() => _SetupCompleteScreenState();
@@ -32,18 +34,22 @@ class _SetupCompleteScreenState extends State<SetupCompleteScreen>
     );
     _fadeAnim = Tween<double>(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(
-          parent: _controller, curve: const Interval(0.4, 1.0)),
+        parent: _controller,
+        curve: const Interval(0.4, 1.0),
+      ),
     );
   }
 
   @override
-  void dispose() { _controller.dispose(); super.dispose(); }
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    final provider = context.read<OnboardingProvider>();
-    final goal = provider.selectedGoal;
-    final diets = provider.selectedDiets;
+    final goal = widget.args.goal;
+    final diets = widget.args.diets;
 
     return Scaffold(
       backgroundColor: AppColors.background,
@@ -99,14 +105,17 @@ class _SetupCompleteScreenState extends State<SetupCompleteScreen>
                       child: Column(
                         children: [
                           if (goal != null) ...[
-                            _SummaryRow(
+                            SummaryRow(
                               icon: '🎯',
                               label: 'Your goal',
                               value: goal.title,
                             ),
-                            const Divider(height: 24, color: AppColors.divider),
+                            const Divider(
+                              height: 24,
+                              color: AppColors.divider,
+                            ),
                           ],
-                          _SummaryRow(
+                          SummaryRow(
                             icon: '🌿',
                             label: 'Diet type',
                             value: diets.isEmpty
@@ -114,7 +123,7 @@ class _SetupCompleteScreenState extends State<SetupCompleteScreen>
                                 : diets.map((d) => d.label).join(', '),
                           ),
                           const Divider(height: 24, color: AppColors.divider),
-                          const _SummaryRow(
+                          const SummaryRow(
                             icon: '📅',
                             label: 'Meal plan',
                             value: '7-day plan ready',
@@ -132,7 +141,7 @@ class _SetupCompleteScreenState extends State<SetupCompleteScreen>
                 opacity: _fadeAnim,
                 child: CravvyButton(
                   label: 'View My Meal Plan 🍽️',
-                  onTap: () => context.go(AppRouter.mealPlan),
+                  onTap: () => context.go(AppRouter.app),
                 ),
               ),
               const SizedBox(height: 12),
@@ -140,42 +149,6 @@ class _SetupCompleteScreenState extends State<SetupCompleteScreen>
           ),
         ),
       ),
-    );
-  }
-}
-
-class _SummaryRow extends StatelessWidget {
-  final String icon;
-  final String label;
-  final String value;
-
-  const _SummaryRow({
-    required this.icon,
-    required this.label,
-    required this.value,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Text(icon, style: const TextStyle(fontSize: 20)),
-        const SizedBox(width: 12),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(label, style: Theme.of(context).textTheme.bodyMedium),
-              Text(
-                value,
-                style: Theme.of(context).textTheme.titleMedium,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ],
-          ),
-        ),
-      ],
     );
   }
 }

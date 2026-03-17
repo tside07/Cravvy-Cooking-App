@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../core/constants/app_colors.dart';
-import '../../../data/models/meal.dart';
-import '../../providers/meal_plan_provider.dart';
+import 'package:cravvy_cooking_app/core/theme/app_colors.dart';
+import 'package:cravvy_cooking_app/data/models/meal.dart';
+import 'package:cravvy_cooking_app/modules/meal_plan/provider/meal_plan_provider.dart';
 
 class MealSwapSheet extends StatelessWidget {
-  final Meal meal;
   const MealSwapSheet({super.key, required this.meal});
+
+  final Meal meal;
 
   @override
   Widget build(BuildContext context) {
@@ -36,20 +37,21 @@ class MealSwapSheet extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(24, 20, 24, 0),
             child: Row(
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Swap Meal',
-                      style: Theme.of(context).textTheme.headlineSmall,
-                    ),
-                    Text(
-                      'Choose a replacement for ${meal.name}',
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
-                  ],
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Swap Meal',
+                        style: Theme.of(context).textTheme.headlineSmall,
+                      ),
+                      Text(
+                        'Choose a replacement for ${meal.name}',
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                    ],
+                  ),
                 ),
-                const Spacer(),
                 IconButton(
                   onPressed: () => Navigator.pop(context),
                   icon: const Icon(Icons.close_rounded),
@@ -61,7 +63,7 @@ class MealSwapSheet extends StatelessWidget {
             ),
           ),
 
-          // Current meal
+          // Current meal banner
           Container(
             margin: const EdgeInsets.fromLTRB(16, 16, 16, 0),
             padding: const EdgeInsets.all(12),
@@ -72,8 +74,11 @@ class MealSwapSheet extends StatelessWidget {
             ),
             child: Row(
               children: [
-                Icon(Icons.info_outline_rounded,
-                    size: 16, color: meal.type.color),
+                Icon(
+                  Icons.info_outline_rounded,
+                  size: 16,
+                  color: meal.type.color,
+                ),
                 const SizedBox(width: 8),
                 Expanded(
                   child: Text(
@@ -100,7 +105,7 @@ class MealSwapSheet extends StatelessWidget {
 
           const SizedBox(height: 16),
 
-          // Alternatives
+          // Alternatives list
           Expanded(
             child: ListView.builder(
               padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -109,8 +114,10 @@ class MealSwapSheet extends StatelessWidget {
                 meal: alternatives[i],
                 originalCalories: meal.calories,
                 onSelect: () {
-                  context.read<MealPlanProvider>()
-                      .swapMeal(meal.id, alternatives[i]);
+                  context.read<MealPlanProvider>().swapMeal(
+                    meal.id,
+                    alternatives[i],
+                  );
                   Navigator.pop(context);
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
@@ -137,15 +144,15 @@ class MealSwapSheet extends StatelessWidget {
 }
 
 class _AlternativeTile extends StatelessWidget {
-  final Meal meal;
-  final int originalCalories;
-  final VoidCallback onSelect;
-
   const _AlternativeTile({
     required this.meal,
     required this.originalCalories,
     required this.onSelect,
   });
+
+  final Meal meal;
+  final int originalCalories;
+  final VoidCallback onSelect;
 
   @override
   Widget build(BuildContext context) {
@@ -167,7 +174,6 @@ class _AlternativeTile extends StatelessWidget {
           padding: const EdgeInsets.all(14),
           child: Row(
             children: [
-              // Image
               ClipRRect(
                 borderRadius: BorderRadius.circular(12),
                 child: Image.network(
@@ -176,18 +182,20 @@ class _AlternativeTile extends StatelessWidget {
                   height: 70,
                   fit: BoxFit.cover,
                   errorBuilder: (_, __, ___) => Container(
-                    width: 70, height: 70,
+                    width: 70,
+                    height: 70,
                     color: meal.type.lightColor,
                     child: Center(
-                      child: Text(meal.type.emoji,
-                          style: const TextStyle(fontSize: 28)),
+                      child: Text(
+                        meal.type.emoji,
+                        style: const TextStyle(fontSize: 28),
+                      ),
                     ),
                   ),
                 ),
               ),
               const SizedBox(width: 14),
 
-              // Info
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -213,7 +221,9 @@ class _AlternativeTile extends StatelessWidget {
                         const SizedBox(width: 6),
                         Container(
                           padding: const EdgeInsets.symmetric(
-                              horizontal: 6, vertical: 1),
+                            horizontal: 6,
+                            vertical: 1,
+                          ),
                           decoration: BoxDecoration(
                             color: diffColor.withOpacity(0.1),
                             borderRadius: BorderRadius.circular(6),
@@ -234,38 +244,47 @@ class _AlternativeTile extends StatelessWidget {
                     Wrap(
                       spacing: 4,
                       runSpacing: 4,
-                      children: meal.tags.take(2).map((tag) => Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 7, vertical: 2),
-                        decoration: BoxDecoration(
-                          color: AppColors.surfaceVariant,
-                          borderRadius: BorderRadius.circular(6),
-                        ),
-                        child: Text(
-                          tag,
-                          style: const TextStyle(
-                            fontFamily: 'Nunito',
-                            fontSize: 10,
-                            fontWeight: FontWeight.w600,
-                            color: AppColors.textSecondary,
-                          ),
-                        ),
-                      )).toList(),
+                      children: meal.tags
+                          .take(2)
+                          .map(
+                            (tag) => Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 7,
+                                vertical: 2,
+                              ),
+                              decoration: BoxDecoration(
+                                color: AppColors.surfaceVariant,
+                                borderRadius: BorderRadius.circular(6),
+                              ),
+                              child: Text(
+                                tag,
+                                style: const TextStyle(
+                                  fontFamily: 'Nunito',
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w600,
+                                  color: AppColors.textSecondary,
+                                ),
+                              ),
+                            ),
+                          )
+                          .toList(),
                     ),
                   ],
                 ),
               ),
 
-              // Select button
               Container(
                 width: 36,
                 height: 36,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: AppColors.primaryLight,
                   shape: BoxShape.circle,
                 ),
-                child: const Icon(Icons.arrow_forward_rounded,
-                    color: AppColors.primary, size: 18),
+                child: const Icon(
+                  Icons.arrow_forward_rounded,
+                  color: AppColors.primary,
+                  size: 18,
+                ),
               ),
             ],
           ),

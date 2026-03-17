@@ -2,6 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
+import 'package:cravvy_cooking_app/modules/splash/screen/splash_screen.dart';
+import 'package:cravvy_cooking_app/modules/onboarding/screen/onboarding_screen.dart';
+import 'package:cravvy_cooking_app/modules/onboarding/screen/goal_selection_screen.dart';
+import 'package:cravvy_cooking_app/modules/onboarding/screen/diet_selection_screen.dart';
+import 'package:cravvy_cooking_app/modules/onboarding/screen/setup_complete_screen.dart';
+import 'package:cravvy_cooking_app/modules/onboarding/provider/onboarding_provider.dart';
+import 'package:cravvy_cooking_app/modules/meal_plan/provider/meal_plan_provider.dart';
+import 'package:cravvy_cooking_app/modules/main_shell.dart';
+
+/// Arguments passed from [GoalSelectionScreen] / [DietSelectionScreen]
+/// to [SetupCompleteScreen].
+class OnboardingArgs {
+  final HealthGoal? goal;
+  final Set<DietType> diets;
+
+  const OnboardingArgs({this.goal, required this.diets});
+}
 
 class AppRouter {
   static const String splash = '/';
@@ -10,6 +27,9 @@ class AppRouter {
   static const String dietSelection = '/onboarding/diet';
   static const String setupComplete = '/onboarding/complete';
   static const String app = '/app';
+
+  /// Alias kept for backward-compatibility with screens that use [mealPlan].
+  static const String mealPlan = app;
 
   static void _logRoute(String? name) {
     assert(() {
@@ -20,9 +40,7 @@ class AppRouter {
 
   static final GoRouter router = GoRouter(
     initialLocation: splash,
-
     observers: [_AppRouteObserver()],
-
     routes: [
       GoRoute(
         path: splash,
@@ -31,43 +49,38 @@ class AppRouter {
           return const NoTransitionPage(child: SplashScreen());
         },
       ),
-
       GoRoute(
         path: onboarding,
         builder: (context, state) => const OnboardingScreen(),
       ),
-
-      // ✅ DI tại route — OnboardingProvider chỉ sống trong flow onboarding
       GoRoute(
         path: goalSelection,
         builder: (context, state) => ChangeNotifierProvider(
-          create: (_) => OnboardingProvider(), // tạo mới, tự dispose khi pop
+          create: (_) => OnboardingProvider(),
           child: const GoalSelectionScreen(),
         ),
       ),
-
       GoRoute(
         path: dietSelection,
-        // ✅ Nhận argument từ route trước
         builder: (context, state) {
           final goal = state.extra as HealthGoal?;
           return ChangeNotifierProvider(
-            create: (_) => OnboardingProvider()..selectGoal(goal),
+            create: (_) {
+              final provider = OnboardingProvider();
+              if (goal != null) provider.selectGoal(goal);
+              return provider;
+            },
             child: const DietSelectionScreen(),
           );
         },
       ),
-
       GoRoute(
         path: setupComplete,
         builder: (context, state) {
-          // ✅ Type-safe argument — học từ settings.arguments
           final args = state.extra as OnboardingArgs;
           return SetupCompleteScreen(args: args);
         },
       ),
-
-      // ✅ MealPlanProvider chỉ sống trong /app, không phải global
       GoRoute(
         path: app,
         builder: (context, state) => ChangeNotifierProvider(
@@ -76,7 +89,25 @@ class AppRouter {
         ),
       ),
     ],
-
-    // errorBuilder: (context, state) => _ErrorScreen(path: state.uri.toString()),
+    errorBuilder: (context, state) =>
+        Scaffold(body: Center(child: Text('Route not found: ${state.uri}'))),
   );
+}
+
+class _AppRouteObserver extends NavigatorObserver {
+  @override
+  void didPush(Route route, Route? previousRoute) {
+    assert(() {
+      debugPrint('📌 Push: ${route.settings.name}');
+      return true;
+    }());
+  }
+
+  @override
+  void didPop(Route route, Route? previousRoute) {
+    assert(() {
+      debugPrint('⬅️  Pop: ${route.settings.name}');
+      return true;
+    }());
+  }
 }

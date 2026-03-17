@@ -115,7 +115,8 @@ class OnboardingProvider extends ChangeNotifier {
   HealthGoal? get selectedGoal => _selectedGoal;
   Set<DietType> get selectedDiets => Set.unmodifiable(_selectedDiets);
 
-  void selectGoal(HealthGoal goal) {
+  void selectGoal(HealthGoal? goal) {
+    if (goal == null) return;
     _selectedGoal = goal;
     notifyListeners();
   }
