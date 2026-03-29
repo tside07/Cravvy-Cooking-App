@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import '../../../core/theme/app_colors.dart';
+import 'package:cravvy_cooking_app/init.dart';
 
 class CravvyButton extends StatelessWidget {
   final String label;

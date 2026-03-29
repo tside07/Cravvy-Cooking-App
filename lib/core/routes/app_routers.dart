@@ -1,15 +1,12 @@
-import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:provider/provider.dart';
-
-import 'package:cravvy_cooking_app/modules/splash/screen/splash_screen.dart';
-import 'package:cravvy_cooking_app/modules/onboarding/screen/onboarding_screen.dart';
-import 'package:cravvy_cooking_app/modules/onboarding/screen/goal_selection_screen.dart';
-import 'package:cravvy_cooking_app/modules/onboarding/screen/diet_selection_screen.dart';
-import 'package:cravvy_cooking_app/modules/onboarding/screen/setup_complete_screen.dart';
+import 'package:cravvy_cooking_app/init.dart';
+import 'package:cravvy_cooking_app/modules/dashboard/screens/dashboard_screen.dart';
+import 'package:cravvy_cooking_app/modules/splash/screens/splash_screen.dart';
+import 'package:cravvy_cooking_app/modules/onboarding/screens/onboarding_screen.dart';
+import 'package:cravvy_cooking_app/modules/onboarding/screens/goal_selection_screen.dart';
+import 'package:cravvy_cooking_app/modules/onboarding/screens/diet_selection_screen.dart';
+import 'package:cravvy_cooking_app/modules/onboarding/screens/setup_complete_screen.dart';
 import 'package:cravvy_cooking_app/modules/onboarding/provider/onboarding_provider.dart';
 import 'package:cravvy_cooking_app/modules/meal_plan/provider/meal_plan_provider.dart';
-import 'package:cravvy_cooking_app/modules/main_shell.dart';
 
 /// Arguments passed from [GoalSelectionScreen] / [DietSelectionScreen]
 /// to [SetupCompleteScreen].
@@ -85,7 +82,7 @@ class AppRouter {
         path: app,
         builder: (context, state) => ChangeNotifierProvider(
           create: (_) => MealPlanProvider(),
-          child: const MainShell(),
+          child: const DashboardScreen(), //TODO
         ),
       ),
     ],

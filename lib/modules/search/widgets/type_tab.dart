@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:cravvy_cooking_app/core/theme/app_colors.dart';
-import 'ingredient_input_bar.dart';
-import 'recipe_suggestion_tile.dart';
+import 'package:cravvy_cooking_app/init.dart';
+import 'package:cravvy_cooking_app/modules/search/widgets/ingredient_input_bar_widget.dart';
+import 'package:cravvy_cooking_app/modules/search/widgets/recipe_suggestion_tile_widget.dart';
+
 
 class TypeTab extends StatelessWidget {
   const TypeTab({
@@ -28,7 +28,7 @@ class TypeTab extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          IngredientInputBar(controller: controller, onAdd: onAdd),
+          IngredientInputBarWidget(controller: controller, onAdd: onAdd),
           const SizedBox(height: 16),
 
           // Added chips
@@ -148,7 +148,7 @@ class TypeTab extends StatelessWidget {
             ),
             const SizedBox(height: 12),
             ...suggestedRecipes.map(
-              (r) => RecipeSuggestionTile(recipe: r),
+              (r) => RecipeSuggestionTileWidget(recipe: r),
             ),
           ],
           const SizedBox(height: 80),

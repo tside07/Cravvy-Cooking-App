@@ -1,12 +1,10 @@
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:go_router/go_router.dart';
-import 'package:cravvy_cooking_app/core/theme/app_colors.dart';
+import 'package:cravvy_cooking_app/init.dart';
 import 'package:cravvy_cooking_app/core/routes/app_routers.dart';
 import 'package:cravvy_cooking_app/modules/onboarding/provider/onboarding_provider.dart';
-import '../widgets/profile_header_card.dart';
-import '../widgets/premium_banner.dart';
-import '../widgets/settings_group.dart';
+import 'package:cravvy_cooking_app/modules/profile/widgets/profile_header_card_widget.dart';
+import 'package:cravvy_cooking_app/modules/profile/widgets/premium_banner_widget.dart';
+import 'package:cravvy_cooking_app/modules/profile/widgets/settings_group_widget.dart';
+
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -38,13 +36,13 @@ class ProfileScreen extends StatelessWidget {
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
-            SliverToBoxAdapter(child: ProfileHeaderCard(goal: goal)),
+            SliverToBoxAdapter(child: ProfileHeaderCardWidget(goal: goal)),
 
-            const SliverToBoxAdapter(child: PremiumBanner()),
+            const SliverToBoxAdapter(child: PremiumBannerWidget()),
 
             ..._settingsGroups.map(
               (items) => SliverToBoxAdapter(
-                child: SettingsGroup(
+                child: SettingsGroupWidget(
                   items: items,
                   onTap: (label) {
                     if (label == 'Log Out') {

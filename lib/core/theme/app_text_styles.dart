@@ -4,6 +4,37 @@ import '../constants/app_constants.dart';
 import 'app_colors.dart';
 
 abstract final class AppTextStyles {
+  static const TextStyle s12 = TextStyle(
+    fontFamily: AppConst.nunitoFont,
+    color: AppColors.white,
+    fontSize: 12,
+    fontWeight: FontWeight.w500,
+  );
+  static const TextStyle s14 = TextStyle(
+    fontFamily: AppConst.nunitoFont,
+    color: AppColors.white,
+    fontSize: 14,
+    fontWeight: FontWeight.w500,
+  );
+  static const TextStyle s16 = TextStyle(
+    fontFamily: AppConst.nunitoFont,
+    color: AppColors.white,
+    fontSize: 16,
+    fontWeight: FontWeight.w500,
+  );
+  static const TextStyle s18 = TextStyle(
+    fontFamily: AppConst.nunitoFont,
+    color: AppColors.white,
+    fontSize: 18,
+    fontWeight: FontWeight.w500,
+  );
+  static const TextStyle s20 = TextStyle(
+    fontFamily: AppConst.nunitoFont,
+    color: AppColors.white,
+    fontSize: 20,
+    fontWeight: FontWeight.w500,
+  );
+
   static const TextStyle appbarTitle = TextStyle(
     fontFamily: AppConst.robotoFont,
     color: AppColors.primary,
