@@ -9,11 +9,15 @@ class ProfileHeaderCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.fromLTRB(16, 20, 16, 0),
-      padding: const EdgeInsets.all(20),
+      margin: const EdgeInsets.only(
+        left: 16,
+        top: 20,
+        right: 16,
+      ), //TODO: no AppPad equivalent for this multi-directional EdgeInsets.only
+      padding: AppPad.a20,
       decoration: BoxDecoration(
         gradient: AppColors.primaryGradient,
-        borderRadius: BorderRadius.circular(24),
+        borderRadius: AppBorderRadius.a24,
       ),
       child: Column(
         children: [
@@ -29,7 +33,7 @@ class ProfileHeaderCardWidget extends StatelessWidget {
               child: Text('👤', style: TextStyle(fontSize: 36)),
             ),
           ),
-          const SizedBox(height: 12),
+          AppGap.h12,
           const Text(
             'Sarah Johnson',
             style: TextStyle(
@@ -47,7 +51,7 @@ class ProfileHeaderCardWidget extends StatelessWidget {
               color: Colors.white.withOpacity(0.8),
             ),
           ),
-          const SizedBox(height: 20),
+          AppGap.h20,
           Row(
             children: [
               _ProfileStat('BMI', '22.4', 'Normal'),
@@ -100,9 +104,6 @@ class _ProfileStat extends StatelessWidget {
 
 class _VSeparator extends StatelessWidget {
   @override
-  Widget build(BuildContext context) => Container(
-        width: 1,
-        height: 36,
-        color: Colors.white.withOpacity(0.2),
-      );
+  Widget build(BuildContext context) =>
+      Container(width: 1, height: 36, color: Colors.white.withOpacity(0.2));
 }

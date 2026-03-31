@@ -13,7 +13,11 @@ class WeekStripWidget extends StatelessWidget {
       builder: (context, provider, _) {
         return Container(
           height: 90,
-          margin: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+          margin: const EdgeInsets.only(
+            left: 16,
+            top: 16,
+            right: 16,
+          ), //TODO: no AppPad equivalent for this multi-directional EdgeInsets.only
           child: Row(
             children: List.generate(7, (i) {
               final plan = provider.weekPlan[i];
@@ -27,19 +31,17 @@ class WeekStripWidget extends StatelessWidget {
                   onTap: () => provider.selectDay(i),
                   child: AnimatedContainer(
                     duration: const Duration(milliseconds: 250),
-                    margin: const EdgeInsets.symmetric(horizontal: 3),
-                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    margin: AppPad.h4,
+                    padding: AppPad.v10,
                     decoration: BoxDecoration(
-                      color: isSelected
-                          ? AppColors.primary
-                          : AppColors.surface,
-                      borderRadius: BorderRadius.circular(16),
+                      color: isSelected ? AppColors.primary : AppColors.surface,
+                      borderRadius: AppBorderRadius.a16,
                       border: Border.all(
                         color: isSelected
                             ? AppColors.primary
                             : isToday
-                                ? AppColors.primary.withValues(alpha: 0.4)
-                                : AppColors.border,
+                            ? AppColors.primary.withValues(alpha: 0.4)
+                            : AppColors.border,
                         width: isToday && !isSelected ? 1.5 : 1,
                       ),
                     ),
@@ -57,7 +59,7 @@ class WeekStripWidget extends StatelessWidget {
                                 : AppColors.textSecondary,
                           ),
                         ),
-                        const SizedBox(height: 4),
+                        AppGap.h4,
                         Text(
                           DateFormat('d').format(plan.date),
                           style: TextStyle(
@@ -69,7 +71,7 @@ class WeekStripWidget extends StatelessWidget {
                                 : AppColors.textPrimary,
                           ),
                         ),
-                        const SizedBox(height: 6),
+                        AppGap.h6,
                         Container(
                           width: 6,
                           height: 6,
@@ -78,10 +80,10 @@ class WeekStripWidget extends StatelessWidget {
                             color: hasAll
                                 ? AppColors.success
                                 : hasSome
-                                    ? AppColors.warning
-                                    : isSelected
-                                        ? Colors.white.withValues(alpha: 0.4)
-                                        : AppColors.border,
+                                ? AppColors.warning
+                                : isSelected
+                                ? Colors.white.withValues(alpha: 0.4)
+                                : AppColors.border,
                           ),
                         ),
                       ],

@@ -34,7 +34,9 @@ class BottomNavBar extends StatelessWidget {
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.06),
+            color: Colors.black.withOpacity(
+              0.06,
+            ), // no AppColors equivalent for 0.06 opacity
             blurRadius: 20,
             offset: const Offset(0, -4),
           ),
@@ -82,10 +84,10 @@ class _NavItem extends StatelessWidget {
           children: [
             AnimatedContainer(
               duration: const Duration(milliseconds: 220),
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+              padding: AppPad.h12v4,
               decoration: BoxDecoration(
                 color: isSelected ? AppColors.primaryLight : Colors.transparent,
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: AppBorderRadius.a20,
               ),
               child: Icon(
                 tab.icon,
@@ -93,7 +95,7 @@ class _NavItem extends StatelessWidget {
                 color: isSelected ? AppColors.primary : AppColors.textHint,
               ),
             ),
-            const SizedBox(height: 2),
+            AppGap.h2,
             AnimatedDefaultTextStyle(
               duration: const Duration(milliseconds: 220),
               style: TextStyle(

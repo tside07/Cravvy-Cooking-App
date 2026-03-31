@@ -10,10 +10,12 @@ class MealScrollCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 150,
-      margin: const EdgeInsets.only(right: 12),
+      margin: const EdgeInsets.only(
+        right: 12,
+      ), //TODO: no AppPad equivalent for this multi-directional EdgeInsets.only
       decoration: BoxDecoration(
         color: AppColors.surface,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: AppBorderRadius.a20,
         border: Border.all(color: AppColors.border),
       ),
       clipBehavior: Clip.hardEdge,
@@ -54,13 +56,10 @@ class MealScrollCardWidget extends StatelessWidget {
                   top: 8,
                   left: 8,
                   child: Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 8,
-                      vertical: 3,
-                    ),
+                    padding: AppPad.h8v4,
                     decoration: BoxDecoration(
                       color: meal.type.color,
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: AppBorderRadius.a8,
                     ),
                     child: Text(
                       meal.type.emoji,
@@ -93,22 +92,20 @@ class MealScrollCardWidget extends StatelessWidget {
 
           // Info
           Padding(
-            padding: const EdgeInsets.all(10),
+            padding: AppPad.a10,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   meal.name,
-                  style: const TextStyle(
-                    fontFamily: 'Nunito',
-                    fontSize: 12,
+                  style: AppTextStyles.s12.copyWith(
                     fontWeight: FontWeight.w700,
                     color: AppColors.textPrimary,
                   ),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
-                const SizedBox(height: 4),
+                AppGap.h4,
                 Row(
                   children: [
                     const Icon(
@@ -116,11 +113,10 @@ class MealScrollCardWidget extends StatelessWidget {
                       size: 12,
                       color: AppColors.primary,
                     ),
-                    const SizedBox(width: 2),
+                    AppGap.w2,
                     Text(
                       '${meal.calories} cal',
-                      style: const TextStyle(
-                        fontFamily: 'Nunito',
+                      style: AppTextStyles.s12.copyWith(
                         fontSize: 11,
                         fontWeight: FontWeight.w600,
                         color: AppColors.primary,

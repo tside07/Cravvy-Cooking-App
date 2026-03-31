@@ -15,10 +15,14 @@ class SettingsGroupWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.fromLTRB(16, 14, 16, 0),
+      margin: const EdgeInsets.only(
+        left: 16,
+        top: 14,
+        right: 16,
+      ), //TODO: no AppPad equivalent for this multi-directional EdgeInsets.only
       decoration: BoxDecoration(
         color: AppColors.surface,
-        borderRadius: BorderRadius.circular(18),
+        borderRadius: AppBorderRadius.a18,
         border: Border.all(color: AppColors.border),
       ),
       child: Column(

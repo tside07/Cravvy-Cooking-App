@@ -26,21 +26,22 @@ class MacroBarWidget extends StatelessWidget {
           children: [
             Text(
               label,
-              style:
-                  Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: 12),
+              style: Theme.of(
+                context,
+              ).textTheme.bodyMedium?.copyWith(fontSize: 12),
             ),
             Text(
               '$current / $target$unit',
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    fontWeight: FontWeight.w600,
-                    color: AppColors.textPrimary,
-                  ),
+                fontWeight: FontWeight.w600,
+                color: AppColors.textPrimary,
+              ),
             ),
           ],
         ),
-        const SizedBox(height: 4),
+        AppGap.h4,
         ClipRRect(
-          borderRadius: BorderRadius.circular(6),
+          borderRadius: AppBorderRadius.a6,
           child: LinearProgressIndicator(
             value: progress,
             minHeight: 7,

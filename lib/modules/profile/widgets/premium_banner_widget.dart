@@ -6,16 +6,20 @@ class PremiumBannerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.fromLTRB(16, 14, 16, 0),
-      padding: const EdgeInsets.all(16),
+      margin: const EdgeInsets.only(
+        left: 16,
+        top: 14,
+        right: 16,
+      ), //TODO: no AppPad equivalent for this multi-directional EdgeInsets.only
+      padding: AppPad.a16,
       decoration: BoxDecoration(
         color: const Color(0xFF1A1A2E),
-        borderRadius: BorderRadius.circular(18),
+        borderRadius: AppBorderRadius.a18,
       ),
       child: Row(
         children: [
           const Text('⭐', style: TextStyle(fontSize: 28)),
-          const SizedBox(width: 12),
+          AppGap.w12,
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -41,11 +45,10 @@ class PremiumBannerWidget extends StatelessWidget {
             ),
           ),
           Container(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+            padding: AppPad.h14v8,
             decoration: BoxDecoration(
               gradient: AppColors.primaryGradient,
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: AppBorderRadius.a12,
             ),
             child: const Text(
               'Try Free',

@@ -68,7 +68,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
             // Bottom controls
             Padding(
-              padding: const EdgeInsets.fromLTRB(24, 0, 24, 32),
+              padding: const EdgeInsets.only(
+                left: 24,
+                right: 24,
+                bottom: 32,
+              ), //TODO: no AppPad equivalent for this multi-directional EdgeInsets.only
               child: Column(
                 children: [
                   SmoothPageIndicator(

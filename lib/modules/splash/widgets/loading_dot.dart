@@ -22,9 +22,10 @@ class _LoadingDotState extends State<LoadingDot>
       vsync: this,
       duration: const Duration(milliseconds: 600),
     );
-    _anim = Tween<double>(begin: 0.4, end: 1.0).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
-    );
+    _anim = Tween<double>(
+      begin: 0.4,
+      end: 1.0,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
     Future.delayed(Duration(milliseconds: widget.delay), () {
       if (mounted) _controller.repeat(reverse: true);
     });
@@ -38,18 +39,18 @@ class _LoadingDotState extends State<LoadingDot>
 
   @override
   Widget build(BuildContext context) => Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 4),
-        child: FadeTransition(
-          opacity: _anim,
-          child: const SizedBox.square(
-            dimension: 8,
-            child: DecoratedBox(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                shape: BoxShape.circle,
-              ),
-            ),
+    padding: const EdgeInsets.symmetric(horizontal: 4),
+    child: FadeTransition(
+      opacity: _anim,
+      child: const SizedBox.square(
+        dimension: 8,
+        child: DecoratedBox(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            shape: BoxShape.circle,
           ),
         ),
-      );
+      ),
+    ),
+  );
 }

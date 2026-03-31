@@ -26,8 +26,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   ];
 
   void _onTabTap(int index) {
-    if (index == _currentIndex)
-      return;
+    if (index == _currentIndex) return;
     HapticFeedback.selectionClick();
     setState(() => _currentIndex = index);
   }

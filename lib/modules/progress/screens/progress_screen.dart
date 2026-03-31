@@ -27,7 +27,11 @@ class ProgressScreen extends StatelessWidget {
             // Title
             SliverToBoxAdapter(
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(24, 20, 24, 0),
+                padding: const EdgeInsets.only(
+                  left: 24,
+                  top: 20,
+                  right: 24,
+                ), //TODO: no AppPad equivalent for this multi-directional EdgeInsets.only
                 child: Text(
                   'Progress',
                   style: Theme.of(context).textTheme.headlineLarge,
@@ -38,7 +42,11 @@ class ProgressScreen extends StatelessWidget {
             // Streak + stats row
             SliverToBoxAdapter(
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(16, 20, 16, 0),
+                padding: const EdgeInsets.only(
+                  left: 16,
+                  top: 20,
+                  right: 16,
+                ), //TODO: no AppPad equivalent for this multi-directional EdgeInsets.only
                 child: Row(
                   children: [
                     StatCardWidget(
@@ -47,14 +55,14 @@ class ProgressScreen extends StatelessWidget {
                       label: 'Day streak',
                       color: AppColors.primaryLight,
                     ),
-                    const SizedBox(width: 10),
+                    AppGap.w10,
                     StatCardWidget(
                       emoji: '✅',
                       value: '23',
                       label: 'Meals logged',
                       color: AppColors.successLight,
                     ),
-                    const SizedBox(width: 10),
+                    AppGap.w10,
                     StatCardWidget(
                       emoji: '🎯',
                       value: '68%',
@@ -69,11 +77,15 @@ class ProgressScreen extends StatelessWidget {
             // Weekly calorie chart
             SliverToBoxAdapter(
               child: Container(
-                margin: const EdgeInsets.fromLTRB(16, 16, 16, 0),
-                padding: const EdgeInsets.all(20),
+                margin: const EdgeInsets.only(
+                  left: 16,
+                  top: 16,
+                  right: 16,
+                ), //TODO: no AppPad equivalent for this multi-directional EdgeInsets.only
+                padding: AppPad.a20,
                 decoration: BoxDecoration(
                   color: AppColors.surface,
-                  borderRadius: BorderRadius.circular(24),
+                  borderRadius: AppBorderRadius.a24,
                   border: Border.all(color: AppColors.border),
                 ),
                 child: Column(
@@ -83,12 +95,12 @@ class ProgressScreen extends StatelessWidget {
                       'Weekly Calories',
                       style: Theme.of(context).textTheme.headlineSmall,
                     ),
-                    const SizedBox(height: 4),
+                    AppGap.h4,
                     Text(
                       'Goal: 2,200 kcal/day',
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
-                    const SizedBox(height: 20),
+                    AppGap.h20,
                     const WeeklyBarChartWidget(
                       data: _weeklyData,
                       days: _weekDays,
@@ -102,11 +114,15 @@ class ProgressScreen extends StatelessWidget {
             // Nutrition consistency
             SliverToBoxAdapter(
               child: Container(
-                margin: const EdgeInsets.fromLTRB(16, 14, 16, 0),
-                padding: const EdgeInsets.all(20),
+                margin: const EdgeInsets.only(
+                  left: 16,
+                  top: 14,
+                  right: 16,
+                ), //TODO: no AppPad equivalent for this multi-directional EdgeInsets.only
+                padding: AppPad.a20,
                 decoration: BoxDecoration(
                   color: AppColors.surface,
-                  borderRadius: BorderRadius.circular(24),
+                  borderRadius: AppBorderRadius.a24,
                   border: Border.all(color: AppColors.border),
                 ),
                 child: Column(
@@ -116,19 +132,19 @@ class ProgressScreen extends StatelessWidget {
                       'Nutrition Consistency',
                       style: Theme.of(context).textTheme.headlineSmall,
                     ),
-                    const SizedBox(height: 16),
+                    AppGap.h16,
                     const NutritionConsistencyRowWidget(
                       label: 'Protein',
                       percent: 72,
                       color: AppColors.secondary,
                     ),
-                    const SizedBox(height: 10),
+                    AppGap.h10,
                     const NutritionConsistencyRowWidget(
                       label: 'Carbs',
                       percent: 88,
                       color: AppColors.accentDark,
                     ),
-                    const SizedBox(height: 10),
+                    AppGap.h10,
                     const NutritionConsistencyRowWidget(
                       label: 'Fat',
                       percent: 55,
@@ -142,7 +158,11 @@ class ProgressScreen extends StatelessWidget {
             // Achievements title
             SliverToBoxAdapter(
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(24, 20, 24, 0),
+                padding: const EdgeInsets.only(
+                  left: 24,
+                  top: 20,
+                  right: 24,
+                ), //TODO: no AppPad equivalent for this multi-directional EdgeInsets.only
                 child: Text(
                   'Achievements',
                   style: Theme.of(context).textTheme.headlineSmall,
@@ -152,7 +172,12 @@ class ProgressScreen extends StatelessWidget {
 
             // Achievement grid
             SliverPadding(
-              padding: const EdgeInsets.fromLTRB(16, 12, 16, 100),
+              padding: const EdgeInsets.only(
+                left: 16,
+                top: 12,
+                right: 16,
+                bottom: 100,
+              ), //TODO: no AppPad equivalent for this multi-directional EdgeInsets.only
               sliver: SliverGrid.count(
                 crossAxisCount: 2,
                 mainAxisSpacing: 10,

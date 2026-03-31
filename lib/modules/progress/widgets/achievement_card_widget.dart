@@ -17,10 +17,10 @@ class AchievementCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(12),
+      padding: AppPad.a12,
       decoration: BoxDecoration(
         color: unlocked ? AppColors.surface : AppColors.surfaceVariant,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: AppBorderRadius.a16,
         border: Border.all(
           color: unlocked
               ? AppColors.primary.withOpacity(0.3)
@@ -42,11 +42,10 @@ class AchievementCardWidget extends StatelessWidget {
               const Spacer(),
               if (unlocked)
                 Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                  padding: AppPad.h6v2,
                   decoration: BoxDecoration(
                     color: AppColors.primaryLight,
-                    borderRadius: BorderRadius.circular(6),
+                    borderRadius: AppBorderRadius.a6,
                   ),
                   child: const Text(
                     '✓',
@@ -59,8 +58,11 @@ class AchievementCardWidget extends StatelessWidget {
                   ),
                 )
               else
-                const Icon(Icons.lock_outline_rounded,
-                    size: 14, color: AppColors.textHint),
+                const Icon(
+                  Icons.lock_outline_rounded,
+                  size: 14,
+                  color: AppColors.textHint,
+                ),
             ],
           ),
           const Spacer(),

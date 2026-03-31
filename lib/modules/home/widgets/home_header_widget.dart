@@ -8,7 +8,11 @@ class HomeHeaderWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final goal = context.read<OnboardingProvider>().selectedGoal;
     return Padding(
-      padding: const EdgeInsets.fromLTRB(24, 20, 24, 0),
+      padding: const EdgeInsets.only(
+        left: 24,
+        top: 20,
+        right: 24,
+      ), //TODO: no AppPad equivalent for this multi-directional EdgeInsets.only
       child: Row(
         children: [
           Expanded(
@@ -19,7 +23,7 @@ class HomeHeaderWidget extends StatelessWidget {
                   'Good morning !',
                   style: Theme.of(context).textTheme.headlineLarge,
                 ),
-                const SizedBox(height: 2),
+                AppGap.h2,
                 Text(
                   goal != null
                       ? 'Goal: ${goal.title}'
@@ -30,20 +34,18 @@ class HomeHeaderWidget extends StatelessWidget {
             ),
           ),
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+            padding: AppPad.h12v6,
             decoration: BoxDecoration(
               color: AppColors.primaryLight,
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: AppBorderRadius.a20,
             ),
             child: Row(
               children: [
                 const Text('🔥', style: TextStyle(fontSize: 14)),
-                const SizedBox(width: 4),
-                const Text(
+                AppGap.w4,
+                Text(
                   '7-day streak',
-                  style: TextStyle(
-                    fontFamily: 'Nunito',
-                    fontSize: 12,
+                  style: AppTextStyles.s12.copyWith(
                     fontWeight: FontWeight.w700,
                     color: AppColors.primary,
                   ),

@@ -1,7 +1,11 @@
 import 'package:cravvy_cooking_app/init.dart';
 
 class ComingSoonTabWidget extends StatelessWidget {
-  const ComingSoonTabWidget({super.key, required this.icon, required this.label});
+  const ComingSoonTabWidget({
+    super.key,
+    required this.icon,
+    required this.label,
+  });
 
   final String icon;
   final String label;

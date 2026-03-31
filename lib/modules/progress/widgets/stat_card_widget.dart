@@ -18,15 +18,18 @@ class StatCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 10),
+        padding: const EdgeInsets.symmetric(
+          vertical: 14,
+          horizontal: 10,
+        ), //TODO: no AppPad equivalent for h10v14
         decoration: BoxDecoration(
           color: color,
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: AppBorderRadius.a16,
         ),
         child: Column(
           children: [
             Text(emoji, style: const TextStyle(fontSize: 22)),
-            const SizedBox(height: 4),
+            AppGap.h4,
             Text(
               value,
               style: const TextStyle(

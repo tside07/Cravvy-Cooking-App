@@ -21,15 +21,15 @@ class NutritionConsistencyRowWidget extends StatelessWidget {
           child: Text(
             label,
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 13,
-                  color: AppColors.textPrimary,
-                ),
+              fontWeight: FontWeight.w600,
+              fontSize: 13,
+              color: AppColors.textPrimary,
+            ),
           ),
         ),
         Expanded(
           child: ClipRRect(
-            borderRadius: BorderRadius.circular(6),
+            borderRadius: AppBorderRadius.a6,
             child: LinearProgressIndicator(
               value: percent / 100,
               minHeight: 10,
@@ -38,7 +38,7 @@ class NutritionConsistencyRowWidget extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(width: 10),
+        AppGap.w10,
         Text(
           '$percent%',
           style: TextStyle(

@@ -16,17 +16,17 @@ class GoalCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 14),
+      padding: AppPad.b12,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
         child: InkWell(
           onTap: onTap,
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: AppBorderRadius.a20,
           child: Container(
-            padding: const EdgeInsets.all(18),
+            padding: AppPad.a18,
             decoration: BoxDecoration(
               color: isSelected ? AppColors.primaryLight : AppColors.surface,
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: AppBorderRadius.a20,
               border: Border.all(
                 color: isSelected ? AppColors.primary : AppColors.border,
                 width: isSelected ? 2 : 1,
@@ -41,7 +41,7 @@ class GoalCardWidget extends StatelessWidget {
                     color: isSelected
                         ? AppColors.primary.withOpacity(0.15)
                         : AppColors.surfaceVariant,
-                    borderRadius: BorderRadius.circular(14),
+                    borderRadius: AppBorderRadius.a14,
                   ),
                   child: Center(
                     child: Text(
@@ -50,7 +50,7 @@ class GoalCardWidget extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(width: 16),
+                AppGap.w16,
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -58,12 +58,12 @@ class GoalCardWidget extends StatelessWidget {
                       Text(
                         goal.title,
                         style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                              color: isSelected
-                                  ? AppColors.primary
-                                  : AppColors.textPrimary,
-                            ),
+                          color: isSelected
+                              ? AppColors.primary
+                              : AppColors.textPrimary,
+                        ),
                       ),
-                      const SizedBox(height: 2),
+                      AppGap.h2,
                       Text(
                         goal.subtitle,
                         style: Theme.of(context).textTheme.bodyMedium,
@@ -81,7 +81,11 @@ class GoalCardWidget extends StatelessWidget {
                       color: AppColors.primary,
                       shape: BoxShape.circle,
                     ),
-                    child: const Icon(Icons.check, color: Colors.white, size: 16),
+                    child: const Icon(
+                      Icons.check,
+                      color: Colors.white,
+                      size: 16,
+                    ),
                   ),
                 ),
               ],

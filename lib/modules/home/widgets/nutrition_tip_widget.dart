@@ -6,11 +6,15 @@ class NutritionTipWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.fromLTRB(16, 24, 16, 0),
-      padding: const EdgeInsets.all(16),
+      margin: const EdgeInsets.only(
+        left: 16,
+        top: 24,
+        right: 16,
+      ), //TODO: no AppPad equivalent for this multi-directional EdgeInsets.only
+      padding: AppPad.a16,
       decoration: BoxDecoration(
         color: AppColors.secondaryLight,
-        borderRadius: BorderRadius.circular(18),
+        borderRadius: AppBorderRadius.a18,
         border: Border.all(color: AppColors.secondary.withValues(alpha: 0.3)),
       ),
       child: Row(
@@ -26,26 +30,23 @@ class NutritionTipWidget extends StatelessWidget {
               child: Text('💡', style: TextStyle(fontSize: 22)),
             ),
           ),
-          const SizedBox(width: 14),
+          AppGap.w16,
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
+                Text(
                   'Tip of the Day',
-                  style: TextStyle(
-                    fontFamily: 'Nunito',
+                  style: AppTextStyles.s12.copyWith(
                     fontSize: 13,
                     fontWeight: FontWeight.w700,
                     color: AppColors.secondaryDark,
                   ),
                 ),
-                const SizedBox(height: 3),
+                AppGap.h3,
                 Text(
                   'Drink water 30 min before meals to help with digestion and portion control.',
-                  style: TextStyle(
-                    fontFamily: 'Nunito',
-                    fontSize: 12,
+                  style: AppTextStyles.s12.copyWith(
                     color: AppColors.textSecondary,
                     height: 1.4,
                   ),

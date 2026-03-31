@@ -51,7 +51,7 @@ class SlidePageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 32),
+      padding: AppPad.h30,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -63,28 +63,25 @@ class SlidePageWidget extends StatelessWidget {
               shape: BoxShape.circle,
             ),
             child: Center(
-              child: Text(
-                slide.emoji,
-                style: const TextStyle(fontSize: 90),
-              ),
+              child: Text(slide.emoji, style: const TextStyle(fontSize: 90)),
             ),
           ),
-          const SizedBox(height: 48),
+          AppGap.h48,
           Text(
             slide.title,
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                  color: AppColors.textPrimary,
-                  height: 1.2,
-                ),
+              color: AppColors.textPrimary,
+              height: 1.2,
+            ),
           ),
-          const SizedBox(height: 16),
+          AppGap.h16,
           Text(
             slide.subtitle,
             textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                  color: AppColors.textSecondary,
-                ),
+            style: Theme.of(
+              context,
+            ).textTheme.bodyLarge?.copyWith(color: AppColors.textSecondary),
           ),
         ],
       ),

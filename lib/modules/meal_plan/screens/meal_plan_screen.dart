@@ -36,7 +36,12 @@ class _MealList extends StatelessWidget {
       builder: (context, provider, _) {
         final meals = provider.selectedDay.meals;
         return ListView.builder(
-          padding: const EdgeInsets.fromLTRB(16, 16, 16, 100),
+          padding: const EdgeInsets.only(
+            left: 16,
+            top: 16,
+            right: 16,
+            bottom: 100,
+          ), //TODO: no AppPad equivalent for this multi-directional EdgeInsets.only
           itemCount: meals.length,
           itemBuilder: (context, i) => MealCardWidget(
             meal: meals[i],

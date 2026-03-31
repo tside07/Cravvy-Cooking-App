@@ -28,7 +28,7 @@ class CravvyButton extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         backgroundColor: backgroundColor ?? AppColors.primary,
         minimumSize: const Size(double.infinity, 56),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        shape: RoundedRectangleBorder(borderRadius: AppBorderRadius.a16),
       ),
       child: _child,
     );
@@ -45,7 +45,7 @@ class CravvyButton extends StatelessWidget {
     if (icon != null) {
       return Row(
         mainAxisSize: MainAxisSize.min,
-        children: [Icon(icon, size: 20), const SizedBox(width: 8), Text(label)],
+        children: [Icon(icon, size: 20), AppGap.w8, Text(label)],
       );
     }
     return Text(label);

@@ -72,7 +72,11 @@ class _SearchScreenState extends State<SearchScreen>
           children: [
             // Header
             Padding(
-              padding: const EdgeInsets.fromLTRB(24, 20, 24, 0),
+              padding: const EdgeInsets.only(
+                left: 24,
+                top: 20,
+                right: 24,
+              ), //TODO: no AppPad equivalent for this multi-directional EdgeInsets.only
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -80,7 +84,7 @@ class _SearchScreenState extends State<SearchScreen>
                     'What\'s in your\nfridge? 🛒',
                     style: Theme.of(context).textTheme.headlineLarge,
                   ),
-                  const SizedBox(height: 4),
+                  AppGap.h4,
                   Text(
                     'Add ingredients to get recipe ideas',
                     style: Theme.of(context).textTheme.bodyMedium,
@@ -88,25 +92,27 @@ class _SearchScreenState extends State<SearchScreen>
                 ],
               ),
             ),
-            const SizedBox(height: 20),
+            AppGap.h20,
 
             // Tab bar
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
+              padding: AppPad.h16,
               child: Container(
                 height: 44,
                 decoration: BoxDecoration(
                   color: AppColors.surfaceVariant,
-                  borderRadius: BorderRadius.circular(14),
+                  borderRadius: AppBorderRadius.a14,
                 ),
                 child: TabBar(
                   controller: _tabController,
                   indicator: BoxDecoration(
                     color: AppColors.surface,
-                    borderRadius: BorderRadius.circular(11),
+                    borderRadius: AppBorderRadius.a12,
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(0.08),
+                        color: Colors.black.withOpacity(
+                          0.06,
+                        ), // no AppColors equivalent for 0.06 opacity
                         blurRadius: 8,
                       ),
                     ],
@@ -133,7 +139,7 @@ class _SearchScreenState extends State<SearchScreen>
                 ),
               ),
             ),
-            const SizedBox(height: 16),
+            AppGap.h16,
 
             Expanded(
               child: TabBarView(
@@ -147,7 +153,10 @@ class _SearchScreenState extends State<SearchScreen>
                     onAdd: _addIngredient,
                     onRemove: _removeIngredient,
                   ),
-                  const ComingSoonTabWidget(icon: '📷', label: 'Scan ingredients'),
+                  const ComingSoonTabWidget(
+                    icon: '📷',
+                    label: 'Scan ingredients',
+                  ),
                   const ComingSoonTabWidget(icon: '🎙️', label: 'Voice input'),
                 ],
               ),

@@ -16,10 +16,12 @@ class MealCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 14),
+      margin: const EdgeInsets.only(
+        bottom: 14,
+      ), //TODO: no AppPad equivalent for bottom: 14
       decoration: BoxDecoration(
         color: AppColors.surface,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: AppBorderRadius.a20,
         border: Border.all(
           color: meal.isLogged
               ? AppColors.success.withValues(alpha: 0.3)
@@ -30,16 +32,22 @@ class MealCardWidget extends StatelessWidget {
         children: [
           // Meal type header
           Container(
-            padding: const EdgeInsets.fromLTRB(16, 12, 12, 12),
+            padding: const EdgeInsets.only(
+              left: 16,
+              top: 12,
+              right: 12,
+              bottom: 12,
+            ), //TODO: no AppPad equivalent for this multi-directional EdgeInsets.only
             decoration: BoxDecoration(
               color: meal.type.lightColor,
-              borderRadius:
-                  const BorderRadius.vertical(top: Radius.circular(20)),
+              borderRadius: const BorderRadius.vertical(
+                top: Radius.circular(20),
+              ), //TODO: no AppBorderRadius equivalent for top-only r20
             ),
             child: Row(
               children: [
                 Text(meal.type.emoji, style: const TextStyle(fontSize: 16)),
-                const SizedBox(width: 8),
+                AppGap.w8,
                 Text(
                   meal.type.label,
                   style: TextStyle(
@@ -54,17 +62,22 @@ class MealCardWidget extends StatelessWidget {
                   onTap: onSwap,
                   child: Container(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 10, vertical: 4),
+                      horizontal: 10,
+                      vertical: 4,
+                    ), //TODO: no AppPad equivalent for h10v4
                     decoration: BoxDecoration(
                       color: Colors.white,
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: AppBorderRadius.a20,
                       border: Border.all(color: AppColors.border),
                     ),
                     child: Row(
                       children: [
-                        Icon(Icons.swap_horiz_rounded,
-                            size: 14, color: meal.type.color),
-                        const SizedBox(width: 4),
+                        Icon(
+                          Icons.swap_horiz_rounded,
+                          size: 14,
+                          color: meal.type.color,
+                        ),
+                        AppGap.w4,
                         Text(
                           'Swap',
                           style: TextStyle(
@@ -84,11 +97,11 @@ class MealCardWidget extends StatelessWidget {
 
           // Meal content
           Padding(
-            padding: const EdgeInsets.all(14),
+            padding: AppPad.a14,
             child: Row(
               children: [
                 ClipRRect(
-                  borderRadius: BorderRadius.circular(14),
+                  borderRadius: AppBorderRadius.a14,
                   child: Image.network(
                     meal.imageUrl,
                     width: 80,
@@ -99,13 +112,15 @@ class MealCardWidget extends StatelessWidget {
                       height: 80,
                       color: meal.type.lightColor,
                       child: Center(
-                        child: Text(meal.type.emoji,
-                            style: const TextStyle(fontSize: 32)),
+                        child: Text(
+                          meal.type.emoji,
+                          style: const TextStyle(fontSize: 32),
+                        ),
                       ),
                     ),
                   ),
                 ),
-                const SizedBox(width: 14),
+                AppGap.w16,
 
                 Expanded(
                   child: Column(
@@ -117,7 +132,7 @@ class MealCardWidget extends StatelessWidget {
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                       ),
-                      const SizedBox(height: 6),
+                      AppGap.h6,
                       Row(
                         children: [
                           _InfoChip(
@@ -125,7 +140,7 @@ class MealCardWidget extends StatelessWidget {
                             label: '${meal.calories} cal',
                             color: AppColors.primary,
                           ),
-                          const SizedBox(width: 8),
+                          AppGap.w8,
                           _InfoChip(
                             icon: Icons.timer_outlined,
                             label: '${meal.prepTime} min',
@@ -133,24 +148,33 @@ class MealCardWidget extends StatelessWidget {
                           ),
                         ],
                       ),
-                      const SizedBox(height: 8),
+                      AppGap.h8,
                       Row(
                         children: [
-                          _MacroPill('P ${meal.protein}g',
-                              AppColors.secondaryLight, AppColors.secondaryDark),
-                          const SizedBox(width: 4),
-                          _MacroPill('C ${meal.carbs}g',
-                              const Color(0xFFFFFAE6), AppColors.accentDark),
-                          const SizedBox(width: 4),
-                          _MacroPill('F ${meal.fat}g', AppColors.primaryLight,
-                              AppColors.primaryDark),
+                          _MacroPill(
+                            'P ${meal.protein}g',
+                            AppColors.secondaryLight,
+                            AppColors.secondaryDark,
+                          ),
+                          AppGap.w4,
+                          _MacroPill(
+                            'C ${meal.carbs}g',
+                            const Color(0xFFFFFAE6),
+                            AppColors.accentDark,
+                          ),
+                          AppGap.w4,
+                          _MacroPill(
+                            'F ${meal.fat}g',
+                            AppColors.primaryLight,
+                            AppColors.primaryDark,
+                          ),
                         ],
                       ),
                     ],
                   ),
                 ),
 
-                const SizedBox(width: 8),
+                AppGap.w8,
                 GestureDetector(
                   onTap: onToggle,
                   child: AnimatedContainer(
@@ -172,8 +196,7 @@ class MealCardWidget extends StatelessWidget {
                     child: Icon(
                       Icons.check_rounded,
                       size: 18,
-                      color:
-                          meal.isLogged ? Colors.white : AppColors.textHint,
+                      color: meal.isLogged ? Colors.white : AppColors.textHint,
                     ),
                   ),
                 ),
@@ -203,7 +226,7 @@ class _InfoChip extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Icon(icon, size: 14, color: color),
-        const SizedBox(width: 3),
+        const SizedBox(width: 3), //TODO: no AppGap equivalent for w3
         Text(
           label,
           style: TextStyle(
@@ -228,11 +251,11 @@ class _MacroPill extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 3),
-      decoration: BoxDecoration(
-        color: bg,
-        borderRadius: BorderRadius.circular(20),
-      ),
+      padding: const EdgeInsets.symmetric(
+        horizontal: 7,
+        vertical: 3,
+      ), //TODO: no AppPad equivalent for h7v3
+      decoration: BoxDecoration(color: bg, borderRadius: AppBorderRadius.a20),
       child: Text(
         label,
         style: TextStyle(

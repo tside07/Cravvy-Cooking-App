@@ -27,14 +27,12 @@ class _SetupCompleteScreenState extends State<SetupCompleteScreen>
       duration: const Duration(milliseconds: 800),
     )..forward();
 
-    _scaleAnim = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.elasticOut),
-    );
+    _scaleAnim = Tween<double>(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.elasticOut));
     _fadeAnim = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(
-        parent: _controller,
-        curve: const Interval(0.4, 1.0),
-      ),
+      CurvedAnimation(parent: _controller, curve: const Interval(0.4, 1.0)),
     );
   }
 
@@ -94,10 +92,10 @@ class _SetupCompleteScreenState extends State<SetupCompleteScreen>
 
                     // Summary card
                     Container(
-                      padding: const EdgeInsets.all(20),
+                      padding: AppPad.a20,
                       decoration: BoxDecoration(
                         color: AppColors.surface,
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: AppBorderRadius.a20,
                         border: Border.all(color: AppColors.border),
                       ),
                       child: Column(
@@ -108,10 +106,7 @@ class _SetupCompleteScreenState extends State<SetupCompleteScreen>
                               label: 'Your goal',
                               value: goal.title,
                             ),
-                            const Divider(
-                              height: 24,
-                              color: AppColors.divider,
-                            ),
+                            const Divider(height: 24, color: AppColors.divider),
                           ],
                           SummaryRowWidget(
                             icon: '🌿',

@@ -15,11 +15,15 @@ class NutritionRingCardWidget extends StatelessWidget {
         final progress = provider.calorieProgress;
 
         return Container(
-          margin: const EdgeInsets.fromLTRB(16, 20, 16, 0),
-          padding: const EdgeInsets.all(20),
+          margin: const EdgeInsets.only(
+            left: 16,
+            top: 20,
+            right: 16,
+          ), //TODO: no AppPad equivalent for this multi-directional EdgeInsets.only
+          padding: AppPad.a20,
           decoration: BoxDecoration(
             color: AppColors.surface,
-            borderRadius: BorderRadius.circular(24),
+            borderRadius: AppBorderRadius.a24,
             border: Border.all(color: AppColors.border),
           ),
           child: Column(
@@ -29,7 +33,7 @@ class NutritionRingCardWidget extends StatelessWidget {
                 "Today's Nutrition",
                 style: Theme.of(context).textTheme.headlineSmall,
               ),
-              const SizedBox(height: 20),
+              AppGap.h20,
               Row(
                 children: [
                   // Donut chart
@@ -70,7 +74,7 @@ class NutritionRingCardWidget extends StatelessWidget {
                       ],
                     ),
                   ),
-                  const SizedBox(width: 20),
+                  AppGap.w20,
 
                   // Macro bars
                   Expanded(
@@ -83,7 +87,7 @@ class NutritionRingCardWidget extends StatelessWidget {
                           unit: 'g',
                           color: AppColors.secondary,
                         ),
-                        const SizedBox(height: 12),
+                        AppGap.h12,
                         MacroBarWidget(
                           label: 'Carbs',
                           current: day.totalCarbs,
@@ -91,7 +95,7 @@ class NutritionRingCardWidget extends StatelessWidget {
                           unit: 'g',
                           color: AppColors.accentDark,
                         ),
-                        const SizedBox(height: 12),
+                        AppGap.h12,
                         MacroBarWidget(
                           label: 'Fat',
                           current: day.totalFat,

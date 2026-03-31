@@ -58,8 +58,11 @@ abstract final class AppPad {
   static const EdgeInsets h6v2 = EdgeInsets.symmetric(horizontal: 6, vertical: 2);
   static const EdgeInsets h8v4 = EdgeInsets.symmetric(horizontal: 8, vertical: 4);
   static const EdgeInsets h8v16 = EdgeInsets.symmetric(horizontal: 8, vertical: 16);
+  static const EdgeInsets h10v8 = EdgeInsets.symmetric(horizontal: 10, vertical: 8);
   static const EdgeInsets h12v4 = EdgeInsets.symmetric(horizontal: 12, vertical: 4);
+  static const EdgeInsets h12v6 = EdgeInsets.symmetric(horizontal: 12, vertical: 6);
   static const EdgeInsets h12v8 = EdgeInsets.symmetric(horizontal: 12, vertical: 8);
+  static const EdgeInsets h14v8 = EdgeInsets.symmetric(horizontal: 14, vertical: 8);
   static const EdgeInsets h15v21 = EdgeInsets.symmetric(horizontal: 15, vertical: 21);
   static const EdgeInsets h16v4 = EdgeInsets.symmetric(horizontal: 16, vertical: 4);
   static const EdgeInsets h16v6 = EdgeInsets.symmetric(horizontal: 16, vertical: 6);
@@ -86,6 +89,7 @@ abstract final class AppPad {
 
   static const EdgeInsets b8 = EdgeInsets.only(bottom: 8);
   static const EdgeInsets b10 = EdgeInsets.only(bottom: 10);
+  static const EdgeInsets b12 = EdgeInsets.only(bottom: 12);
   static const EdgeInsets b20 = EdgeInsets.only(bottom: 20);
   static const EdgeInsets b19 = EdgeInsets.only(bottom: 19);
   static const EdgeInsets b24 = EdgeInsets.only(bottom: 24);

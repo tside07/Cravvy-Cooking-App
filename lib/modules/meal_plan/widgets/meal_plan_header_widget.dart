@@ -6,7 +6,11 @@ class MealPlanHeaderWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(24, 16, 24, 0),
+      padding: const EdgeInsets.only(
+        left: 24,
+        top: 16,
+        right: 24,
+      ), //TODO: no AppPad equivalent for this multi-directional EdgeInsets.only
       child: Row(
         children: [
           Column(
@@ -24,22 +28,22 @@ class MealPlanHeaderWidget extends StatelessWidget {
           ),
           const Spacer(),
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+            padding: AppPad.h12v6,
             decoration: BoxDecoration(
               color: AppColors.primaryLight,
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: AppBorderRadius.a20,
             ),
             child: Row(
               children: [
                 const Text('🔥', style: TextStyle(fontSize: 14)),
-                const SizedBox(width: 4),
+                AppGap.w4,
                 Text(
                   '7-day streak',
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: AppColors.primary,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 12,
-                      ),
+                    color: AppColors.primary,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 12,
+                  ),
                 ),
               ],
             ),

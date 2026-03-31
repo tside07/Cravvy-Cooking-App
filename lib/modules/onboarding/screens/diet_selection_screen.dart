@@ -26,7 +26,10 @@ class DietSelectionScreen extends StatelessWidget {
                 children: [
                   IconButton(
                     onPressed: () => context.go(AppRouter.goalSelection),
-                    icon: const Icon(Icons.arrow_back_ios_new_rounded, size: 20),
+                    icon: const Icon(
+                      Icons.arrow_back_ios_new_rounded,
+                      size: 20,
+                    ),
                     padding: EdgeInsets.zero,
                     constraints: const BoxConstraints(),
                   ),
@@ -52,11 +55,11 @@ class DietSelectionScreen extends StatelessWidget {
                     return GridView.builder(
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 12,
-                        mainAxisSpacing: 12,
-                        childAspectRatio: 1.6,
-                      ),
+                            crossAxisCount: 2,
+                            crossAxisSpacing: 12,
+                            mainAxisSpacing: 12,
+                            childAspectRatio: 1.6,
+                          ),
                       itemCount: DietType.values.length,
                       itemBuilder: (context, i) {
                         final diet = DietType.values[i];
@@ -76,12 +79,12 @@ class DietSelectionScreen extends StatelessWidget {
                   label: 'Start Planning →',
                   onTap: provider.canProceedDiet
                       ? () => context.go(
-                            AppRouter.setupComplete,
-                            extra: OnboardingArgs(
-                              goal: provider.selectedGoal,
-                              diets: provider.selectedDiets,
-                            ),
-                          )
+                          AppRouter.setupComplete,
+                          extra: OnboardingArgs(
+                            goal: provider.selectedGoal,
+                            diets: provider.selectedDiets,
+                          ),
+                        )
                       : null,
                 ),
               ),

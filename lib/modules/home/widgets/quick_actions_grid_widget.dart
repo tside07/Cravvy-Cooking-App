@@ -9,7 +9,12 @@ class _Action {
 }
 
 const _kActions = [
-  _Action('🥕', 'Ingredients I have', AppColors.primaryLight, AppColors.primary),
+  _Action(
+    '🥕',
+    'Ingredients I have',
+    AppColors.primaryLight,
+    AppColors.primary,
+  ),
   _Action('⚡', 'Quick recipes', AppColors.secondaryLight, AppColors.secondary),
   _Action('📋', "Today's full plan", Color(0xFFEDE9FE), Color(0xFF7C3AED)),
   _Action('🤖', 'Ask AI Chef', AppColors.warningLight, AppColors.warning),
@@ -21,17 +26,22 @@ class QuickActionsGridWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 24, 16, 0),
+      padding: const EdgeInsets.only(
+        left: 16,
+        top: 24,
+        right: 16,
+      ), //TODO: no AppPad equivalent for this multi-directional EdgeInsets.only
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.only(left: 8, bottom: 14),
+            padding: AppPad.l8,
             child: Text(
               'Quick Actions',
               style: Theme.of(context).textTheme.headlineSmall,
             ),
           ),
+          AppGap.h14,
           GridView.count(
             crossAxisCount: 2,
             mainAxisSpacing: 12,
@@ -55,15 +65,15 @@ class _ActionCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       color: AppColors.surface,
-      borderRadius: BorderRadius.circular(18),
+      borderRadius: AppBorderRadius.a18,
       child: InkWell(
-        borderRadius: BorderRadius.circular(18),
+        borderRadius: AppBorderRadius.a18,
         onTap: () {},
         child: Container(
-          padding: const EdgeInsets.all(14),
+          padding: AppPad.a14,
           decoration: BoxDecoration(
             border: Border.all(color: AppColors.border),
-            borderRadius: BorderRadius.circular(18),
+            borderRadius: AppBorderRadius.a18,
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -73,19 +83,19 @@ class _ActionCard extends StatelessWidget {
                 height: 38,
                 decoration: BoxDecoration(
                   color: action.bgColor,
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: AppBorderRadius.a10,
                 ),
                 child: Center(
-                  child: Text(action.emoji,
-                      style: const TextStyle(fontSize: 18)),
+                  child: Text(
+                    action.emoji,
+                    style: const TextStyle(fontSize: 18),
+                  ),
                 ),
               ),
               const Spacer(),
               Text(
                 action.label,
-                style: const TextStyle(
-                  fontFamily: 'Nunito',
-                  fontSize: 12,
+                style: AppTextStyles.s12.copyWith(
                   fontWeight: FontWeight.w700,
                   color: AppColors.textPrimary,
                 ),

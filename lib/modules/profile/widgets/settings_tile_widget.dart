@@ -28,34 +28,30 @@ class _SettingsTileState extends State<SettingsTileWidget> {
     return Column(
       children: [
         ListTile(
-          contentPadding:
-              const EdgeInsets.symmetric(horizontal: 16, vertical: 2),
+          contentPadding: AppPad.h16v4,
           leading: Container(
             width: 38,
             height: 38,
             decoration: BoxDecoration(
               color: AppColors.surfaceVariant,
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: AppBorderRadius.a10,
             ),
             child: Center(
-              child: Text(
-                widget.emoji,
-                style: const TextStyle(fontSize: 18),
-              ),
+              child: Text(widget.emoji, style: const TextStyle(fontSize: 18)),
             ),
           ),
           title: Text(
             widget.label,
             style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  color: widget.label == 'Log Out'
-                      ? AppColors.error
-                      : AppColors.textPrimary,
-                ),
+              color: widget.label == 'Log Out'
+                  ? AppColors.error
+                  : AppColors.textPrimary,
+            ),
           ),
           trailing: widget.isToggle
               ? Switch.adaptive(
                   value: _toggled,
-                  activeColor: AppColors.primary,
+                  activeThumbColor: AppColors.primary,
                   onChanged: (v) => setState(() => _toggled = v),
                 )
               : const Icon(

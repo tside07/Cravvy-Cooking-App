@@ -32,14 +32,12 @@ class IngredientInputBarWidget extends StatelessWidget {
             onSubmitted: (_) => _submit(),
           ),
         ),
-        const SizedBox(width: 10),
+        AppGap.w10,
         ElevatedButton(
           onPressed: _submit,
           style: ElevatedButton.styleFrom(
             minimumSize: const Size(52, 52),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(14),
-            ),
+            shape: RoundedRectangleBorder(borderRadius: AppBorderRadius.a14),
             padding: EdgeInsets.zero,
           ),
           child: const Icon(Icons.add_rounded),

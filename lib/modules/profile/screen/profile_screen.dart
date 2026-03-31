@@ -5,7 +5,6 @@ import 'package:cravvy_cooking_app/modules/profile/widgets/profile_header_card_w
 import 'package:cravvy_cooking_app/modules/profile/widgets/premium_banner_widget.dart';
 import 'package:cravvy_cooking_app/modules/profile/widgets/settings_group_widget.dart';
 
-
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
@@ -53,7 +52,7 @@ class ProfileScreen extends StatelessWidget {
               ),
             ),
 
-            const SliverToBoxAdapter(child: SizedBox(height: 100)),
+            AppGap.sh100,
           ],
         ),
       ),

@@ -28,8 +28,8 @@ class WeeklyBarChartWidget extends StatelessWidget {
           final color = isToday
               ? AppColors.primary
               : isGoalMet
-                  ? AppColors.success
-                  : AppColors.border;
+              ? AppColors.success
+              : AppColors.border;
 
           return Expanded(
             child: Column(
@@ -45,23 +45,22 @@ class WeeklyBarChartWidget extends StatelessWidget {
                       color: AppColors.primary,
                     ),
                   ),
-                const SizedBox(height: 2),
+                AppGap.h2,
                 Container(
                   height: barHeight,
-                  margin: const EdgeInsets.symmetric(horizontal: 3),
+                  margin: AppPad.h4,
                   decoration: BoxDecoration(
                     color: color,
-                    borderRadius: BorderRadius.circular(6),
+                    borderRadius: AppBorderRadius.a6,
                   ),
                 ),
-                const SizedBox(height: 6),
+                AppGap.h6,
                 Text(
                   days[i],
                   style: TextStyle(
                     fontFamily: 'Nunito',
                     fontSize: 11,
-                    fontWeight:
-                        isToday ? FontWeight.w700 : FontWeight.w500,
+                    fontWeight: isToday ? FontWeight.w700 : FontWeight.w500,
                     color: isToday
                         ? AppColors.primary
                         : AppColors.textSecondary,

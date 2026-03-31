@@ -14,7 +14,12 @@ class TodayMealsSectionWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.fromLTRB(24, 24, 24, 14),
+              padding: const EdgeInsets.only(
+                left: 24,
+                top: 24,
+                right: 24,
+                bottom: 14,
+              ), //TODO: no AppPad equivalent for this multi-directional EdgeInsets.only
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -49,7 +54,7 @@ class TodayMealsSectionWidget extends StatelessWidget {
               height: 200,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                padding: const EdgeInsets.symmetric(horizontal: 16),
+                padding: AppPad.h16,
                 itemCount: meals.length,
                 itemBuilder: (context, i) =>
                     MealScrollCardWidget(meal: meals[i]),

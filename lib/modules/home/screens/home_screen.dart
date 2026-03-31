@@ -20,7 +20,7 @@ class HomeScreen extends StatelessWidget {
             const SliverToBoxAdapter(child: TodayMealsSectionWidget()),
             const SliverToBoxAdapter(child: QuickActionsGridWidget()),
             const SliverToBoxAdapter(child: NutritionTipWidget()),
-            const SliverToBoxAdapter(child: SizedBox(height: 100)),
+            AppGap.sh100,
           ],
         ),
       ),

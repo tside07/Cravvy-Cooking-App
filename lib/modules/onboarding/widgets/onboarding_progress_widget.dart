@@ -21,9 +21,9 @@ class OnboardingProgressWidget extends StatelessWidget {
             Text(
               'Step $current of $total',
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: AppColors.primary,
-                    fontWeight: FontWeight.w600,
-                  ),
+                color: AppColors.primary,
+                fontWeight: FontWeight.w600,
+              ),
             ),
             const Spacer(),
             TextButton(

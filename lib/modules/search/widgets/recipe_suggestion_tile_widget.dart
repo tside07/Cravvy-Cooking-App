@@ -10,11 +10,11 @@ class RecipeSuggestionTileWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final (name, cal, time, emoji, match) = recipe;
     return Container(
-      margin: const EdgeInsets.only(bottom: 10),
-      padding: const EdgeInsets.all(14),
+      margin: AppPad.b10,
+      padding: AppPad.a14,
       decoration: BoxDecoration(
         color: AppColors.surface,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: AppBorderRadius.a16,
         border: Border.all(color: AppColors.border),
       ),
       child: Row(
@@ -24,19 +24,19 @@ class RecipeSuggestionTileWidget extends StatelessWidget {
             height: 52,
             decoration: BoxDecoration(
               color: AppColors.primaryLight,
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: AppBorderRadius.a12,
             ),
             child: Center(
               child: Text(emoji, style: const TextStyle(fontSize: 26)),
             ),
           ),
-          const SizedBox(width: 14),
+          AppGap.w16,
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(name, style: Theme.of(context).textTheme.titleMedium),
-                const SizedBox(height: 4),
+                AppGap.h4,
                 Row(
                   children: [
                     const Icon(
@@ -46,11 +46,10 @@ class RecipeSuggestionTileWidget extends StatelessWidget {
                     ),
                     Text(
                       ' $cal · ⏱ $time',
-                      style:
-                          Theme.of(context).textTheme.bodySmall?.copyWith(
-                                color: AppColors.textSecondary,
-                                fontSize: 11,
-                              ),
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: AppColors.textSecondary,
+                        fontSize: 11,
+                      ),
                     ),
                   ],
                 ),
