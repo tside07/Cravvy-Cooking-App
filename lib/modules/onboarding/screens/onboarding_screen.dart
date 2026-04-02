@@ -40,22 +40,19 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            // Skip button
             Align(
               alignment: Alignment.centerRight,
               child: TextButton(
                 onPressed: () => context.go(AppRouter.goalSelection),
                 child: Text(
                   'Skip',
-                  style: TextStyle(
+                  style: AppTextStyles.s16.copyWith(
                     color: slide.accentColor,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
               ),
             ),
-
-            // Pages
             Expanded(
               child: PageView.builder(
                 controller: _pageController,
@@ -65,14 +62,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     SlidePageWidget(slide: kOnboardingSlides[i]),
               ),
             ),
-
-            // Bottom controls
             Padding(
-              padding: const EdgeInsets.only(
-                left: 24,
-                right: 24,
-                bottom: 32,
-              ), //TODO: no AppPad equivalent for this multi-directional EdgeInsets.only
+              padding: const EdgeInsets.fromLTRB(24, 0, 24, 32),
               child: Column(
                 children: [
                   SmoothPageIndicator(

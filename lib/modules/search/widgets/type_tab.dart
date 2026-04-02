@@ -23,22 +23,22 @@ class TypeTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      padding: AppPad.h16,
+      padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           IngredientInputBarWidget(controller: controller, onAdd: onAdd),
-          AppGap.h16,
+          const SizedBox(height: 16),
 
-          // Added chips
           if (addedIngredients.isNotEmpty) ...[
             Text(
               'Added (${addedIngredients.length})',
-              style: Theme.of(
-                context,
-              ).textTheme.titleMedium?.copyWith(fontSize: 14),
+              style: AppTextStyles.s14.copyWith(
+                fontWeight: FontWeight.w600,
+                color: AppColors.textPrimary,
+              ),
             ),
-            AppGap.h8,
+            const SizedBox(height: 8),
             Wrap(
               spacing: 8,
               runSpacing: 8,
@@ -46,8 +46,7 @@ class TypeTab extends StatelessWidget {
                   .map(
                     (item) => Chip(
                       label: Text(item),
-                      labelStyle: const TextStyle(
-                        fontFamily: 'Nunito',
+                      labelStyle: AppTextStyles.s14.copyWith(
                         fontSize: 13,
                         fontWeight: FontWeight.w600,
                         color: AppColors.primaryDark,
@@ -63,22 +62,22 @@ class TypeTab extends StatelessWidget {
                         color: AppColors.primary,
                       ),
                       onDeleted: () => onRemove(item),
-                      padding: AppPad.h4,
+                      padding: const EdgeInsets.symmetric(horizontal: 4),
                     ),
                   )
                   .toList(),
             ),
-            AppGap.h16,
+            const SizedBox(height: 16),
           ],
 
-          // Common ingredients
           Text(
             'Common ingredients',
-            style: Theme.of(
-              context,
-            ).textTheme.titleMedium?.copyWith(fontSize: 14),
+            style: AppTextStyles.s14.copyWith(
+              fontWeight: FontWeight.w600,
+              color: AppColors.textPrimary,
+            ),
           ),
-          AppGap.h10,
+          const SizedBox(height: 10),
           Wrap(
             spacing: 8,
             runSpacing: 8,
@@ -91,10 +90,13 @@ class TypeTab extends StatelessWidget {
                 onTap: () => onAdd(item),
                 child: AnimatedContainer(
                   duration: const Duration(milliseconds: 200),
-                  padding: AppPad.h12v8,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 8,
+                  ),
                   decoration: BoxDecoration(
                     color: isAdded ? AppColors.primaryLight : AppColors.surface,
-                    borderRadius: AppBorderRadius.a12,
+                    borderRadius: BorderRadius.circular(12),
                     border: Border.all(
                       color: isAdded ? AppColors.primary : AppColors.border,
                       width: isAdded ? 1.5 : 1,
@@ -102,8 +104,7 @@ class TypeTab extends StatelessWidget {
                   ),
                   child: Text(
                     item,
-                    style: TextStyle(
-                      fontFamily: 'Nunito',
+                    style: AppTextStyles.s14.copyWith(
                       fontSize: 13,
                       fontWeight: FontWeight.w600,
                       color: isAdded
@@ -116,27 +117,30 @@ class TypeTab extends StatelessWidget {
             }).toList(),
           ),
 
-          // Recipe suggestions
           if (addedIngredients.isNotEmpty) ...[
-            AppGap.h24,
+            const SizedBox(height: 24),
             Row(
               children: [
                 Text(
                   'Recipe Suggestions',
-                  style: Theme.of(context).textTheme.headlineSmall,
+                  style: AppTextStyles.s18.copyWith(
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.textPrimary,
+                  ),
                 ),
-                AppGap.w8,
+                const SizedBox(width: 8),
                 Container(
-                  padding: AppPad.h8v4,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 3,
+                  ),
                   decoration: BoxDecoration(
                     color: AppColors.primaryLight,
-                    borderRadius: AppBorderRadius.a8,
+                    borderRadius: BorderRadius.circular(8),
                   ),
                   child: Text(
                     '${suggestedRecipes.length}',
-                    style: const TextStyle(
-                      fontFamily: 'Nunito',
-                      fontSize: 12,
+                    style: AppTextStyles.s12.copyWith(
                       fontWeight: FontWeight.w700,
                       color: AppColors.primary,
                     ),
@@ -144,12 +148,12 @@ class TypeTab extends StatelessWidget {
                 ),
               ],
             ),
-            AppGap.h12,
+            const SizedBox(height: 12),
             ...suggestedRecipes.map(
               (r) => RecipeSuggestionTileWidget(recipe: r),
             ),
           ],
-          AppGap.h80,
+          const SizedBox(height: 80),
         ],
       ),
     );

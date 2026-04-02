@@ -17,15 +17,24 @@ class SummaryRowWidget extends StatelessWidget {
     return Row(
       children: [
         Text(icon, style: const TextStyle(fontSize: 20)),
-        AppGap.w12,
+        const SizedBox(width: 12),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(label, style: Theme.of(context).textTheme.bodyMedium),
+              Text(
+                label,
+                style: AppTextStyles.s14.copyWith(
+                  color: AppColors.textSecondary,
+                ),
+              ),
               Text(
                 value,
-                style: Theme.of(context).textTheme.titleMedium,
+                style: AppTextStyles.s16.copyWith(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.textPrimary,
+                ),
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
               ),

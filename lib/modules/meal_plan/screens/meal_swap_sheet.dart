@@ -15,32 +15,21 @@ class MealSwapSheet extends StatelessWidget {
       height: MediaQuery.of(context).size.height * 0.75,
       decoration: const BoxDecoration(
         color: AppColors.background,
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(28),
-        ), //TODO: no AppBorderRadius equivalent for top-only r28
+        borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
       ),
       child: Column(
         children: [
-          // Handle
           Container(
-            margin: const EdgeInsets.only(
-              top: 12,
-            ), //TODO: no AppPad equivalent for this multi-directional EdgeInsets.only
+            margin: const EdgeInsets.only(top: 12),
             width: 40,
             height: 4,
             decoration: BoxDecoration(
               color: AppColors.border,
-              borderRadius: AppBorderRadius.a2,
+              borderRadius: BorderRadius.circular(2),
             ),
           ),
-
-          // Header
           Padding(
-            padding: const EdgeInsets.only(
-              left: 24,
-              top: 20,
-              right: 24,
-            ), //TODO: no AppPad equivalent for this multi-directional EdgeInsets.only
+            padding: const EdgeInsets.fromLTRB(24, 20, 24, 0),
             child: Row(
               children: [
                 Expanded(
@@ -49,11 +38,16 @@ class MealSwapSheet extends StatelessWidget {
                     children: [
                       Text(
                         'Swap Meal',
-                        style: Theme.of(context).textTheme.headlineSmall,
+                        style: AppTextStyles.s18.copyWith(
+                          fontWeight: FontWeight.w600,
+                          color: AppColors.textPrimary,
+                        ),
                       ),
                       Text(
                         'Choose a replacement for ${meal.name}',
-                        style: Theme.of(context).textTheme.bodyMedium,
+                        style: AppTextStyles.s14.copyWith(
+                          color: AppColors.textSecondary,
+                        ),
                       ),
                     ],
                   ),
@@ -68,18 +62,12 @@ class MealSwapSheet extends StatelessWidget {
               ],
             ),
           ),
-
-          // Current meal banner
           Container(
-            margin: const EdgeInsets.only(
-              left: 16,
-              top: 16,
-              right: 16,
-            ), //TODO: no AppPad equivalent for this multi-directional EdgeInsets.only
-            padding: AppPad.a12,
+            margin: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+            padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
               color: meal.type.lightColor,
-              borderRadius: AppBorderRadius.a16,
+              borderRadius: BorderRadius.circular(16),
               border: Border.all(color: meal.type.color.withOpacity(0.3)),
             ),
             child: Row(
@@ -89,12 +77,11 @@ class MealSwapSheet extends StatelessWidget {
                   size: 16,
                   color: meal.type.color,
                 ),
-                AppGap.w8,
+                const SizedBox(width: 8),
                 Expanded(
                   child: Text(
                     'Replacing: ${meal.name}',
-                    style: TextStyle(
-                      fontFamily: 'Nunito',
+                    style: AppTextStyles.s14.copyWith(
                       fontSize: 13,
                       fontWeight: FontWeight.w600,
                       color: meal.type.color,
@@ -103,22 +90,15 @@ class MealSwapSheet extends StatelessWidget {
                 ),
                 Text(
                   '${meal.calories} kcal',
-                  style: TextStyle(
-                    fontFamily: 'Nunito',
-                    fontSize: 12,
-                    color: meal.type.color,
-                  ),
+                  style: AppTextStyles.s12.copyWith(color: meal.type.color),
                 ),
               ],
             ),
           ),
-
-          AppGap.h16,
-
-          // Alternatives list
+          const SizedBox(height: 16),
           Expanded(
             child: ListView.builder(
-              padding: AppPad.h16,
+              padding: const EdgeInsets.symmetric(horizontal: 16),
               itemCount: alternatives.length,
               itemBuilder: (context, i) => _AlternativeTile(
                 meal: alternatives[i],
@@ -133,12 +113,14 @@ class MealSwapSheet extends StatelessWidget {
                     SnackBar(
                       content: Text(
                         '✅ Swapped to ${alternatives[i].name}',
-                        style: const TextStyle(fontFamily: 'Nunito'),
+                        style: AppTextStyles.s14.copyWith(
+                          color: AppColors.white,
+                        ),
                       ),
                       backgroundColor: AppColors.success,
                       behavior: SnackBarBehavior.floating,
                       shape: RoundedRectangleBorder(
-                        borderRadius: AppBorderRadius.a12,
+                        borderRadius: BorderRadius.circular(12),
                       ),
                       duration: const Duration(seconds: 2),
                     ),
@@ -171,21 +153,21 @@ class _AlternativeTile extends StatelessWidget {
     final diffColor = isLower ? AppColors.success : AppColors.warning;
 
     return Container(
-      margin: AppPad.b12,
+      margin: const EdgeInsets.only(bottom: 12),
       decoration: BoxDecoration(
         color: AppColors.surface,
-        borderRadius: AppBorderRadius.a18,
+        borderRadius: BorderRadius.circular(18),
         border: Border.all(color: AppColors.border),
       ),
       child: InkWell(
         onTap: onSelect,
-        borderRadius: AppBorderRadius.a18,
+        borderRadius: BorderRadius.circular(18),
         child: Padding(
-          padding: AppPad.a14,
+          padding: const EdgeInsets.all(14),
           child: Row(
             children: [
               ClipRRect(
-                borderRadius: AppBorderRadius.a12,
+                borderRadius: BorderRadius.circular(12),
                 child: Image.network(
                   meal.imageUrl,
                   width: 70,
@@ -204,41 +186,45 @@ class _AlternativeTile extends StatelessWidget {
                   ),
                 ),
               ),
-              AppGap.w16,
-
+              const SizedBox(width: 14),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       meal.name,
-                      style: Theme.of(context).textTheme.titleMedium,
+                      style: AppTextStyles.s16.copyWith(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w600,
+                        color: AppColors.textPrimary,
+                      ),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    AppGap.h4,
+                    const SizedBox(height: 4),
                     Row(
                       children: [
                         Text(
                           '${meal.calories} kcal',
-                          style: const TextStyle(
-                            fontFamily: 'Nunito',
+                          style: AppTextStyles.s14.copyWith(
                             fontSize: 13,
                             fontWeight: FontWeight.w600,
                             color: AppColors.textPrimary,
                           ),
                         ),
-                        AppGap.w6,
+                        const SizedBox(width: 6),
                         Container(
-                          padding: AppPad.h6v2,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 6,
+                            vertical: 1,
+                          ),
                           decoration: BoxDecoration(
                             color: diffColor.withOpacity(0.1),
-                            borderRadius: AppBorderRadius.a6,
+                            borderRadius: BorderRadius.circular(6),
                           ),
                           child: Text(
                             '${isLower ? '' : '+'}$calDiff',
-                            style: TextStyle(
-                              fontFamily: 'Nunito',
+                            style: AppTextStyles.s12.copyWith(
                               fontSize: 11,
                               fontWeight: FontWeight.w700,
                               color: diffColor,
@@ -247,7 +233,7 @@ class _AlternativeTile extends StatelessWidget {
                         ),
                       ],
                     ),
-                    AppGap.h6,
+                    const SizedBox(height: 6),
                     Wrap(
                       spacing: 4,
                       runSpacing: 4,
@@ -258,15 +244,14 @@ class _AlternativeTile extends StatelessWidget {
                               padding: const EdgeInsets.symmetric(
                                 horizontal: 7,
                                 vertical: 2,
-                              ), //TODO: no AppPad equivalent for h7v2
+                              ),
                               decoration: BoxDecoration(
                                 color: AppColors.surfaceVariant,
-                                borderRadius: AppBorderRadius.a6,
+                                borderRadius: BorderRadius.circular(6),
                               ),
                               child: Text(
                                 tag,
-                                style: const TextStyle(
-                                  fontFamily: 'Nunito',
+                                style: AppTextStyles.s12.copyWith(
                                   fontSize: 10,
                                   fontWeight: FontWeight.w600,
                                   color: AppColors.textSecondary,
@@ -279,7 +264,6 @@ class _AlternativeTile extends StatelessWidget {
                   ],
                 ),
               ),
-
               Container(
                 width: 36,
                 height: 36,

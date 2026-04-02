@@ -71,7 +71,6 @@ class _SplashScreenState extends State<SplashScreen>
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            // Logo
             FadeTransition(
               opacity: _logoFade,
               child: ScaleTransition(
@@ -90,6 +89,7 @@ class _SplashScreenState extends State<SplashScreen>
                       ),
                     ],
                   ),
+                  // fontSize: 52 — no AppTextStyles slot, add s52 if needed
                   child: const Center(
                     child: Text('🍳', style: TextStyle(fontSize: 52)),
                   ),
@@ -97,30 +97,25 @@ class _SplashScreenState extends State<SplashScreen>
               ),
             ),
             const SizedBox(height: 28),
-
-            // App name + tagline
             SlideTransition(
               position: _textSlide,
               child: FadeTransition(
                 opacity: _textFade,
                 child: Column(
                   children: [
-                    const Text(
+                    Text(
                       'Cravvy',
-                      style: TextStyle(
-                        fontFamily: 'Nunito',
+                      style: AppTextStyles.s20.copyWith(
                         fontSize: 40,
                         fontWeight: FontWeight.w800,
-                        color: Colors.white,
+                        color: AppColors.white,
                         letterSpacing: -0.5,
                       ),
                     ),
                     const SizedBox(height: 8),
                     Text(
                       'Your AI Meal Planner',
-                      style: TextStyle(
-                        fontFamily: 'Nunito',
-                        fontSize: 16,
+                      style: AppTextStyles.s16.copyWith(
                         fontWeight: FontWeight.w500,
                         color: Colors.white.withValues(alpha: 0.85),
                       ),
@@ -129,10 +124,7 @@ class _SplashScreenState extends State<SplashScreen>
                 ),
               ),
             ),
-
             const SizedBox(height: 80),
-
-            // Loading dots
             FadeTransition(
               opacity: _textFade,
               child: Row(

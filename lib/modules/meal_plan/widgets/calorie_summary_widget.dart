@@ -12,15 +12,11 @@ class CalorieSummaryWidget extends StatelessWidget {
         final remaining = provider.remainingCalories;
 
         return Container(
-          margin: const EdgeInsets.only(
-            left: 16,
-            top: 14,
-            right: 16,
-          ), //TODO: no AppPad equivalent for this multi-directional EdgeInsets.only
-          padding: AppPad.a18,
+          margin: const EdgeInsets.fromLTRB(16, 14, 16, 0),
+          padding: const EdgeInsets.all(18),
           decoration: BoxDecoration(
             gradient: AppColors.primaryGradient,
-            borderRadius: AppBorderRadius.a20,
+            borderRadius: BorderRadius.circular(20),
           ),
           child: Column(
             children: [
@@ -36,20 +32,17 @@ class CalorieSummaryWidget extends StatelessWidget {
                     children: [
                       Text(
                         '${remaining > 0 ? remaining : 0}',
-                        style: const TextStyle(
-                          fontFamily: 'Nunito',
+                        style: AppTextStyles.s20.copyWith(
                           fontSize: 36,
                           fontWeight: FontWeight.w800,
-                          color: Colors.white,
+                          color: AppColors.white,
                           height: 1,
                         ),
                       ),
                       Text(
                         'kcal left',
-                        style: TextStyle(
-                          fontFamily: 'Nunito',
-                          fontSize: 12,
-                          color: Colors.white.withOpacity(0.8),
+                        style: AppTextStyles.s12.copyWith(
+                          color: Colors.white.withValues(alpha: 0.8),
                         ),
                       ),
                     ],
@@ -63,17 +56,17 @@ class CalorieSummaryWidget extends StatelessWidget {
                   ),
                 ],
               ),
-              AppGap.h14,
+              const SizedBox(height: 14),
               ClipRRect(
-                borderRadius: AppBorderRadius.a8,
+                borderRadius: BorderRadius.circular(8),
                 child: LinearProgressIndicator(
                   value: provider.calorieProgress,
                   minHeight: 8,
-                  backgroundColor: Colors.white.withOpacity(0.25),
+                  backgroundColor: Colors.white.withValues(alpha: 0.25),
                   valueColor: const AlwaysStoppedAnimation<Color>(Colors.white),
                 ),
               ),
-              AppGap.h16,
+              const SizedBox(height: 16),
               Row(
                 children: [
                   _MacroChip(
@@ -83,7 +76,7 @@ class CalorieSummaryWidget extends StatelessWidget {
                     progress: provider.proteinProgress,
                     color: AppColors.secondary,
                   ),
-                  AppGap.w8,
+                  const SizedBox(width: 8),
                   _MacroChip(
                     label: 'Carbs',
                     value: '${day.totalCarbs}g',
@@ -91,7 +84,7 @@ class CalorieSummaryWidget extends StatelessWidget {
                     progress: provider.carbsProgress,
                     color: AppColors.accent,
                   ),
-                  AppGap.w8,
+                  const SizedBox(width: 8),
                   _MacroChip(
                     label: 'Fat',
                     value: '${day.totalFat}g',
@@ -108,8 +101,6 @@ class CalorieSummaryWidget extends StatelessWidget {
     );
   }
 }
-
-// ─── Private sub-widgets ─────────────────────────────────────────────────────
 
 class _CalStat extends StatelessWidget {
   const _CalStat({
@@ -133,10 +124,9 @@ class _CalStat extends StatelessWidget {
       children: [
         Text(
           label,
-          style: TextStyle(
-            fontFamily: 'Nunito',
+          style: AppTextStyles.s12.copyWith(
             fontSize: 11,
-            color: Colors.white.withOpacity(0.7),
+            color: Colors.white.withValues(alpha: 0.7),
           ),
         ),
         RichText(
@@ -144,19 +134,16 @@ class _CalStat extends StatelessWidget {
             children: [
               TextSpan(
                 text: value,
-                style: const TextStyle(
-                  fontFamily: 'Nunito',
-                  fontSize: 18,
+                style: AppTextStyles.s18.copyWith(
                   fontWeight: FontWeight.w700,
-                  color: Colors.white,
+                  color: AppColors.white,
                 ),
               ),
               TextSpan(
                 text: ' $unit',
-                style: TextStyle(
-                  fontFamily: 'Nunito',
+                style: AppTextStyles.s12.copyWith(
                   fontSize: 11,
-                  color: Colors.white.withOpacity(0.7),
+                  color: Colors.white.withValues(alpha: 0.7),
                 ),
               ),
             ],
@@ -186,35 +173,32 @@ class _MacroChip extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
-        padding: AppPad.h10v8,
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
         decoration: BoxDecoration(
           color: Colors.white.withOpacity(0.15),
-          borderRadius: AppBorderRadius.a12,
+          borderRadius: BorderRadius.circular(12),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               label,
-              style: TextStyle(
-                fontFamily: 'Nunito',
+              style: AppTextStyles.s12.copyWith(
                 fontSize: 10,
                 color: Colors.white.withOpacity(0.75),
               ),
             ),
-            AppGap.h2,
+            const SizedBox(height: 2),
             Text(
               value,
-              style: const TextStyle(
-                fontFamily: 'Nunito',
-                fontSize: 14,
+              style: AppTextStyles.s14.copyWith(
                 fontWeight: FontWeight.w700,
-                color: Colors.white,
+                color: AppColors.white,
               ),
             ),
-            AppGap.h4,
+            const SizedBox(height: 4),
             ClipRRect(
-              borderRadius: AppBorderRadius.a4,
+              borderRadius: BorderRadius.circular(4),
               child: LinearProgressIndicator(
                 value: progress,
                 minHeight: 4,
@@ -222,11 +206,10 @@ class _MacroChip extends StatelessWidget {
                 valueColor: AlwaysStoppedAnimation<Color>(color),
               ),
             ),
-            AppGap.h2,
+            const SizedBox(height: 2),
             Text(
               '/ $target',
-              style: TextStyle(
-                fontFamily: 'Nunito',
+              style: AppTextStyles.s12.copyWith(
                 fontSize: 9,
                 color: Colors.white.withOpacity(0.6),
               ),

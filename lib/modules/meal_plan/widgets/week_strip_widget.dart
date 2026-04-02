@@ -13,11 +13,7 @@ class WeekStripWidget extends StatelessWidget {
       builder: (context, provider, _) {
         return Container(
           height: 90,
-          margin: const EdgeInsets.only(
-            left: 16,
-            top: 16,
-            right: 16,
-          ), //TODO: no AppPad equivalent for this multi-directional EdgeInsets.only
+          margin: const EdgeInsets.fromLTRB(16, 16, 16, 0),
           child: Row(
             children: List.generate(7, (i) {
               final plan = provider.weekPlan[i];
@@ -31,11 +27,11 @@ class WeekStripWidget extends StatelessWidget {
                   onTap: () => provider.selectDay(i),
                   child: AnimatedContainer(
                     duration: const Duration(milliseconds: 250),
-                    margin: AppPad.h4,
-                    padding: AppPad.v10,
+                    margin: const EdgeInsets.symmetric(horizontal: 3),
+                    padding: const EdgeInsets.symmetric(vertical: 10),
                     decoration: BoxDecoration(
                       color: isSelected ? AppColors.primary : AppColors.surface,
-                      borderRadius: AppBorderRadius.a16,
+                      borderRadius: BorderRadius.circular(16),
                       border: Border.all(
                         color: isSelected
                             ? AppColors.primary
@@ -50,8 +46,7 @@ class WeekStripWidget extends StatelessWidget {
                       children: [
                         Text(
                           _days[i],
-                          style: TextStyle(
-                            fontFamily: 'Nunito',
+                          style: AppTextStyles.s12.copyWith(
                             fontSize: 11,
                             fontWeight: FontWeight.w600,
                             color: isSelected
@@ -59,19 +54,17 @@ class WeekStripWidget extends StatelessWidget {
                                 : AppColors.textSecondary,
                           ),
                         ),
-                        AppGap.h4,
+                        const SizedBox(height: 4),
                         Text(
                           DateFormat('d').format(plan.date),
-                          style: TextStyle(
-                            fontFamily: 'Nunito',
-                            fontSize: 16,
+                          style: AppTextStyles.s16.copyWith(
                             fontWeight: FontWeight.w800,
                             color: isSelected
-                                ? Colors.white
+                                ? AppColors.white
                                 : AppColors.textPrimary,
                           ),
                         ),
-                        AppGap.h6,
+                        const SizedBox(height: 6),
                         Container(
                           width: 6,
                           height: 6,

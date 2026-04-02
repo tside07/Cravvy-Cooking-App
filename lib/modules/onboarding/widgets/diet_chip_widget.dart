@@ -19,12 +19,12 @@ class DietChipWidget extends StatelessWidget {
       duration: const Duration(milliseconds: 200),
       child: InkWell(
         onTap: onTap,
-        borderRadius: AppBorderRadius.a16,
+        borderRadius: BorderRadius.circular(16),
         child: Container(
-          padding: AppPad.h16v12,
+          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
           decoration: BoxDecoration(
             color: isSelected ? AppColors.secondaryLight : AppColors.surface,
-            borderRadius: AppBorderRadius.a16,
+            borderRadius: BorderRadius.circular(16),
             border: Border.all(
               color: isSelected ? AppColors.secondary : AppColors.border,
               width: isSelected ? 2 : 1,
@@ -33,15 +33,16 @@ class DietChipWidget extends StatelessWidget {
           child: Row(
             children: [
               Text(diet.emoji, style: const TextStyle(fontSize: 22)),
-              AppGap.w10,
+              const SizedBox(width: 10),
               Expanded(
                 child: Text(
                   diet.label,
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                  style: AppTextStyles.s14.copyWith(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w600,
                     color: isSelected
                         ? AppColors.secondaryDark
                         : AppColors.textPrimary,
-                    fontSize: 13,
                   ),
                 ),
               ),

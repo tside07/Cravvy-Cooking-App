@@ -16,17 +16,17 @@ class GoalCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: AppPad.b12,
+      padding: const EdgeInsets.only(bottom: 14),
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
         child: InkWell(
           onTap: onTap,
-          borderRadius: AppBorderRadius.a20,
+          borderRadius: BorderRadius.circular(20),
           child: Container(
-            padding: AppPad.a18,
+            padding: const EdgeInsets.all(18),
             decoration: BoxDecoration(
               color: isSelected ? AppColors.primaryLight : AppColors.surface,
-              borderRadius: AppBorderRadius.a20,
+              borderRadius: BorderRadius.circular(20),
               border: Border.all(
                 color: isSelected ? AppColors.primary : AppColors.border,
                 width: isSelected ? 2 : 1,
@@ -41,7 +41,7 @@ class GoalCardWidget extends StatelessWidget {
                     color: isSelected
                         ? AppColors.primary.withOpacity(0.15)
                         : AppColors.surfaceVariant,
-                    borderRadius: AppBorderRadius.a14,
+                    borderRadius: BorderRadius.circular(14),
                   ),
                   child: Center(
                     child: Text(
@@ -50,23 +50,26 @@ class GoalCardWidget extends StatelessWidget {
                     ),
                   ),
                 ),
-                AppGap.w16,
+                const SizedBox(width: 16),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         goal.title,
-                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                        style: AppTextStyles.s16.copyWith(
+                          fontWeight: FontWeight.w600,
                           color: isSelected
                               ? AppColors.primary
                               : AppColors.textPrimary,
                         ),
                       ),
-                      AppGap.h2,
+                      const SizedBox(height: 2),
                       Text(
                         goal.subtitle,
-                        style: Theme.of(context).textTheme.bodyMedium,
+                        style: AppTextStyles.s14.copyWith(
+                          color: AppColors.textSecondary,
+                        ),
                       ),
                     ],
                   ),

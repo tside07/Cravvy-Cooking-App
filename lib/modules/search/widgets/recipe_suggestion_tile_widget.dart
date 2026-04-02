@@ -10,11 +10,11 @@ class RecipeSuggestionTileWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final (name, cal, time, emoji, match) = recipe;
     return Container(
-      margin: AppPad.b10,
-      padding: AppPad.a14,
+      margin: const EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
         color: AppColors.surface,
-        borderRadius: AppBorderRadius.a16,
+        borderRadius: BorderRadius.circular(16),
         border: Border.all(color: AppColors.border),
       ),
       child: Row(
@@ -24,19 +24,26 @@ class RecipeSuggestionTileWidget extends StatelessWidget {
             height: 52,
             decoration: BoxDecoration(
               color: AppColors.primaryLight,
-              borderRadius: AppBorderRadius.a12,
+              borderRadius: BorderRadius.circular(12),
             ),
             child: Center(
               child: Text(emoji, style: const TextStyle(fontSize: 26)),
             ),
           ),
-          AppGap.w16,
+          const SizedBox(width: 14),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(name, style: Theme.of(context).textTheme.titleMedium),
-                AppGap.h4,
+                Text(
+                  name,
+                  style: AppTextStyles.s16.copyWith(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.textPrimary,
+                  ),
+                ),
+                const SizedBox(height: 4),
                 Row(
                   children: [
                     const Icon(
@@ -46,9 +53,9 @@ class RecipeSuggestionTileWidget extends StatelessWidget {
                     ),
                     Text(
                       ' $cal · ⏱ $time',
-                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: AppColors.textSecondary,
+                      style: AppTextStyles.s12.copyWith(
                         fontSize: 11,
+                        color: AppColors.textSecondary,
                       ),
                     ),
                   ],
@@ -60,17 +67,14 @@ class RecipeSuggestionTileWidget extends StatelessWidget {
             children: [
               Text(
                 '$match%',
-                style: const TextStyle(
-                  fontFamily: 'Nunito',
-                  fontSize: 16,
+                style: AppTextStyles.s16.copyWith(
                   fontWeight: FontWeight.w800,
                   color: AppColors.success,
                 ),
               ),
-              const Text(
+              Text(
                 'match',
-                style: TextStyle(
-                  fontFamily: 'Nunito',
+                style: AppTextStyles.s12.copyWith(
                   fontSize: 10,
                   color: AppColors.textSecondary,
                 ),
