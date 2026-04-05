@@ -16,17 +16,17 @@ class GoalCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 14),
+      padding: const EdgeInsets.only(bottom: 14), //TODO: no AppPad equivalent for bottom: 14
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
         child: InkWell(
           onTap: onTap,
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: AppBorderRadius.a20,
           child: Container(
-            padding: const EdgeInsets.all(18),
+            padding: AppPad.a18,
             decoration: BoxDecoration(
               color: isSelected ? AppColors.primaryLight : AppColors.surface,
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: AppBorderRadius.a20,
               border: Border.all(
                 color: isSelected ? AppColors.primary : AppColors.border,
                 width: isSelected ? 2 : 1,
@@ -41,16 +41,16 @@ class GoalCardWidget extends StatelessWidget {
                     color: isSelected
                         ? AppColors.primary.withOpacity(0.15)
                         : AppColors.surfaceVariant,
-                    borderRadius: BorderRadius.circular(14),
+                    borderRadius: AppBorderRadius.a14,
                   ),
                   child: Center(
                     child: Text(
                       goal.emoji,
-                      style: const TextStyle(fontSize: 28),
+                      style: AppTextStyles.s20.copyWith(fontSize: 28),
                     ),
                   ),
                 ),
-                const SizedBox(width: 16),
+                AppGap.w16,
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -64,7 +64,7 @@ class GoalCardWidget extends StatelessWidget {
                               : AppColors.textPrimary,
                         ),
                       ),
-                      const SizedBox(height: 2),
+                      AppGap.h2,
                       Text(
                         goal.subtitle,
                         style: AppTextStyles.s14.copyWith(

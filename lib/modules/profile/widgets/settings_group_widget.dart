@@ -19,7 +19,7 @@ class SettingsGroupWidget extends StatelessWidget {
         left: 16,
         top: 14,
         right: 16,
-      ), //TODO: no AppPad equivalent for this multi-directional EdgeInsets.only
+      ),
       decoration: BoxDecoration(
         color: AppColors.surface,
         borderRadius: AppBorderRadius.a18,

@@ -18,32 +18,25 @@ class StatCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
-        padding: const EdgeInsets.symmetric(
-          vertical: 14,
-          horizontal: 10,
-        ), //TODO: no AppPad equivalent for h10v14
+        padding: AppPad.h10v14,
         decoration: BoxDecoration(
           color: color,
           borderRadius: AppBorderRadius.a16,
         ),
         child: Column(
           children: [
-            Text(emoji, style: const TextStyle(fontSize: 22)),
+            Text(emoji, style: AppTextStyles.s20.copyWith(fontSize: 22)),
             AppGap.h4,
             Text(
               value,
-              style: const TextStyle(
-                fontFamily: 'Nunito',
-                fontSize: 20,
+              style: AppTextStyles.s20.copyWith(
                 fontWeight: FontWeight.w800,
                 color: AppColors.textPrimary,
               ),
             ),
             Text(
               label,
-              style: const TextStyle(
-                fontFamily: 'Nunito',
-                fontSize: 10,
+              style: AppTextStyles.s10.copyWith(
                 color: AppColors.textSecondary,
               ),
               textAlign: TextAlign.center,

@@ -88,7 +88,7 @@ class _ActionCard extends StatelessWidget {
                 child: Center(
                   child: Text(
                     action.emoji,
-                    style: const TextStyle(fontSize: 18),
+                    style: AppTextStyles.s18,
                   ),
                 ),
               ),

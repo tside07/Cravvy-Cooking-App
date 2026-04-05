@@ -41,9 +41,7 @@ class NutritionConsistencyRowWidget extends StatelessWidget {
         AppGap.w10,
         Text(
           '$percent%',
-          style: TextStyle(
-            fontFamily: 'Nunito',
-            fontSize: 13,
+          style: AppTextStyles.s14.copyWith(
             fontWeight: FontWeight.w700,
             color: color,
           ),

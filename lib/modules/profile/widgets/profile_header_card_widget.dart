@@ -13,7 +13,7 @@ class ProfileHeaderCardWidget extends StatelessWidget {
         left: 16,
         top: 20,
         right: 16,
-      ), //TODO: no AppPad equivalent for this multi-directional EdgeInsets.only
+      ),
       padding: AppPad.a20,
       decoration: BoxDecoration(
         gradient: AppColors.primaryGradient,
@@ -29,26 +29,22 @@ class ProfileHeaderCardWidget extends StatelessWidget {
               color: Colors.white,
               shape: BoxShape.circle,
             ),
-            child: const Center(
-              child: Text('👤', style: TextStyle(fontSize: 36)),
+            child: Center(
+              child: Text('👤', style: AppTextStyles.s20.copyWith(fontSize: 36)),
             ),
           ),
           AppGap.h12,
-          const Text(
+          Text(
             'Sarah Johnson',
-            style: TextStyle(
-              fontFamily: 'Nunito',
-              fontSize: 20,
+            style: AppTextStyles.s20.copyWith(
               fontWeight: FontWeight.w800,
-              color: Colors.white,
+              color: AppColors.white,
             ),
           ),
           Text(
             goal?.title ?? 'Healthy Eating',
-            style: TextStyle(
-              fontFamily: 'Nunito',
-              fontSize: 13,
-              color: Colors.white.withOpacity(0.8),
+            style: AppTextStyles.s12.copyWith(
+              color: Colors.white.withValues(alpha: 0.8),
             ),
           ),
           AppGap.h20,
@@ -81,19 +77,15 @@ class _ProfileStat extends StatelessWidget {
         children: [
           Text(
             value,
-            style: const TextStyle(
-              fontFamily: 'Nunito',
-              fontSize: 18,
+            style: AppTextStyles.s18.copyWith(
               fontWeight: FontWeight.w800,
               color: Colors.white,
             ),
           ),
           Text(
             sub,
-            style: TextStyle(
-              fontFamily: 'Nunito',
-              fontSize: 10,
-              color: Colors.white.withOpacity(0.6),
+            style: AppTextStyles.s10.copyWith(
+              color: Colors.white.withValues(alpha: 0.6),
             ),
           ),
         ],

@@ -21,7 +21,9 @@ abstract final class AppGap {
   static const Widget w8d5 = SizedBox(width: 8.5);
   static const Widget w10 = SizedBox(width: 10);
   static const Widget w12 = SizedBox(width: 12);
+  static const Widget w14 = SizedBox(width: 14);
   static const Widget w16 = SizedBox(width: 16);
+  static const Widget w18 = SizedBox(width: 18);
   static const Widget w20 = SizedBox(width: 20);
   static const Widget w22 = SizedBox(width: 22);
   static const Widget w24 = SizedBox(width: 24);

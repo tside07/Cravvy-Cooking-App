@@ -66,8 +66,8 @@ class _SetupCompleteScreenState extends State<SetupCompleteScreen>
                     gradient: AppColors.primaryGradient,
                     shape: BoxShape.circle,
                   ),
-                  child: const Center(
-                    child: Text('🎉', style: TextStyle(fontSize: 56)),
+                  child: Center(
+                    child: Text('🎉', style: AppTextStyles.s20.copyWith(fontSize: 56)),
                   ),
                 ),
               ),

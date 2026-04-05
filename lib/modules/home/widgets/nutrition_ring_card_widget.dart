@@ -52,18 +52,15 @@ class NutritionRingCardWidget extends StatelessWidget {
                             children: [
                               Text(
                                 '$remaining',
-                                style: const TextStyle(
-                                  fontFamily: 'Nunito',
+                                style: AppTextStyles.s20.copyWith(
                                   fontSize: 30,
                                   fontWeight: FontWeight.w800,
-                                  color: AppColors.textPrimary,
                                   height: 1,
                                 ),
                               ),
-                              const Text(
+                              Text(
                                 'kcal left',
-                                style: TextStyle(
-                                  fontFamily: 'Nunito',
+                                style: AppTextStyles.s12.copyWith(
                                   fontSize: 11,
                                   color: AppColors.textSecondary,
                                 ),

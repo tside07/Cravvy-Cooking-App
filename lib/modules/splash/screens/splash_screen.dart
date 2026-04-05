@@ -80,7 +80,7 @@ class _SplashScreenState extends State<SplashScreen>
                   height: 110,
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(32),
+                    borderRadius: AppBorderRadius.a32,
                     boxShadow: [
                       BoxShadow(
                         color: Colors.black.withValues(alpha: 0.15),
@@ -89,14 +89,13 @@ class _SplashScreenState extends State<SplashScreen>
                       ),
                     ],
                   ),
-                  // fontSize: 52 — no AppTextStyles slot, add s52 if needed
-                  child: const Center(
-                    child: Text('🍳', style: TextStyle(fontSize: 52)),
+                  child: Center(
+                    child: Text('🍳', style: AppTextStyles.s20.copyWith(fontSize: 52)),
                   ),
                 ),
               ),
             ),
-            const SizedBox(height: 28),
+            AppGap.h28,
             SlideTransition(
               position: _textSlide,
               child: FadeTransition(
@@ -112,7 +111,7 @@ class _SplashScreenState extends State<SplashScreen>
                         letterSpacing: -0.5,
                       ),
                     ),
-                    const SizedBox(height: 8),
+                    AppGap.h8,
                     Text(
                       'Your AI Meal Planner',
                       style: AppTextStyles.s16.copyWith(
@@ -124,7 +123,7 @@ class _SplashScreenState extends State<SplashScreen>
                 ),
               ),
             ),
-            const SizedBox(height: 80),
+            AppGap.h80,
             FadeTransition(
               opacity: _textFade,
               child: Row(

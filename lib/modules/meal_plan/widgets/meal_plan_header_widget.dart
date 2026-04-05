@@ -35,7 +35,7 @@ class MealPlanHeaderWidget extends StatelessWidget {
             ),
             child: Row(
               children: [
-                const Text('🔥', style: TextStyle(fontSize: 14)),
+                const Text('🔥', style: AppTextStyles.s14),
                 AppGap.w4,
                 Text(
                   '7-day streak',

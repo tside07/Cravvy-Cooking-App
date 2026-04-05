@@ -18,27 +18,24 @@ class PremiumBannerWidget extends StatelessWidget {
       ),
       child: Row(
         children: [
-          const Text('⭐', style: TextStyle(fontSize: 28)),
+          Text('⭐', style: AppTextStyles.s20.copyWith(fontSize: 28)),
           AppGap.w12,
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
+                Text(
                   'Upgrade to Premium',
-                  style: TextStyle(
-                    fontFamily: 'Nunito',
+                  style: AppTextStyles.s14.copyWith(
                     fontSize: 15,
                     fontWeight: FontWeight.w700,
-                    color: Colors.white,
+                    color: AppColors.white,
                   ),
                 ),
                 Text(
                   'Unlock AI meal planning & more',
-                  style: TextStyle(
-                    fontFamily: 'Nunito',
-                    fontSize: 12,
-                    color: Colors.white.withOpacity(0.6),
+                  style: AppTextStyles.s12.copyWith(
+                    color: Colors.white.withValues(alpha: 0.6),
                   ),
                 ),
               ],
@@ -50,11 +47,9 @@ class PremiumBannerWidget extends StatelessWidget {
               gradient: AppColors.primaryGradient,
               borderRadius: AppBorderRadius.a12,
             ),
-            child: const Text(
+            child: Text(
               'Try Free',
-              style: TextStyle(
-                fontFamily: 'Nunito',
-                fontSize: 13,
+              style: AppTextStyles.s12.copyWith(
                 fontWeight: FontWeight.w700,
                 color: Colors.white,
               ),

@@ -37,7 +37,7 @@ class _SettingsTileState extends State<SettingsTileWidget> {
               borderRadius: AppBorderRadius.a10,
             ),
             child: Center(
-              child: Text(widget.emoji, style: const TextStyle(fontSize: 18)),
+              child: Text(widget.emoji, style: AppTextStyles.s18),
             ),
           ),
           title: Text(

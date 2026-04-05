@@ -20,12 +20,12 @@ class MealSwapSheet extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            margin: const EdgeInsets.only(top: 12),
+            margin: AppPad.t12,
             width: 40,
             height: 4,
             decoration: BoxDecoration(
               color: AppColors.border,
-              borderRadius: BorderRadius.circular(2),
+              borderRadius: AppBorderRadius.a2,
             ),
           ),
           Padding(
@@ -64,10 +64,10 @@ class MealSwapSheet extends StatelessWidget {
           ),
           Container(
             margin: const EdgeInsets.fromLTRB(16, 16, 16, 0),
-            padding: const EdgeInsets.all(12),
+            padding: AppPad.a12,
             decoration: BoxDecoration(
               color: meal.type.lightColor,
-              borderRadius: BorderRadius.circular(16),
+              borderRadius: AppBorderRadius.a16,
               border: Border.all(color: meal.type.color.withOpacity(0.3)),
             ),
             child: Row(
@@ -77,7 +77,7 @@ class MealSwapSheet extends StatelessWidget {
                   size: 16,
                   color: meal.type.color,
                 ),
-                const SizedBox(width: 8),
+                AppGap.w8,
                 Expanded(
                   child: Text(
                     'Replacing: ${meal.name}',
@@ -95,10 +95,10 @@ class MealSwapSheet extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(height: 16),
+          AppGap.h16,
           Expanded(
             child: ListView.builder(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
+              padding: AppPad.h16,
               itemCount: alternatives.length,
               itemBuilder: (context, i) => _AlternativeTile(
                 meal: alternatives[i],
@@ -120,7 +120,7 @@ class MealSwapSheet extends StatelessWidget {
                       backgroundColor: AppColors.success,
                       behavior: SnackBarBehavior.floating,
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
+                        borderRadius: AppBorderRadius.a12,
                       ),
                       duration: const Duration(seconds: 2),
                     ),
@@ -153,21 +153,21 @@ class _AlternativeTile extends StatelessWidget {
     final diffColor = isLower ? AppColors.success : AppColors.warning;
 
     return Container(
-      margin: const EdgeInsets.only(bottom: 12),
+      margin: AppPad.b12,
       decoration: BoxDecoration(
         color: AppColors.surface,
-        borderRadius: BorderRadius.circular(18),
+        borderRadius: AppBorderRadius.a18,
         border: Border.all(color: AppColors.border),
       ),
       child: InkWell(
         onTap: onSelect,
-        borderRadius: BorderRadius.circular(18),
+        borderRadius: AppBorderRadius.a18,
         child: Padding(
-          padding: const EdgeInsets.all(14),
+          padding: AppPad.a14,
           child: Row(
             children: [
               ClipRRect(
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: AppBorderRadius.a12,
                 child: Image.network(
                   meal.imageUrl,
                   width: 70,
@@ -180,13 +180,13 @@ class _AlternativeTile extends StatelessWidget {
                     child: Center(
                       child: Text(
                         meal.type.emoji,
-                        style: const TextStyle(fontSize: 28),
+                        style: AppTextStyles.s20.copyWith(fontSize: 28),
                       ),
                     ),
                   ),
                 ),
               ),
-              const SizedBox(width: 14),
+              AppGap.w14,
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -201,7 +201,7 @@ class _AlternativeTile extends StatelessWidget {
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    const SizedBox(height: 4),
+                    AppGap.h4,
                     Row(
                       children: [
                         Text(
@@ -212,15 +212,12 @@ class _AlternativeTile extends StatelessWidget {
                             color: AppColors.textPrimary,
                           ),
                         ),
-                        const SizedBox(width: 6),
+                        AppGap.w6,
                         Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 6,
-                            vertical: 1,
-                          ),
+                          padding: AppPad.h6v2,
                           decoration: BoxDecoration(
-                            color: diffColor.withOpacity(0.1),
-                            borderRadius: BorderRadius.circular(6),
+                            color: diffColor.withValues(alpha: 0.1),
+                            borderRadius: AppBorderRadius.a6,
                           ),
                           child: Text(
                             '${isLower ? '' : '+'}$calDiff',
@@ -233,7 +230,7 @@ class _AlternativeTile extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 6),
+                    AppGap.h6,
                     Wrap(
                       spacing: 4,
                       runSpacing: 4,
@@ -241,18 +238,14 @@ class _AlternativeTile extends StatelessWidget {
                           .take(2)
                           .map(
                             (tag) => Container(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 7,
-                                vertical: 2,
-                              ),
+                              padding: AppPad.h6v2,
                               decoration: BoxDecoration(
                                 color: AppColors.surfaceVariant,
-                                borderRadius: BorderRadius.circular(6),
+                                borderRadius: AppBorderRadius.a6,
                               ),
                               child: Text(
                                 tag,
-                                style: AppTextStyles.s12.copyWith(
-                                  fontSize: 10,
+                                style: AppTextStyles.s10.copyWith(
                                   fontWeight: FontWeight.w600,
                                   color: AppColors.textSecondary,
                                 ),

@@ -31,12 +31,11 @@ class TodayMealsSectionWidget extends StatelessWidget {
                     onPressed: () {},
                     child: Row(
                       children: [
-                        const Text(
+                        Text(
                           'See all',
-                          style: TextStyle(
+                          style: AppTextStyles.s12.copyWith(
                             color: AppColors.primary,
                             fontWeight: FontWeight.w600,
-                            fontSize: 13,
                           ),
                         ),
                         const Icon(

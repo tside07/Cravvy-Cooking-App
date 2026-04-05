@@ -38,9 +38,7 @@ class WeeklyBarChartWidget extends StatelessWidget {
                 if (isToday)
                   Text(
                     '${data[i]}',
-                    style: const TextStyle(
-                      fontFamily: 'Nunito',
-                      fontSize: 9,
+                    style: AppTextStyles.s10.copyWith(
                       fontWeight: FontWeight.w700,
                       color: AppColors.primary,
                     ),
@@ -57,9 +55,7 @@ class WeeklyBarChartWidget extends StatelessWidget {
                 AppGap.h6,
                 Text(
                   days[i],
-                  style: TextStyle(
-                    fontFamily: 'Nunito',
-                    fontSize: 11,
+                  style: AppTextStyles.s12.copyWith(
                     fontWeight: isToday ? FontWeight.w700 : FontWeight.w500,
                     color: isToday
                         ? AppColors.primary

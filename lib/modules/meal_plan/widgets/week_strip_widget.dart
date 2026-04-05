@@ -27,11 +27,11 @@ class WeekStripWidget extends StatelessWidget {
                   onTap: () => provider.selectDay(i),
                   child: AnimatedContainer(
                     duration: const Duration(milliseconds: 250),
-                    margin: const EdgeInsets.symmetric(horizontal: 3),
-                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    margin: const EdgeInsets.symmetric(horizontal: 3), //TODO: no AppPad h3
+                    padding: AppPad.v10,
                     decoration: BoxDecoration(
                       color: isSelected ? AppColors.primary : AppColors.surface,
-                      borderRadius: BorderRadius.circular(16),
+                      borderRadius: AppBorderRadius.a16,
                       border: Border.all(
                         color: isSelected
                             ? AppColors.primary
@@ -54,7 +54,7 @@ class WeekStripWidget extends StatelessWidget {
                                 : AppColors.textSecondary,
                           ),
                         ),
-                        const SizedBox(height: 4),
+                        AppGap.h4,
                         Text(
                           DateFormat('d').format(plan.date),
                           style: AppTextStyles.s16.copyWith(
@@ -64,7 +64,7 @@ class WeekStripWidget extends StatelessWidget {
                                 : AppColors.textPrimary,
                           ),
                         ),
-                        const SizedBox(height: 6),
+                        AppGap.h6,
                         Container(
                           width: 6,
                           height: 6,

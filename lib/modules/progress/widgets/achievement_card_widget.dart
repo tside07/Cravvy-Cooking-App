@@ -23,7 +23,7 @@ class AchievementCardWidget extends StatelessWidget {
         borderRadius: AppBorderRadius.a16,
         border: Border.all(
           color: unlocked
-              ? AppColors.primary.withOpacity(0.3)
+              ? AppColors.primary.withValues(alpha: 0.3)
               : AppColors.border,
         ),
       ),
@@ -34,7 +34,7 @@ class AchievementCardWidget extends StatelessWidget {
             children: [
               Text(
                 emoji,
-                style: TextStyle(
+                style: AppTextStyles.s20.copyWith(
                   fontSize: 22,
                   color: unlocked ? null : const Color(0x66000000),
                 ),
@@ -47,10 +47,9 @@ class AchievementCardWidget extends StatelessWidget {
                     color: AppColors.primaryLight,
                     borderRadius: AppBorderRadius.a6,
                   ),
-                  child: const Text(
+                  child: Text(
                     '✓',
-                    style: TextStyle(
-                      fontFamily: 'Nunito',
+                    style: AppTextStyles.s10.copyWith(
                       fontSize: 11,
                       fontWeight: FontWeight.w700,
                       color: AppColors.primary,
@@ -68,18 +67,14 @@ class AchievementCardWidget extends StatelessWidget {
           const Spacer(),
           Text(
             title,
-            style: TextStyle(
-              fontFamily: 'Nunito',
-              fontSize: 12,
+            style: AppTextStyles.s12.copyWith(
               fontWeight: FontWeight.w700,
               color: unlocked ? AppColors.textPrimary : AppColors.textHint,
             ),
           ),
           Text(
             desc,
-            style: const TextStyle(
-              fontFamily: 'Nunito',
-              fontSize: 10,
+            style: AppTextStyles.s10.copyWith(
               color: AppColors.textHint,
             ),
             maxLines: 1,

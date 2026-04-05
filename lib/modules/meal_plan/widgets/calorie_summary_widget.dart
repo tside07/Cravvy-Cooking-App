@@ -13,10 +13,10 @@ class CalorieSummaryWidget extends StatelessWidget {
 
         return Container(
           margin: const EdgeInsets.fromLTRB(16, 14, 16, 0),
-          padding: const EdgeInsets.all(18),
+          padding: AppPad.a18,
           decoration: BoxDecoration(
             gradient: AppColors.primaryGradient,
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: AppBorderRadius.a20,
           ),
           child: Column(
             children: [
@@ -56,9 +56,9 @@ class CalorieSummaryWidget extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: 14),
+              AppGap.h14,
               ClipRRect(
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: AppBorderRadius.a8,
                 child: LinearProgressIndicator(
                   value: provider.calorieProgress,
                   minHeight: 8,
@@ -66,7 +66,7 @@ class CalorieSummaryWidget extends StatelessWidget {
                   valueColor: const AlwaysStoppedAnimation<Color>(Colors.white),
                 ),
               ),
-              const SizedBox(height: 16),
+              AppGap.h16,
               Row(
                 children: [
                   _MacroChip(
@@ -76,7 +76,7 @@ class CalorieSummaryWidget extends StatelessWidget {
                     progress: provider.proteinProgress,
                     color: AppColors.secondary,
                   ),
-                  const SizedBox(width: 8),
+                  AppGap.w8,
                   _MacroChip(
                     label: 'Carbs',
                     value: '${day.totalCarbs}g',
@@ -84,7 +84,7 @@ class CalorieSummaryWidget extends StatelessWidget {
                     progress: provider.carbsProgress,
                     color: AppColors.accent,
                   ),
-                  const SizedBox(width: 8),
+                  AppGap.w8,
                   _MacroChip(
                     label: 'Fat',
                     value: '${day.totalFat}g',
@@ -173,22 +173,21 @@ class _MacroChip extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+        padding: AppPad.h10v8,
         decoration: BoxDecoration(
-          color: Colors.white.withOpacity(0.15),
-          borderRadius: BorderRadius.circular(12),
+          color: Colors.white.withValues(alpha: 0.15),
+          borderRadius: AppBorderRadius.a12,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               label,
-              style: AppTextStyles.s12.copyWith(
-                fontSize: 10,
-                color: Colors.white.withOpacity(0.75),
+              style: AppTextStyles.s10.copyWith(
+                color: Colors.white.withValues(alpha: 0.75),
               ),
             ),
-            const SizedBox(height: 2),
+            AppGap.h2,
             Text(
               value,
               style: AppTextStyles.s14.copyWith(
@@ -196,22 +195,21 @@ class _MacroChip extends StatelessWidget {
                 color: AppColors.white,
               ),
             ),
-            const SizedBox(height: 4),
+            AppGap.h4,
             ClipRRect(
-              borderRadius: BorderRadius.circular(4),
+              borderRadius: AppBorderRadius.a4,
               child: LinearProgressIndicator(
                 value: progress,
                 minHeight: 4,
-                backgroundColor: Colors.white.withOpacity(0.2),
+                backgroundColor: Colors.white.withValues(alpha: 0.2),
                 valueColor: AlwaysStoppedAnimation<Color>(color),
               ),
             ),
-            const SizedBox(height: 2),
+            AppGap.h2,
             Text(
               '/ $target',
-              style: AppTextStyles.s12.copyWith(
-                fontSize: 9,
-                color: Colors.white.withOpacity(0.6),
+              style: AppTextStyles.s10.copyWith(
+                color: Colors.white.withValues(alpha: 0.6),
               ),
             ),
           ],

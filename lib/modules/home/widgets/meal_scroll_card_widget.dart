@@ -36,7 +36,7 @@ class MealScrollCardWidget extends StatelessWidget {
                     child: Center(
                       child: Text(
                         meal.type.emoji,
-                        style: const TextStyle(fontSize: 36),
+                        style: AppTextStyles.s20.copyWith(fontSize: 36),
                       ),
                     ),
                   ),
@@ -63,7 +63,7 @@ class MealScrollCardWidget extends StatelessWidget {
                     ),
                     child: Text(
                       meal.type.emoji,
-                      style: const TextStyle(fontSize: 12),
+                      style: AppTextStyles.s12.copyWith(),
                     ),
                   ),
                 ),

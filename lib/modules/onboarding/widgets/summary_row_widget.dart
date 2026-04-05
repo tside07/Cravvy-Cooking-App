@@ -16,8 +16,8 @@ class SummaryRowWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Text(icon, style: const TextStyle(fontSize: 20)),
-        const SizedBox(width: 12),
+        Text(icon, style: AppTextStyles.s20),
+        AppGap.w12,
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -31,7 +31,6 @@ class SummaryRowWidget extends StatelessWidget {
               Text(
                 value,
                 style: AppTextStyles.s16.copyWith(
-                  fontSize: 15,
                   fontWeight: FontWeight.w600,
                   color: AppColors.textPrimary,
                 ),

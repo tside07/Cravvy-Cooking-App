@@ -110,23 +110,19 @@ class _SearchScreenState extends State<SearchScreen>
                     borderRadius: AppBorderRadius.a12,
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(
-                          0.06,
-                        ), // no AppColors equivalent for 0.06 opacity
+                        color: Colors.black.withValues(
+                          alpha: 0.06,
+                        ),
                         blurRadius: 8,
                       ),
                     ],
                   ),
                   indicatorSize: TabBarIndicatorSize.tab,
                   dividerColor: Colors.transparent,
-                  labelStyle: const TextStyle(
-                    fontFamily: 'Nunito',
-                    fontSize: 13,
+                  labelStyle: AppTextStyles.s14.copyWith(
                     fontWeight: FontWeight.w700,
                   ),
-                  unselectedLabelStyle: const TextStyle(
-                    fontFamily: 'Nunito',
-                    fontSize: 13,
+                  unselectedLabelStyle: AppTextStyles.s14.copyWith(
                     fontWeight: FontWeight.w500,
                   ),
                   labelColor: AppColors.primary,

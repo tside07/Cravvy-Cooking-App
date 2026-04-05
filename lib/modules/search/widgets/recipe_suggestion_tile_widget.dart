@@ -10,11 +10,11 @@ class RecipeSuggestionTileWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final (name, cal, time, emoji, match) = recipe;
     return Container(
-      margin: const EdgeInsets.only(bottom: 10),
-      padding: const EdgeInsets.all(14),
+      margin: AppPad.b10,
+      padding: AppPad.a14,
       decoration: BoxDecoration(
         color: AppColors.surface,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: AppBorderRadius.a16,
         border: Border.all(color: AppColors.border),
       ),
       child: Row(
@@ -24,13 +24,13 @@ class RecipeSuggestionTileWidget extends StatelessWidget {
             height: 52,
             decoration: BoxDecoration(
               color: AppColors.primaryLight,
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: AppBorderRadius.a12,
             ),
             child: Center(
-              child: Text(emoji, style: const TextStyle(fontSize: 26)),
+              child: Text(emoji, style: AppTextStyles.s20.copyWith(fontSize: 26)),
             ),
           ),
-          const SizedBox(width: 14),
+          AppGap.w14,
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -43,7 +43,7 @@ class RecipeSuggestionTileWidget extends StatelessWidget {
                     color: AppColors.textPrimary,
                   ),
                 ),
-                const SizedBox(height: 4),
+                AppGap.h4,
                 Row(
                   children: [
                     const Icon(

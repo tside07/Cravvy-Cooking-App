@@ -35,9 +35,9 @@ class OnboardingProgressWidget extends StatelessWidget {
             ),
           ],
         ),
-        const SizedBox(height: 8),
+        AppGap.h8,
         ClipRRect(
-          borderRadius: BorderRadius.circular(4),
+          borderRadius: AppBorderRadius.a4,
           child: LinearProgressIndicator(
             value: current / total,
             minHeight: 6,

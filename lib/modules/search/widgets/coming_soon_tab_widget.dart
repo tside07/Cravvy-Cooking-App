@@ -16,10 +16,10 @@ class ComingSoonTabWidget extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(icon, style: const TextStyle(fontSize: 52)),
-          const SizedBox(height: 16),
+          Text(icon, style: AppTextStyles.s20.copyWith(fontSize: 52)),
+          AppGap.h16,
           Text(label, style: Theme.of(context).textTheme.headlineSmall),
-          const SizedBox(height: 8),
+          AppGap.h8,
           Text(
             'Coming soon in the next update',
             style: Theme.of(context).textTheme.bodyMedium,

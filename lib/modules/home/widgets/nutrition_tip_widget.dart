@@ -26,8 +26,8 @@ class NutritionTipWidget extends StatelessWidget {
               color: AppColors.secondary.withValues(alpha: 0.15),
               shape: BoxShape.circle,
             ),
-            child: const Center(
-              child: Text('💡', style: TextStyle(fontSize: 22)),
+            child: Center(
+              child: Text('💡', style: AppTextStyles.s20),
             ),
           ),
           AppGap.w16,
@@ -38,7 +38,6 @@ class NutritionTipWidget extends StatelessWidget {
                 Text(
                   'Tip of the Day',
                   style: AppTextStyles.s12.copyWith(
-                    fontSize: 13,
                     fontWeight: FontWeight.w700,
                     color: AppColors.secondaryDark,
                   ),

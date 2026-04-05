@@ -46,13 +46,12 @@ class MealCardWidget extends StatelessWidget {
             ),
             child: Row(
               children: [
-                Text(meal.type.emoji, style: const TextStyle(fontSize: 16)),
+                Text(meal.type.emoji, style: AppTextStyles.s16),
                 AppGap.w8,
                 Text(
                   meal.type.label,
-                  style: TextStyle(
+                  style: AppTextStyles.s14.copyWith(
                     fontFamily: 'Nunito',
-                    fontSize: 13,
                     fontWeight: FontWeight.w700,
                     color: meal.type.color,
                   ),
@@ -61,10 +60,7 @@ class MealCardWidget extends StatelessWidget {
                 GestureDetector(
                   onTap: onSwap,
                   child: Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 10,
-                      vertical: 4,
-                    ), //TODO: no AppPad equivalent for h10v4
+                    padding: AppPad.h10v4,
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: AppBorderRadius.a20,
@@ -80,9 +76,7 @@ class MealCardWidget extends StatelessWidget {
                         AppGap.w4,
                         Text(
                           'Swap',
-                          style: TextStyle(
-                            fontFamily: 'Nunito',
-                            fontSize: 11,
+                          style: AppTextStyles.s10.copyWith(
                             fontWeight: FontWeight.w600,
                             color: meal.type.color,
                           ),
@@ -114,7 +108,7 @@ class MealCardWidget extends StatelessWidget {
                       child: Center(
                         child: Text(
                           meal.type.emoji,
-                          style: const TextStyle(fontSize: 32),
+                          style: AppTextStyles.s20.copyWith(fontSize: 32),
                         ),
                       ),
                     ),
@@ -226,12 +220,10 @@ class _InfoChip extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Icon(icon, size: 14, color: color),
-        const SizedBox(width: 3), //TODO: no AppGap equivalent for w3
+        AppGap.w4,
         Text(
           label,
-          style: TextStyle(
-            fontFamily: 'Nunito',
-            fontSize: 12,
+          style: AppTextStyles.s12.copyWith(
             fontWeight: FontWeight.w600,
             color: color,
           ),
@@ -251,16 +243,11 @@ class _MacroPill extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 7,
-        vertical: 3,
-      ), //TODO: no AppPad equivalent for h7v3
+      padding: AppPad.h8v4,
       decoration: BoxDecoration(color: bg, borderRadius: AppBorderRadius.a20),
       child: Text(
         label,
-        style: TextStyle(
-          fontFamily: 'Nunito',
-          fontSize: 10,
+        style: AppTextStyles.s10.copyWith(
           fontWeight: FontWeight.w700,
           color: textColor,
         ),

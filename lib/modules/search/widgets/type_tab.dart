@@ -23,12 +23,12 @@ class TypeTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+      padding: AppPad.h16,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           IngredientInputBarWidget(controller: controller, onAdd: onAdd),
-          const SizedBox(height: 16),
+          AppGap.h16,
 
           if (addedIngredients.isNotEmpty) ...[
             Text(
@@ -38,7 +38,7 @@ class TypeTab extends StatelessWidget {
                 color: AppColors.textPrimary,
               ),
             ),
-            const SizedBox(height: 8),
+            AppGap.h8,
             Wrap(
               spacing: 8,
               runSpacing: 8,
@@ -62,12 +62,12 @@ class TypeTab extends StatelessWidget {
                         color: AppColors.primary,
                       ),
                       onDeleted: () => onRemove(item),
-                      padding: const EdgeInsets.symmetric(horizontal: 4),
+                      padding: AppPad.h4, //TODO: use AppPad.h4 (horizontal: 4, no vertical)
                     ),
                   )
                   .toList(),
             ),
-            const SizedBox(height: 16),
+            AppGap.h16,
           ],
 
           Text(
@@ -77,7 +77,7 @@ class TypeTab extends StatelessWidget {
               color: AppColors.textPrimary,
             ),
           ),
-          const SizedBox(height: 10),
+          AppGap.h10,
           Wrap(
             spacing: 8,
             runSpacing: 8,
@@ -90,13 +90,10 @@ class TypeTab extends StatelessWidget {
                 onTap: () => onAdd(item),
                 child: AnimatedContainer(
                   duration: const Duration(milliseconds: 200),
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 12,
-                    vertical: 8,
-                  ),
+                  padding: AppPad.h12v8,
                   decoration: BoxDecoration(
                     color: isAdded ? AppColors.primaryLight : AppColors.surface,
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: AppBorderRadius.a12,
                     border: Border.all(
                       color: isAdded ? AppColors.primary : AppColors.border,
                       width: isAdded ? 1.5 : 1,
@@ -118,7 +115,7 @@ class TypeTab extends StatelessWidget {
           ),
 
           if (addedIngredients.isNotEmpty) ...[
-            const SizedBox(height: 24),
+            AppGap.h24,
             Row(
               children: [
                 Text(
@@ -128,15 +125,12 @@ class TypeTab extends StatelessWidget {
                     color: AppColors.textPrimary,
                   ),
                 ),
-                const SizedBox(width: 8),
+                AppGap.w8,
                 Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 8,
-                    vertical: 3,
-                  ),
+                  padding: AppPad.h8v4,
                   decoration: BoxDecoration(
                     color: AppColors.primaryLight,
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: AppBorderRadius.a8,
                   ),
                   child: Text(
                     '${suggestedRecipes.length}',
@@ -148,12 +142,12 @@ class TypeTab extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 12),
+            AppGap.h12,
             ...suggestedRecipes.map(
               (r) => RecipeSuggestionTileWidget(recipe: r),
             ),
           ],
-          const SizedBox(height: 80),
+          AppGap.h80,
         ],
       ),
     );
