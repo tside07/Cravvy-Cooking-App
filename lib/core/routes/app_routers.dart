@@ -7,9 +7,11 @@ import 'package:cravvy_cooking_app/modules/onboarding/screens/diet_selection_scr
 import 'package:cravvy_cooking_app/modules/onboarding/screens/setup_complete_screen.dart';
 import 'package:cravvy_cooking_app/modules/onboarding/provider/onboarding_provider.dart';
 import 'package:cravvy_cooking_app/modules/meal_plan/provider/meal_plan_provider.dart';
+import 'package:cravvy_cooking_app/modules/auth/login/screen/login_screen.dart';
+import 'package:cravvy_cooking_app/modules/auth/register/screen/register_screen.dart';
+import 'package:cravvy_cooking_app/modules/auth/forgot_password/screen/forgot_password_screen.dart';
+import 'package:cravvy_cooking_app/modules/auth/otp/screen/otp_screen.dart';
 
-/// Arguments passed from [GoalSelectionScreen] / [DietSelectionScreen]
-/// to [SetupCompleteScreen].
 class OnboardingArgs {
   final HealthGoal? goal;
   final Set<DietType> diets;
@@ -24,9 +26,13 @@ class AppRouter {
   static const String dietSelection = '/onboarding/diet';
   static const String setupComplete = '/onboarding/complete';
   static const String app = '/app';
-
-  /// Alias kept for backward-compatibility with screens that use [mealPlan].
   static const String mealPlan = app;
+
+  // ─── Auth ────────────────────────────────────────────────────────────────
+  static const String login = '/auth/login';
+  static const String register = '/auth/register';
+  static const String forgotPassword = '/auth/forgot-password';
+  static const String otp = '/auth/otp';
 
   static void _logRoute(String? name) {
     assert(() {
@@ -82,8 +88,25 @@ class AppRouter {
         path: app,
         builder: (context, state) => ChangeNotifierProvider(
           create: (_) => MealPlanProvider(),
-          child: const DashboardScreen(), //TODO
+          child: const DashboardScreen(),
         ),
+      ),
+
+      GoRoute(path: login, builder: (context, state) => const LoginScreen()),
+      GoRoute(
+        path: register,
+        builder: (context, state) => const RegisterScreen(),
+      ),
+      GoRoute(
+        path: forgotPassword,
+        builder: (context, state) => const ForgotPasswordScreen(),
+      ),
+      GoRoute(
+        path: otp,
+        builder: (context, state) {
+          final email = (state.extra as String?) ?? '';
+          return OtpScreen(email: email);
+        },
       ),
     ],
     errorBuilder: (context, state) =>

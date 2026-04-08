@@ -27,6 +27,7 @@ export 'core/widgets/app_gap.dart';
 
 // Routers
 export 'package:go_router/go_router.dart';
+export 'package:cravvy_cooking_app/core/routes/app_routers.dart';
 
 // Responsive
 export 'package:responsive_framework/responsive_framework.dart';

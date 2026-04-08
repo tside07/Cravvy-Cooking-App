@@ -28,7 +28,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         curve: Curves.easeInOut,
       );
     } else {
-      context.go(AppRouter.goalSelection);
+      context.go(AppRouter.login);
     }
   }
 

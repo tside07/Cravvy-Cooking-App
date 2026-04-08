@@ -1,6 +1,7 @@
 import 'package:cravvy_cooking_app/init.dart';
 import 'package:cravvy_cooking_app/core/routes/app_routers.dart';
 import 'package:cravvy_cooking_app/modules/splash/widgets/loading_dot.dart';
+import 'package:cravvy_cooking_app/resources/resources.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -22,7 +23,7 @@ class _SplashScreenState extends State<SplashScreen>
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 1800),
+      duration: const Duration(milliseconds: 3000),
     );
 
     _logoScale = Tween<double>(begin: 0.5, end: 1.0).animate(
@@ -66,7 +67,7 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.primary,
+      backgroundColor: AppColors.lightYellowBackground,
       body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -75,48 +76,25 @@ class _SplashScreenState extends State<SplashScreen>
               opacity: _logoFade,
               child: ScaleTransition(
                 scale: _logoScale,
-                child: Container(
-                  width: 110,
-                  height: 110,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: AppBorderRadius.a32,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withValues(alpha: 0.15),
-                        blurRadius: 40,
-                        offset: const Offset(0, 12),
-                      ),
-                    ],
-                  ),
-                  child: Center(
-                    child: Text('🍳', style: AppTextStyles.s20.copyWith(fontSize: 52)),
-                  ),
+                child: Center(
+                  child: Image.asset(ImagePath.sticketLogo, width: 200, height: 200),
                 ),
               ),
             ),
-            AppGap.h28,
+            AppGap.h20,
             SlideTransition(
               position: _textSlide,
               child: FadeTransition(
                 opacity: _textFade,
                 child: Column(
                   children: [
-                    Text(
-                      'Cravvy',
-                      style: AppTextStyles.s20.copyWith(
-                        fontSize: 40,
-                        fontWeight: FontWeight.w800,
-                        color: AppColors.white,
-                        letterSpacing: -0.5,
-                      ),
-                    ),
+                    Image.asset(ImagePath.appName, height: 65, width: 220),
                     AppGap.h8,
                     Text(
-                      'Your AI Meal Planner',
-                      style: AppTextStyles.s16.copyWith(
-                        fontWeight: FontWeight.w500,
-                        color: Colors.white.withValues(alpha: 0.85),
+                      'Find your flavor',
+                      style: AppTextStyles.s18.copyWith(
+                        fontWeight: FontWeight.w700,
+                        color: AppColors.textColor,
                       ),
                     ),
                   ],

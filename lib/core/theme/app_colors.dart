@@ -7,12 +7,18 @@ class AppColors {
   static const Color primaryLight = Color(0xFFFFEDE6);
   static const Color primaryDark = Color(0xFFCC4D1A);
 
+  static const Color lightYellowBackground = Color(0xFFFFE787);
+
   static const Color secondary = Color(0xFF2EC4B6);
   static const Color secondaryLight = Color(0xFFE0F7F5);
   static const Color secondaryDark = Color(0xFF1A9D91);
 
   static const Color accent = Color(0xFFFFE66D);
   static const Color accentDark = Color(0xFFF0C800);
+
+  // ─── Text ────────────────────────────────────────────────────────────
+  static const Color textColor = Color(0xFF6A8042);
+
 
   // ─── Gradient ────────────────────────────────────────────────────────────
   static const LinearGradient primaryGradient = LinearGradient(
@@ -37,6 +43,7 @@ class AppColors {
   static const Color warningLight = Color(0xFFFEF3C7);
   static const Color error = Color(0xFFDC3545);
   static const Color errorLight = Color(0xFFFEE2E2);
+  static const Color lightGray = Color(0xFFD3D1D1);
 
   // ─── Macro colors ────────────────────────────────────────────────────────
   static const Color protein = Color(0xFF2EC4B6);

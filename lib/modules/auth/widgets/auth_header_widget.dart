@@ -1,0 +1,44 @@
+
+import 'package:cravvy_cooking_app/init.dart';
+
+class AuthHeaderWidget extends StatelessWidget {
+  const AuthHeaderWidget({
+    super.key,
+    required this.title,
+    required this.subtitle,
+    this.textAlign = TextAlign.start,
+  });
+
+  final String title;
+  final String subtitle;
+  final TextAlign textAlign;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: textAlign == TextAlign.center
+          ? CrossAxisAlignment.center
+          : CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          textAlign: textAlign,
+          style: AppTextStyles.s20.copyWith(
+            fontSize: 28,
+            fontWeight: FontWeight.w800,
+            color: AppColors.textPrimary,
+          ),
+        ),
+        AppGap.h6,
+        Text(
+          subtitle,
+          textAlign: textAlign,
+          style: AppTextStyles.s14.copyWith(
+            color: AppColors.textSecondary,
+            height: 1.5,
+          ),
+        ),
+      ],
+    );
+  }
+}

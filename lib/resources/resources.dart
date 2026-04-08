@@ -1,3 +1,3 @@
-part 'images.dart';
+part 'image_path.dart';
 
-part 'icons.dart';
+part 'icon_path.dart';

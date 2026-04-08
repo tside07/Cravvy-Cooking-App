@@ -31,5 +31,8 @@ package: resources
 
 groups:
   - path: assets/images
-    class_name: Images
+    class_name: ImagePath
+    types: [ .png, .jpg, .jpeg, .webp, .webm, .bmp ]
+  - path: assets/icons
+    class_name: IconPath
     types: [ .png, .jpg, .jpeg, .webp, .webm, .bmp ]
