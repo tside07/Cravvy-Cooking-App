@@ -18,7 +18,7 @@ class OnboardingSlide {
 
 const kOnboardingSlides = [
   OnboardingSlide(
-    emoji: '🍽️',
+    emoji: IconPath.plate,
     title: 'What should\nI eat today?',
     subtitle:
         'Tell us what\'s in your fridge and we\'ll suggest delicious, healthy meals tailored just for you.',
@@ -26,7 +26,7 @@ const kOnboardingSlides = [
     accentColor: AppColors.primary,
   ),
   OnboardingSlide(
-    emoji: '📅',
+    emoji: IconPath.calendar,
     title: 'Plan your\nweek effortlessly',
     subtitle:
         'Get a personalized 7-day meal plan based on your health goals, diet type, and cooking time.',
@@ -34,7 +34,7 @@ const kOnboardingSlides = [
     accentColor: AppColors.secondary,
   ),
   OnboardingSlide(
-    emoji: '🎯',
+    emoji: IconPath.target,
     title: 'Track nutrition\nwith ease',
     subtitle:
         'Monitor calories, macros and streaks automatically — no manual logging required.',
@@ -51,7 +51,7 @@ class SlidePageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 32), //TODO: no AppPad h32
+      padding: AppPad.h32,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -63,7 +63,15 @@ class SlidePageWidget extends StatelessWidget {
               shape: BoxShape.circle,
             ),
             child: Center(
-              child: Text(slide.emoji, style: AppTextStyles.s20.copyWith(fontSize: 90)),
+              child: SvgPicture.asset(
+                slide.emoji,
+                width: 120,
+                height: 120,
+                colorFilter: ColorFilter.mode(
+                  slide.accentColor,
+                  BlendMode.srcIn,
+                ),
+              ),
             ),
           ),
           AppGap.h48,

@@ -1,5 +1,4 @@
 import 'package:cravvy_cooking_app/init.dart';
-import 'package:cravvy_cooking_app/core/routes/app_routers.dart';
 import 'package:cravvy_cooking_app/modules/onboarding/provider/onboarding_provider.dart';
 import 'package:cravvy_cooking_app/modules/widgets/common/cravvy_button.dart';
 import 'package:cravvy_cooking_app/modules/onboarding/widgets/goal_card_widget.dart';
@@ -22,7 +21,7 @@ class GoalSelectionScreen extends StatelessWidget {
               const OnboardingProgressWidget(current: 1, total: 2),
               AppGap.h32,
               Text(
-                'What\'s your\nmain goal? 🎯',
+                'What\'s your\nmain goal?',
                 style: Theme.of(context).textTheme.displayMedium,
               ),
               AppGap.h8,

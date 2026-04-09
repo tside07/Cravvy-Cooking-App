@@ -1,6 +1,5 @@
 import 'package:cravvy_cooking_app/init.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:cravvy_cooking_app/core/routes/app_routers.dart';
 import 'package:cravvy_cooking_app/modules/widgets/common/cravvy_button.dart';
 import 'package:cravvy_cooking_app/modules/onboarding/widgets/slide_page_widget.dart';
 

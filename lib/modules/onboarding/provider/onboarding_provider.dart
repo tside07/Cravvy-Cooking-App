@@ -1,3 +1,4 @@
+import 'package:cravvy_cooking_app/resources/resources.dart';
 import 'package:flutter/foundation.dart';
 
 enum HealthGoal { loseWeight, buildMuscle, maintain, manageCondition }
@@ -45,13 +46,13 @@ extension HealthGoalExt on HealthGoal {
   String get emoji {
     switch (this) {
       case HealthGoal.loseWeight:
-        return '🔥';
+        return IconPath.fire;
       case HealthGoal.buildMuscle:
-        return '💪';
+        return IconPath.strength;
       case HealthGoal.maintain:
-        return '⚖️';
+        return IconPath.foodPlate;
       case HealthGoal.manageCondition:
-        return '❤️';
+        return IconPath.health;
     }
   }
 }

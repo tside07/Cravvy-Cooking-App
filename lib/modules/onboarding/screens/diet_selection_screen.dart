@@ -1,5 +1,4 @@
 import 'package:cravvy_cooking_app/init.dart';
-import 'package:cravvy_cooking_app/core/routes/app_routers.dart';
 import 'package:cravvy_cooking_app/modules/onboarding/provider/onboarding_provider.dart';
 import 'package:cravvy_cooking_app/modules/widgets/common/cravvy_button.dart';
 import 'package:cravvy_cooking_app/modules/onboarding/widgets/diet_chip_widget.dart';

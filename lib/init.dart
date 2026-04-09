@@ -33,3 +33,6 @@ export 'package:cravvy_cooking_app/core/routes/app_routers.dart';
 export 'package:responsive_framework/responsive_framework.dart';
 
 export 'package:flutter_svg/flutter_svg.dart';
+
+// Resources
+export 'package:cravvy_cooking_app/resources/resources.dart';

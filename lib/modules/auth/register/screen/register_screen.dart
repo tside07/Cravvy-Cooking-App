@@ -46,7 +46,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            'Vui lòng đồng ý với điều khoản sử dụng',
+            'Please agree to the terms and conditions.',
             style: AppTextStyles.s14.copyWith(color: AppColors.white),
           ),
           backgroundColor: AppColors.error,

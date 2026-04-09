@@ -16,7 +16,7 @@ class GoalCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 14), //TODO: no AppPad equivalent for bottom: 14
+      padding: AppPad.b12,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
         child: InkWell(
@@ -39,14 +39,15 @@ class GoalCardWidget extends StatelessWidget {
                   height: 54,
                   decoration: BoxDecoration(
                     color: isSelected
-                        ? AppColors.primary.withOpacity(0.15)
+                        ? AppColors.primary.withValues(alpha: 0.15)
                         : AppColors.surfaceVariant,
                     borderRadius: AppBorderRadius.a14,
                   ),
                   child: Center(
-                    child: Text(
+                    child: SvgPicture.asset(
                       goal.emoji,
-                      style: AppTextStyles.s20.copyWith(fontSize: 28),
+                      width: 25,
+                      height: 25,
                     ),
                   ),
                 ),
