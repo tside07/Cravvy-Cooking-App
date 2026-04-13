@@ -1,0 +1,600 @@
+import 'package:flutter/services.dart';
+import 'package:cravvy_cooking_app/init.dart';
+import 'package:cravvy_cooking_app/modules/profile/provider/profile_provider.dart';
+
+class EditProfileScreen extends StatefulWidget {
+  const EditProfileScreen({super.key});
+
+  @override
+  State<EditProfileScreen> createState() => _EditProfileScreenState();
+}
+
+class _EditProfileScreenState extends State<EditProfileScreen> {
+  final _formKey = GlobalKey<FormState>();
+
+  late TextEditingController _nameCtrl;
+  late TextEditingController _emailCtrl;
+  late TextEditingController _phoneCtrl;
+  late TextEditingController _bioCtrl;
+  late DateTime _birthDate;
+
+  static const int _bioMaxLength = 200;
+
+  @override
+  void initState() {
+    super.initState();
+    final p = context.read<ProfileProvider>();
+    _nameCtrl = TextEditingController(text: p.name);
+    _emailCtrl = TextEditingController(text: p.email);
+    _phoneCtrl = TextEditingController(text: p.phone);
+    _bioCtrl = TextEditingController(text: p.bio);
+    _birthDate = p.birthDate;
+    _bioCtrl.addListener(() => setState(() {}));
+  }
+
+  @override
+  void dispose() {
+    _nameCtrl.dispose();
+    _emailCtrl.dispose();
+    _phoneCtrl.dispose();
+    _bioCtrl.dispose();
+    super.dispose();
+  }
+
+  // ── Date picker ──────────────────────────────────────────────────────────
+  Future<void> _pickDate() async {
+    final picked = await showDatePicker(
+      context: context,
+      initialDate: _birthDate,
+      firstDate: DateTime(1920),
+      lastDate: DateTime.now(),
+      builder: (ctx, child) => Theme(
+        data: Theme.of(ctx).copyWith(
+          colorScheme: ColorScheme.light(
+            primary: AppColors.primary,
+            onPrimary: AppColors.white,
+            surface: AppColors.surface,
+          ),
+        ),
+        child: child!,
+      ),
+    );
+    if (picked != null) setState(() => _birthDate = picked);
+  }
+
+  // ── Save ─────────────────────────────────────────────────────────────────
+  void _save() {
+    if (_formKey.currentState?.validate() != true) return;
+    HapticFeedback.mediumImpact();
+    context.read<ProfileProvider>().updateProfile(
+          name: _nameCtrl.text.trim(),
+          email: _emailCtrl.text.trim(),
+          phone: _phoneCtrl.text.trim(),
+          bio: _bioCtrl.text.trim(),
+          birthDate: _birthDate,
+        );
+    context.pop();
+  }
+
+  // ── Danger-zone dialogs ──────────────────────────────────────────────────
+  void _showChangePassword() {
+    showDialog(
+      context: context,
+      builder: (_) => _SimpleDialog(
+        title: 'Change Password',
+        body: 'This feature is not yet available in this version.',
+        confirmLabel: 'OK',
+        onConfirm: () => Navigator.pop(context),
+        isDestructive: false,
+      ),
+    );
+  }
+
+  void _showDeleteAccount() {
+    showDialog(
+      context: context,
+      builder: (_) => _SimpleDialog(
+        title: 'Delete Account',
+        body:
+            'Are you sure? This action cannot be undone and all your data will be permanently removed.',
+        confirmLabel: 'Delete',
+        onConfirm: () {
+          Navigator.pop(context);
+          context.go(AppRouter.onboarding);
+        },
+        isDestructive: true,
+      ),
+    );
+  }
+
+  // ── Build ─────────────────────────────────────────────────────────────────
+  @override
+  Widget build(BuildContext context) {
+    final formattedDate =
+        '${_birthDate.month.toString().padLeft(2, '0')}/${_birthDate.day.toString().padLeft(2, '0')}/${_birthDate.year}';
+
+    final profile = context.read<ProfileProvider>();
+
+    return Scaffold(
+      backgroundColor: AppColors.background,
+      appBar: AppBar(
+        backgroundColor: AppColors.background,
+        elevation: 0,
+        scrolledUnderElevation: 0,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_rounded,
+              color: AppColors.textPrimary),
+          onPressed: () => context.pop(),
+        ),
+        title: Text(
+          'Edit Profile',
+          style: AppTextStyles.s16.copyWith(fontWeight: FontWeight.w700),
+        ),
+        centerTitle: true,
+      ),
+      body: Form(
+        key: _formKey,
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              AppGap.h16,
+
+              // ── Avatar ─────────────────────────────────────────────────
+              Center(
+                child: Column(
+                  children: [
+                    Stack(
+                      alignment: Alignment.bottomRight,
+                      children: [
+                        Container(
+                          width: 88,
+                          height: 88,
+                          decoration: BoxDecoration(
+                            gradient: AppColors.primaryGradient,
+                            shape: BoxShape.circle,
+                          ),
+                          child: Center(
+                            child: Text(
+                              profile.initials,
+                              style: AppTextStyles.s20.copyWith(
+                                fontSize: 32,
+                                fontWeight: FontWeight.w800,
+                                color: AppColors.white,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          width: 28,
+                          height: 28,
+                          decoration: BoxDecoration(
+                            color: AppColors.primary,
+                            shape: BoxShape.circle,
+                            border:
+                                Border.all(color: AppColors.white, width: 2),
+                          ),
+                          child: const Icon(
+                            Icons.camera_alt_rounded,
+                            size: 14,
+                            color: AppColors.white,
+                          ),
+                        ),
+                      ],
+                    ),
+                    AppGap.h8,
+                    Text(
+                      'Change avatar',
+                      style: AppTextStyles.s12.copyWith(
+                        color: AppColors.primary,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              AppGap.h24,
+
+              // ── BASIC INFORMATION ──────────────────────────────────────
+              const _SectionHeader(title: 'BASIC INFORMATION'),
+              AppGap.h8,
+
+              // Name
+              _FieldCard(
+                child: TextFormField(
+                  controller: _nameCtrl,
+                  style: AppTextStyles.s14,
+                  decoration: _fieldDecoration(
+                    icon: Icons.person_outline_rounded,
+                    hint: 'Full name',
+                    controller: _nameCtrl,
+                    showCheckMark: true,
+                  ),
+                  validator: (v) => (v == null || v.trim().isEmpty)
+                      ? 'Name is required'
+                      : null,
+                ),
+              ),
+
+              AppGap.h10,
+
+              // Date of birth
+              _FieldCard(
+                child: ListTile(
+                  contentPadding: AppPad.h12v4,
+                  leading: Container(
+                    width: 34,
+                    height: 34,
+                    decoration: BoxDecoration(
+                      color: AppColors.primaryLight,
+                      borderRadius: AppBorderRadius.a8,
+                    ),
+                    child: const Icon(
+                      Icons.calendar_today_rounded,
+                      size: 16,
+                      color: AppColors.primary,
+                    ),
+                  ),
+                  title: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Date of birth',
+                        style: AppTextStyles.s10.copyWith(
+                          color: AppColors.textSecondary,
+                        ),
+                      ),
+                      Text(formattedDate, style: AppTextStyles.s14),
+                    ],
+                  ),
+                  trailing: const Icon(
+                    Icons.calendar_today_outlined,
+                    size: 18,
+                    color: AppColors.textHint,
+                  ),
+                  onTap: _pickDate,
+                ),
+              ),
+
+              AppGap.h24,
+
+              // ── CONTACT INFORMATION ────────────────────────────────────
+              const _SectionHeader(title: 'CONTACT INFORMATION'),
+              AppGap.h8,
+
+              // Email
+              _FieldCard(
+                child: TextFormField(
+                  controller: _emailCtrl,
+                  keyboardType: TextInputType.emailAddress,
+                  style: AppTextStyles.s14,
+                  decoration: _fieldDecoration(
+                    icon: Icons.email_outlined,
+                    hint: 'Email address',
+                    controller: _emailCtrl,
+                    showCheckMark: true,
+                  ),
+                  validator: (v) {
+                    if (v == null || v.trim().isEmpty) return 'Email is required';
+                    if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(v.trim())) {
+                      return 'Enter a valid email';
+                    }
+                    return null;
+                  },
+                ),
+              ),
+
+              AppGap.h10,
+
+              // Phone
+              _FieldCard(
+                child: TextFormField(
+                  controller: _phoneCtrl,
+                  keyboardType: TextInputType.phone,
+                  style: AppTextStyles.s14,
+                  decoration: _fieldDecoration(
+                    icon: Icons.phone_outlined,
+                    hint: 'Phone number',
+                    controller: _phoneCtrl,
+                    showCheckMark: false,
+                  ),
+                ),
+              ),
+
+              AppGap.h24,
+
+              // ── ABOUT YOU ─────────────────────────────────────────────
+              const _SectionHeader(title: 'ABOUT YOU'),
+              AppGap.h8,
+
+              // Bio
+              _FieldCard(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    TextFormField(
+                      controller: _bioCtrl,
+                      maxLines: 4,
+                      maxLength: _bioMaxLength,
+                      style: AppTextStyles.s14,
+                      decoration: InputDecoration(
+                        hintText: 'Write something about yourself...',
+                        hintStyle: AppTextStyles.s14
+                            .copyWith(color: AppColors.textHint),
+                        prefixIcon: Padding(
+                          padding: const EdgeInsets.only(
+                              left: 10, right: 10, top: 10, bottom: 10),
+                          child: Align(
+                            alignment: Alignment.topCenter,
+                            widthFactor: 1.0,
+                            heightFactor: 4.0,
+                            child: Container(
+                              width: 34,
+                              height: 34,
+                              decoration: BoxDecoration(
+                                color: AppColors.primaryLight,
+                                borderRadius: AppBorderRadius.a8,
+                              ),
+                              child: const Icon(Icons.description_outlined,
+                                  size: 16, color: AppColors.primary),
+                            ),
+                          ),
+                        ),
+                        border: InputBorder.none,
+                        enabledBorder: InputBorder.none,
+                        focusedBorder: InputBorder.none,
+                        alignLabelWithHint: true,
+                        counterText: '',
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 12, bottom: 8),
+                      child: Text(
+                        '${_bioCtrl.text.length}/$_bioMaxLength',
+                        style: AppTextStyles.s10.copyWith(
+                          color: AppColors.textHint,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              AppGap.h32,
+
+              // ── Save button ────────────────────────────────────────────
+              Container(
+                width: double.infinity,
+                height: 52,
+                decoration: BoxDecoration(
+                  gradient: const LinearGradient(
+                    colors: [Color(0xFFFFB88C), Color(0xFFFF6B35)],
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight,
+                  ),
+                  borderRadius: AppBorderRadius.a16,
+                  boxShadow: [
+                    BoxShadow(
+                      color: AppColors.primary.withValues(alpha: 0.3),
+                      blurRadius: 12,
+                      offset: const Offset(0, 4),
+                    ),
+                  ],
+                ),
+                child: Material(
+                  color: Colors.transparent,
+                  child: InkWell(
+                    borderRadius: AppBorderRadius.a16,
+                    onTap: _save,
+                    child: Center(
+                      child: Text(
+                        'Save Changes',
+                        style: AppTextStyles.s16.copyWith(
+                          color: AppColors.white,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+
+              AppGap.h20,
+
+              // ── Danger zone ────────────────────────────────────────────
+              Container(
+                padding: AppPad.a16,
+                decoration: BoxDecoration(
+                  color: AppColors.errorLight,
+                  borderRadius: AppBorderRadius.a16,
+                  border: Border.all(
+                    color: AppColors.error.withValues(alpha: 0.25),
+                  ),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Danger Zone',
+                      style: AppTextStyles.s14.copyWith(
+                        color: AppColors.error,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    AppGap.h4,
+                    Text(
+                      'These actions cannot be undone',
+                      style: AppTextStyles.s12.copyWith(
+                        color: AppColors.error.withValues(alpha: 0.7),
+                      ),
+                    ),
+                    AppGap.h12,
+                    _DangerTile(
+                      label: 'Change Password',
+                      onTap: _showChangePassword,
+                    ),
+                    const Divider(height: 1, color: Color(0xFFFFCDD2)),
+                    _DangerTile(
+                      label: 'Delete Account',
+                      onTap: _showDeleteAccount,
+                    ),
+                  ],
+                ),
+              ),
+
+              AppGap.h40,
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  // ── Input decoration factory ───────────────────────────────────────────────
+  InputDecoration _fieldDecoration({
+    required IconData icon,
+    required String hint,
+    required TextEditingController controller,
+    required bool showCheckMark,
+  }) {
+    return InputDecoration(
+      hintText: hint,
+      hintStyle: AppTextStyles.s14.copyWith(color: AppColors.textHint),
+      prefixIcon: Padding(
+        padding: const EdgeInsets.all(10),
+        child: Container(
+          width: 34,
+          height: 34,
+          decoration: BoxDecoration(
+            color: AppColors.primaryLight,
+            borderRadius: AppBorderRadius.a8,
+          ),
+          child: Icon(icon, size: 16, color: AppColors.primary),
+        ),
+      ),
+      suffixIcon: showCheckMark
+          ? ValueListenableBuilder<TextEditingValue>(
+              valueListenable: controller,
+              builder: (_, value, __) => value.text.trim().isNotEmpty
+                  ? const Padding(
+                      padding: EdgeInsets.only(right: 12),
+                      child: Icon(Icons.check_circle_rounded,
+                          color: AppColors.success, size: 20),
+                    )
+                  : const SizedBox.shrink(),
+            )
+          : null,
+      border: InputBorder.none,
+      enabledBorder: InputBorder.none,
+      focusedBorder: InputBorder.none,
+    );
+  }
+}
+
+// ── Section header ────────────────────────────────────────────────────────────
+class _SectionHeader extends StatelessWidget {
+  const _SectionHeader({required this.title});
+  final String title;
+
+  @override
+  Widget build(BuildContext context) => Padding(
+        padding: const EdgeInsets.only(left: 4),
+        child: Text(
+          title,
+          style: const TextStyle(
+            fontSize: 11,
+            fontWeight: FontWeight.w700,
+            color: AppColors.textSecondary,
+            letterSpacing: 0.8,
+          ),
+        ),
+      );
+}
+
+// ── Field card container ──────────────────────────────────────────────────────
+class _FieldCard extends StatelessWidget {
+  const _FieldCard({required this.child});
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) => Container(
+        decoration: BoxDecoration(
+          color: AppColors.surface,
+          borderRadius: AppBorderRadius.a14,
+          border: Border.all(color: AppColors.border),
+        ),
+        child: child,
+      );
+}
+
+// ── Danger-zone tile ──────────────────────────────────────────────────────────
+class _DangerTile extends StatelessWidget {
+  const _DangerTile({required this.label, required this.onTap});
+  final String label;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) => InkWell(
+        onTap: onTap,
+        borderRadius: AppBorderRadius.a8,
+        child: Padding(
+          padding: AppPad.h4v8,
+          child: Text(
+            label,
+            style: AppTextStyles.s14.copyWith(
+              color: AppColors.error,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ),
+      );
+}
+
+// ── Simple alert dialog ───────────────────────────────────────────────────────
+class _SimpleDialog extends StatelessWidget {
+  const _SimpleDialog({
+    required this.title,
+    required this.body,
+    required this.confirmLabel,
+    required this.onConfirm,
+    required this.isDestructive,
+  });
+
+  final String title;
+  final String body;
+  final String confirmLabel;
+  final VoidCallback onConfirm;
+  final bool isDestructive;
+
+  @override
+  Widget build(BuildContext context) => AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: AppBorderRadius.a20),
+        title: Text(title,
+            style:
+                AppTextStyles.s16.copyWith(fontWeight: FontWeight.w700)),
+        content: Text(body,
+            style: AppTextStyles.s14
+                .copyWith(color: AppColors.textSecondary)),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text('Cancel',
+                style: AppTextStyles.s14
+                    .copyWith(color: AppColors.textSecondary)),
+          ),
+          TextButton(
+            onPressed: onConfirm,
+            child: Text(
+              confirmLabel,
+              style: AppTextStyles.s14.copyWith(
+                color:
+                    isDestructive ? AppColors.error : AppColors.primary,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+          ),
+        ],
+      );
+}

@@ -5,6 +5,7 @@ import 'core/theme/app_theme.dart';
 import 'package:cravvy_cooking_app/core/routes/app_routers.dart';
 import 'package:cravvy_cooking_app/modules/onboarding/provider/onboarding_provider.dart';
 import 'package:cravvy_cooking_app/modules/meal_plan/provider/meal_plan_provider.dart';
+import 'package:cravvy_cooking_app/modules/profile/provider/profile_provider.dart';
 
 // import 'presentation/providers/onboarding_provider.dart';
 // import 'presentation/providers/meal_plan_provider.dart';
@@ -33,6 +34,7 @@ class CravvyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => OnboardingProvider()),
         ChangeNotifierProvider(create: (_) => MealPlanProvider()),
+        ChangeNotifierProvider(create: (_) => ProfileProvider()),
       ],
       child: MaterialApp.router(
         title: 'Cravvy',

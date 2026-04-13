@@ -12,6 +12,8 @@ import 'package:cravvy_cooking_app/modules/auth/register/screen/register_screen.
 import 'package:cravvy_cooking_app/modules/auth/forgot_password/screen/forgot_password_screen.dart';
 import 'package:cravvy_cooking_app/modules/auth/otp/screen/otp_screen.dart';
 import 'package:cravvy_cooking_app/modules/meal_detail/screens/meal_detail_screen.dart';
+import 'package:cravvy_cooking_app/modules/profile/screen/edit_profile_screen.dart';
+import 'package:cravvy_cooking_app/modules/premium/screen/premium_screen.dart';
 import 'package:cravvy_cooking_app/data/models/meal.dart';
 
 class OnboardingArgs {
@@ -36,6 +38,8 @@ class AppRouter {
   static const String forgotPassword = '/auth/forgot-password';
   static const String otp = '/auth/otp';
   static const String mealDetail = '/meal-detail';
+  static const String editProfile = '/profile/edit';
+  static const String premium = '/premium';
 
   static void _logRoute(String? name) {
     assert(() {
@@ -117,6 +121,14 @@ class AppRouter {
           final meal = state.extra as Meal;
           return MealDetailScreen(meal: meal);
         },
+      ),
+      GoRoute(
+        path: editProfile,
+        builder: (context, state) => const EditProfileScreen(),
+      ),
+      GoRoute(
+        path: premium,
+        builder: (context, state) => const PremiumScreen(),
       ),
     ],
     errorBuilder: (context, state) =>

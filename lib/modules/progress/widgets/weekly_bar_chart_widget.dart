@@ -18,11 +18,11 @@ class WeeklyBarChartWidget extends StatelessWidget {
     final today = DateTime.now().weekday - 1;
 
     return SizedBox(
-      height: 130,
+      height: 150,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: List.generate(data.length, (i) {
-          final barHeight = (data[i] / max) * 110;
+          final barHeight = (data[i] / max) * 90;
           final isToday = i == today;
           final isGoalMet = data[i] >= goal * 0.9;
           final color = isToday
