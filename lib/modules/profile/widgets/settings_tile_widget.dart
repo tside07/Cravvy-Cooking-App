@@ -36,9 +36,7 @@ class _SettingsTileState extends State<SettingsTileWidget> {
               color: AppColors.surfaceVariant,
               borderRadius: AppBorderRadius.a10,
             ),
-            child: Center(
-              child: Text(widget.emoji, style: AppTextStyles.s18),
-            ),
+            child: Center(child: Text(widget.emoji, style: AppTextStyles.s18)),
           ),
           title: Text(
             widget.label,
@@ -54,20 +52,24 @@ class _SettingsTileState extends State<SettingsTileWidget> {
                   activeThumbColor: AppColors.primary,
                   onChanged: (v) => setState(() => _toggled = v),
                 )
-              : const Icon(
-                  Icons.chevron_right_rounded,
-                  color: AppColors.textHint,
-                  size: 20,
+              : SvgPicture.asset(
+                  IconPath.rightArrow,
+                  width: 20,
+                  height: 20,
+                  colorFilter: ColorFilter.mode(
+                    AppColors.black50,
+                    BlendMode.srcIn,
+                  ),
                 ),
+          // : const Icon(
+          //     Icons.chevron_right_rounded,
+          //     color: AppColors.textHint,
+          //     size: 20,
+          //   ),
           onTap: widget.isToggle ? null : widget.onTap,
         ),
         if (widget.showDivider)
-          const Divider(
-            height: 1,
-            indent: 68,
-            endIndent: 16,
-            color: AppColors.divider,
-          ),
+          const Divider(height: 0.1, color: AppColors.divider),
       ],
     );
   }

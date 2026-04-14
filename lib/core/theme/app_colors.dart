@@ -71,7 +71,7 @@ class AppColors {
   static const Color active = primary;
   static const Color bodyBackground = white;
   static const Color border = Color(0xFFDEE2E6);
-  static const Color divider = auroMetalAaurus;
+  static const Color divider = Color(0xFFE8E9EA);
   static const Color sectionTitle = primary;
   static const Color text = raisinBlack;
   static const Color description = raisinBlack;

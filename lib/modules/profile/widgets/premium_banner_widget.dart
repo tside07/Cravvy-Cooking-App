@@ -8,19 +8,21 @@ class PremiumBannerWidget extends StatelessWidget {
     return GestureDetector(
       onTap: () => context.push(AppRouter.premium),
       child: Container(
-        margin: const EdgeInsets.only(
-          left: 16,
-          top: 14,
-          right: 16,
-        ),
+        margin: const EdgeInsets.only(left: 16, top: 14, right: 16),
         padding: AppPad.a16,
         decoration: BoxDecoration(
-          color: const Color(0xFF1A1A2E),
+          color: AppColors.orange,
           borderRadius: AppBorderRadius.a18,
         ),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('⭐', style: AppTextStyles.s20.copyWith(fontSize: 28)),
+            SvgPicture.asset(
+              IconPath.crown,
+              width: 35,
+              height: 35,
+              colorFilter: ColorFilter.mode(AppColors.white, BlendMode.srcIn),
+            ),
             AppGap.w12,
             Expanded(
               child: Column(
@@ -43,19 +45,11 @@ class PremiumBannerWidget extends StatelessWidget {
                 ],
               ),
             ),
-            Container(
-              padding: AppPad.h14v8,
-              decoration: BoxDecoration(
-                gradient: AppColors.primaryGradient,
-                borderRadius: AppBorderRadius.a12,
-              ),
-              child: Text(
-                'Try Free',
-                style: AppTextStyles.s12.copyWith(
-                  fontWeight: FontWeight.w700,
-                  color: Colors.white,
-                ),
-              ),
+            SvgPicture.asset(
+              IconPath.rightArrow,
+              width: 25,
+              height: 25,
+              colorFilter: ColorFilter.mode(AppColors.white, BlendMode.srcIn,),
             ),
           ],
         ),

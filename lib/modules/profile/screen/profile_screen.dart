@@ -17,7 +17,6 @@ class ProfileScreen extends StatelessWidget {
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
-            // ── App bar ───────────────────────────────────────────────────
             SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.only(left: 20, right: 16, top: 16),
@@ -53,15 +52,12 @@ class ProfileScreen extends StatelessWidget {
               ),
             ),
 
-            // ── Profile header card ───────────────────────────────────────
             SliverToBoxAdapter(
               child: _ProfileHeaderCard(profile: profile, goal: goal),
             ),
 
-            // ── Premium banner ────────────────────────────────────────────
             const SliverToBoxAdapter(child: PremiumBannerWidget()),
 
-            // ── "My Plan" section ─────────────────────────────────────────
             _SectionLabel(label: 'My Plan'),
             SliverToBoxAdapter(
               child: SettingsGroupWidget(
@@ -74,7 +70,6 @@ class ProfileScreen extends StatelessWidget {
               ),
             ),
 
-            // ── "Settings" section ────────────────────────────────────────
             _SectionLabel(label: 'Settings'),
             SliverToBoxAdapter(
               child: SettingsGroupWidget(
@@ -86,7 +81,6 @@ class ProfileScreen extends StatelessWidget {
               ),
             ),
 
-            // ── "Data & Privacy" section ──────────────────────────────────
             _SectionLabel(label: 'Data & Privacy'),
             SliverToBoxAdapter(
               child: SettingsGroupWidget(
@@ -98,7 +92,6 @@ class ProfileScreen extends StatelessWidget {
               ),
             ),
 
-            // ── "Support" section ─────────────────────────────────────────
             _SectionLabel(label: 'Support'),
             SliverToBoxAdapter(
               child: SettingsGroupWidget(
@@ -110,7 +103,6 @@ class ProfileScreen extends StatelessWidget {
               ),
             ),
 
-            // ── "Interface" section ───────────────────────────────────────
             _SectionLabel(label: 'Interface'),
             SliverToBoxAdapter(
               child: SettingsGroupWidget(
@@ -121,7 +113,6 @@ class ProfileScreen extends StatelessWidget {
               ),
             ),
 
-            // ── Log-out button ────────────────────────────────────────────
             SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
@@ -156,7 +147,6 @@ class ProfileScreen extends StatelessWidget {
               ),
             ),
 
-            // ── Version label ─────────────────────────────────────────────
             SliverToBoxAdapter(
               child: Padding(
                 padding: AppPad.b20,
@@ -176,7 +166,6 @@ class ProfileScreen extends StatelessWidget {
   }
 }
 
-// ── Profile Header Card (inline) ──────────────────────────────────────────────
 class _ProfileHeaderCard extends StatelessWidget {
   const _ProfileHeaderCard({required this.profile, required this.goal});
 
@@ -202,7 +191,6 @@ class _ProfileHeaderCard extends StatelessWidget {
       ),
       child: Column(
         children: [
-          // ── Avatar ────────────────────────────────────────────────────
           Stack(
             alignment: Alignment.bottomRight,
             children: [
@@ -242,14 +230,12 @@ class _ProfileHeaderCard extends StatelessWidget {
           ),
           AppGap.h12,
 
-          // ── Name ──────────────────────────────────────────────────────
           Text(
             profile.name,
             style: AppTextStyles.s20.copyWith(fontWeight: FontWeight.w800),
           ),
           AppGap.h4,
 
-          // ── Email ─────────────────────────────────────────────────────
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -265,7 +251,6 @@ class _ProfileHeaderCard extends StatelessWidget {
           ),
           AppGap.h4,
 
-          // ── Phone ─────────────────────────────────────────────────────
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -281,7 +266,6 @@ class _ProfileHeaderCard extends StatelessWidget {
           ),
           AppGap.h8,
 
-          // ── Bio ───────────────────────────────────────────────────────
           if (profile.bio.isNotEmpty) ...[
             Text(
               profile.bio,
@@ -292,7 +276,6 @@ class _ProfileHeaderCard extends StatelessWidget {
             AppGap.h10,
           ],
 
-          // ── Goal chip ─────────────────────────────────────────────────
           if (goal != null)
             Container(
               padding: AppPad.h12v6,
@@ -319,7 +302,6 @@ class _ProfileHeaderCard extends StatelessWidget {
 
           AppGap.h16,
 
-          // ── Stats row: Age · Height · Weight ──────────────────────────
           Container(
             padding: AppPad.a12,
             decoration: BoxDecoration(
@@ -341,7 +323,6 @@ class _ProfileHeaderCard extends StatelessWidget {
           ),
           AppGap.h10,
 
-          // ── BMI pill ──────────────────────────────────────────────────
           Container(
             width: double.infinity,
             padding: AppPad.h16v10,
@@ -361,7 +342,6 @@ class _ProfileHeaderCard extends StatelessWidget {
           ),
           AppGap.h12,
 
-          // ── Edit button ───────────────────────────────────────────────
           GestureDetector(
             onTap: () => context.push(AppRouter.editProfile),
             child: Container(
@@ -394,7 +374,6 @@ class _ProfileHeaderCard extends StatelessWidget {
   }
 }
 
-// ── Helpers ───────────────────────────────────────────────────────────────────
 
 class _StatBox extends StatelessWidget {
   const _StatBox({required this.label, required this.value});
@@ -427,7 +406,6 @@ class _VSep extends StatelessWidget {
       Container(width: 1, height: 32, color: AppColors.border);
 }
 
-// ── Section label sliver ──────────────────────────────────────────────────────
 class _SectionLabel extends SliverToBoxAdapter {
   _SectionLabel({required String label})
       : super(
