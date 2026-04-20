@@ -1,6 +1,7 @@
 import 'package:cravvy_cooking_app/init.dart';
 import 'package:cravvy_cooking_app/modules/meal_plan/provider/meal_plan_provider.dart';
 import 'package:cravvy_cooking_app/modules/home/widgets/meal_scroll_card_widget.dart';
+import 'package:cravvy_cooking_app/modules/dashboard/provider/dashboard_tab_provider.dart';
 
 class TodayMealsSectionWidget extends StatelessWidget {
   const TodayMealsSectionWidget({super.key});
@@ -28,7 +29,7 @@ class TodayMealsSectionWidget extends StatelessWidget {
                     style: Theme.of(context).textTheme.headlineSmall,
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () => context.read<DashboardTabProvider>().switchTo(1),
                     child: Row(
                       children: [
                         Text(

@@ -66,7 +66,7 @@ class ProfileScreen extends StatelessWidget {
                   ('🥗', 'Food Preferences', false),
                   ('🚫', 'Dietary Restrictions', false),
                 ],
-                onTap: (_) {},
+                onTap: (label) => context.push(AppRouter.settings),
               ),
             ),
 
@@ -77,7 +77,16 @@ class ProfileScreen extends StatelessWidget {
                   ('🔔', 'Reminders', false),
                   ('💳', 'Subscription & Plan', false),
                 ],
-                onTap: (_) {},
+                onTap: (label) {
+                  switch (label) {
+                    case 'Reminders':
+                      context.push(AppRouter.settings);
+                      break;
+                    case 'Subscription & Plan':
+                      context.push(AppRouter.subscription);
+                      break;
+                  }
+                },
               ),
             ),
 
@@ -88,7 +97,16 @@ class ProfileScreen extends StatelessWidget {
                   ('📤', 'Export Data', false),
                   ('🗑️', 'Delete Account', false),
                 ],
-                onTap: (_) {},
+                onTap: (label) {
+                  switch (label) {
+                    case 'Export Data':
+                      _showExportDialog(context);
+                      break;
+                    case 'Delete Account':
+                      _showDeleteAccountDialog(context);
+                      break;
+                  }
+                },
               ),
             ),
 
@@ -99,7 +117,15 @@ class ProfileScreen extends StatelessWidget {
                   ('❓', 'FAQ', false),
                   ('⭐', 'Rate the App', false),
                 ],
-                onTap: (_) {},
+                onTap: (label) {
+                  if (label == 'FAQ') {
+                    context.push(AppRouter.faq);
+                  } else if (label == 'Rate the App') {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Thank you! Redirecting to store...')),
+                    );
+                  }
+                },
               ),
             ),
 
@@ -423,3 +449,52 @@ class _SectionLabel extends SliverToBoxAdapter {
           ),
         );
 }
+
+void _showExportDialog(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (ctx) => AlertDialog(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      title: const Text('Export Data'),
+      content: const Text(
+          'Your data will be compiled and sent to your email address within 24 hours.'),
+      actions: [
+        TextButton(
+            onPressed: () => Navigator.pop(ctx),
+            child: const Text('Cancel')),
+        ElevatedButton(
+          onPressed: () => Navigator.pop(ctx),
+          style:
+              ElevatedButton.styleFrom(backgroundColor: AppColors.primary),
+          child: const Text('Request Export',
+              style: TextStyle(color: Colors.white)),
+        ),
+      ],
+    ),
+  );
+}
+
+void _showDeleteAccountDialog(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (ctx) => AlertDialog(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      title: const Text('Delete Account?'),
+      content: const Text(
+          'This action cannot be undone. All your data, meal plans, and progress will be permanently deleted.'),
+      actions: [
+        TextButton(
+            onPressed: () => Navigator.pop(ctx),
+            child: const Text('Cancel')),
+        ElevatedButton(
+          onPressed: () => Navigator.pop(ctx),
+          style:
+              ElevatedButton.styleFrom(backgroundColor: AppColors.error),
+          child: const Text('Delete',
+              style: TextStyle(color: Colors.white)),
+        ),
+      ],
+    ),
+  );
+}
+

@@ -1,11 +1,14 @@
 import "package:cravvy_cooking_app/init.dart";
+import 'package:cravvy_cooking_app/modules/dashboard/provider/dashboard_tab_provider.dart';
 
 class _Action {
   final String emoji;
   final String label;
   final Color bgColor;
   final Color iconColor;
-  const _Action(this.emoji, this.label, this.bgColor, this.iconColor);
+  /// Dashboard tab index to switch to when tapped.
+  final int? tabIndex;
+  const _Action(this.emoji, this.label, this.bgColor, this.iconColor, {this.tabIndex});
 }
 
 const _kActions = [
@@ -14,10 +17,17 @@ const _kActions = [
     'Ingredients I have',
     AppColors.primaryLight,
     AppColors.primary,
+    tabIndex: 2, // Search tab
   ),
-  _Action('⚡', 'Quick recipes', AppColors.secondaryLight, AppColors.secondary),
-  _Action('📋', "Today's full plan", Color(0xFFEDE9FE), Color(0xFF7C3AED)),
-  _Action('🤖', 'Ask AI Chef', AppColors.warningLight, AppColors.warning),
+  _Action('⚡', 'Quick recipes', AppColors.secondaryLight, AppColors.secondary,
+    tabIndex: 2, // Search tab
+  ),
+  _Action('📋', "Today's full plan", Color(0xFFEDE9FE), Color(0xFF7C3AED),
+    tabIndex: 1, // Meal Plan tab
+  ),
+  _Action('🤖', 'Ask AI Chef', AppColors.warningLight, AppColors.warning,
+    tabIndex: 2, // Search tab
+  ),
 ];
 
 class QuickActionsGridWidget extends StatelessWidget {
@@ -30,7 +40,7 @@ class QuickActionsGridWidget extends StatelessWidget {
         left: 16,
         top: 24,
         right: 16,
-      ), //TODO: no AppPad equivalent for this multi-directional EdgeInsets.only
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -68,7 +78,11 @@ class _ActionCard extends StatelessWidget {
       borderRadius: AppBorderRadius.a18,
       child: InkWell(
         borderRadius: AppBorderRadius.a18,
-        onTap: () {},
+        onTap: () {
+          if (action.tabIndex != null) {
+            context.read<DashboardTabProvider>().switchTo(action.tabIndex!);
+          }
+        },
         child: Container(
           padding: AppPad.a14,
           decoration: BoxDecoration(
@@ -109,3 +123,4 @@ class _ActionCard extends StatelessWidget {
     );
   }
 }
+
