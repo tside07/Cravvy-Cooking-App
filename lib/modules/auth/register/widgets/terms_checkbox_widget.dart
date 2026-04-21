@@ -36,7 +36,7 @@ class TermsCheckboxWidget extends StatelessWidget {
               children: [
                 WidgetSpan(
                   child: GestureDetector(
-                    onTap: () {}, // TODO: open terms
+                    onTap: () => context.push(AppRouter.termsOfService),
                     child: Text(
                       'Terms of Service',
                       style: AppTextStyles.s14.copyWith(
@@ -54,7 +54,7 @@ class TermsCheckboxWidget extends StatelessWidget {
                 ),
                 WidgetSpan(
                   child: GestureDetector(
-                    onTap: () {}, // TODO: open privacy
+                    onTap: () => context.push(AppRouter.privacyPolicy),
                     child: Text(
                       'Privacy Policy',
                       style: AppTextStyles.s14.copyWith(

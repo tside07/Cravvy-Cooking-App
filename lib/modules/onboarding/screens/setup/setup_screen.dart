@@ -1,92 +1,10 @@
 import 'package:cravvy_cooking_app/init.dart';
-
-class _SetupProgress extends StatelessWidget {
-  final int current;
-  final int total;
-  const _SetupProgress({required this.current, required this.total});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.fromLTRB(20, 16, 20, 12),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'Step $current of $total',
-                style: AppTextStyles.s12.copyWith(
-                  color: AppColors.textSecondary,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              Text(
-                '${((current / total) * 100).round()}%',
-                style: AppTextStyles.s12.copyWith(
-                  color: AppColors.primary,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 8),
-          ClipRRect(
-            borderRadius: BorderRadius.circular(4),
-            child: LinearProgressIndicator(
-              value: current / total,
-              backgroundColor: AppColors.surfaceVariant,
-              color: AppColors.primary,
-              minHeight: 6,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-// ─── Chip widget shared across steps ─────────────────────────────────────────
-
-class _SelectChip extends StatelessWidget {
-  final String label;
-  final bool selected;
-  final VoidCallback onTap;
-
-  const _SelectChip({
-    required this.label,
-    required this.selected,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 180),
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-        decoration: BoxDecoration(
-          color: selected ? AppColors.primary : AppColors.surfaceVariant,
-          borderRadius: BorderRadius.circular(50),
-          border: Border.all(
-            color: selected ? AppColors.primary : Colors.transparent,
-          ),
-        ),
-        child: Text(
-          label,
-          style: AppTextStyles.s14.copyWith(
-            color: selected ? Colors.white : AppColors.textPrimary,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-// ─── Step 1: Body metrics ─────────────────────────────────────────────────────
+import 'package:cravvy_cooking_app/modules/onboarding/widgets/setup/setup_progress_widget.dart';
+import 'package:cravvy_cooking_app/modules/onboarding/widgets/setup/setup_select_chip_widget.dart';
+import 'package:cravvy_cooking_app/modules/onboarding/widgets/setup/setup_input_label_widget.dart';
+import 'package:cravvy_cooking_app/modules/onboarding/widgets/setup/setup_sub_header_widget.dart';
+import 'package:cravvy_cooking_app/modules/onboarding/widgets/setup/setup_num_field_widget.dart';
+import 'package:cravvy_cooking_app/modules/onboarding/widgets/setup/setup_continue_button_widget.dart';
 
 class SetupStep1Screen extends StatefulWidget {
   const SetupStep1Screen({super.key});
@@ -141,7 +59,7 @@ class _SetupStep1ScreenState extends State<SetupStep1Screen> {
       body: SafeArea(
         child: Column(
           children: [
-            const _SetupProgress(current: 1, total: 5),
+            const SetupProgressWidget(current: 1, total: 5),
             Expanded(
               child: SingleChildScrollView(
                 padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -159,22 +77,21 @@ class _SetupStep1ScreenState extends State<SetupStep1Screen> {
                     AppGap.h8,
                     Text(
                       'Your meals will be tailored to your body and goals',
-                      style: AppTextStyles.s14.copyWith(
-                        color: AppColors.textSecondary,
-                      ),
+                      style: AppTextStyles.s14
+                          .copyWith(color: AppColors.textSecondary),
                     ),
                     AppGap.h28,
 
-                    _InputLabel('Age'),
+                    const SetupInputLabelWidget('Age'),
                     AppGap.h8,
-                    _NumField(
+                    SetupNumFieldWidget(
                       controller: _ageCtrl,
                       hint: 'Enter age',
                       onChanged: (_) => setState(() {}),
                     ),
                     AppGap.h20,
 
-                    _InputLabel('Gender'),
+                    const SetupInputLabelWidget('Gender'),
                     AppGap.h8,
                     Row(
                       children: ['Male', 'Female', 'Other']
@@ -182,8 +99,7 @@ class _SetupStep1ScreenState extends State<SetupStep1Screen> {
                             (g) => Expanded(
                               child: Padding(
                                 padding: EdgeInsets.only(
-                                  right: g != 'Other' ? 8 : 0,
-                                ),
+                                    right: g != 'Other' ? 8 : 0),
                                 child: GestureDetector(
                                   onTap: () => setState(() => _gender = g),
                                   child: AnimatedContainer(
@@ -220,18 +136,18 @@ class _SetupStep1ScreenState extends State<SetupStep1Screen> {
                     ),
                     AppGap.h20,
 
-                    _InputLabel('Height (cm)'),
+                    const SetupInputLabelWidget('Height (cm)'),
                     AppGap.h8,
-                    _NumField(
+                    SetupNumFieldWidget(
                       controller: _heightCtrl,
                       hint: 'e.g. 170',
                       onChanged: (_) => setState(() {}),
                     ),
                     AppGap.h20,
 
-                    _InputLabel('Weight (kg)'),
+                    const SetupInputLabelWidget('Weight (kg)'),
                     AppGap.h8,
-                    _NumField(
+                    SetupNumFieldWidget(
                       controller: _weightCtrl,
                       hint: 'e.g. 70',
                       onChanged: (_) => setState(() {}),
@@ -271,9 +187,7 @@ class _SetupStep1ScreenState extends State<SetupStep1Screen> {
                             ),
                             Container(
                               padding: const EdgeInsets.symmetric(
-                                horizontal: 12,
-                                vertical: 6,
-                              ),
+                                  horizontal: 12, vertical: 6),
                               decoration: BoxDecoration(
                                 color: _bmiColor.withOpacity(0.1),
                                 borderRadius: BorderRadius.circular(20),
@@ -294,7 +208,7 @@ class _SetupStep1ScreenState extends State<SetupStep1Screen> {
                 ),
               ),
             ),
-            _ContinueButton(
+            SetupContinueButtonWidget(
               onPressed: () => context.push(AppRouter.setupStep2),
             ),
           ],
@@ -352,7 +266,7 @@ class _SetupStep2ScreenState extends State<SetupStep2Screen> {
       body: SafeArea(
         child: Column(
           children: [
-            const _SetupProgress(current: 2, total: 5),
+            const SetupProgressWidget(current: 2, total: 5),
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -370,9 +284,8 @@ class _SetupStep2ScreenState extends State<SetupStep2Screen> {
                     AppGap.h8,
                     Text(
                       "We'll customize your meal plan to help you achieve it",
-                      style: AppTextStyles.s14.copyWith(
-                        color: AppColors.textSecondary,
-                      ),
+                      style: AppTextStyles.s14
+                          .copyWith(color: AppColors.textSecondary),
                     ),
                     AppGap.h28,
                     Expanded(
@@ -382,12 +295,12 @@ class _SetupStep2ScreenState extends State<SetupStep2Screen> {
                         mainAxisSpacing: 12,
                         childAspectRatio: 1.0,
                         children: _goals.map((g) {
-                          final isSelected = _selectedGoal == g['id'] as String;
+                          final isSelected =
+                              _selectedGoal == g['id'] as String;
                           final color = Color(g['color'] as int);
                           return GestureDetector(
                             onTap: () => setState(
-                              () => _selectedGoal = g['id'] as String,
-                            ),
+                                () => _selectedGoal = g['id'] as String),
                             child: AnimatedContainer(
                               duration: const Duration(milliseconds: 180),
                               padding: const EdgeInsets.all(20),
@@ -413,11 +326,13 @@ class _SetupStep2ScreenState extends State<SetupStep2Screen> {
                                       color: isSelected
                                           ? AppColors.primary
                                           : color.withOpacity(0.12),
-                                      borderRadius: BorderRadius.circular(14),
+                                      borderRadius:
+                                          BorderRadius.circular(14),
                                     ),
                                     child: Icon(
                                       g['icon'] as IconData,
-                                      color: isSelected ? Colors.white : color,
+                                      color:
+                                          isSelected ? Colors.white : color,
                                       size: 24,
                                     ),
                                   ),
@@ -446,7 +361,7 @@ class _SetupStep2ScreenState extends State<SetupStep2Screen> {
                 ),
               ),
             ),
-            _ContinueButton(
+            SetupContinueButtonWidget(
               onPressed: () => context.push(AppRouter.setupStep3),
             ),
           ],
@@ -502,7 +417,7 @@ class _SetupStep3ScreenState extends State<SetupStep3Screen> {
       body: SafeArea(
         child: Column(
           children: [
-            const _SetupProgress(current: 3, total: 5),
+            const SetupProgressWidget(current: 3, total: 5),
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -520,9 +435,8 @@ class _SetupStep3ScreenState extends State<SetupStep3Screen> {
                     AppGap.h8,
                     Text(
                       'Select all that apply',
-                      style: AppTextStyles.s14.copyWith(
-                        color: AppColors.textSecondary,
-                      ),
+                      style: AppTextStyles.s14
+                          .copyWith(color: AppColors.textSecondary),
                     ),
                     AppGap.h24,
                     Wrap(
@@ -530,7 +444,7 @@ class _SetupStep3ScreenState extends State<SetupStep3Screen> {
                       runSpacing: 10,
                       children: _diets
                           .map(
-                            (d) => _SelectChip(
+                            (d) => SetupSelectChipWidget(
                               label: d,
                               selected: _selected.contains(d),
                               onTap: () => _toggle(d),
@@ -542,7 +456,7 @@ class _SetupStep3ScreenState extends State<SetupStep3Screen> {
                 ),
               ),
             ),
-            _ContinueButton(
+            SetupContinueButtonWidget(
               onPressed: () => context.push(AppRouter.setupStep4),
             ),
           ],
@@ -566,21 +480,11 @@ class _SetupStep4ScreenState extends State<SetupStep4Screen> {
   final _customCtrl = TextEditingController();
 
   static const _allergies = [
-    'Peanuts',
-    'Shellfish',
-    'Dairy',
-    'Gluten',
-    'Eggs',
-    'Soy',
-    'Tree Nuts',
-    'Fish',
+    'Peanuts', 'Shellfish', 'Dairy', 'Gluten',
+    'Eggs', 'Soy', 'Tree Nuts', 'Fish',
   ];
   static const _prefs = [
-    'No Pork',
-    'No Beef',
-    'No Seafood',
-    'No Spicy',
-    'No Raw Foods',
+    'No Pork', 'No Beef', 'No Seafood', 'No Spicy', 'No Raw Foods',
   ];
 
   @override
@@ -617,7 +521,7 @@ class _SetupStep4ScreenState extends State<SetupStep4Screen> {
       body: SafeArea(
         child: Column(
           children: [
-            const _SetupProgress(current: 4, total: 5),
+            const SetupProgressWidget(current: 4, total: 5),
             Expanded(
               child: SingleChildScrollView(
                 padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -635,20 +539,19 @@ class _SetupStep4ScreenState extends State<SetupStep4Screen> {
                     AppGap.h8,
                     Text(
                       "We'll never suggest these in your meals",
-                      style: AppTextStyles.s14.copyWith(
-                        color: AppColors.textSecondary,
-                      ),
+                      style: AppTextStyles.s14
+                          .copyWith(color: AppColors.textSecondary),
                     ),
                     AppGap.h24,
 
-                    _SubHeader('Allergies'),
+                    const SetupSubHeaderWidget('Allergies'),
                     AppGap.h10,
                     Wrap(
                       spacing: 8,
                       runSpacing: 10,
                       children: _allergies
                           .map(
-                            (a) => _SelectChip(
+                            (a) => SetupSelectChipWidget(
                               label: a,
                               selected: _selected.contains(a),
                               onTap: () => _toggle(a),
@@ -658,14 +561,14 @@ class _SetupStep4ScreenState extends State<SetupStep4Screen> {
                     ),
                     AppGap.h20,
 
-                    _SubHeader('Food Preferences'),
+                    const SetupSubHeaderWidget('Food Preferences'),
                     AppGap.h10,
                     Wrap(
                       spacing: 8,
                       runSpacing: 10,
                       children: _prefs
                           .map(
-                            (p) => _SelectChip(
+                            (p) => SetupSelectChipWidget(
                               label: p,
                               selected: _selected.contains(p),
                               onTap: () => _toggle(p),
@@ -675,8 +578,7 @@ class _SetupStep4ScreenState extends State<SetupStep4Screen> {
                     ),
                     AppGap.h20,
 
-                    // Custom input
-                    _SubHeader('Add Custom'),
+                    const SetupSubHeaderWidget('Add Custom'),
                     AppGap.h10,
                     Row(
                       children: [
@@ -692,9 +594,7 @@ class _SetupStep4ScreenState extends State<SetupStep4Screen> {
                                 borderSide: BorderSide.none,
                               ),
                               contentPadding: const EdgeInsets.symmetric(
-                                horizontal: 14,
-                                vertical: 12,
-                              ),
+                                  horizontal: 14, vertical: 12),
                             ),
                           ),
                         ),
@@ -707,14 +607,10 @@ class _SetupStep4ScreenState extends State<SetupStep4Screen> {
                               borderRadius: BorderRadius.circular(12),
                             ),
                             padding: const EdgeInsets.symmetric(
-                              horizontal: 16,
-                              vertical: 13,
-                            ),
+                                horizontal: 16, vertical: 13),
                           ),
-                          child: const Icon(
-                            Icons.add_rounded,
-                            color: Colors.white,
-                          ),
+                          child: const Icon(Icons.add_rounded,
+                              color: Colors.white),
                         ),
                       ],
                     ),
@@ -728,23 +624,18 @@ class _SetupStep4ScreenState extends State<SetupStep4Screen> {
                               (s) => Chip(
                                 label: Text(
                                   s,
-                                  style: AppTextStyles.s12.copyWith(
-                                    color: AppColors.primary,
-                                  ),
+                                  style: AppTextStyles.s12
+                                      .copyWith(color: AppColors.primary),
                                 ),
                                 backgroundColor: AppColors.primaryLight,
-                                deleteIcon: const Icon(
-                                  Icons.close_rounded,
-                                  size: 14,
-                                  color: AppColors.primary,
-                                ),
+                                deleteIcon: const Icon(Icons.close_rounded,
+                                    size: 14, color: AppColors.primary),
                                 onDeleted: () =>
                                     setState(() => _selected.remove(s)),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(20),
                                   side: const BorderSide(
-                                    color: Colors.transparent,
-                                  ),
+                                      color: Colors.transparent),
                                 ),
                               ),
                             )
@@ -753,7 +644,6 @@ class _SetupStep4ScreenState extends State<SetupStep4Screen> {
                     ],
                     AppGap.h20,
 
-                    // No restrictions toggle
                     GestureDetector(
                       onTap: () => setState(() {
                         _noRestrictions = !_noRestrictions;
@@ -801,7 +691,7 @@ class _SetupStep4ScreenState extends State<SetupStep4Screen> {
                 ),
               ),
             ),
-            _ContinueButton(
+            SetupContinueButtonWidget(
               onPressed: () => context.push(AppRouter.setupStep5),
             ),
           ],
@@ -811,7 +701,6 @@ class _SetupStep4ScreenState extends State<SetupStep4Screen> {
   }
 }
 
-// ─── Step 5: Cooking preferences ─────────────────────────────────────────────
 
 class SetupStep5Screen extends StatefulWidget {
   const SetupStep5Screen({super.key});
@@ -828,7 +717,11 @@ class _SetupStep5ScreenState extends State<SetupStep5Screen> {
     {'id': 'quick', 'label': 'Under 15 min', 'icon': Icons.bolt_rounded},
     {'id': 'short', 'label': '15–30 min', 'icon': Icons.schedule_rounded},
     {'id': 'medium', 'label': '30–60 min', 'icon': Icons.timer_outlined},
-    {'id': 'long', 'label': '1 hour+', 'icon': Icons.restaurant_menu_rounded},
+    {
+      'id': 'long',
+      'label': '1 hour+',
+      'icon': Icons.restaurant_menu_rounded,
+    },
   ];
 
   static const _skills = [
@@ -859,7 +752,7 @@ class _SetupStep5ScreenState extends State<SetupStep5Screen> {
       body: SafeArea(
         child: Column(
           children: [
-            const _SetupProgress(current: 5, total: 5),
+            const SetupProgressWidget(current: 5, total: 5),
             Expanded(
               child: SingleChildScrollView(
                 padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -877,13 +770,12 @@ class _SetupStep5ScreenState extends State<SetupStep5Screen> {
                     AppGap.h8,
                     Text(
                       'Help us personalize your cooking experience',
-                      style: AppTextStyles.s14.copyWith(
-                        color: AppColors.textSecondary,
-                      ),
+                      style: AppTextStyles.s14
+                          .copyWith(color: AppColors.textSecondary),
                     ),
                     AppGap.h28,
 
-                    _SubHeader('Available cooking time'),
+                    const SetupSubHeaderWidget('Available cooking time'),
                     AppGap.h12,
                     GridView.count(
                       shrinkWrap: true,
@@ -893,16 +785,15 @@ class _SetupStep5ScreenState extends State<SetupStep5Screen> {
                       mainAxisSpacing: 10,
                       childAspectRatio: 2.5,
                       children: _times.map((t) {
-                        final isSelected = _cookingTime == t['id'] as String;
+                        final isSelected =
+                            _cookingTime == t['id'] as String;
                         return GestureDetector(
-                          onTap: () =>
-                              setState(() => _cookingTime = t['id'] as String),
+                          onTap: () => setState(
+                              () => _cookingTime = t['id'] as String),
                           child: AnimatedContainer(
                             duration: const Duration(milliseconds: 180),
                             padding: const EdgeInsets.symmetric(
-                              horizontal: 12,
-                              vertical: 8,
-                            ),
+                                horizontal: 12, vertical: 8),
                             decoration: BoxDecoration(
                               color: isSelected
                                   ? AppColors.primaryLight
@@ -944,7 +835,7 @@ class _SetupStep5ScreenState extends State<SetupStep5Screen> {
                     ),
 
                     AppGap.h24,
-                    _SubHeader('Cooking skill level'),
+                    const SetupSubHeaderWidget('Cooking skill level'),
                     AppGap.h12,
                     Column(
                       children: _skills.map((s) {
@@ -952,8 +843,8 @@ class _SetupStep5ScreenState extends State<SetupStep5Screen> {
                         return Padding(
                           padding: const EdgeInsets.only(bottom: 10),
                           child: GestureDetector(
-                            onTap: () =>
-                                setState(() => _skillLevel = s['id'] as String),
+                            onTap: () => setState(
+                                () => _skillLevel = s['id'] as String),
                             child: AnimatedContainer(
                               duration: const Duration(milliseconds: 180),
                               padding: const EdgeInsets.all(14),
@@ -1040,98 +931,6 @@ class _SetupStep5ScreenState extends State<SetupStep5Screen> {
               ),
             ),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-
-class _InputLabel extends StatelessWidget {
-  final String text;
-  const _InputLabel(this.text);
-
-  @override
-  Widget build(BuildContext context) => Text(
-    text,
-    style: AppTextStyles.s14.copyWith(fontWeight: FontWeight.w600),
-  );
-}
-
-class _SubHeader extends StatelessWidget {
-  final String text;
-  const _SubHeader(this.text);
-
-  @override
-  Widget build(BuildContext context) => Text(
-    text,
-    style: AppTextStyles.s14.copyWith(
-      fontWeight: FontWeight.w700,
-      color: AppColors.textPrimary,
-    ),
-  );
-}
-
-class _NumField extends StatelessWidget {
-  final TextEditingController controller;
-  final String hint;
-  final ValueChanged<String> onChanged;
-  const _NumField({
-    required this.controller,
-    required this.hint,
-    required this.onChanged,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return TextField(
-      controller: controller,
-      keyboardType: TextInputType.number,
-      onChanged: onChanged,
-      decoration: InputDecoration(
-        hintText: hint,
-        filled: true,
-        fillColor: AppColors.surfaceVariant,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(14),
-          borderSide: BorderSide.none,
-        ),
-        contentPadding: const EdgeInsets.symmetric(
-          horizontal: 16,
-          vertical: 14,
-        ),
-      ),
-    );
-  }
-}
-
-class _ContinueButton extends StatelessWidget {
-  final VoidCallback onPressed;
-  const _ContinueButton({required this.onPressed});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(20, 8, 20, 20),
-      child: SizedBox(
-        width: double.infinity,
-        height: 54,
-        child: ElevatedButton(
-          onPressed: onPressed,
-          style: ElevatedButton.styleFrom(
-            backgroundColor: AppColors.primary,
-            foregroundColor: Colors.white,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16),
-            ),
-          ),
-          child: Text(
-            'Continue',
-            style: AppTextStyles.s16.copyWith(
-              color: Colors.white,
-              fontWeight: FontWeight.w700,
-            ),
-          ),
         ),
       ),
     );

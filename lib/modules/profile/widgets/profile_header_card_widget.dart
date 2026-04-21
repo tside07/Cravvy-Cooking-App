@@ -1,16 +1,21 @@
 import 'package:cravvy_cooking_app/init.dart';
-import 'package:cravvy_cooking_app/modules/onboarding/provider/onboarding_provider.dart';
 import 'package:cravvy_cooking_app/modules/profile/provider/profile_provider.dart';
+import 'package:cravvy_cooking_app/modules/profile/widgets/profile_stat_box_widget.dart';
+import 'package:cravvy_cooking_app/modules/profile/widgets/profile_vsep_widget.dart';
+import 'package:cravvy_cooking_app/modules/onboarding/provider/onboarding_provider.dart';
 
 class ProfileHeaderCardWidget extends StatelessWidget {
-  const ProfileHeaderCardWidget({super.key, required this.goal});
+  const ProfileHeaderCardWidget({
+    super.key,
+    required this.profile,
+    required this.goal,
+  });
 
+  final ProfileProvider profile;
   final HealthGoal? goal;
 
   @override
   Widget build(BuildContext context) {
-    final profile = context.watch<ProfileProvider>();
-
     return Container(
       margin: const EdgeInsets.only(left: 16, top: 20, right: 16),
       padding: AppPad.a20,
@@ -28,7 +33,6 @@ class ProfileHeaderCardWidget extends StatelessWidget {
       ),
       child: Column(
         children: [
-          // ── Avatar ────────────────────────────────────────────────────
           Stack(
             alignment: Alignment.bottomRight,
             children: [
@@ -58,24 +62,16 @@ class ProfileHeaderCardWidget extends StatelessWidget {
                   shape: BoxShape.circle,
                   border: Border.all(color: AppColors.white, width: 2),
                 ),
-                child: const Icon(
-                  Icons.edit_rounded,
-                  size: 12,
-                  color: AppColors.white,
-                ),
+                child: const Icon(Icons.edit_rounded, size: 12, color: AppColors.white),
               ),
             ],
           ),
           AppGap.h12,
-
-          // ── Name ──────────────────────────────────────────────────────
           Text(
             profile.name,
             style: AppTextStyles.s20.copyWith(fontWeight: FontWeight.w800),
           ),
           AppGap.h4,
-
-          // ── Email ─────────────────────────────────────────────────────
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -88,8 +84,6 @@ class ProfileHeaderCardWidget extends StatelessWidget {
             ],
           ),
           AppGap.h4,
-
-          // ── Phone ─────────────────────────────────────────────────────
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -102,8 +96,6 @@ class ProfileHeaderCardWidget extends StatelessWidget {
             ],
           ),
           AppGap.h8,
-
-          // ── Bio ───────────────────────────────────────────────────────
           if (profile.bio.isNotEmpty) ...[
             Text(
               profile.bio,
@@ -112,8 +104,6 @@ class ProfileHeaderCardWidget extends StatelessWidget {
             ),
             AppGap.h10,
           ],
-
-          // ── Goal chip ─────────────────────────────────────────────────
           if (goal != null)
             Container(
               padding: AppPad.h12v6,
@@ -136,10 +126,7 @@ class ProfileHeaderCardWidget extends StatelessWidget {
                 ],
               ),
             ),
-
           AppGap.h16,
-
-          // ── Stats row: Age · Height · Weight ──────────────────────────
           Container(
             padding: AppPad.a12,
             decoration: BoxDecoration(
@@ -148,17 +135,17 @@ class ProfileHeaderCardWidget extends StatelessWidget {
             ),
             child: Row(
               children: [
-                _StatBox(label: 'Age', value: '${profile.age}'),
-                _VSep(),
-                _StatBox(label: 'Height', value: '${profile.heightCm}cm'),
-                _VSep(),
-                _StatBox(label: 'Weight', value: '${profile.weightKg.toStringAsFixed(0)}kg'),
+                ProfileStatBoxWidget(label: 'Age', value: '${profile.age}'),
+                const ProfileVSepWidget(),
+                ProfileStatBoxWidget(label: 'Height', value: '${profile.heightCm}cm'),
+                const ProfileVSepWidget(),
+                ProfileStatBoxWidget(
+                    label: 'Weight',
+                    value: '${profile.weightKg.toStringAsFixed(0)}kg'),
               ],
             ),
           ),
           AppGap.h10,
-
-          // ── BMI pill ──────────────────────────────────────────────────
           Container(
             width: double.infinity,
             padding: AppPad.h16v10,
@@ -167,7 +154,7 @@ class ProfileHeaderCardWidget extends StatelessWidget {
               borderRadius: AppBorderRadius.a12,
             ),
             child: Text(
-              'BMI: ${profile.bmi.toStringAsFixed(1)}  (${profile.bmiLabel})',
+              'BMI: ${profile.bmi.toStringAsFixed(1)} (${profile.bmiLabel})',
               textAlign: TextAlign.center,
               style: AppTextStyles.s12.copyWith(
                 fontSize: 13,
@@ -177,8 +164,6 @@ class ProfileHeaderCardWidget extends StatelessWidget {
             ),
           ),
           AppGap.h12,
-
-          // ── Edit button ───────────────────────────────────────────────
           GestureDetector(
             onTap: () => context.push(AppRouter.editProfile),
             child: Container(
@@ -208,37 +193,4 @@ class ProfileHeaderCardWidget extends StatelessWidget {
       ),
     );
   }
-}
-
-// ── Helpers ───────────────────────────────────────────────────────────────────
-
-class _StatBox extends StatelessWidget {
-  const _StatBox({required this.label, required this.value});
-  final String label;
-  final String value;
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: Column(
-        children: [
-          Text(
-            label,
-            style: AppTextStyles.s10.copyWith(color: AppColors.textSecondary),
-          ),
-          AppGap.h2,
-          Text(
-            value,
-            style: AppTextStyles.s16.copyWith(fontWeight: FontWeight.w800),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _VSep extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) =>
-      Container(width: 1, height: 32, color: AppColors.border);
 }

@@ -1,6 +1,10 @@
 import 'package:flutter/services.dart';
 import 'package:cravvy_cooking_app/init.dart';
 import 'package:cravvy_cooking_app/modules/profile/provider/profile_provider.dart';
+import 'package:cravvy_cooking_app/modules/profile/widgets/edit_profile_section_header_widget.dart';
+import 'package:cravvy_cooking_app/modules/profile/widgets/field_card_widget.dart';
+import 'package:cravvy_cooking_app/modules/profile/widgets/danger_tile_widget.dart';
+import 'package:cravvy_cooking_app/modules/profile/widgets/simple_dialog_widget.dart';
 
 class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({super.key});
@@ -41,7 +45,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     super.dispose();
   }
 
-  // ── Date picker ──────────────────────────────────────────────────────────
   Future<void> _pickDate() async {
     final picked = await showDatePicker(
       context: context,
@@ -62,25 +65,23 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     if (picked != null) setState(() => _birthDate = picked);
   }
 
-  // ── Save ─────────────────────────────────────────────────────────────────
   void _save() {
     if (_formKey.currentState?.validate() != true) return;
     HapticFeedback.mediumImpact();
     context.read<ProfileProvider>().updateProfile(
-          name: _nameCtrl.text.trim(),
-          email: _emailCtrl.text.trim(),
-          phone: _phoneCtrl.text.trim(),
-          bio: _bioCtrl.text.trim(),
-          birthDate: _birthDate,
-        );
+      name: _nameCtrl.text.trim(),
+      email: _emailCtrl.text.trim(),
+      phone: _phoneCtrl.text.trim(),
+      bio: _bioCtrl.text.trim(),
+      birthDate: _birthDate,
+    );
     context.pop();
   }
 
-  // ── Danger-zone dialogs ──────────────────────────────────────────────────
   void _showChangePassword() {
     showDialog(
       context: context,
-      builder: (_) => _SimpleDialog(
+      builder: (_) => SimpleDialogWidget(
         title: 'Change Password',
         body: 'This feature is not yet available in this version.',
         confirmLabel: 'OK',
@@ -93,7 +94,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   void _showDeleteAccount() {
     showDialog(
       context: context,
-      builder: (_) => _SimpleDialog(
+      builder: (_) => SimpleDialogWidget(
         title: 'Delete Account',
         body:
             'Are you sure? This action cannot be undone and all your data will be permanently removed.',
@@ -107,7 +108,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     );
   }
 
-  // ── Build ─────────────────────────────────────────────────────────────────
   @override
   Widget build(BuildContext context) {
     final formattedDate =
@@ -122,8 +122,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         elevation: 0,
         scrolledUnderElevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_rounded,
-              color: AppColors.textPrimary),
+          icon: const Icon(
+            Icons.arrow_back_rounded,
+            color: AppColors.textPrimary,
+          ),
           onPressed: () => context.pop(),
         ),
         title: Text(
@@ -141,7 +143,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             children: [
               AppGap.h16,
 
-              // ── Avatar ─────────────────────────────────────────────────
+              // Avatar
               Center(
                 child: Column(
                   children: [
@@ -172,8 +174,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           decoration: BoxDecoration(
                             color: AppColors.primary,
                             shape: BoxShape.circle,
-                            border:
-                                Border.all(color: AppColors.white, width: 2),
+                            border: Border.all(
+                              color: AppColors.white,
+                              width: 2,
+                            ),
                           ),
                           child: const Icon(
                             Icons.camera_alt_rounded,
@@ -197,12 +201,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
               AppGap.h24,
 
-              // ── BASIC INFORMATION ──────────────────────────────────────
-              const _SectionHeader(title: 'BASIC INFORMATION'),
+              const EditProfileSectionHeaderWidget(title: 'BASIC INFORMATION'),
               AppGap.h8,
 
-              // Name
-              _FieldCard(
+              FieldCardWidget(
                 child: TextFormField(
                   controller: _nameCtrl,
                   style: AppTextStyles.s14,
@@ -220,8 +222,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
               AppGap.h10,
 
-              // Date of birth
-              _FieldCard(
+              FieldCardWidget(
                 child: ListTile(
                   contentPadding: AppPad.h12v4,
                   leading: Container(
@@ -260,12 +261,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
               AppGap.h24,
 
-              // ── CONTACT INFORMATION ────────────────────────────────────
-              const _SectionHeader(title: 'CONTACT INFORMATION'),
+              const EditProfileSectionHeaderWidget(
+                title: 'CONTACT INFORMATION',
+              ),
               AppGap.h8,
 
-              // Email
-              _FieldCard(
+              FieldCardWidget(
                 child: TextFormField(
                   controller: _emailCtrl,
                   keyboardType: TextInputType.emailAddress,
@@ -277,7 +278,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     showCheckMark: true,
                   ),
                   validator: (v) {
-                    if (v == null || v.trim().isEmpty) return 'Email is required';
+                    if (v == null || v.trim().isEmpty)
+                      return 'Email is required';
                     if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(v.trim())) {
                       return 'Enter a valid email';
                     }
@@ -288,8 +290,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
               AppGap.h10,
 
-              // Phone
-              _FieldCard(
+              FieldCardWidget(
                 child: TextFormField(
                   controller: _phoneCtrl,
                   keyboardType: TextInputType.phone,
@@ -305,12 +306,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
               AppGap.h24,
 
-              // ── ABOUT YOU ─────────────────────────────────────────────
-              const _SectionHeader(title: 'ABOUT YOU'),
+              const EditProfileSectionHeaderWidget(title: 'ABOUT YOU'),
               AppGap.h8,
 
-              // Bio
-              _FieldCard(
+              FieldCardWidget(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
@@ -321,11 +320,16 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       style: AppTextStyles.s14,
                       decoration: InputDecoration(
                         hintText: 'Write something about yourself...',
-                        hintStyle: AppTextStyles.s14
-                            .copyWith(color: AppColors.textHint),
+                        hintStyle: AppTextStyles.s14.copyWith(
+                          color: AppColors.textHint,
+                        ),
                         prefixIcon: Padding(
                           padding: const EdgeInsets.only(
-                              left: 10, right: 10, top: 10, bottom: 10),
+                            left: 10,
+                            right: 10,
+                            top: 10,
+                            bottom: 10,
+                          ),
                           child: Align(
                             alignment: Alignment.topCenter,
                             widthFactor: 1.0,
@@ -337,8 +341,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 color: AppColors.primaryLight,
                                 borderRadius: AppBorderRadius.a8,
                               ),
-                              child: const Icon(Icons.description_outlined,
-                                  size: 16, color: AppColors.primary),
+                              child: const Icon(
+                                Icons.description_outlined,
+                                size: 16,
+                                color: AppColors.primary,
+                              ),
                             ),
                           ),
                         ),
@@ -364,7 +371,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
               AppGap.h32,
 
-              // ── Save button ────────────────────────────────────────────
+              // Save button
               Container(
                 width: double.infinity,
                 height: 52,
@@ -403,7 +410,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
               AppGap.h20,
 
-              // ── Danger zone ────────────────────────────────────────────
+              // Danger zone
               Container(
                 padding: AppPad.a16,
                 decoration: BoxDecoration(
@@ -431,12 +438,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       ),
                     ),
                     AppGap.h12,
-                    _DangerTile(
+                    DangerTileWidget(
                       label: 'Change Password',
                       onTap: _showChangePassword,
                     ),
                     const Divider(height: 1, color: Color(0xFFFFCDD2)),
-                    _DangerTile(
+                    DangerTileWidget(
                       label: 'Delete Account',
                       onTap: _showDeleteAccount,
                     ),
@@ -452,7 +459,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     );
   }
 
-  // ── Input decoration factory ───────────────────────────────────────────────
   InputDecoration _fieldDecoration({
     required IconData icon,
     required String hint,
@@ -480,8 +486,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               builder: (_, value, __) => value.text.trim().isNotEmpty
                   ? const Padding(
                       padding: EdgeInsets.only(right: 12),
-                      child: Icon(Icons.check_circle_rounded,
-                          color: AppColors.success, size: 20),
+                      child: Icon(
+                        Icons.check_circle_rounded,
+                        color: AppColors.success,
+                        size: 20,
+                      ),
                     )
                   : const SizedBox.shrink(),
             )
@@ -491,110 +500,4 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       focusedBorder: InputBorder.none,
     );
   }
-}
-
-// ── Section header ────────────────────────────────────────────────────────────
-class _SectionHeader extends StatelessWidget {
-  const _SectionHeader({required this.title});
-  final String title;
-
-  @override
-  Widget build(BuildContext context) => Padding(
-        padding: const EdgeInsets.only(left: 4),
-        child: Text(
-          title,
-          style: const TextStyle(
-            fontSize: 11,
-            fontWeight: FontWeight.w700,
-            color: AppColors.textSecondary,
-            letterSpacing: 0.8,
-          ),
-        ),
-      );
-}
-
-// ── Field card container ──────────────────────────────────────────────────────
-class _FieldCard extends StatelessWidget {
-  const _FieldCard({required this.child});
-  final Widget child;
-
-  @override
-  Widget build(BuildContext context) => Container(
-        decoration: BoxDecoration(
-          color: AppColors.surface,
-          borderRadius: AppBorderRadius.a14,
-          border: Border.all(color: AppColors.border),
-        ),
-        child: child,
-      );
-}
-
-// ── Danger-zone tile ──────────────────────────────────────────────────────────
-class _DangerTile extends StatelessWidget {
-  const _DangerTile({required this.label, required this.onTap});
-  final String label;
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) => InkWell(
-        onTap: onTap,
-        borderRadius: AppBorderRadius.a8,
-        child: Padding(
-          padding: AppPad.h4v8,
-          child: Text(
-            label,
-            style: AppTextStyles.s14.copyWith(
-              color: AppColors.error,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-        ),
-      );
-}
-
-// ── Simple alert dialog ───────────────────────────────────────────────────────
-class _SimpleDialog extends StatelessWidget {
-  const _SimpleDialog({
-    required this.title,
-    required this.body,
-    required this.confirmLabel,
-    required this.onConfirm,
-    required this.isDestructive,
-  });
-
-  final String title;
-  final String body;
-  final String confirmLabel;
-  final VoidCallback onConfirm;
-  final bool isDestructive;
-
-  @override
-  Widget build(BuildContext context) => AlertDialog(
-        shape: RoundedRectangleBorder(borderRadius: AppBorderRadius.a20),
-        title: Text(title,
-            style:
-                AppTextStyles.s16.copyWith(fontWeight: FontWeight.w700)),
-        content: Text(body,
-            style: AppTextStyles.s14
-                .copyWith(color: AppColors.textSecondary)),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text('Cancel',
-                style: AppTextStyles.s14
-                    .copyWith(color: AppColors.textSecondary)),
-          ),
-          TextButton(
-            onPressed: onConfirm,
-            child: Text(
-              confirmLabel,
-              style: AppTextStyles.s14.copyWith(
-                color:
-                    isDestructive ? AppColors.error : AppColors.primary,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-          ),
-        ],
-      );
 }
