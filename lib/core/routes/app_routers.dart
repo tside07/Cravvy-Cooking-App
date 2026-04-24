@@ -25,6 +25,7 @@ import 'package:cravvy_cooking_app/modules/legal/screen/legal_screen.dart';
 import 'package:cravvy_cooking_app/modules/profile/screen/edit_profile_screen.dart';
 import 'package:cravvy_cooking_app/modules/premium/screen/premium_screen.dart';
 import 'package:cravvy_cooking_app/data/models/meal.dart';
+import 'package:cravvy_cooking_app/data/providers/auth_provider.dart';
 
 class OnboardingArgs {
   final HealthGoal? goal;
@@ -76,6 +77,26 @@ class AppRouter {
 
   static final GoRouter router = GoRouter(
     initialLocation: splash,
+    redirect: (context, state) {
+      final authProvider = Provider.of<AuthProvider>(context, listen: false);
+
+      final isLoggedIn = authProvider.isLoggedIn;
+      final isInitial = authProvider.status == AuthStatus.initial;
+      final location = state.matchedLocation;
+
+      if (isInitial) return splash;
+
+      final publicRoutes = [splash, login, register, forgotPassword, otp];
+      if (!isLoggedIn && !publicRoutes.contains(location)) {
+        return login;
+      }
+
+      if (isLoggedIn && (location == login || location == register)) {
+        return app;
+      }
+
+      return null; // không redirect
+    },
     observers: [_AppRouteObserver()],
     routes: [
       GoRoute(
