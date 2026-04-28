@@ -1,4 +1,5 @@
 import 'package:cravvy_cooking_app/init.dart';
+import 'package:cravvy_cooking_app/data/providers/auth_provider.dart';
 import 'package:cravvy_cooking_app/modules/auth/widgets/auth_divider_widget.dart';
 import 'package:cravvy_cooking_app/modules/auth/widgets/auth_form_fields_widget.dart';
 import 'package:cravvy_cooking_app/modules/auth/widgets/auth_header_widget.dart';
@@ -20,7 +21,6 @@ class _LoginScreenState extends State<LoginScreen> {
   final _passwordController = TextEditingController();
   final _emailFocus = FocusNode();
   final _passwordFocus = FocusNode();
-  bool _isLoading = false;
 
   @override
   void dispose() {
@@ -31,12 +31,36 @@ class _LoginScreenState extends State<LoginScreen> {
     super.dispose();
   }
 
-  void _submit() {
+  Future<void> _submit() async {
     if (!_formKey.currentState!.validate()) return;
-    setState(() => _isLoading = true);
-    Future.delayed(const Duration(seconds: 2), () {
-      if (mounted) setState(() => _isLoading = false);
-    });
+
+    final auth = context.read<AuthProvider>();
+    final success = await auth.login(
+      _emailController.text.trim(),
+      _passwordController.text,
+    );
+
+    if (!mounted) return;
+
+    if (success) {
+      // Kiểm tra onboarding xong chưa
+      if (auth.user?.onboardingComplete == true) {
+        context.go(AppRouter.app);
+      } else {
+        context.go(AppRouter.setupStep1);
+      }
+    } else {
+      // Hiển thị lỗi
+      final error = auth.errorMessage ?? 'Đăng nhập thất bại';
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(error, style: AppTextStyles.s14.copyWith(color: AppColors.white)),
+          backgroundColor: AppColors.error,
+          behavior: SnackBarBehavior.floating,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        ),
+      );
+    }
   }
 
   @override
@@ -47,14 +71,16 @@ class _LoginScreenState extends State<LoginScreen> {
         top: false,
         child: Scaffold(
           backgroundColor: AppColors.background,
-          body: _Body(
-            formKey: _formKey,
-            emailController: _emailController,
-            passwordController: _passwordController,
-            emailFocus: _emailFocus,
-            passwordFocus: _passwordFocus,
-            isLoading: _isLoading,
-            onSubmit: _submit,
+          body: Consumer<AuthProvider>(
+            builder: (context, auth, _) => _Body(
+              formKey: _formKey,
+              emailController: _emailController,
+              passwordController: _passwordController,
+              emailFocus: _emailFocus,
+              passwordFocus: _passwordFocus,
+              isLoading: auth.status == AuthStatus.loading,
+              onSubmit: _submit,
+            ),
           ),
         ),
       ),
@@ -112,10 +138,8 @@ class _Body extends StatelessWidget {
                   keyboardType: TextInputType.emailAddress,
                   focusNode: emailFocus,
                   validator: (v) {
-                    if (v == null || v.isEmpty) {
-                      return 'Please enter your email';
-                    }
-                    if (!v.contains('@')) return 'Invalid email address';
+                    if (v == null || v.isEmpty) return 'Vui lòng nhập email';
+                    if (!v.contains('@')) return 'Email không hợp lệ';
                     return null;
                   },
                 ),
@@ -125,9 +149,7 @@ class _Body extends StatelessWidget {
                   isPassword: true,
                   focusNode: passwordFocus,
                   validator: (v) {
-                    if (v == null || v.isEmpty) {
-                      return 'Please enter your password';
-                    }
+                    if (v == null || v.isEmpty) return 'Vui lòng nhập mật khẩu';
                     return null;
                   },
                 ),

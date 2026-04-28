@@ -7,6 +7,13 @@ class UserModel {
   final String? gender;
   final double? heightCm;
   final double? weightKg;
+  // Setup step 2-5 data
+  final String? goal;
+  final List<String> diets;
+  final List<String> avoidFoods;
+  final String? cookingTime;
+  final String? skillLevel;
+  final bool onboardingComplete;
 
   const UserModel({
     required this.id,
@@ -17,6 +24,12 @@ class UserModel {
     this.gender,
     this.heightCm,
     this.weightKg,
+    this.goal,
+    this.diets = const [],
+    this.avoidFoods = const [],
+    this.cookingTime,
+    this.skillLevel,
+    this.onboardingComplete = false,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
@@ -29,19 +42,32 @@ class UserModel {
       gender: json['gender'] as String?,
       heightCm: (json['height_cm'] as num?)?.toDouble(),
       weightKg: (json['weight_kg'] as num?)?.toDouble(),
+      goal: json['goal'] as String?,
+      diets: (json['diets'] as List<dynamic>?)?.cast<String>() ?? [],
+      avoidFoods:
+          (json['avoid_foods'] as List<dynamic>?)?.cast<String>() ?? [],
+      cookingTime: json['cooking_time'] as String?,
+      skillLevel: json['skill_level'] as String?,
+      onboardingComplete: json['onboarding_complete'] as bool? ?? false,
     );
   }
 
   Map<String, dynamic> toJson() => {
-    'id': id,
-    'email': email,
-    'full_name': fullName,
-    'avatar_url': avatarUrl,
-    'age': age,
-    'gender': gender,
-    'height_cm': heightCm,
-    'weight_kg': weightKg,
-  };
+        'id': id,
+        'email': email,
+        'full_name': fullName,
+        'avatar_url': avatarUrl,
+        'age': age,
+        'gender': gender,
+        'height_cm': heightCm,
+        'weight_kg': weightKg,
+        'goal': goal,
+        'diets': diets,
+        'avoid_foods': avoidFoods,
+        'cooking_time': cookingTime,
+        'skill_level': skillLevel,
+        'onboarding_complete': onboardingComplete,
+      };
 
   UserModel copyWith({
     String? fullName,
@@ -50,6 +76,12 @@ class UserModel {
     String? gender,
     double? heightCm,
     double? weightKg,
+    String? goal,
+    List<String>? diets,
+    List<String>? avoidFoods,
+    String? cookingTime,
+    String? skillLevel,
+    bool? onboardingComplete,
   }) {
     return UserModel(
       id: id,
@@ -60,6 +92,12 @@ class UserModel {
       gender: gender ?? this.gender,
       heightCm: heightCm ?? this.heightCm,
       weightKg: weightKg ?? this.weightKg,
+      goal: goal ?? this.goal,
+      diets: diets ?? this.diets,
+      avoidFoods: avoidFoods ?? this.avoidFoods,
+      cookingTime: cookingTime ?? this.cookingTime,
+      skillLevel: skillLevel ?? this.skillLevel,
+      onboardingComplete: onboardingComplete ?? this.onboardingComplete,
     );
   }
 }

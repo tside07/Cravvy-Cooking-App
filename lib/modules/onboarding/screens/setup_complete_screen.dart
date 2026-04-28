@@ -1,12 +1,14 @@
 import 'package:cravvy_cooking_app/init.dart';
 import 'package:cravvy_cooking_app/modules/widgets/common/cravvy_button.dart';
-import 'package:cravvy_cooking_app/modules/onboarding/widgets/summary_row_widget.dart';
-import 'package:cravvy_cooking_app/modules/onboarding/provider/onboarding_provider.dart';
+import 'package:cravvy_cooking_app/data/providers/auth_provider.dart';
 
+// SetupCompleteScreen không cần OnboardingArgs nữa —
+// data đã lưu lên Supabase ở step 5 rồi
 class SetupCompleteScreen extends StatefulWidget {
-  const SetupCompleteScreen({super.key, required this.args});
+  const SetupCompleteScreen({super.key, this.args});
 
-  final OnboardingArgs args;
+  // args có thể null khi đến từ setup flow
+  final dynamic args;
 
   @override
   State<SetupCompleteScreen> createState() => _SetupCompleteScreenState();
@@ -43,8 +45,8 @@ class _SetupCompleteScreenState extends State<SetupCompleteScreen>
 
   @override
   Widget build(BuildContext context) {
-    final goal = widget.args.goal;
-    final diets = widget.args.diets;
+    final auth = context.watch<AuthProvider>();
+    final user = auth.user;
 
     return Scaffold(
       backgroundColor: AppColors.background,
@@ -55,7 +57,6 @@ class _SetupCompleteScreenState extends State<SetupCompleteScreen>
             children: [
               const Spacer(),
 
-              // Celebration icon
               ScaleTransition(
                 scale: _scaleAnim,
                 child: Container(
@@ -66,7 +67,10 @@ class _SetupCompleteScreenState extends State<SetupCompleteScreen>
                     shape: BoxShape.circle,
                   ),
                   child: Center(
-                    child: Text('🎉', style: AppTextStyles.s20.copyWith(fontSize: 56)),
+                    child: Text(
+                      '🎉',
+                      style: AppTextStyles.s20.copyWith(fontSize: 56),
+                    ),
                   ),
                 ),
               ),
@@ -77,7 +81,9 @@ class _SetupCompleteScreenState extends State<SetupCompleteScreen>
                 child: Column(
                   children: [
                     Text(
-                      'You\'re all set!',
+                      user != null
+                          ? 'You\'re all set, ${user.fullName?.split(' ').first ?? ''}!'
+                          : 'You\'re all set!',
                       style: Theme.of(context).textTheme.displayMedium,
                       textAlign: TextAlign.center,
                     ),
@@ -89,7 +95,7 @@ class _SetupCompleteScreenState extends State<SetupCompleteScreen>
                     ),
                     AppGap.h36,
 
-                    // Summary card
+                    // Summary card — dùng data thật từ Supabase
                     Container(
                       padding: AppPad.a20,
                       decoration: BoxDecoration(
@@ -99,23 +105,29 @@ class _SetupCompleteScreenState extends State<SetupCompleteScreen>
                       ),
                       child: Column(
                         children: [
-                          if (goal != null) ...[
-                            SummaryRowWidget(
+                          if (user?.goal != null) ...[
+                            _SummaryRow(
                               icon: '🎯',
                               label: 'Your goal',
-                              value: goal.title,
+                              value: _goalLabel(user!.goal!),
                             ),
                             const Divider(height: 24, color: AppColors.divider),
                           ],
-                          SummaryRowWidget(
+                          _SummaryRow(
                             icon: '🌿',
                             label: 'Diet type',
-                            value: diets.isEmpty
+                            value: user?.diets.isEmpty ?? true
                                 ? 'No restrictions'
-                                : diets.map((d) => d.label).join(', '),
+                                : user!.diets.take(3).join(', '),
                           ),
                           const Divider(height: 24, color: AppColors.divider),
-                          const SummaryRowWidget(
+                          _SummaryRow(
+                            icon: '⏱',
+                            label: 'Cooking time',
+                            value: _cookingTimeLabel(user?.cookingTime),
+                          ),
+                          const Divider(height: 24, color: AppColors.divider),
+                          const _SummaryRow(
                             icon: '📅',
                             label: 'Meal plan',
                             value: '7-day plan ready',
@@ -141,6 +153,75 @@ class _SetupCompleteScreenState extends State<SetupCompleteScreen>
           ),
         ),
       ),
+    );
+  }
+
+  String _goalLabel(String goal) {
+    switch (goal) {
+      case 'lose-weight':
+        return 'Lose Weight';
+      case 'build-muscle':
+        return 'Build Muscle';
+      case 'maintain':
+        return 'Maintain Weight';
+      case 'health':
+        return 'Manage Condition';
+      default:
+        return goal;
+    }
+  }
+
+  String _cookingTimeLabel(String? time) {
+    switch (time) {
+      case 'quick':
+        return 'Under 15 min';
+      case 'short':
+        return '15–30 min';
+      case 'medium':
+        return '30–60 min';
+      case 'long':
+        return '1 hour+';
+      default:
+        return 'Flexible';
+    }
+  }
+}
+
+class _SummaryRow extends StatelessWidget {
+  const _SummaryRow({
+    required this.icon,
+    required this.label,
+    required this.value,
+  });
+
+  final String icon;
+  final String label;
+  final String value;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Text(icon, style: const TextStyle(fontSize: 20)),
+        const SizedBox(width: 12),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                label,
+                style: AppTextStyles.s12.copyWith(
+                  color: AppColors.textSecondary,
+                ),
+              ),
+              Text(
+                value,
+                style: AppTextStyles.s14.copyWith(fontWeight: FontWeight.w600),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }

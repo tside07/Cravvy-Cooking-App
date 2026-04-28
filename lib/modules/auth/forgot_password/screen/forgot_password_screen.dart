@@ -1,5 +1,5 @@
 import 'package:cravvy_cooking_app/init.dart';
-import 'package:cravvy_cooking_app/core/routes/app_routers.dart';
+import 'package:cravvy_cooking_app/data/providers/auth_provider.dart';
 import 'package:cravvy_cooking_app/core/widgets/template/custom_auth_app_bar.dart';
 import 'package:cravvy_cooking_app/modules/auth/widgets/auth_form_fields_widget.dart';
 import 'package:cravvy_cooking_app/modules/auth/widgets/auth_header_widget.dart';
@@ -18,7 +18,6 @@ class ForgotPasswordScreen extends StatefulWidget {
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
-  bool _isLoading = false;
 
   @override
   void dispose() {
@@ -26,16 +25,30 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     super.dispose();
   }
 
-  void _sendOtp() {
+  Future<void> _sendOtp() async {
     if (!_formKey.currentState!.validate()) return;
-    setState(() => _isLoading = true);
-    // TODO: call send OTP service
-    Future.delayed(const Duration(seconds: 2), () {
-      if (mounted) {
-        setState(() => _isLoading = false);
-        context.push(AppRouter.otp, extra: _emailController.text.trim());
-      }
-    });
+
+    final email = _emailController.text.trim();
+    final auth = context.read<AuthProvider>();
+    final success = await auth.sendPasswordResetOtp(email);
+
+    if (!mounted) return;
+
+    if (success) {
+      context.push(AppRouter.otp, extra: email);
+    } else {
+      final error = auth.errorMessage ?? 'Không thể gửi OTP';
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(error,
+              style: AppTextStyles.s14.copyWith(color: AppColors.white)),
+          backgroundColor: AppColors.error,
+          behavior: SnackBarBehavior.floating,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        ),
+      );
+    }
   }
 
   @override
@@ -44,11 +57,13 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
       backgroundColor: AppColors.background,
       appBar: const CustomAuthAppBar(),
       body: SafeArea(
-        child: _Body(
-          formKey: _formKey,
-          emailController: _emailController,
-          isLoading: _isLoading,
-          onSubmit: _sendOtp,
+        child: Consumer<AuthProvider>(
+          builder: (context, auth, _) => _Body(
+            formKey: _formKey,
+            emailController: _emailController,
+            isLoading: auth.status == AuthStatus.loading,
+            onSubmit: _sendOtp,
+          ),
         ),
       ),
     );
@@ -95,9 +110,8 @@ class _Body extends StatelessWidget {
                   keyboardType: TextInputType.emailAddress,
                   prefixIcon: Icons.email_outlined,
                   validator: (v) {
-                    if (v == null || v.isEmpty)
-                      return 'Please enter your email';
-                    if (!v.contains('@')) return 'Invalid email address';
+                    if (v == null || v.isEmpty) return 'Vui lòng nhập email';
+                    if (!v.contains('@')) return 'Email không hợp lệ';
                     return null;
                   },
                 ),
