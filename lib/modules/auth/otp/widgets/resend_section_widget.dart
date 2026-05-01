@@ -14,37 +14,23 @@ class ResendSectionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        RichText(
-          text: TextSpan(
-            text: 'Resend code in ',
-            style: AppTextStyles.s14.copyWith(color: AppColors.textSecondary),
-            children: [
-              TextSpan(
-                text: secondsLeft > 0 ? countdownLabel : 'Resend',
-                style: AppTextStyles.s14.copyWith(
-                  color: AppColors.primary,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-            ],
-          ),
+        Text(
+          secondsLeft > 0 ? 'Resend code in: ' : '',
+          style: AppTextStyles.s14.copyWith(color: AppColors.textSecondary),
         ),
-        if (secondsLeft == 0)
-          GestureDetector(
-            onTap: onResend,
-            child: Padding(
-              padding: AppPad.t5,
-              child: Text(
-                'Tap to resend',
-                style: AppTextStyles.s12.copyWith(
-                  color: AppColors.primary,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
+        GestureDetector(
+          onTap: secondsLeft == 0 ? onResend : null,
+          child: Text(
+            secondsLeft > 0 ? countdownLabel : 'Resend',
+            style: AppTextStyles.s14.copyWith(
+              color: AppColors.primary,
+              fontWeight: FontWeight.w700,
             ),
           ),
+        ),
       ],
     );
   }

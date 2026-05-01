@@ -25,11 +25,11 @@ import 'package:cravvy_cooking_app/modules/legal/screen/legal_screen.dart';
 import 'package:cravvy_cooking_app/modules/profile/screen/edit_profile_screen.dart';
 import 'package:cravvy_cooking_app/modules/premium/screen/premium_screen.dart';
 import 'package:cravvy_cooking_app/data/models/meal.dart';
+import 'package:cravvy_cooking_app/data/providers/auth_provider.dart';
 
 class OnboardingArgs {
   final HealthGoal? goal;
   final Set<DietType> diets;
-
   const OnboardingArgs({this.goal, required this.diets});
 }
 
@@ -39,7 +39,7 @@ class AppRouter {
   static const String goalSelection = '/onboarding/goal';
   static const String dietSelection = '/onboarding/diet';
   static const String setupComplete = '/onboarding/complete';
-  // ─── New 5-step setup ────────────────────────────────────────────────────
+
   static const String setupStep1 = '/setup/1';
   static const String setupStep2 = '/setup/2';
   static const String setupStep3 = '/setup/3';
@@ -47,13 +47,13 @@ class AppRouter {
   static const String setupStep5 = '/setup/5';
   static const String app = '/app';
   static const String mealPlan = app;
-
-  // ─── Auth ────────────────────────────────────────────────────────────────
+  // Auth
   static const String login = '/auth/login';
   static const String register = '/auth/register';
   static const String forgotPassword = '/auth/forgot-password';
   static const String otp = '/auth/otp';
   static const String resetPassword = '/auth/reset-password';
+  // Features
   static const String mealDetail = '/meal-detail';
   static const String cookingMode = '/cooking';
   static const String editProfile = '/profile/edit';
@@ -67,24 +67,47 @@ class AppRouter {
   static const String termsOfService = '/terms-of-service';
   static const String disclaimer = '/disclaimer';
 
-  static void _logRoute(String? name) {
-    assert(() {
-      debugPrint('🧭 Navigate → $name');
-      return true;
-    }());
-  }
+  static const List<String> _setupRoutes = [
+    setupStep1, setupStep2, setupStep3, setupStep4, setupStep5, setupComplete,
+  ];
+
+  static const List<String> _publicRoutes = [
+    splash, login, register, forgotPassword, otp, resetPassword,
+    onboarding, goalSelection, dietSelection,
+  ];
 
   static final GoRouter router = GoRouter(
     initialLocation: splash,
-    observers: [_AppRouteObserver()],
+    redirect: (context, state) {
+      final auth = Provider.of<AuthProvider>(context, listen: false);
+      final location = state.matchedLocation;
+
+      if (auth.status == AuthStatus.initial) {
+        return location == splash ? null : splash;
+      }
+
+      final isPublic = _publicRoutes.contains(location);
+      final isSetup = _setupRoutes.contains(location);
+
+      if (!auth.isLoggedIn && !isPublic && !isSetup) {
+        if (isSetup) return login;
+        return login;
+      }
+
+      if (auth.isLoggedIn && (location == login || location == register)) {
+        if (auth.user?.onboardingComplete == true) return app;
+        return setupStep1;
+      }
+
+      return null; // không redirect
+    },
     routes: [
       GoRoute(
         path: splash,
-        pageBuilder: (context, state) {
-          _logRoute(state.fullPath);
-          return const NoTransitionPage(child: SplashScreen());
-        },
+        pageBuilder: (context, state) =>
+            const NoTransitionPage(child: SplashScreen()),
       ),
+
       GoRoute(
         path: onboarding,
         builder: (context, state) => const OnboardingScreen(),
@@ -112,11 +135,10 @@ class AppRouter {
       ),
       GoRoute(
         path: setupComplete,
-        builder: (context, state) {
-          final args = state.extra as OnboardingArgs;
-          return SetupCompleteScreen(args: args);
-        },
+        builder: (context, state) =>
+            SetupCompleteScreen(args: state.extra),
       ),
+
       GoRoute(
         path: app,
         builder: (context, state) => MultiProvider(
@@ -130,13 +152,11 @@ class AppRouter {
 
       GoRoute(path: login, builder: (context, state) => const LoginScreen()),
       GoRoute(
-        path: register,
-        builder: (context, state) => const RegisterScreen(),
-      ),
+          path: register,
+          builder: (context, state) => const RegisterScreen()),
       GoRoute(
-        path: forgotPassword,
-        builder: (context, state) => const ForgotPasswordScreen(),
-      ),
+          path: forgotPassword,
+          builder: (context, state) => const ForgotPasswordScreen()),
       GoRoute(
         path: otp,
         builder: (context, state) {
@@ -151,6 +171,23 @@ class AppRouter {
           return ResetPasswordScreen(email: email);
         },
       ),
+
+      GoRoute(
+          path: setupStep1,
+          builder: (context, state) => const SetupStep1Screen()),
+      GoRoute(
+          path: setupStep2,
+          builder: (context, state) => const SetupStep2Screen()),
+      GoRoute(
+          path: setupStep3,
+          builder: (context, state) => const SetupStep3Screen()),
+      GoRoute(
+          path: setupStep4,
+          builder: (context, state) => const SetupStep4Screen()),
+      GoRoute(
+          path: setupStep5,
+          builder: (context, state) => const SetupStep5Screen()),
+
       GoRoute(
         path: mealDetail,
         builder: (context, state) {
@@ -166,83 +203,35 @@ class AppRouter {
         },
       ),
       GoRoute(
-        path: editProfile,
-        builder: (context, state) => const EditProfileScreen(),
-      ),
+          path: editProfile,
+          builder: (context, state) => const EditProfileScreen()),
       GoRoute(
-        path: premium,
-        builder: (context, state) => const PremiumScreen(),
-      ),
+          path: premium,
+          builder: (context, state) => const PremiumScreen()),
       GoRoute(
-        path: subscription,
-        builder: (context, state) => const SubscriptionScreen(),
-      ),
+          path: subscription,
+          builder: (context, state) => const SubscriptionScreen()),
       GoRoute(
-        path: trialActivation,
-        builder: (context, state) => const TrialActivationScreen(),
-      ),
+          path: trialActivation,
+          builder: (context, state) => const TrialActivationScreen()),
       GoRoute(
-        path: shoppingList,
-        builder: (context, state) => const ShoppingListScreen(),
-      ),
+          path: shoppingList,
+          builder: (context, state) => const ShoppingListScreen()),
       GoRoute(
-        path: settings,
-        builder: (context, state) => const SettingsScreen(),
-      ),
+          path: settings,
+          builder: (context, state) => const SettingsScreen()),
       GoRoute(path: faq, builder: (context, state) => const FAQScreen()),
       GoRoute(
-        path: privacyPolicy,
-        builder: (context, state) => const PrivacyPolicyScreen(),
-      ),
+          path: privacyPolicy,
+          builder: (context, state) => const PrivacyPolicyScreen()),
       GoRoute(
-        path: termsOfService,
-        builder: (context, state) => const TermsOfServiceScreen(),
-      ),
+          path: termsOfService,
+          builder: (context, state) => const TermsOfServiceScreen()),
       GoRoute(
-        path: disclaimer,
-        builder: (context, state) => const DisclaimerScreen(),
-      ),
-      // ─── New 5-step setup ───────────────────────────────────────────────
-      GoRoute(
-        path: setupStep1,
-        builder: (context, state) => const SetupStep1Screen(),
-      ),
-      GoRoute(
-        path: setupStep2,
-        builder: (context, state) => const SetupStep2Screen(),
-      ),
-      GoRoute(
-        path: setupStep3,
-        builder: (context, state) => const SetupStep3Screen(),
-      ),
-      GoRoute(
-        path: setupStep4,
-        builder: (context, state) => const SetupStep4Screen(),
-      ),
-      GoRoute(
-        path: setupStep5,
-        builder: (context, state) => const SetupStep5Screen(),
-      ),
+          path: disclaimer,
+          builder: (context, state) => const DisclaimerScreen()),
     ],
     errorBuilder: (context, state) =>
         Scaffold(body: Center(child: Text('Route not found: ${state.uri}'))),
   );
-}
-
-class _AppRouteObserver extends NavigatorObserver {
-  @override
-  void didPush(Route route, Route? previousRoute) {
-    assert(() {
-      debugPrint('📌 Push: ${route.settings.name}');
-      return true;
-    }());
-  }
-
-  @override
-  void didPop(Route route, Route? previousRoute) {
-    assert(() {
-      debugPrint('⬅️  Pop: ${route.settings.name}');
-      return true;
-    }());
-  }
 }

@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:cravvy_cooking_app/init.dart';
-import 'package:cravvy_cooking_app/core/routes/app_routers.dart';
+import 'package:cravvy_cooking_app/data/providers/auth_provider.dart';
 import 'package:cravvy_cooking_app/core/widgets/template/custom_auth_app_bar.dart';
 import 'package:cravvy_cooking_app/modules/auth/widgets/auth_header_widget.dart';
 import 'package:cravvy_cooking_app/modules/auth/otp/widgets/icon_section_widget.dart';
@@ -20,7 +20,7 @@ class OtpScreen extends StatefulWidget {
 
 class _OtpScreenState extends State<OtpScreen> {
   static const _otpLength = 6;
-  static const _countdownSeconds = 57;
+  static const _countdownSeconds = 60;
 
   final List<TextEditingController> _controllers = List.generate(
     _otpLength,
@@ -33,7 +33,6 @@ class _OtpScreenState extends State<OtpScreen> {
 
   late int _secondsLeft;
   Timer? _timer;
-  bool _isLoading = false;
 
   @override
   void initState() {
@@ -53,11 +52,26 @@ class _OtpScreenState extends State<OtpScreen> {
     });
   }
 
-  void _resend() {
+  Future<void> _resend() async {
     if (_secondsLeft > 0) return;
-    setState(() => _secondsLeft = _countdownSeconds);
-    _startCountdown();
-    // TODO: call resend OTP service
+    final auth = context.read<AuthProvider>();
+    final success = await auth.sendPasswordResetOtp(widget.email);
+    if (!mounted) return;
+    if (success) {
+      setState(() => _secondsLeft = _countdownSeconds);
+      _startCountdown();
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            auth.errorMessage ?? 'Error Occurred. Unable to resend OTP',
+            style: AppTextStyles.s14.copyWith(color: AppColors.white),
+          ),
+          backgroundColor: AppColors.error,
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+    }
   }
 
   String get _otpValue => _controllers.map((c) => c.text).join();
@@ -78,16 +92,36 @@ class _OtpScreenState extends State<OtpScreen> {
     return '$m:$s';
   }
 
-  void _verify() {
+  Future<void> _verify() async {
     if (_otpValue.length < _otpLength) return;
-    setState(() => _isLoading = true);
-    // TODO: call verify OTP service
-    Future.delayed(const Duration(seconds: 2), () {
-      if (mounted) {
-        setState(() => _isLoading = false);
-        context.go(AppRouter.app);
-      }
-    });
+
+    final auth = context.read<AuthProvider>();
+    final success = await auth.verifyOtp(email: widget.email, token: _otpValue);
+
+    if (!mounted) return;
+
+    if (success) {
+      // OTP đúng → vào reset password
+      context.push(AppRouter.resetPassword, extra: widget.email);
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            auth.errorMessage ?? 'Invalid OTP',
+            style: AppTextStyles.s14.copyWith(color: AppColors.white),
+          ),
+          backgroundColor: AppColors.error,
+          behavior: SnackBarBehavior.floating,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+        ),
+      );
+      // Clear input
+      for (final c in _controllers) c.clear();
+      if (_focusNodes.isNotEmpty) _focusNodes[0].requestFocus();
+      setState(() {});
+    }
   }
 
   @override
@@ -104,17 +138,19 @@ class _OtpScreenState extends State<OtpScreen> {
       backgroundColor: AppColors.background,
       appBar: const CustomAuthAppBar(),
       body: SafeArea(
-        child: _Body(
-          controllers: _controllers,
-          focusNodes: _focusNodes,
-          maskedEmail: _maskedEmail,
-          countdownLabel: _countdownLabel,
-          secondsLeft: _secondsLeft,
-          isLoading: _isLoading,
-          isComplete: _otpValue.length == _otpLength,
-          onChanged: (_) => setState(() {}),
-          onResend: _resend,
-          onVerify: _verify,
+        child: Consumer<AuthProvider>(
+          builder: (context, auth, _) => _Body(
+            controllers: _controllers,
+            focusNodes: _focusNodes,
+            maskedEmail: _maskedEmail,
+            countdownLabel: _countdownLabel,
+            secondsLeft: _secondsLeft,
+            isLoading: auth.status == AuthStatus.loading,
+            isComplete: _otpValue.length == _otpLength,
+            onChanged: (_) => setState(() {}),
+            onResend: _resend,
+            onVerify: _verify,
+          ),
         ),
       ),
     );

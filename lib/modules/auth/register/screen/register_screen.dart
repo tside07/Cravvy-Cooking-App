@@ -1,4 +1,5 @@
 import 'package:cravvy_cooking_app/init.dart';
+import 'package:cravvy_cooking_app/data/providers/auth_provider.dart';
 import 'package:cravvy_cooking_app/core/widgets/template/custom_auth_app_bar.dart';
 import 'package:cravvy_cooking_app/modules/auth/widgets/auth_divider_widget.dart';
 import 'package:cravvy_cooking_app/modules/auth/widgets/auth_header_widget.dart';
@@ -25,7 +26,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final _emailFocus = FocusNode();
   final _passwordFocus = FocusNode();
   final _confirmFocus = FocusNode();
-  bool _isLoading = false;
   bool _agreedToTerms = false;
 
   @override
@@ -41,29 +41,49 @@ class _RegisterScreenState extends State<RegisterScreen> {
     super.dispose();
   }
 
-  void _submit() {
+  Future<void> _submit() async {
     if (!_agreedToTerms) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            'Please agree to the terms and conditions.',
+            'Vui lòng đồng ý với điều khoản sử dụng.',
             style: AppTextStyles.s14.copyWith(color: AppColors.white),
           ),
           backgroundColor: AppColors.error,
           behavior: SnackBarBehavior.floating,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         ),
       );
       return;
     }
     if (!_formKey.currentState!.validate()) return;
-    setState(() => _isLoading = true);
-    // TODO: call auth service
-    Future.delayed(const Duration(seconds: 2), () {
-      if (mounted) setState(() => _isLoading = false);
-    });
+
+    final auth = context.read<AuthProvider>();
+    final success = await auth.register(
+      _emailController.text.trim(),
+      _passwordController.text,
+      _nameController.text.trim(),
+    );
+
+    if (!mounted) return;
+
+    if (success) {
+      // Đăng ký xong → vào setup step 1 (onboarding chưa xong)
+      context.go(AppRouter.setupStep1);
+    } else {
+      final error = auth.errorMessage ?? 'Đăng ký thất bại';
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content:
+              Text(error, style: AppTextStyles.s14.copyWith(color: AppColors.white)),
+          backgroundColor: AppColors.error,
+          behavior: SnackBarBehavior.floating,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        ),
+      );
+    }
   }
 
   @override
@@ -72,20 +92,22 @@ class _RegisterScreenState extends State<RegisterScreen> {
       backgroundColor: AppColors.background,
       appBar: const CustomAuthAppBar(),
       body: SafeArea(
-        child: _Body(
-          formKey: _formKey,
-          nameController: _nameController,
-          emailController: _emailController,
-          passwordController: _passwordController,
-          confirmPasswordController: _confirmPasswordController,
-          nameFocus: _nameFocus,
-          emailFocus: _emailFocus,
-          passwordFocus: _passwordFocus,
-          confirmFocus: _confirmFocus,
-          isLoading: _isLoading,
-          agreedToTerms: _agreedToTerms,
-          onAgreedChanged: (v) => setState(() => _agreedToTerms = v ?? false),
-          onSubmit: _submit,
+        child: Consumer<AuthProvider>(
+          builder: (context, auth, _) => _Body(
+            formKey: _formKey,
+            nameController: _nameController,
+            emailController: _emailController,
+            passwordController: _passwordController,
+            confirmPasswordController: _confirmPasswordController,
+            nameFocus: _nameFocus,
+            emailFocus: _emailFocus,
+            passwordFocus: _passwordFocus,
+            confirmFocus: _confirmFocus,
+            isLoading: auth.status == AuthStatus.loading,
+            agreedToTerms: _agreedToTerms,
+            onAgreedChanged: (v) => setState(() => _agreedToTerms = v ?? false),
+            onSubmit: _submit,
+          ),
         ),
       ),
     );
