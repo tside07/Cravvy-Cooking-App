@@ -20,7 +20,7 @@ class OtpScreen extends StatefulWidget {
 
 class _OtpScreenState extends State<OtpScreen> {
   static const _otpLength = 6;
-  static const _countdownSeconds = 57;
+  static const _countdownSeconds = 60;
 
   final List<TextEditingController> _controllers = List.generate(
     _otpLength,
@@ -64,7 +64,7 @@ class _OtpScreenState extends State<OtpScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            auth.errorMessage ?? 'Không thể gửi lại OTP',
+            auth.errorMessage ?? 'Error Occurred. Unable to resend OTP',
             style: AppTextStyles.s14.copyWith(color: AppColors.white),
           ),
           backgroundColor: AppColors.error,
@@ -107,7 +107,7 @@ class _OtpScreenState extends State<OtpScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            auth.errorMessage ?? 'OTP không đúng',
+            auth.errorMessage ?? 'Invalid OTP',
             style: AppTextStyles.s14.copyWith(color: AppColors.white),
           ),
           backgroundColor: AppColors.error,
