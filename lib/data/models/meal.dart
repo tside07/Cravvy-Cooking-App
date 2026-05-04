@@ -69,6 +69,7 @@ class Meal {
   final String imageUrl;
   final bool isLogged;
   final List<String> tags;
+  final List<String> steps; // từ Recipe.steps — TEXT[]
 
   const Meal({
     required this.id,
@@ -82,6 +83,7 @@ class Meal {
     required this.imageUrl,
     this.isLogged = false,
     this.tags = const [],
+    this.steps = const [],
   });
 
   Meal copyWith({bool? isLogged}) => Meal(
@@ -96,6 +98,7 @@ class Meal {
     imageUrl: imageUrl,
     isLogged: isLogged ?? this.isLogged,
     tags: tags,
+    steps: steps,
   );
 }
 

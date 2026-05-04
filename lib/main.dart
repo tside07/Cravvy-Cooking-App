@@ -10,6 +10,7 @@ import 'data/providers/auth_provider.dart';
 import 'modules/onboarding/provider/onboarding_provider.dart';
 import 'modules/meal_plan/provider/meal_plan_provider.dart';
 import 'modules/profile/provider/profile_provider.dart';
+import 'data/providers/recipe_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -35,6 +36,7 @@ void main() async {
         ChangeNotifierProvider(create: (_) => OnboardingProvider()),
         ChangeNotifierProvider(create: (_) => MealPlanProvider()),
         ChangeNotifierProvider(create: (_) => ProfileProvider()),
+        ChangeNotifierProvider(create: (_) => RecipeProvider()),
       ],
       child: const CravvyApp(),
     ),

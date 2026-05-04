@@ -4,6 +4,7 @@ import 'package:cravvy_cooking_app/modules/home/widgets/nutrition_ring_card_widg
 import 'package:cravvy_cooking_app/modules/home/widgets/today_meals_section_widget.dart';
 import 'package:cravvy_cooking_app/modules/home/widgets/quick_actions_grid_widget.dart';
 import 'package:cravvy_cooking_app/modules/home/widgets/nutrition_tip_widget.dart';
+import 'package:cravvy_cooking_app/modules/home/widgets/featured_recipes_widget.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -19,6 +20,7 @@ class HomeScreen extends StatelessWidget {
             const SliverToBoxAdapter(child: NutritionRingCardWidget()),
             const SliverToBoxAdapter(child: TodayMealsSectionWidget()),
             const SliverToBoxAdapter(child: QuickActionsGridWidget()),
+            const SliverToBoxAdapter(child: FeaturedRecipesWidget()),
             const SliverToBoxAdapter(child: NutritionTipWidget()),
             AppGap.sh100,
           ],
