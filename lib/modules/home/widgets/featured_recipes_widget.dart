@@ -1,8 +1,7 @@
 // lib/modules/home/widgets/featured_recipes_widget.dart
 //
-// Section mới trên Home screen hiển thị recipes thật từ Supabase.
-// Thêm vào HomeScreen DƯỚI TodayMealsSectionWidget.
-// Có tab lọc theo meal type + loading/error state.
+// Tuần 3: Thêm Quick Filter tags (High Protein, Vegan, Quick, Low Carb)
+// bên dưới meal type tabs. Filter hoạt động locally trên _allRecipes.
 
 import 'package:cravvy_cooking_app/init.dart';
 import 'package:cravvy_cooking_app/data/providers/recipe_provider.dart';
@@ -18,8 +17,9 @@ class FeaturedRecipesWidget extends StatefulWidget {
 
 class _FeaturedRecipesWidgetState extends State<FeaturedRecipesWidget> {
   String _selectedType = 'all';
+  String? _selectedTag;
 
-  static const _tabs = [
+  static const _typeTabs = [
     ('all', 'All', '🍽️'),
     ('breakfast', 'Breakfast', '🌅'),
     ('lunch', 'Lunch', '☀️'),
@@ -27,10 +27,18 @@ class _FeaturedRecipesWidgetState extends State<FeaturedRecipesWidget> {
     ('snack', 'Snack', '🍎'),
   ];
 
+  static const _quickTags = [
+    'High Protein',
+    'Quick',
+    'Vegan',
+    'Low Carb',
+    'Gluten-Free',
+    'Meal Prep',
+  ];
+
   @override
   void initState() {
     super.initState();
-    // Load recipes lần đầu nếu chưa có
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<RecipeProvider>().loadAll();
     });
@@ -70,19 +78,22 @@ class _FeaturedRecipesWidgetState extends State<FeaturedRecipesWidget> {
               ),
             ),
 
-            // ── Filter tabs ──────────────────────────────────────────────────
+            // ── Meal type tabs ───────────────────────────────────────────────
             SizedBox(
               height: 36,
               child: ListView.separated(
                 scrollDirection: Axis.horizontal,
                 padding: const EdgeInsets.symmetric(horizontal: 20),
-                itemCount: _tabs.length,
+                itemCount: _typeTabs.length,
                 separatorBuilder: (_, __) => const SizedBox(width: 8),
                 itemBuilder: (_, i) {
-                  final (type, label, emoji) = _tabs[i];
+                  final (type, label, emoji) = _typeTabs[i];
                   final isSelected = _selectedType == type;
                   return GestureDetector(
-                    onTap: () => setState(() => _selectedType = type),
+                    onTap: () => setState(() {
+                      _selectedType = type;
+                      _selectedTag = null; // reset tag filter
+                    }),
                     child: AnimatedContainer(
                       duration: const Duration(milliseconds: 180),
                       padding: const EdgeInsets.symmetric(
@@ -114,9 +125,59 @@ class _FeaturedRecipesWidgetState extends State<FeaturedRecipesWidget> {
                 },
               ),
             ),
-            AppGap.h12,
+            AppGap.h10,
 
-            // ── Content ──────────────────────────────────────────────────────
+            // ── Quick tag filters ────────────────────────────────────────────
+            if (provider.isLoaded) ...[
+              SizedBox(
+                height: 32,
+                child: ListView.separated(
+                  scrollDirection: Axis.horizontal,
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  itemCount: _quickTags.length,
+                  separatorBuilder: (_, __) => const SizedBox(width: 6),
+                  itemBuilder: (_, i) {
+                    final tag = _quickTags[i];
+                    final isActive = _selectedTag == tag;
+                    return GestureDetector(
+                      onTap: () =>
+                          setState(() => _selectedTag = isActive ? null : tag),
+                      child: AnimatedContainer(
+                        duration: const Duration(milliseconds: 160),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 5,
+                        ),
+                        decoration: BoxDecoration(
+                          color: isActive
+                              ? AppColors.primaryLight
+                              : AppColors.surfaceVariant,
+                          borderRadius: BorderRadius.circular(16),
+                          border: Border.all(
+                            color: isActive
+                                ? AppColors.primary
+                                : Colors.transparent,
+                          ),
+                        ),
+                        child: Text(
+                          tag,
+                          style: AppTextStyles.s12.copyWith(
+                            fontSize: 11,
+                            fontWeight: FontWeight.w600,
+                            color: isActive
+                                ? AppColors.primary
+                                : AppColors.textSecondary,
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+              AppGap.h10,
+            ],
+
+            // ── Recipe cards ─────────────────────────────────────────────────
             SizedBox(height: 220, child: _buildContent(provider)),
           ],
         );
@@ -125,12 +186,10 @@ class _FeaturedRecipesWidgetState extends State<FeaturedRecipesWidget> {
   }
 
   Widget _buildContent(RecipeProvider provider) {
-    // Loading state
     if (provider.isLoading || provider.status == RecipeStatus.initial) {
       return _buildShimmer();
     }
 
-    // Error state
     if (provider.status == RecipeStatus.error) {
       return Center(
         child: Column(
@@ -155,8 +214,8 @@ class _FeaturedRecipesWidgetState extends State<FeaturedRecipesWidget> {
       );
     }
 
-    // Loaded state — filter theo tab
-    final recipes = switch (_selectedType) {
+    // Lọc theo type tab
+    var recipes = switch (_selectedType) {
       'breakfast' => provider.breakfastRecipes,
       'lunch' => provider.lunchRecipes,
       'dinner' => provider.dinnerRecipes,
@@ -164,11 +223,25 @@ class _FeaturedRecipesWidgetState extends State<FeaturedRecipesWidget> {
       _ => provider.allRecipes,
     };
 
+    // Lọc thêm theo tag nếu đang active
+    if (_selectedTag != null) {
+      recipes = recipes.where((r) => r.tags.contains(_selectedTag)).toList();
+    }
+
     if (recipes.isEmpty) {
       return Center(
-        child: Text(
-          'Chưa có món ăn nào',
-          style: AppTextStyles.s14.copyWith(color: AppColors.textSecondary),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text('🔍', style: TextStyle(fontSize: 28)),
+            AppGap.h8,
+            Text(
+              _selectedTag != null
+                  ? 'No "$_selectedTag" recipes found'
+                  : 'Chưa có món ăn nào',
+              style: AppTextStyles.s14.copyWith(color: AppColors.textSecondary),
+            ),
+          ],
         ),
       );
     }

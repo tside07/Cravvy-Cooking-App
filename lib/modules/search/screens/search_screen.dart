@@ -1,5 +1,13 @@
+// lib/modules/search/screens/search_screen.dart
+//
+// Tuần 3: Thêm filter bar (meal type + calorie range + difficulty).
+// Kết quả search giờ kết hợp cả text search và filter.
+
 import 'package:cravvy_cooking_app/init.dart';
 import 'package:cravvy_cooking_app/data/providers/recipe_provider.dart';
+import 'package:cravvy_cooking_app/modules/search/widgets/filter_chip_widget.dart';
+import 'package:cravvy_cooking_app/modules/search/widgets/filter_option_widget.dart';
+import 'package:cravvy_cooking_app/modules/search/widgets/filter_sheet_state_widget.dart';
 import 'package:cravvy_cooking_app/modules/search/widgets/recipe_search_result_tile.dart';
 import 'package:cravvy_cooking_app/modules/search/widgets/coming_soon_tab_widget.dart';
 import 'package:shimmer/shimmer.dart';
@@ -17,6 +25,16 @@ class _SearchScreenState extends State<SearchScreen>
   final _searchCtrl = TextEditingController();
   final _ingredientCtrl = TextEditingController();
   final List<String> _addedIngredients = [];
+
+  // ── Filter state ────────────────────────────────────────────────────────────
+  String? _filterMealType; // null = all
+  int? _filterMaxCalories; // null = no limit
+  String? _filterDifficulty; // null = all
+
+  bool get _hasActiveFilter =>
+      _filterMealType != null ||
+      _filterMaxCalories != null ||
+      _filterDifficulty != null;
 
   static const _commonIngredients = [
     '🥚 Eggs',
@@ -71,6 +89,38 @@ class _SearchScreenState extends State<SearchScreen>
 
   void _doSearch(String query) {
     context.read<RecipeProvider>().search(query);
+  }
+
+  void _showFilterSheet() {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: AppColors.background,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+      ),
+      builder: (_) => FilterSheet(
+        selectedMealType: _filterMealType,
+        selectedMaxCal: _filterMaxCalories,
+        selectedDifficulty: _filterDifficulty,
+        onApply: (mealType, maxCal, difficulty) {
+          setState(() {
+            _filterMealType = mealType;
+            _filterMaxCalories = maxCal;
+            _filterDifficulty = difficulty;
+          });
+          // Re-search với filter mới
+          if (_searchCtrl.text.isNotEmpty) _doSearch(_searchCtrl.text);
+        },
+        onReset: () {
+          setState(() {
+            _filterMealType = null;
+            _filterMaxCalories = null;
+            _filterDifficulty = null;
+          });
+          if (_searchCtrl.text.isNotEmpty) _doSearch(_searchCtrl.text);
+        },
+      ),
+    );
   }
 
   @override
@@ -150,6 +200,11 @@ class _SearchScreenState extends State<SearchScreen>
                     onAdd: _addIngredient,
                     onRemove: _removeIngredient,
                     onSearchChanged: _doSearch,
+                    onFilterTap: _showFilterSheet,
+                    hasActiveFilter: _hasActiveFilter,
+                    filterMealType: _filterMealType,
+                    filterMaxCalories: _filterMaxCalories,
+                    filterDifficulty: _filterDifficulty,
                   ),
                   const ComingSoonTabWidget(
                     icon: '📷',
@@ -175,6 +230,11 @@ class _TypeTab extends StatelessWidget {
     required this.onAdd,
     required this.onRemove,
     required this.onSearchChanged,
+    required this.onFilterTap,
+    required this.hasActiveFilter,
+    this.filterMealType,
+    this.filterMaxCalories,
+    this.filterDifficulty,
   });
 
   final TextEditingController searchCtrl;
@@ -184,6 +244,11 @@ class _TypeTab extends StatelessWidget {
   final ValueChanged<String> onAdd;
   final ValueChanged<String> onRemove;
   final ValueChanged<String> onSearchChanged;
+  final VoidCallback onFilterTap;
+  final bool hasActiveFilter;
+  final String? filterMealType;
+  final int? filterMaxCalories;
+  final String? filterDifficulty;
 
   @override
   Widget build(BuildContext context) {
@@ -194,34 +259,83 @@ class _TypeTab extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Search bar
-              Container(
-                decoration: BoxDecoration(
-                  color: AppColors.surface,
-                  borderRadius: BorderRadius.circular(14),
-                  border: Border.all(color: AppColors.border),
-                ),
-                child: TextField(
-                  controller: searchCtrl,
-                  onChanged: onSearchChanged,
-                  decoration: InputDecoration(
-                    hintText: 'Search recipes...',
-                    hintStyle: AppTextStyles.s14.copyWith(
-                      color: AppColors.textHint,
-                    ),
-                    prefixIcon: const Icon(
-                      Icons.search_rounded,
-                      color: AppColors.textHint,
-                      size: 20,
-                    ),
-                    border: InputBorder.none,
-                    contentPadding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 12,
+              // Search bar + Filter button
+              Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: AppColors.surface,
+                        borderRadius: BorderRadius.circular(14),
+                        border: Border.all(color: AppColors.border),
+                      ),
+                      child: TextField(
+                        controller: searchCtrl,
+                        onChanged: onSearchChanged,
+                        decoration: InputDecoration(
+                          hintText: 'Search recipes...',
+                          hintStyle: AppTextStyles.s14.copyWith(
+                            color: AppColors.textHint,
+                          ),
+                          prefixIcon: const Icon(
+                            Icons.search_rounded,
+                            color: AppColors.textHint,
+                            size: 20,
+                          ),
+                          border: InputBorder.none,
+                          contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 12,
+                          ),
+                        ),
+                      ),
                     ),
                   ),
-                ),
+                  const SizedBox(width: 8),
+                  // Filter button
+                  GestureDetector(
+                    onTap: onFilterTap,
+                    child: Container(
+                      width: 48,
+                      height: 48,
+                      decoration: BoxDecoration(
+                        color: hasActiveFilter
+                            ? AppColors.primary
+                            : AppColors.surface,
+                        borderRadius: BorderRadius.circular(14),
+                        border: Border.all(
+                          color: hasActiveFilter
+                              ? AppColors.primary
+                              : AppColors.border,
+                        ),
+                      ),
+                      child: Icon(
+                        Icons.tune_rounded,
+                        color: hasActiveFilter
+                            ? Colors.white
+                            : AppColors.textSecondary,
+                        size: 20,
+                      ),
+                    ),
+                  ),
+                ],
               ),
+              // Active filter chips (hiển thị khi có filter đang bật)
+              if (hasActiveFilter) ...[
+                AppGap.h8,
+                Wrap(
+                  spacing: 6,
+                  runSpacing: 6,
+                  children: [
+                    if (filterMealType != null)
+                      FilterChipWidget(label: filterMealType!),
+                    if (filterMaxCalories != null)
+                      FilterChipWidget(label: '< $filterMaxCalories cal'),
+                    if (filterDifficulty != null)
+                      FilterChipWidget(label: filterDifficulty!),
+                  ],
+                ),
+              ],
               AppGap.h16,
 
               // Ingredient input
@@ -417,28 +531,56 @@ class _TypeTab extends StatelessWidget {
                       ),
                     ),
                   )
-                else if (provider.searchResults.isEmpty)
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    child: Center(
-                      child: Column(
-                        children: [
-                          const Text('🔍', style: TextStyle(fontSize: 32)),
-                          AppGap.h8,
-                          Text(
-                            'Không tìm thấy món phù hợp',
-                            style: AppTextStyles.s14.copyWith(
-                              color: AppColors.textSecondary,
+                else ...[
+                  // Apply client-side filter lên search results
+                  Builder(
+                    builder: (_) {
+                      var results = provider.searchResults;
+                      if (filterMealType != null) {
+                        results = results
+                            .where((r) => r.mealType == filterMealType)
+                            .toList();
+                      }
+                      if (filterMaxCalories != null) {
+                        results = results
+                            .where((r) => r.calories <= filterMaxCalories!)
+                            .toList();
+                      }
+                      if (filterDifficulty != null) {
+                        results = results
+                            .where((r) => r.difficulty == filterDifficulty)
+                            .toList();
+                      }
+                      if (results.isEmpty) {
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 16),
+                          child: Center(
+                            child: Column(
+                              children: [
+                                const Text(
+                                  '🔍',
+                                  style: TextStyle(fontSize: 32),
+                                ),
+                                AppGap.h8,
+                                Text(
+                                  'Không tìm thấy món phù hợp',
+                                  style: AppTextStyles.s14.copyWith(
+                                    color: AppColors.textSecondary,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                        ],
-                      ),
-                    ),
-                  )
-                else
-                  ...provider.searchResults.map(
-                    (r) => RecipeSearchResultTile(recipe: r),
+                        );
+                      }
+                      return Column(
+                        children: results
+                            .map((r) => RecipeSearchResultTile(recipe: r))
+                            .toList(),
+                      );
+                    },
                   ),
+                ],
               ],
 
               const SizedBox(height: 80),

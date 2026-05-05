@@ -2,6 +2,7 @@
 
 import 'package:flutter/foundation.dart';
 import 'package:cravvy_cooking_app/data/models/recipe.dart';
+import 'package:cravvy_cooking_app/data/models/user_model.dart';
 import 'package:cravvy_cooking_app/data/services/recipe_service.dart';
 
 enum RecipeStatus { initial, loading, loaded, error }
@@ -10,6 +11,7 @@ class RecipeProvider extends ChangeNotifier {
   RecipeStatus _status = RecipeStatus.initial;
   List<Recipe> _allRecipes = [];
   List<Recipe> _searchResults = [];
+  List<Recipe> _suggestedRecipes = []; // recipes phù hợp với user profile
   String? _errorMessage;
   String _searchQuery = '';
 
@@ -23,8 +25,9 @@ class RecipeProvider extends ChangeNotifier {
 
   List<Recipe> get allRecipes => _allRecipes;
   List<Recipe> get searchResults => _searchResults;
+  List<Recipe> get suggestedRecipes => _suggestedRecipes;
 
-  // Phân loại để dùng ở Home (hiển thị featured theo từng bữa)
+  // Phân loại theo meal type
   List<Recipe> get breakfastRecipes =>
       _allRecipes.where((r) => r.mealType == 'breakfast').toList();
   List<Recipe> get lunchRecipes =>
@@ -36,7 +39,7 @@ class RecipeProvider extends ChangeNotifier {
 
   // ─── Load tất cả recipes khi app start ───────────────────────────────────
   Future<void> loadAll() async {
-    if (_status == RecipeStatus.loaded) return; // đã load rồi → bỏ qua
+    if (_status == RecipeStatus.loaded) return;
 
     _status = RecipeStatus.loading;
     _errorMessage = null;
@@ -50,6 +53,84 @@ class RecipeProvider extends ChangeNotifier {
       _status = RecipeStatus.error;
     }
     notifyListeners();
+  }
+
+  // ─── Load recipes phù hợp với user (dùng cho "For You" section) ──────────
+  Future<void> loadForUser(UserModel? user) async {
+    if (user == null) return;
+
+    // Nếu allRecipes chưa có thì load trước
+    if (_allRecipes.isEmpty) await loadAll();
+
+    // Filter local theo goal và calorie target
+    final calorieMax = _calorieMaxForGoal(user.goal);
+    final minProtein = user.goal == 'build-muscle' ? 20 : 0;
+
+    _suggestedRecipes =
+        _allRecipes.where((r) {
+            if (r.calories > calorieMax) return false;
+            if (r.protein < minProtein) return false;
+            return true;
+          }).toList()
+          // Sort: món khớp goal lên trước
+          ..sort(
+            (a, b) => _scoreRecipe(
+              b,
+              user.goal,
+            ).compareTo(_scoreRecipe(a, user.goal)),
+          );
+
+    notifyListeners();
+  }
+
+  int _calorieMaxForGoal(String? goal) {
+    switch (goal) {
+      case 'lose-weight':
+        return 450;
+      case 'build-muscle':
+        return 650;
+      default:
+        return 600;
+    }
+  }
+
+  int _scoreRecipe(Recipe r, String? goal) {
+    int score = 0;
+    switch (goal) {
+      case 'lose-weight':
+        if (r.tags.any((t) => t.toLowerCase().contains('low carb'))) score += 2;
+        if (r.calories < 350) score += 2;
+        break;
+      case 'build-muscle':
+        if (r.protein >= 30) score += 3;
+        if (r.tags.any((t) => t.toLowerCase().contains('high protein')))
+          score += 2;
+        break;
+      case 'maintain':
+      case 'health':
+        if (r.tags.any(
+          (t) =>
+              t.toLowerCase().contains('vegan') ||
+              t.toLowerCase().contains('fiber'),
+        ))
+          score += 1;
+        break;
+    }
+    return score;
+  }
+
+  // ─── Filter nâng cao (dùng cho Search screen) ────────────────────────────
+  List<Recipe> filterRecipes({
+    String? mealType, // null = all
+    int? maxCalories, // null = no limit
+    String? difficulty, // null = all
+  }) {
+    return _allRecipes.where((r) {
+      if (mealType != null && r.mealType != mealType) return false;
+      if (maxCalories != null && r.calories > maxCalories) return false;
+      if (difficulty != null && r.difficulty != difficulty) return false;
+      return true;
+    }).toList();
   }
 
   // ─── Tìm kiếm ─────────────────────────────────────────────────────────────

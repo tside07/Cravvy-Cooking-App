@@ -1,41 +1,58 @@
 import 'package:flutter/foundation.dart';
-import '../../../data/models/meal.dart';
+import 'package:cravvy_cooking_app/data/models/meal.dart';
+import 'package:cravvy_cooking_app/data/models/user_model.dart';
+import 'package:cravvy_cooking_app/core/utils/nutrition_calculator.dart';
 
 class MealPlanProvider extends ChangeNotifier {
   late List<DayPlan> _weekPlan;
   int _selectedDayIndex;
-  static const int _targetCalories = 2200;
-  static const int _targetProtein = 150;
-  static const int _targetCarbs = 220;
-  static const int _targetFat = 70;
+  NutritionTarget _target;
 
-  MealPlanProvider() : _selectedDayIndex = _todayIndex() {
+  MealPlanProvider()
+    : _selectedDayIndex = _todayIndex(),
+      _target = NutritionTarget.defaultTarget {
     _weekPlan = MealData.generateWeekPlan();
   }
 
   static int _todayIndex() {
     final today = DateTime.now();
-    return today.weekday - 1;
+    return today.weekday - 1; // Mon=0, Sun=6
+  }
+
+  void updateFromUser(UserModel? user) {
+    if (user == null) {
+      _target = NutritionTarget.defaultTarget;
+    } else {
+      _target = NutritionCalculator.calculate(
+        age: user.age,
+        gender: user.gender,
+        weightKg: user.weightKg,
+        heightCm: user.heightCm,
+        goal: user.goal,
+      );
+    }
+    notifyListeners();
   }
 
   List<DayPlan> get weekPlan => _weekPlan;
   int get selectedDayIndex => _selectedDayIndex;
   DayPlan get selectedDay => _weekPlan[_selectedDayIndex];
 
-  int get targetCalories => _targetCalories;
-  int get targetProtein => _targetProtein;
-  int get targetCarbs => _targetCarbs;
-  int get targetFat => _targetFat;
+  int get targetCalories => _target.calories;
+  int get targetProtein => _target.protein;
+  int get targetCarbs => _target.carbs;
+  int get targetFat => _target.fat;
 
   double get calorieProgress =>
-      (selectedDay.totalCalories / _targetCalories).clamp(0.0, 1.0);
+      (selectedDay.totalCalories / _target.calories).clamp(0.0, 1.0);
   double get proteinProgress =>
-      (selectedDay.totalProtein / _targetProtein).clamp(0.0, 1.0);
+      (selectedDay.totalProtein / _target.protein).clamp(0.0, 1.0);
   double get carbsProgress =>
-      (selectedDay.totalCarbs / _targetCarbs).clamp(0.0, 1.0);
-  double get fatProgress => (selectedDay.totalFat / _targetFat).clamp(0.0, 1.0);
+      (selectedDay.totalCarbs / _target.carbs).clamp(0.0, 1.0);
+  double get fatProgress =>
+      (selectedDay.totalFat / _target.fat).clamp(0.0, 1.0);
 
-  int get remainingCalories => _targetCalories - selectedDay.totalCalories;
+  int get remainingCalories => _target.calories - selectedDay.totalCalories;
 
   void selectDay(int index) {
     _selectedDayIndex = index;

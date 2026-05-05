@@ -32,11 +32,24 @@ void main() async {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => AuthProvider()),
-        ChangeNotifierProvider(create: (_) => OnboardingProvider()),
         ChangeNotifierProvider(create: (_) => MealPlanProvider()),
+        ChangeNotifierProvider(create: (_) => OnboardingProvider()),
         ChangeNotifierProvider(create: (_) => ProfileProvider()),
         ChangeNotifierProvider(create: (_) => RecipeProvider()),
+        // AuthProvider được tạo SAU MealPlanProvider để có thể link ngay
+        ChangeNotifierProxyProvider<MealPlanProvider, AuthProvider>(
+          create: (ctx) {
+            final auth = AuthProvider();
+            // Link ngay khi tạo — MealPlanProvider đã sẵn sàng
+            auth.linkMealPlanProvider(ctx.read<MealPlanProvider>());
+            return auth;
+          },
+          update: (ctx, mealPlan, auth) {
+            // Re-link nếu MealPlanProvider rebuild (hiếm xảy ra)
+            auth!.linkMealPlanProvider(mealPlan);
+            return auth;
+          },
+        ),
       ],
       child: const CravvyApp(),
     ),
