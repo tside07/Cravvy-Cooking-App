@@ -1,5 +1,6 @@
 import 'package:cravvy_cooking_app/init.dart';
 import 'package:cravvy_cooking_app/data/models/meal.dart';
+import 'package:cravvy_cooking_app/data/models/meal_data.dart';
 import 'package:cravvy_cooking_app/modules/meal_plan/provider/meal_plan_provider.dart';
 import 'package:cravvy_cooking_app/modules/meal_plan/widgets/alternative_tile_widget.dart';
 
@@ -46,8 +47,9 @@ class MealSwapSheet extends StatelessWidget {
                       ),
                       Text(
                         'Choose a replacement for ${meal.name}',
-                        style: AppTextStyles.s14
-                            .copyWith(color: AppColors.textSecondary),
+                        style: AppTextStyles.s14.copyWith(
+                          color: AppColors.textSecondary,
+                        ),
                       ),
                     ],
                   ),
@@ -72,8 +74,11 @@ class MealSwapSheet extends StatelessWidget {
             ),
             child: Row(
               children: [
-                Icon(Icons.info_outline_rounded,
-                    size: 16, color: meal.type.color),
+                Icon(
+                  Icons.info_outline_rounded,
+                  size: 16,
+                  color: meal.type.color,
+                ),
                 AppGap.w8,
                 Expanded(
                   child: Text(
@@ -102,9 +107,9 @@ class MealSwapSheet extends StatelessWidget {
                 originalCalories: meal.calories,
                 onSelect: () {
                   context.read<MealPlanProvider>().swapMeal(
-                        meal.id,
-                        alternatives[i],
-                      );
+                    meal.id,
+                    alternatives[i],
+                  );
                   Navigator.pop(context);
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(

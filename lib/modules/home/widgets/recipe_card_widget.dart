@@ -1,6 +1,6 @@
 import 'package:cravvy_cooking_app/init.dart';
-import 'package:cravvy_cooking_app/data/models/meal.dart';
 import 'package:cravvy_cooking_app/data/models/recipe.dart';
+import 'package:cravvy_cooking_app/data/models/meal_type_helper.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class RecipeCardWidget extends StatelessWidget {
@@ -10,10 +10,12 @@ class RecipeCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final meal = recipe.toMeal();
+    final emoji = MealTypeHelper.emoji(recipe.mealType);
+    final lightColor = MealTypeHelper.lightColor(recipe.mealType);
+    final typeColor = MealTypeHelper.color(recipe.mealType);
 
     return GestureDetector(
-      onTap: () => context.push(AppRouter.mealDetail, extra: meal),
+      onTap: () => context.push(AppRouter.mealDetail, extra: recipe.toMeal()),
       child: Container(
         width: 160,
         margin: const EdgeInsets.only(right: 12),
@@ -26,7 +28,6 @@ class RecipeCardWidget extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // ── Image ────────────────────────────────────────────────────────
             SizedBox(
               height: 110,
               child: Stack(
@@ -37,35 +38,33 @@ class RecipeCardWidget extends StatelessWidget {
                           imageUrl: recipe.imageUrl!,
                           fit: BoxFit.cover,
                           placeholder: (_, __) => ColoredBox(
-                            color: meal.type.lightColor,
+                            color: lightColor,
                             child: Center(
                               child: Text(
-                                meal.type.emoji,
+                                emoji,
                                 style: AppTextStyles.s20.copyWith(fontSize: 32),
                               ),
                             ),
                           ),
                           errorWidget: (_, __, ___) => ColoredBox(
-                            color: meal.type.lightColor,
+                            color: lightColor,
                             child: Center(
                               child: Text(
-                                meal.type.emoji,
+                                emoji,
                                 style: AppTextStyles.s20.copyWith(fontSize: 32),
                               ),
                             ),
                           ),
                         )
                       : ColoredBox(
-                          color: meal.type.lightColor,
+                          color: lightColor,
                           child: Center(
                             child: Text(
-                              meal.type.emoji,
+                              emoji,
                               style: AppTextStyles.s20.copyWith(fontSize: 32),
                             ),
                           ),
                         ),
-
-                  // Gradient overlay
                   const DecoratedBox(
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
@@ -75,8 +74,6 @@ class RecipeCardWidget extends StatelessWidget {
                       ),
                     ),
                   ),
-
-                  // Meal type badge
                   Positioned(
                     top: 8,
                     left: 8,
@@ -86,14 +83,12 @@ class RecipeCardWidget extends StatelessWidget {
                         vertical: 4,
                       ),
                       decoration: BoxDecoration(
-                        color: meal.type.color,
+                        color: typeColor,
                         borderRadius: BorderRadius.circular(8),
                       ),
-                      child: Text(meal.type.emoji, style: AppTextStyles.s12),
+                      child: Text(emoji, style: AppTextStyles.s12),
                     ),
                   ),
-
-                  // Difficulty badge (bottom right)
                   Positioned(
                     bottom: 8,
                     right: 8,
@@ -119,8 +114,6 @@ class RecipeCardWidget extends StatelessWidget {
                 ],
               ),
             ),
-
-            // ── Info ─────────────────────────────────────────────────────────
             Padding(
               padding: const EdgeInsets.all(10),
               child: Column(

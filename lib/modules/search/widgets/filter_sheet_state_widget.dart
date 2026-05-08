@@ -20,10 +20,10 @@ class FilterSheet extends StatefulWidget {
   final VoidCallback onReset;
 
   @override
-  State<FilterSheet> createState() => FilterSheetStateWidget();
+  State<FilterSheet> createState() => _FilterSheetState();
 }
 
-class FilterSheetStateWidget extends State<FilterSheet> {
+class _FilterSheetState extends State<FilterSheet> {
   String? _mealType;
   int? _maxCal;
   String? _difficulty;

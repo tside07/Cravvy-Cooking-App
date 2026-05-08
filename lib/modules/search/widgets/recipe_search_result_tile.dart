@@ -1,6 +1,6 @@
 import 'package:cravvy_cooking_app/init.dart';
-import 'package:cravvy_cooking_app/data/models/meal.dart';
 import 'package:cravvy_cooking_app/data/models/recipe.dart';
+import 'package:cravvy_cooking_app/data/models/meal_type_helper.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class RecipeSearchResultTile extends StatelessWidget {
@@ -10,10 +10,11 @@ class RecipeSearchResultTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final meal = recipe.toMeal();
+    final emoji = MealTypeHelper.emoji(recipe.mealType);
+    final lightColor = MealTypeHelper.lightColor(recipe.mealType);
 
     return GestureDetector(
-      onTap: () => context.push(AppRouter.mealDetail, extra: meal),
+      onTap: () => context.push(AppRouter.mealDetail, extra: recipe.toMeal()),
       child: Container(
         margin: const EdgeInsets.only(bottom: 10),
         decoration: BoxDecoration(
@@ -24,7 +25,6 @@ class RecipeSearchResultTile extends StatelessWidget {
         clipBehavior: Clip.hardEdge,
         child: Row(
           children: [
-            // ── Thumbnail ───────────────────────────────────────────────────
             SizedBox(
               width: 80,
               height: 80,
@@ -33,42 +33,22 @@ class RecipeSearchResultTile extends StatelessWidget {
                       imageUrl: recipe.imageUrl!,
                       fit: BoxFit.cover,
                       placeholder: (_, __) => ColoredBox(
-                        color: meal.type.lightColor,
-                        child: Center(
-                          child: Text(
-                            meal.type.emoji,
-                            style: const TextStyle(fontSize: 28),
-                          ),
-                        ),
+                        color: lightColor,
+                        child: Center(child: Text(emoji, style: const TextStyle(fontSize: 28))),
                       ),
                       errorWidget: (_, __, ___) => ColoredBox(
-                        color: meal.type.lightColor,
-                        child: Center(
-                          child: Text(
-                            meal.type.emoji,
-                            style: const TextStyle(fontSize: 28),
-                          ),
-                        ),
+                        color: lightColor,
+                        child: Center(child: Text(emoji, style: const TextStyle(fontSize: 28))),
                       ),
                     )
                   : ColoredBox(
-                      color: meal.type.lightColor,
-                      child: Center(
-                        child: Text(
-                          meal.type.emoji,
-                          style: const TextStyle(fontSize: 28),
-                        ),
-                      ),
+                      color: lightColor,
+                      child: Center(child: Text(emoji, style: const TextStyle(fontSize: 28))),
                     ),
             ),
-
-            // ── Info ─────────────────────────────────────────────────────────
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 12,
-                  vertical: 10,
-                ),
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -84,11 +64,7 @@ class RecipeSearchResultTile extends StatelessWidget {
                     AppGap.h4,
                     Row(
                       children: [
-                        const Icon(
-                          Icons.local_fire_department_rounded,
-                          size: 13,
-                          color: AppColors.primary,
-                        ),
+                        const Icon(Icons.local_fire_department_rounded, size: 13, color: AppColors.primary),
                         const SizedBox(width: 2),
                         Text(
                           '${recipe.calories} cal',
@@ -98,31 +74,21 @@ class RecipeSearchResultTile extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(width: 8),
-                        const Icon(
-                          Icons.timer_outlined,
-                          size: 13,
-                          color: AppColors.textSecondary,
-                        ),
+                        const Icon(Icons.timer_outlined, size: 13, color: AppColors.textSecondary),
                         const SizedBox(width: 2),
                         Text(
                           '${recipe.prepTime} min',
-                          style: AppTextStyles.s12.copyWith(
-                            color: AppColors.textSecondary,
-                          ),
+                          style: AppTextStyles.s12.copyWith(color: AppColors.textSecondary),
                         ),
                       ],
                     ),
                     AppGap.h6,
-                    // Tags row
                     if (recipe.tags.isNotEmpty)
                       Wrap(
                         spacing: 4,
                         children: recipe.tags.take(2).map((tag) {
                           return Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 6,
-                              vertical: 2,
-                            ),
+                            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                             decoration: BoxDecoration(
                               color: AppColors.primaryLight,
                               borderRadius: BorderRadius.circular(6),
@@ -142,15 +108,9 @@ class RecipeSearchResultTile extends StatelessWidget {
                 ),
               ),
             ),
-
-            // ── Arrow ───────────────────────────────────────────────────────
-            Padding(
-              padding: const EdgeInsets.only(right: 12),
-              child: const Icon(
-                Icons.chevron_right_rounded,
-                color: AppColors.textHint,
-                size: 22,
-              ),
+            const Padding(
+              padding: EdgeInsets.only(right: 12),
+              child: Icon(Icons.chevron_right_rounded, color: AppColors.textHint, size: 22),
             ),
           ],
         ),

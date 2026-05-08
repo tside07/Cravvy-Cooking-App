@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:cravvy_cooking_app/data/models/meal.dart';
+import 'package:cravvy_cooking_app/data/models/meal_data.dart';
 import 'package:cravvy_cooking_app/data/models/user_model.dart';
 import 'package:cravvy_cooking_app/core/utils/nutrition_calculator.dart';
 
