@@ -7,20 +7,20 @@ class MealCardWidget extends StatelessWidget {
     required this.meal,
     required this.onToggle,
     required this.onSwap,
+    required this.onRemove,
   });
 
   final Meal meal;
   final VoidCallback onToggle;
   final VoidCallback onSwap;
+  final VoidCallback onRemove;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => context.push(AppRouter.mealDetail, extra: meal),
       child: Container(
-        margin: const EdgeInsets.only(
-          bottom: 14,
-        ), //TODO: no AppPad equivalent for bottom: 14
+        margin: const EdgeInsets.only(bottom: 14),
         decoration: BoxDecoration(
           color: AppColors.surface,
           borderRadius: AppBorderRadius.a20,
@@ -32,19 +32,19 @@ class MealCardWidget extends StatelessWidget {
         ),
         child: Column(
           children: [
-            // Meal type header
+            // Header
             Container(
               padding: const EdgeInsets.only(
                 left: 16,
                 top: 12,
                 right: 12,
                 bottom: 12,
-              ), //TODO: no AppPad equivalent for this multi-directional EdgeInsets.only
+              ),
               decoration: BoxDecoration(
                 color: meal.type.lightColor,
                 borderRadius: const BorderRadius.vertical(
                   top: Radius.circular(20),
-                ), //TODO: no AppBorderRadius equivalent for top-only r20
+                ),
               ),
               child: Row(
                 children: [
@@ -59,6 +59,7 @@ class MealCardWidget extends StatelessWidget {
                     ),
                   ),
                   const Spacer(),
+                  // Swap
                   GestureDetector(
                     onTap: onSwap,
                     child: Container(
@@ -87,11 +88,29 @@ class MealCardWidget extends StatelessWidget {
                       ),
                     ),
                   ),
+                  AppGap.w8,
+                  // Remove
+                  GestureDetector(
+                    onTap: () => _confirmRemove(context),
+                    child: Container(
+                      width: 28,
+                      height: 28,
+                      decoration: BoxDecoration(
+                        color: AppColors.errorLight,
+                        borderRadius: AppBorderRadius.a8,
+                      ),
+                      child: const Icon(
+                        Icons.delete_outline_rounded,
+                        size: 16,
+                        color: AppColors.error,
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
 
-            // Meal content
+            // Content
             Padding(
               padding: AppPad.a14,
               child: Row(
@@ -117,7 +136,6 @@ class MealCardWidget extends StatelessWidget {
                     ),
                   ),
                   AppGap.w16,
-
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -169,8 +187,8 @@ class MealCardWidget extends StatelessWidget {
                       ],
                     ),
                   ),
-
                   AppGap.w8,
+                  // Log toggle
                   GestureDetector(
                     onTap: onToggle,
                     child: AnimatedContainer(
@@ -192,7 +210,9 @@ class MealCardWidget extends StatelessWidget {
                       child: Icon(
                         Icons.check_rounded,
                         size: 18,
-                        color: meal.isLogged ? Colors.white : AppColors.textHint,
+                        color: meal.isLogged
+                            ? Colors.white
+                            : AppColors.textHint,
                       ),
                     ),
                   ),
@@ -204,7 +224,119 @@ class MealCardWidget extends StatelessWidget {
       ),
     );
   }
+
+  void _confirmRemove(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (_) => AlertDialog(
+        backgroundColor: AppColors.surface,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        title: Text(
+          'Remove meal?',
+          style: AppTextStyles.s16.copyWith(fontWeight: FontWeight.w700),
+        ),
+        content: Text(
+          'Remove ${meal.name} from your plan?',
+          style: AppTextStyles.s14.copyWith(color: AppColors.textSecondary),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text(
+              'Cancel',
+              style: AppTextStyles.s14.copyWith(color: AppColors.textSecondary),
+            ),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+              onRemove();
+            },
+            child: Text(
+              'Remove',
+              style: AppTextStyles.s14.copyWith(
+                color: AppColors.error,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }
+
+// ─── Empty slot ───────────────────────────────────────────────────────────────
+
+class EmptyMealSlotCard extends StatelessWidget {
+  const EmptyMealSlotCard({
+    super.key,
+    required this.mealType,
+    required this.onAdd,
+  });
+
+  final MealType mealType;
+  final VoidCallback onAdd;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onAdd,
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 14),
+        padding: const EdgeInsets.symmetric(vertical: 20),
+        decoration: BoxDecoration(
+          color: AppColors.surface,
+          borderRadius: AppBorderRadius.a20,
+          border: Border.all(color: AppColors.border),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              width: 32,
+              height: 32,
+              decoration: BoxDecoration(
+                color: mealType.lightColor,
+                shape: BoxShape.circle,
+              ),
+              child: Center(
+                child: Text(
+                  mealType.emoji,
+                  style: const TextStyle(fontSize: 16),
+                ),
+              ),
+            ),
+            AppGap.w12,
+            Text(
+              'Add ${mealType.label}',
+              style: AppTextStyles.s14.copyWith(
+                fontWeight: FontWeight.w600,
+                color: AppColors.textSecondary,
+              ),
+            ),
+            AppGap.w8,
+            Container(
+              width: 24,
+              height: 24,
+              decoration: const BoxDecoration(
+                color: AppColors.primaryLight,
+                shape: BoxShape.circle,
+              ),
+              child: const Icon(
+                Icons.add_rounded,
+                size: 16,
+                color: AppColors.primary,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// ─── Shared sub-widgets ───────────────────────────────────────────────────────
 
 class _InfoChip extends StatelessWidget {
   const _InfoChip({
@@ -212,49 +344,43 @@ class _InfoChip extends StatelessWidget {
     required this.label,
     required this.color,
   });
-
   final IconData icon;
   final String label;
   final Color color;
 
   @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Icon(icon, size: 14, color: color),
-        AppGap.w4,
-        Text(
-          label,
-          style: AppTextStyles.s12.copyWith(
-            fontWeight: FontWeight.w600,
-            color: color,
-          ),
+  Widget build(BuildContext context) => Row(
+    mainAxisSize: MainAxisSize.min,
+    children: [
+      Icon(icon, size: 14, color: color),
+      AppGap.w4,
+      Text(
+        label,
+        style: AppTextStyles.s12.copyWith(
+          fontWeight: FontWeight.w600,
+          color: color,
         ),
-      ],
-    );
-  }
+      ),
+    ],
+  );
 }
 
 class _MacroPill extends StatelessWidget {
   const _MacroPill(this.label, this.bg, this.textColor);
-
   final String label;
   final Color bg;
   final Color textColor;
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: AppPad.h8v4,
-      decoration: BoxDecoration(color: bg, borderRadius: AppBorderRadius.a20),
-      child: Text(
-        label,
-        style: AppTextStyles.s10.copyWith(
-          fontWeight: FontWeight.w700,
-          color: textColor,
-        ),
+  Widget build(BuildContext context) => Container(
+    padding: AppPad.h8v4,
+    decoration: BoxDecoration(color: bg, borderRadius: AppBorderRadius.a20),
+    child: Text(
+      label,
+      style: AppTextStyles.s10.copyWith(
+        fontWeight: FontWeight.w700,
+        color: textColor,
       ),
-    );
-  }
+    ),
+  );
 }

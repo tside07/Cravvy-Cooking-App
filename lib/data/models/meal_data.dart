@@ -1,8 +1,4 @@
-// lib/data/models/meal_data.dart
-//
-// Sample/mock data dùng cho meal plan trước khi AI thật (Tuần 5).
-// Tách ra khỏi meal.dart để model file sạch — khi xóa mock data
-// ở Tuần 5 không ảnh hưởng đến Meal/DayPlan models.
+// Mock data — xóa file này ở Tuần 5 khi AI thay thế.
 
 import 'package:cravvy_cooking_app/data/models/meal.dart';
 
@@ -128,53 +124,53 @@ class MealData {
   }
 
   static List<Meal> getAlternatives(MealType type) => [
-        Meal(
-          id: 'alt1',
-          name: 'Oatmeal with Berries',
-          type: type,
-          calories: 310,
-          protein: 12,
-          carbs: 52,
-          fat: 6,
-          prepTime: 10,
-          imageUrl: '${_base}1517673132405-a56a62b18caf?w=400&q=80',
-          tags: ['High Fiber', 'Quick'],
-        ),
-        Meal(
-          id: 'alt2',
-          name: 'Egg White Omelette',
-          type: type,
-          calories: 280,
-          protein: 28,
-          carbs: 8,
-          fat: 12,
-          prepTime: 12,
-          imageUrl: '${_base}1551248429-40975aa4de74?w=400&q=80',
-          tags: ['High Protein', 'Low Carb'],
-        ),
-        Meal(
-          id: 'alt3',
-          name: 'Banana Pancakes',
-          type: type,
-          calories: 390,
-          protein: 14,
-          carbs: 62,
-          fat: 10,
-          prepTime: 20,
-          imageUrl: '${_base}1567620905732-2d1ec7ab7445?w=400&q=80',
-          tags: ['Gluten-Free'],
-        ),
-        Meal(
-          id: 'alt4',
-          name: 'Chia Pudding Bowl',
-          type: type,
-          calories: 340,
-          protein: 10,
-          carbs: 44,
-          fat: 14,
-          prepTime: 5,
-          imageUrl: '${_base}1594736797933-d0501ba2fe65?w=400&q=80',
-          tags: ['Vegan', 'Quick'],
-        ),
-      ];
+    Meal(
+      id: 'alt1',
+      name: 'Oatmeal with Berries',
+      type: type,
+      calories: 310,
+      protein: 12,
+      carbs: 52,
+      fat: 6,
+      prepTime: 10,
+      imageUrl: '${_base}1517673132405-a56a62b18caf?w=400&q=80',
+      tags: ['High Fiber', 'Quick'],
+    ),
+    Meal(
+      id: 'alt2',
+      name: 'Egg White Omelette',
+      type: type,
+      calories: 280,
+      protein: 28,
+      carbs: 8,
+      fat: 12,
+      prepTime: 12,
+      imageUrl: '${_base}1551248429-40975aa4de74?w=400&q=80',
+      tags: ['High Protein', 'Low Carb'],
+    ),
+    Meal(
+      id: 'alt3',
+      name: 'Banana Pancakes',
+      type: type,
+      calories: 390,
+      protein: 14,
+      carbs: 62,
+      fat: 10,
+      prepTime: 20,
+      imageUrl: '${_base}1567620905732-2d1ec7ab7445?w=400&q=80',
+      tags: ['Gluten-Free'],
+    ),
+    Meal(
+      id: 'alt4',
+      name: 'Chia Pudding Bowl',
+      type: type,
+      calories: 340,
+      protein: 10,
+      carbs: 44,
+      fat: 14,
+      prepTime: 5,
+      imageUrl: '${_base}1594736797933-d0501ba2fe65?w=400&q=80',
+      tags: ['Vegan', 'Quick'],
+    ),
+  ];
 }

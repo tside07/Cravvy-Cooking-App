@@ -1,7 +1,4 @@
-// lib/data/models/meal_type_helper.dart
-//
-// Helper để lấy emoji/color từ mealType string trực tiếp,
-// tránh phải convert Recipe → Meal chỉ để dùng MealTypeExt.
+// Helper để lấy emoji/color từ mealType string — tránh toMeal() trong widgets.
 
 import 'package:flutter/material.dart';
 import 'package:cravvy_cooking_app/core/theme/app_colors.dart';

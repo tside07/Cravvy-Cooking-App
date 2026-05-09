@@ -37,10 +37,17 @@ class RecipeService {
 
   // ─── Lấy 1 recipe theo ID ─────────────────────────────────────────────────
   static Future<Recipe?> fetchById(String id) async {
-    final data = await _client.from(_table).select().eq('id', id).maybeSingle();
-
-    if (data == null) return null;
-    return Recipe.fromJson(data);
+    try {
+      final data = await SupabaseService.client
+          .from('recipes')
+          .select()
+          .eq('id', id)
+          .eq('is_active', true)
+          .single();
+      return Recipe.fromJson(data);
+    } catch (_) {
+      return null;
+    }
   }
 
   // ─── Tìm kiếm theo tên ────────────────────────────────────────────────────
@@ -95,4 +102,6 @@ class RecipeService {
     final data = await query.order('calories').limit(limit);
     return (data as List).map((e) => Recipe.fromJson(e)).toList();
   }
+
+
 }

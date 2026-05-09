@@ -57,6 +57,8 @@ extension MealTypeExt on MealType {
   }
 }
 
+// ─── Meal model ───────────────────────────────────────────────────────────────
+
 class Meal {
   final String id;
   final String name;
@@ -69,7 +71,7 @@ class Meal {
   final String imageUrl;
   final bool isLogged;
   final List<String> tags;
-  final List<String> steps; // từ Recipe.steps — TEXT[]
+  final List<String> steps;
 
   const Meal({
     required this.id,
@@ -86,21 +88,36 @@ class Meal {
     this.steps = const [],
   });
 
-  Meal copyWith({bool? isLogged}) => Meal(
-    id: id,
-    name: name,
-    type: type,
-    calories: calories,
-    protein: protein,
-    carbs: carbs,
-    fat: fat,
-    prepTime: prepTime,
-    imageUrl: imageUrl,
+  Meal copyWith({
+    String? id,
+    String? name,
+    MealType? type,
+    int? calories,
+    int? protein,
+    int? carbs,
+    int? fat,
+    int? prepTime,
+    String? imageUrl,
+    bool? isLogged,
+    List<String>? tags,
+    List<String>? steps,
+  }) => Meal(
+    id: id ?? this.id,
+    name: name ?? this.name,
+    type: type ?? this.type,
+    calories: calories ?? this.calories,
+    protein: protein ?? this.protein,
+    carbs: carbs ?? this.carbs,
+    fat: fat ?? this.fat,
+    prepTime: prepTime ?? this.prepTime,
+    imageUrl: imageUrl ?? this.imageUrl,
     isLogged: isLogged ?? this.isLogged,
-    tags: tags,
-    steps: steps,
+    tags: tags ?? this.tags,
+    steps: steps ?? this.steps,
   );
 }
+
+// ─── DayPlan ──────────────────────────────────────────────────────────────────
 
 class DayPlan {
   final DateTime date;
@@ -108,12 +125,12 @@ class DayPlan {
 
   const DayPlan({required this.date, required this.meals});
 
-  int get totalCalories => meals.fold(0, (sum, m) => sum + m.calories);
-  int get totalProtein => meals.fold(0, (sum, m) => sum + m.protein);
-  int get totalCarbs => meals.fold(0, (sum, m) => sum + m.carbs);
-  int get totalFat => meals.fold(0, (sum, m) => sum + m.fat);
+  int get totalCalories => meals.fold(0, (s, m) => s + m.calories);
+  int get totalProtein => meals.fold(0, (s, m) => s + m.protein);
+  int get totalCarbs => meals.fold(0, (s, m) => s + m.carbs);
+  int get totalFat => meals.fold(0, (s, m) => s + m.fat);
   int get loggedCount => meals.where((m) => m.isLogged).length;
-  bool get isComplete => loggedCount == meals.length;
+  bool get isComplete => meals.isNotEmpty && loggedCount == meals.length;
 
   DayPlan copyWith({List<Meal>? meals}) =>
       DayPlan(date: date, meals: meals ?? this.meals);
