@@ -11,23 +11,31 @@ class WeekStripWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<MealPlanProvider>(
       builder: (context, provider, _) {
+        // Khi weekPlan chưa load xong — hiện skeleton với ngày tháng đúng
+        // nhưng không đọc weekPlan[i] để tránh RangeError
+        final weekStart = _currentWeekStart();
+
         return Container(
           height: 90,
           margin: const EdgeInsets.fromLTRB(16, 16, 16, 0),
           child: Row(
             children: List.generate(7, (i) {
-              final plan = provider.weekPlan[i];
+              final date = weekStart.add(Duration(days: i));
               final isSelected = provider.selectedDayIndex == i;
               final isToday = i == DateTime.now().weekday - 1;
-              final hasAll = plan.isComplete;
-              final hasSome = plan.loggedCount > 0;
+
+              // Chỉ đọc weekPlan[i] khi đã loaded và đủ 7 ngày
+              final hasPlan = provider.weekPlan.length == 7;
+              final plan = hasPlan ? provider.weekPlan[i] : null;
+              final hasAll = plan?.isComplete ?? false;
+              final hasSome = (plan?.loggedCount ?? 0) > 0;
 
               return Expanded(
                 child: GestureDetector(
                   onTap: () => provider.selectDay(i),
                   child: AnimatedContainer(
                     duration: const Duration(milliseconds: 250),
-                    margin: const EdgeInsets.symmetric(horizontal: 3), //TODO: no AppPad h3
+                    margin: const EdgeInsets.symmetric(horizontal: 3),
                     padding: AppPad.v10,
                     decoration: BoxDecoration(
                       color: isSelected ? AppColors.primary : AppColors.surface,
@@ -56,7 +64,7 @@ class WeekStripWidget extends StatelessWidget {
                         ),
                         AppGap.h4,
                         Text(
-                          DateFormat('d').format(plan.date),
+                          DateFormat('d').format(date),
                           style: AppTextStyles.s16.copyWith(
                             fontWeight: FontWeight.w800,
                             color: isSelected
@@ -65,12 +73,15 @@ class WeekStripWidget extends StatelessWidget {
                           ),
                         ),
                         AppGap.h6,
+                        // Dot indicator — ẩn khi chưa load xong
                         Container(
                           width: 6,
                           height: 6,
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            color: hasAll
+                            color: !hasPlan
+                                ? Colors.transparent
+                                : hasAll
                                 ? AppColors.success
                                 : hasSome
                                 ? AppColors.warning
@@ -89,5 +100,14 @@ class WeekStripWidget extends StatelessWidget {
         );
       },
     );
+  }
+
+  DateTime _currentWeekStart() {
+    final now = DateTime.now();
+    return DateTime(
+      now.year,
+      now.month,
+      now.day,
+    ).subtract(Duration(days: now.weekday - 1));
   }
 }
