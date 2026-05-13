@@ -143,10 +143,7 @@ class ProfileScreen extends StatelessWidget {
 
             SliverToBoxAdapter(
               child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 14,
-                ),
+                padding: AppPad.h16v14,
                 child: GestureDetector(
                   onTap: () => context.go(AppRouter.onboarding),
                   child: Container(
@@ -229,7 +226,7 @@ void _showDeleteAccountDialog(BuildContext context) {
     context: context,
     builder: (ctx) => AlertDialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      title: const Text('Delete Account?'),
+      title: const Text('Delete Account ?'),
       content: const Text(
         'This action cannot be undone. All your data, meal plans, and progress will be permanently deleted.',
       ),

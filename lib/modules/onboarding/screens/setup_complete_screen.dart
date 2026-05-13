@@ -203,7 +203,7 @@ class _SummaryRow extends StatelessWidget {
     return Row(
       children: [
         Text(icon, style: const TextStyle(fontSize: 20)),
-        const SizedBox(width: 12),
+        AppGap.w12,
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
