@@ -1,7 +1,6 @@
 import 'package:cravvy_cooking_app/init.dart';
 import 'package:cravvy_cooking_app/modules/search/widgets/filter_option_widget.dart';
-
-// ─── Filter bottom sheet ──────────────────────────────────────────────────────
+import 'package:easy_localization/easy_localization.dart';
 
 class FilterSheet extends StatefulWidget {
   const FilterSheet({
@@ -28,23 +27,24 @@ class _FilterSheetState extends State<FilterSheet> {
   int? _maxCal;
   String? _difficulty;
 
-  static const _mealTypes = [
-    ('breakfast', 'Breakfast', '🌅'),
-    ('lunch', 'Lunch', '☀️'),
-    ('dinner', 'Dinner', '🌙'),
-    ('snack', 'Snack', '🍎'),
+  /// route key (value) — label được lấy từ .tr() để hiển thị
+  static const _mealTypeKeys = [
+    ('breakfast', 'search.filter.breakfast'),
+    ('lunch', 'search.filter.lunch'),
+    ('dinner', 'search.filter.dinner'),
+    ('snack', 'search.filter.snack'),
   ];
 
   static const _calorieOptions = [
-    (300, '< 300 cal'),
-    (450, '< 450 cal'),
-    (600, '< 600 cal'),
+    (300, 'search.filter.cal_300'),
+    (450, 'search.filter.cal_450'),
+    (600, 'search.filter.cal_600'),
   ];
 
-  static const _difficulties = [
-    ('easy', 'Easy', '🟢'),
-    ('medium', 'Medium', '🟡'),
-    ('hard', 'Hard', '🔴'),
+  static const _difficultyKeys = [
+    ('easy', 'search.filter.easy'),
+    ('medium', 'search.filter.medium'),
+    ('hard', 'search.filter.hard'),
   ];
 
   @override
@@ -71,7 +71,7 @@ class _FilterSheetState extends State<FilterSheet> {
                 height: 4,
                 decoration: BoxDecoration(
                   color: AppColors.border,
-                  borderRadius: BorderRadius.circular(2),
+                  borderRadius: AppBorderRadius.a2,
                 ),
               ),
             ),
@@ -80,7 +80,7 @@ class _FilterSheetState extends State<FilterSheet> {
             Row(
               children: [
                 Text(
-                  'Filter Recipes',
+                  'search.filter.title'.tr(),
                   style: AppTextStyles.s18.copyWith(
                     fontWeight: FontWeight.w700,
                   ),
@@ -92,7 +92,7 @@ class _FilterSheetState extends State<FilterSheet> {
                     Navigator.pop(context);
                   },
                   child: Text(
-                    'Reset',
+                    'search.filter.reset'.tr(),
                     style: AppTextStyles.s14.copyWith(
                       color: AppColors.textSecondary,
                     ),
@@ -104,21 +104,21 @@ class _FilterSheetState extends State<FilterSheet> {
 
             // Meal type
             Text(
-              'Meal Type',
+              'search.filter.meal_type'.tr(),
               style: AppTextStyles.s14.copyWith(fontWeight: FontWeight.w600),
             ),
             AppGap.h8,
             Wrap(
               spacing: 8,
               runSpacing: 8,
-              children: _mealTypes.map<Widget>((record) {
-                final (type, label, emoji) = record;
-                final selected = _mealType == type;
+              children: _mealTypeKeys.map<Widget>((record) {
+                final (key, labelKey) = record;
+                final selected = _mealType == key;
                 return GestureDetector(
                   onTap: () =>
-                      setState(() => _mealType = selected ? null : type),
+                      setState(() => _mealType = selected ? null : key),
                   child: FilterOptionWidget(
-                    label: '$emoji $label',
+                    label: labelKey.tr(),
                     selected: selected,
                   ),
                 );
@@ -126,9 +126,9 @@ class _FilterSheetState extends State<FilterSheet> {
             ),
             AppGap.h16,
 
-            // Calories
+            // Max calories
             Text(
-              'Max Calories',
+              'search.filter.max_calories'.tr(),
               style: AppTextStyles.s14.copyWith(fontWeight: FontWeight.w600),
             ),
             AppGap.h8,
@@ -136,11 +136,14 @@ class _FilterSheetState extends State<FilterSheet> {
               spacing: 8,
               runSpacing: 8,
               children: _calorieOptions.map<Widget>((record) {
-                final (cal, label) = record;
+                final (cal, labelKey) = record;
                 final selected = _maxCal == cal;
                 return GestureDetector(
                   onTap: () => setState(() => _maxCal = selected ? null : cal),
-                  child: FilterOptionWidget(label: label, selected: selected),
+                  child: FilterOptionWidget(
+                    label: labelKey.tr(),
+                    selected: selected,
+                  ),
                 );
               }).toList(),
             ),
@@ -148,21 +151,21 @@ class _FilterSheetState extends State<FilterSheet> {
 
             // Difficulty
             Text(
-              'Difficulty',
+              'search.filter.difficulty'.tr(),
               style: AppTextStyles.s14.copyWith(fontWeight: FontWeight.w600),
             ),
             AppGap.h8,
             Wrap(
               spacing: 8,
               runSpacing: 8,
-              children: _difficulties.map<Widget>((record) {
-                final (diff, label, dot) = record;
-                final selected = _difficulty == diff;
+              children: _difficultyKeys.map<Widget>((record) {
+                final (key, labelKey) = record;
+                final selected = _difficulty == key;
                 return GestureDetector(
                   onTap: () =>
-                      setState(() => _difficulty = selected ? null : diff),
+                      setState(() => _difficulty = selected ? null : key),
                   child: FilterOptionWidget(
-                    label: '$dot $label',
+                    label: labelKey.tr(),
                     selected: selected,
                   ),
                 );
@@ -181,13 +184,13 @@ class _FilterSheetState extends State<FilterSheet> {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.primary,
                   foregroundColor: Colors.white,
-                  padding: const EdgeInsets.symmetric(vertical: 14),
+                  padding: AppPad.v14,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(14),
+                    borderRadius: AppBorderRadius.a14,
                   ),
                 ),
                 child: Text(
-                  'Apply Filters',
+                  'search.filter.apply'.tr(),
                   style: AppTextStyles.s16.copyWith(
                     fontWeight: FontWeight.w700,
                     color: Colors.white,

@@ -102,6 +102,7 @@ abstract final class AppPad {
   static const EdgeInsets b24 = EdgeInsets.only(bottom: 24);
   static const EdgeInsets b32 = EdgeInsets.only(bottom: 32);
 
+  static const EdgeInsets l4 = EdgeInsets.only(left: 4);
   static const EdgeInsets l8 = EdgeInsets.only(left: 8);
   static const EdgeInsets l16 = EdgeInsets.only(left: 16);
   static const EdgeInsets l20 = EdgeInsets.only(left: 20);
