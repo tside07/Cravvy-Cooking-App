@@ -3,6 +3,7 @@ import 'package:cravvy_cooking_app/modules/profile/provider/profile_provider.dar
 import 'package:cravvy_cooking_app/modules/profile/widgets/profile_stat_box_widget.dart';
 import 'package:cravvy_cooking_app/modules/profile/widgets/profile_vsep_widget.dart';
 import 'package:cravvy_cooking_app/modules/onboarding/provider/onboarding_provider.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class ProfileHeaderCardWidget extends StatelessWidget {
   const ProfileHeaderCardWidget({
@@ -62,7 +63,11 @@ class ProfileHeaderCardWidget extends StatelessWidget {
                   shape: BoxShape.circle,
                   border: Border.all(color: AppColors.white, width: 2),
                 ),
-                child: const Icon(Icons.edit_rounded, size: 12, color: AppColors.white),
+                child: const Icon(
+                  Icons.edit_rounded,
+                  size: 12,
+                  color: AppColors.white,
+                ),
               ),
             ],
           ),
@@ -75,11 +80,17 @@ class ProfileHeaderCardWidget extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Icon(Icons.email_outlined, size: 14, color: AppColors.textSecondary),
+              const Icon(
+                Icons.email_outlined,
+                size: 14,
+                color: AppColors.textSecondary,
+              ),
               AppGap.w4,
               Text(
                 profile.email,
-                style: AppTextStyles.s12.copyWith(color: AppColors.textSecondary),
+                style: AppTextStyles.s12.copyWith(
+                  color: AppColors.textSecondary,
+                ),
               ),
             ],
           ),
@@ -87,11 +98,17 @@ class ProfileHeaderCardWidget extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Icon(Icons.phone_outlined, size: 14, color: AppColors.textSecondary),
+              const Icon(
+                Icons.phone_outlined,
+                size: 14,
+                color: AppColors.textSecondary,
+              ),
               AppGap.w4,
               Text(
                 profile.phone,
-                style: AppTextStyles.s12.copyWith(color: AppColors.textSecondary),
+                style: AppTextStyles.s12.copyWith(
+                  color: AppColors.textSecondary,
+                ),
               ),
             ],
           ),
@@ -114,7 +131,11 @@ class ProfileHeaderCardWidget extends StatelessWidget {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Icon(Icons.flag_rounded, size: 14, color: AppColors.primary),
+                  const Icon(
+                    Icons.flag_rounded,
+                    size: 14,
+                    color: AppColors.primary,
+                  ),
                   AppGap.w4,
                   Text(
                     goal!.title,
@@ -135,13 +156,20 @@ class ProfileHeaderCardWidget extends StatelessWidget {
             ),
             child: Row(
               children: [
-                ProfileStatBoxWidget(label: 'Age', value: '${profile.age}'),
-                const ProfileVSepWidget(),
-                ProfileStatBoxWidget(label: 'Height', value: '${profile.heightCm}cm'),
+                ProfileStatBoxWidget(
+                  label: 'profile.stat_age'.tr(),
+                  value: '${profile.age}',
+                ),
                 const ProfileVSepWidget(),
                 ProfileStatBoxWidget(
-                    label: 'Weight',
-                    value: '${profile.weightKg.toStringAsFixed(0)}kg'),
+                  label: 'profile.stat_height'.tr(),
+                  value: '${profile.heightCm}cm',
+                ),
+                const ProfileVSepWidget(),
+                ProfileStatBoxWidget(
+                  label: 'profile.stat_weight'.tr(),
+                  value: '${profile.weightKg.toStringAsFixed(0)}kg',
+                ),
               ],
             ),
           ),
@@ -176,10 +204,14 @@ class ProfileHeaderCardWidget extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Icon(Icons.edit_outlined, size: 16, color: AppColors.primary),
+                  const Icon(
+                    Icons.edit_outlined,
+                    size: 16,
+                    color: AppColors.primary,
+                  ),
                   AppGap.w8,
                   Text(
-                    'Edit personal info',
+                    'profile.edit_personal_info'.tr(),
                     style: AppTextStyles.s14.copyWith(
                       color: AppColors.primary,
                       fontWeight: FontWeight.w600,

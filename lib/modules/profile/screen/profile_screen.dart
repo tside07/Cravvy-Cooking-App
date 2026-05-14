@@ -5,6 +5,7 @@ import 'package:cravvy_cooking_app/modules/profile/widgets/premium_banner_widget
 import 'package:cravvy_cooking_app/modules/profile/widgets/settings_group_widget.dart';
 import 'package:cravvy_cooking_app/modules/profile/widgets/profile_header_card_widget.dart';
 import 'package:cravvy_cooking_app/modules/profile/widgets/profile_section_label_widget.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -25,7 +26,7 @@ class ProfileScreen extends StatelessWidget {
                 child: Row(
                   children: [
                     Text(
-                      'Profile',
+                      'profile.title'.tr(),
                       style: AppTextStyles.s20.copyWith(
                         fontWeight: FontWeight.w800,
                         color: AppColors.textPrimary,
@@ -60,83 +61,80 @@ class ProfileScreen extends StatelessWidget {
 
             const SliverToBoxAdapter(child: PremiumBannerWidget()),
 
-            ProfileSectionLabelWidget(label: 'My Plan'),
+            ProfileSectionLabelWidget(label: 'profile.plan'.tr()),
             SliverToBoxAdapter(
               child: SettingsGroupWidget(
-                items: const [
-                  ('🎯', 'Edit Goal', false),
-                  ('🥗', 'Food Preferences', false),
-                  ('🚫', 'Dietary Restrictions', false),
+                items: [
+                  ('🎯', 'profile.edit_goal'.tr(), AppRouter.settings, false),
+                  ('🥗', 'profile.food_pref'.tr(), AppRouter.settings, false),
+                  (
+                    '🚫',
+                    'profile.diet_restriction'.tr(),
+                    AppRouter.settings,
+                    false,
+                  ),
                 ],
-                onTap: (label) => context.push(AppRouter.settings),
+                onTap: (route) => context.push(route),
               ),
             ),
 
-            ProfileSectionLabelWidget(label: 'Settings'),
+            ProfileSectionLabelWidget(label: 'profile.settings'.tr()),
             SliverToBoxAdapter(
               child: SettingsGroupWidget(
-                items: const [
-                  ('🔔', 'Reminders', false),
-                  ('💳', 'Subscription & Plan', false),
+                items: [
+                  ('🔔', 'profile.reminders'.tr(), AppRouter.settings, false),
+                  (
+                    '💳',
+                    'profile.subnplan'.tr(),
+                    AppRouter.subscription,
+                    false,
+                  ),
                 ],
-                onTap: (label) {
-                  switch (label) {
-                    case 'Reminders':
-                      context.push(AppRouter.settings);
-                      break;
-                    case 'Subscription & Plan':
-                      context.push(AppRouter.subscription);
-                      break;
+                onTap: (route) => context.push(route),
+              ),
+            ),
+
+            ProfileSectionLabelWidget(label: 'profile.data_privacy'.tr()),
+            SliverToBoxAdapter(
+              child: SettingsGroupWidget(
+                items: [
+                  ('📤', 'profile.export'.tr(), '', false),
+                  ('🗑️', 'profile.delete_acc'.tr(), '', false),
+                ],
+                onTap: (route) {
+                  if (route == '__export') {
+                    _showExportDialog(context);
+                  } else if (route == '__delete') {
+                    _showDeleteAccountDialog(context);
                   }
                 },
+                customRoutes: const {0: '__export', 1: '__delete'},
               ),
             ),
 
-            ProfileSectionLabelWidget(label: 'Data & Privacy'),
+            ProfileSectionLabelWidget(label: 'profile.support'.tr()),
             SliverToBoxAdapter(
               child: SettingsGroupWidget(
-                items: const [
-                  ('📤', 'Export Data', false),
-                  ('🗑️', 'Delete Account', false),
+                items: [
+                  ('❓', 'profile.faq'.tr(), AppRouter.faq, false),
+                  ('⭐', 'profile.rating'.tr(), '__rate', false),
                 ],
-                onTap: (label) {
-                  switch (label) {
-                    case 'Export Data':
-                      _showExportDialog(context);
-                      break;
-                    case 'Delete Account':
-                      _showDeleteAccountDialog(context);
-                      break;
-                  }
-                },
-              ),
-            ),
-
-            ProfileSectionLabelWidget(label: 'Support'),
-            SliverToBoxAdapter(
-              child: SettingsGroupWidget(
-                items: const [
-                  ('❓', 'FAQ', false),
-                  ('⭐', 'Rate the App', false),
-                ],
-                onTap: (label) {
-                  if (label == 'FAQ') {
-                    context.push(AppRouter.faq);
-                  } else if (label == 'Rate the App') {
+                onTap: (route) {
+                  if (route == '__rate') {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Thank you! Redirecting to store...'),
-                      ),
+                      SnackBar(content: Text('profile.redirect'.tr())),
                     );
+                  } else {
+                    context.push(route);
                   }
                 },
               ),
             ),
 
-            ProfileSectionLabelWidget(label: 'Interface'),
+            ProfileSectionLabelWidget(label: 'profile.interface'.tr()),
             SliverToBoxAdapter(
               child: SettingsGroupWidget(
-                items: const [('🌙', 'Dark Mode', true)],
+                items: [('🌙', 'profile.darkmode'.tr(), '', true)],
                 onTap: (_) {},
               ),
             ),
@@ -162,7 +160,7 @@ class ProfileScreen extends StatelessWidget {
                         ),
                         AppGap.w8,
                         Text(
-                          'Log Out',
+                          'profile.log_out'.tr(),
                           style: AppTextStyles.s14.copyWith(
                             color: AppColors.error,
                             fontWeight: FontWeight.w700,
@@ -179,7 +177,7 @@ class ProfileScreen extends StatelessWidget {
               child: Padding(
                 padding: AppPad.b20,
                 child: Text(
-                  'Cravvy v1.0.0',
+                  'profile.version'.tr(),
                   textAlign: TextAlign.center,
                   style: AppTextStyles.s12.copyWith(color: AppColors.textHint),
                 ),
@@ -199,21 +197,19 @@ void _showExportDialog(BuildContext context) {
     context: context,
     builder: (ctx) => AlertDialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      title: const Text('Export Data'),
-      content: const Text(
-        'Your data will be compiled and sent to your email address within 24 hours.',
-      ),
+      title: Text('profile.export_title'.tr()),
+      content: Text('profile.export_info'.tr()),
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(ctx),
-          child: const Text('Cancel'),
+          child: Text('common.cancel'.tr()),
         ),
         ElevatedButton(
           onPressed: () => Navigator.pop(ctx),
           style: ElevatedButton.styleFrom(backgroundColor: AppColors.primary),
-          child: const Text(
-            'Request Export',
-            style: TextStyle(color: Colors.white),
+          child: Text(
+            'profile.req_export'.tr(),
+            style: const TextStyle(color: Colors.white),
           ),
         ),
       ],
@@ -226,19 +222,20 @@ void _showDeleteAccountDialog(BuildContext context) {
     context: context,
     builder: (ctx) => AlertDialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      title: const Text('Delete Account ?'),
-      content: const Text(
-        'This action cannot be undone. All your data, meal plans, and progress will be permanently deleted.',
-      ),
+      title: Text('profile.delete_acc_title'.tr()),
+      content: Text('profile.del_dialog'.tr()),
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(ctx),
-          child: const Text('Cancel'),
+          child: Text('common.cancel'.tr()),
         ),
         ElevatedButton(
           onPressed: () => Navigator.pop(ctx),
           style: ElevatedButton.styleFrom(backgroundColor: AppColors.error),
-          child: const Text('Delete', style: TextStyle(color: Colors.white)),
+          child: Text(
+            'common.delete'.tr(),
+            style: const TextStyle(color: Colors.white),
+          ),
         ),
       ],
     ),

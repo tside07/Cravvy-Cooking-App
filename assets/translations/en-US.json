@@ -43,7 +43,7 @@
     },
     "onboarding_goal": {
         "main_goal": "What's your main goal?",
-        "main_goal_desc": "We'll tailor your meal plan around this.",
+        "main_goal_desc": "We'll tailor your meal plan around this."
     },
     "onboarding_slide": {
         "sl1_title": "What should\nI eat today?",
@@ -100,26 +100,31 @@
         "subtitle": "Unlock the full power of meal planning",
         "billed_monthly": "Billed monthly"
     },
-
     "profile": {
+        "title": "Profile",
+        "log_out": "Log Out",
+        "version": "Cravvy v1.0.0",
+        "edit_personal_info": "Edit personal info",
+        "upgrade_subtitle": "Unlock AI meal planning & more",
         "change_pw": "Change Password",
         "change_pw_desc": "This feature is not yet available in this version.",
         "delete_acc": "Delete Account",
         "delete_acc_desc": "Are you sure? This action cannot be undone and all your data will be permanently removed.",
+        "delete_acc_title": "Delete Account ?",
         "edit_profile": "Edit Profile",
         "change_avatar": "Change Avatar",
         "basic_info": "BASIC INFORMATION",
+        "contact_info": "CONTACT INFORMATION",
         "hint_fullname": "Full name",
         "val_name": "Name is required",
         "dob": "Date of birth",
-        "contact_info": "Contact Information",
         "hint_email": "Email address",
         "val_email1": "Email is required",
         "val_email2": "Enter a valid email",
         "phoneNo": "Phone number",
         "about_u": "ABOUT YOU",
-        "hint_bio": "Write something about yourself",
-        "danger_zone": "DANGER ZONE",
+        "hint_bio": "Write something about yourself...",
+        "danger_zone": "Danger Zone",
         "danger": "These actions cannot be undone",
         "pf": "Profile",
         "plan": "My Plan",
@@ -137,12 +142,45 @@
         "redirect": "Thank you! Redirecting to store...",
         "interface": "Interface",
         "darkmode": "Dark Mode",
+        "export_title": "Export Data",
         "export_info": "Your data will be compiled and sent to your email address within 24 hours.",
         "req_export": "Request Export",
         "del_dialog": "This action cannot be undone. All your data, meal plans, and progress will be permanently deleted.",
         "upgrade": "Upgrade to Premium",
+        "stat_age": "Age",
+        "stat_height": "Height",
+        "stat_weight": "Weight"
     },
-
+    "progress": {
+        "title": "Progress",
+        "weekly_calories": "Weekly Calories",
+        "weekly_goal": "Goal: {kcal} kcal/day",
+        "nutrition_consistency": "Nutrition Consistency",
+        "achievements": "Achievements",
+        "stat_day_streak": "Day streak",
+        "stat_meals_logged": "Meals logged",
+        "stat_goal_hit": "Goal hit",
+        "nutrition_protein": "Protein",
+        "nutrition_carbs": "Carbs",
+        "nutrition_fat": "Fat",
+        "week_mo": "Mo",
+        "week_tu": "Tu",
+        "week_we": "We",
+        "week_th": "Th",
+        "week_fr": "Fr",
+        "week_sa": "Sa",
+        "week_su": "Su",
+        "achievement": {
+            "streak7_title": "7-Day Streak",
+            "streak7_desc": "Logged meals 7 days in a row",
+            "salad_title": "Salad Lover",
+            "salad_desc": "Ate salad 5 times",
+            "hydrated_title": "Hydrated",
+            "hydrated_desc": "Drank 2L water for 3 days",
+            "goal_crusher_title": "Goal Crusher",
+            "goal_crusher_desc": "Hit calorie goal 10 times"
+        }
+    },
     "common": {
         "continue": "Continue",
         "skip": "Skip",
@@ -150,6 +188,6 @@
         "ok": "OK",
         "delete": "Delete",
         "save_changes": "Save Changes",
-        "cancel": "Cancel",
+        "cancel": "Cancel"
     }
 }
