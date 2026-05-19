@@ -98,7 +98,11 @@
         "define": "Bao gồm những gì trong\nGói cao cấp",
         "title": "Nâng cấp lên Cravvy Premium",
         "subtitle": "Mở khóa toàn bộ sức mạnh lên kế hoạch bữa ăn",
-        "billed_monthly": "Thanh toán hàng tháng"
+        "billed_monthly": "Thanh toán hàng tháng",
+        "period_year": "/năm",
+        "period_month": "/tháng",
+        "save_badge": "Tiết kiệm\n{pct}%",
+        "annual_detail": "Chỉ {monthly}đ/tháng • Tiết kiệm đến {savings}đ mỗi năm"
     },
     "profile": {
         "title": "Hồ sơ",
@@ -149,7 +153,8 @@
         "upgrade": "Nâng cấp lên Premium",
         "stat_age": "Tuổi",
         "stat_height": "Chiều cao",
-        "stat_weight": "Cân nặng"
+        "stat_weight": "Cân nặng",
+        "language": "Ngôn ngữ"
     },
     "progress": {
         "title": "Tiến trình",
@@ -276,5 +281,74 @@
         "delete": "Xóa",
         "save_changes": "Lưu thay đổi",
         "cancel": "Hủy"
+    },
+    "subscription": {
+        "title": "Gói đăng ký",
+        "hero_title": "Nâng cấp Premium",
+        "hero_subtitle": "Nấu ăn thông minh hơn, ăn uống lành mạnh hơn",
+        "what_you_get": "Bạn nhận được gì",
+        "compare_plans": "So sánh các gói",
+        "current_plan": "Gói hiện tại",
+        "start_trial": "Dùng thử miễn phí 14 ngày",
+        "cancel_note": "Hủy bất cứ lúc nào · Không tính phí trong thời gian dùng thử",
+        "plan": {
+            "free_name": "Miễn phí",
+            "free_price": "Miễn phí",
+            "free_note": "Mãi mãi",
+            "monthly_name": "Premium Hàng tháng",
+            "monthly_price": "149.000đ",
+            "monthly_note": "mỗi tháng",
+            "annual_name": "Premium Hàng năm",
+            "annual_price": "999.000đ",
+            "annual_note": "mỗi năm",
+            "annual_badge": "Tiết kiệm 44%"
+        },
+        "highlight": {
+            "ai_chef_title": "AI Bếp Thông Minh",
+            "ai_chef_desc": "Thực đơn 30 ngày cá nhân hóa theo cơ thể, mục tiêu và khẩu vị",
+            "swap_title": "Đổi bữa ăn không giới hạn",
+            "swap_desc": "Thay thế bất kỳ bữa ăn nào chỉ với một chạm, khớp với nguyên liệu trong tủ lạnh",
+            "nutrition_title": "Phân tích dinh dưỡng chuyên sâu",
+            "nutrition_desc": "Theo dõi 20+ vi chất và nhận báo cáo điều chỉnh hàng tuần",
+            "adfree_title": "Trải nghiệm không quảng cáo",
+            "adfree_desc": "Tập trung hoàn toàn vào nấu ăn, không bị gián đoạn"
+        },
+        "table": {
+            "feature": "Tính năng",
+            "free": "Miễn phí",
+            "premium": "Premium",
+            "row_ai_suggestions": "Gợi ý bữa ăn AI",
+            "row_meal_plan": "Thời gian kế hoạch bữa ăn",
+            "row_meal_swap": "Đổi bữa ăn",
+            "row_calorie": "Theo dõi calo",
+            "row_macro": "Phân tích macro",
+            "row_chatbot": "Chatbot dinh dưỡng AI",
+            "row_recipe": "Thư viện công thức",
+            "row_shopping": "Danh sách mua sắm thông minh",
+            "row_adfree": "Không quảng cáo",
+            "row_support": "Hỗ trợ ưu tiên",
+            "val_3_per_day": "3/ngày",
+            "val_unlimited": "Không giới hạn",
+            "val_3_days": "3 ngày",
+            "val_7_30_days": "7–30 ngày",
+            "val_2_per_week": "2×/tuần",
+            "val_basic": "Cơ bản",
+            "val_advanced": "Nâng cao",
+            "val_100_plus": "100+",
+            "val_1000_plus": "1.000+"
+        }
+    },
+    "trial": {
+        "started": "🎉 Đã kích hoạt dùng thử!",
+        "welcome": "Chào mừng đến với Cravvy Premium! Trải nghiệm toàn bộ tính năng hoàn toàn miễn phí trong 14 ngày.",
+        "unlocked": "Những gì đã được mở khóa cho bạn",
+        "expiry_note": "Dùng thử kết thúc sau 14 ngày. Hủy bất cứ lúc nào từ Hồ sơ → Cài đặt.",
+        "explore_btn": "Khám phá tính năng Premium",
+        "feat_1": "Gợi ý bữa ăn AI không giới hạn",
+        "feat_2": "Theo dõi dinh dưỡng nâng cao",
+        "feat_3": "1.000+ công thức cao cấp",
+        "feat_4": "Danh sách mua sắm thông minh",
+        "feat_5": "Trải nghiệm không quảng cáo",
+        "feat_6": "Hỗ trợ ưu tiên"
     }
 }

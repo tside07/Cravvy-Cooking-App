@@ -3,6 +3,8 @@ import 'package:cravvy_cooking_app/modules/onboarding/provider/onboarding_provid
 import 'package:cravvy_cooking_app/modules/profile/provider/profile_provider.dart';
 import 'package:cravvy_cooking_app/modules/profile/widgets/premium_banner_widget.dart';
 import 'package:cravvy_cooking_app/modules/profile/widgets/settings_group_widget.dart';
+import 'package:cravvy_cooking_app/modules/profile/widgets/settings_tile_widget.dart';
+import 'package:cravvy_cooking_app/modules/profile/widgets/language_toggle_tile_widget.dart';
 import 'package:cravvy_cooking_app/modules/profile/widgets/profile_header_card_widget.dart';
 import 'package:cravvy_cooking_app/modules/profile/widgets/profile_section_label_widget.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -133,9 +135,25 @@ class ProfileScreen extends StatelessWidget {
 
             ProfileSectionLabelWidget(label: 'profile.interface'.tr()),
             SliverToBoxAdapter(
-              child: SettingsGroupWidget(
-                items: [('🌙', 'profile.darkmode'.tr(), '', true)],
-                onTap: (_) {},
+              child: Container(
+                margin: const EdgeInsets.only(left: 16, top: 14, right: 16),
+                decoration: BoxDecoration(
+                  color: AppColors.surface,
+                  borderRadius: AppBorderRadius.a18,
+                  border: Border.all(color: AppColors.border),
+                ),
+                child: Column(
+                  children: [
+                    SettingsTileWidget(
+                      emoji: '🌙',
+                      label: 'profile.darkmode'.tr(),
+                      isToggle: true,
+                      showDivider: true,
+                      onTap: () {},
+                    ),
+                    const LanguageToggleTileWidget(showDivider: false),
+                  ],
+                ),
               ),
             ),
 
