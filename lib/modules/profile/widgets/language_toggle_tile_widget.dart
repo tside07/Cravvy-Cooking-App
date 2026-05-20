@@ -26,7 +26,7 @@ class LanguageToggleTileWidget extends StatelessWidget {
               color: AppColors.surfaceVariant,
               borderRadius: AppBorderRadius.a10,
             ),
-            child: Center(child: Text('🌐', style: AppTextStyles.s18)), 
+            child: Center(child: Text('🌐', style: AppTextStyles.s18)),
           ),
           title: Text(
             'profile.language'.tr(),
@@ -41,7 +41,7 @@ class LanguageToggleTileWidget extends StatelessWidget {
             },
             child: AnimatedContainer(
               duration: const Duration(milliseconds: 250),
-              padding: AppPad.h10v6,
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
               decoration: BoxDecoration(
                 color: AppColors.primaryLight,
                 borderRadius: AppBorderRadius.a20,
@@ -54,9 +54,9 @@ class LanguageToggleTileWidget extends StatelessWidget {
                 children: [
                   Text(
                     isVi ? '🇻🇳' : '🇺🇸',
-                    style: AppTextStyles.s16,
+                    style: const TextStyle(fontSize: 16),
                   ),
-                  AppGap.w6,
+                  const SizedBox(width: 6),
                   Text(
                     isVi ? 'VI' : 'EN',
                     style: AppTextStyles.s12.copyWith(
@@ -64,7 +64,7 @@ class LanguageToggleTileWidget extends StatelessWidget {
                       color: AppColors.primary,
                     ),
                   ),
-                  AppGap.w4,
+                  const SizedBox(width: 4),
                   const Icon(
                     Icons.swap_horiz_rounded,
                     size: 16,

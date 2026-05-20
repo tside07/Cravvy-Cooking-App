@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 import 'core/theme/app_theme.dart';
 import 'core/routes/app_routers.dart';
@@ -14,6 +15,9 @@ import 'data/providers/recipe_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // easy_localization PHẢI init trước runApp
+  await EasyLocalization.ensureInitialized();
 
   await dotenv.load();
   await SupabaseService.initialize();
@@ -30,28 +34,31 @@ void main() async {
   );
 
   runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => MealPlanProvider()),
-        ChangeNotifierProvider(create: (_) => OnboardingProvider()),
-        ChangeNotifierProvider(create: (_) => ProfileProvider()),
-        ChangeNotifierProvider(create: (_) => RecipeProvider()),
-        // AuthProvider được tạo SAU MealPlanProvider để có thể link ngay
-        ChangeNotifierProxyProvider<MealPlanProvider, AuthProvider>(
-          create: (ctx) {
-            final auth = AuthProvider();
-            // Link ngay khi tạo — MealPlanProvider đã sẵn sàng
-            auth.linkMealPlanProvider(ctx.read<MealPlanProvider>());
-            return auth;
-          },
-          update: (ctx, mealPlan, auth) {
-            // Re-link nếu MealPlanProvider rebuild (hiếm xảy ra)
-            auth!.linkMealPlanProvider(mealPlan);
-            return auth;
-          },
-        ),
-      ],
-      child: const CravvyApp(),
+    EasyLocalization(
+      supportedLocales: const [Locale('en', 'US'), Locale('vi', 'VN')],
+      path: 'assets/translations',
+      fallbackLocale: const Locale('en', 'US'),
+      startLocale: const Locale('en', 'US'),
+      child: MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (_) => MealPlanProvider()),
+          ChangeNotifierProvider(create: (_) => OnboardingProvider()),
+          ChangeNotifierProvider(create: (_) => ProfileProvider()),
+          ChangeNotifierProvider(create: (_) => RecipeProvider()),
+          ChangeNotifierProxyProvider<MealPlanProvider, AuthProvider>(
+            create: (ctx) {
+              final auth = AuthProvider();
+              auth.linkMealPlanProvider(ctx.read<MealPlanProvider>());
+              return auth;
+            },
+            update: (ctx, mealPlan, auth) {
+              auth!.linkMealPlanProvider(mealPlan);
+              return auth;
+            },
+          ),
+        ],
+        child: const CravvyApp(),
+      ),
     ),
   );
 }
@@ -61,11 +68,16 @@ class CravvyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final el = EasyLocalization.of(context)!;
+
     return MaterialApp.router(
       title: 'Cravvy',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
       routerConfig: AppRouter.router,
+      locale: el.locale,
+      supportedLocales: el.supportedLocales,
+      localizationsDelegates: el.delegates,
     );
   }
 }
