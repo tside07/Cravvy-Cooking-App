@@ -75,6 +75,7 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _ = context.locale;
     // ChangeNotifierProvider đặt ở đây vì SettingsProvider chỉ cần
     // tồn tại trong phạm vi màn hình này, không cần share lên toàn app.
     return ChangeNotifierProvider(

@@ -49,6 +49,7 @@ class _TrialActivationScreenState extends State<TrialActivationScreen>
 
   @override
   Widget build(BuildContext context) {
+    final _ = context.locale;
     return Scaffold(
       backgroundColor: AppColors.background,
       body: SafeArea(

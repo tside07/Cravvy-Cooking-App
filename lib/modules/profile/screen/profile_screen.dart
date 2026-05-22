@@ -14,6 +14,7 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _ = context.locale;
     final goal = context.read<OnboardingProvider>().selectedGoal;
     final profile = context.watch<ProfileProvider>();
 

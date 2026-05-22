@@ -118,6 +118,7 @@ class _SearchScreenState extends State<SearchScreen>
 
   @override
   Widget build(BuildContext context) {
+    final _ = context.locale;
     return Scaffold(
       backgroundColor: AppColors.background,
       body: SafeArea(
@@ -216,4 +217,3 @@ class _SearchScreenState extends State<SearchScreen>
     );
   }
 }
-

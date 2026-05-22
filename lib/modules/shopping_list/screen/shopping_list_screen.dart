@@ -23,6 +23,7 @@ class _ShoppingListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _ = context.locale;
     final provider = context.watch<ShoppingListProvider>();
 
     if (provider.isEmpty) return const ShoppingEmptyStateWidget();

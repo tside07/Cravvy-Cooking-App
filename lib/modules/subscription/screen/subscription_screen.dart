@@ -22,6 +22,7 @@ class _SubscriptionView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _ = context.locale;
     final provider = context.watch<SubscriptionProvider>();
     final plans = SubscriptionProvider.plans();
     final highlights = SubscriptionProvider.highlights();

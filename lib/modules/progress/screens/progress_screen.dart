@@ -12,6 +12,7 @@ class ProgressScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _ = context.locale;
     // Achievements: built at runtime to allow .tr()
     final achievements = [
       (
