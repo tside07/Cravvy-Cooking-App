@@ -3,6 +3,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:cravvy_cooking_app/data/models/user_model.dart';
 import 'package:cravvy_cooking_app/data/services/auth_service.dart';
 import 'package:cravvy_cooking_app/data/services/supabase_service.dart';
+import 'package:cravvy_cooking_app/data/providers/recipe_provider.dart';
 import 'package:cravvy_cooking_app/modules/meal_plan/provider/meal_plan_provider.dart';
 
 enum AuthStatus { initial, loading, authenticated, unauthenticated, error }
@@ -12,6 +13,7 @@ class AuthProvider extends ChangeNotifier {
   UserModel? _user;
   String? _errorMessage;
   MealPlanProvider? _mealPlanProvider;
+  RecipeProvider? _recipeProvider;
 
   AuthStatus get status => _status;
   UserModel? get user => _user;
@@ -23,8 +25,16 @@ class AuthProvider extends ChangeNotifier {
     if (_user != null) _mealPlanProvider!.updateFromUser(_user);
   }
 
+  void linkRecipeProvider(RecipeProvider rp) {
+    _recipeProvider = rp;
+    if (_user != null) Future.microtask(rp.loadAll);
+  }
+
   void _syncUserToProviders() {
     _mealPlanProvider?.updateFromUser(_user);
+    if (_user != null) {
+      Future.microtask(() => _recipeProvider?.loadAll());
+    }
   }
 
   AuthProvider() {
@@ -164,6 +174,7 @@ class AuthProvider extends ChangeNotifier {
         weightKg: weightKg,
       );
       _status = AuthStatus.authenticated;
+      _syncUserToProviders();
       notifyListeners();
       return true;
     } catch (e) {
@@ -191,6 +202,7 @@ class AuthProvider extends ChangeNotifier {
         skillLevel: skillLevel,
         onboardingComplete: onboardingComplete,
       );
+      _syncUserToProviders();
       notifyListeners();
       return true;
     } catch (e) {

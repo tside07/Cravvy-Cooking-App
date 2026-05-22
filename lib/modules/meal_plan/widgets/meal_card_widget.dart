@@ -195,9 +195,9 @@ class MealCardWidget extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
 
-                  // Edit/swap icon — compact, góc phải như ảnh mẫu
+                  // Đổi món — tap mở sheet chọn món khác (như design mẫu)
                   GestureDetector(
-                    onTap: () => _showActionMenu(context),
+                    onTap: onSwap,
                     child: Container(
                       width: 32,
                       height: 32,
@@ -221,149 +221,6 @@ class MealCardWidget extends StatelessWidget {
     );
   }
 
-  // Tap icon edit → menu nhỏ: Đổi món / Xóa
-  void _showActionMenu(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      backgroundColor: Colors.transparent,
-      builder: (_) => Container(
-        margin: const EdgeInsets.fromLTRB(16, 0, 16, 32),
-        decoration: BoxDecoration(
-          color: AppColors.surface,
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Container(
-              margin: const EdgeInsets.only(top: 12),
-              width: 40,
-              height: 4,
-              decoration: BoxDecoration(
-                color: AppColors.border,
-                borderRadius: BorderRadius.circular(2),
-              ),
-            ),
-            const SizedBox(height: 8),
-            // Tên món
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-              child: Text(
-                meal.name,
-                style: AppTextStyles.s14.copyWith(
-                  fontWeight: FontWeight.w700,
-                  color: AppColors.textPrimary,
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ),
-            const Divider(height: 1),
-            // Đổi món
-            ListTile(
-              leading: Container(
-                width: 36,
-                height: 36,
-                decoration: BoxDecoration(
-                  color: AppColors.primaryLight,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: const Icon(
-                  Icons.swap_horiz_rounded,
-                  color: AppColors.primary,
-                  size: 18,
-                ),
-              ),
-              title: Text(
-                'Đổi món',
-                style: AppTextStyles.s14.copyWith(
-                  fontWeight: FontWeight.w600,
-                  color: AppColors.textPrimary,
-                ),
-              ),
-              subtitle: Text(
-                'Chọn món khác cho slot này',
-                style: AppTextStyles.s12.copyWith(
-                  color: AppColors.textSecondary,
-                ),
-              ),
-              onTap: () {
-                Navigator.pop(context);
-                onSwap();
-              },
-            ),
-            // Xóa
-            ListTile(
-              leading: Container(
-                width: 36,
-                height: 36,
-                decoration: BoxDecoration(
-                  color: AppColors.errorLight,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: const Icon(
-                  Icons.delete_outline_rounded,
-                  color: AppColors.error,
-                  size: 18,
-                ),
-              ),
-              title: Text(
-                'Xóa khỏi kế hoạch',
-                style: AppTextStyles.s14.copyWith(
-                  fontWeight: FontWeight.w600,
-                  color: AppColors.error,
-                ),
-              ),
-              onTap: () {
-                Navigator.pop(context);
-                _confirmRemove(context);
-              },
-            ),
-            const SizedBox(height: 8),
-          ],
-        ),
-      ),
-    );
-  }
-
-  void _confirmRemove(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (_) => AlertDialog(
-        backgroundColor: AppColors.surface,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        title: Text(
-          'Xóa bữa ăn?',
-          style: AppTextStyles.s16.copyWith(fontWeight: FontWeight.w700),
-        ),
-        content: Text(
-          'Xóa ${meal.name} khỏi kế hoạch?',
-          style: AppTextStyles.s14.copyWith(color: AppColors.textSecondary),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text(
-              'Hủy',
-              style: AppTextStyles.s14.copyWith(color: AppColors.textSecondary),
-            ),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-              onRemove();
-            },
-            child: Text(
-              'Xóa',
-              style: AppTextStyles.s14.copyWith(
-                color: AppColors.error,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 }
 
 // ─── Empty slot (giữ nguyên) ──────────────────────────────────────────────────

@@ -78,8 +78,10 @@ class MealPlanProvider extends ChangeNotifier {
     }
   }
 
+  static const _mainMealSlots = ['breakfast', 'lunch', 'dinner', 'snack'];
+
   // ─── Load tuần ───────────────────────────────────────────────────────────
-  Future<void> loadWeek() async {
+  Future<void> loadWeek({bool suggestIfEmpty = true}) async {
     if (_userId == null) return;
     _status = MealPlanStatus.loading;
     notifyListeners();
@@ -93,9 +95,27 @@ class MealPlanProvider extends ChangeNotifier {
       final recipes = await _fetchRecipesByIds(recipeIds);
       _weekPlan = _buildWeekPlan(weekStart, entries, recipes);
       _rebuildEntryCache(entries);
+
+      if (suggestIfEmpty && _user != null) {
+        if (entries.isEmpty) {
+          await autoFillWeek();
+          return;
+        }
+        if (_dayMissingSlots(_selectedDayIndex)) {
+          await fillMissingMealsForDay(_weekPlan[_selectedDayIndex].date);
+          await loadWeek(suggestIfEmpty: false);
+          return;
+        }
+      }
+
       _status = MealPlanStatus.loaded;
     } catch (_) {
-      _status = MealPlanStatus.error;
+      if (suggestIfEmpty && _user != null) {
+        _applyLocalWeekFromSuggester();
+        _status = MealPlanStatus.loaded;
+      } else {
+        _status = MealPlanStatus.error;
+      }
     }
     notifyListeners();
   }
@@ -208,6 +228,15 @@ class MealPlanProvider extends ChangeNotifier {
   void selectDay(int index) {
     _selectedDayIndex = index;
     notifyListeners();
+    if (_user != null &&
+        _weekPlan.isNotEmpty &&
+        _dayMissingSlots(index) &&
+        _status == MealPlanStatus.loaded) {
+      Future.microtask(() async {
+        await fillMissingMealsForDay(_weekPlan[index].date);
+        await loadWeek(suggestIfEmpty: false);
+      });
+    }
   }
 
   Future<void> reload() async {
@@ -217,43 +246,125 @@ class MealPlanProvider extends ChangeNotifier {
 
   /// Gợi ý lại toàn bộ tuần theo profile user (MealSuggester → Supabase upsert).
   Future<void> autoFillWeek() async {
-    if (_userId == null || _user == null) return;
+    if (_user == null) return;
     _status = MealPlanStatus.loading;
     notifyListeners();
     try {
-      final recipes = await RecipeService.fetchAll(limit: 100);
-      final byType = <String, List<Recipe>>{
-        for (final t in ['breakfast', 'lunch', 'dinner', 'snack'])
-          t: recipes.where((r) => r.mealType == t).toList(),
-      };
       final weekStart = _currentWeekStart();
       final weekNumber = weekStart.weekOfYear;
+      final byType = await _recipesByMealType();
 
-      for (var i = 0; i < 7; i++) {
-        final date = weekStart.add(Duration(days: i));
-        final suggestions = MealSuggester.suggestDay(
-          byType: byType,
-          user: _user!,
-          weekNumber: weekNumber,
-          dayOffset: i,
-        );
-        for (final e in suggestions.entries) {
+      if (_userId != null) {
+        for (var i = 0; i < 7; i++) {
+          final date = weekStart.add(Duration(days: i));
+          final suggestions = MealSuggester.suggestDay(
+            byType: byType,
+            user: _user!,
+            weekNumber: weekNumber,
+            dayOffset: i,
+          );
+          for (final e in suggestions.entries) {
+            await MealPlanService.addMeal(
+              userId: _userId!,
+              date: date,
+              mealType: e.key,
+              recipeId: e.value.id,
+            );
+          }
+        }
+        await loadWeek(suggestIfEmpty: false);
+        return;
+      }
+
+      _applyLocalWeekFromSuggester(byType: byType);
+      _status = MealPlanStatus.loaded;
+    } catch (_) {
+      _applyLocalWeekFromSuggester();
+      _status = MealPlanStatus.loaded;
+    }
+    notifyListeners();
+  }
+
+  /// Điền các slot còn thiếu (breakfast/lunch/dinner/snack) cho một ngày.
+  Future<void> fillMissingMealsForDay(DateTime date) async {
+    if (_user == null) return;
+    final missing = _missingSlotsForDay(date);
+    if (missing.isEmpty) return;
+
+    final byType = await _recipesByMealType();
+    final weekStart = _currentWeekStart();
+    final dayOffset = date.difference(weekStart).inDays.clamp(0, 6);
+    final suggestions = MealSuggester.suggestDay(
+      byType: byType,
+      user: _user!,
+      weekNumber: weekStart.weekOfYear,
+      dayOffset: dayOffset,
+    );
+
+    for (final mealType in missing) {
+      final recipe = suggestions[mealType];
+      if (recipe == null) continue;
+      if (_userId != null) {
+        try {
           await MealPlanService.addMeal(
             userId: _userId!,
             date: date,
-            mealType: e.key,
-            recipeId: e.value.id,
+            mealType: mealType,
+            recipeId: recipe.id,
           );
+        } catch (_) {
+          _upsertMealInPlan(date, mealType, _mealFromRecipe(recipe, null));
         }
+      } else {
+        _upsertMealInPlan(date, mealType, _mealFromRecipe(recipe, null));
       }
-      await loadWeek();
-    } catch (_) {
-      _status = MealPlanStatus.error;
-      notifyListeners();
     }
+    notifyListeners();
   }
 
   // ─── Private ──────────────────────────────────────────────────────────────
+  bool _dayMissingSlots(int dayIndex) {
+    if (dayIndex < 0 || dayIndex >= _weekPlan.length) return false;
+    return _missingSlotsForDay(_weekPlan[dayIndex].date).isNotEmpty;
+  }
+
+  List<String> _missingSlotsForDay(DateTime date) {
+    final i = _dayIndex(date);
+    if (i == -1) return List.from(_mainMealSlots);
+    final existing = _weekPlan[i].meals.map((m) => _typeStr(m.type)).toSet();
+    return _mainMealSlots.where((s) => !existing.contains(s)).toList();
+  }
+
+  Future<Map<String, List<Recipe>>> _recipesByMealType() async {
+    final recipes = await RecipeService.fetchAll(limit: 100);
+    return {
+      for (final t in _mainMealSlots)
+        t: recipes.where((r) => r.mealType == t).toList(),
+    };
+  }
+
+  void _applyLocalWeekFromSuggester({Map<String, List<Recipe>>? byType}) {
+    if (_user == null) return;
+    final weekStart = _currentWeekStart();
+    final types = byType ?? {};
+    final weekNumber = weekStart.weekOfYear;
+
+    _weekPlan = List.generate(7, (i) {
+      final date = weekStart.add(Duration(days: i));
+      final suggestions = MealSuggester.suggestDay(
+        byType: types,
+        user: _user!,
+        weekNumber: weekNumber,
+        dayOffset: i,
+      );
+      final meals = suggestions.entries
+          .map((e) => _mealFromRecipe(e.value, null))
+          .toList()
+        ..sort((a, b) => a.type.index.compareTo(b.type.index));
+      return DayPlan(date: date, meals: meals);
+    });
+  }
+
   static int _todayIndex() => DateTime.now().weekday - 1;
 
   DateTime _currentWeekStart() {
