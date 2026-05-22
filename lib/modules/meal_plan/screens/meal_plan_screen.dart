@@ -1,3 +1,5 @@
+// lib/modules/meal_plan/screens/meal_plan_screen.dart
+
 import 'package:cravvy_cooking_app/init.dart';
 import 'package:cravvy_cooking_app/data/models/meal.dart';
 import 'package:cravvy_cooking_app/data/providers/recipe_provider.dart';
@@ -46,7 +48,20 @@ class _MealList extends StatelessWidget {
       builder: (context, provider, _) {
         if (provider.isLoading) {
           return const Center(
-            child: CircularProgressIndicator(color: AppColors.primary),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CircularProgressIndicator(color: AppColors.primary),
+                SizedBox(height: 16),
+                Text(
+                  'Đang gợi ý thực đơn...',
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: AppColors.textSecondary,
+                  ),
+                ),
+              ],
+            ),
           );
         }
 
@@ -83,22 +98,21 @@ class _MealList extends StatelessWidget {
           onRefresh: provider.reload,
           color: AppColors.primary,
           child: ListView.builder(
-            padding: const EdgeInsets.only(
-              left: 16,
-              top: 16,
-              right: 16,
-              bottom: 100,
-            ),
-            itemCount: _allSlots.length,
+            padding: const EdgeInsets.fromLTRB(16, 12, 16, 100),
+            itemCount: _allSlots.length + 1, // +1 cho banner
             itemBuilder: (context, i) {
-              final slotType = _allSlots[i];
-              final mealOrNull = meals
-                  .where((m) => m.type == slotType)
-                  .toList();
-              final hasMeal = mealOrNull.isNotEmpty;
+              // Index 0: banner "Làm mới gợi ý"
+              if (i == 0) {
+                return _RefreshSuggestionBanner(
+                  onRefresh: () => _confirmRefresh(context, provider),
+                );
+              }
 
-              if (hasMeal) {
-                final meal = mealOrNull.first;
+              final slotType = _allSlots[i - 1];
+              final match = meals.where((m) => m.type == slotType).toList();
+
+              if (match.isNotEmpty) {
+                final meal = match.first;
                 return MealCardWidget(
                   meal: meal,
                   onToggle: () => provider.toggleMealLogged(meal.id),
@@ -118,6 +132,46 @@ class _MealList extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+
+  void _confirmRefresh(BuildContext context, MealPlanProvider provider) {
+    showDialog(
+      context: context,
+      builder: (_) => AlertDialog(
+        backgroundColor: AppColors.surface,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        title: Text(
+          'Làm mới gợi ý?',
+          style: AppTextStyles.s16.copyWith(fontWeight: FontWeight.w700),
+        ),
+        content: Text(
+          'Toàn bộ thực đơn tuần này sẽ được gợi ý lại theo mục tiêu của bạn.',
+          style: AppTextStyles.s14.copyWith(color: AppColors.textSecondary),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text(
+              'Hủy',
+              style: AppTextStyles.s14.copyWith(color: AppColors.textSecondary),
+            ),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+              provider.autoFillWeek();
+            },
+            child: Text(
+              'Làm mới',
+              style: AppTextStyles.s14.copyWith(
+                color: AppColors.primary,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -145,8 +199,11 @@ class _MealList extends StatelessWidget {
       context: context,
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
-      builder: (_) => ChangeNotifierProvider.value(
-        value: provider,
+      builder: (_) => MultiProvider(
+        providers: [
+          ChangeNotifierProvider.value(value: provider),
+          ChangeNotifierProvider.value(value: context.read<RecipeProvider>()),
+        ],
         child: MealSwapSheet(meal: meal),
       ),
     );
@@ -163,5 +220,56 @@ class _MealList extends StatelessWidget {
       case MealType.snack:
         return 'snack';
     }
+  }
+}
+
+class _RefreshSuggestionBanner extends StatelessWidget {
+  const _RefreshSuggestionBanner({required this.onRefresh});
+  final VoidCallback onRefresh;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 14),
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+      decoration: BoxDecoration(
+        color: AppColors.primaryLight,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: AppColors.primary.withValues(alpha: 0.15)),
+      ),
+      child: Row(
+        children: [
+          const Text('✨', style: TextStyle(fontSize: 14)),
+          AppGap.w8,
+          Expanded(
+            child: Text(
+              'Thực đơn được gợi ý theo mục tiêu của bạn',
+              style: AppTextStyles.s12.copyWith(
+                color: AppColors.primaryDark,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+          AppGap.w8,
+          GestureDetector(
+            onTap: onRefresh,
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+              decoration: BoxDecoration(
+                color: AppColors.primary,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Text(
+                'Làm mới',
+                style: AppTextStyles.s12.copyWith(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

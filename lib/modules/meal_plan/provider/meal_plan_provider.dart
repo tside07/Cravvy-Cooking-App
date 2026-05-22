@@ -5,6 +5,7 @@ import 'package:cravvy_cooking_app/data/models/user_model.dart';
 import 'package:cravvy_cooking_app/data/services/meal_plan_service.dart';
 import 'package:cravvy_cooking_app/data/services/recipe_service.dart';
 import 'package:cravvy_cooking_app/core/utils/nutrition_calculator.dart';
+import 'package:cravvy_cooking_app/core/utils/meal_suggester.dart';
 
 enum MealPlanStatus { initial, loading, loaded, error }
 
@@ -14,6 +15,7 @@ class MealPlanProvider extends ChangeNotifier {
   int _selectedDayIndex = _todayIndex();
   NutritionTarget _target = NutritionTarget.defaultTarget;
   String? _userId;
+  UserModel? _user;
 
   // key: '${dateStr}_${mealType}' → entryId (Supabase row id)
   final Map<String, String> _entryIdCache = {};
@@ -47,6 +49,7 @@ class MealPlanProvider extends ChangeNotifier {
     if (user == null) {
       _target = NutritionTarget.defaultTarget;
       _userId = null;
+      _user = null;
       _weekPlan = [];
       _entryIdCache.clear();
       _status = MealPlanStatus.initial;
@@ -62,6 +65,8 @@ class MealPlanProvider extends ChangeNotifier {
       heightCm: user.heightCm,
       goal: user.goal,
     );
+
+    _user = user;
 
     if (_userId != user.id || _status == MealPlanStatus.initial) {
       _userId = user.id;
@@ -208,6 +213,44 @@ class MealPlanProvider extends ChangeNotifier {
   Future<void> reload() async {
     _status = MealPlanStatus.initial;
     await loadWeek();
+  }
+
+  /// Gợi ý lại toàn bộ tuần theo profile user (MealSuggester → Supabase upsert).
+  Future<void> autoFillWeek() async {
+    if (_userId == null || _user == null) return;
+    _status = MealPlanStatus.loading;
+    notifyListeners();
+    try {
+      final recipes = await RecipeService.fetchAll(limit: 100);
+      final byType = <String, List<Recipe>>{
+        for (final t in ['breakfast', 'lunch', 'dinner', 'snack'])
+          t: recipes.where((r) => r.mealType == t).toList(),
+      };
+      final weekStart = _currentWeekStart();
+      final weekNumber = weekStart.weekOfYear;
+
+      for (var i = 0; i < 7; i++) {
+        final date = weekStart.add(Duration(days: i));
+        final suggestions = MealSuggester.suggestDay(
+          byType: byType,
+          user: _user!,
+          weekNumber: weekNumber,
+          dayOffset: i,
+        );
+        for (final e in suggestions.entries) {
+          await MealPlanService.addMeal(
+            userId: _userId!,
+            date: date,
+            mealType: e.key,
+            recipeId: e.value.id,
+          );
+        }
+      }
+      await loadWeek();
+    } catch (_) {
+      _status = MealPlanStatus.error;
+      notifyListeners();
+    }
   }
 
   // ─── Private ──────────────────────────────────────────────────────────────

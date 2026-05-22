@@ -1,6 +1,7 @@
 import 'package:cravvy_cooking_app/init.dart';
 import 'package:cravvy_cooking_app/data/models/meal.dart';
-import 'package:cravvy_cooking_app/data/models/meal_data.dart';
+import 'package:cravvy_cooking_app/data/models/recipe.dart';
+import 'package:cravvy_cooking_app/data/providers/recipe_provider.dart';
 import 'package:cravvy_cooking_app/modules/meal_plan/provider/meal_plan_provider.dart';
 import 'package:cravvy_cooking_app/modules/meal_plan/widgets/alternative_tile_widget.dart';
 
@@ -9,9 +10,37 @@ class MealSwapSheet extends StatelessWidget {
 
   final Meal meal;
 
+  /// Convert Recipe → Meal để dùng với AlternativeTileWidget và swapMeal().
+  /// QUAN TRỌNG: meal.id phải là recipe.id (UUID thật từ Supabase),
+  /// không phải entry id — MealPlanProvider.swapMeal() dùng newMeal.id
+  /// làm newRecipeId khi gọi MealPlanService.swapMeal().
+  Meal _recipeToMeal(Recipe recipe) => Meal(
+    id: recipe.id, // UUID thật — an toàn để persist vào Supabase
+    name: recipe.name,
+    type: meal.type,
+    calories: recipe.calories,
+    protein: recipe.protein,
+    carbs: recipe.carbs,
+    fat: recipe.fat,
+    prepTime: recipe.prepTime,
+    imageUrl: recipe.imageUrl ?? '',
+    tags: recipe.tags,
+    steps: recipe.steps,
+  );
+
   @override
   Widget build(BuildContext context) {
-    final alternatives = MealData.getAlternatives(meal.type);
+    // RecipeProvider đã loaded từ app start — không cần async ở đây
+    final recipeProvider = context.watch<RecipeProvider>();
+
+    // Filter theo mealType của slot hiện tại, loại bỏ chính món đang swap
+    // (so sánh theo name vì meal.id là entryId, không phải recipeId)
+    final mealTypeName = _mealTypeToString(meal.type);
+    final alternatives = recipeProvider.allRecipes
+        .where(
+          (r) => r.mealType == mealTypeName && r.name != meal.name,
+        ) // tránh suggest lại chính món đó
+        .toList();
 
     return Container(
       height: MediaQuery.of(context).size.height * 0.75,
@@ -21,6 +50,7 @@ class MealSwapSheet extends StatelessWidget {
       ),
       child: Column(
         children: [
+          // Handle
           Container(
             margin: AppPad.t12,
             width: 40,
@@ -30,6 +60,8 @@ class MealSwapSheet extends StatelessWidget {
               borderRadius: AppBorderRadius.a2,
             ),
           ),
+
+          // Header
           Padding(
             padding: const EdgeInsets.fromLTRB(24, 20, 24, 0),
             child: Row(
@@ -64,13 +96,15 @@ class MealSwapSheet extends StatelessWidget {
               ],
             ),
           ),
+
+          // Info banner — món đang được thay
           Container(
             margin: const EdgeInsets.fromLTRB(16, 16, 16, 0),
             padding: AppPad.a12,
             decoration: BoxDecoration(
               color: meal.type.lightColor,
               borderRadius: AppBorderRadius.a16,
-              border: Border.all(color: meal.type.color.withOpacity(0.3)),
+              border: Border.all(color: meal.type.color.withValues(alpha: 0.3)),
             ),
             child: Row(
               children: [
@@ -97,39 +131,92 @@ class MealSwapSheet extends StatelessWidget {
               ],
             ),
           ),
+
           AppGap.h16,
+
+          // List alternatives
           Expanded(
-            child: ListView.builder(
-              padding: AppPad.h16,
-              itemCount: alternatives.length,
-              itemBuilder: (context, i) => AlternativeTileWidget(
-                meal: alternatives[i],
-                originalCalories: meal.calories,
-                onSelect: () {
-                  context.read<MealPlanProvider>().swapMeal(
-                    meal.id,
-                    alternatives[i],
-                  );
-                  Navigator.pop(context);
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text(
-                        '✅ Swapped to ${alternatives[i].name}',
-                        style: AppTextStyles.s14.copyWith(
-                          color: AppColors.white,
-                        ),
-                      ),
-                      backgroundColor: AppColors.success,
-                      behavior: SnackBarBehavior.floating,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: AppBorderRadius.a12,
-                      ),
-                      duration: const Duration(seconds: 2),
-                    ),
-                  );
-                },
-              ),
+            child: alternatives.isEmpty
+                ? _EmptyAlternatives(mealType: meal.type)
+                : ListView.builder(
+                    padding: AppPad.h16,
+                    itemCount: alternatives.length,
+                    itemBuilder: (context, i) {
+                      final newMeal = _recipeToMeal(alternatives[i]);
+                      return AlternativeTileWidget(
+                        meal: newMeal,
+                        originalCalories: meal.calories,
+                        onSelect: () {
+                          context.read<MealPlanProvider>().swapMeal(
+                            meal.id,
+                            newMeal,
+                          );
+                          Navigator.pop(context);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                '✅ Swapped to ${newMeal.name}',
+                                style: AppTextStyles.s14.copyWith(
+                                  color: AppColors.white,
+                                ),
+                              ),
+                              backgroundColor: AppColors.success,
+                              behavior: SnackBarBehavior.floating,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: AppBorderRadius.a12,
+                              ),
+                              duration: const Duration(seconds: 2),
+                            ),
+                          );
+                        },
+                      );
+                    },
+                  ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  String _mealTypeToString(MealType type) {
+    switch (type) {
+      case MealType.breakfast:
+        return 'breakfast';
+      case MealType.lunch:
+        return 'lunch';
+      case MealType.dinner:
+        return 'dinner';
+      case MealType.snack:
+        return 'snack';
+    }
+  }
+}
+
+/// Fallback khi RecipeProvider chưa loaded hoặc không có món nào cùng type
+class _EmptyAlternatives extends StatelessWidget {
+  const _EmptyAlternatives({required this.mealType});
+
+  final MealType mealType;
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(mealType.emoji, style: const TextStyle(fontSize: 40)),
+          AppGap.h12,
+          Text(
+            'No alternatives available',
+            style: AppTextStyles.s16.copyWith(
+              fontWeight: FontWeight.w600,
+              color: AppColors.textPrimary,
             ),
+          ),
+          AppGap.h6,
+          Text(
+            'Try adding more recipes to your plan',
+            style: AppTextStyles.s14.copyWith(color: AppColors.textSecondary),
           ),
         ],
       ),
