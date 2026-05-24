@@ -60,7 +60,10 @@ extension MealTypeExt on MealType {
 // ─── Meal model ───────────────────────────────────────────────────────────────
 
 class Meal {
+  /// `meal_plans` row id when loaded from Supabase; recipe uuid when optimistic/local.
   final String id;
+  /// Always the `recipes.id` for this slot.
+  final String recipeId;
   final String name;
   final MealType type;
   final int calories;
@@ -75,6 +78,7 @@ class Meal {
 
   const Meal({
     required this.id,
+    required this.recipeId,
     required this.name,
     required this.type,
     required this.calories,
@@ -90,6 +94,7 @@ class Meal {
 
   Meal copyWith({
     String? id,
+    String? recipeId,
     String? name,
     MealType? type,
     int? calories,
@@ -103,6 +108,7 @@ class Meal {
     List<String>? steps,
   }) => Meal(
     id: id ?? this.id,
+    recipeId: recipeId ?? this.recipeId,
     name: name ?? this.name,
     type: type ?? this.type,
     calories: calories ?? this.calories,

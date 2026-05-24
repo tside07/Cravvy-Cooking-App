@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:cravvy_cooking_app/data/models/meal.dart';
 import 'package:cravvy_cooking_app/data/models/recipe.dart';
 import 'package:cravvy_cooking_app/data/models/user_model.dart';
+import 'package:cravvy_cooking_app/data/services/ai_meal_plan_service.dart';
 import 'package:cravvy_cooking_app/data/services/meal_plan_service.dart';
 import 'package:cravvy_cooking_app/data/services/recipe_service.dart';
 import 'package:cravvy_cooking_app/core/utils/nutrition_calculator.dart';
@@ -28,6 +29,20 @@ class MealPlanProvider extends ChangeNotifier {
   int get selectedDayIndex => _selectedDayIndex;
   DayPlan get selectedDay =>
       _weekPlan.isNotEmpty ? _weekPlan[_selectedDayIndex] : _emptyDay();
+
+  /// Meals for calendar today (Home "Today's Meals"), not the week-strip selection.
+  DayPlan get todayDay {
+    if (_weekPlan.isEmpty) return _emptyDay();
+    final today = DateTime.now();
+    for (final day in _weekPlan) {
+      if (day.date.year == today.year &&
+          day.date.month == today.month &&
+          day.date.day == today.day) {
+        return day;
+      }
+    }
+    return _emptyDay();
+  }
 
   int get targetCalories => _target.calories;
   int get targetProtein => _target.protein;
@@ -204,18 +219,22 @@ class MealPlanProvider extends ChangeNotifier {
       final oldMeal = _weekPlan[i].meals[idx];
       final date = _weekPlan[i].date;
       final mealType = _typeStr(oldMeal.type);
+      final entryId = _entryIdCache[_cacheKey(date, mealType)] ?? oldMeal.id;
       _weekPlan[i] = _weekPlan[i].copyWith(
         meals: _weekPlan[i].meals
-            .map((m) => m.id == oldMealId ? newMeal : m)
+            .map(
+              (m) => m.id == oldMealId
+                  ? newMeal.copyWith(id: entryId, recipeId: newMeal.recipeId)
+                  : m,
+            )
             .toList(),
       );
       notifyListeners();
-      final entryId = _entryIdCache[_cacheKey(date, mealType)];
-      if (entryId != null) {
+      if (entryId.isNotEmpty) {
         try {
           await MealPlanService.swapMeal(
             entryId: entryId,
-            newRecipeId: newMeal.id,
+            newRecipeId: newMeal.recipeId,
           );
         } catch (_) {
           await loadWeek();
@@ -244,44 +263,62 @@ class MealPlanProvider extends ChangeNotifier {
     await loadWeek();
   }
 
-  /// Gợi ý lại toàn bộ tuần theo profile user (MealSuggester → Supabase upsert).
-  Future<void> autoFillWeek() async {
+  /// AI generate tuần (Edge Function) hoặc fallback MealSuggester local.
+  Future<void> autoFillWeek({bool forceRefresh = false}) async {
     if (_user == null) return;
     _status = MealPlanStatus.loading;
     notifyListeners();
     try {
-      final weekStart = _currentWeekStart();
-      final weekNumber = weekStart.weekOfYear;
-      final byType = await _recipesByMealType();
-
       if (_userId != null) {
-        for (var i = 0; i < 7; i++) {
-          final date = weekStart.add(Duration(days: i));
-          final suggestions = MealSuggester.suggestDay(
-            byType: byType,
-            user: _user!,
-            weekNumber: weekNumber,
-            dayOffset: i,
+        try {
+          await AiMealPlanService.generateWeek(
+            weekStart: _currentWeekStart(),
+            forceRefresh: forceRefresh,
           );
-          for (final e in suggestions.entries) {
-            await MealPlanService.addMeal(
-              userId: _userId!,
-              date: date,
-              mealType: e.key,
-              recipeId: e.value.id,
-            );
-          }
+          await loadWeek(suggestIfEmpty: false);
+          return;
+        } on AiMealPlanException catch (e) {
+          debugPrint('AI meal plan failed, using local fallback: $e');
         }
-        await loadWeek(suggestIfEmpty: false);
-        return;
       }
-
-      _applyLocalWeekFromSuggester(byType: byType);
-      _status = MealPlanStatus.loaded;
+      await _autoFillWeekLocal();
     } catch (_) {
       _applyLocalWeekFromSuggester();
       _status = MealPlanStatus.loaded;
+      notifyListeners();
     }
+  }
+
+  /// Local deterministic fill (MealSuggester) — fallback khi AI lỗi / offline.
+  Future<void> _autoFillWeekLocal() async {
+    final weekStart = _currentWeekStart();
+    final weekNumber = weekStart.weekOfYear;
+    final byType = await _recipesByMealType();
+
+    if (_userId != null) {
+      for (var i = 0; i < 7; i++) {
+        final date = weekStart.add(Duration(days: i));
+        final suggestions = MealSuggester.suggestDay(
+          byType: byType,
+          user: _user!,
+          weekNumber: weekNumber,
+          dayOffset: i,
+        );
+        for (final e in suggestions.entries) {
+          await MealPlanService.addMeal(
+            userId: _userId!,
+            date: date,
+            mealType: e.key,
+            recipeId: e.value.id,
+          );
+        }
+      }
+      await loadWeek(suggestIfEmpty: false);
+      return;
+    }
+
+    _applyLocalWeekFromSuggester(byType: byType);
+    _status = MealPlanStatus.loaded;
     notifyListeners();
   }
 
@@ -474,6 +511,7 @@ class MealPlanProvider extends ChangeNotifier {
   Meal _mealFromRecipe(Recipe r, String? entryId, {bool isLogged = false}) =>
       Meal(
         id: entryId ?? r.id,
+        recipeId: r.id,
         name: r.name,
         type: _parseType(r.mealType),
         calories: r.calories,

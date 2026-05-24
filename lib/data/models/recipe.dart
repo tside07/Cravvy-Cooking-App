@@ -61,6 +61,7 @@ class Recipe {
   Meal toMeal() {
     return Meal(
       id: id,
+      recipeId: id,
       name: name,
       type: _parseMealType(mealType),
       calories: calories,

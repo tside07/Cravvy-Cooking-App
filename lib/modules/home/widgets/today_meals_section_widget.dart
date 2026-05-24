@@ -10,7 +10,7 @@ class TodayMealsSectionWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<MealPlanProvider>(
       builder: (context, provider, _) {
-        final meals = provider.selectedDay.meals;
+        final meals = provider.todayDay.meals;
 
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,

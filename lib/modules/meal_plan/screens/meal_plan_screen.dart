@@ -54,7 +54,7 @@ class _MealList extends StatelessWidget {
                 CircularProgressIndicator(color: AppColors.primary),
                 SizedBox(height: 16),
                 Text(
-                  'Đang gợi ý thực đơn...',
+                  'AI đang gợi ý thực đơn...',
                   style: TextStyle(
                     fontSize: 14,
                     color: AppColors.textSecondary,
@@ -160,7 +160,7 @@ class _MealList extends StatelessWidget {
           TextButton(
             onPressed: () {
               Navigator.pop(context);
-              provider.autoFillWeek();
+              provider.autoFillWeek(forceRefresh: true);
             },
             child: Text(
               'Làm mới',

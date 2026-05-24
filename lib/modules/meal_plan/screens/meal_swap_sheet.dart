@@ -15,7 +15,8 @@ class MealSwapSheet extends StatelessWidget {
   /// không phải entry id — MealPlanProvider.swapMeal() dùng newMeal.id
   /// làm newRecipeId khi gọi MealPlanService.swapMeal().
   Meal _recipeToMeal(Recipe recipe) => Meal(
-    id: recipe.id, // UUID thật — an toàn để persist vào Supabase
+    id: recipe.id,
+    recipeId: recipe.id,
     name: recipe.name,
     type: meal.type,
     calories: recipe.calories,
@@ -33,13 +34,11 @@ class MealSwapSheet extends StatelessWidget {
     // RecipeProvider đã loaded từ app start — không cần async ở đây
     final recipeProvider = context.watch<RecipeProvider>();
 
-    // Filter theo mealType của slot hiện tại, loại bỏ chính món đang swap
-    // (so sánh theo name vì meal.id là entryId, không phải recipeId)
-    final mealTypeName = _mealTypeToString(meal.type);
+  final mealTypeName = _mealTypeToString(meal.type);
     final alternatives = recipeProvider.allRecipes
         .where(
-          (r) => r.mealType == mealTypeName && r.name != meal.name,
-        ) // tránh suggest lại chính món đó
+          (r) => r.mealType == mealTypeName && r.id != meal.recipeId,
+        )
         .toList();
 
     return Container(
