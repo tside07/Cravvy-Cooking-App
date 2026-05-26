@@ -306,8 +306,8 @@
         "highlight": {
             "ai_chef_title": "AI Bếp Thông Minh",
             "ai_chef_desc": "Thực đơn 30 ngày cá nhân hóa theo cơ thể, mục tiêu và khẩu vị",
-            "swap_title": "Đổi bữa ăn không giới hạn",
-            "swap_desc": "Thay thế bất kỳ bữa ăn nào chỉ với một chạm, khớp với nguyên liệu trong tủ lạnh",
+            "swap_title": "Đổi bữa ăn linh hoạt",
+            "swap_desc": "Tới 5 lần đổi món mỗi tuần — thay bữa ăn chỉ với một chạm",
             "nutrition_title": "Phân tích dinh dưỡng chuyên sâu",
             "nutrition_desc": "Theo dõi 20+ vi chất và nhận báo cáo điều chỉnh hàng tuần",
             "adfree_title": "Trải nghiệm không quảng cáo",
@@ -328,15 +328,25 @@
             "row_adfree": "Không quảng cáo",
             "row_support": "Hỗ trợ ưu tiên",
             "val_3_per_day": "3/ngày",
+            "val_1_refresh_week": "1 lần/tuần",
             "val_unlimited": "Không giới hạn",
+            "val_5_per_week": "5×/tuần",
+            "val_3_refresh_week": "3 lần/tuần",
             "val_3_days": "3 ngày",
-            "val_7_30_days": "7–30 ngày",
+            "val_7_30_days": "7 ngày",
             "val_2_per_week": "2×/tuần",
+            "val_250_plus": "250+",
             "val_basic": "Cơ bản",
             "val_advanced": "Nâng cao",
             "val_100_plus": "100+",
             "val_1000_plus": "1.000+"
         }
+    },
+    "limits": {
+        "swaps_remaining": "Còn {n} lần đổi món tuần này",
+        "swap_exhausted": "Đã hết lượt đổi món tuần này. Nâng cấp Premium để có thêm 5 lần/tuần.",
+        "ai_refresh_exhausted": "Đã hết lượt làm mới thực đơn AI tuần này.",
+        "upgrade": "Nâng cấp"
     },
     "trial": {
         "started": "🎉 Đã kích hoạt dùng thử!",
@@ -409,7 +419,7 @@
         "q_ai_suggest": "AI gợi ý món ăn như thế nào?",
         "a_ai_suggest": "AI của Cravvy phân tích thông tin cá nhân (chiều cao, cân nặng, mục tiêu sức khỏe, chế độ ăn, dị ứng thực phẩm) để tạo thực đơn phù hợp nhất.",
         "q_swap": "Tính năng Đổi món hoạt động như thế nào?",
-        "a_swap": "Đổi món cho phép thay thế bất kỳ bữa ăn nào bằng bữa khác cùng lượng calo chỉ bằng một chạm. Gói Miễn phí được 2 lần/tuần; Premium không giới hạn.",
+        "a_swap": "Đổi món thay bữa ăn bằng món khác cùng loại. Gói Miễn phí: 2 lần/tuần; Premium: 5 lần/tuần (giới hạn để tối ưu hiệu năng hệ thống).",
         "q_chatbot": "Chatbot Dinh dưỡng AI là gì?",
         "a_chatbot": "Chatbot Dinh dưỡng AI (Premium) trả lời câu hỏi như \"Tôi nên ăn gì để tăng cơ?\" dựa trên dữ liệu dinh dưỡng đã được kiểm chứng.",
         "q_cancel": "Làm thế nào để hủy đăng ký?",

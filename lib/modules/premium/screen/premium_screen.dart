@@ -19,17 +19,17 @@ class _PremiumScreenState extends State<PremiumScreen> {
   bool _isAnnual = true;
 
   // Pricing constants
-  static const int _annualPriceVND = 599000;
-  static const int _monthlyPriceVND = 79000;
-  static const int _annualMonthly = 49917; // 599000 / 12
-  static const int _annualSavings = 349000; // (79000 * 12) - 599000
-  static const int _savePct = 37;
+  static const int _annualPriceVND = 999000;
+  static const int _monthlyPriceVND = 149000;
+  static const int _annualMonthly = 83250; // 999000 / 12
+  static const int _annualSavings = 789000; // (149000 * 12) - 999000
+  static const int _savePct = 44;
 
   // Feature list
   static const List<String> _features = [
-    'Unlimited AI-powered meal suggestions daily',
+    'Up to 3 AI menu refreshes per week',
     'Advanced nutrition tracking & insights',
-    'Access to 1000+ premium recipes',
+    'Expanded recipe library (250+ dishes)',
     'Smart shopping lists with auto-sync',
     'Ad-free experience',
     'Priority customer support',
@@ -37,12 +37,13 @@ class _PremiumScreenState extends State<PremiumScreen> {
 
   // Comparison rows
   static const List<CompRow> _compRows = [
-    CompRow('Daily meal suggestions', '3/day', 'Unlimited'),
-    CompRow('AI meal plan duration', '3 days', '7–30 days'),
+    CompRow('AI menu refresh', '1/week', '3/week'),
+    CompRow('AI meal plan duration', '3 days', '7 days'),
+    CompRow('Meal swap', '2/week', '5/week'),
     CompRow('Calorie tracking', 'Basic', 'Advanced'),
     CompRow('Ads', 'Yes', 'No'),
     CompRow('Diet personalization', 'Limited', 'Full'),
-    CompRow('Recipe collections', '100+', '1000+'),
+    CompRow('Recipe collections', '100+', '250+'),
     CompRow('Shopping lists', 'Basic', 'Smart'),
     CompRow('Priority support', '—', '✓'),
   ];

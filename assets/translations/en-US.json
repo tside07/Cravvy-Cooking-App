@@ -306,8 +306,8 @@
         "highlight": {
             "ai_chef_title": "Smart AI Chef",
             "ai_chef_desc": "Personalized 30-day menu based on your body, goals and taste",
-            "swap_title": "Unlimited Meal Swap",
-            "swap_desc": "Replace any meal with a tap, matched to fridge ingredients",
+            "swap_title": "Flexible Meal Swap",
+            "swap_desc": "Up to 5 swaps per week — replace any meal in one tap",
             "nutrition_title": "Deep Nutrition Analysis",
             "nutrition_desc": "Track 20+ micronutrients and get weekly adjustment reports",
             "adfree_title": "Ad-Free Experience",
@@ -328,15 +328,26 @@
             "row_adfree": "Ad-free",
             "row_support": "Priority support",
             "val_3_per_day": "3/day",
+            "val_1_refresh_week": "1×/week",
             "val_unlimited": "Unlimited",
+            "val_5_per_week": "5×/week",
+            "val_3_refresh_week": "3×/week",
             "val_3_days": "3 days",
+            "val_7_days": "7 days",
             "val_7_30_days": "7–30 days",
             "val_2_per_week": "2×/week",
             "val_basic": "Basic",
             "val_advanced": "Advanced",
             "val_100_plus": "100+",
+            "val_250_plus": "250+",
             "val_1000_plus": "1,000+"
         }
+    },
+    "limits": {
+        "swaps_remaining": "{n} meal swaps left this week",
+        "swap_exhausted": "No meal swaps left this week. Upgrade to Premium for 5 swaps/week.",
+        "ai_refresh_exhausted": "No AI menu refreshes left this week.",
+        "upgrade": "Upgrade"
     },
     "trial": {
         "started": "🎉 Trial Started!",

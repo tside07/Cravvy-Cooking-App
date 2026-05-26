@@ -1,6 +1,7 @@
 // lib/data/providers/recipe_provider.dart
 
 import 'package:flutter/foundation.dart';
+import 'package:cravvy_cooking_app/core/constants/plan_limits.dart';
 import 'package:cravvy_cooking_app/data/models/recipe.dart';
 import 'package:cravvy_cooking_app/data/models/user_model.dart';
 import 'package:cravvy_cooking_app/data/services/recipe_service.dart';
@@ -37,16 +38,28 @@ class RecipeProvider extends ChangeNotifier {
   List<Recipe> get snackRecipes =>
       _allRecipes.where((r) => r.mealType == 'snack').toList();
 
+  UserModel? _user;
+
+  void updateFromUser(UserModel? user) {
+    _user = user;
+  }
+
   // ─── Load tất cả recipes khi app start ───────────────────────────────────
-  Future<void> loadAll() async {
-    if (_status == RecipeStatus.loaded) return;
+  Future<void> loadAll({bool forceReload = false}) async {
+    if (_status == RecipeStatus.loaded && !forceReload) return;
 
     _status = RecipeStatus.loading;
     _errorMessage = null;
     notifyListeners();
 
     try {
-      _allRecipes = await RecipeService.fetchAll(limit: 50);
+      final premium = _user?.isPremium ?? false;
+      _allRecipes = await RecipeService.fetchAll(
+        premiumCatalog: premium,
+        limit: PlanLimits.recipeFetchLimit(
+          premium ? PlanLimits.tierPremium : PlanLimits.tierFree,
+        ),
+      );
       _status = RecipeStatus.loaded;
     } catch (e) {
       _errorMessage = 'Không thể tải danh sách món ăn. Vui lòng thử lại.';

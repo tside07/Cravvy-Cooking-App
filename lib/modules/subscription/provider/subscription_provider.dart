@@ -71,18 +71,18 @@ class SubscriptionProvider extends ChangeNotifier {
   static List<FeatureRow> featureRows() => [
     FeatureRow(
       label: 'subscription.table.row_ai_suggestions'.tr(),
-      freeVal: 'subscription.table.val_3_per_day'.tr(),
-      premiumVal: 'subscription.table.val_unlimited'.tr(),
+      freeVal: 'subscription.table.val_1_refresh_week'.tr(),
+      premiumVal: 'subscription.table.val_3_refresh_week'.tr(),
     ),
     FeatureRow(
       label: 'subscription.table.row_meal_plan'.tr(),
       freeVal: 'subscription.table.val_3_days'.tr(),
-      premiumVal: 'subscription.table.val_7_30_days'.tr(),
+      premiumVal: 'subscription.table.val_7_days'.tr(),
     ),
     FeatureRow(
       label: 'subscription.table.row_meal_swap'.tr(),
       freeVal: 'subscription.table.val_2_per_week'.tr(),
-      premiumVal: 'subscription.table.val_unlimited'.tr(),
+      premiumVal: 'subscription.table.val_5_per_week'.tr(),
     ),
     FeatureRow(
       label: 'subscription.table.row_calorie'.tr(),
@@ -102,7 +102,7 @@ class SubscriptionProvider extends ChangeNotifier {
     FeatureRow(
       label: 'subscription.table.row_recipe'.tr(),
       freeVal: 'subscription.table.val_100_plus'.tr(),
-      premiumVal: 'subscription.table.val_1000_plus'.tr(),
+      premiumVal: 'subscription.table.val_250_plus'.tr(),
     ),
     FeatureRow(
       label: 'subscription.table.row_shopping'.tr(),

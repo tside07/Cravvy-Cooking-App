@@ -3,6 +3,7 @@
 import 'package:cravvy_cooking_app/init.dart';
 import 'package:cravvy_cooking_app/data/models/meal.dart';
 import 'package:cravvy_cooking_app/data/providers/recipe_provider.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:cravvy_cooking_app/modules/meal_plan/provider/meal_plan_provider.dart';
 import 'package:cravvy_cooking_app/modules/meal_plan/widgets/meal_plan_header_widget.dart';
 import 'package:cravvy_cooking_app/modules/meal_plan/widgets/week_strip_widget.dart';
@@ -135,7 +136,22 @@ class _MealList extends StatelessWidget {
     );
   }
 
-  void _confirmRefresh(BuildContext context, MealPlanProvider provider) {
+  Future<void> _confirmRefresh(
+    BuildContext context,
+    MealPlanProvider provider,
+  ) async {
+    final can = await provider.canForceRefreshWeek();
+    if (!context.mounted) return;
+    if (!can) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('limits.ai_refresh_exhausted'.tr()),
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+      return;
+    }
+
     showDialog(
       context: context,
       builder: (_) => AlertDialog(

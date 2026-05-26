@@ -5,6 +5,8 @@ import 'package:cravvy_cooking_app/data/models/user_model.dart';
 import 'package:cravvy_cooking_app/data/services/ai_meal_plan_service.dart';
 import 'package:cravvy_cooking_app/data/services/meal_plan_service.dart';
 import 'package:cravvy_cooking_app/data/services/recipe_service.dart';
+import 'package:cravvy_cooking_app/data/services/usage_limit_service.dart';
+import 'package:cravvy_cooking_app/core/constants/plan_limits.dart';
 import 'package:cravvy_cooking_app/core/utils/nutrition_calculator.dart';
 import 'package:cravvy_cooking_app/core/utils/meal_suggester.dart';
 
@@ -211,8 +213,12 @@ class MealPlanProvider extends ChangeNotifier {
     }
   }
 
-  // ─── Swap ─────────────────────────────────────────────────────────────────
-  Future<void> swapMeal(String oldMealId, Meal newMeal) async {
+  /// `null` = success; non-null = user-facing reason (quota, not logged in).
+  Future<String?> swapMeal(String oldMealId, Meal newMeal) async {
+    if (_userId == null) return 'not_logged_in';
+    final allowed = await UsageLimitService.canSwap(_userId!, _user);
+    if (!allowed) return 'swap_limit';
+
     for (var i = 0; i < _weekPlan.length; i++) {
       final idx = _weekPlan[i].meals.indexWhere((m) => m.id == oldMealId);
       if (idx == -1) continue;
@@ -236,12 +242,24 @@ class MealPlanProvider extends ChangeNotifier {
             entryId: entryId,
             newRecipeId: newMeal.recipeId,
           );
+          await UsageLimitService.recordSwap(_userId!);
         } catch (_) {
           await loadWeek();
         }
       }
-      return;
+      return null;
     }
+    return 'not_found';
+  }
+
+  Future<int> swapsRemainingThisWeek() async {
+    if (_userId == null) return 0;
+    return UsageLimitService.swapsRemaining(_userId!, _user);
+  }
+
+  Future<bool> canForceRefreshWeek() async {
+    if (_userId == null) return false;
+    return UsageLimitService.canAiRefresh(_userId!, _user);
   }
 
   void selectDay(int index) {
@@ -266,6 +284,15 @@ class MealPlanProvider extends ChangeNotifier {
   /// AI generate tuần (Edge Function) hoặc fallback MealSuggester local.
   Future<void> autoFillWeek({bool forceRefresh = false}) async {
     if (_user == null) return;
+
+    if (forceRefresh && _userId != null) {
+      final canRefresh = await UsageLimitService.canAiRefresh(_userId!, _user);
+      if (!canRefresh) {
+        notifyListeners();
+        return;
+      }
+    }
+
     _status = MealPlanStatus.loading;
     notifyListeners();
     try {
@@ -275,6 +302,9 @@ class MealPlanProvider extends ChangeNotifier {
             weekStart: _currentWeekStart(),
             forceRefresh: forceRefresh,
           );
+          if (forceRefresh) {
+            await UsageLimitService.recordAiRefresh(_userId!);
+          }
           await loadWeek(suggestIfEmpty: false);
           return;
         } on AiMealPlanException catch (e) {
@@ -373,7 +403,14 @@ class MealPlanProvider extends ChangeNotifier {
   }
 
   Future<Map<String, List<Recipe>>> _recipesByMealType() async {
-    final recipes = await RecipeService.fetchAll(limit: 100);
+    final recipes = await RecipeService.fetchAll(
+      premiumCatalog: _user?.isPremium ?? false,
+      limit: PlanLimits.recipeFetchLimit(
+        (_user?.isPremium ?? false)
+            ? PlanLimits.tierPremium
+            : PlanLimits.tierFree,
+      ),
+    );
     return {
       for (final t in _mainMealSlots)
         t: recipes.where((r) => r.mealType == t).toList(),

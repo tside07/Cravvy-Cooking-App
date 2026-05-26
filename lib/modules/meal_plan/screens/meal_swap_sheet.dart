@@ -1,14 +1,37 @@
 import 'package:cravvy_cooking_app/init.dart';
+import 'package:cravvy_cooking_app/core/routes/app_routers.dart';
 import 'package:cravvy_cooking_app/data/models/meal.dart';
 import 'package:cravvy_cooking_app/data/models/recipe.dart';
 import 'package:cravvy_cooking_app/data/providers/recipe_provider.dart';
 import 'package:cravvy_cooking_app/modules/meal_plan/provider/meal_plan_provider.dart';
 import 'package:cravvy_cooking_app/modules/meal_plan/widgets/alternative_tile_widget.dart';
+import 'package:easy_localization/easy_localization.dart';
 
-class MealSwapSheet extends StatelessWidget {
+class MealSwapSheet extends StatefulWidget {
   const MealSwapSheet({super.key, required this.meal});
 
   final Meal meal;
+
+  @override
+  State<MealSwapSheet> createState() => _MealSwapSheetState();
+}
+
+class _MealSwapSheetState extends State<MealSwapSheet> {
+  int? _swapsLeft;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) => _loadQuota());
+  }
+
+  Future<void> _loadQuota() async {
+    final left =
+        await context.read<MealPlanProvider>().swapsRemainingThisWeek();
+    if (mounted) setState(() => _swapsLeft = left);
+  }
+
+  Meal get meal => widget.meal;
 
   /// Convert Recipe → Meal để dùng với AlternativeTileWidget và swapMeal().
   /// QUAN TRỌNG: meal.id phải là recipe.id (UUID thật từ Supabase),
@@ -76,6 +99,15 @@ class MealSwapSheet extends StatelessWidget {
                           color: AppColors.textPrimary,
                         ),
                       ),
+                      if (_swapsLeft != null)
+                        Text(
+                          'limits.swaps_remaining'.tr(
+                            namedArgs: {'n': '$_swapsLeft'},
+                          ),
+                          style: AppTextStyles.s12.copyWith(
+                            color: AppColors.textSecondary,
+                          ),
+                        ),
                       Text(
                         'Choose a replacement for ${meal.name}',
                         style: AppTextStyles.s14.copyWith(
@@ -145,11 +177,27 @@ class MealSwapSheet extends StatelessWidget {
                       return AlternativeTileWidget(
                         meal: newMeal,
                         originalCalories: meal.calories,
-                        onSelect: () {
-                          context.read<MealPlanProvider>().swapMeal(
-                            meal.id,
-                            newMeal,
-                          );
+                        onSelect: () async {
+                          final err = await context
+                              .read<MealPlanProvider>()
+                              .swapMeal(meal.id, newMeal);
+                          if (!context.mounted) return;
+                          if (err == 'swap_limit') {
+                            Navigator.pop(context);
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text('limits.swap_exhausted'.tr()),
+                                action: SnackBarAction(
+                                  label: 'limits.upgrade'.tr(),
+                                  onPressed: () =>
+                                      context.push(AppRouter.premium),
+                                ),
+                                behavior: SnackBarBehavior.floating,
+                              ),
+                            );
+                            return;
+                          }
+                          if (err != null) return;
                           Navigator.pop(context);
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(

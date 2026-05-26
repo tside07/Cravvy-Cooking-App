@@ -51,12 +51,9 @@ Urban students and office workers, **aged 18–30**, who care about eating well 
 > 🚧 This repo is part of an academic project.
 > Code and prototype are currently in development.
 
-### Week 5 — AI Meal Plan
+**Stack:** Flutter · Supabase · Gemini (Edge Function `generate-meal-plan`)
 
-Deploy the Gemini Edge Function and run migrations before testing AI generation:
-
-- [docs/WEEK5_DEPLOY.md](docs/WEEK5_DEPLOY.md) — deploy `generate-meal-plan`, set `GEMINI_API_KEY`
-- [docs/WEEK5_QA_CHECKLIST.md](docs/WEEK5_QA_CHECKLIST.md) — manual QA checklist
+**Setup (local):** configure Supabase secrets (`GEMINI_API_KEY`), run SQL migrations under `supabase/migrations/`, deploy Edge Functions from `supabase/functions/`.
 
 ---
 

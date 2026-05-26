@@ -1,5 +1,6 @@
 // lib/data/services/recipe_service.dart
 
+import 'package:cravvy_cooking_app/core/constants/plan_limits.dart';
 import 'package:cravvy_cooking_app/data/services/supabase_service.dart';
 import 'package:cravvy_cooking_app/data/models/recipe.dart';
 
@@ -8,13 +9,24 @@ class RecipeService {
   static const _table = 'recipes';
 
   // ─── Lấy tất cả recipes (dùng cho Home - featured) ───────────────────────
-  static Future<List<Recipe>> fetchAll({int limit = 20}) async {
-    final data = await _client
-        .from(_table)
-        .select()
-        .eq('is_active', true)
-        .order('created_at')
-        .limit(limit);
+  static Future<List<Recipe>> fetchAll({
+    int? limit,
+    bool premiumCatalog = false,
+  }) async {
+    final cap = limit ?? PlanLimits.recipeFetchLimit(
+      premiumCatalog ? PlanLimits.tierPremium : PlanLimits.tierFree,
+    );
+
+    var query = _client.from(_table).select().eq('is_active', true);
+
+    if (!premiumCatalog) {
+      // Curated VN + legacy rows without source (early seed)
+      query = query.or(
+        'source.in.(${PlanLimits.freeRecipeSources.join(',')}),source.is.null',
+      );
+    }
+
+    final data = await query.order('created_at').limit(cap);
 
     return (data as List).map((e) => Recipe.fromJson(e)).toList();
   }

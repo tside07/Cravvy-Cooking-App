@@ -27,14 +27,18 @@ class AuthProvider extends ChangeNotifier {
 
   void linkRecipeProvider(RecipeProvider rp) {
     _recipeProvider = rp;
-    if (_user != null) Future.microtask(rp.loadAll);
+    if (_user != null) _syncRecipeCatalog();
   }
 
   void _syncUserToProviders() {
     _mealPlanProvider?.updateFromUser(_user);
-    if (_user != null) {
-      Future.microtask(() => _recipeProvider?.loadAll());
-    }
+    _syncRecipeCatalog();
+  }
+
+  void _syncRecipeCatalog() {
+    if (_user == null || _recipeProvider == null) return;
+    _recipeProvider!.updateFromUser(_user);
+    Future.microtask(() => _recipeProvider!.loadAll(forceReload: true));
   }
 
   AuthProvider() {
