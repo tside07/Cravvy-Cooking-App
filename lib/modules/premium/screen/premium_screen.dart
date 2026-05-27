@@ -1,3 +1,4 @@
+import 'package:cravvy_cooking_app/data/providers/auth_provider.dart';
 import 'package:cravvy_cooking_app/init.dart';
 import 'package:cravvy_cooking_app/modules/premium/model/comp_row.dart';
 import 'package:cravvy_cooking_app/modules/premium/widgets/plan_toggle_widget.dart';
@@ -26,6 +27,28 @@ class _PremiumScreenState extends State<PremiumScreen> {
   static const int _savePct = 44;
 
   // Feature list
+  Future<void> _onPremiumCta(BuildContext context) async {
+    final auth = context.read<AuthProvider>();
+    if (auth.canStartPremiumTrial) {
+      final ok = await auth.startPremiumTrial();
+      if (!context.mounted) return;
+      if (ok) {
+        context.push(AppRouter.trialActivation);
+        return;
+      }
+      final msg = auth.errorMessage ?? 'Không kích hoạt được dùng thử.';
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(msg), behavior: SnackBarBehavior.floating),
+      );
+      return;
+    }
+    if (auth.user?.isPremium == true) {
+      context.push(AppRouter.trialActivation);
+      return;
+    }
+    context.push(AppRouter.subscription);
+  }
+
   static const List<String> _features = [
     'Up to 3 AI menu refreshes per week',
     'Advanced nutrition tracking & insights',
@@ -87,9 +110,7 @@ class _PremiumScreenState extends State<PremiumScreen> {
                     AppGap.h24,
             
                     PremiumCtaButtonWidget(
-                      onPressed: () {
-                        // TODO: handle subscription purchase
-                      },
+                      onPressed: () => _onPremiumCta(context),
                     ),
                     AppGap.h8,
             

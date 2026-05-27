@@ -1,3 +1,4 @@
+import 'package:cravvy_cooking_app/data/providers/auth_provider.dart';
 import 'package:cravvy_cooking_app/init.dart';
 import 'package:cravvy_cooking_app/modules/subscription/provider/subscription_provider.dart';
 import 'package:cravvy_cooking_app/modules/subscription/widgets/plan_card_widget.dart';
@@ -24,6 +25,7 @@ class _SubscriptionView extends StatelessWidget {
   Widget build(BuildContext context) {
     final _ = context.locale;
     final provider = context.watch<SubscriptionProvider>();
+    final auth = context.watch<AuthProvider>();
     final plans = SubscriptionProvider.plans();
     final highlights = SubscriptionProvider.highlights();
     final features = SubscriptionProvider.featureRows();
@@ -218,9 +220,9 @@ class _SubscriptionView extends StatelessWidget {
                     width: double.infinity,
                     height: 54,
                     child: ElevatedButton(
-                      onPressed: provider.isFreePlan
-                          ? null
-                          : () => context.push(AppRouter.trialActivation),
+                      onPressed: auth.canStartPremiumTrial
+                          ? () => _onStartTrial(context)
+                          : null,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.primary,
                         disabledBackgroundColor: AppColors.surfaceVariant,
@@ -229,13 +231,13 @@ class _SubscriptionView extends StatelessWidget {
                         ),
                       ),
                       child: Text(
-                        provider.isFreePlan
-                            ? 'subscription.current_plan'.tr()
-                            : 'subscription.start_trial'.tr(),
+                        auth.canStartPremiumTrial
+                            ? 'subscription.start_trial'.tr()
+                            : 'subscription.current_plan'.tr(),
                         style: AppTextStyles.s16.copyWith(
-                          color: provider.isFreePlan
-                              ? AppColors.textSecondary
-                              : Colors.white,
+                          color: auth.canStartPremiumTrial
+                              ? Colors.white
+                              : AppColors.textSecondary,
                           fontWeight: FontWeight.w700,
                         ),
                       ),
@@ -254,6 +256,20 @@ class _SubscriptionView extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  Future<void> _onStartTrial(BuildContext context) async {
+    final auth = context.read<AuthProvider>();
+    final ok = await auth.startPremiumTrial();
+    if (!context.mounted) return;
+    if (ok) {
+      context.push(AppRouter.trialActivation);
+      return;
+    }
+    final msg = auth.errorMessage ?? 'Không kích hoạt được dùng thử.';
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(msg), behavior: SnackBarBehavior.floating),
     );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:cravvy_cooking_app/core/constants/plan_limits.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:cravvy_cooking_app/data/services/supabase_service.dart';
 import 'package:cravvy_cooking_app/data/models/user_model.dart';
@@ -92,6 +93,19 @@ class AuthService {
     }).eq('id', userId);
 
     return await getProfile(userId);
+  }
+
+  /// Activates 14-day Premium trial on `profiles` (no payment).
+  static Future<UserModel?> startPremiumTrial(String userId) async {
+    final until = DateTime.now().add(
+      const Duration(days: PlanLimits.premiumTrialDays),
+    );
+    await _client.from('profiles').update({
+      'subscription_tier': PlanLimits.tierTrial,
+      'premium_until': until.toUtc().toIso8601String(),
+    }).eq('id', userId);
+
+    return getProfile(userId);
   }
 
   static Future<UserModel?> updateSetupData({

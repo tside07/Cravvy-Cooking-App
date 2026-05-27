@@ -6,6 +6,7 @@ import 'package:cravvy_cooking_app/data/providers/recipe_provider.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:cravvy_cooking_app/modules/meal_plan/provider/meal_plan_provider.dart';
 import 'package:cravvy_cooking_app/modules/meal_plan/widgets/meal_plan_header_widget.dart';
+import 'package:cravvy_cooking_app/modules/meal_plan/widgets/free_week_upsell_banner.dart';
 import 'package:cravvy_cooking_app/modules/meal_plan/widgets/week_strip_widget.dart';
 import 'package:cravvy_cooking_app/modules/meal_plan/widgets/calorie_summary_widget.dart';
 import 'package:cravvy_cooking_app/modules/meal_plan/widgets/meal_card_widget.dart';
@@ -24,6 +25,7 @@ class MealPlanScreen extends StatelessWidget {
           children: [
             const MealPlanHeaderWidget(),
             const WeekStripWidget(),
+            const FreeWeekUpsellBanner(),
             const CalorieSummaryWidget(),
             const Expanded(child: _MealList()),
           ],

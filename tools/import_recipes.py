@@ -182,18 +182,47 @@ def load_hf_csv(path: Path, limit: int, source: str) -> list[dict[str, Any]]:
     return out
 
 
+def _validate_supabase_env(url: str | None, key: str | None) -> None:
+    if not url or not key:
+        print(
+            "Set SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY in tools/.env\n"
+            "(copy from tools/.env.example, then paste values from Supabase Dashboard).",
+            file=sys.stderr,
+        )
+        sys.exit(1)
+    url = url.strip()
+    if "YOUR_PROJECT" in url or "your_project" in url.lower():
+        print(
+            "SUPABASE_URL is still the example placeholder.\n"
+            "Fix tools/.env → Project Settings → API → Project URL\n"
+            "Example: https://abcdefghijklmnop.supabase.co",
+            file=sys.stderr,
+        )
+        sys.exit(1)
+    if key.strip() in ("your_service_role_key_here", "", "YOUR_KEY"):
+        print(
+            "SUPABASE_SERVICE_ROLE_KEY is still the example placeholder.\n"
+            "Fix tools/.env → Project Settings → API → service_role (secret).\n"
+            "Do NOT use the anon key for import.",
+            file=sys.stderr,
+        )
+        sys.exit(1)
+    if not url.startswith("https://") or ".supabase.co" not in url:
+        print(f"SUPABASE_URL looks invalid: {url[:80]}", file=sys.stderr)
+        sys.exit(1)
+
+
 def get_client() -> Client:
     load_dotenv(ROOT / "tools" / ".env")
     load_dotenv(ROOT / ".env")
     url = os.environ.get("SUPABASE_URL")
     key = os.environ.get("SUPABASE_SERVICE_ROLE_KEY")
-    if not url or not key:
-        print(
-            "Set SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY in tools/.env",
-            file=sys.stderr,
-        )
+    _validate_supabase_env(url, key)
+    try:
+        return create_client(url.strip(), key.strip())  # type: ignore[arg-type]
+    except Exception as e:
+        print(f"Cannot create Supabase client: {e}", file=sys.stderr)
         sys.exit(1)
-    return create_client(url, key)
 
 
 def upsert_batch(client: Client, rows: list[dict[str, Any]], dry_run: bool) -> int:
@@ -252,12 +281,34 @@ def main() -> None:
         return
 
     client = get_client()
+    host = os.environ.get("SUPABASE_URL", "").replace("https://", "").split("/")[0]
+    print(f"Connecting to {host} ...")
     total = 0
-    for i in range(0, len(recipes), BATCH_SIZE):
-        batch = recipes[i : i + BATCH_SIZE]
-        n = upsert_batch(client, batch, dry_run=False)
-        total += n
-        print(f"Upserted {total}/{len(recipes)}")
+    try:
+        for i in range(0, len(recipes), BATCH_SIZE):
+            batch = recipes[i : i + BATCH_SIZE]
+            n = upsert_batch(client, batch, dry_run=False)
+            total += n
+            print(f"Upserted {total}/{len(recipes)}")
+    except Exception as e:
+        err = str(e).lower()
+        if "getaddrinfo" in err or "connect" in err:
+            print(
+                "\nNetwork/DNS error — cannot reach Supabase.\n"
+                "1) Check internet / VPN\n"
+                "2) Fix SUPABASE_URL in tools/.env (real project URL, not YOUR_PROJECT)\n"
+                "3) Open the URL in a browser to confirm it loads",
+                file=sys.stderr,
+            )
+        elif "42p10" in err or "on conflict" in err:
+            print(
+                "\nDatabase missing UNIQUE (source, source_id) on table recipes.\n"
+                "Run in Supabase SQL Editor:\n"
+                "  supabase/RUN_IN_SQL_EDITOR_recipes_provenance.sql\n"
+                "Then run import again.",
+                file=sys.stderr,
+            )
+        raise
     print("Done.")
 
 

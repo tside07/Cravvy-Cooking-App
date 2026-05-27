@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:cravvy_cooking_app/core/constants/plan_limits.dart';
 import 'package:cravvy_cooking_app/data/models/user_model.dart';
 import 'package:cravvy_cooking_app/data/services/auth_service.dart';
 import 'package:cravvy_cooking_app/data/services/supabase_service.dart';
@@ -212,6 +213,33 @@ class AuthProvider extends ChangeNotifier {
     } catch (e) {
       return false;
     }
+  }
+
+  /// Starts 14-day trial; refreshes meal plan & recipe catalog for Premium access.
+  Future<bool> startPremiumTrial() async {
+    if (_user == null) return false;
+    try {
+      _user = await AuthService.startPremiumTrial(_user!.id);
+      if (_user == null) {
+        _setError('Không kích hoạt được dùng thử. Kiểm tra kết nối.');
+        return false;
+      }
+      _status = AuthStatus.authenticated;
+      _syncUserToProviders();
+      notifyListeners();
+      return true;
+    } catch (e) {
+      _setError(
+        'Không lưu được gói dùng thử. Chạy migration Tuần 6 trên Supabase.',
+      );
+      return false;
+    }
+  }
+
+  bool get canStartPremiumTrial {
+    if (_user == null) return false;
+    if (_user!.isPremium) return false;
+    return _user!.subscriptionTier == PlanLimits.tierFree;
   }
 
   Future<void> logout() async {

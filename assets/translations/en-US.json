@@ -347,7 +347,9 @@
         "swaps_remaining": "{n} meal swaps left this week",
         "swap_exhausted": "No meal swaps left this week. Upgrade to Premium for 5 swaps/week.",
         "ai_refresh_exhausted": "No AI menu refreshes left this week.",
-        "upgrade": "Upgrade"
+        "upgrade": "Upgrade",
+        "unlock_week": "Unlock",
+        "free_week_hint": "Free plan shows 3 days per week. Premium unlocks the full 7-day plan."
     },
     "trial": {
         "started": "🎉 Trial Started!",

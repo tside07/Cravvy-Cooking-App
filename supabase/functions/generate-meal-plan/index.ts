@@ -11,6 +11,9 @@ const CORS_HEADERS = {
     "authorization, x-client-info, apikey, content-type",
 };
 
+// Keep in sync with `PlanLimits.freeRecipeSources` (Flutter).
+const FREE_RECIPE_SOURCES = ["cravvy_curated_vn"] as const;
+
 type MealSlot = { meal_type: string; recipe_id: string };
 type DayPlan = { date: string; meals: MealSlot[] };
 
@@ -184,6 +187,18 @@ function validateAndFillDays(
   return result;
 }
 
+function isPremiumAccess(profile: Record<string, unknown>): boolean {
+  const tier = String(profile.subscription_tier ?? "free");
+  const isTierPremium = tier === "premium" || tier === "trial";
+  if (!isTierPremium) return false;
+
+  const untilRaw = profile.premium_until;
+  if (untilRaw == null) return true;
+  const until = new Date(String(untilRaw));
+  if (isNaN(until.getTime())) return true;
+  return until.getTime() > Date.now();
+}
+
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response("ok", { headers: CORS_HEADERS });
@@ -225,7 +240,7 @@ Deno.serve(async (req) => {
     const { data: profile, error: profileError } = await admin
       .from("profiles")
       .select(
-        "id, goal, diets, avoid_foods, age, gender, weight_kg, height_cm, cooking_time, meal_plan_profile_hash, meal_plan_week_start",
+        "id, goal, diets, avoid_foods, age, gender, weight_kg, height_cm, cooking_time, meal_plan_profile_hash, meal_plan_week_start, subscription_tier, premium_until",
       )
       .eq("id", user.id)
       .single();
@@ -260,10 +275,21 @@ Deno.serve(async (req) => {
       }
     }
 
-    const { data: recipes, error: recipesError } = await admin
+    const premium = isPremiumAccess(profile);
+
+    let recipesQuery = admin
       .from("recipes")
-      .select("id, name, meal_type, calories, protein, carbs, fat, tags")
+      .select("id, name, meal_type, calories, protein, carbs, fat, tags, source")
       .eq("is_active", true);
+
+    if (!premium) {
+      // Free catalog: curated VN + legacy rows without source (early seed).
+      recipesQuery = recipesQuery.or(
+        `source.in.(${FREE_RECIPE_SOURCES.join(",")}),source.is.null`,
+      );
+    }
+
+    const { data: recipes, error: recipesError } = await recipesQuery;
 
     if (recipesError || !recipes?.length) {
       return jsonResponse({ error: "No recipes in catalog" }, 400);

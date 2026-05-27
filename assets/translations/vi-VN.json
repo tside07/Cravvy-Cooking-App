@@ -346,7 +346,9 @@
         "swaps_remaining": "Còn {n} lần đổi món tuần này",
         "swap_exhausted": "Đã hết lượt đổi món tuần này. Nâng cấp Premium để có thêm 5 lần/tuần.",
         "ai_refresh_exhausted": "Đã hết lượt làm mới thực đơn AI tuần này.",
-        "upgrade": "Nâng cấp"
+        "upgrade": "Nâng cấp",
+        "unlock_week": "Mở khóa",
+        "free_week_hint": "Gói Free xem 3 ngày/tuần. Premium mở khóa kế hoạch 7 ngày."
     },
     "trial": {
         "started": "🎉 Đã kích hoạt dùng thử!",

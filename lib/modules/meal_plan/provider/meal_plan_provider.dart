@@ -7,6 +7,7 @@ import 'package:cravvy_cooking_app/data/services/meal_plan_service.dart';
 import 'package:cravvy_cooking_app/data/services/recipe_service.dart';
 import 'package:cravvy_cooking_app/data/services/usage_limit_service.dart';
 import 'package:cravvy_cooking_app/core/constants/plan_limits.dart';
+import 'package:cravvy_cooking_app/core/utils/meal_plan_visibility.dart';
 import 'package:cravvy_cooking_app/core/utils/nutrition_calculator.dart';
 import 'package:cravvy_cooking_app/core/utils/meal_suggester.dart';
 
@@ -61,6 +62,17 @@ class MealPlanProvider extends ChangeNotifier {
       (selectedDay.totalFat / _target.fat).clamp(0.0, 1.0);
   int get remainingCalories => _target.calories - selectedDay.totalCalories;
 
+  bool get hasPremiumAccess => UsageLimitService.userHasPremium(_user);
+
+  int get visibleDayCount => MealPlanVisibility.visibleDayCount(hasPremiumAccess);
+
+  List<int> get visibleDayIndices => MealPlanVisibility.visibleDayIndices(
+        isPremium: hasPremiumAccess,
+      );
+
+  bool isDayVisible(int index) =>
+      MealPlanVisibility.isIndexVisible(index, visibleDayIndices);
+
   // ─── Called by AuthProvider ───────────────────────────────────────────────
   void updateFromUser(UserModel? user) {
     if (user == null) {
@@ -84,6 +96,10 @@ class MealPlanProvider extends ChangeNotifier {
     );
 
     _user = user;
+    _selectedDayIndex = MealPlanVisibility.clampSelectedIndex(
+      _selectedDayIndex,
+      visibleDayIndices,
+    );
 
     if (_userId != user.id || _status == MealPlanStatus.initial) {
       _userId = user.id;
@@ -125,10 +141,12 @@ class MealPlanProvider extends ChangeNotifier {
         }
       }
 
+      _clampSelectedDay();
       _status = MealPlanStatus.loaded;
     } catch (_) {
       if (suggestIfEmpty && _user != null) {
         _applyLocalWeekFromSuggester();
+        _clampSelectedDay();
         _status = MealPlanStatus.loaded;
       } else {
         _status = MealPlanStatus.error;
@@ -263,6 +281,7 @@ class MealPlanProvider extends ChangeNotifier {
   }
 
   void selectDay(int index) {
+    if (!isDayVisible(index)) return;
     _selectedDayIndex = index;
     notifyListeners();
     if (_user != null &&
@@ -314,6 +333,7 @@ class MealPlanProvider extends ChangeNotifier {
       await _autoFillWeekLocal();
     } catch (_) {
       _applyLocalWeekFromSuggester();
+      _clampSelectedDay();
       _status = MealPlanStatus.loaded;
       notifyListeners();
     }
@@ -348,6 +368,7 @@ class MealPlanProvider extends ChangeNotifier {
     }
 
     _applyLocalWeekFromSuggester(byType: byType);
+    _clampSelectedDay();
     _status = MealPlanStatus.loaded;
     notifyListeners();
   }
@@ -440,6 +461,13 @@ class MealPlanProvider extends ChangeNotifier {
   }
 
   static int _todayIndex() => DateTime.now().weekday - 1;
+
+  void _clampSelectedDay() {
+    _selectedDayIndex = MealPlanVisibility.clampSelectedIndex(
+      _selectedDayIndex,
+      visibleDayIndices,
+    );
+  }
 
   DateTime _currentWeekStart() {
     final now = DateTime.now();

@@ -7,6 +7,9 @@ class PlanLimits {
   static const String tierPremium = 'premium';
   static const String tierTrial = 'trial';
 
+  /// Premium trial length shown in subscription UI.
+  static const int premiumTrialDays = 14;
+
   /// Meal swaps per ISO week (Monday start, UTC-aligned in UsageLimitService).
   static const int freeSwapsPerWeek = 2;
   static const int premiumSwapsPerWeek = 5;
