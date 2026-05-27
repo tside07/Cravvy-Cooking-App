@@ -50,16 +50,15 @@ class _MealList extends StatelessWidget {
     return Consumer<MealPlanProvider>(
       builder: (context, provider, _) {
         if (provider.isLoading) {
-          return const Center(
+          return Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                CircularProgressIndicator(color: AppColors.primary),
-                SizedBox(height: 16),
+                const CircularProgressIndicator(color: AppColors.primary),
+                const SizedBox(height: 16),
                 Text(
-                  'AI đang gợi ý thực đơn...',
-                  style: TextStyle(
-                    fontSize: 14,
+                  'meal_plan.loading'.tr(),
+                  style: AppTextStyles.s14.copyWith(
                     color: AppColors.textSecondary,
                   ),
                 ),
@@ -76,7 +75,7 @@ class _MealList extends StatelessWidget {
                 const Text('😕', style: TextStyle(fontSize: 36)),
                 AppGap.h12,
                 Text(
-                  'Không tải được kế hoạch ăn',
+                  'meal_plan.load_error'.tr(),
                   style: AppTextStyles.s14.copyWith(
                     color: AppColors.textSecondary,
                   ),
@@ -85,7 +84,7 @@ class _MealList extends StatelessWidget {
                 TextButton(
                   onPressed: provider.reload,
                   child: Text(
-                    'Thử lại',
+                    'meal_plan.retry'.tr(),
                     style: AppTextStyles.s14.copyWith(color: AppColors.primary),
                   ),
                 ),
@@ -160,18 +159,18 @@ class _MealList extends StatelessWidget {
         backgroundColor: AppColors.surface,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         title: Text(
-          'Làm mới gợi ý?',
+          'meal_plan.refresh_dialog_title'.tr(),
           style: AppTextStyles.s16.copyWith(fontWeight: FontWeight.w700),
         ),
         content: Text(
-          'Toàn bộ thực đơn tuần này sẽ được gợi ý lại theo mục tiêu của bạn.',
+          'meal_plan.refresh_dialog_body'.tr(),
           style: AppTextStyles.s14.copyWith(color: AppColors.textSecondary),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
             child: Text(
-              'Hủy',
+              'common.cancel'.tr(),
               style: AppTextStyles.s14.copyWith(color: AppColors.textSecondary),
             ),
           ),
@@ -181,7 +180,7 @@ class _MealList extends StatelessWidget {
               provider.autoFillWeek(forceRefresh: true);
             },
             child: Text(
-              'Làm mới',
+              'meal_plan.refresh'.tr(),
               style: AppTextStyles.s14.copyWith(
                 color: AppColors.primary,
                 fontWeight: FontWeight.w700,
@@ -261,7 +260,7 @@ class _RefreshSuggestionBanner extends StatelessWidget {
           AppGap.w8,
           Expanded(
             child: Text(
-              'Thực đơn được gợi ý theo mục tiêu của bạn',
+              'meal_plan.banner_hint'.tr(),
               style: AppTextStyles.s12.copyWith(
                 color: AppColors.primaryDark,
                 fontWeight: FontWeight.w600,
@@ -278,7 +277,7 @@ class _RefreshSuggestionBanner extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Text(
-                'Làm mới',
+                'meal_plan.refresh'.tr(),
                 style: AppTextStyles.s12.copyWith(
                   color: Colors.white,
                   fontWeight: FontWeight.w700,

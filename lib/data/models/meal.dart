@@ -1,9 +1,11 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../core/theme/app_colors.dart';
 
 enum MealType { breakfast, lunch, dinner, snack }
 
 extension MealTypeExt on MealType {
+  /// English fallback for debug / non-UI use.
   String get label {
     switch (this) {
       case MealType.breakfast:
@@ -14,6 +16,20 @@ extension MealTypeExt on MealType {
         return 'Dinner';
       case MealType.snack:
         return 'Snack';
+    }
+  }
+
+  /// Localized label via `assets/translations`.
+  String get localizedLabel {
+    switch (this) {
+      case MealType.breakfast:
+        return 'meal_plan.meal_breakfast'.tr();
+      case MealType.lunch:
+        return 'meal_plan.meal_lunch'.tr();
+      case MealType.dinner:
+        return 'meal_plan.meal_dinner'.tr();
+      case MealType.snack:
+        return 'meal_plan.meal_snack'.tr();
     }
   }
 

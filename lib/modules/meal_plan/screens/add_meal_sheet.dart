@@ -1,4 +1,5 @@
 import 'package:cravvy_cooking_app/init.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:cravvy_cooking_app/data/models/meal.dart';
 import 'package:cravvy_cooking_app/data/providers/recipe_provider.dart';
 import 'package:cravvy_cooking_app/modules/meal_plan/provider/meal_plan_provider.dart';
@@ -67,14 +68,16 @@ class _AddMealSheetState extends State<AddMealSheet> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Add ${widget.mealType.label}',
+                      'meal_plan.add_sheet_title'.tr(
+                        namedArgs: {'meal': widget.mealType.localizedLabel},
+                      ),
                       style: AppTextStyles.s18.copyWith(
                         fontWeight: FontWeight.w700,
                         color: AppColors.textPrimary,
                       ),
                     ),
                     Text(
-                      'Pick a recipe for this slot',
+                      'meal_plan.add_sheet_subtitle'.tr(),
                       style: AppTextStyles.s14.copyWith(
                         color: AppColors.textSecondary,
                       ),
@@ -107,7 +110,11 @@ class _AddMealSheetState extends State<AddMealSheet> {
                 controller: _searchCtrl,
                 onChanged: (v) => setState(() => _query = v.toLowerCase()),
                 decoration: InputDecoration(
-                  hintText: 'Search ${widget.mealType.label.toLowerCase()}...',
+                  hintText: 'meal_plan.search_meal_hint'.tr(
+                    namedArgs: {
+                      'meal': widget.mealType.localizedLabel.toLowerCase(),
+                    },
+                  ),
                   hintStyle: AppTextStyles.s14.copyWith(
                     color: AppColors.textHint,
                   ),
@@ -162,7 +169,11 @@ class _AddMealSheetState extends State<AddMealSheet> {
                         ),
                         AppGap.h12,
                         Text(
-                          'No ${widget.mealType.label.toLowerCase()} found',
+                          'meal_plan.no_recipes_found'.tr(
+                            namedArgs: {
+                              'meal': widget.mealType.localizedLabel.toLowerCase(),
+                            },
+                          ),
                           style: AppTextStyles.s14.copyWith(
                             color: AppColors.textSecondary,
                           ),
@@ -189,7 +200,9 @@ class _AddMealSheetState extends State<AddMealSheet> {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               content: Text(
-                                '✅ Added ${recipe.name}',
+                                'meal_plan.added_success'.tr(
+                                  namedArgs: {'name': recipe.name},
+                                ),
                                 style: AppTextStyles.s14.copyWith(
                                   color: Colors.white,
                                 ),
@@ -284,7 +297,7 @@ class _AddMealSheetState extends State<AddMealSheet> {
                                         ),
                                         const SizedBox(width: 2),
                                         Text(
-                                          '${recipe.calories} cal',
+                                          '${recipe.calories} ${'meal_plan.calories_unit'.tr()}',
                                           style: AppTextStyles.s12.copyWith(
                                             color: AppColors.primary,
                                             fontWeight: FontWeight.w600,
@@ -298,7 +311,11 @@ class _AddMealSheetState extends State<AddMealSheet> {
                                         ),
                                         const SizedBox(width: 2),
                                         Text(
-                                          '${recipe.prepTime} min',
+                                          'meal_plan.minutes_long'.tr(
+                                            namedArgs: {
+                                              'n': '${recipe.prepTime}',
+                                            },
+                                          ),
                                           style: AppTextStyles.s12.copyWith(
                                             color: AppColors.textSecondary,
                                           ),

@@ -1,5 +1,6 @@
 import 'package:cravvy_cooking_app/init.dart';
 import 'package:cravvy_cooking_app/data/models/meal.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 /// Four-column stat strip: Prep time, Calories, Servings, Difficulty level.
 class MealDetailStatsWidget extends StatelessWidget {
@@ -17,29 +18,30 @@ class MealDetailStatsWidget extends StatelessWidget {
             _StatItem(
               icon: Icons.timer_outlined,
               iconColor: AppColors.primary,
-              value: '${meal.prepTime}m',
-              label: 'Prep',
+              value:
+                  '${meal.prepTime}${'meal_plan.minutes_short'.tr()}',
+              label: 'meal_detail.stat_prep'.tr(),
             ),
             _divider,
             _StatItem(
               icon: Icons.local_fire_department_rounded,
               iconColor: AppColors.warning,
               value: '${meal.calories}',
-              label: 'Cal',
+              label: 'meal_detail.stat_cal'.tr(),
             ),
             _divider,
             _StatItem(
               icon: Icons.people_alt_outlined,
               iconColor: AppColors.secondary,
               value: '2',
-              label: 'Servings',
+              label: 'meal_detail.stat_servings'.tr(),
             ),
             _divider,
-            const _StatItem(
+            _StatItem(
               icon: Icons.trending_up_rounded,
               iconColor: AppColors.secondaryDark,
-              value: 'Medium',
-              label: 'Level',
+              value: 'meal_detail.level_medium'.tr(),
+              label: 'meal_detail.stat_level'.tr(),
             ),
           ],
         ),

@@ -5,7 +5,15 @@ import 'package:cravvy_cooking_app/modules/meal_plan/provider/meal_plan_provider
 class WeekStripWidget extends StatelessWidget {
   const WeekStripWidget({super.key});
 
-  static const _days = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
+  static const _dayKeys = [
+    'meal_plan.day_mon',
+    'meal_plan.day_tue',
+    'meal_plan.day_wed',
+    'meal_plan.day_thu',
+    'meal_plan.day_fri',
+    'meal_plan.day_sat',
+    'meal_plan.day_sun',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -92,7 +100,7 @@ class _DayCell extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                WeekStripWidget._days[index],
+                WeekStripWidget._dayKeys[index].tr(),
                 style: AppTextStyles.s12.copyWith(
                   fontSize: 11,
                   fontWeight: FontWeight.w600,

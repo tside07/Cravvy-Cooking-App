@@ -7,6 +7,7 @@
 import 'package:cravvy_cooking_app/init.dart';
 import 'package:cravvy_cooking_app/data/models/meal.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class MealCardWidget extends StatelessWidget {
   const MealCardWidget({
@@ -76,7 +77,7 @@ class MealCardWidget extends StatelessWidget {
                         ),
                         const SizedBox(width: 4),
                         Text(
-                          meal.type.label.toUpperCase(),
+                          meal.type.localizedLabel.toUpperCase(),
                           style: AppTextStyles.s10.copyWith(
                             fontWeight: FontWeight.w700,
                             color: meal.type.color,
@@ -109,7 +110,7 @@ class MealCardWidget extends StatelessWidget {
                         ),
                         const SizedBox(width: 2),
                         Text(
-                          '${meal.calories} cal',
+                          '${meal.calories} ${'meal_plan.calories_unit'.tr()}',
                           style: AppTextStyles.s12.copyWith(
                             color: AppColors.primary,
                             fontWeight: FontWeight.w600,
@@ -123,7 +124,7 @@ class MealCardWidget extends StatelessWidget {
                         ),
                         const SizedBox(width: 2),
                         Text(
-                          '${meal.prepTime}m',
+                          '${meal.prepTime}${'meal_plan.minutes_short'.tr()}',
                           style: AppTextStyles.s12.copyWith(
                             color: AppColors.textSecondary,
                           ),
@@ -136,19 +137,19 @@ class MealCardWidget extends StatelessWidget {
                     Row(
                       children: [
                         _MacroPill(
-                          'P ${meal.protein}g',
+                          '${'meal_plan.macro_protein_short'.tr()} ${meal.protein}g',
                           AppColors.secondaryLight,
                           AppColors.secondaryDark,
                         ),
                         const SizedBox(width: 4),
                         _MacroPill(
-                          'C ${meal.carbs}g',
+                          '${'meal_plan.macro_carbs_short'.tr()} ${meal.carbs}g',
                           const Color(0xFFFFFAE6),
                           AppColors.accentDark,
                         ),
                         const SizedBox(width: 4),
                         _MacroPill(
-                          'F ${meal.fat}g',
+                          '${'meal_plan.macro_fat_short'.tr()} ${meal.fat}g',
                           AppColors.primaryLight,
                           AppColors.primaryDark,
                         ),
@@ -265,7 +266,9 @@ class EmptyMealSlotCard extends StatelessWidget {
             ),
             AppGap.w10,
             Text(
-              'Thêm ${mealType.label}',
+              'meal_plan.add_meal'.tr(
+                namedArgs: {'meal': mealType.localizedLabel},
+              ),
               style: AppTextStyles.s14.copyWith(
                 fontWeight: FontWeight.w600,
                 color: AppColors.textSecondary,

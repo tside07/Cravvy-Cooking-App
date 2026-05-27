@@ -93,7 +93,7 @@ class _MealSwapSheetState extends State<MealSwapSheet> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Swap Meal',
+                        'meal_plan.swap_title'.tr(),
                         style: AppTextStyles.s18.copyWith(
                           fontWeight: FontWeight.w600,
                           color: AppColors.textPrimary,
@@ -109,7 +109,9 @@ class _MealSwapSheetState extends State<MealSwapSheet> {
                           ),
                         ),
                       Text(
-                        'Choose a replacement for ${meal.name}',
+                        'meal_plan.swap_subtitle'.tr(
+                          namedArgs: {'name': meal.name},
+                        ),
                         style: AppTextStyles.s14.copyWith(
                           color: AppColors.textSecondary,
                         ),
@@ -147,7 +149,9 @@ class _MealSwapSheetState extends State<MealSwapSheet> {
                 AppGap.w8,
                 Expanded(
                   child: Text(
-                    'Replacing: ${meal.name}',
+                    'meal_plan.swap_replacing'.tr(
+                      namedArgs: {'name': meal.name},
+                    ),
                     style: AppTextStyles.s14.copyWith(
                       fontSize: 13,
                       fontWeight: FontWeight.w600,
@@ -156,7 +160,7 @@ class _MealSwapSheetState extends State<MealSwapSheet> {
                   ),
                 ),
                 Text(
-                  '${meal.calories} kcal',
+                  '${meal.calories} ${'meal_plan.kcal_unit'.tr()}',
                   style: AppTextStyles.s12.copyWith(color: meal.type.color),
                 ),
               ],
@@ -202,7 +206,9 @@ class _MealSwapSheetState extends State<MealSwapSheet> {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               content: Text(
-                                '✅ Swapped to ${newMeal.name}',
+                                'meal_plan.swap_success'.tr(
+                                  namedArgs: {'name': newMeal.name},
+                                ),
                                 style: AppTextStyles.s14.copyWith(
                                   color: AppColors.white,
                                 ),
@@ -254,7 +260,7 @@ class _EmptyAlternatives extends StatelessWidget {
           Text(mealType.emoji, style: const TextStyle(fontSize: 40)),
           AppGap.h12,
           Text(
-            'No alternatives available',
+            'meal_plan.swap_empty_title'.tr(),
             style: AppTextStyles.s16.copyWith(
               fontWeight: FontWeight.w600,
               color: AppColors.textPrimary,
@@ -262,7 +268,7 @@ class _EmptyAlternatives extends StatelessWidget {
           ),
           AppGap.h6,
           Text(
-            'Try adding more recipes to your plan',
+            'meal_plan.swap_empty_subtitle'.tr(),
             style: AppTextStyles.s14.copyWith(color: AppColors.textSecondary),
           ),
         ],

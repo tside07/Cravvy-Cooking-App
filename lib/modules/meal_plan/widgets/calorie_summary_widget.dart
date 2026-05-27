@@ -1,4 +1,5 @@
 import 'package:cravvy_cooking_app/init.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:cravvy_cooking_app/modules/meal_plan/provider/meal_plan_provider.dart';
 
 class CalorieSummaryWidget extends StatelessWidget {
@@ -23,9 +24,9 @@ class CalorieSummaryWidget extends StatelessWidget {
               Row(
                 children: [
                   _CalStat(
-                    label: 'Consumed',
+                    label: 'meal_plan.consumed'.tr(),
                     value: '${day.totalCalories}',
-                    unit: 'kcal',
+                    unit: 'meal_plan.kcal_unit'.tr(),
                   ),
                   const Spacer(),
                   Column(
@@ -40,7 +41,7 @@ class CalorieSummaryWidget extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        'kcal left',
+                        'meal_plan.kcal_left'.tr(),
                         style: AppTextStyles.s12.copyWith(
                           color: Colors.white.withValues(alpha: 0.8),
                         ),
@@ -49,9 +50,9 @@ class CalorieSummaryWidget extends StatelessWidget {
                   ),
                   const Spacer(),
                   _CalStat(
-                    label: 'Goal',
+                    label: 'meal_plan.goal'.tr(),
                     value: '${provider.targetCalories}',
-                    unit: 'kcal',
+                    unit: 'meal_plan.kcal_unit'.tr(),
                     alignRight: true,
                   ),
                 ],
@@ -70,7 +71,7 @@ class CalorieSummaryWidget extends StatelessWidget {
               Row(
                 children: [
                   _MacroChip(
-                    label: 'Protein',
+                    label: 'meal_plan.macro_protein'.tr(),
                     value: '${day.totalProtein}g',
                     target: '${provider.targetProtein}g',
                     progress: provider.proteinProgress,
@@ -78,7 +79,7 @@ class CalorieSummaryWidget extends StatelessWidget {
                   ),
                   AppGap.w8,
                   _MacroChip(
-                    label: 'Carbs',
+                    label: 'meal_plan.macro_carbs'.tr(),
                     value: '${day.totalCarbs}g',
                     target: '${provider.targetCarbs}g',
                     progress: provider.carbsProgress,
@@ -86,7 +87,7 @@ class CalorieSummaryWidget extends StatelessWidget {
                   ),
                   AppGap.w8,
                   _MacroChip(
-                    label: 'Fat',
+                    label: 'meal_plan.macro_fat'.tr(),
                     value: '${day.totalFat}g',
                     target: '${provider.targetFat}g',
                     progress: provider.fatProgress,

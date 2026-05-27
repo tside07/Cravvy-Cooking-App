@@ -1,5 +1,6 @@
 import 'package:cravvy_cooking_app/init.dart';
 import 'package:cravvy_cooking_app/data/models/meal.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 /// Hero image section with back/bookmark buttons, title, rating, and tags.
 class MealDetailHeaderWidget extends StatelessWidget {
@@ -101,7 +102,7 @@ class MealDetailHeaderWidget extends StatelessWidget {
                     ),
                     AppGap.w4,
                     Text(
-                      '(128 reviews)',
+                      'meal_detail.reviews'.tr(namedArgs: {'n': '128'}),
                       style: AppTextStyles.s12.copyWith(
                         color: Colors.white.withValues(alpha: 0.75),
                       ),

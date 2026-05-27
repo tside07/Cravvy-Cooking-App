@@ -1,4 +1,5 @@
 import 'package:cravvy_cooking_app/init.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class MealPlanHeaderWidget extends StatelessWidget {
   const MealPlanHeaderWidget({super.key});
@@ -17,11 +18,11 @@ class MealPlanHeaderWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Meal Plan',
+                'meal_plan.title'.tr(),
                 style: Theme.of(context).textTheme.headlineLarge,
               ),
               Text(
-                'Stay on track this week',
+                'meal_plan.subtitle'.tr(),
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
             ],
@@ -38,7 +39,7 @@ class MealPlanHeaderWidget extends StatelessWidget {
                 const Text('🔥', style: AppTextStyles.s14),
                 AppGap.w4,
                 Text(
-                  '7-day streak',
+                  'meal_plan.streak_days'.tr(namedArgs: {'n': '7'}),
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
                     color: AppColors.primary,
                     fontWeight: FontWeight.w700,
