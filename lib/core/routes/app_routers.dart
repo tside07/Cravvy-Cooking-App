@@ -7,7 +7,6 @@ import 'package:cravvy_cooking_app/modules/onboarding/screens/diet_selection_scr
 import 'package:cravvy_cooking_app/modules/onboarding/screens/setup_complete_screen.dart';
 import 'package:cravvy_cooking_app/modules/onboarding/screens/setup/setup_screen.dart';
 import 'package:cravvy_cooking_app/modules/onboarding/provider/onboarding_provider.dart';
-import 'package:cravvy_cooking_app/modules/meal_plan/provider/meal_plan_provider.dart';
 import 'package:cravvy_cooking_app/modules/dashboard/provider/dashboard_tab_provider.dart';
 import 'package:cravvy_cooking_app/modules/auth/login/screen/login_screen.dart';
 import 'package:cravvy_cooking_app/modules/auth/register/screen/register_screen.dart';
@@ -141,11 +140,8 @@ class AppRouter {
 
       GoRoute(
         path: app,
-        builder: (context, state) => MultiProvider(
-          providers: [
-            ChangeNotifierProvider(create: (_) => MealPlanProvider()),
-            ChangeNotifierProvider(create: (_) => DashboardTabProvider()),
-          ],
+        builder: (context, state) => ChangeNotifierProvider(
+          create: (_) => DashboardTabProvider(),
           child: const DashboardScreen(),
         ),
       ),

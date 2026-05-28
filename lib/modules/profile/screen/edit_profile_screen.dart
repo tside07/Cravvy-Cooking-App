@@ -5,6 +5,7 @@ import 'package:cravvy_cooking_app/modules/profile/widgets/edit_profile_section_
 import 'package:cravvy_cooking_app/modules/profile/widgets/field_card_widget.dart';
 import 'package:cravvy_cooking_app/modules/profile/widgets/danger_tile_widget.dart';
 import 'package:cravvy_cooking_app/modules/profile/widgets/simple_dialog_widget.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({super.key});
@@ -82,9 +83,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     showDialog(
       context: context,
       builder: (_) => SimpleDialogWidget(
-        title: 'Change Password',
-        body: 'This feature is not yet available in this version.',
-        confirmLabel: 'OK',
+        title: 'profile.change_pw'.tr(),
+        body: 'profile.change_pw_desc'.tr(),
+        confirmLabel: 'common.ok'.tr(),
         onConfirm: () => Navigator.pop(context),
         isDestructive: false,
       ),
@@ -95,10 +96,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     showDialog(
       context: context,
       builder: (_) => SimpleDialogWidget(
-        title: 'Delete Account',
-        body:
-            'Are you sure? This action cannot be undone and all your data will be permanently removed.',
-        confirmLabel: 'Delete',
+        title: 'profile.delete_acc'.tr(),
+        body: 'profile.delete_acc_desc'.tr(),
+        confirmLabel: 'common.delete'.tr(),
         onConfirm: () {
           Navigator.pop(context);
           context.go(AppRouter.onboarding);
@@ -129,7 +129,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           onPressed: () => context.pop(),
         ),
         title: Text(
-          'Edit Profile',
+          'profile.edit_profile'.tr(),
           style: AppTextStyles.s16.copyWith(fontWeight: FontWeight.w700),
         ),
         centerTitle: true,
@@ -189,7 +189,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     ),
                     AppGap.h8,
                     Text(
-                      'Change avatar',
+                      'profile.change_avatar'.tr(),
                       style: AppTextStyles.s12.copyWith(
                         color: AppColors.primary,
                         fontWeight: FontWeight.w600,
@@ -201,7 +201,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
               AppGap.h24,
 
-              const EditProfileSectionHeaderWidget(title: 'BASIC INFORMATION'),
+              EditProfileSectionHeaderWidget(title: 'profile.basic_info'.tr()),
               AppGap.h8,
 
               FieldCardWidget(
@@ -210,12 +210,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   style: AppTextStyles.s14,
                   decoration: _fieldDecoration(
                     icon: Icons.person_outline_rounded,
-                    hint: 'Full name',
+                    hint: 'profile.hint_fullname'.tr(),
                     controller: _nameCtrl,
                     showCheckMark: true,
                   ),
                   validator: (v) => (v == null || v.trim().isEmpty)
-                      ? 'Name is required'
+                      ? 'profile.val_name'.tr()
                       : null,
                 ),
               ),
@@ -242,7 +242,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Date of birth',
+                        'profile.dob'.tr(),
                         style: AppTextStyles.s10.copyWith(
                           color: AppColors.textSecondary,
                         ),
@@ -261,8 +261,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
               AppGap.h24,
 
-              const EditProfileSectionHeaderWidget(
-                title: 'CONTACT INFORMATION',
+              EditProfileSectionHeaderWidget(
+                title: 'profile.contact_info'.tr(),
               ),
               AppGap.h8,
 
@@ -273,15 +273,16 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   style: AppTextStyles.s14,
                   decoration: _fieldDecoration(
                     icon: Icons.email_outlined,
-                    hint: 'Email address',
+                    hint: 'profile.hint_email'.tr(),
                     controller: _emailCtrl,
                     showCheckMark: true,
                   ),
                   validator: (v) {
-                    if (v == null || v.trim().isEmpty)
-                      return 'Email is required';
+                    if (v == null || v.trim().isEmpty) {
+                      return 'profile.val_email1'.tr();
+                    }
                     if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(v.trim())) {
-                      return 'Enter a valid email';
+                      return 'profile.val_email2'.tr();
                     }
                     return null;
                   },
@@ -297,7 +298,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   style: AppTextStyles.s14,
                   decoration: _fieldDecoration(
                     icon: Icons.phone_outlined,
-                    hint: 'Phone number',
+                    hint: 'profile.phoneNo'.tr(),
                     controller: _phoneCtrl,
                     showCheckMark: false,
                   ),
@@ -306,7 +307,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
               AppGap.h24,
 
-              const EditProfileSectionHeaderWidget(title: 'ABOUT YOU'),
+              EditProfileSectionHeaderWidget(title: 'profile.about_u'.tr()),
               AppGap.h8,
 
               FieldCardWidget(
@@ -319,7 +320,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       maxLength: _bioMaxLength,
                       style: AppTextStyles.s14,
                       decoration: InputDecoration(
-                        hintText: 'Write something about yourself...',
+                        hintText: 'profile.hint_bio'.tr(),
                         hintStyle: AppTextStyles.s14.copyWith(
                           color: AppColors.textHint,
                         ),
@@ -397,7 +398,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     onTap: _save,
                     child: Center(
                       child: Text(
-                        'Save Changes',
+                        'common.save_changes'.tr(),
                         style: AppTextStyles.s16.copyWith(
                           color: AppColors.white,
                           fontWeight: FontWeight.w700,
@@ -424,7 +425,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Danger Zone',
+                      'profile.danger_zone'.tr(),
                       style: AppTextStyles.s14.copyWith(
                         color: AppColors.error,
                         fontWeight: FontWeight.w700,
@@ -432,19 +433,19 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     ),
                     AppGap.h4,
                     Text(
-                      'These actions cannot be undone',
+                      'profile.danger'.tr(),
                       style: AppTextStyles.s12.copyWith(
                         color: AppColors.error.withValues(alpha: 0.7),
                       ),
                     ),
                     AppGap.h12,
                     DangerTileWidget(
-                      label: 'Change Password',
+                      label: 'profile.change_pw'.tr(),
                       onTap: _showChangePassword,
                     ),
                     const Divider(height: 1, color: Color(0xFFFFCDD2)),
                     DangerTileWidget(
-                      label: 'Delete Account',
+                      label: 'profile.delete_acc'.tr(),
                       onTap: _showDeleteAccount,
                     ),
                   ],

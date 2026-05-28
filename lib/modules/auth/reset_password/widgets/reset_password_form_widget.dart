@@ -1,5 +1,6 @@
 import 'package:cravvy_cooking_app/init.dart';
 import 'package:cravvy_cooking_app/modules/auth/reset_password/widgets/password_rule_widget.dart';
+import 'package:cravvy_cooking_app/modules/auth/widgets/auth_header_widget.dart';
 
 class ResetPasswordFormWidget extends StatelessWidget {
   final GlobalKey<FormState> formKey;
@@ -40,39 +41,37 @@ class ResetPasswordFormWidget extends StatelessWidget {
     return Form(
       key: formKey,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24),
+        padding: AppPad.h24,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             AppGap.h8,
             Center(
-              child: Container(
-                width: 56,
-                height: 56,
-                decoration: BoxDecoration(
-                  color: AppColors.primaryLight,
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                child: const Icon(
-                  Icons.lock_outline_rounded,
-                  color: AppColors.primary,
-                  size: 28,
-                ),
+              child: Column(
+                children: [
+                  Container(
+                    width: 56,
+                    height: 56,
+                    decoration: BoxDecoration(
+                      color: AppColors.primaryLight,
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    child: const Icon(
+                      Icons.lock_outline_rounded,
+                      color: AppColors.primary,
+                      size: 28,
+                    ),
+                  ),
+                  AppGap.h20,
+                  AuthHeaderWidget(
+                    title: 'Create New Password',
+                    subtitle: 'Enter a strong password for $email',
+                    textAlign: TextAlign.center,
+                  ),
+                ],
               ),
             ),
-            AppGap.h20,
-            Text(
-              'Create New Password',
-              style: AppTextStyles.s20.copyWith(
-                fontWeight: FontWeight.w700,
-                fontSize: 26,
-              ),
-            ),
-            AppGap.h8,
-            Text(
-              'Enter a strong password for $email',
-              style: AppTextStyles.s14.copyWith(color: AppColors.textSecondary),
-            ),
+
             AppGap.h32,
 
             // Password field
@@ -198,7 +197,8 @@ class ResetPasswordFormWidget extends StatelessWidget {
               ),
               validator: (v) {
                 if (v == null || v.isEmpty) return 'Please confirm password';
-                if (v != passwordController.text) return 'Passwords do not match';
+                if (v != passwordController.text)
+                  return 'Passwords do not match';
                 return null;
               },
             ),

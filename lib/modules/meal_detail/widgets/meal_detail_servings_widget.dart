@@ -1,4 +1,5 @@
 import 'package:cravvy_cooking_app/init.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:cravvy_cooking_app/modules/meal_detail/provider/meal_detail_provider.dart';
 
 /// "Servings" row with decrement / count / increment controls.
@@ -20,7 +21,7 @@ class MealDetailServingsWidget extends StatelessWidget {
             child: Row(
               children: [
                 Text(
-                  'Servings',
+                  'meal_detail.servings'.tr(),
                   style: AppTextStyles.s16.copyWith(
                     fontWeight: FontWeight.w700,
                     color: AppColors.textPrimary,

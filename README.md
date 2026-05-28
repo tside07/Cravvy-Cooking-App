@@ -51,6 +51,10 @@ Urban students and office workers, **aged 18–30**, who care about eating well 
 > 🚧 This repo is part of an academic project.
 > Code and prototype are currently in development.
 
+**Stack:** Flutter · Supabase · Gemini (Edge Function `generate-meal-plan`)
+
+**Setup (local):** configure Supabase secrets (`GEMINI_API_KEY`), run SQL migrations under `supabase/migrations/`, deploy Edge Functions from `supabase/functions/`.
+
 ---
 
 ## Contributor

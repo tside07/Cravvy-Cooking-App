@@ -1,0 +1,191 @@
+// lib/data/providers/recipe_provider.dart
+
+import 'package:flutter/foundation.dart';
+import 'package:cravvy_cooking_app/core/constants/plan_limits.dart';
+import 'package:cravvy_cooking_app/data/models/recipe.dart';
+import 'package:cravvy_cooking_app/data/models/user_model.dart';
+import 'package:cravvy_cooking_app/data/services/recipe_service.dart';
+
+enum RecipeStatus { initial, loading, loaded, error }
+
+class RecipeProvider extends ChangeNotifier {
+  RecipeStatus _status = RecipeStatus.initial;
+  List<Recipe> _allRecipes = [];
+  List<Recipe> _searchResults = [];
+  List<Recipe> _suggestedRecipes = []; // recipes phù hợp với user profile
+  String? _errorMessage;
+  String _searchQuery = '';
+
+  // ─── Getters ──────────────────────────────────────────────────────────────
+  RecipeStatus get status => _status;
+  String? get errorMessage => _errorMessage;
+  String get searchQuery => _searchQuery;
+
+  bool get isLoading => _status == RecipeStatus.loading;
+  bool get isLoaded => _status == RecipeStatus.loaded;
+
+  List<Recipe> get allRecipes => _allRecipes;
+  List<Recipe> get searchResults => _searchResults;
+  List<Recipe> get suggestedRecipes => _suggestedRecipes;
+
+  // Phân loại theo meal type
+  List<Recipe> get breakfastRecipes =>
+      _allRecipes.where((r) => r.mealType == 'breakfast').toList();
+  List<Recipe> get lunchRecipes =>
+      _allRecipes.where((r) => r.mealType == 'lunch').toList();
+  List<Recipe> get dinnerRecipes =>
+      _allRecipes.where((r) => r.mealType == 'dinner').toList();
+  List<Recipe> get snackRecipes =>
+      _allRecipes.where((r) => r.mealType == 'snack').toList();
+
+  UserModel? _user;
+
+  void updateFromUser(UserModel? user) {
+    _user = user;
+  }
+
+  // ─── Load tất cả recipes khi app start ───────────────────────────────────
+  Future<void> loadAll({bool forceReload = false}) async {
+    if (_status == RecipeStatus.loaded && !forceReload) return;
+
+    _status = RecipeStatus.loading;
+    _errorMessage = null;
+    notifyListeners();
+
+    try {
+      final premium = _user?.isPremium ?? false;
+      _allRecipes = await RecipeService.fetchAll(
+        premiumCatalog: premium,
+        limit: PlanLimits.recipeFetchLimit(
+          premium ? PlanLimits.tierPremium : PlanLimits.tierFree,
+        ),
+      );
+      _status = RecipeStatus.loaded;
+    } catch (e) {
+      _errorMessage = 'Không thể tải danh sách món ăn. Vui lòng thử lại.';
+      _status = RecipeStatus.error;
+    }
+    notifyListeners();
+  }
+
+  // ─── Load recipes phù hợp với user (dùng cho "For You" section) ──────────
+  Future<void> loadForUser(UserModel? user) async {
+    if (user == null) return;
+
+    // Nếu allRecipes chưa có thì load trước
+    if (_allRecipes.isEmpty) await loadAll();
+
+    // Filter local theo goal và calorie target
+    final calorieMax = _calorieMaxForGoal(user.goal);
+    final minProtein = user.goal == 'build-muscle' ? 20 : 0;
+
+    _suggestedRecipes =
+        _allRecipes.where((r) {
+            if (r.calories > calorieMax) return false;
+            if (r.protein < minProtein) return false;
+            return true;
+          }).toList()
+          // Sort: món khớp goal lên trước
+          ..sort(
+            (a, b) => _scoreRecipe(
+              b,
+              user.goal,
+            ).compareTo(_scoreRecipe(a, user.goal)),
+          );
+
+    notifyListeners();
+  }
+
+  int _calorieMaxForGoal(String? goal) {
+    switch (goal) {
+      case 'lose-weight':
+        return 450;
+      case 'build-muscle':
+        return 650;
+      default:
+        return 600;
+    }
+  }
+
+  int _scoreRecipe(Recipe r, String? goal) {
+    int score = 0;
+    switch (goal) {
+      case 'lose-weight':
+        if (r.tags.any((t) => t.toLowerCase().contains('low carb'))) score += 2;
+        if (r.calories < 350) score += 2;
+        break;
+      case 'build-muscle':
+        if (r.protein >= 30) score += 3;
+        if (r.tags.any((t) => t.toLowerCase().contains('high protein')))
+          score += 2;
+        break;
+      case 'maintain':
+      case 'health':
+        if (r.tags.any(
+          (t) =>
+              t.toLowerCase().contains('vegan') ||
+              t.toLowerCase().contains('fiber'),
+        ))
+          score += 1;
+        break;
+    }
+    return score;
+  }
+
+  // ─── Filter nâng cao (dùng cho Search screen) ────────────────────────────
+  List<Recipe> filterRecipes({
+    String? mealType, // null = all
+    int? maxCalories, // null = no limit
+    String? difficulty, // null = all
+  }) {
+    return _allRecipes.where((r) {
+      if (mealType != null && r.mealType != mealType) return false;
+      if (maxCalories != null && r.calories > maxCalories) return false;
+      if (difficulty != null && r.difficulty != difficulty) return false;
+      return true;
+    }).toList();
+  }
+
+  // ─── Tìm kiếm ─────────────────────────────────────────────────────────────
+  Future<void> search(String query) async {
+    _searchQuery = query;
+
+    if (query.trim().isEmpty) {
+      _searchResults = [];
+      notifyListeners();
+      return;
+    }
+
+    // Search local trước (nhanh hơn, offline-friendly)
+    final q = query.toLowerCase();
+    _searchResults = _allRecipes.where((r) {
+      return r.name.toLowerCase().contains(q) ||
+          r.tags.any((t) => t.toLowerCase().contains(q)) ||
+          (r.description?.toLowerCase().contains(q) ?? false);
+    }).toList();
+
+    notifyListeners();
+
+    // Nếu local không có kết quả → query Supabase
+    if (_searchResults.isEmpty) {
+      try {
+        _searchResults = await RecipeService.search(query);
+        notifyListeners();
+      } catch (_) {
+        // Silent fail — local search đã trả về empty, không cần báo lỗi
+      }
+    }
+  }
+
+  void clearSearch() {
+    _searchQuery = '';
+    _searchResults = [];
+    notifyListeners();
+  }
+
+  // ─── Reload (pull-to-refresh) ─────────────────────────────────────────────
+  Future<void> reload() async {
+    _status = RecipeStatus.initial;
+    await loadAll();
+  }
+}

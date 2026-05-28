@@ -1,4 +1,5 @@
 import 'package:cravvy_cooking_app/init.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:cravvy_cooking_app/modules/meal_detail/provider/meal_detail_provider.dart';
 
 /// Segmented tab bar: Ingredients | Nutrition | Instructions.
@@ -63,11 +64,11 @@ class MealDetailTabsWidget extends StatelessWidget {
   String _label(MealDetailTab tab) {
     switch (tab) {
       case MealDetailTab.ingredients:
-        return 'Ingredients';
+        return 'meal_detail.tab_ingredients'.tr();
       case MealDetailTab.nutrition:
-        return 'Nutrition';
+        return 'meal_detail.tab_nutrition'.tr();
       case MealDetailTab.instructions:
-        return 'Instructions';
+        return 'meal_detail.tab_instructions'.tr();
     }
   }
 }

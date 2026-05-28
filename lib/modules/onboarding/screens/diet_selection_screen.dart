@@ -35,7 +35,7 @@ class DietSelectionScreen extends StatelessWidget {
                   AppGap.w12,
                   Expanded(
                     child: Text(
-                      'Your diet type 🌿',
+                      'Your diet type preferences?',
                       style: Theme.of(context).textTheme.headlineLarge,
                     ),
                   ),
@@ -75,7 +75,7 @@ class DietSelectionScreen extends StatelessWidget {
 
               Consumer<OnboardingProvider>(
                 builder: (context, provider, _) => CravvyButton(
-                  label: 'Start Planning →',
+                  label: 'Start Planning',
                   onTap: provider.canProceedDiet
                       ? () => context.go(
                           AppRouter.setupComplete,

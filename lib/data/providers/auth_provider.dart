@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:cravvy_cooking_app/core/constants/plan_limits.dart';
 import 'package:cravvy_cooking_app/data/models/user_model.dart';
 import 'package:cravvy_cooking_app/data/services/auth_service.dart';
 import 'package:cravvy_cooking_app/data/services/supabase_service.dart';
+import 'package:cravvy_cooking_app/data/providers/recipe_provider.dart';
+import 'package:cravvy_cooking_app/modules/meal_plan/provider/meal_plan_provider.dart';
 
 enum AuthStatus { initial, loading, authenticated, unauthenticated, error }
 
@@ -10,17 +13,39 @@ class AuthProvider extends ChangeNotifier {
   AuthStatus _status = AuthStatus.initial;
   UserModel? _user;
   String? _errorMessage;
+  MealPlanProvider? _mealPlanProvider;
+  RecipeProvider? _recipeProvider;
 
   AuthStatus get status => _status;
   UserModel? get user => _user;
   String? get errorMessage => _errorMessage;
   bool get isLoggedIn => _status == AuthStatus.authenticated;
 
+  void linkMealPlanProvider(MealPlanProvider mp) {
+    _mealPlanProvider = mp;
+    if (_user != null) _mealPlanProvider!.updateFromUser(_user);
+  }
+
+  void linkRecipeProvider(RecipeProvider rp) {
+    _recipeProvider = rp;
+    if (_user != null) _syncRecipeCatalog();
+  }
+
+  void _syncUserToProviders() {
+    _mealPlanProvider?.updateFromUser(_user);
+    _syncRecipeCatalog();
+  }
+
+  void _syncRecipeCatalog() {
+    if (_user == null || _recipeProvider == null) return;
+    _recipeProvider!.updateFromUser(_user);
+    Future.microtask(() => _recipeProvider!.loadAll(forceReload: true));
+  }
+
   AuthProvider() {
     _init();
   }
 
-  // ─── Kiểm tra session khi mở app ─────────────────────────────────────────
   Future<void> _init() async {
     try {
       final currentUser = SupabaseService.currentUser;
@@ -29,6 +54,7 @@ class AuthProvider extends ChangeNotifier {
         _status = _user != null
             ? AuthStatus.authenticated
             : AuthStatus.unauthenticated;
+        _syncUserToProviders();
       } else {
         _status = AuthStatus.unauthenticated;
       }
@@ -38,13 +64,13 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ─── Login ───────────────────────────────────────────────────────────────
   Future<bool> login(String email, String password) async {
     _setLoading();
     try {
       _user = await AuthService.login(email: email, password: password);
       if (_user != null) {
         _status = AuthStatus.authenticated;
+        _syncUserToProviders();
         notifyListeners();
         return true;
       }
@@ -59,7 +85,6 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-  // ─── Register ────────────────────────────────────────────────────────────
   Future<bool> register(String email, String password, String fullName) async {
     _setLoading();
     try {
@@ -70,6 +95,7 @@ class AuthProvider extends ChangeNotifier {
       );
       if (_user != null) {
         _status = AuthStatus.authenticated;
+        _syncUserToProviders();
         notifyListeners();
         return true;
       }
@@ -84,7 +110,6 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-  // ─── Forgot Password ──────────────────────────────────────────────────────
   Future<bool> sendPasswordResetOtp(String email) async {
     _setLoading();
     try {
@@ -101,7 +126,6 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-  // ─── Verify OTP ───────────────────────────────────────────────────────────
   Future<bool> verifyOtp({required String email, required String token}) async {
     _setLoading();
     try {
@@ -122,7 +146,6 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-  // ─── Update Password ──────────────────────────────────────────────────────
   Future<bool> updatePassword(String newPassword) async {
     _setLoading();
     try {
@@ -139,7 +162,6 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-  // ─── Update Profile Basic Info (Setup Step 1) ────────────────────────────
   Future<bool> updateProfileBasicInfo({
     required int age,
     required String gender,
@@ -157,6 +179,7 @@ class AuthProvider extends ChangeNotifier {
         weightKg: weightKg,
       );
       _status = AuthStatus.authenticated;
+      _syncUserToProviders();
       notifyListeners();
       return true;
     } catch (e) {
@@ -165,7 +188,6 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-  // ─── Update Setup Data (Step 2–5) ────────────────────────────────────────
   Future<bool> updateSetupData({
     String? goal,
     List<String>? diets,
@@ -185,6 +207,7 @@ class AuthProvider extends ChangeNotifier {
         skillLevel: skillLevel,
         onboardingComplete: onboardingComplete,
       );
+      _syncUserToProviders();
       notifyListeners();
       return true;
     } catch (e) {
@@ -192,15 +215,41 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-  // ─── Logout ───────────────────────────────────────────────────────────────
+  /// Starts 14-day trial; refreshes meal plan & recipe catalog for Premium access.
+  Future<bool> startPremiumTrial() async {
+    if (_user == null) return false;
+    try {
+      _user = await AuthService.startPremiumTrial(_user!.id);
+      if (_user == null) {
+        _setError('Không kích hoạt được dùng thử. Kiểm tra kết nối.');
+        return false;
+      }
+      _status = AuthStatus.authenticated;
+      _syncUserToProviders();
+      notifyListeners();
+      return true;
+    } catch (e) {
+      _setError(
+        'Không lưu được gói dùng thử. Chạy migration Tuần 6 trên Supabase.',
+      );
+      return false;
+    }
+  }
+
+  bool get canStartPremiumTrial {
+    if (_user == null) return false;
+    if (_user!.isPremium) return false;
+    return _user!.subscriptionTier == PlanLimits.tierFree;
+  }
+
   Future<void> logout() async {
     await AuthService.logout();
     _user = null;
     _status = AuthStatus.unauthenticated;
+    _syncUserToProviders();
     notifyListeners();
   }
 
-  // ─── Helpers ──────────────────────────────────────────────────────────────
   void clearError() {
     _errorMessage = null;
     notifyListeners();

@@ -44,7 +44,8 @@ class MealDetailInstructionsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final steps = _mockSteps(meal.id);
+    // Ưu tiên steps thật từ Supabase, fallback về mock nếu Meal từ mock data
+    final steps = meal.steps.isNotEmpty ? meal.steps : _mockSteps(meal.id);
 
     return SliverPadding(
       padding: const EdgeInsets.fromLTRB(16, 20, 16, 100),

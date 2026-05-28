@@ -53,3 +53,6 @@ app.*.map.json
 # Supabase
 supabase/.branches
 supabase/.temp
+
+# Project docs / weekly progress (local only — not pushed)
+/docs/

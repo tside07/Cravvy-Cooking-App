@@ -23,13 +23,10 @@ class SetupNumFieldWidget extends StatelessWidget {
         filled: true,
         fillColor: AppColors.surfaceVariant,
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(14),
+          borderRadius: AppBorderRadius.a14,
           borderSide: BorderSide.none,
         ),
-        contentPadding: const EdgeInsets.symmetric(
-          horizontal: 16,
-          vertical: 14,
-        ),
+        contentPadding: AppPad.h16v14,
       ),
     );
   }

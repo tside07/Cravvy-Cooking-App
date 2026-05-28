@@ -1,4 +1,5 @@
 import 'package:cravvy_cooking_app/init.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class ComingSoonTabWidget extends StatelessWidget {
   const ComingSoonTabWidget({
@@ -21,7 +22,7 @@ class ComingSoonTabWidget extends StatelessWidget {
           Text(label, style: Theme.of(context).textTheme.headlineSmall),
           AppGap.h8,
           Text(
-            'Coming soon in the next update',
+            'search.coming_soon'.tr(),
             style: Theme.of(context).textTheme.bodyMedium,
           ),
         ],

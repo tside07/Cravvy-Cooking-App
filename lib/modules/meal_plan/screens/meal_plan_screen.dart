@@ -1,9 +1,16 @@
+// lib/modules/meal_plan/screens/meal_plan_screen.dart
+
 import 'package:cravvy_cooking_app/init.dart';
+import 'package:cravvy_cooking_app/data/models/meal.dart';
+import 'package:cravvy_cooking_app/data/providers/recipe_provider.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:cravvy_cooking_app/modules/meal_plan/provider/meal_plan_provider.dart';
 import 'package:cravvy_cooking_app/modules/meal_plan/widgets/meal_plan_header_widget.dart';
+import 'package:cravvy_cooking_app/modules/meal_plan/widgets/free_week_upsell_banner.dart';
 import 'package:cravvy_cooking_app/modules/meal_plan/widgets/week_strip_widget.dart';
 import 'package:cravvy_cooking_app/modules/meal_plan/widgets/calorie_summary_widget.dart';
 import 'package:cravvy_cooking_app/modules/meal_plan/widgets/meal_card_widget.dart';
+import 'package:cravvy_cooking_app/modules/meal_plan/screens/add_meal_sheet.dart';
 import 'meal_swap_sheet.dart';
 
 class MealPlanScreen extends StatelessWidget {
@@ -14,92 +21,49 @@ class MealPlanScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.background,
       body: SafeArea(
-<<<<<<< Updated upstream
         child: Column(
           children: [
             const MealPlanHeaderWidget(),
             const WeekStripWidget(),
+            const FreeWeekUpsellBanner(),
             const CalorieSummaryWidget(),
             const Expanded(child: _MealList()),
           ],
-=======
-        child: LayoutBuilder(
-          builder: (context, constraints) {
-            final horizontalPadding = _responsiveHorizontalPadding(
-              constraints.maxWidth,
-            );
-            return Center(
-              child: ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: 840),
-                child: Column(
-                  children: [
-                    const MealPlanHeaderWidget(),
-                    const WeekStripWidget(),
-                    const FreeWeekUpsellBanner(),
-                    const CalorieSummaryWidget(),
-                    Expanded(
-                      child: _MealList(horizontalPadding: horizontalPadding),
-                    ),
-                  ],
-                ),
-              ),
-            );
-          },
->>>>>>> Stashed changes
         ),
       ),
     );
   }
-
-  double _responsiveHorizontalPadding(double maxWidth) {
-    if (maxWidth >= 1024) return 32;
-    if (maxWidth >= 768) return 28;
-    if (maxWidth >= 600) return 20;
-    return 16;
-  }
 }
 
 class _MealList extends StatelessWidget {
-  const _MealList({required this.horizontalPadding});
+  const _MealList();
 
-<<<<<<< Updated upstream
-=======
   static const _allSlots = [
     MealType.breakfast,
     MealType.lunch,
     MealType.dinner,
     MealType.snack,
   ];
-  final double horizontalPadding;
 
->>>>>>> Stashed changes
   @override
   Widget build(BuildContext context) {
     return Consumer<MealPlanProvider>(
       builder: (context, provider, _) {
-        final meals = provider.selectedDay.meals;
-        return ListView.builder(
-          padding: const EdgeInsets.only(
-            left: 16,
-            top: 16,
-            right: 16,
-            bottom: 100,
-          ), //TODO: no AppPad equivalent for this multi-directional EdgeInsets.only
-          itemCount: meals.length,
-          itemBuilder: (context, i) => MealCardWidget(
-            meal: meals[i],
-            onToggle: () => provider.toggleMealLogged(meals[i].id),
-            onSwap: () => showModalBottomSheet(
-              context: context,
-              isScrollControlled: true,
-              backgroundColor: Colors.transparent,
-              builder: (_) => ChangeNotifierProvider.value(
-                value: provider,
-                child: MealSwapSheet(meal: meals[i]),
-              ),
+        if (provider.isLoading) {
+          return Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const CircularProgressIndicator(color: AppColors.primary),
+                const SizedBox(height: 16),
+                Text(
+                  'meal_plan.loading'.tr(),
+                  style: AppTextStyles.s14.copyWith(
+                    color: AppColors.textSecondary,
+                  ),
+                ),
+              ],
             ),
-<<<<<<< Updated upstream
-=======
           );
         }
 
@@ -131,13 +95,12 @@ class _MealList extends StatelessWidget {
 
         final day = provider.selectedDay;
         final meals = day.meals;
-        final mealByType = {for (final meal in meals) meal.type: meal};
 
         return RefreshIndicator(
           onRefresh: provider.reload,
           color: AppColors.primary,
           child: ListView.builder(
-            padding: EdgeInsets.fromLTRB(horizontalPadding, 12, horizontalPadding, 100),
+            padding: const EdgeInsets.fromLTRB(16, 12, 16, 100),
             itemCount: _allSlots.length + 1, // +1 cho banner
             itemBuilder: (context, i) {
               // Index 0: banner "Làm mới gợi ý"
@@ -148,8 +111,10 @@ class _MealList extends StatelessWidget {
               }
 
               final slotType = _allSlots[i - 1];
-              final meal = mealByType[slotType];
-              if (meal != null) {
+              final match = meals.where((m) => m.type == slotType).toList();
+
+              if (match.isNotEmpty) {
+                final meal = match.first;
                 return MealCardWidget(
                   meal: meal,
                   onToggle: () => provider.toggleMealLogged(meal.id),
@@ -166,14 +131,11 @@ class _MealList extends StatelessWidget {
                 onAdd: () => _showAddSheet(context, day.date, slotType),
               );
             },
->>>>>>> Stashed changes
           ),
         );
       },
     );
   }
-<<<<<<< Updated upstream
-=======
 
   Future<void> _confirmRefresh(
     BuildContext context,
@@ -306,23 +268,19 @@ class _RefreshSuggestionBanner extends StatelessWidget {
             ),
           ),
           AppGap.w8,
-          Material(
-            color: Colors.transparent,
-            child: InkWell(
-              onTap: onRefresh,
-              borderRadius: BorderRadius.circular(8),
-              child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                decoration: BoxDecoration(
-                  color: AppColors.primary,
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Text(
-                  'meal_plan.refresh'.tr(),
-                  style: AppTextStyles.s12.copyWith(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w700,
-                  ),
+          GestureDetector(
+            onTap: onRefresh,
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+              decoration: BoxDecoration(
+                color: AppColors.primary,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Text(
+                'meal_plan.refresh'.tr(),
+                style: AppTextStyles.s12.copyWith(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w700,
                 ),
               ),
             ),
@@ -331,5 +289,4 @@ class _RefreshSuggestionBanner extends StatelessWidget {
       ),
     );
   }
->>>>>>> Stashed changes
 }

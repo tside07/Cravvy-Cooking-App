@@ -1,5 +1,6 @@
 import 'package:cravvy_cooking_app/init.dart';
 import 'package:cravvy_cooking_app/data/models/meal.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 /// Four-column stat strip: Prep time, Calories, Servings, Difficulty level.
 class MealDetailStatsWidget extends StatelessWidget {
@@ -12,95 +13,37 @@ class MealDetailStatsWidget extends StatelessWidget {
     return SliverToBoxAdapter(
       child: Padding(
         padding: AppPad.h16v20,
-<<<<<<< Updated upstream
         child: Row(
           children: [
             _StatItem(
               icon: Icons.timer_outlined,
               iconColor: AppColors.primary,
-              value: '${meal.prepTime}m',
-              label: 'Prep',
+              value:
+                  '${meal.prepTime}${'meal_plan.minutes_short'.tr()}',
+              label: 'meal_detail.stat_prep'.tr(),
             ),
             _divider,
             _StatItem(
               icon: Icons.local_fire_department_rounded,
               iconColor: AppColors.warning,
               value: '${meal.calories}',
-              label: 'Cal',
+              label: 'meal_detail.stat_cal'.tr(),
             ),
             _divider,
             _StatItem(
               icon: Icons.people_alt_outlined,
               iconColor: AppColors.secondary,
               value: '2',
-              label: 'Servings',
+              label: 'meal_detail.stat_servings'.tr(),
             ),
             _divider,
-            const _StatItem(
+            _StatItem(
               icon: Icons.trending_up_rounded,
               iconColor: AppColors.secondaryDark,
-              value: 'Medium',
-              label: 'Level',
+              value: 'meal_detail.level_medium'.tr(),
+              label: 'meal_detail.stat_level'.tr(),
             ),
           ],
-=======
-        child: LayoutBuilder(
-          builder: (context, constraints) {
-            final items = [
-              _StatItem(
-                icon: Icons.timer_outlined,
-                iconColor: AppColors.primary,
-                value: '${meal.prepTime}${'meal_plan.minutes_short'.tr()}',
-                label: 'meal_detail.stat_prep'.tr(),
-              ),
-              _StatItem(
-                icon: Icons.local_fire_department_rounded,
-                iconColor: AppColors.warning,
-                value: '${meal.calories}',
-                label: 'meal_detail.stat_cal'.tr(),
-              ),
-              _StatItem(
-                icon: Icons.people_alt_outlined,
-                iconColor: AppColors.secondary,
-                value: '2',
-                label: 'meal_detail.stat_servings'.tr(),
-              ),
-              _StatItem(
-                icon: Icons.trending_up_rounded,
-                iconColor: AppColors.secondaryDark,
-                value: 'meal_detail.level_medium'.tr(),
-                label: 'meal_detail.stat_level'.tr(),
-              ),
-            ];
-
-            if (constraints.maxWidth < 420) {
-              return GridView.builder(
-                itemCount: items.length,
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 12,
-                  crossAxisSpacing: 12,
-                  childAspectRatio: 1.7,
-                ),
-                itemBuilder: (_, i) => items[i],
-              );
-            }
-
-            return Row(
-              children: [
-                Expanded(child: items[0]),
-                _divider,
-                Expanded(child: items[1]),
-                _divider,
-                Expanded(child: items[2]),
-                _divider,
-                Expanded(child: items[3]),
-              ],
-            );
-          },
->>>>>>> Stashed changes
         ),
       ),
     );
@@ -129,34 +72,36 @@ class _StatItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          width: 40,
-          height: 40,
-          decoration: BoxDecoration(
-            color: iconColor.withValues(alpha: 0.12),
-            shape: BoxShape.circle,
+    return Expanded(
+      child: Column(
+        children: [
+          Container(
+            width: 40,
+            height: 40,
+            decoration: BoxDecoration(
+              color: iconColor.withValues(alpha: 0.12),
+              shape: BoxShape.circle,
+            ),
+            child: Icon(icon, color: iconColor, size: 20),
           ),
-          child: Icon(icon, color: iconColor, size: 20),
-        ),
-        AppGap.h6,
-        Text(
-          label,
-          style: AppTextStyles.s10.copyWith(
-            color: AppColors.textSecondary,
-            fontWeight: FontWeight.w500,
+          AppGap.h6,
+          Text(
+            label,
+            style: AppTextStyles.s10.copyWith(
+              color: AppColors.textSecondary,
+              fontWeight: FontWeight.w500,
+            ),
           ),
-        ),
-        AppGap.h2,
-        Text(
-          value,
-          style: AppTextStyles.s14.copyWith(
-            fontWeight: FontWeight.w800,
-            color: AppColors.textPrimary,
+          AppGap.h2,
+          Text(
+            value,
+            style: AppTextStyles.s14.copyWith(
+              fontWeight: FontWeight.w800,
+              color: AppColors.textPrimary,
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

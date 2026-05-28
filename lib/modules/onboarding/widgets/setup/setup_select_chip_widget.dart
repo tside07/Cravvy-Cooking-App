@@ -18,10 +18,10 @@ class SetupSelectChipWidget extends StatelessWidget {
       onTap: onTap,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 180),
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+        padding: AppPad.h16v10,
         decoration: BoxDecoration(
           color: selected ? AppColors.primary : AppColors.surfaceVariant,
-          borderRadius: BorderRadius.circular(50),
+          borderRadius: AppBorderRadius.a50,
           border: Border.all(
             color: selected ? AppColors.primary : Colors.transparent,
           ),

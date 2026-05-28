@@ -1,4 +1,5 @@
 import 'package:cravvy_cooking_app/init.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class RecipeSuggestionTileWidget extends StatelessWidget {
   const RecipeSuggestionTileWidget({super.key, required this.recipe});
@@ -27,7 +28,10 @@ class RecipeSuggestionTileWidget extends StatelessWidget {
               borderRadius: AppBorderRadius.a12,
             ),
             child: Center(
-              child: Text(emoji, style: AppTextStyles.s20.copyWith(fontSize: 26)),
+              child: Text(
+                emoji,
+                style: AppTextStyles.s20.copyWith(fontSize: 26),
+              ),
             ),
           ),
           AppGap.w14,
@@ -73,7 +77,7 @@ class RecipeSuggestionTileWidget extends StatelessWidget {
                 ),
               ),
               Text(
-                'match',
+                'search.match'.tr(),
                 style: AppTextStyles.s12.copyWith(
                   fontSize: 10,
                   color: AppColors.textSecondary,
@@ -86,3 +90,4 @@ class RecipeSuggestionTileWidget extends StatelessWidget {
     );
   }
 }
+  
