@@ -1,10 +1,6 @@
 import 'package:cravvy_cooking_app/init.dart';
 import 'package:cravvy_cooking_app/data/models/meal.dart';
-<<<<<<< Updated upstream
-=======
-import 'package:easy_localization/easy_localization.dart';
 import 'package:cached_network_image/cached_network_image.dart';
->>>>>>> Stashed changes
 
 /// Hero image section with back/bookmark buttons, title, rating, and tags.
 class MealDetailHeaderWidget extends StatelessWidget {

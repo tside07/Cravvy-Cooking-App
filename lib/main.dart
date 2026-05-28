@@ -7,6 +7,7 @@ import 'core/theme/app_theme.dart';
 import 'core/routes/app_routers.dart';
 import 'data/services/supabase_service.dart';
 import 'data/providers/auth_provider.dart';
+import 'data/providers/recipe_provider.dart';
 import 'modules/onboarding/provider/onboarding_provider.dart';
 import 'modules/meal_plan/provider/meal_plan_provider.dart';
 import 'modules/profile/provider/profile_provider.dart';
@@ -34,6 +35,7 @@ void main() async {
         ChangeNotifierProvider(create: (_) => AuthProvider()),
         ChangeNotifierProvider(create: (_) => OnboardingProvider()),
         ChangeNotifierProvider(create: (_) => MealPlanProvider()),
+        ChangeNotifierProvider(create: (_) => RecipeProvider()),
         ChangeNotifierProvider(create: (_) => ProfileProvider()),
       ],
       child: const CravvyApp(),

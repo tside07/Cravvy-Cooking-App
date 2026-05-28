@@ -1,8 +1,3 @@
-// lib/modules/home/widgets/featured_recipes_widget.dart
-//
-// Tuần 3: Thêm Quick Filter tags (High Protein, Vegan, Quick, Low Carb)
-// bên dưới meal type tabs. Filter hoạt động locally trên _allRecipes.
-
 import 'package:cravvy_cooking_app/init.dart';
 import 'package:cravvy_cooking_app/data/providers/recipe_provider.dart';
 import 'package:cravvy_cooking_app/modules/home/widgets/recipe_card_widget.dart';

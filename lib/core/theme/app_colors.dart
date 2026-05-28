@@ -37,15 +37,6 @@ class AppColors {
   static const Color textHint = Color(0xFF8E8E93);
 
   // ─── Semantic ────────────────────────────────────────────────────────────
-<<<<<<< Updated upstream
-  static const Color success = Color(0xFF28A745);
-  static const Color successLight = Color(0xFFDCFCE7);
-  static const Color warning = Color(0xFFF59E0B);
-  static const Color warningLight = Color(0xFFFEF3C7);
-  static const Color error = Color(0xFFDC3545);
-  static const Color errorLight = Color(0xFFFEE2E2);
-  static const Color lightGray = Color(0xFFD3D1D1);
-=======
   static const Color success = Color(0xFF34C759);
   static const Color successLight = Color(0xFFEAF9EE);
   static const Color warning = Color(0xFFFF9F0A);
@@ -53,7 +44,6 @@ class AppColors {
   static const Color error = Color(0xFFFF3B30);
   static const Color errorLight = Color(0xFFFFECEA);
   static const Color lightGray = Color(0xFFD1D1D6);
->>>>>>> Stashed changes
 
   // ─── Macro colors ────────────────────────────────────────────────────────
   static const Color protein = Color(0xFF34C759);

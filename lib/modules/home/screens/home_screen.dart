@@ -3,6 +3,7 @@ import 'package:cravvy_cooking_app/modules/home/widgets/home_header_widget.dart'
 import 'package:cravvy_cooking_app/modules/home/widgets/nutrition_ring_card_widget.dart';
 import 'package:cravvy_cooking_app/modules/home/widgets/today_meals_section_widget.dart';
 import 'package:cravvy_cooking_app/modules/home/widgets/quick_actions_grid_widget.dart';
+import 'package:cravvy_cooking_app/modules/home/widgets/featured_recipes_widget.dart';
 import 'package:cravvy_cooking_app/modules/home/widgets/nutrition_tip_widget.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -13,17 +14,6 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.background,
       body: SafeArea(
-<<<<<<< Updated upstream
-        child: CustomScrollView(
-          slivers: [
-            const SliverToBoxAdapter(child: HomeHeaderWidget()),
-            const SliverToBoxAdapter(child: NutritionRingCardWidget()),
-            const SliverToBoxAdapter(child: TodayMealsSectionWidget()),
-            const SliverToBoxAdapter(child: QuickActionsGridWidget()),
-            const SliverToBoxAdapter(child: NutritionTipWidget()),
-            AppGap.sh100,
-          ],
-=======
         child: LayoutBuilder(
           builder: (context, constraints) {
             final horizontalPadding = constraints.maxWidth >= 768 ? 24.0 : 0.0;
@@ -62,7 +52,6 @@ class HomeScreen extends StatelessWidget {
               ),
             );
           },
->>>>>>> Stashed changes
         ),
       ),
     );
