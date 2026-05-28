@@ -19,7 +19,7 @@ const _faqData = [
     id: 'general', emoji: '🍳', label: 'General',
     items: [
       _FAQItem(q: 'What is Cravvy?', a: 'Cravvy is an AI cooking assistant app designed for health-conscious users. It works like an "AI Cooking Assistant" – suggesting personalized menus based on your health goals, helping eliminate the daily "what should I eat?" dilemma.'),
-      _FAQItem(q: 'Is Cravvy free?', a: 'Yes! Cravvy operates on a Freemium model. The Free plan allows 3 meal suggestions per day, a 3-day plan view, and 100+ recipes. Premium (149,000đ/month or 999,000đ/year) unlocks full AI features, 7–30 day plans and the AI Nutrition Chatbot.'),
+      _FAQItem(q: 'Is Cravvy free?', a: 'Yes! Cravvy operates on a Freemium model. The Free plan includes 100+ recipes, a 3-day meal plan view, 2 meal swaps per week, and 1 AI menu refresh per week. Premium (149,000đ/month or 999,000đ/year) adds 5 swaps/week, 3 AI refreshes/week, a 7-day plan, and an expanded recipe library.'),
       _FAQItem(q: 'Does Cravvy support all diets?', a: 'Cravvy supports many diets: Unrestricted, Eat Clean, Vegan, Vegetarian, Keto, Paleo, Mediterranean, Gluten-Free, and Dairy-Free. You can change your diet preference anytime in Settings.'),
       _FAQItem(q: 'Is my data safe?', a: 'Cravvy is committed to protecting user data. Personal information (name, email, health metrics) is encrypted and never shared with third parties. You can export or delete all your data anytime in Settings → Privacy.'),
     ],
@@ -27,8 +27,8 @@ const _faqData = [
   _FAQCategory(
     id: 'ai', emoji: '🤖', label: 'AI Features',
     items: [
-      _FAQItem(q: 'How does AI suggest meals?', a: 'Cravvy\'s AI analyzes your personal info (height, weight, health goal, diet, food allergies) to generate the most suitable menu. Free gets 3 suggestions/day; Premium is unlimited with deeper personalization.'),
-      _FAQItem(q: 'How does Meal Swap work?', a: 'Meal Swap lets you replace any meal in your plan with another that matches the same calories — in one tap. Free gets 2 swaps/week; Premium is unlimited. AI prioritizes ingredients similar to the original meal.'),
+      _FAQItem(q: 'How does AI suggest meals?', a: 'Cravvy\'s AI analyzes your profile (goal, diet, allergies) to build a weekly menu. Free users can refresh the AI plan once per week; Premium users get up to 3 refreshes per week.'),
+      _FAQItem(q: 'How does Meal Swap work?', a: 'Meal Swap replaces a meal with another from the same category. Free: 2 swaps per week. Premium: 5 swaps per week — enough flexibility without overloading our servers.'),
       _FAQItem(q: 'What is the AI Nutrition Chatbot?', a: 'The AI Nutrition Chatbot (Premium) is an assistant that answers questions like "What should I eat to build muscle?" or "What can I substitute for egg whites?" instantly, based on verified nutritional data.'),
     ],
   ),

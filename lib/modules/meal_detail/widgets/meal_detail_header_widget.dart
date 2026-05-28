@@ -1,6 +1,6 @@
 import 'package:cravvy_cooking_app/init.dart';
 import 'package:cravvy_cooking_app/data/models/meal.dart';
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 /// Hero image section with back/bookmark buttons, title, rating, and tags.
 class MealDetailHeaderWidget extends StatelessWidget {
@@ -17,14 +17,19 @@ class MealDetailHeaderWidget extends StatelessWidget {
           SizedBox(
             height: 280,
             width: double.infinity,
-            child: meal.imageUrl.isNotEmpty
-                ? CachedNetworkImage(
-                    imageUrl: meal.imageUrl,
-                    fit: BoxFit.cover,
-                    errorWidget: (_, __, ___) => _headerFallback(),
-                    placeholder: (_, __) => _headerFallback(),
-                  )
-                : _headerFallback(),
+            child: Image.network(
+              meal.imageUrl,
+              fit: BoxFit.cover,
+              errorBuilder: (_, __, ___) => ColoredBox(
+                color: meal.type.lightColor,
+                child: Center(
+                  child: Text(
+                    meal.type.emoji,
+                    style: AppTextStyles.s20.copyWith(fontSize: 64),
+                  ),
+                ),
+              ),
+            ),
           ),
 
           // ── Gradient overlay ──────────────────────────────────────────────
@@ -97,7 +102,7 @@ class MealDetailHeaderWidget extends StatelessWidget {
                     ),
                     AppGap.w4,
                     Text(
-                      '(128 reviews)',
+                      'meal_detail.reviews'.tr(namedArgs: {'n': '128'}),
                       style: AppTextStyles.s12.copyWith(
                         color: Colors.white.withValues(alpha: 0.75),
                       ),
@@ -137,17 +142,6 @@ class MealDetailHeaderWidget extends StatelessWidget {
     );
   }
 }
-
-Widget _headerFallback() => ColoredBox(
-      color: AppColors.surfaceVariant,
-      child: Center(
-        child: Icon(
-          Icons.restaurant_rounded,
-          color: AppColors.textHint,
-          size: 56,
-        ),
-      ),
-    );
 
 class _CircleIconButton extends StatelessWidget {
   const _CircleIconButton({required this.icon, required this.onTap});

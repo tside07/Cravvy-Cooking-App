@@ -1,4 +1,5 @@
 import 'package:cravvy_cooking_app/init.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:cravvy_cooking_app/modules/meal_detail/provider/meal_detail_provider.dart';
 import 'package:cravvy_cooking_app/modules/meal_detail/widgets/meal_detail_ingredient_item_widget.dart';
 import 'package:cravvy_cooking_app/modules/widgets/common/cravvy_button.dart';
@@ -28,8 +29,10 @@ class MealDetailIngredientsWidget extends StatelessWidget {
                   ),
                   child: CravvyButton(
                     label: missingCount > 0
-                        ? 'Add $missingCount missing to shopping list'
-                        : 'All ingredients available ✓',
+                        ? 'meal_detail.add_missing'.tr(
+                            namedArgs: {'n': '$missingCount'},
+                          )
+                        : 'meal_detail.all_available'.tr(),
                     icon: Icons.shopping_cart_outlined,
                     backgroundColor: missingCount > 0
                         ? AppColors.primary
@@ -39,8 +42,10 @@ class MealDetailIngredientsWidget extends StatelessWidget {
                         SnackBar(
                           content: Text(
                             missingCount > 0
-                                ? '$missingCount item(s) added to shopping list!'
-                                : 'You have all the ingredients!',
+                                ? 'meal_detail.snack_added'.tr(
+                                    namedArgs: {'n': '$missingCount'},
+                                  )
+                                : 'meal_detail.snack_have_all'.tr(),
                           ),
                           backgroundColor: missingCount > 0
                               ? AppColors.primary

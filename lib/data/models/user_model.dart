@@ -14,6 +14,9 @@ class UserModel {
   final String? cookingTime;
   final String? skillLevel;
   final bool onboardingComplete;
+  /// `free` | `premium` | `trial` — see docs/FREEMIUM_SPEC.md
+  final String subscriptionTier;
+  final DateTime? premiumUntil;
 
   const UserModel({
     required this.id,
@@ -30,7 +33,17 @@ class UserModel {
     this.cookingTime,
     this.skillLevel,
     this.onboardingComplete = false,
+    this.subscriptionTier = 'free',
+    this.premiumUntil,
   });
+
+  bool get isPremium {
+    if (subscriptionTier != 'premium' && subscriptionTier != 'trial') {
+      return false;
+    }
+    if (premiumUntil == null) return true;
+    return premiumUntil!.isAfter(DateTime.now());
+  }
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
@@ -49,6 +62,10 @@ class UserModel {
       cookingTime: json['cooking_time'] as String?,
       skillLevel: json['skill_level'] as String?,
       onboardingComplete: json['onboarding_complete'] as bool? ?? false,
+      subscriptionTier: json['subscription_tier'] as String? ?? 'free',
+      premiumUntil: json['premium_until'] != null
+          ? DateTime.tryParse(json['premium_until'] as String)
+          : null,
     );
   }
 
@@ -67,6 +84,8 @@ class UserModel {
         'cooking_time': cookingTime,
         'skill_level': skillLevel,
         'onboarding_complete': onboardingComplete,
+        'subscription_tier': subscriptionTier,
+        'premium_until': premiumUntil?.toIso8601String(),
       };
 
   UserModel copyWith({
@@ -82,6 +101,8 @@ class UserModel {
     String? cookingTime,
     String? skillLevel,
     bool? onboardingComplete,
+    String? subscriptionTier,
+    DateTime? premiumUntil,
   }) {
     return UserModel(
       id: id,
@@ -98,6 +119,8 @@ class UserModel {
       cookingTime: cookingTime ?? this.cookingTime,
       skillLevel: skillLevel ?? this.skillLevel,
       onboardingComplete: onboardingComplete ?? this.onboardingComplete,
+      subscriptionTier: subscriptionTier ?? this.subscriptionTier,
+      premiumUntil: premiumUntil ?? this.premiumUntil,
     );
   }
 }

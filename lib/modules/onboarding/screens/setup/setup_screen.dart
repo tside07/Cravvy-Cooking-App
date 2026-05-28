@@ -118,7 +118,7 @@ class _SetupStep1ScreenState extends State<SetupStep1Screen> {
           Expanded(
             child: LayoutBuilder(
               builder: (_, constraints) => SingleChildScrollView(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
+                padding: AppPad.h24,
                 child: ConstrainedBox(
                   // KEY FIX: đảm bảo Column con có width = maxWidth của parent
                   constraints: BoxConstraints(minWidth: constraints.maxWidth),
@@ -219,7 +219,7 @@ class _SetupStep1ScreenState extends State<SetupStep1Screen> {
 
                       if (_bmi != null)
                         Container(
-                          padding: const EdgeInsets.all(16),
+                          padding: AppPad.a16,
                           decoration: BoxDecoration(
                             color: AppColors.surface,
                             borderRadius: BorderRadius.circular(16),
@@ -249,10 +249,7 @@ class _SetupStep1ScreenState extends State<SetupStep1Screen> {
                                 ),
                               ),
                               Container(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 12,
-                                  vertical: 6,
-                                ),
+                                padding: AppPad.h12,
                                 decoration: BoxDecoration(
                                   color: _bmiColor.withValues(alpha: 0.1),
                                   borderRadius: BorderRadius.circular(20),
@@ -345,7 +342,7 @@ class _SetupStep2ScreenState extends State<SetupStep2Screen> {
           const SetupProgressWidget(current: 2, total: 5),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
+              padding: AppPad.h24,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
@@ -385,7 +382,7 @@ class _SetupStep2ScreenState extends State<SetupStep2Screen> {
                               color: isSelected
                                   ? AppColors.primaryLight
                                   : AppColors.surface,
-                              borderRadius: BorderRadius.circular(20),
+                              borderRadius: AppBorderRadius.a20,
                               border: Border.all(
                                 color: isSelected
                                     ? AppColors.primary
@@ -403,7 +400,7 @@ class _SetupStep2ScreenState extends State<SetupStep2Screen> {
                                     color: isSelected
                                         ? AppColors.primary
                                         : color.withValues(alpha: 0.12),
-                                    borderRadius: BorderRadius.circular(14),
+                                    borderRadius: AppBorderRadius.a14,
                                   ),
                                   child: Icon(
                                     g['icon'] as IconData,
@@ -504,7 +501,7 @@ class _SetupStep3ScreenState extends State<SetupStep3Screen> {
           const SetupProgressWidget(current: 3, total: 5),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
+              padding: AppPad.h24,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
@@ -631,7 +628,7 @@ class _SetupStep4ScreenState extends State<SetupStep4Screen> {
           const SetupProgressWidget(current: 4, total: 5),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
+              padding: AppPad.h24,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
@@ -712,7 +709,7 @@ class _SetupStep4ScreenState extends State<SetupStep4Screen> {
                                   ),
                                 ),
                               ),
-                              const SizedBox(width: 10),
+                              AppGap.w10,
                               // KEY FIX: ElevatedButton bị infinite width khi không bounded
                               // SizedBox với width cố định giải quyết vấn đề này
                               SizedBox(
@@ -724,7 +721,7 @@ class _SetupStep4ScreenState extends State<SetupStep4Screen> {
                                     backgroundColor: AppColors.primary,
                                     padding: EdgeInsets.zero,
                                     shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(12),
+                                      borderRadius: AppBorderRadius.a12,
                                     ),
                                   ),
                                   child: const Icon(
@@ -758,7 +755,7 @@ class _SetupStep4ScreenState extends State<SetupStep4Screen> {
                                       onDeleted: () =>
                                           setState(() => _selected.remove(s)),
                                       shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(20),
+                                        borderRadius: AppBorderRadius.a20,
                                         side: const BorderSide(
                                           color: Colors.transparent,
                                         ),
@@ -775,12 +772,12 @@ class _SetupStep4ScreenState extends State<SetupStep4Screen> {
                               if (_noRestrictions) _selected.clear();
                             }),
                             child: Container(
-                              padding: const EdgeInsets.all(14),
+                              padding: AppPad.a14,
                               decoration: BoxDecoration(
                                 color: _noRestrictions
                                     ? AppColors.primaryLight
                                     : AppColors.surface,
-                                borderRadius: BorderRadius.circular(14),
+                                borderRadius: AppBorderRadius.a14,
                                 border: Border.all(
                                   color: _noRestrictions
                                       ? AppColors.primary
@@ -797,7 +794,7 @@ class _SetupStep4ScreenState extends State<SetupStep4Screen> {
                                         ? AppColors.primary
                                         : AppColors.textHint,
                                   ),
-                                  const SizedBox(width: 10),
+                                  AppGap.w10,
                                   Expanded(
                                     child: Text(
                                       'No restrictions — I eat everything!',
@@ -895,7 +892,7 @@ class _SetupStep5ScreenState extends State<SetupStep5Screen> {
           const SetupProgressWidget(current: 5, total: 5),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
+              padding: AppPad.h24,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
@@ -938,15 +935,12 @@ class _SetupStep5ScreenState extends State<SetupStep5Screen> {
                                 ),
                                 child: AnimatedContainer(
                                   duration: const Duration(milliseconds: 180),
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 12,
-                                    vertical: 8,
-                                  ),
+                                  padding: AppPad.h12v8,
                                   decoration: BoxDecoration(
                                     color: isSelected
                                         ? AppColors.primaryLight
                                         : AppColors.surface,
-                                    borderRadius: BorderRadius.circular(14),
+                                    borderRadius: AppBorderRadius.a14,
                                     border: Border.all(
                                       color: isSelected
                                           ? AppColors.primary
@@ -963,7 +957,7 @@ class _SetupStep5ScreenState extends State<SetupStep5Screen> {
                                             ? AppColors.primary
                                             : AppColors.textSecondary,
                                       ),
-                                      const SizedBox(width: 8),
+                                      AppGap.w8,
                                       Flexible(
                                         child: Text(
                                           t['label'] as String,
@@ -988,19 +982,19 @@ class _SetupStep5ScreenState extends State<SetupStep5Screen> {
                           ..._skills.map((s) {
                             final isSelected = _skillLevel == s['id'] as String;
                             return Padding(
-                              padding: const EdgeInsets.only(bottom: 10),
+                              padding: AppPad.b10,
                               child: GestureDetector(
                                 onTap: () => setState(
                                   () => _skillLevel = s['id'] as String,
                                 ),
                                 child: AnimatedContainer(
                                   duration: const Duration(milliseconds: 180),
-                                  padding: const EdgeInsets.all(14),
+                                  padding: AppPad.a14,
                                   decoration: BoxDecoration(
                                     color: isSelected
                                         ? AppColors.primaryLight
                                         : AppColors.surface,
-                                    borderRadius: BorderRadius.circular(14),
+                                    borderRadius: AppBorderRadius.a14,
                                     border: Border.all(
                                       color: isSelected
                                           ? AppColors.primary
@@ -1014,7 +1008,7 @@ class _SetupStep5ScreenState extends State<SetupStep5Screen> {
                                         s['emoji'] as String,
                                         style: const TextStyle(fontSize: 24),
                                       ),
-                                      const SizedBox(width: 14),
+                                      AppGap.w14,
                                       Expanded(
                                         child: Column(
                                           crossAxisAlignment:
@@ -1069,7 +1063,7 @@ class _SetupStep5ScreenState extends State<SetupStep5Screen> {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.primary,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(16),
+                          borderRadius: AppBorderRadius.a16,
                         ),
                       ),
                       child: const SizedBox(
@@ -1089,7 +1083,7 @@ class _SetupStep5ScreenState extends State<SetupStep5Screen> {
                         backgroundColor: AppColors.primary,
                         foregroundColor: Colors.white,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(16),
+                          borderRadius: AppBorderRadius.a16,
                         ),
                         textStyle: AppTextStyles.s16.copyWith(
                           fontWeight: FontWeight.w700,

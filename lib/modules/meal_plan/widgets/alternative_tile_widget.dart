@@ -1,5 +1,6 @@
 import 'package:cravvy_cooking_app/init.dart';
 import 'package:cravvy_cooking_app/data/models/meal.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class AlternativeTileWidget extends StatelessWidget {
   const AlternativeTileWidget({
@@ -72,7 +73,7 @@ class AlternativeTileWidget extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          '${meal.calories} kcal',
+                          '${meal.calories} ${'meal_plan.kcal_unit'.tr()}',
                           style: AppTextStyles.s14.copyWith(
                             fontSize: 13,
                             fontWeight: FontWeight.w600,
