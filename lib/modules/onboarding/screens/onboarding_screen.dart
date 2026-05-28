@@ -37,57 +37,72 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     return Scaffold(
       backgroundColor: slide.bgColor,
       body: SafeArea(
-        child: Column(
-          children: [
-            Align(
-              alignment: Alignment.centerRight,
-              child: TextButton(
-                onPressed: () => context.go(AppRouter.goalSelection),
-                child: Text(
-                  'Skip',
-                  style: AppTextStyles.s16.copyWith(
-                    color: slide.accentColor,
-                    fontWeight: FontWeight.w600,
-                  ),
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            final horizontalPadding = constraints.maxWidth >= 768 ? 32.0 : 24.0;
+            return Center(
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 760),
+                child: Column(
+                  children: [
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: TextButton(
+                        onPressed: () => context.go(AppRouter.goalSelection),
+                        child: Text(
+                          'Skip',
+                          style: AppTextStyles.s16.copyWith(
+                            color: slide.accentColor,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: PageView.builder(
+                        controller: _pageController,
+                        onPageChanged: (i) => setState(() => _currentPage = i),
+                        itemCount: kOnboardingSlides.length,
+                        itemBuilder: (context, i) =>
+                            SlidePageWidget(slide: kOnboardingSlides[i]),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(
+                        horizontalPadding,
+                        0,
+                        horizontalPadding,
+                        32,
+                      ),
+                      child: Column(
+                        children: [
+                          SmoothPageIndicator(
+                            controller: _pageController,
+                            count: kOnboardingSlides.length,
+                            effect: ExpandingDotsEffect(
+                              activeDotColor: slide.accentColor,
+                              dotColor: slide.accentColor.withValues(alpha: 0.2),
+                              dotHeight: 8,
+                              dotWidth: 8,
+                              expansionFactor: 3,
+                            ),
+                          ),
+                          AppGap.h28,
+                          CravvyButton(
+                            label: _currentPage < kOnboardingSlides.length - 1
+                                ? 'Continue'
+                                : 'Get Started',
+                            onTap: _next,
+                            backgroundColor: slide.accentColor,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
               ),
-            ),
-            Expanded(
-              child: PageView.builder(
-                controller: _pageController,
-                onPageChanged: (i) => setState(() => _currentPage = i),
-                itemCount: kOnboardingSlides.length,
-                itemBuilder: (context, i) =>
-                    SlidePageWidget(slide: kOnboardingSlides[i]),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(24, 0, 24, 32),
-              child: Column(
-                children: [
-                  SmoothPageIndicator(
-                    controller: _pageController,
-                    count: kOnboardingSlides.length,
-                    effect: ExpandingDotsEffect(
-                      activeDotColor: slide.accentColor,
-                      dotColor: slide.accentColor.withValues(alpha: 0.2),
-                      dotHeight: 8,
-                      dotWidth: 8,
-                      expansionFactor: 3,
-                    ),
-                  ),
-                  AppGap.h28,
-                  CravvyButton(
-                    label: _currentPage < kOnboardingSlides.length - 1
-                        ? 'Continue'
-                        : 'Get Started',
-                    onTap: _next,
-                    backgroundColor: slide.accentColor,
-                  ),
-                ],
-              ),
-            ),
-          ],
+            );
+          },
         ),
       ),
     );

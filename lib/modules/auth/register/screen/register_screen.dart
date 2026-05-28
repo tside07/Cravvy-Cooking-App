@@ -147,50 +147,60 @@ class _Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      padding: AppPad.h24,
-      child: Form(
-        key: formKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            AppGap.h8,
-            const AuthHeaderWidget(
-              title: 'Create Account',
-              subtitle: 'Start your healthy food journey',
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final horizontalPadding = constraints.maxWidth >= 768 ? 32.0 : 24.0;
+        return Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 560),
+            child: SingleChildScrollView(
+              padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+              child: Form(
+                key: formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    AppGap.h8,
+                    const AuthHeaderWidget(
+                      title: 'Create Account',
+                      subtitle: 'Start your healthy food journey',
+                    ),
+                    AppGap.h28,
+                    AuthSocialSectionWidget(onGoogleTap: () {}, onAppleTap: () {}),
+                    AppGap.h20,
+                    const AuthDividerWidget(label: 'or sign up with email'),
+                    AppGap.h20,
+                    RegisterFormFieldsWidget(
+                      nameController: nameController,
+                      emailController: emailController,
+                      passwordController: passwordController,
+                      confirmPasswordController: confirmPasswordController,
+                      nameFocus: nameFocus,
+                      emailFocus: emailFocus,
+                      passwordFocus: passwordFocus,
+                      confirmFocus: confirmFocus,
+                    ),
+                    AppGap.h16,
+                    TermsCheckboxWidget(
+                      agreedToTerms: agreedToTerms,
+                      onChanged: onAgreedChanged,
+                    ),
+                    AppGap.h24,
+                    CravvyButton(
+                      label: 'Create Account',
+                      isLoading: isLoading,
+                      onTap: onSubmit,
+                    ),
+                    AppGap.h20,
+                    const LoginLinkWidget(),
+                    AppGap.h24,
+                  ],
+                ),
+              ),
             ),
-            AppGap.h28,
-            AuthSocialSectionWidget(onGoogleTap: () {}, onAppleTap: () {}),
-            AppGap.h20,
-            const AuthDividerWidget(label: 'or sign up with email'),
-            AppGap.h20,
-            RegisterFormFieldsWidget(
-              nameController: nameController,
-              emailController: emailController,
-              passwordController: passwordController,
-              confirmPasswordController: confirmPasswordController,
-              nameFocus: nameFocus,
-              emailFocus: emailFocus,
-              passwordFocus: passwordFocus,
-              confirmFocus: confirmFocus,
-            ),
-            AppGap.h16,
-            TermsCheckboxWidget(
-              agreedToTerms: agreedToTerms,
-              onChanged: onAgreedChanged,
-            ),
-            AppGap.h24,
-            CravvyButton(
-              label: 'Create Account',
-              isLoading: isLoading,
-              onTap: onSubmit,
-            ),
-            AppGap.h20,
-            const LoginLinkWidget(),
-            AppGap.h24,
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }

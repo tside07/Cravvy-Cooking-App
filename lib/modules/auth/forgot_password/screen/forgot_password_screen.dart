@@ -85,52 +85,62 @@ class _Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      padding: AppPad.h24,
-      child: Form(
-        key: formKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            AppGap.h16,
-            const IconSectionWidget(icon: Icons.mail_outline_rounded),
-            AppGap.h28,
-            const AuthHeaderWidget(
-              title: 'Forgot Password?',
-              subtitle:
-                  "Don't worry! Enter your registered email address and we will send you an OTP code to verify your identity.",
-              textAlign: TextAlign.center,
-            ),
-            AppGap.h36,
-            AuthFormFieldsWidget(
-              fields: [
-                AuthFormFieldConfig(
-                  hint: 'Enter your email',
-                  controller: emailController,
-                  keyboardType: TextInputType.emailAddress,
-                  prefixIcon: Icons.email_outlined,
-                  validator: (v) {
-                    if (v == null || v.isEmpty) return 'Vui lòng nhập email';
-                    if (!v.contains('@')) return 'Email không hợp lệ';
-                    return null;
-                  },
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final horizontalPadding = constraints.maxWidth >= 768 ? 32.0 : 24.0;
+        return Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 560),
+            child: SingleChildScrollView(
+              padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+              child: Form(
+                key: formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    AppGap.h16,
+                    const IconSectionWidget(icon: Icons.mail_outline_rounded),
+                    AppGap.h28,
+                    const AuthHeaderWidget(
+                      title: 'Forgot Password?',
+                      subtitle:
+                          "Don't worry! Enter your registered email address and we will send you an OTP code to verify your identity.",
+                      textAlign: TextAlign.center,
+                    ),
+                    AppGap.h36,
+                    AuthFormFieldsWidget(
+                      fields: [
+                        AuthFormFieldConfig(
+                          hint: 'Enter your email',
+                          controller: emailController,
+                          keyboardType: TextInputType.emailAddress,
+                          prefixIcon: Icons.email_outlined,
+                          validator: (v) {
+                            if (v == null || v.isEmpty) return 'Vui lòng nhập email';
+                            if (!v.contains('@')) return 'Email không hợp lệ';
+                            return null;
+                          },
+                        ),
+                      ],
+                    ),
+                    AppGap.h28,
+                    CravvyButton(
+                      label: 'SEND OTP',
+                      isLoading: isLoading,
+                      onTap: onSubmit,
+                    ),
+                    AppGap.h16,
+                    const BackToLoginWidget(),
+                    AppGap.h24,
+                    const NoteBoxWidget(),
+                    AppGap.h24,
+                  ],
                 ),
-              ],
+              ),
             ),
-            AppGap.h28,
-            CravvyButton(
-              label: 'SEND OTP',
-              isLoading: isLoading,
-              onTap: onSubmit,
-            ),
-            AppGap.h16,
-            const BackToLoginWidget(),
-            AppGap.h24,
-            const NoteBoxWidget(),
-            AppGap.h24,
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }

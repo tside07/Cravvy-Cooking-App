@@ -22,7 +22,7 @@ const kOnboardingSlides = [
     title: 'What should\nI eat today?',
     subtitle:
         'Tell us what\'s in your fridge and we\'ll suggest delicious, healthy meals tailored just for you.',
-    bgColor: Color(0xFFFFF3EE),
+    bgColor: AppColors.primaryLight,
     accentColor: AppColors.primary,
   ),
   OnboardingSlide(
@@ -30,7 +30,7 @@ const kOnboardingSlides = [
     title: 'Plan your\nweek effortlessly',
     subtitle:
         'Get a personalized 7-day meal plan based on your health goals, diet type, and cooking time.',
-    bgColor: Color(0xFFE8FAF8),
+    bgColor: AppColors.secondaryLight,
     accentColor: AppColors.secondary,
   ),
   OnboardingSlide(
@@ -38,7 +38,7 @@ const kOnboardingSlides = [
     title: 'Track nutrition\nwith ease',
     subtitle:
         'Monitor calories, macros and streaks automatically — no manual logging required.',
-    bgColor: Color(0xFFFFFAE6),
+    bgColor: AppColors.warningLight,
     accentColor: AppColors.accentDark,
   ),
 ];
@@ -50,52 +50,60 @@ class SlidePageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: AppPad.h32,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            width: 200,
-            height: 200,
-            decoration: BoxDecoration(
-              color: slide.accentColor.withValues(alpha: 0.12),
-              shape: BoxShape.circle,
-            ),
-            child: Center(
-              child: SvgPicture.asset(
-                slide.emoji,
-                width: 120,
-                height: 120,
-                colorFilter: ColorFilter.mode(
-                  slide.accentColor,
-                  BlendMode.srcIn,
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final isCompact = constraints.maxWidth < 390;
+        final circleSize = isCompact ? 172.0 : 200.0;
+        final iconSize = isCompact ? 104.0 : 120.0;
+        return Padding(
+          padding: EdgeInsets.symmetric(horizontal: isCompact ? 24 : 32),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                width: circleSize,
+                height: circleSize,
+                decoration: BoxDecoration(
+                  color: slide.accentColor.withValues(alpha: 0.12),
+                  shape: BoxShape.circle,
+                ),
+                child: Center(
+                  child: SvgPicture.asset(
+                    slide.emoji,
+                    width: iconSize,
+                    height: iconSize,
+                    colorFilter: ColorFilter.mode(
+                      slide.accentColor,
+                      BlendMode.srcIn,
+                    ),
+                  ),
                 ),
               ),
-            ),
+              SizedBox(height: isCompact ? 36 : 48),
+              Text(
+                slide.title,
+                textAlign: TextAlign.center,
+                style: AppTextStyles.s20.copyWith(
+                  fontSize: isCompact ? 24 : 28,
+                  fontWeight: FontWeight.w800,
+                  color: AppColors.textPrimary,
+                  height: 1.2,
+                ),
+              ),
+              AppGap.h16,
+              Text(
+                slide.subtitle,
+                textAlign: TextAlign.center,
+                style: AppTextStyles.s16.copyWith(
+                  fontSize: isCompact ? 15 : 16,
+                  color: AppColors.textSecondary,
+                  height: 1.6,
+                ),
+              ),
+            ],
           ),
-          AppGap.h48,
-          Text(
-            slide.title,
-            textAlign: TextAlign.center,
-            style: AppTextStyles.s20.copyWith(
-              fontSize: 28,
-              fontWeight: FontWeight.w800,
-              color: AppColors.textPrimary,
-              height: 1.2,
-            ),
-          ),
-          AppGap.h16,
-          Text(
-            slide.subtitle,
-            textAlign: TextAlign.center,
-            style: AppTextStyles.s16.copyWith(
-              color: AppColors.textSecondary,
-              height: 1.6,
-            ),
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 }

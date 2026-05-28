@@ -13,6 +13,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.background,
       body: SafeArea(
+<<<<<<< Updated upstream
         child: CustomScrollView(
           slivers: [
             const SliverToBoxAdapter(child: HomeHeaderWidget()),
@@ -22,6 +23,46 @@ class HomeScreen extends StatelessWidget {
             const SliverToBoxAdapter(child: NutritionTipWidget()),
             AppGap.sh100,
           ],
+=======
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            final horizontalPadding = constraints.maxWidth >= 768 ? 24.0 : 0.0;
+            return Center(
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 960),
+                child: CustomScrollView(
+                  slivers: [
+                    SliverPadding(
+                      padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+                      sliver: const SliverToBoxAdapter(child: HomeHeaderWidget()),
+                    ),
+                    SliverPadding(
+                      padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+                      sliver: const SliverToBoxAdapter(child: NutritionRingCardWidget()),
+                    ),
+                    SliverPadding(
+                      padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+                      sliver: const SliverToBoxAdapter(child: TodayMealsSectionWidget()),
+                    ),
+                    SliverPadding(
+                      padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+                      sliver: const SliverToBoxAdapter(child: QuickActionsGridWidget()),
+                    ),
+                    SliverPadding(
+                      padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+                      sliver: const SliverToBoxAdapter(child: FeaturedRecipesWidget()),
+                    ),
+                    SliverPadding(
+                      padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+                      sliver: const SliverToBoxAdapter(child: NutritionTipWidget()),
+                    ),
+                    AppGap.sh100,
+                  ],
+                ),
+              ),
+            );
+          },
+>>>>>>> Stashed changes
         ),
       ),
     );

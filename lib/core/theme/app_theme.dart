@@ -16,21 +16,22 @@ class AppTheme {
         error: AppColors.error,
       ),
       scaffoldBackgroundColor: AppColors.background,
-      fontFamily: 'Nunito',
+      fontFamily: 'Inter',
 
       appBarTheme: const AppBarTheme(
-        backgroundColor: Colors.transparent,
+        backgroundColor: AppColors.background,
         elevation: 0,
         scrolledUnderElevation: 0,
+        centerTitle: true,
         systemOverlayStyle: SystemUiOverlayStyle(
           statusBarColor: Colors.transparent,
           statusBarIconBrightness: Brightness.dark,
         ),
         iconTheme: IconThemeData(color: AppColors.textPrimary),
         titleTextStyle: TextStyle(
-          fontFamily: 'Nunito',
-          fontSize: 18,
-          fontWeight: FontWeight.w700,
+          fontFamily: 'Inter',
+          fontSize: 17,
+          fontWeight: FontWeight.w600,
           color: AppColors.textPrimary,
         ),
       ),
@@ -38,13 +39,13 @@ class AppTheme {
       textTheme: const TextTheme(
         displayLarge: TextStyle(
           fontSize: 32,
-          fontWeight: FontWeight.w800,
+          fontWeight: FontWeight.w700,
           color: AppColors.textPrimary,
           height: 1.2,
         ),
         displayMedium: TextStyle(
           fontSize: 28,
-          fontWeight: FontWeight.w800,
+          fontWeight: FontWeight.w700,
           color: AppColors.textPrimary,
           height: 1.2,
         ),
@@ -95,9 +96,9 @@ class AppTheme {
         ),
         labelLarge: TextStyle(
           fontSize: 16,
-          fontWeight: FontWeight.w700,
+          fontWeight: FontWeight.w600,
           color: Colors.white,
-          letterSpacing: 0.3,
+          letterSpacing: 0.1,
         ),
       ),
 
@@ -108,12 +109,28 @@ class AppTheme {
           elevation: 0,
           minimumSize: const Size(double.infinity, 56),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(14),
           ),
           textStyle: const TextStyle(
-            fontFamily: 'Nunito',
+            fontFamily: 'Inter',
             fontSize: 16,
-            fontWeight: FontWeight.w700,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
+      filledButtonTheme: FilledButtonThemeData(
+        style: FilledButton.styleFrom(
+          backgroundColor: AppColors.secondaryLight,
+          foregroundColor: AppColors.secondaryDark,
+          elevation: 0,
+          minimumSize: const Size(double.infinity, 56),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(14),
+          ),
+          textStyle: const TextStyle(
+            fontFamily: 'Inter',
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
           ),
         ),
       ),
@@ -124,39 +141,52 @@ class AppTheme {
           side: const BorderSide(color: AppColors.primary, width: 1.5),
           minimumSize: const Size(double.infinity, 56),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(14),
           ),
           textStyle: const TextStyle(
-            fontFamily: 'Nunito',
+            fontFamily: 'Inter',
             fontSize: 16,
-            fontWeight: FontWeight.w700,
+            fontWeight: FontWeight.w600,
           ),
         ),
       ),
 
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: AppColors.surfaceVariant,
+        fillColor: AppColors.surface,
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(14),
+          borderRadius: BorderRadius.circular(12),
           borderSide: BorderSide.none,
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(14),
+          borderRadius: BorderRadius.circular(12),
           borderSide: const BorderSide(color: AppColors.border),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(14),
-          borderSide: const BorderSide(color: AppColors.primary, width: 2),
+          borderRadius: BorderRadius.circular(12),
+          borderSide: const BorderSide(color: AppColors.primary, width: 1.5),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: const BorderSide(color: AppColors.error),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: const BorderSide(color: AppColors.error, width: 1.5),
         ),
         contentPadding: const EdgeInsets.symmetric(
           horizontal: 16,
-          vertical: 14,
+          vertical: 12,
         ),
         hintStyle: const TextStyle(
           color: AppColors.textHint,
           fontSize: 15,
-          fontFamily: 'Nunito',
+          fontFamily: 'Inter',
+        ),
+        labelStyle: const TextStyle(
+          color: AppColors.textSecondary,
+          fontSize: 15,
+          fontFamily: 'Inter',
         ),
       ),
 
@@ -168,11 +198,11 @@ class AppTheme {
         type: BottomNavigationBarType.fixed,
         elevation: 0,
         selectedLabelStyle: TextStyle(
-          fontFamily: 'Nunito',
+          fontFamily: 'Inter',
           fontSize: 11,
           fontWeight: FontWeight.w600,
         ),
-        unselectedLabelStyle: TextStyle(fontFamily: 'Nunito', fontSize: 11),
+        unselectedLabelStyle: TextStyle(fontFamily: 'Inter', fontSize: 11),
       ),
     );
   }

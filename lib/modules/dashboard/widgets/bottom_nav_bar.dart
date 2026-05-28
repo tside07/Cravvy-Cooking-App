@@ -99,7 +99,7 @@ class _NavItem extends StatelessWidget {
             AnimatedDefaultTextStyle(
               duration: const Duration(milliseconds: 220),
               style: TextStyle(
-                fontFamily: 'Nunito',
+                fontFamily: 'Inter',
                 fontSize: 10,
                 fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
                 color: isSelected ? AppColors.primary : AppColors.textHint,

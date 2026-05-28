@@ -32,14 +32,8 @@ class MealDetailTabsWidget extends StatelessWidget {
                               ? AppColors.surface
                               : Colors.transparent,
                           borderRadius: AppBorderRadius.a12,
-                          boxShadow: isActive
-                              ? [
-                                  BoxShadow(
-                                    color: Colors.black.withValues(alpha: 0.06),
-                                    blurRadius: 6,
-                                    offset: const Offset(0, 2),
-                                  ),
-                                ]
+                          border: isActive
+                              ? Border.all(color: AppColors.border)
                               : null,
                         ),
                         child: Text(

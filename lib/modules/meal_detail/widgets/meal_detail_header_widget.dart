@@ -1,5 +1,10 @@
 import 'package:cravvy_cooking_app/init.dart';
 import 'package:cravvy_cooking_app/data/models/meal.dart';
+<<<<<<< Updated upstream
+=======
+import 'package:easy_localization/easy_localization.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+>>>>>>> Stashed changes
 
 /// Hero image section with back/bookmark buttons, title, rating, and tags.
 class MealDetailHeaderWidget extends StatelessWidget {
@@ -16,19 +21,14 @@ class MealDetailHeaderWidget extends StatelessWidget {
           SizedBox(
             height: 280,
             width: double.infinity,
-            child: Image.network(
-              meal.imageUrl,
-              fit: BoxFit.cover,
-              errorBuilder: (_, __, ___) => ColoredBox(
-                color: meal.type.lightColor,
-                child: Center(
-                  child: Text(
-                    meal.type.emoji,
-                    style: AppTextStyles.s20.copyWith(fontSize: 64),
-                  ),
-                ),
-              ),
-            ),
+            child: meal.imageUrl.isNotEmpty
+                ? CachedNetworkImage(
+                    imageUrl: meal.imageUrl,
+                    fit: BoxFit.cover,
+                    errorWidget: (_, __, ___) => _headerFallback(),
+                    placeholder: (_, __) => _headerFallback(),
+                  )
+                : _headerFallback(),
           ),
 
           // ── Gradient overlay ──────────────────────────────────────────────
@@ -141,6 +141,17 @@ class MealDetailHeaderWidget extends StatelessWidget {
     );
   }
 }
+
+Widget _headerFallback() => ColoredBox(
+      color: AppColors.surfaceVariant,
+      child: Center(
+        child: Icon(
+          Icons.restaurant_rounded,
+          color: AppColors.textHint,
+          size: 56,
+        ),
+      ),
+    );
 
 class _CircleIconButton extends StatelessWidget {
   const _CircleIconButton({required this.icon, required this.onTap});

@@ -3,6 +3,16 @@ import 'package:flutter/material.dart';
 import 'app_radius.dart';
 
 abstract final class AppBorderRadius {
+  // iOS17 baseline radii
+  static const BorderRadius iosSmall = a8;
+  static const BorderRadius iosField = a10;
+  static const BorderRadius iosCard = a12;
+  static const BorderRadius iosSection = a14;
+  static const BorderRadius iosButton = a16;
+  static const BorderRadius iosPill = a20;
+  static const BorderRadius iosSheet = a24;
+
+  // Backward-compatible existing constants.
   static const BorderRadius a2 = BorderRadius.all(AppRadius.c2);
   static const BorderRadius a3 = BorderRadius.all(AppRadius.c3);
   static const BorderRadius a4 = BorderRadius.all(AppRadius.c4);

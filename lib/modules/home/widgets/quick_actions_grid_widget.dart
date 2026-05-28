@@ -22,7 +22,7 @@ const _kActions = [
   _Action('⚡', 'Quick recipes', AppColors.secondaryLight, AppColors.secondary,
     tabIndex: 2, // Search tab
   ),
-  _Action('📋', "Today's full plan", Color(0xFFEDE9FE), Color(0xFF7C3AED),
+  _Action('📋', "Today's full plan", AppColors.surfaceVariant, AppColors.dinner,
     tabIndex: 1, // Meal Plan tab
   ),
   _Action('🤖', 'Ask AI Chef', AppColors.warningLight, AppColors.warning,

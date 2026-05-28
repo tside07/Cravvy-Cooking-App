@@ -109,14 +109,20 @@ class _Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      padding: AppPad.h24,
-      child: Form(
-        key: formKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            AppGap.h20,
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final horizontalPadding = constraints.maxWidth >= 768 ? 32.0 : 24.0;
+        return Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 560),
+            child: SingleChildScrollView(
+              padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+              child: Form(
+                key: formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    AppGap.h20,
 
             const AuthHeaderWidget(
               title: 'Welcome Back!',
@@ -124,53 +130,57 @@ class _Body extends StatelessWidget {
             ),
             AppGap.h28,
 
-            AuthSocialSectionWidget(onGoogleTap: () {}, onAppleTap: () {}),
-            AppGap.h20,
+                    AuthSocialSectionWidget(onGoogleTap: () {}, onAppleTap: () {}),
+                    AppGap.h20,
 
             const AuthDividerWidget(label: 'or sign in with email'),
             AppGap.h20,
 
-            AuthFormFieldsWidget(
-              fields: [
-                AuthFormFieldConfig(
-                  hint: 'Email',
-                  controller: emailController,
-                  keyboardType: TextInputType.emailAddress,
-                  focusNode: emailFocus,
-                  validator: (v) {
-                    if (v == null || v.isEmpty) return 'Vui lòng nhập email';
-                    if (!v.contains('@')) return 'Email không hợp lệ';
-                    return null;
-                  },
+                    AuthFormFieldsWidget(
+                      fields: [
+                        AuthFormFieldConfig(
+                          hint: 'Email',
+                          controller: emailController,
+                          keyboardType: TextInputType.emailAddress,
+                          focusNode: emailFocus,
+                          validator: (v) {
+                            if (v == null || v.isEmpty) return 'Vui lòng nhập email';
+                            if (!v.contains('@')) return 'Email không hợp lệ';
+                            return null;
+                          },
+                        ),
+                        AuthFormFieldConfig(
+                          hint: 'Password',
+                          controller: passwordController,
+                          isPassword: true,
+                          focusNode: passwordFocus,
+                          validator: (v) {
+                            if (v == null || v.isEmpty) return 'Vui lòng nhập mật khẩu';
+                            return null;
+                          },
+                        ),
+                      ],
+                    ),
+
+                    const ForgotPasswordButtonWidget(),
+                    AppGap.h8,
+
+                    CravvyButton(
+                      label: 'Sign In',
+                      isLoading: isLoading,
+                      onTap: onSubmit,
+                    ),
+                    AppGap.h20,
+
+                    const RegisterLinkWidget(),
+                    AppGap.h24,
+                  ],
                 ),
-                AuthFormFieldConfig(
-                  hint: 'Password',
-                  controller: passwordController,
-                  isPassword: true,
-                  focusNode: passwordFocus,
-                  validator: (v) {
-                    if (v == null || v.isEmpty) return 'Vui lòng nhập mật khẩu';
-                    return null;
-                  },
-                ),
-              ],
+              ),
             ),
-
-            const ForgotPasswordButtonWidget(),
-            AppGap.h8,
-
-            CravvyButton(
-              label: 'Sign In',
-              isLoading: isLoading,
-              onTap: onSubmit,
-            ),
-            AppGap.h20,
-
-            const RegisterLinkWidget(),
-            AppGap.h24,
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }

@@ -5,44 +5,84 @@ import 'app_colors.dart';
 
 abstract final class AppTextStyles {
   static const TextStyle s10 = TextStyle(
-    fontFamily: AppConst.nunitoFont,
+    fontFamily: AppConst.interFont,
     color: AppColors.textPrimary,
     fontSize: 10,
-    fontWeight: FontWeight.w500,
+    fontWeight: FontWeight.w400,
+    height: 1.3,
+  );
+  static const TextStyle s11 = TextStyle(
+    fontFamily: AppConst.interFont,
+    color: AppColors.textPrimary,
+    fontSize: 11,
+    fontWeight: FontWeight.w400,
+    height: 1.3,
   );
   static const TextStyle s12 = TextStyle(
-    fontFamily: AppConst.nunitoFont,
+    fontFamily: AppConst.interFont,
     color: AppColors.textPrimary,
     fontSize: 12,
-    fontWeight: FontWeight.w500,
+    fontWeight: FontWeight.w400,
+    height: 1.33,
+  );
+  static const TextStyle s13 = TextStyle(
+    fontFamily: AppConst.interFont,
+    color: AppColors.textPrimary,
+    fontSize: 13,
+    fontWeight: FontWeight.w400,
+    height: 1.35,
   );
   static const TextStyle s14 = TextStyle(
-    fontFamily: AppConst.nunitoFont,
+    fontFamily: AppConst.interFont,
     color: AppColors.textPrimary,
     fontSize: 14,
-    fontWeight: FontWeight.w500,
+    fontWeight: FontWeight.w400,
+    height: 1.4,
+  );
+  static const TextStyle s15 = TextStyle(
+    fontFamily: AppConst.interFont,
+    color: AppColors.textPrimary,
+    fontSize: 15,
+    fontWeight: FontWeight.w400,
+    height: 1.4,
   );
   static const TextStyle s16 = TextStyle(
-    fontFamily: AppConst.nunitoFont,
+    fontFamily: AppConst.interFont,
     color: AppColors.textPrimary,
     fontSize: 16,
     fontWeight: FontWeight.w500,
+    height: 1.4,
+  );
+  static const TextStyle s17 = TextStyle(
+    fontFamily: AppConst.interFont,
+    color: AppColors.textPrimary,
+    fontSize: 17,
+    fontWeight: FontWeight.w500,
+    height: 1.38,
   );
   static const TextStyle s18 = TextStyle(
-    fontFamily: AppConst.nunitoFont,
+    fontFamily: AppConst.interFont,
     color: AppColors.textPrimary,
     fontSize: 18,
-    fontWeight: FontWeight.w500,
+    fontWeight: FontWeight.w600,
+    height: 1.35,
   );
   static const TextStyle s20 = TextStyle(
-    fontFamily: AppConst.nunitoFont,
+    fontFamily: AppConst.interFont,
     color: AppColors.textPrimary,
     fontSize: 20,
-    fontWeight: FontWeight.w500,
+    fontWeight: FontWeight.w700,
+    height: 1.3,
   );
 
+  // Compatibility aliases for safe migration.
+  static const TextStyle caption = s12;
+  static const TextStyle body = s14;
+  static const TextStyle subtitle = s16;
+  static const TextStyle title = s18;
+
   static const TextStyle appbarTitle = TextStyle(
-    fontFamily: AppConst.robotoFont,
+    fontFamily: AppConst.interFont,
     color: AppColors.primary,
     fontSize: 16,
     fontWeight: FontWeight.w600,
@@ -51,21 +91,21 @@ abstract final class AppTextStyles {
   // Button
 
   static const TextStyle button = TextStyle(
-    fontFamily: AppConst.robotoFont,
+    fontFamily: AppConst.interFont,
     color: Colors.white,
     fontSize: 16,
-    fontWeight: FontWeight.w500,
+    fontWeight: FontWeight.w600,
   );
 
   static const TextStyle smallButton = TextStyle(
-    fontFamily: AppConst.robotoFont,
+    fontFamily: AppConst.interFont,
     color: Colors.white,
     fontSize: 11,
     fontWeight: FontWeight.w400,
   );
 
   static const TextStyle textButton = TextStyle(
-    fontFamily: AppConst.robotoFont,
+    fontFamily: AppConst.interFont,
     color: AppColors.primary,
     fontSize: 16,
     fontWeight: FontWeight.w500,
@@ -74,28 +114,28 @@ abstract final class AppTextStyles {
   // Input / Form
 
   static const TextStyle inputTitle = TextStyle(
-    fontFamily: AppConst.robotoFont,
+    fontFamily: AppConst.interFont,
     color: AppColors.formTitle,
     fontSize: 15,
     fontWeight: FontWeight.w400,
   );
 
   static const TextStyle inputFieldLabel = TextStyle(
-    fontFamily: AppConst.robotoFont,
+    fontFamily: AppConst.interFont,
     color: AppColors.formFieldLabel,
     fontSize: 15,
     fontWeight: FontWeight.w400,
   );
 
   static const TextStyle inputHintText = TextStyle(
-    fontFamily: AppConst.robotoFont,
+    fontFamily: AppConst.interFont,
     color: AppColors.hintText,
     fontSize: 15,
     fontWeight: FontWeight.w400,
   );
 
   static const TextStyle inputError = TextStyle(
-    fontFamily: AppConst.robotoFont,
+    fontFamily: AppConst.interFont,
     color: AppColors.error,
     fontSize: 11,
     fontWeight: FontWeight.w400,
@@ -104,14 +144,14 @@ abstract final class AppTextStyles {
   // Text
 
   static const TextStyle text = TextStyle(
-    fontFamily: AppConst.robotoFont,
+    fontFamily: AppConst.interFont,
     color: AppColors.text,
     fontSize: 14,
     fontWeight: FontWeight.w400,
   );
 
   static const TextStyle textMedium = TextStyle(
-    fontFamily: AppConst.robotoFont,
+    fontFamily: AppConst.interFont,
     color: AppColors.text,
     fontSize: 14,
     fontWeight: FontWeight.w500,
@@ -120,19 +160,19 @@ abstract final class AppTextStyles {
   //
 
   static const TextStyle cupertinoActionSheetAction = TextStyle(
-    fontFamily: AppConst.robotoFont,
+    fontFamily: AppConst.interFont,
     fontSize: 17,
     fontWeight: FontWeight.w400,
   );
 
   static const TextStyle tabBarLabel = TextStyle(
-    fontFamily: AppConst.robotoFont,
+    fontFamily: AppConst.interFont,
     fontSize: 15,
     fontWeight: FontWeight.w400,
   );
 
   static const TextStyle bottomSheetTitle = TextStyle(
-    fontFamily: AppConst.robotoFont,
+    fontFamily: AppConst.interFont,
     fontSize: 16,
     fontWeight: FontWeight.w400,
   );
