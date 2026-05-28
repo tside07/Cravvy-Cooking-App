@@ -181,7 +181,7 @@ class _FAQScreenState extends State<FAQScreen> {
               decoration: BoxDecoration(
                 color: AppColors.primaryLight,
                 borderRadius: BorderRadius.circular(16),
-                border: Border.all(color: AppColors.primary.withOpacity(0.2)),
+                border: Border.all(color: AppColors.primary.withValues(alpha: 0.2)),
               ),
               child: Row(
                 children: [
@@ -225,8 +225,8 @@ class _FAQTile extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppColors.surface,
         borderRadius: BorderRadius.circular(16),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 8)],
-        border: isExpanded ? Border.all(color: AppColors.primary.withOpacity(0.25)) : null,
+        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.04), blurRadius: 8)],
+        border: isExpanded ? Border.all(color: AppColors.primary.withValues(alpha: 0.25)) : null,
       ),
       child: InkWell(
         onTap: onTap,
