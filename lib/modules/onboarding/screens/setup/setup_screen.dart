@@ -254,7 +254,7 @@ class _SetupStep1ScreenState extends State<SetupStep1Screen> {
                                   vertical: 6,
                                 ),
                                 decoration: BoxDecoration(
-                                  color: _bmiColor.withOpacity(0.1),
+                                  color: _bmiColor.withValues(alpha: 0.1),
                                   borderRadius: BorderRadius.circular(20),
                                 ),
                                 child: Text(
@@ -402,7 +402,7 @@ class _SetupStep2ScreenState extends State<SetupStep2Screen> {
                                   decoration: BoxDecoration(
                                     color: isSelected
                                         ? AppColors.primary
-                                        : color.withOpacity(0.12),
+                                        : color.withValues(alpha: 0.12),
                                     borderRadius: BorderRadius.circular(14),
                                   ),
                                   child: Icon(

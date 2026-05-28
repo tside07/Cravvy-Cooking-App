@@ -131,7 +131,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                                 color: isSelected ? AppColors.primary : AppColors.border,
                                 width: isSelected ? 2 : 1,
                               ),
-                              boxShadow: isSelected ? [BoxShadow(color: AppColors.primary.withOpacity(0.15), blurRadius: 12)] : [],
+                              boxShadow: isSelected ? [BoxShadow(color: AppColors.primary.withValues(alpha: 0.15), blurRadius: 12)] : [],
                             ),
                             child: Row(
                               children: [
@@ -197,7 +197,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                       decoration: BoxDecoration(
                         color: AppColors.surface,
                         borderRadius: BorderRadius.circular(16),
-                        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 8)],
+                        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 8)],
                       ),
                       child: Column(
                         children: [
@@ -293,14 +293,14 @@ class _HighlightTile extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppColors.surface,
         borderRadius: BorderRadius.circular(14),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 8)],
+        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.04), blurRadius: 8)],
       ),
       child: Row(
         children: [
           Container(
             width: 44,
             height: 44,
-            decoration: BoxDecoration(color: highlight.color.withOpacity(0.12), borderRadius: BorderRadius.circular(12)),
+            decoration: BoxDecoration(color: highlight.color.withValues(alpha: 0.12), borderRadius: BorderRadius.circular(12)),
             child: Icon(highlight.icon, color: highlight.color, size: 22),
           ),
           const SizedBox(width: 12),

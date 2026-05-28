@@ -68,7 +68,7 @@ class MealSwapSheet extends StatelessWidget {
             decoration: BoxDecoration(
               color: meal.type.lightColor,
               borderRadius: AppBorderRadius.a16,
-              border: Border.all(color: meal.type.color.withOpacity(0.3)),
+              border: Border.all(color: meal.type.color.withValues(alpha: 0.3)),
             ),
             child: Row(
               children: [

@@ -22,7 +22,7 @@ class SetupContinueButtonWidget extends StatelessWidget {
           style: ElevatedButton.styleFrom(
             backgroundColor: AppColors.primary,
             foregroundColor: Colors.white,
-            disabledBackgroundColor: AppColors.primary.withOpacity(0.6),
+            disabledBackgroundColor: AppColors.primary.withValues(alpha: 0.6),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16),
             ),

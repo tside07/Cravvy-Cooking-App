@@ -56,7 +56,7 @@ class _TrialActivationScreenState extends State<TrialActivationScreen>
                     width: 8,
                     height: 8,
                     decoration: BoxDecoration(
-                      color: colors[i % colors.length].withOpacity(0.6),
+                      color: colors[i % colors.length].withValues(alpha: 0.6),
                       shape: BoxShape.circle,
                     ),
                   ),
@@ -80,7 +80,7 @@ class _TrialActivationScreenState extends State<TrialActivationScreen>
                       decoration: BoxDecoration(
                         gradient: AppColors.primaryGradient,
                         shape: BoxShape.circle,
-                        boxShadow: [BoxShadow(color: AppColors.primary.withOpacity(0.4), blurRadius: 24, offset: const Offset(0, 8))],
+                        boxShadow: [BoxShadow(color: AppColors.primary.withValues(alpha: 0.4), blurRadius: 24, offset: const Offset(0, 8))],
                       ),
                       child: const Icon(Icons.auto_awesome_rounded, color: Colors.white, size: 44),
                     ),
@@ -105,7 +105,7 @@ class _TrialActivationScreenState extends State<TrialActivationScreen>
                           decoration: BoxDecoration(
                             color: AppColors.surface,
                             borderRadius: BorderRadius.circular(20),
-                            boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.06), blurRadius: 16, offset: const Offset(0, 4))],
+                            boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.06), blurRadius: 16, offset: const Offset(0, 4))],
                           ),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,

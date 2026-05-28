@@ -212,7 +212,7 @@ class _CookingModeScreenState extends State<CookingModeScreen> {
                         shape: BoxShape.circle,
                         boxShadow: [
                           BoxShadow(
-                            color: AppColors.primary.withOpacity(0.3),
+                            color: AppColors.primary.withValues(alpha: 0.3),
                             blurRadius: 16,
                             offset: const Offset(0, 6),
                           ),
@@ -240,7 +240,7 @@ class _CookingModeScreenState extends State<CookingModeScreen> {
                         borderRadius: BorderRadius.circular(20),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black.withOpacity(0.06),
+                            color: Colors.black.withValues(alpha: 0.06),
                             blurRadius: 16,
                             offset: const Offset(0, 4),
                           ),
@@ -265,7 +265,7 @@ class _CookingModeScreenState extends State<CookingModeScreen> {
                           color: AppColors.surface,
                           borderRadius: BorderRadius.circular(20),
                           border: Border.all(
-                            color: AppColors.primary.withOpacity(0.2),
+                            color: AppColors.primary.withValues(alpha: 0.2),
                           ),
                         ),
                         child: Column(
@@ -321,7 +321,7 @@ class _CookingModeScreenState extends State<CookingModeScreen> {
                                       shape: BoxShape.circle,
                                       boxShadow: [
                                         BoxShadow(
-                                          color: AppColors.primary.withOpacity(
+                                          color: AppColors.primary.withValues(alpha: 
                                             0.4,
                                           ),
                                           blurRadius: 12,
