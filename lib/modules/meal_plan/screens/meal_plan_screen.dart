@@ -16,22 +16,45 @@ class MealPlanScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.background,
       body: SafeArea(
-        child: Column(
-          children: const [
-            MealPlanHeaderWidget(),
-            WeekStripWidget(),
-            FreeWeekUpsellBanner(),
-            CalorieSummaryWidget(),
-            Expanded(child: _MealList()),
-          ],
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            final horizontalPadding = _responsiveHorizontalPadding(
+              constraints.maxWidth,
+            );
+            return Center(
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 900),
+                child: Column(
+                  children: [
+                    const MealPlanHeaderWidget(),
+                    const WeekStripWidget(),
+                    const FreeWeekUpsellBanner(),
+                    const CalorieSummaryWidget(),
+                    Expanded(
+                      child: _MealList(horizontalPadding: horizontalPadding),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
         ),
       ),
     );
   }
+
+  double _responsiveHorizontalPadding(double maxWidth) {
+    if (maxWidth >= 1024) return 32;
+    if (maxWidth >= 768) return 24;
+    if (maxWidth >= 600) return 20;
+    return 16;
+  }
 }
 
 class _MealList extends StatelessWidget {
-  const _MealList();
+  const _MealList({required this.horizontalPadding});
+
+  final double horizontalPadding;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +62,7 @@ class _MealList extends StatelessWidget {
       builder: (context, provider, _) {
         final meals = provider.selectedDay.meals;
         return ListView.builder(
-          padding: const EdgeInsets.only(left: 16, top: 16, right: 16, bottom: 100),
+          padding: EdgeInsets.fromLTRB(horizontalPadding, 16, horizontalPadding, 100),
           itemCount: meals.length,
           itemBuilder: (context, i) => MealCardWidget(
             meal: meals[i],

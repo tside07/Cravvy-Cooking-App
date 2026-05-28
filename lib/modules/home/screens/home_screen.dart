@@ -16,7 +16,9 @@ class HomeScreen extends StatelessWidget {
       body: SafeArea(
         child: LayoutBuilder(
           builder: (context, constraints) {
-            final horizontalPadding = constraints.maxWidth >= 768 ? 24.0 : 0.0;
+            final horizontalPadding = _responsiveHorizontalPadding(
+              constraints.maxWidth,
+            );
             return Center(
               child: ConstrainedBox(
                 constraints: const BoxConstraints(maxWidth: 960),
@@ -55,5 +57,12 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  double _responsiveHorizontalPadding(double maxWidth) {
+    if (maxWidth >= 1024) return 32;
+    if (maxWidth >= 768) return 24;
+    if (maxWidth >= 600) return 20;
+    return 16;
   }
 }
