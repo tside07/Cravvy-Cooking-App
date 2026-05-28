@@ -3,8 +3,9 @@ abstract final class AppConst {
   static const String appTagline = 'Your AI Meal Planner';
   static const String bundleId = 'com.tside07.cravvy';
 
-  static const String robotoFont = 'Roboto';
-  static const String nunitoFont = 'Nunito';
+  static const String robotoFont = 'Inter';
+  static const String interFont = 'Inter';
+  static const String nunitoFont = interFont;
 
   // Business
   static const int otpLength = 6;

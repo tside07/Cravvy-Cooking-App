@@ -35,10 +35,15 @@ class _MealDetailBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<MealDetailProvider>(
       builder: (context, provider, _) {
-        return CustomScrollView(
-          slivers: [
-            // ── Hero image + title + tags ───────────────────────────────────
-            MealDetailHeaderWidget(meal: meal),
+        return LayoutBuilder(
+          builder: (context, constraints) {
+            return Center(
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 900),
+                child: CustomScrollView(
+                  slivers: [
+                    // ── Hero image + title + tags ───────────────────────────────────
+                    MealDetailHeaderWidget(meal: meal),
 
             // ── White content card that peeks over the image ────────────────
             SliverToBoxAdapter(
@@ -68,29 +73,33 @@ class _MealDetailBody extends StatelessWidget {
               ),
             ),
 
-            // ── Stats row (prep / cal / servings / level) ───────────────────
-            MealDetailStatsWidget(meal: meal),
+                    // ── Stats row (prep / cal / servings / level) ───────────────────
+                    MealDetailStatsWidget(meal: meal),
 
-            // ── Divider ─────────────────────────────────────────────────────
-            const SliverToBoxAdapter(
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16),
-                child: Divider(color: AppColors.border, height: 1),
+                    // ── Divider ─────────────────────────────────────────────────────
+                    const SliverToBoxAdapter(
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 16),
+                        child: Divider(color: AppColors.border, height: 1),
+                      ),
+                    ),
+
+                    // ── Tab bar ──────────────────────────────────────────────────────
+                    const MealDetailTabsWidget(),
+
+                    // ── Tab-specific content ─────────────────────────────────────────
+                    if (provider.activeTab == MealDetailTab.ingredients) ...[
+                      const MealDetailServingsWidget(),
+                      const MealDetailIngredientsWidget(),
+                    ] else if (provider.activeTab == MealDetailTab.nutrition)
+                      MealDetailNutritionWidget(meal: meal)
+                    else
+                      MealDetailInstructionsWidget(meal: meal),
+                  ],
+                ),
               ),
-            ),
-
-            // ── Tab bar ──────────────────────────────────────────────────────
-            MealDetailTabsWidget(),
-
-            // ── Tab-specific content ─────────────────────────────────────────
-            if (provider.activeTab == MealDetailTab.ingredients) ...[
-              MealDetailServingsWidget(),
-              MealDetailIngredientsWidget(),
-            ] else if (provider.activeTab == MealDetailTab.nutrition)
-              MealDetailNutritionWidget(meal: meal)
-            else
-              MealDetailInstructionsWidget(meal: meal),
-          ],
+            );
+          },
         );
       },
     );

@@ -17,8 +17,21 @@ class _SetupShell extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
-      // SizedBox.expand + LayoutBuilder đảm bảo child LUÔN có bounded width
-      body: SafeArea(child: SizedBox.expand(child: child)),
+      body: SafeArea(
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            return Center(
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 760),
+                child: SizedBox(
+                  width: constraints.maxWidth,
+                  child: child,
+                ),
+              ),
+            );
+          },
+        ),
+      ),
     );
   }
 }

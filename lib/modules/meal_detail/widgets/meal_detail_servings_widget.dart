@@ -71,13 +71,6 @@ class _StepButton extends StatelessWidget {
           color: AppColors.surface,
           shape: BoxShape.circle,
           border: Border.all(color: AppColors.border),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withValues(alpha: 0.05),
-              blurRadius: 4,
-              offset: const Offset(0, 1),
-            ),
-          ],
         ),
         child: Icon(icon, size: 18, color: AppColors.textPrimary),
       ),
