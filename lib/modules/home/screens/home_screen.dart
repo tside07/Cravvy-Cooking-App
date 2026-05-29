@@ -1,4 +1,5 @@
 import 'package:cravvy_cooking_app/init.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:cravvy_cooking_app/modules/home/widgets/home_header_widget.dart';
 import 'package:cravvy_cooking_app/modules/home/widgets/nutrition_ring_card_widget.dart';
 import 'package:cravvy_cooking_app/modules/home/widgets/today_meals_section_widget.dart';
@@ -11,17 +12,19 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _ = context.locale;
+
     return Scaffold(
       backgroundColor: AppColors.background,
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
-            const SliverToBoxAdapter(child: HomeHeaderWidget()),
-            const SliverToBoxAdapter(child: NutritionRingCardWidget()),
-            const SliverToBoxAdapter(child: TodayMealsSectionWidget()),
-            const SliverToBoxAdapter(child: QuickActionsGridWidget()),
-            const SliverToBoxAdapter(child: FeaturedRecipesWidget()),
-            const SliverToBoxAdapter(child: NutritionTipWidget()),
+            SliverToBoxAdapter(child: HomeHeaderWidget()),
+            SliverToBoxAdapter(child: NutritionRingCardWidget()),
+            SliverToBoxAdapter(child: TodayMealsSectionWidget()),
+            SliverToBoxAdapter(child: QuickActionsGridWidget()),
+            SliverToBoxAdapter(child: FeaturedRecipesWidget()),
+            SliverToBoxAdapter(child: NutritionTipWidget()),
             AppGap.sh100,
           ],
         ),

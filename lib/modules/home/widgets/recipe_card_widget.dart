@@ -2,6 +2,7 @@ import 'package:cravvy_cooking_app/init.dart';
 import 'package:cravvy_cooking_app/data/models/recipe.dart';
 import 'package:cravvy_cooking_app/data/models/meal_type_helper.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 enum RecipeCardLayout { compact, featured, grid }
 
@@ -17,6 +18,8 @@ class RecipeCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _ = context.locale;
+
     switch (layout) {
       case RecipeCardLayout.compact:
         return _buildCompact(context);
@@ -53,7 +56,7 @@ class RecipeCardWidget extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(20),
             child: AspectRatio(
-              aspectRatio: 4 / 5,
+              aspectRatio: 180 / 150,
               child: _buildRecipePhoto(emoji, lightColor),
             ),
           ),
@@ -218,7 +221,7 @@ class RecipeCardWidget extends StatelessWidget {
         ),
         const SizedBox(width: 2),
         Text(
-          '${recipe.calories} cal',
+          '${recipe.calories} ${'meal_plan.calories_unit'.tr()}',
           style: AppTextStyles.s12.copyWith(
             fontSize: 11,
             fontWeight: FontWeight.w600,
@@ -233,7 +236,7 @@ class RecipeCardWidget extends StatelessWidget {
         ),
         const SizedBox(width: 2),
         Text(
-          '${recipe.prepTime}m',
+          '${recipe.prepTime}${'meal_plan.minutes_short'.tr()}',
           style: AppTextStyles.s12.copyWith(
             fontSize: 11,
             color: AppColors.textSecondary,

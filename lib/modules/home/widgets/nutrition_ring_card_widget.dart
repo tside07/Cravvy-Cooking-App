@@ -1,4 +1,5 @@
 import 'package:cravvy_cooking_app/init.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:cravvy_cooking_app/modules/meal_plan/provider/meal_plan_provider.dart';
 import 'package:cravvy_cooking_app/modules/home/widgets/macro_bar_widget.dart';
 import 'package:cravvy_cooking_app/modules/home/widgets/ring_painter_widget.dart';
@@ -8,11 +9,17 @@ class NutritionRingCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Rebuild when locale changes (.tr() alone does not subscribe).
+    // Source: https://pub.dev/documentation/easy_localization/latest/easy_localization/EasyLocalization/of.html
+    final _ = context.locale;
+
     return Consumer<MealPlanProvider>(
       builder: (context, provider, _) {
-        final day = provider.selectedDay;
-        final remaining = provider.remainingCalories.clamp(0, 9999);
-        final progress = provider.calorieProgress;
+        final day = provider.todayDay;
+        final remaining =
+            (provider.targetCalories - day.totalCalories).clamp(0, 9999);
+        final progress =
+            (day.totalCalories / provider.targetCalories).clamp(0.0, 1.0);
 
         return Container(
           margin: const EdgeInsets.only(
@@ -30,7 +37,7 @@ class NutritionRingCardWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Today's Nutrition",
+                'home.nutrition_title'.tr(),
                 style: Theme.of(context).textTheme.headlineSmall,
               ),
               AppGap.h20,
@@ -59,7 +66,7 @@ class NutritionRingCardWidget extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                'kcal left',
+                                'home.kcal_left'.tr(),
                                 style: AppTextStyles.s12.copyWith(
                                   fontSize: 11,
                                   color: AppColors.textSecondary,
@@ -78,7 +85,7 @@ class NutritionRingCardWidget extends StatelessWidget {
                     child: Column(
                       children: [
                         MacroBarWidget(
-                          label: 'Protein',
+                          label: 'home.macro_protein'.tr(),
                           current: day.totalProtein,
                           target: provider.targetProtein,
                           unit: 'g',
@@ -86,7 +93,7 @@ class NutritionRingCardWidget extends StatelessWidget {
                         ),
                         AppGap.h12,
                         MacroBarWidget(
-                          label: 'Carbs',
+                          label: 'home.macro_carbs'.tr(),
                           current: day.totalCarbs,
                           target: provider.targetCarbs,
                           unit: 'g',
@@ -94,7 +101,7 @@ class NutritionRingCardWidget extends StatelessWidget {
                         ),
                         AppGap.h12,
                         MacroBarWidget(
-                          label: 'Fat',
+                          label: 'home.macro_fat'.tr(),
                           current: day.totalFat,
                           target: provider.targetFat,
                           unit: 'g',

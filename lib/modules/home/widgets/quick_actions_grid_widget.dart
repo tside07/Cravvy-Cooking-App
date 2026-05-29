@@ -1,4 +1,5 @@
 import "package:cravvy_cooking_app/init.dart";
+import 'package:easy_localization/easy_localization.dart';
 import 'package:cravvy_cooking_app/modules/dashboard/provider/dashboard_tab_provider.dart';
 
 class _Action {
@@ -8,33 +9,53 @@ class _Action {
   final Color iconColor;
   /// Dashboard tab index to switch to when tapped.
   final int? tabIndex;
-  const _Action(this.emoji, this.label, this.bgColor, this.iconColor, {this.tabIndex});
+  const _Action(
+    this.emoji,
+    this.label,
+    this.bgColor,
+    this.iconColor, {
+    this.tabIndex,
+  });
 }
-
-const _kActions = [
-  _Action(
-    '🥕',
-    'Ingredients I have',
-    AppColors.primaryLight,
-    AppColors.primary,
-    tabIndex: 2, // Search tab
-  ),
-  _Action('⚡', 'Quick recipes', AppColors.secondaryLight, AppColors.secondary,
-    tabIndex: 2, // Search tab
-  ),
-  _Action('📋', "Today's full plan", AppColors.surfaceVariant, AppColors.dinner,
-    tabIndex: 1, // Meal Plan tab
-  ),
-  _Action('🤖', 'Ask AI Chef', AppColors.warningLight, AppColors.warning,
-    tabIndex: 2, // Search tab
-  ),
-];
 
 class QuickActionsGridWidget extends StatelessWidget {
   const QuickActionsGridWidget({super.key});
 
+  List<_Action> _actions() => [
+        _Action(
+          '🥕',
+          'home.action_ingredients'.tr(),
+          AppColors.primaryLight,
+          AppColors.primary,
+          tabIndex: 2,
+        ),
+        _Action(
+          '⚡',
+          'home.action_quick'.tr(),
+          AppColors.secondaryLight,
+          AppColors.secondary,
+          tabIndex: 2,
+        ),
+        _Action(
+          '📋',
+          'home.action_plan'.tr(),
+          AppColors.surfaceVariant,
+          AppColors.dinner,
+          tabIndex: 1,
+        ),
+        _Action(
+          '🤖',
+          'home.action_ai'.tr(),
+          AppColors.warningLight,
+          AppColors.warning,
+          tabIndex: 2,
+        ),
+      ];
+
   @override
   Widget build(BuildContext context) {
+    final _ = context.locale;
+
     return Padding(
       padding: const EdgeInsets.only(
         left: 16,
@@ -47,7 +68,7 @@ class QuickActionsGridWidget extends StatelessWidget {
           Padding(
             padding: AppPad.l8,
             child: Text(
-              'Quick Actions',
+              'home.quick_actions'.tr(),
               style: Theme.of(context).textTheme.headlineSmall,
             ),
           ),
@@ -59,7 +80,7 @@ class QuickActionsGridWidget extends StatelessWidget {
             childAspectRatio: 1.6,
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
-            children: _kActions.map((a) => _ActionCard(action: a)).toList(),
+            children: _actions().map((a) => _ActionCard(action: a)).toList(),
           ),
         ],
       ),
@@ -123,4 +144,3 @@ class _ActionCard extends StatelessWidget {
     );
   }
 }
-

@@ -1,4 +1,5 @@
 import 'package:cravvy_cooking_app/init.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/services.dart';
 import 'package:cravvy_cooking_app/modules/home/screens/home_screen.dart';
 import 'package:cravvy_cooking_app/modules/meal_plan/screens/meal_plan_screen.dart';
@@ -34,6 +35,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final _ = context.locale;
+
     // Listen for programmatic tab switches from child screens.
     final tabProvider = context.watch<DashboardTabProvider>();
     if (tabProvider.index != _currentIndex) {

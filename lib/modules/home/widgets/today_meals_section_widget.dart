@@ -1,4 +1,5 @@
 import 'package:cravvy_cooking_app/init.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:cravvy_cooking_app/modules/meal_plan/provider/meal_plan_provider.dart';
 import 'package:cravvy_cooking_app/modules/home/widgets/meal_scroll_card_widget.dart';
 import 'package:cravvy_cooking_app/modules/dashboard/provider/dashboard_tab_provider.dart';
@@ -8,6 +9,8 @@ class TodayMealsSectionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _ = context.locale;
+
     return Consumer<MealPlanProvider>(
       builder: (context, provider, _) {
         final meals = provider.todayDay.meals;
@@ -26,7 +29,7 @@ class TodayMealsSectionWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Today's Meals",
+                    'home.meals_title'.tr(),
                     style: Theme.of(context).textTheme.headlineSmall,
                   ),
                   TextButton(
@@ -35,7 +38,7 @@ class TodayMealsSectionWidget extends StatelessWidget {
                     child: Row(
                       children: [
                         Text(
-                          'See all',
+                          'home.see_all'.tr(),
                           style: AppTextStyles.s12.copyWith(
                             color: AppColors.primary,
                             fontWeight: FontWeight.w600,
@@ -83,7 +86,7 @@ class TodayMealsSectionWidget extends StatelessWidget {
                         const Text('🍽️', style: TextStyle(fontSize: 32)),
                         AppGap.h8,
                         Text(
-                          'No meals planned today',
+                          'home.no_meals_title'.tr(),
                           style: AppTextStyles.s14.copyWith(
                             fontWeight: FontWeight.w600,
                             color: AppColors.textPrimary,
@@ -91,7 +94,7 @@ class TodayMealsSectionWidget extends StatelessWidget {
                         ),
                         AppGap.h4,
                         Text(
-                          'Tap to add meals to your plan',
+                          'home.no_meals_desc'.tr(),
                           style: AppTextStyles.s12.copyWith(
                             color: AppColors.textSecondary,
                           ),

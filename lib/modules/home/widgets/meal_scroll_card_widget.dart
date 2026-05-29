@@ -1,5 +1,6 @@
 import 'package:cravvy_cooking_app/init.dart';
 import 'package:cravvy_cooking_app/data/models/meal.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class MealScrollCardWidget extends StatelessWidget {
   const MealScrollCardWidget({super.key, required this.meal});
@@ -8,6 +9,8 @@ class MealScrollCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _ = context.locale;
+
     return GestureDetector(
       onTap: () => context.push(AppRouter.mealDetail, extra: meal),
       child: Container(
@@ -117,7 +120,7 @@ class MealScrollCardWidget extends StatelessWidget {
                       ),
                       AppGap.w2,
                       Text(
-                        '${meal.calories} cal',
+                        '${meal.calories} ${'meal_plan.calories_unit'.tr()}',
                         style: AppTextStyles.s12.copyWith(
                           fontSize: 11,
                           fontWeight: FontWeight.w600,

@@ -5,24 +5,28 @@
 
 import 'package:cravvy_cooking_app/init.dart';
 import 'package:cravvy_cooking_app/data/providers/auth_provider.dart';
-import 'package:intl/intl.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class HomeHeaderWidget extends StatelessWidget {
   const HomeHeaderWidget({super.key});
 
   String _greeting() {
     final hour = DateTime.now().hour;
-    if (hour < 12) return 'Good morning';
-    if (hour < 17) return 'Good afternoon';
-    return 'Good evening';
+    if (hour < 12) return 'home.greeting_morning'.tr();
+    if (hour < 17) return 'home.greeting_afternoon'.tr();
+    return 'home.greeting_evening'.tr();
   }
 
-  String _todayLabel() {
-    return DateFormat('EEEE, MMM d').format(DateTime.now());
+  String _todayLabel(BuildContext context) {
+    return DateFormat(
+      'EEEE, MMM d',
+      context.locale.toString(),
+    ).format(DateTime.now());
   }
 
   @override
   Widget build(BuildContext context) {
+    final _ = context.locale;
     final user = context.watch<AuthProvider>().user;
     final firstName = user?.fullName?.split(' ').first ?? 'there';
 
@@ -40,7 +44,7 @@ class HomeHeaderWidget extends StatelessWidget {
                 ),
                 AppGap.h2,
                 Text(
-                  _todayLabel(),
+                  _todayLabel(context),
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
               ],
@@ -58,7 +62,7 @@ class HomeHeaderWidget extends StatelessWidget {
                 const Text('🔥', style: TextStyle(fontSize: 14)),
                 AppGap.w4,
                 Text(
-                  '7-day streak',
+                  'home.streak_badge'.tr(namedArgs: {'n': '7'}),
                   style: AppTextStyles.s12.copyWith(
                     fontWeight: FontWeight.w700,
                     color: AppColors.primary,

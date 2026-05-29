@@ -15,7 +15,6 @@ class FeaturedRecipesWidget extends StatefulWidget {
 
 class _FeaturedRecipesWidgetState extends State<FeaturedRecipesWidget> {
   String _selectedType = 'all';
-  String? _selectedTag;
 
   static const _typeTabs = [
     ('all', 'home.tab_all', '🍽️'),
@@ -23,15 +22,6 @@ class _FeaturedRecipesWidgetState extends State<FeaturedRecipesWidget> {
     ('lunch', 'home.tab_lunch', '☀️'),
     ('dinner', 'home.tab_dinner', '🌙'),
     ('snack', 'home.tab_snack', '🍎'),
-  ];
-
-  static const _quickTags = [
-    'High Protein',
-    'Quick',
-    'Vegan',
-    'Low Carb',
-    'Gluten-Free',
-    'Meal Prep',
   ];
 
   @override
@@ -44,6 +34,8 @@ class _FeaturedRecipesWidgetState extends State<FeaturedRecipesWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final _ = context.locale;
+
     return Consumer<RecipeProvider>(
       builder: (context, provider, _) {
         return LayoutBuilder(
@@ -93,10 +85,7 @@ class _FeaturedRecipesWidgetState extends State<FeaturedRecipesWidget> {
                       final (type, labelKey, emoji) = _typeTabs[i];
                       final isSelected = _selectedType == type;
                       return GestureDetector(
-                        onTap: () => setState(() {
-                          _selectedType = type;
-                          _selectedTag = null;
-                        }),
+                        onTap: () => setState(() => _selectedType = type),
                         child: AnimatedContainer(
                           duration: const Duration(milliseconds: 180),
                           padding: const EdgeInsets.symmetric(
@@ -129,57 +118,6 @@ class _FeaturedRecipesWidgetState extends State<FeaturedRecipesWidget> {
                   ),
                 ),
                 AppGap.h10,
-                if (provider.isLoaded) ...[
-                  SizedBox(
-                    height: 32,
-                    child: ListView.separated(
-                      scrollDirection: Axis.horizontal,
-                      padding: EdgeInsets.symmetric(
-                        horizontal: horizontalPadding,
-                      ),
-                      itemCount: _quickTags.length,
-                      separatorBuilder: (_, __) => const SizedBox(width: 6),
-                      itemBuilder: (_, i) {
-                        final tag = _quickTags[i];
-                        final isActive = _selectedTag == tag;
-                        return GestureDetector(
-                          onTap: () => setState(
-                            () => _selectedTag = isActive ? null : tag,
-                          ),
-                          child: AnimatedContainer(
-                            duration: const Duration(milliseconds: 160),
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 12,
-                              vertical: 5,
-                            ),
-                            decoration: BoxDecoration(
-                              color: isActive
-                                  ? AppColors.primaryLight
-                                  : AppColors.surfaceVariant,
-                              borderRadius: BorderRadius.circular(16),
-                              border: Border.all(
-                                color: isActive
-                                    ? AppColors.primary
-                                    : Colors.transparent,
-                              ),
-                            ),
-                            child: Text(
-                              tag,
-                              style: AppTextStyles.s12.copyWith(
-                                fontSize: 11,
-                                fontWeight: FontWeight.w600,
-                                color: isActive
-                                    ? AppColors.primary
-                                    : AppColors.textSecondary,
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                  AppGap.h10,
-                ],
                 SizedBox(
                   height: 260,
                   child: _buildContent(
@@ -227,11 +165,10 @@ class _FeaturedRecipesWidgetState extends State<FeaturedRecipesWidget> {
       );
     }
 
-    final filterKey = buildFeaturedFilterKey(_selectedType, _selectedTag);
+    final filterKey = buildFeaturedFilterKey(_selectedType, null);
     final recipes = provider.featuredRecipes(
       filterKey: filterKey,
       mealType: _selectedType,
-      tag: _selectedTag,
     );
 
     if (recipes.isEmpty) {
