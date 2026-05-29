@@ -1,6 +1,9 @@
 import 'package:cravvy_cooking_app/init.dart';
+import 'package:cravvy_cooking_app/core/routes/all_recipes_args.dart';
+import 'package:cravvy_cooking_app/core/utils/featured_recipes_utils.dart';
 import 'package:cravvy_cooking_app/data/providers/recipe_provider.dart';
 import 'package:cravvy_cooking_app/modules/home/widgets/recipe_card_widget.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:shimmer/shimmer.dart';
 
 class FeaturedRecipesWidget extends StatefulWidget {
@@ -15,11 +18,11 @@ class _FeaturedRecipesWidgetState extends State<FeaturedRecipesWidget> {
   String? _selectedTag;
 
   static const _typeTabs = [
-    ('all', 'All', '🍽️'),
-    ('breakfast', 'Breakfast', '🌅'),
-    ('lunch', 'Lunch', '☀️'),
-    ('dinner', 'Dinner', '🌙'),
-    ('snack', 'Snack', '🍎'),
+    ('all', 'home.tab_all', '🍽️'),
+    ('breakfast', 'home.tab_breakfast', '🌅'),
+    ('lunch', 'home.tab_lunch', '☀️'),
+    ('dinner', 'home.tab_dinner', '🌙'),
+    ('snack', 'home.tab_snack', '🍎'),
   ];
 
   static const _quickTags = [
@@ -49,135 +52,136 @@ class _FeaturedRecipesWidgetState extends State<FeaturedRecipesWidget> {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-            // ── Header ──────────────────────────────────────────────────────
-            Padding(
-              padding: EdgeInsets.only(
-                left: horizontalPadding + 4,
-                right: horizontalPadding + 4,
-                top: 24,
-                bottom: 12,
-              ),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      'Explore Recipes',
-                      style: Theme.of(context).textTheme.headlineSmall,
+                Padding(
+                  padding: EdgeInsets.only(
+                    left: horizontalPadding + 4,
+                    right: horizontalPadding + 4,
+                    top: 24,
+                    bottom: 12,
+                  ),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          'home.recipes_title'.tr(),
+                          style: Theme.of(context).textTheme.headlineSmall,
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: provider.isLoaded
+                            ? () => context.push(
+                                  AppRouter.allRecipes,
+                                  extra: AllRecipesArgs(
+                                    initialMealType: _selectedType,
+                                  ),
+                                )
+                            : null,
+                        child: Text('home.recipes_see_all'.tr()),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 36,
+                  child: ListView.separated(
+                    scrollDirection: Axis.horizontal,
+                    padding:
+                        EdgeInsets.symmetric(horizontal: horizontalPadding),
+                    itemCount: _typeTabs.length,
+                    separatorBuilder: (_, __) => const SizedBox(width: 8),
+                    itemBuilder: (_, i) {
+                      final (type, labelKey, emoji) = _typeTabs[i];
+                      final isSelected = _selectedType == type;
+                      return GestureDetector(
+                        onTap: () => setState(() {
+                          _selectedType = type;
+                          _selectedTag = null;
+                        }),
+                        child: AnimatedContainer(
+                          duration: const Duration(milliseconds: 180),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 14,
+                            vertical: 6,
+                          ),
+                          decoration: BoxDecoration(
+                            color: isSelected
+                                ? AppColors.primary
+                                : AppColors.surface,
+                            borderRadius: BorderRadius.circular(20),
+                            border: Border.all(
+                              color: isSelected
+                                  ? AppColors.primary
+                                  : AppColors.border,
+                            ),
+                          ),
+                          child: Text(
+                            '$emoji ${labelKey.tr()}',
+                            style: AppTextStyles.s12.copyWith(
+                              fontWeight: FontWeight.w700,
+                              color: isSelected
+                                  ? Colors.white
+                                  : AppColors.textSecondary,
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                AppGap.h10,
+                if (provider.isLoaded) ...[
+                  SizedBox(
+                    height: 32,
+                    child: ListView.separated(
+                      scrollDirection: Axis.horizontal,
+                      padding: EdgeInsets.symmetric(
+                        horizontal: horizontalPadding,
+                      ),
+                      itemCount: _quickTags.length,
+                      separatorBuilder: (_, __) => const SizedBox(width: 6),
+                      itemBuilder: (_, i) {
+                        final tag = _quickTags[i];
+                        final isActive = _selectedTag == tag;
+                        return GestureDetector(
+                          onTap: () => setState(
+                            () => _selectedTag = isActive ? null : tag,
+                          ),
+                          child: AnimatedContainer(
+                            duration: const Duration(milliseconds: 160),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 12,
+                              vertical: 5,
+                            ),
+                            decoration: BoxDecoration(
+                              color: isActive
+                                  ? AppColors.primaryLight
+                                  : AppColors.surfaceVariant,
+                              borderRadius: BorderRadius.circular(16),
+                              border: Border.all(
+                                color: isActive
+                                    ? AppColors.primary
+                                    : Colors.transparent,
+                              ),
+                            ),
+                            child: Text(
+                              tag,
+                              style: AppTextStyles.s12.copyWith(
+                                fontSize: 11,
+                                fontWeight: FontWeight.w600,
+                                color: isActive
+                                    ? AppColors.primary
+                                    : AppColors.textSecondary,
+                              ),
+                            ),
+                          ),
+                        );
+                      },
                     ),
                   ),
-                  if (provider.isLoaded)
-                    Text(
-                      '${provider.allRecipes.length} recipes',
-                      style: AppTextStyles.s12.copyWith(
-                        color: AppColors.textSecondary,
-                      ),
-                    ),
+                  AppGap.h10,
                 ],
-              ),
-            ),
-
-            // ── Meal type tabs ───────────────────────────────────────────────
-            SizedBox(
-              height: 36,
-              child: ListView.separated(
-                scrollDirection: Axis.horizontal,
-                padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
-                itemCount: _typeTabs.length,
-                separatorBuilder: (_, __) => const SizedBox(width: 8),
-                itemBuilder: (_, i) {
-                  final (type, label, emoji) = _typeTabs[i];
-                  final isSelected = _selectedType == type;
-                  return GestureDetector(
-                    onTap: () => setState(() {
-                      _selectedType = type;
-                      _selectedTag = null; // reset tag filter
-                    }),
-                    child: AnimatedContainer(
-                      duration: const Duration(milliseconds: 180),
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 14,
-                        vertical: 6,
-                      ),
-                      decoration: BoxDecoration(
-                        color: isSelected
-                            ? AppColors.primary
-                            : AppColors.surface,
-                        borderRadius: BorderRadius.circular(20),
-                        border: Border.all(
-                          color: isSelected
-                              ? AppColors.primary
-                              : AppColors.border,
-                        ),
-                      ),
-                      child: Text(
-                        '$emoji $label',
-                        style: AppTextStyles.s12.copyWith(
-                          fontWeight: FontWeight.w700,
-                          color: isSelected
-                              ? Colors.white
-                              : AppColors.textSecondary,
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
-            AppGap.h10,
-
-            // ── Quick tag filters ────────────────────────────────────────────
-            if (provider.isLoaded) ...[
-              SizedBox(
-                height: 32,
-                child: ListView.separated(
-                  scrollDirection: Axis.horizontal,
-                  padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
-                  itemCount: _quickTags.length,
-                  separatorBuilder: (_, __) => const SizedBox(width: 6),
-                  itemBuilder: (_, i) {
-                    final tag = _quickTags[i];
-                    final isActive = _selectedTag == tag;
-                    return GestureDetector(
-                      onTap: () =>
-                          setState(() => _selectedTag = isActive ? null : tag),
-                      child: AnimatedContainer(
-                        duration: const Duration(milliseconds: 160),
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 12,
-                          vertical: 5,
-                        ),
-                        decoration: BoxDecoration(
-                          color: isActive
-                              ? AppColors.primaryLight
-                              : AppColors.surfaceVariant,
-                          borderRadius: BorderRadius.circular(16),
-                          border: Border.all(
-                            color: isActive
-                                ? AppColors.primary
-                                : Colors.transparent,
-                          ),
-                        ),
-                        child: Text(
-                          tag,
-                          style: AppTextStyles.s12.copyWith(
-                            fontSize: 11,
-                            fontWeight: FontWeight.w600,
-                            color: isActive
-                                ? AppColors.primary
-                                : AppColors.textSecondary,
-                          ),
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ),
-              AppGap.h10,
-            ],
-
-            // ── Recipe cards ─────────────────────────────────────────────────
                 SizedBox(
-                  height: 220,
+                  height: 260,
                   child: _buildContent(
                     provider,
                     horizontalPadding: horizontalPadding,
@@ -207,14 +211,14 @@ class _FeaturedRecipesWidgetState extends State<FeaturedRecipesWidget> {
             const Text('😕', style: TextStyle(fontSize: 32)),
             AppGap.h8,
             Text(
-              'Không tải được dữ liệu',
+              'home.load_error'.tr(),
               style: AppTextStyles.s14.copyWith(color: AppColors.textSecondary),
             ),
             AppGap.h8,
             TextButton(
               onPressed: provider.reload,
               child: Text(
-                'Thử lại',
+                'home.retry'.tr(),
                 style: AppTextStyles.s14.copyWith(color: AppColors.primary),
               ),
             ),
@@ -223,19 +227,12 @@ class _FeaturedRecipesWidgetState extends State<FeaturedRecipesWidget> {
       );
     }
 
-    // Lọc theo type tab
-    var recipes = switch (_selectedType) {
-      'breakfast' => provider.breakfastRecipes,
-      'lunch' => provider.lunchRecipes,
-      'dinner' => provider.dinnerRecipes,
-      'snack' => provider.snackRecipes,
-      _ => provider.allRecipes,
-    };
-
-    // Lọc thêm theo tag nếu đang active
-    if (_selectedTag != null) {
-      recipes = recipes.where((r) => r.tags.contains(_selectedTag)).toList(growable: false);
-    }
+    final filterKey = buildFeaturedFilterKey(_selectedType, _selectedTag);
+    final recipes = provider.featuredRecipes(
+      filterKey: filterKey,
+      mealType: _selectedType,
+      tag: _selectedTag,
+    );
 
     if (recipes.isEmpty) {
       return Center(
@@ -245,9 +242,7 @@ class _FeaturedRecipesWidgetState extends State<FeaturedRecipesWidget> {
             const Text('🔍', style: TextStyle(fontSize: 28)),
             AppGap.h8,
             Text(
-              _selectedTag != null
-                  ? 'No "$_selectedTag" recipes found'
-                  : 'Chưa có món ăn nào',
+              'home.no_recipes'.tr(),
               style: AppTextStyles.s14.copyWith(color: AppColors.textSecondary),
             ),
           ],
@@ -259,7 +254,10 @@ class _FeaturedRecipesWidgetState extends State<FeaturedRecipesWidget> {
       scrollDirection: Axis.horizontal,
       padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
       itemCount: recipes.length,
-      itemBuilder: (_, i) => RecipeCardWidget(recipe: recipes[i]),
+      itemBuilder: (_, i) => RecipeCardWidget(
+        recipe: recipes[i],
+        layout: RecipeCardLayout.featured,
+      ),
     );
   }
 
@@ -272,7 +270,8 @@ class _FeaturedRecipesWidgetState extends State<FeaturedRecipesWidget> {
         baseColor: AppColors.border,
         highlightColor: AppColors.surface,
         child: Container(
-          width: 160,
+          width: 180,
+          height: 240,
           margin: const EdgeInsets.only(right: 12),
           decoration: BoxDecoration(
             color: Colors.white,

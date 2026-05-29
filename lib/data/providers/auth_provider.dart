@@ -15,6 +15,7 @@ class AuthProvider extends ChangeNotifier {
   String? _errorMessage;
   MealPlanProvider? _mealPlanProvider;
   RecipeProvider? _recipeProvider;
+  bool? _lastRecipeCatalogPremium;
 
   AuthStatus get status => _status;
   UserModel? get user => _user;
@@ -27,6 +28,7 @@ class AuthProvider extends ChangeNotifier {
   }
 
   void linkRecipeProvider(RecipeProvider rp) {
+    if (identical(_recipeProvider, rp)) return;
     _recipeProvider = rp;
     if (_user != null) _syncRecipeCatalog();
   }
@@ -39,7 +41,12 @@ class AuthProvider extends ChangeNotifier {
   void _syncRecipeCatalog() {
     if (_user == null || _recipeProvider == null) return;
     _recipeProvider!.updateFromUser(_user);
-    Future.microtask(() => _recipeProvider!.loadAll(forceReload: true));
+    final isPremium = _user!.isPremium;
+    final shouldForceReload = _lastRecipeCatalogPremium != isPremium;
+    _lastRecipeCatalogPremium = isPremium;
+    Future.microtask(
+      () => _recipeProvider!.loadAll(forceReload: shouldForceReload),
+    );
   }
 
   AuthProvider() {

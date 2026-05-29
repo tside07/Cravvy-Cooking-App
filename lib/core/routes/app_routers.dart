@@ -23,8 +23,10 @@ import 'package:cravvy_cooking_app/modules/faq/screen/faq_screen.dart';
 import 'package:cravvy_cooking_app/modules/legal/screen/legal_screen.dart';
 import 'package:cravvy_cooking_app/modules/profile/screen/edit_profile_screen.dart';
 import 'package:cravvy_cooking_app/modules/premium/screen/premium_screen.dart';
+import 'package:cravvy_cooking_app/core/routes/all_recipes_args.dart';
 import 'package:cravvy_cooking_app/data/models/meal.dart';
 import 'package:cravvy_cooking_app/data/providers/auth_provider.dart';
+import 'package:cravvy_cooking_app/modules/home/screens/all_recipes_screen.dart';
 
 class OnboardingArgs {
   final HealthGoal? goal;
@@ -53,6 +55,7 @@ class AppRouter {
   static const String otp = '/auth/otp';
   static const String resetPassword = '/auth/reset-password';
   // Features
+  static const String allRecipes = '/recipes/all';
   static const String mealDetail = '/meal-detail';
   static const String cookingMode = '/cooking';
   static const String editProfile = '/profile/edit';
@@ -184,6 +187,13 @@ class AppRouter {
           path: setupStep5,
           builder: (context, state) => const SetupStep5Screen()),
 
+      GoRoute(
+        path: allRecipes,
+        builder: (context, state) {
+          final args = state.extra as AllRecipesArgs?;
+          return AllRecipesScreen(args: args ?? const AllRecipesArgs());
+        },
+      ),
       GoRoute(
         path: mealDetail,
         builder: (context, state) {

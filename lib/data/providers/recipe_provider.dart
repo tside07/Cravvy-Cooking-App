@@ -1,6 +1,9 @@
 // lib/data/providers/recipe_provider.dart
 
+import 'dart:math';
+
 import 'package:flutter/foundation.dart';
+import 'package:cravvy_cooking_app/core/constants/featured_recipes_constants.dart';
 import 'package:cravvy_cooking_app/core/constants/plan_limits.dart';
 import 'package:cravvy_cooking_app/data/models/recipe.dart';
 import 'package:cravvy_cooking_app/data/models/user_model.dart';
@@ -15,6 +18,19 @@ class RecipeProvider extends ChangeNotifier {
   List<Recipe> _suggestedRecipes = []; // recipes phù hợp với user profile
   String? _errorMessage;
   String _searchQuery = '';
+
+  final Map<String, List<Recipe>> _featuredCache = {};
+  DateTime Function() _featuredNow = DateTime.now;
+
+  @visibleForTesting
+  set featuredNowForTesting(DateTime Function() value) => _featuredNow = value;
+
+  @visibleForTesting
+  void setAllRecipesForTesting(List<Recipe> recipes) {
+    _allRecipes = List<Recipe>.from(recipes);
+    _status = RecipeStatus.loaded;
+    _featuredCache.clear();
+  }
 
   // ─── Getters ──────────────────────────────────────────────────────────────
   RecipeStatus get status => _status;
@@ -60,6 +76,7 @@ class RecipeProvider extends ChangeNotifier {
           premium ? PlanLimits.tierPremium : PlanLimits.tierFree,
         ),
       );
+      _featuredCache.clear();
       _status = RecipeStatus.loaded;
     } catch (e) {
       _errorMessage = 'Không thể tải danh sách món ăn. Vui lòng thử lại.';
@@ -130,6 +147,54 @@ class RecipeProvider extends ChangeNotifier {
         break;
     }
     return score;
+  }
+
+  /// Home teaser: up to [count] recipes, stable per calendar day + [filterKey].
+  /// [filterKey] should be [buildFeaturedFilterKey](mealType, tag).
+  List<Recipe> featuredRecipes({
+    required String filterKey,
+    String mealType = 'all',
+    String? tag,
+    int count = kFeaturedRecipeCount,
+  }) {
+    if (_allRecipes.isEmpty) return [];
+
+    final filtered = _recipesForFeatured(mealType: mealType, tag: tag);
+    if (filtered.isEmpty) return [];
+
+    final dateKey = _featuredDateKey(_featuredNow());
+    final cacheKey = '$dateKey|$filterKey';
+
+    final cached = _featuredCache[cacheKey];
+    if (cached != null) return cached;
+
+    final shuffled = List<Recipe>.from(filtered)
+      ..shuffle(Random(cacheKey.hashCode));
+    final result = shuffled.take(count).toList(growable: false);
+    _featuredCache[cacheKey] = result;
+    return result;
+  }
+
+  List<Recipe> _recipesForFeatured({
+    required String mealType,
+    String? tag,
+  }) {
+    final List<Recipe> byType = switch (mealType) {
+      'breakfast' => breakfastRecipes,
+      'lunch' => lunchRecipes,
+      'dinner' => dinnerRecipes,
+      'snack' => snackRecipes,
+      _ => List<Recipe>.from(_allRecipes),
+    };
+    if (tag == null) return byType;
+    return byType.where((r) => r.tags.contains(tag)).toList(growable: false);
+  }
+
+  static String _featuredDateKey(DateTime date) {
+    final y = date.year.toString().padLeft(4, '0');
+    final m = date.month.toString().padLeft(2, '0');
+    final d = date.day.toString().padLeft(2, '0');
+    return '$y$m$d';
   }
 
   // ─── Filter nâng cao (dùng cho Search screen) ────────────────────────────

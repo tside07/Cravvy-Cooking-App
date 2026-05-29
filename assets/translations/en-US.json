@@ -384,6 +384,7 @@
         "action_plan": "Today's full plan",
         "action_ai": "Ask AI Chef",
         "recipes_title": "Explore Recipes",
+        "recipes_see_all": "See all",
         "recipes_count": "{n} recipes",
         "tab_all": "All",
         "tab_breakfast": "Breakfast",
