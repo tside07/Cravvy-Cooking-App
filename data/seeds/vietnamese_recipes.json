@@ -27,6 +27,13 @@
         "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
         "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
       ],
+      "ingredients": [
+        "ức gà",
+        "bánh phở",
+        "hành lá",
+        "gừng",
+        "rau thơm"
+      ],
       "source": "cravvy_curated_vn",
       "source_id": "pho-ga-nac",
       "locale": "vi",
@@ -54,6 +61,13 @@
         "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
         "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
         "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "bánh phở",
+        "đậu phụ",
+        "nấm",
+        "cà rốt",
+        "ngò"
       ],
       "source": "cravvy_curated_vn",
       "source_id": "pho-chay-rau-cu",
@@ -84,6 +98,12 @@
         "Xếp cơm + protein + rau, kiểm soát khẩu phần (~1 bát cơm).",
         "Ghi nhận bữa ăn trên Cravvy để cập nhật calories."
       ],
+      "ingredients": [
+        "gạo lứt",
+        "ức gà",
+        "gừng",
+        "hành lá"
+      ],
       "source": "cravvy_curated_vn",
       "source_id": "chao-ga-gao-lut",
       "locale": "vi",
@@ -111,6 +131,12 @@
         "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
         "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
         "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "yến mạch",
+        "trứng gà",
+        "sữa ít béo",
+        "chuối"
       ],
       "source": "cravvy_curated_vn",
       "source_id": "chao-yen-mach-trung",
@@ -140,6 +166,12 @@
         "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
         "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
         "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "bánh mì nguyên cám",
+        "trứng",
+        "rau xà lách",
+        "cà chua"
       ],
       "source": "cravvy_curated_vn",
       "source_id": "banh-mi-trung-op-la",
@@ -171,6 +203,12 @@
         "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
         "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
       ],
+      "ingredients": [
+        "bánh mì",
+        "ức gà nướng",
+        "dưa leo",
+        "rau"
+      ],
       "source": "cravvy_curated_vn",
       "source_id": "banh-mi-ga-nuong",
       "locale": "vi",
@@ -198,6 +236,12 @@
         "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
         "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
         "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "bột gạo",
+        "nấm",
+        "đậu xanh",
+        "hành phi"
       ],
       "source": "cravvy_curated_vn",
       "source_id": "banh-cuon-chay",
@@ -227,6 +271,12 @@
         "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
         "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
       ],
+      "ingredients": [
+        "gạo nếp",
+        "gấc",
+        "đậu xanh",
+        "muối"
+      ],
       "source": "cravvy_curated_vn",
       "source_id": "xoi-gac-it-uong",
       "locale": "vi",
@@ -254,6 +304,12 @@
         "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
         "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
         "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "sữa chua không đường",
+        "granola",
+        "dâu",
+        "chuối"
       ],
       "source": "cravvy_curated_vn",
       "source_id": "sua-chua-granola-trai-cay",
@@ -284,6 +340,12 @@
         "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
         "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
       ],
+      "ingredients": [
+        "bơ",
+        "táo",
+        "rau bina",
+        "nước dừa"
+      ],
       "source": "cravvy_curated_vn",
       "source_id": "smoothie-xanh-tao-bo",
       "locale": "vi",
@@ -312,6 +374,11 @@
         "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
         "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
         "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "trứng gà",
+        "bánh mì đen",
+        "bơ lạt"
       ],
       "source": "cravvy_curated_vn",
       "source_id": "trung-luoc-banh-mi-en",
@@ -342,6 +409,12 @@
         "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
         "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
       ],
+      "ingredients": [
+        "ức gà",
+        "bông cải",
+        "cà rốt",
+        "tỏi"
+      ],
       "source": "cravvy_curated_vn",
       "source_id": "uc-ga-ap-chao-rau-cu",
       "locale": "vi",
@@ -370,6 +443,13 @@
         "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
         "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
       ],
+      "ingredients": [
+        "bún",
+        "gà luộc",
+        "me",
+        "rau sống",
+        "đậu phộng"
+      ],
       "source": "cravvy_curated_vn",
       "source_id": "bun-ga-sot-me-it-dau",
       "locale": "vi",
@@ -397,6 +477,13 @@
         "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
         "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
       ],
+      "ingredients": [
+        "hủ tiếu",
+        "thịt heo nạc",
+        "tôm",
+        "giá",
+        "hành"
+      ],
       "source": "cravvy_curated_vn",
       "source_id": "hu-tieu-nam-vang-rau",
       "locale": "vi",
@@ -423,6 +510,12 @@
         "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
         "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
         "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "mì Quảng",
+        "gà",
+        "trứng cút",
+        "rau sống"
       ],
       "source": "cravvy_curated_vn",
       "source_id": "mi-quang-ga",
@@ -452,6 +545,12 @@
         "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
         "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
       ],
+      "ingredients": [
+        "gạo",
+        "cá hồi",
+        "gừng",
+        "hành lá"
+      ],
       "source": "cravvy_curated_vn",
       "source_id": "chao-ca-hoi",
       "locale": "vi",
@@ -479,6 +578,12 @@
         "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
         "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
         "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "bánh mì",
+        "trứng",
+        "dưa leo",
+        "ngò"
       ],
       "source": "cravvy_curated_vn",
       "source_id": "banh-mi-trung-rau",
@@ -509,6 +614,12 @@
         "Trộn rau, sốt nhẹ (ít muối/đường), chia khẩu phần một người.",
         "Kiểm tra dị ứng đã khai báo trong hồ sơ Cravvy trước khi dùng."
       ],
+      "ingredients": [
+        "đậu hũ",
+        "cà chua",
+        "nấm",
+        "hành tây"
+      ],
       "source": "cravvy_curated_vn",
       "source_id": "au-hu-sot-ca-breakfast-bowl",
       "locale": "vi",
@@ -537,6 +648,11 @@
         "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
         "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
       ],
+      "ingredients": [
+        "sữa chua Hy Lạp",
+        "đào",
+        "hạt chia"
+      ],
       "source": "cravvy_curated_vn",
       "source_id": "yogurt-parfait-ao",
       "locale": "vi",
@@ -563,6 +679,12 @@
         "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
         "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
         "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "bún",
+        "thịt heo nạc nướng",
+        "dưa góp",
+        "rau thơm"
       ],
       "source": "cravvy_curated_vn",
       "source_id": "bun-cha-nuong-it-mo",
@@ -592,6 +714,11 @@
         "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
         "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
       ],
+      "ingredients": [
+        "bí đỏ",
+        "sữa ít béo",
+        "hành tây"
+      ],
       "source": "cravvy_curated_vn",
       "source_id": "sup-bi-o-kem-nhat",
       "locale": "vi",
@@ -619,6 +746,12 @@
         "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
         "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
       ],
+      "ingredients": [
+        "thịt bò nạc",
+        "bánh phở",
+        "xương hầm",
+        "rau thơm"
+      ],
       "source": "cravvy_curated_vn",
       "source_id": "pho-bo-nac",
       "locale": "vi",
@@ -645,6 +778,11 @@
         "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
         "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
         "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "bột mì",
+        "nấm hương",
+        "đậu phụ"
       ],
       "source": "cravvy_curated_vn",
       "source_id": "banh-bao-chay-nam",
@@ -674,6 +812,12 @@
         "Xếp cơm + protein + rau, kiểm soát khẩu phần (~1 bát cơm).",
         "Ghi nhận bữa ăn trên Cravvy để cập nhật calories."
       ],
+      "ingredients": [
+        "gạo lứt",
+        "trứng",
+        "cà rốt",
+        "đậu Hà Lan"
+      ],
       "source": "cravvy_curated_vn",
       "source_id": "com-gao-lut-trung-chien-it-dau",
       "locale": "vi",
@@ -701,6 +845,11 @@
         "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
         "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
         "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "chuối",
+        "đậu phộng",
+        "sữa hạnh nhân"
       ],
       "source": "cravvy_curated_vn",
       "source_id": "sinh-to-chuoi-au-phong",
@@ -732,6 +881,13 @@
         "Trộn rau, sốt nhẹ (ít muối/đường), chia khẩu phần một người.",
         "Kiểm tra dị ứng đã khai báo trong hồ sơ Cravvy trước khi dùng."
       ],
+      "ingredients": [
+        "tôm",
+        "bánh tráng",
+        "bún",
+        "rau sống",
+        "bạc hà"
+      ],
       "source": "cravvy_curated_vn",
       "source_id": "goi-cuon-tom-gao-lut",
       "locale": "vi",
@@ -760,6 +916,12 @@
         "Chế biến protein (luộc/nướng) ít dầu, để nguội vừa phải.",
         "Trộn rau, sốt nhẹ (ít muối/đường), chia khẩu phần một người.",
         "Kiểm tra dị ứng đã khai báo trong hồ sơ Cravvy trước khi dùng."
+      ],
+      "ingredients": [
+        "ức gà",
+        "bắp cải",
+        "cà rốt",
+        "đậu phộng"
       ],
       "source": "cravvy_curated_vn",
       "source_id": "goi-ga-bap-cai",
@@ -790,6 +952,12 @@
         "Trộn rau, sốt nhẹ (ít muối/đường), chia khẩu phần một người.",
         "Kiểm tra dị ứng đã khai báo trong hồ sơ Cravvy trước khi dùng."
       ],
+      "ingredients": [
+        "đu đủ xanh",
+        "tôm luộc",
+        "rau thơm",
+        "me"
+      ],
       "source": "cravvy_curated_vn",
       "source_id": "goi-u-u-tom",
       "locale": "vi",
@@ -818,6 +986,11 @@
         "Xếp cơm + protein + rau, kiểm soát khẩu phần (~1 bát cơm).",
         "Ghi nhận bữa ăn trên Cravvy để cập nhật calories."
       ],
+      "ingredients": [
+        "gạo lứt",
+        "đùi gà bỏ da",
+        "rau luộc"
+      ],
       "source": "cravvy_curated_vn",
       "source_id": "com-gao-lut-ga-nuong",
       "locale": "vi",
@@ -844,6 +1017,12 @@
         "Protein nướng/luộc hoặc xào ít dầu.",
         "Xếp cơm + protein + rau, kiểm soát khẩu phần (~1 bát cơm).",
         "Ghi nhận bữa ăn trên Cravvy để cập nhật calories."
+      ],
+      "ingredients": [
+        "sườn heo nạc",
+        "gạo tấm",
+        "dưa leo",
+        "đồ chua"
       ],
       "source": "cravvy_curated_vn",
       "source_id": "com-tam-suon-nuong-phan-fit",
@@ -873,6 +1052,12 @@
         "Xếp cơm + protein + rau, kiểm soát khẩu phần (~1 bát cơm).",
         "Ghi nhận bữa ăn trên Cravvy để cập nhật calories."
       ],
+      "ingredients": [
+        "thịt bò",
+        "cơm nguội",
+        "dưa chuột",
+        "trứng"
+      ],
       "source": "cravvy_curated_vn",
       "source_id": "com-rang-dua-bo-it-dau",
       "locale": "vi",
@@ -900,6 +1085,12 @@
         "Protein nướng/luộc hoặc xào ít dầu.",
         "Xếp cơm + protein + rau, kiểm soát khẩu phần (~1 bát cơm).",
         "Ghi nhận bữa ăn trên Cravvy để cập nhật calories."
+      ],
+      "ingredients": [
+        "cơm",
+        "trứng",
+        "đậu Hà Lan",
+        "cà rốt"
       ],
       "source": "cravvy_curated_vn",
       "source_id": "com-chien-rau-cu-trung",
@@ -929,6 +1120,12 @@
         "Xếp cơm + protein + rau, kiểm soát khẩu phần (~1 bát cơm).",
         "Ghi nhận bữa ăn trên Cravvy để cập nhật calories."
       ],
+      "ingredients": [
+        "gạo",
+        "đậu hũ",
+        "cà chua",
+        "nấm"
+      ],
       "source": "cravvy_curated_vn",
       "source_id": "com-chay-au-hu-sot-ca",
       "locale": "vi",
@@ -957,6 +1154,12 @@
         "Xếp cơm + protein + rau, kiểm soát khẩu phần (~1 bát cơm).",
         "Ghi nhận bữa ăn trên Cravvy để cập nhật calories."
       ],
+      "ingredients": [
+        "cá hồi",
+        "gạo",
+        "bông cải",
+        "tương ít muối"
+      ],
       "source": "cravvy_curated_vn",
       "source_id": "com-ca-hoi-sot-teriyaki-nhat",
       "locale": "vi",
@@ -983,6 +1186,12 @@
         "Protein nướng/luộc hoặc xào ít dầu.",
         "Xếp cơm + protein + rau, kiểm soát khẩu phần (~1 bát cơm).",
         "Ghi nhận bữa ăn trên Cravvy để cập nhật calories."
+      ],
+      "ingredients": [
+        "thịt bò",
+        "cơm",
+        "cà chua",
+        "dưa leo"
       ],
       "source": "cravvy_curated_vn",
       "source_id": "com-bo-luc-lac",
@@ -1012,6 +1221,12 @@
         "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
         "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
       ],
+      "ingredients": [
+        "bún",
+        "thịt heo nạc",
+        "dưa góp",
+        "rau"
+      ],
       "source": "cravvy_curated_vn",
       "source_id": "bun-thit-nuong-chao",
       "locale": "vi",
@@ -1038,6 +1253,12 @@
         "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
         "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
         "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "cá phi lê",
+        "bún",
+        "cà chua",
+        "thì là"
       ],
       "source": "cravvy_curated_vn",
       "source_id": "bun-ca-chua-cay-nhe",
@@ -1068,6 +1289,12 @@
         "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
         "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
       ],
+      "ingredients": [
+        "mì trứng",
+        "thịt bò",
+        "bắp cải",
+        "cà rốt"
+      ],
       "source": "cravvy_curated_vn",
       "source_id": "mi-xao-bo-rau-cu",
       "locale": "vi",
@@ -1094,6 +1321,12 @@
         "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
         "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
         "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "mì",
+        "hoành thánh",
+        "rau cải",
+        "hành"
       ],
       "source": "cravvy_curated_vn",
       "source_id": "mi-hoanh-thanh-nhat-man",
@@ -1125,6 +1358,12 @@
         "Trộn rau, sốt nhẹ (ít muối/đường), chia khẩu phần một người.",
         "Kiểm tra dị ứng đã khai báo trong hồ sơ Cravvy trước khi dùng."
       ],
+      "ingredients": [
+        "quinoa",
+        "gà nướng",
+        "xà lách",
+        "dầu olive"
+      ],
       "source": "cravvy_curated_vn",
       "source_id": "salad-quinoa-ga-nuong",
       "locale": "vi",
@@ -1155,6 +1394,12 @@
         "Trộn rau, sốt nhẹ (ít muối/đường), chia khẩu phần một người.",
         "Kiểm tra dị ứng đã khai báo trong hồ sơ Cravvy trước khi dùng."
       ],
+      "ingredients": [
+        "ức gà",
+        "khoai lang",
+        "bông cải",
+        "sữa chua"
+      ],
       "source": "cravvy_curated_vn",
       "source_id": "bowl-uc-ga-sot-yogurt",
       "locale": "vi",
@@ -1183,6 +1428,12 @@
         "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
         "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
       ],
+      "ingredients": [
+        "cá basa",
+        "cà chua",
+        "dứa",
+        "đậu bắp"
+      ],
       "source": "cravvy_curated_vn",
       "source_id": "canh-chua-ca-nhe",
       "locale": "vi",
@@ -1209,6 +1460,11 @@
         "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
         "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
         "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "bí đỏ",
+        "thịt heo bằm nạc",
+        "hành"
       ],
       "source": "cravvy_curated_vn",
       "source_id": "canh-bi-o-thit-bam-nac",
@@ -1239,6 +1495,11 @@
         "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
         "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
       ],
+      "ingredients": [
+        "rau muống",
+        "tỏi",
+        "dầu olive"
+      ],
       "source": "cravvy_curated_vn",
       "source_id": "rau-muong-xao-toi",
       "locale": "vi",
@@ -1267,6 +1528,11 @@
         "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
         "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
       ],
+      "ingredients": [
+        "đậu phụ",
+        "cà chua",
+        "hành"
+      ],
       "source": "cravvy_curated_vn",
       "source_id": "au-phu-sot-ca",
       "locale": "vi",
@@ -1294,6 +1560,12 @@
         "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
         "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
         "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "cá lóc",
+        "nước mắm",
+        "ớt",
+        "gừng"
       ],
       "source": "cravvy_curated_vn",
       "source_id": "ca-kho-to-it-uong",
@@ -1325,6 +1597,12 @@
         "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
         "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
       ],
+      "ingredients": [
+        "tôm",
+        "nước mắm",
+        "ớt",
+        "tiêu"
+      ],
       "source": "cravvy_curated_vn",
       "source_id": "tom-rim-nhe",
       "locale": "vi",
@@ -1351,6 +1629,12 @@
         "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
         "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
         "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "nem nướng",
+        "bánh tráng",
+        "bún",
+        "rau sống"
       ],
       "source": "cravvy_curated_vn",
       "source_id": "nem-nuong-cuon-rau",
@@ -1379,6 +1663,12 @@
         "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
         "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
       ],
+      "ingredients": [
+        "đậu phụ",
+        "bún",
+        "dưa leo",
+        "rau thơm"
+      ],
       "source": "cravvy_curated_vn",
       "source_id": "bun-au-chay-sot-tuong",
       "locale": "vi",
@@ -1406,6 +1696,12 @@
         "Protein nướng/luộc hoặc xào ít dầu.",
         "Xếp cơm + protein + rau, kiểm soát khẩu phần (~1 bát cơm).",
         "Ghi nhận bữa ăn trên Cravvy để cập nhật calories."
+      ],
+      "ingredients": [
+        "gà ta",
+        "gạo",
+        "muối",
+        "gừng"
       ],
       "source": "cravvy_curated_vn",
       "source_id": "com-nieu-ga-luoc",
@@ -1436,6 +1732,12 @@
         "Trộn rau, sốt nhẹ (ít muối/đường), chia khẩu phần một người.",
         "Kiểm tra dị ứng đã khai báo trong hồ sơ Cravvy trước khi dùng."
       ],
+      "ingredients": [
+        "cá ngừ hộp in water",
+        "xà lách",
+        "cà chua",
+        "dầu olive"
+      ],
       "source": "cravvy_curated_vn",
       "source_id": "salad-ca-ngu-light",
       "locale": "vi",
@@ -1461,6 +1763,12 @@
         "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
         "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
         "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "bột gạo",
+        "giá",
+        "nấm",
+        "rau sống"
       ],
       "source": "cravvy_curated_vn",
       "source_id": "banh-xeo-rau-cu",
@@ -1491,6 +1799,11 @@
         "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
         "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
       ],
+      "ingredients": [
+        "nấm button",
+        "kem ít béo",
+        "hành tây"
+      ],
       "source": "cravvy_curated_vn",
       "source_id": "sup-nam-kem-nhat",
       "locale": "vi",
@@ -1518,6 +1831,12 @@
         "Xếp cơm + protein + rau, kiểm soát khẩu phần (~1 bát cơm).",
         "Ghi nhận bữa ăn trên Cravvy để cập nhật calories."
       ],
+      "ingredients": [
+        "gà luộc",
+        "cơm",
+        "nước tương",
+        "gừng"
+      ],
       "source": "cravvy_curated_vn",
       "source_id": "com-ga-xoi-mo-phan-vua",
       "locale": "vi",
@@ -1543,6 +1862,12 @@
         "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
         "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
         "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "bún",
+        "đậu hũ",
+        "cà chua",
+        "rau thơm"
       ],
       "source": "cravvy_curated_vn",
       "source_id": "bun-rieu-au-chay-protein",
@@ -1574,6 +1899,12 @@
         "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
         "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
       ],
+      "ingredients": [
+        "đùi gà phi lê",
+        "sả",
+        "ớt",
+        "nấm"
+      ],
       "source": "cravvy_curated_vn",
       "source_id": "ga-xao-sa-ot",
       "locale": "vi",
@@ -1601,6 +1932,11 @@
         "Xếp cơm + protein + rau, kiểm soát khẩu phần (~1 bát cơm).",
         "Ghi nhận bữa ăn trên Cravvy để cập nhật calories."
       ],
+      "ingredients": [
+        "thịt ba chỉ cắt mỏng",
+        "trứng",
+        "nước dừa"
+      ],
       "source": "cravvy_curated_vn",
       "source_id": "com-thit-kho-trung-it-mo",
       "locale": "vi",
@@ -1627,6 +1963,12 @@
         "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
         "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
         "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "thịt bò",
+        "hủ tiếu",
+        "cà rốt",
+        "hành tây"
       ],
       "source": "cravvy_curated_vn",
       "source_id": "hu-tieu-bo-kho",
@@ -1657,6 +1999,12 @@
         "Trộn rau, sốt nhẹ (ít muối/đường), chia khẩu phần một người.",
         "Kiểm tra dị ứng đã khai báo trong hồ sơ Cravvy trước khi dùng."
       ],
+      "ingredients": [
+        "cá hồi",
+        "gạo",
+        "edamame",
+        "dưa leo"
+      ],
       "source": "cravvy_curated_vn",
       "source_id": "poke-bowl-ca-hoi",
       "locale": "vi",
@@ -1684,6 +2032,12 @@
         "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
         "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
         "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "cánh gà",
+        "mật ong",
+        "tỏi",
+        "rau củ nướng"
       ],
       "source": "cravvy_curated_vn",
       "source_id": "ga-nuong-mat-ong",
@@ -1713,6 +2067,12 @@
         "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
         "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
         "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "cá hồi",
+        "chanh",
+        "dầu olive",
+        "rau xanh"
       ],
       "source": "cravvy_curated_vn",
       "source_id": "ca-hoi-nuong-chanh",
@@ -1744,6 +2104,12 @@
         "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
         "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
       ],
+      "ingredients": [
+        "tôm sú",
+        "muối ớt",
+        "sả",
+        "chanh"
+      ],
       "source": "cravvy_curated_vn",
       "source_id": "tom-nuong-muoi-ot",
       "locale": "vi",
@@ -1772,6 +2138,12 @@
         "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
         "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
       ],
+      "ingredients": [
+        "thịt bò",
+        "bông cải",
+        "ớt chuông",
+        "tỏi"
+      ],
       "source": "cravvy_curated_vn",
       "source_id": "bo-xao-rau-cu",
       "locale": "vi",
@@ -1797,6 +2169,11 @@
         "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
         "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
         "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "sườn heo",
+        "ướp tỏi",
+        "rau salad"
       ],
       "source": "cravvy_curated_vn",
       "source_id": "suon-nuong-than",
@@ -1827,6 +2204,12 @@
         "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
         "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
       ],
+      "ingredients": [
+        "cá lóc",
+        "sả",
+        "ớt",
+        "nước mắm"
+      ],
       "source": "cravvy_curated_vn",
       "source_id": "ca-loc-nuong-giay-bac",
       "locale": "vi",
@@ -1855,6 +2238,12 @@
         "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
         "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
       ],
+      "ingredients": [
+        "nấm kim châm",
+        "nấm hương",
+        "cải thảo",
+        "đậu phụ"
+      ],
       "source": "cravvy_curated_vn",
       "source_id": "lau-nam-chay",
       "locale": "vi",
@@ -1881,6 +2270,12 @@
         "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
         "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
         "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "gà ta",
+        "lá é",
+        "nấm",
+        "bún"
       ],
       "source": "cravvy_curated_vn",
       "source_id": "lau-ga-la-e",
@@ -1909,6 +2304,11 @@
         "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
         "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
       ],
+      "ingredients": [
+        "khổ qua",
+        "thịt heo bằm",
+        "nấm mèo"
+      ],
       "source": "cravvy_curated_vn",
       "source_id": "canh-kho-qua-nhoi-thit-nac",
       "locale": "vi",
@@ -1936,6 +2336,12 @@
         "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
         "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
         "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "đậu bắp",
+        "cà chua",
+        "dứa",
+        "rau om"
       ],
       "source": "cravvy_curated_vn",
       "source_id": "canh-chua-au-bap",
@@ -1966,6 +2372,11 @@
         "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
         "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
       ],
+      "ingredients": [
+        "cải ngọt",
+        "nấm",
+        "tỏi"
+      ],
       "source": "cravvy_curated_vn",
       "source_id": "rau-cai-xao-nam",
       "locale": "vi",
@@ -1992,6 +2403,11 @@
         "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
         "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
         "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "cà tím",
+        "thịt heo bằm",
+        "hành"
       ],
       "source": "cravvy_curated_vn",
       "source_id": "ca-tim-om-thit-nac",
@@ -2021,6 +2437,11 @@
         "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
         "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
       ],
+      "ingredients": [
+        "đậu hũ",
+        "nấm",
+        "cà chua"
+      ],
       "source": "cravvy_curated_vn",
       "source_id": "au-hu-nhoi-nam-sot-ca",
       "locale": "vi",
@@ -2048,6 +2469,11 @@
         "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
         "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
         "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "thịt bò",
+        "cà rốt",
+        "bánh mì"
       ],
       "source": "cravvy_curated_vn",
       "source_id": "bo-kho-banh-mi-phan-vua",
@@ -2078,6 +2504,12 @@
         "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
         "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
       ],
+      "ingredients": [
+        "gà ta",
+        "gừng",
+        "nấm",
+        "hành"
+      ],
       "source": "cravvy_curated_vn",
       "source_id": "ga-hap-gung",
       "locale": "vi",
@@ -2106,6 +2538,12 @@
         "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
         "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
       ],
+      "ingredients": [
+        "mực",
+        "cần tây",
+        "cà rốt",
+        "ớt"
+      ],
       "source": "cravvy_curated_vn",
       "source_id": "muc-xao-rau-cu",
       "locale": "vi",
@@ -2132,6 +2570,11 @@
         "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
         "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
         "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "chả cá",
+        "bún",
+        "rau thìa là"
       ],
       "source": "cravvy_curated_vn",
       "source_id": "cha-ca-nuong-rau",
@@ -2161,6 +2604,12 @@
         "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
         "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
         "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "nghêu",
+        "sả",
+        "gừng",
+        "ớt"
       ],
       "source": "cravvy_curated_vn",
       "source_id": "ngheu-hap-sa",
@@ -2192,6 +2641,12 @@
         "Trộn rau, sốt nhẹ (ít muối/đường), chia khẩu phần một người.",
         "Kiểm tra dị ứng đã khai báo trong hồ sơ Cravvy trước khi dùng."
       ],
+      "ingredients": [
+        "tôm",
+        "bơ",
+        "xà lách",
+        "cà chua"
+      ],
       "source": "cravvy_curated_vn",
       "source_id": "salad-tom-bo",
       "locale": "vi",
@@ -2217,6 +2672,12 @@
         "Protein nướng/luộc hoặc xào ít dầu.",
         "Xếp cơm + protein + rau, kiểm soát khẩu phần (~1 bát cơm).",
         "Ghi nhận bữa ăn trên Cravvy để cập nhật calories."
+      ],
+      "ingredients": [
+        "cơm",
+        "trứng",
+        "ngô",
+        "đậu Hà Lan"
       ],
       "source": "cravvy_curated_vn",
       "source_id": "com-rang-thap-cam-rau",
@@ -2245,6 +2706,12 @@
         "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
         "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
       ],
+      "ingredients": [
+        "bún",
+        "thịt bò",
+        "chả",
+        "rau"
+      ],
       "source": "cravvy_curated_vn",
       "source_id": "bun-bo-hue-phan-nhe",
       "locale": "vi",
@@ -2272,6 +2739,12 @@
         "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
         "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
       ],
+      "ingredients": [
+        "gà",
+        "khoai tây",
+        "cà rốt",
+        "bí đỏ"
+      ],
       "source": "cravvy_curated_vn",
       "source_id": "sup-rau-cu-nau-ga",
       "locale": "vi",
@@ -2297,6 +2770,12 @@
         "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
         "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
         "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "ức vịt",
+        "tỏi",
+        "mật ong",
+        "salad"
       ],
       "source": "cravvy_curated_vn",
       "source_id": "uc-vit-quay-chao-phan-nho",
@@ -2328,6 +2807,12 @@
         "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
         "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
       ],
+      "ingredients": [
+        "cá basa",
+        "xì dầu",
+        "gừng",
+        "hành"
+      ],
       "source": "cravvy_curated_vn",
       "source_id": "ca-basa-hap-xi-dau",
       "locale": "vi",
@@ -2357,6 +2842,12 @@
         "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
         "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
       ],
+      "ingredients": [
+        "bí đỏ",
+        "tôm",
+        "hành",
+        "tiêu"
+      ],
       "source": "cravvy_curated_vn",
       "source_id": "bi-o-hap-tom",
       "locale": "vi",
@@ -2384,6 +2875,12 @@
         "Chế biến protein (luộc/nướng) ít dầu, để nguội vừa phải.",
         "Trộn rau, sốt nhẹ (ít muối/đường), chia khẩu phần một người.",
         "Kiểm tra dị ứng đã khai báo trong hồ sơ Cravvy trước khi dùng."
+      ],
+      "ingredients": [
+        "bắp cải",
+        "tôm",
+        "cà rốt",
+        "rau thơm"
       ],
       "source": "cravvy_curated_vn",
       "source_id": "goi-bap-cai-tom",
@@ -2414,6 +2911,12 @@
         "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
         "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
       ],
+      "ingredients": [
+        "đậu hũ",
+        "nấm",
+        "tỏi",
+        "hành lá"
+      ],
       "source": "cravvy_curated_vn",
       "source_id": "au-hu-sot-nam",
       "locale": "vi",
@@ -2441,6 +2944,12 @@
         "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
         "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
         "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "gạo",
+        "tôm",
+        "nấm",
+        "hành lá"
       ],
       "source": "cravvy_curated_vn",
       "source_id": "chao-tom-nam",
@@ -2472,6 +2981,12 @@
         "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
         "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
       ],
+      "ingredients": [
+        "bánh mì",
+        "gà",
+        "sữa chua",
+        "rau"
+      ],
       "source": "cravvy_curated_vn",
       "source_id": "banh-mi-kep-ga-sot-yogurt",
       "locale": "vi",
@@ -2500,6 +3015,12 @@
         "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
         "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
       ],
+      "ingredients": [
+        "trứng",
+        "cà rốt",
+        "hành lá",
+        "ớt"
+      ],
       "source": "cravvy_curated_vn",
       "source_id": "trung-chien-rau-cu",
       "locale": "vi",
@@ -2526,6 +3047,11 @@
         "Chuẩn bị: xoài, đá, sữa hạnh nhân.",
         "Ưu tiên ít đường / portion vừa đủ (theo mục tiêu calories trong app).",
         "Trình bày và ghi nhận bữa phụ trong Cravvy để theo dõi tự động."
+      ],
+      "ingredients": [
+        "xoài",
+        "đá",
+        "sữa hạnh nhân"
       ],
       "source": "cravvy_curated_vn",
       "source_id": "sinh-to-xoai-khong-uong",
@@ -2554,6 +3080,11 @@
         "Ưu tiên ít đường / portion vừa đủ (theo mục tiêu calories trong app).",
         "Trình bày và ghi nhận bữa phụ trong Cravvy để theo dõi tự động."
       ],
+      "ingredients": [
+        "bơ",
+        "cacao",
+        "sữa hạnh nhân"
+      ],
       "source": "cravvy_curated_vn",
       "source_id": "sinh-to-bo-cacao",
       "locale": "vi",
@@ -2581,6 +3112,12 @@
         "Ưu tiên ít đường / portion vừa đủ (theo mục tiêu calories trong app).",
         "Trình bày và ghi nhận bữa phụ trong Cravvy để theo dõi tự động."
       ],
+      "ingredients": [
+        "dưa hấu",
+        "dứa",
+        "nho",
+        "dâu"
+      ],
       "source": "cravvy_curated_vn",
       "source_id": "trai-cay-to-mix",
       "locale": "vi",
@@ -2607,6 +3144,9 @@
         "Chuẩn bị: hạnh nhân.",
         "Ưu tiên ít đường / portion vừa đủ (theo mục tiêu calories trong app).",
         "Trình bày và ghi nhận bữa phụ trong Cravvy để theo dõi tự động."
+      ],
+      "ingredients": [
+        "hạnh nhân"
       ],
       "source": "cravvy_curated_vn",
       "source_id": "hanh-nhan-rang-khong-muoi",
@@ -2636,6 +3176,11 @@
         "Ưu tiên ít đường / portion vừa đủ (theo mục tiêu calories trong app).",
         "Trình bày và ghi nhận bữa phụ trong Cravvy để theo dõi tự động."
       ],
+      "ingredients": [
+        "sữa chua Hy Lạp",
+        "mật ong",
+        "óc chó"
+      ],
       "source": "cravvy_curated_vn",
       "source_id": "sua-chua-hy-lap-mat-ong",
       "locale": "vi",
@@ -2661,6 +3206,10 @@
         "Chuẩn bị: chuối, bơ đậu phộng.",
         "Ưu tiên ít đường / portion vừa đủ (theo mục tiêu calories trong app).",
         "Trình bày và ghi nhận bữa phụ trong Cravvy để theo dõi tự động."
+      ],
+      "ingredients": [
+        "chuối",
+        "bơ đậu phộng"
       ],
       "source": "cravvy_curated_vn",
       "source_id": "chuoi-bo-au-phong",
@@ -2688,6 +3237,11 @@
         "Ưu tiên ít đường / portion vừa đủ (theo mục tiêu calories trong app).",
         "Trình bày và ghi nhận bữa phụ trong Cravvy để theo dõi tự động."
       ],
+      "ingredients": [
+        "đậu xanh",
+        "đường phèn",
+        "dừa"
+      ],
       "source": "cravvy_curated_vn",
       "source_id": "che-au-xanh-it-uong",
       "locale": "vi",
@@ -2713,6 +3267,11 @@
         "Chuẩn bị: đậu hũ, sữa tươi, almond jelly.",
         "Ưu tiên ít đường / portion vừa đủ (theo mục tiêu calories trong app).",
         "Trình bày và ghi nhận bữa phụ trong Cravvy để theo dõi tự động."
+      ],
+      "ingredients": [
+        "đậu hũ",
+        "sữa tươi",
+        "almond jelly"
       ],
       "source": "cravvy_curated_vn",
       "source_id": "che-khuc-bach-lite",
@@ -2741,6 +3300,11 @@
         "Ưu tiên ít đường / portion vừa đủ (theo mục tiêu calories trong app).",
         "Trình bày và ghi nhận bữa phụ trong Cravvy để theo dõi tự động."
       ],
+      "ingredients": [
+        "trứng",
+        "sữa",
+        "đường phèn"
+      ],
       "source": "cravvy_curated_vn",
       "source_id": "banh-flan-it-uong",
       "locale": "vi",
@@ -2768,6 +3332,9 @@
         "Chuẩn bị: dừa tươi.",
         "Ưu tiên ít đường / portion vừa đủ (theo mục tiêu calories trong app).",
         "Trình bày và ghi nhận bữa phụ trong Cravvy để theo dõi tự động."
+      ],
+      "ingredients": [
+        "dừa tươi"
       ],
       "source": "cravvy_curated_vn",
       "source_id": "nuoc-dua-tuoi",

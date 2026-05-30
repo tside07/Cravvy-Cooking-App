@@ -20,10 +20,12 @@
 
 ## Việc bạn cần làm trên máy / Supabase
 
-- [ ] Chạy migration Tuần 6 — [../supabase/RUN_IN_SQL_EDITOR_week6_premium.sql](../supabase/RUN_IN_SQL_EDITOR_week6_premium.sql) (**bắt buộc** để nút “Dùng thử 14 ngày” lưu được)
+- [ ] Chạy SQL Slice B — [../supabase/RUN_IN_SQL_EDITOR_slice_b.sql](../supabase/RUN_IN_SQL_EDITOR_slice_b.sql) (ingredients + freemium; idempotent)
+- [ ] Hoặc riêng Tuần 6 — [../supabase/RUN_IN_SQL_EDITOR_week6_premium.sql](../supabase/RUN_IN_SQL_EDITOR_week6_premium.sql)
+- [ ] Kiểm tra: `python tools/verify_slice_b.py`
 - [ ] **Test thủ công** Free: chỉ thấy 3 ô ngày + ô “+4 Mở khóa”; swap lần 3 → chặn
 - [ ] **Test thủ công** Premium/trial: 7 ngày; swap đến 5/tuần
-- [ ] Import catalog: `python tools/generate_vn_seed.py` → `python tools/import_recipes.py` (cần Python + env Supabase)
+- [ ] Import catalog: `python tools/generate_vn_seed.py` → `python tools/import_recipes.py --file data/seeds/vietnamese_recipes.json`
 
 ## Chưa làm (Tuần 6+ / sau)
 

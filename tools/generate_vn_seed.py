@@ -1324,6 +1324,7 @@ def main() -> None:
                 "meal_type": meal_type,
                 "tags": tags,
                 "steps": steps_for(dish),
+                "ingredients": dish.get("ingredients", []),
                 "source": SOURCE,
                 "source_id": sid,
                 "locale": "vi",
