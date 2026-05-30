@@ -588,6 +588,7 @@ class MealPlanProvider extends ChangeNotifier {
         isLogged: isLogged,
         tags: r.tags,
         steps: r.steps,
+        ingredients: r.ingredients,
       );
 
   DayPlan _emptyDay() => DayPlan(date: DateTime.now(), meals: const []);

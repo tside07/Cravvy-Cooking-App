@@ -1,66 +1,23 @@
-import 'package:flutter/foundation.dart';
+import 'package:cravvy_cooking_app/data/services/shopping_list_storage.dart';
+import 'package:cravvy_cooking_app/modules/meal_detail/models/meal_detail_ingredient.dart';
 import 'package:cravvy_cooking_app/modules/shopping_list/model/shopping_item.dart';
+import 'package:flutter/foundation.dart';
+import 'package:uuid/uuid.dart';
 
 class ShoppingListProvider extends ChangeNotifier {
-  final List<ShoppingItem> _items = [
-    ShoppingItem(
-      id: '1',
-      name: '2 salmon fillets (150g each)',
-      recipeName: 'Baked Salmon',
-      recipeId: 'r1',
-    ),
-    ShoppingItem(
-      id: '2',
-      name: '200g broccoli florets',
-      recipeName: 'Baked Salmon',
-      recipeId: 'r1',
-    ),
-    ShoppingItem(
-      id: '3',
-      name: '1 lemon',
-      recipeName: 'Baked Salmon',
-      recipeId: 'r1',
-    ),
-    ShoppingItem(
-      id: '4',
-      name: '3 garlic cloves',
-      recipeName: 'Baked Salmon',
-      recipeId: 'r1',
-    ),
-    ShoppingItem(
-      id: '5',
-      name: '2 cups oats',
-      recipeName: 'Overnight Oats',
-      recipeId: 'r2',
-    ),
-    ShoppingItem(
-      id: '6',
-      name: '1 cup almond milk',
-      recipeName: 'Overnight Oats',
-      recipeId: 'r2',
-    ),
-    ShoppingItem(
-      id: '7',
-      name: '2 tbsp chia seeds',
-      recipeName: 'Overnight Oats',
-      recipeId: 'r2',
-    ),
-    ShoppingItem(
-      id: '8',
-      name: '1 banana',
-      recipeName: 'Overnight Oats',
-      recipeId: 'r2',
-    ),
-  ];
+  ShoppingListProvider({bool autoLoad = true}) {
+    if (autoLoad) _load();
+  }
 
-  // ─── Getters ──────────────────────────────────────────────────────────────
+  static const _uuid = Uuid();
 
+  final List<ShoppingItem> _items = [];
+  bool _isLoaded = false;
+
+  bool get isLoaded => _isLoaded;
   List<ShoppingItem> get items => List.unmodifiable(_items);
-
   bool get isEmpty => _items.isEmpty;
-
   int get checkedCount => _items.where((i) => i.checked).length;
-
   int get totalCount => _items.length;
 
   double get progress => _items.isEmpty ? 0 : checkedCount / _items.length;
@@ -73,30 +30,92 @@ class ShoppingListProvider extends ChangeNotifier {
     return map;
   }
 
-  String recipeNameOf(String recipeId) => _items
-      .firstWhere((i) => i.recipeId == recipeId, orElse: () => _items.first)
-      .recipeName;
+  String recipeNameOf(String recipeId) {
+    final match = _items.where((i) => i.recipeId == recipeId);
+    if (match.isEmpty) return '';
+    return match.first.recipeName;
+  }
 
-  // ─── Actions ──────────────────────────────────────────────────────────────
+  Future<void> _load() async {
+    final stored = await ShoppingListStorage.load();
+    _items
+      ..clear()
+      ..addAll(stored);
+    _isLoaded = true;
+    notifyListeners();
+  }
+
+  Future<void> _persist() => ShoppingListStorage.save(_items);
+
+  /// Adds unchecked ingredients from meal detail. Returns count added (skips dupes).
+  int addFromMeal({
+    required String recipeId,
+    required String recipeName,
+    required List<MealDetailIngredient> ingredients,
+  }) {
+    var added = 0;
+    for (final ingredient in ingredients) {
+      final label = _ingredientLabel(ingredient);
+      if (label.isEmpty) continue;
+      if (_hasDuplicate(recipeId, label)) continue;
+
+      _items.add(
+        ShoppingItem(
+          id: _uuid.v4(),
+          name: label,
+          recipeName: recipeName,
+          recipeId: recipeId,
+        ),
+      );
+      added++;
+    }
+
+    if (added > 0) {
+      notifyListeners();
+      _persist();
+    }
+    return added;
+  }
+
+  String _ingredientLabel(MealDetailIngredient ingredient) {
+    final q = ingredient.quantity.trim();
+    final n = ingredient.name.trim();
+    if (q.isEmpty) return n;
+    if (n.isEmpty) return q;
+    return '$q $n';
+  }
+
+  bool _hasDuplicate(String recipeId, String label) {
+    final normalized = label.toLowerCase();
+    return _items.any(
+      (i) =>
+          i.recipeId == recipeId &&
+          i.displayLabel.toLowerCase() == normalized,
+    );
+  }
 
   void toggle(String id) {
     final item = _items.firstWhere((i) => i.id == id);
     item.checked = !item.checked;
     notifyListeners();
+    _persist();
   }
 
   void remove(String id) {
     _items.removeWhere((i) => i.id == id);
     notifyListeners();
+    _persist();
   }
 
   void clearChecked() {
     _items.removeWhere((i) => i.checked);
     notifyListeners();
+    _persist();
   }
 
   void clearAll() {
     _items.clear();
     notifyListeners();
+    _persist();
   }
 }

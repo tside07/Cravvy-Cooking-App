@@ -1,24 +1,51 @@
 import 'package:cravvy_cooking_app/init.dart';
+import 'package:cravvy_cooking_app/modules/shopping_list/provider/shopping_list_provider.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:cravvy_cooking_app/modules/meal_detail/provider/meal_detail_provider.dart';
 import 'package:cravvy_cooking_app/modules/meal_detail/widgets/meal_detail_ingredient_item_widget.dart';
 import 'package:cravvy_cooking_app/modules/widgets/common/cravvy_button.dart';
 
-/// Full ingredient list + "Add missing to shopping list" button.
+/// Full ingredient list + add-to-shopping-list button.
 class MealDetailIngredientsWidget extends StatelessWidget {
-  const MealDetailIngredientsWidget({super.key});
+  const MealDetailIngredientsWidget({super.key, required this.mealName});
+
+  final String mealName;
 
   @override
   Widget build(BuildContext context) {
+    final _ = context.locale;
+
     return Consumer<MealDetailProvider>(
       builder: (context, provider, _) {
+        if (provider.loadingIngredients) {
+          return const SliverToBoxAdapter(
+            child: Padding(
+              padding: EdgeInsets.symmetric(vertical: 32),
+              child: Center(child: CircularProgressIndicator()),
+            ),
+          );
+        }
+
         final ingredients = provider.ingredients;
-        final missingCount = provider.missingIngredients.length;
+        if (ingredients.isEmpty) {
+          return SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(20, 24, 20, 100),
+              child: Text(
+                'meal_detail.no_ingredients'.tr(),
+                style: AppTextStyles.s14.copyWith(color: AppColors.textSecondary),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          );
+        }
+
+        final toShop = provider.ingredientsToShop;
+        final toShopCount = toShop.length;
 
         return SliverList(
           delegate: SliverChildBuilderDelegate(
             (context, index) {
-              // Last item → "Add missing" button
               if (index == ingredients.length) {
                 return Padding(
                   padding: const EdgeInsets.only(
@@ -28,35 +55,46 @@ class MealDetailIngredientsWidget extends StatelessWidget {
                     bottom: 100,
                   ),
                   child: CravvyButton(
-                    label: missingCount > 0
+                    label: toShopCount > 0
                         ? 'meal_detail.add_missing'.tr(
-                            namedArgs: {'n': '$missingCount'},
+                            namedArgs: {'n': '$toShopCount'},
                           )
                         : 'meal_detail.all_available'.tr(),
                     icon: Icons.shopping_cart_outlined,
-                    backgroundColor: missingCount > 0
+                    backgroundColor: toShopCount > 0
                         ? AppColors.primary
                         : AppColors.success,
-                    onTap: () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(
-                            missingCount > 0
-                                ? 'meal_detail.snack_added'.tr(
-                                    namedArgs: {'n': '$missingCount'},
-                                  )
-                                : 'meal_detail.snack_have_all'.tr(),
-                          ),
-                          backgroundColor: missingCount > 0
-                              ? AppColors.primary
-                              : AppColors.success,
-                          behavior: SnackBarBehavior.floating,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: AppBorderRadius.a12,
-                          ),
-                        ),
-                      );
-                    },
+                    onTap: toShopCount == 0
+                        ? null
+                        : () {
+                            final meal = context.read<MealDetailProvider>().meal;
+                            final added = context
+                                .read<ShoppingListProvider>()
+                                .addFromMeal(
+                                  recipeId: meal.recipeId,
+                                  recipeName: mealName,
+                                  ingredients: toShop,
+                                );
+
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  added > 0
+                                      ? 'meal_detail.snack_added'.tr(
+                                          namedArgs: {'n': '$added'},
+                                        )
+                                      : 'meal_detail.snack_already_added'.tr(),
+                                ),
+                                backgroundColor: added > 0
+                                    ? AppColors.primary
+                                    : AppColors.textSecondary,
+                                behavior: SnackBarBehavior.floating,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: AppBorderRadius.a12,
+                                ),
+                              ),
+                            );
+                          },
                   ),
                 );
               }
@@ -77,7 +115,7 @@ class MealDetailIngredientsWidget extends StatelessWidget {
                 ],
               );
             },
-            childCount: ingredients.length + 1, // +1 for the button
+            childCount: ingredients.length + 1,
           ),
         );
       },

@@ -1,5 +1,6 @@
 import 'package:cravvy_cooking_app/init.dart';
 import 'package:cravvy_cooking_app/data/models/meal.dart';
+import 'package:cravvy_cooking_app/data/providers/recipe_provider.dart';
 import 'package:cravvy_cooking_app/modules/meal_detail/provider/meal_detail_provider.dart';
 import 'package:cravvy_cooking_app/modules/meal_detail/widgets/meal_detail_header_widget.dart';
 import 'package:cravvy_cooking_app/modules/meal_detail/widgets/meal_detail_stats_widget.dart';
@@ -17,7 +18,10 @@ class MealDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) => MealDetailProvider(meal),
+      create: (ctx) => MealDetailProvider(
+        meal,
+        recipeLookup: ctx.read<RecipeProvider>(),
+      ),
       child: Scaffold(
         backgroundColor: AppColors.background,
         body: _MealDetailBody(meal: meal),
@@ -90,7 +94,7 @@ class _MealDetailBody extends StatelessWidget {
                     // ── Tab-specific content ─────────────────────────────────────────
                     if (provider.activeTab == MealDetailTab.ingredients) ...[
                       const MealDetailServingsWidget(),
-                      const MealDetailIngredientsWidget(),
+                      MealDetailIngredientsWidget(mealName: meal.name),
                     ] else if (provider.activeTab == MealDetailTab.nutrition)
                       MealDetailNutritionWidget(meal: meal)
                     else

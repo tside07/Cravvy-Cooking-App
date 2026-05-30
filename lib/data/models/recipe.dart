@@ -21,6 +21,7 @@ class Recipe {
   final String mealType; // 'breakfast' | 'lunch' | 'dinner' | 'snack'
   final List<String> tags;
   final List<String> steps;
+  final List<String> ingredients;
 
   const Recipe({
     required this.id,
@@ -36,6 +37,7 @@ class Recipe {
     required this.mealType,
     this.tags = const [],
     this.steps = const [],
+    this.ingredients = const [],
   });
 
   // ─── Supabase → Recipe ───────────────────────────────────────────────────
@@ -54,6 +56,8 @@ class Recipe {
       mealType: json['meal_type'] as String,
       tags: (json['tags'] as List<dynamic>?)?.cast<String>() ?? [],
       steps: (json['steps'] as List<dynamic>?)?.cast<String>() ?? [],
+      ingredients:
+          (json['ingredients'] as List<dynamic>?)?.cast<String>() ?? [],
     );
   }
 
@@ -72,6 +76,7 @@ class Recipe {
       imageUrl: imageUrl ?? '',
       tags: tags,
       steps: steps, // ← pass steps thật
+      ingredients: ingredients,
     );
   }
 
@@ -103,6 +108,7 @@ class Recipe {
     String? mealType,
     List<String>? tags,
     List<String>? steps,
+    List<String>? ingredients,
   }) {
     return Recipe(
       id: id,
@@ -118,6 +124,7 @@ class Recipe {
       mealType: mealType ?? this.mealType,
       tags: tags ?? this.tags,
       steps: steps ?? this.steps,
+      ingredients: ingredients ?? this.ingredients,
     );
   }
 }

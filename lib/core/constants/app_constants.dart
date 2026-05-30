@@ -35,6 +35,7 @@ abstract final class AppConst {
   static const String keySelectedGoal = 'selected_goal';
   static const String keySelectedDiets = 'selected_diets';
   static const String keyCalorieGoal = 'calorie_goal';
+  static const String keyShoppingList = 'shopping_list_v1';
 
   // ignore: library_private_types_in_public_api, non_constant_identifier_names
   static final _RegExp Pattern = _RegExp();

@@ -474,9 +474,11 @@
         "stat_level": "Độ khó",
         "level_medium": "Trung bình",
         "servings": "Khẩu phần",
-        "add_missing": "Thêm {n} món thiếu vào danh sách mua",
-        "all_available": "Đủ nguyên liệu ✓",
+        "add_missing": "Thêm {n} món vào danh sách mua",
+        "all_available": "Đã đánh dấu đủ nguyên liệu ✓",
         "snack_added": "Đã thêm {n} món vào danh sách mua!",
+        "snack_already_added": "Đã có trong danh sách mua",
+        "no_ingredients": "Chưa có danh sách nguyên liệu cho món này.",
         "snack_have_all": "Bạn đã có đủ nguyên liệu!",
         "nutrition_disclaimer": "Giá trị dinh dưỡng là ước tính theo khẩu phần chuẩn."
     },

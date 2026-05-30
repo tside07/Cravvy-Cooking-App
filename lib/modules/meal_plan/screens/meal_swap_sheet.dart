@@ -50,6 +50,7 @@ class _MealSwapSheetState extends State<MealSwapSheet> {
     imageUrl: recipe.imageUrl ?? '',
     tags: recipe.tags,
     steps: recipe.steps,
+    ingredients: recipe.ingredients,
   );
 
   @override

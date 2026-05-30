@@ -86,42 +86,11 @@ class MealDetailIngredientItemWidget extends StatelessWidget {
                   ),
                 ),
                 AppGap.w8,
-
-                // ── Status icon ──────────────────────────────────────────────
-                _StatusIcon(status: ingredient.status),
               ],
             ),
           ),
         );
       },
-    );
-  }
-}
-
-class _StatusIcon extends StatelessWidget {
-  const _StatusIcon({required this.status});
-
-  final IngredientStatus status;
-
-  @override
-  Widget build(BuildContext context) {
-    final isAvailable = status == IngredientStatus.available;
-    return Container(
-      width: 28,
-      height: 28,
-      decoration: BoxDecoration(
-        color: isAvailable
-            ? AppColors.successLight
-            : AppColors.warningLight,
-        shape: BoxShape.circle,
-      ),
-      child: Icon(
-        isAvailable
-            ? Icons.check_rounded
-            : Icons.priority_high_rounded,
-        size: 15,
-        color: isAvailable ? AppColors.success : AppColors.warning,
-      ),
     );
   }
 }

@@ -2,7 +2,7 @@
   "version": 2,
   "project": "Cravvy Cooking App",
   "catalog_note": "Curated for eat-clean / urban 18-30, aligns with MVP meal plan + swap",
-  "count": 100,
+  "count": 99,
   "recipes": [
     {
       "name": "Phở gà nạc",
@@ -2771,33 +2771,6 @@
       ],
       "source": "cravvy_curated_vn",
       "source_id": "nuoc-dua-tuoi",
-      "locale": "vi",
-      "is_active": true
-    },
-    {
-      "name": "Sữa hạt mix không đường",
-      "description": "Sữa hạt mix không đường — gợi ý Cravvy cho bữa phụ, ~5 phút, khoảng 140 kcal.",
-      "image_url": null,
-      "calories": 140,
-      "protein": 6,
-      "carbs": 10,
-      "fat": 8,
-      "prep_time": 5,
-      "difficulty": "easy",
-      "meal_type": "snack",
-      "tags": [
-        "eat clean",
-        "quick",
-        "low sugar",
-        "vegan"
-      ],
-      "steps": [
-        "Chuẩn bị hạnh nhân, yến mạch, nước lọc.",
-        "Xay nhuyễn, lọc bã và làm lạnh.",
-        "Dùng khẩu phần vừa đủ và ghi nhận trên Cravvy."
-      ],
-      "source": "cravvy_curated_vn",
-      "source_id": "sua-hat-mix-khong-duong",
       "locale": "vi",
       "is_active": true
     }

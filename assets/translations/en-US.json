@@ -475,9 +475,11 @@
         "stat_level": "Level",
         "level_medium": "Medium",
         "servings": "Servings",
-        "add_missing": "Add {n} missing to shopping list",
-        "all_available": "All ingredients available ✓",
+        "add_missing": "Add {n} to shopping list",
+        "all_available": "All ingredients checked ✓",
         "snack_added": "{n} item(s) added to shopping list!",
+        "snack_already_added": "Already on your shopping list",
+        "no_ingredients": "Ingredient list not available for this recipe yet.",
         "snack_have_all": "You have all the ingredients!",
         "nutrition_disclaimer": "Nutritional values are estimates based on standard serving sizes."
     },

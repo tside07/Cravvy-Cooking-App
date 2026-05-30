@@ -98,6 +98,12 @@ def normalize_recipe(raw: dict[str, Any], default_source: str | None = None) -> 
     if isinstance(steps, list):
         steps = [str(s).strip() for s in steps if str(s).strip()][:12]
 
+    ingredients = raw.get("ingredients") or []
+    if isinstance(ingredients, str):
+        ingredients = [i.strip() for i in ingredients.split(",") if i.strip()]
+    if isinstance(ingredients, list):
+        ingredients = [str(i).strip() for i in ingredients if str(i).strip()][:30]
+
     source = raw.get("source") or default_source or "import"
     source_id = raw.get("source_id") or slugify(name)
 
@@ -114,6 +120,7 @@ def normalize_recipe(raw: dict[str, Any], default_source: str | None = None) -> 
         "meal_type": meal_type,
         "tags": tags[:15],
         "steps": steps if steps else [f"Chuẩn bị và nấu {name} theo công thức chuẩn."],
+        "ingredients": ingredients,
         "source": source,
         "source_id": str(source_id)[:120],
         "locale": raw.get("locale") or "vi",

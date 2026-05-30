@@ -91,6 +91,7 @@ class Meal {
   final bool isLogged;
   final List<String> tags;
   final List<String> steps;
+  final List<String> ingredients;
 
   const Meal({
     required this.id,
@@ -106,6 +107,7 @@ class Meal {
     this.isLogged = false,
     this.tags = const [],
     this.steps = const [],
+    this.ingredients = const [],
   });
 
   Meal copyWith({
@@ -122,6 +124,7 @@ class Meal {
     bool? isLogged,
     List<String>? tags,
     List<String>? steps,
+    List<String>? ingredients,
   }) => Meal(
     id: id ?? this.id,
     recipeId: recipeId ?? this.recipeId,
@@ -136,6 +139,7 @@ class Meal {
     isLogged: isLogged ?? this.isLogged,
     tags: tags ?? this.tags,
     steps: steps ?? this.steps,
+    ingredients: ingredients ?? this.ingredients,
   );
 }
 

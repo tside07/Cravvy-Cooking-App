@@ -11,10 +11,7 @@ class ShoppingListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => ShoppingListProvider(),
-      child: const _ShoppingListView(),
-    );
+    return const _ShoppingListView();
   }
 }
 
@@ -25,6 +22,13 @@ class _ShoppingListView extends StatelessWidget {
   Widget build(BuildContext context) {
     final _ = context.locale;
     final provider = context.watch<ShoppingListProvider>();
+
+    if (!provider.isLoaded) {
+      return const Scaffold(
+        backgroundColor: AppColors.background,
+        body: Center(child: CircularProgressIndicator()),
+      );
+    }
 
     if (provider.isEmpty) return const ShoppingEmptyStateWidget();
 
