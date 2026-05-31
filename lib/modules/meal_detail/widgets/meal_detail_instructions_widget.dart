@@ -1,62 +1,111 @@
+import 'package:cravvy_cooking_app/core/utils/recipe_steps_resolver.dart';
+import 'package:cravvy_cooking_app/data/providers/recipe_provider.dart';
 import 'package:cravvy_cooking_app/init.dart';
 import 'package:cravvy_cooking_app/data/models/meal.dart';
+import 'package:easy_localization/easy_localization.dart';
 
-/// Instructions tab content – numbered step list.
-class MealDetailInstructionsWidget extends StatelessWidget {
+/// Instructions tab — steps from Supabase (`recipes.steps`).
+class MealDetailInstructionsWidget extends StatefulWidget {
   const MealDetailInstructionsWidget({super.key, required this.meal});
 
   final Meal meal;
 
-  static List<String> _mockSteps(String mealId) {
-    switch (mealId) {
-      case 'b1':
-        return [
-          'Toast the sourdough bread slices until golden and crispy.',
-          'Halve the avocado, remove the pit and scoop the flesh into a bowl.',
-          'Mash the avocado with lemon juice, salt and pepper to taste.',
-          'Spread the mashed avocado evenly over the toasted bread.',
-          'Bring a pot of water to a gentle simmer, add a splash of vinegar, then poach the eggs for 3 minutes.',
-          'Top each toast with a poached egg, cherry tomatoes, and microgreens.',
-          'Finish with a pinch of red pepper flakes and serve immediately.',
-        ];
-      case 'l1':
-        return [
-          'Season the chicken breast with salt, pepper, and a drizzle of olive oil.',
-          'Grill the chicken on medium-high heat for 6–7 minutes per side until cooked through.',
-          'Let the chicken rest for 5 minutes, then slice into strips.',
-          'Combine the salad greens, cucumber, and red onion in a large bowl.',
-          'Whisk together olive oil, lemon juice, and Dijon mustard to make the dressing.',
-          'Drizzle the dressing over the salad and toss gently.',
-          'Top with grilled chicken strips and crumbled feta cheese. Serve immediately.',
-        ];
-      default:
-        return [
-          'Preheat the oven to 200 °C (400 °F) and line a baking tray with parchment paper.',
-          'Pat the salmon fillet dry with paper towels and place it on the tray.',
-          'Season the salmon generously with salt, pepper, and minced garlic.',
-          'Arrange the broccoli florets and cherry tomatoes around the salmon.',
-          'Drizzle olive oil over everything and lay lemon slices on top of the salmon.',
-          'Bake for 20–25 minutes until the salmon flakes easily with a fork.',
-          'Garnish with fresh dill or parsley and serve hot.',
-        ];
+  @override
+  State<MealDetailInstructionsWidget> createState() =>
+      _MealDetailInstructionsWidgetState();
+}
+
+class _MealDetailInstructionsWidgetState
+    extends State<MealDetailInstructionsWidget> {
+  List<String> _steps = [];
+  bool _loading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) => _loadSteps());
+  }
+
+  Future<void> _loadSteps() async {
+    RecipeProvider? lookup;
+    try {
+      lookup = context.read<RecipeProvider>();
+    } catch (_) {
+      lookup = null;
     }
+
+    final lines = await RecipeStepsResolver.resolveLines(
+      widget.meal,
+      recipeLookup: lookup,
+    );
+
+    if (!mounted) return;
+    setState(() {
+      _steps = lines;
+      _loading = false;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    // Ưu tiên steps thật từ Supabase, fallback về mock nếu Meal từ mock data
-    final steps = meal.steps.isNotEmpty ? meal.steps : _mockSteps(meal.id);
+    final _ = context.locale;
+
+    if (_loading) {
+      return const SliverToBoxAdapter(
+        child: Padding(
+          padding: EdgeInsets.symmetric(vertical: 32),
+          child: Center(child: CircularProgressIndicator()),
+        ),
+      );
+    }
+
+    if (_steps.isEmpty) {
+      return SliverToBoxAdapter(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(20, 24, 20, 100),
+          child: Text(
+            'cooking_mode.no_steps'.tr(),
+            style: AppTextStyles.s14.copyWith(color: AppColors.textSecondary),
+            textAlign: TextAlign.center,
+          ),
+        ),
+      );
+    }
 
     return SliverPadding(
       padding: const EdgeInsets.fromLTRB(16, 20, 16, 100),
       sliver: SliverList(
-        delegate: SliverChildBuilderDelegate(
-          (context, index) => Padding(
-            padding: const EdgeInsets.only(bottom: 14),
-            child: _StepCard(step: index + 1, text: steps[index]),
+        delegate: SliverChildListDelegate([
+          ...[
+            for (var i = 0; i < _steps.length; i++)
+              Padding(
+                padding: const EdgeInsets.only(bottom: 14),
+                child: _StepCard(step: i + 1, text: _steps[i]),
+              ),
+          ],
+          Padding(
+            padding: const EdgeInsets.only(top: 8),
+            child: SizedBox(
+              width: double.infinity,
+              child: ElevatedButton.icon(
+                onPressed: () => context.push(
+                  AppRouter.cookingMode,
+                  extra: widget.meal,
+                ),
+                icon: const Icon(Icons.restaurant_rounded),
+                label: Text('cooking_mode.start_btn'.tr()),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.primary,
+                  foregroundColor: Colors.white,
+                  padding: const EdgeInsets.symmetric(vertical: 14),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: AppBorderRadius.a16,
+                  ),
+                ),
+              ),
+            ),
           ),
-          childCount: steps.length,
-        ),
+        ]),
       ),
     );
   }

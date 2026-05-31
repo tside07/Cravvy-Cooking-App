@@ -1,17 +1,16 @@
 import 'dart:async';
-import 'package:cravvy_cooking_app/init.dart';
-import 'package:cravvy_cooking_app/data/models/meal.dart';
 
-class _Step {
-  final int number;
-  final String text;
-  final int? timerMinutes;
-  const _Step({required this.number, required this.text, this.timerMinutes});
-}
+import 'package:cravvy_cooking_app/core/utils/recipe_cooking_steps.dart';
+import 'package:cravvy_cooking_app/core/utils/recipe_steps_resolver.dart';
+import 'package:cravvy_cooking_app/data/models/meal.dart';
+import 'package:cravvy_cooking_app/data/providers/recipe_provider.dart';
+import 'package:cravvy_cooking_app/init.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class CookingModeScreen extends StatefulWidget {
-  final Meal meal;
   const CookingModeScreen({super.key, required this.meal});
+
+  final Meal meal;
 
   @override
   State<CookingModeScreen> createState() => _CookingModeScreenState();
@@ -23,40 +22,35 @@ class _CookingModeScreenState extends State<CookingModeScreen> {
   int _timeRemaining = 0;
   Timer? _timer;
 
-  static final List<_Step> _steps = [
-    const _Step(
-      number: 1,
-      text:
-          'Prepare all your ingredients. Wash vegetables thoroughly under cold running water. Pat the protein dry with paper towels.',
-    ),
-    const _Step(
-      number: 2,
-      text:
-          'Preheat your pan or oven to the required temperature. For stovetop, heat oil over medium-high heat until shimmering.',
-    ),
-    const _Step(
-      number: 3,
-      text:
-          'Season your protein generously with salt, pepper, and spices. Let it rest at room temperature for 5 minutes.',
-    ),
-    const _Step(
-      number: 4,
-      text:
-          'Cook the protein until golden brown on each side, then reduce heat and cook through.',
-      timerMinutes: 20,
-    ),
-    const _Step(
-      number: 5,
-      text:
-          'Add vegetables and aromatics. Toss together with sauces and let flavors meld.',
-      timerMinutes: 5,
-    ),
-    const _Step(
-      number: 6,
-      text:
-          'Remove from heat and let rest for 2 minutes. Plate beautifully and garnish with fresh herbs. Enjoy!',
-    ),
-  ];
+  bool _loadingSteps = true;
+  List<CookingStep> _steps = [];
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) => _loadSteps());
+  }
+
+  Future<void> _loadSteps() async {
+    RecipeProvider? lookup;
+    try {
+      lookup = context.read<RecipeProvider>();
+    } catch (_) {
+      lookup = null;
+    }
+
+    final lines = await RecipeStepsResolver.resolveLines(
+      widget.meal,
+      recipeLookup: lookup,
+    );
+
+    if (!mounted) return;
+    setState(() {
+      _steps = RecipeCookingSteps.fromStrings(lines);
+      _loadingSteps = false;
+      _currentStep = 0;
+    });
+  }
 
   @override
   void dispose() {
@@ -123,16 +117,84 @@ class _CookingModeScreenState extends State<CookingModeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final _ = context.locale;
+
+    if (_loadingSteps) {
+      return Scaffold(
+        backgroundColor: AppColors.background,
+        body: SafeArea(
+          child: Column(
+            children: [
+              Align(
+                alignment: Alignment.centerLeft,
+                child: IconButton(
+                  icon: const Icon(Icons.close_rounded),
+                  onPressed: () => context.pop(),
+                ),
+              ),
+              const Expanded(
+                child: Center(child: CircularProgressIndicator()),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+
+    if (_steps.isEmpty) {
+      return Scaffold(
+        backgroundColor: AppColors.background,
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(24),
+            child: Column(
+              children: [
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: IconButton(
+                    icon: const Icon(Icons.close_rounded),
+                    onPressed: () => context.pop(),
+                  ),
+                ),
+                Expanded(
+                  child: Center(
+                    child: Text(
+                      'cooking_mode.no_steps'.tr(),
+                      style: AppTextStyles.s16.copyWith(
+                        color: AppColors.textSecondary,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () => context.pop(),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.primary,
+                      foregroundColor: Colors.white,
+                    ),
+                    child: Text('cooking_mode.exit'.tr()),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+    }
+
     final step = _steps[_currentStep];
     final progress = (_currentStep + 1) / _steps.length;
     final isLast = _currentStep == _steps.length - 1;
+    final imageUrl = widget.meal.imageUrl.trim();
 
     return Scaffold(
       backgroundColor: AppColors.background,
       body: SafeArea(
         child: Column(
           children: [
-            // Header
             Padding(
               padding: const EdgeInsets.fromLTRB(16, 12, 16, 0),
               child: Row(
@@ -145,7 +207,7 @@ class _CookingModeScreenState extends State<CookingModeScreen> {
                     child: Column(
                       children: [
                         Text(
-                          'Cooking Mode',
+                          'cooking_mode.title'.tr(),
                           style: AppTextStyles.s14.copyWith(
                             color: AppColors.textSecondary,
                           ),
@@ -180,8 +242,6 @@ class _CookingModeScreenState extends State<CookingModeScreen> {
                 ],
               ),
             ),
-
-            // Progress bar
             Padding(
               padding: const EdgeInsets.fromLTRB(16, 12, 16, 0),
               child: ClipRRect(
@@ -194,16 +254,37 @@ class _CookingModeScreenState extends State<CookingModeScreen> {
                 ),
               ),
             ),
-
-            const SizedBox(height: 24),
-
-            // Step card
+            if (imageUrl.isNotEmpty) ...[
+              const SizedBox(height: 16),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(16),
+                  child: AspectRatio(
+                    aspectRatio: 16 / 9,
+                    child: Image.network(
+                      imageUrl,
+                      fit: BoxFit.cover,
+                      errorBuilder: (_, __, ___) => ColoredBox(
+                        color: widget.meal.type.lightColor,
+                        child: Center(
+                          child: Text(
+                            widget.meal.type.emoji,
+                            style: const TextStyle(fontSize: 48),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+            const SizedBox(height: 20),
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Column(
                   children: [
-                    // Step number badge
                     Container(
                       width: 64,
                       height: 64,
@@ -230,35 +311,35 @@ class _CookingModeScreenState extends State<CookingModeScreen> {
                       ),
                     ),
                     const SizedBox(height: 20),
-
-                    // Step text card
-                    Container(
-                      width: double.infinity,
-                      padding: const EdgeInsets.all(24),
-                      decoration: BoxDecoration(
-                        color: AppColors.surface,
-                        borderRadius: BorderRadius.circular(20),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withValues(alpha: 0.06),
-                            blurRadius: 16,
-                            offset: const Offset(0, 4),
+                    Expanded(
+                      child: SingleChildScrollView(
+                        child: Container(
+                          width: double.infinity,
+                          padding: const EdgeInsets.all(24),
+                          decoration: BoxDecoration(
+                            color: AppColors.surface,
+                            borderRadius: BorderRadius.circular(20),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withValues(alpha: 0.06),
+                                blurRadius: 16,
+                                offset: const Offset(0, 4),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
-                      child: Text(
-                        step.text,
-                        style: AppTextStyles.s16.copyWith(
-                          height: 1.7,
-                          color: AppColors.textPrimary,
+                          child: Text(
+                            step.text,
+                            style: AppTextStyles.s16.copyWith(
+                              height: 1.7,
+                              color: AppColors.textPrimary,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
                         ),
-                        textAlign: TextAlign.center,
                       ),
                     ),
-
-                    // Timer section
                     if (step.timerMinutes != null) ...[
-                      const SizedBox(height: 24),
+                      const SizedBox(height: 16),
                       Container(
                         padding: const EdgeInsets.all(20),
                         decoration: BoxDecoration(
@@ -280,7 +361,11 @@ class _CookingModeScreenState extends State<CookingModeScreen> {
                                 ),
                                 const SizedBox(width: 8),
                                 Text(
-                                  'Timer: ${step.timerMinutes} min',
+                                  'cooking_mode.timer_label'.tr(
+                                    namedArgs: {
+                                      'min': '${step.timerMinutes}',
+                                    },
+                                  ),
                                   style: AppTextStyles.s14.copyWith(
                                     color: AppColors.primary,
                                     fontWeight: FontWeight.w600,
@@ -293,7 +378,7 @@ class _CookingModeScreenState extends State<CookingModeScreen> {
                               _timeRemaining > 0
                                   ? _formatTime(_timeRemaining)
                                   : '${step.timerMinutes!.toString().padLeft(2, '0')}:00',
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 40,
                                 fontWeight: FontWeight.w700,
                                 color: AppColors.textPrimary,
@@ -306,13 +391,15 @@ class _CookingModeScreenState extends State<CookingModeScreen> {
                               children: [
                                 _TimerButton(
                                   icon: Icons.replay_rounded,
-                                  onTap: () => _resetTimer(step.timerMinutes!),
+                                  onTap: () =>
+                                      _resetTimer(step.timerMinutes!),
                                 ),
                                 const SizedBox(width: 12),
                                 GestureDetector(
                                   onTap: _timerRunning
                                       ? _pauseTimer
-                                      : () => _startTimer(step.timerMinutes!),
+                                      : () =>
+                                          _startTimer(step.timerMinutes!),
                                   child: Container(
                                     width: 56,
                                     height: 56,
@@ -321,9 +408,8 @@ class _CookingModeScreenState extends State<CookingModeScreen> {
                                       shape: BoxShape.circle,
                                       boxShadow: [
                                         BoxShadow(
-                                          color: AppColors.primary.withValues(alpha: 
-                                            0.4,
-                                          ),
+                                          color: AppColors.primary
+                                              .withValues(alpha: 0.4),
                                           blurRadius: 12,
                                           offset: const Offset(0, 4),
                                         ),
@@ -348,8 +434,6 @@ class _CookingModeScreenState extends State<CookingModeScreen> {
                 ),
               ),
             ),
-
-            // Navigation
             Padding(
               padding: const EdgeInsets.all(20),
               child: Row(
@@ -362,7 +446,7 @@ class _CookingModeScreenState extends State<CookingModeScreen> {
                           Icons.arrow_back_ios_new_rounded,
                           size: 16,
                         ),
-                        label: const Text('Previous'),
+                        label: Text('cooking_mode.previous'.tr()),
                         style: OutlinedButton.styleFrom(
                           foregroundColor: AppColors.textPrimary,
                           side: const BorderSide(color: AppColors.border),
@@ -386,7 +470,11 @@ class _CookingModeScreenState extends State<CookingModeScreen> {
                             : Icons.arrow_forward_ios_rounded,
                         size: 16,
                       ),
-                      label: Text(isLast ? 'Finish Cooking' : 'Next Step'),
+                      label: Text(
+                        isLast
+                            ? 'cooking_mode.finish'.tr()
+                            : 'cooking_mode.next_step'.tr(),
+                      ),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.primary,
                         foregroundColor: Colors.white,
@@ -411,12 +499,12 @@ class _CookingModeScreenState extends State<CookingModeScreen> {
       context: context,
       builder: (ctx) => AlertDialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        title: const Text('Exit Cooking Mode?'),
-        content: const Text('Your progress will be lost.'),
+        title: Text('cooking_mode.exit_title'.tr()),
+        content: Text('cooking_mode.exit_body'.tr()),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx),
-            child: const Text('Stay'),
+            child: Text('cooking_mode.stay'.tr()),
           ),
           ElevatedButton(
             onPressed: () {
@@ -424,7 +512,7 @@ class _CookingModeScreenState extends State<CookingModeScreen> {
               context.pop();
             },
             style: ElevatedButton.styleFrom(backgroundColor: AppColors.primary),
-            child: const Text('Exit'),
+            child: Text('cooking_mode.exit'.tr()),
           ),
         ],
       ),
@@ -433,9 +521,10 @@ class _CookingModeScreenState extends State<CookingModeScreen> {
 }
 
 class _TimerButton extends StatelessWidget {
+  const _TimerButton({required this.icon, required this.onTap});
+
   final IconData icon;
   final VoidCallback onTap;
-  const _TimerButton({required this.icon, required this.onTap});
 
   @override
   Widget build(BuildContext context) {

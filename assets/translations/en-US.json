@@ -526,8 +526,10 @@
         "previous": "Previous",
         "next_step": "Next Step",
         "finish": "Finish Cooking",
+        "start_btn": "Start Cooking Mode",
         "exit_title": "Exit Cooking Mode?",
         "exit_body": "Your progress will be lost.",
+        "no_steps": "Cooking steps are not available for this recipe yet.",
         "stay": "Stay",
         "exit": "Exit"
     },

@@ -525,8 +525,10 @@
         "previous": "Trước",
         "next_step": "Bước tiếp theo",
         "finish": "Hoàn thành nấu ăn",
+        "start_btn": "Bắt đầu nấu",
         "exit_title": "Thoát chế độ nấu ăn?",
         "exit_body": "Tiến trình của bạn sẽ bị mất.",
+        "no_steps": "Chưa có hướng dẫn nấu cho món này.",
         "stay": "Ở lại",
         "exit": "Thoát"
     },
