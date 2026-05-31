@@ -1,5 +1,7 @@
 // lib/modules/meal_plan/screens/meal_plan_screen.dart
 
+import 'package:cravvy_cooking_app/core/constants/plan_limits.dart';
+import 'package:cravvy_cooking_app/data/services/usage_limit_service.dart';
 import 'package:cravvy_cooking_app/init.dart';
 import 'package:cravvy_cooking_app/data/models/meal.dart';
 import 'package:cravvy_cooking_app/data/providers/recipe_provider.dart';
@@ -106,6 +108,9 @@ class _MealList extends StatelessWidget {
               // Index 0: banner "Làm mới gợi ý"
               if (i == 0) {
                 return _RefreshSuggestionBanner(
+                  cooldownSeconds: provider.refreshCooldownSeconds,
+                  weeklyExhausted: provider.isWeeklyRefreshExhausted,
+                  canRefresh: provider.canTapRefresh,
                   onRefresh: () => _confirmRefresh(context, provider),
                 );
               }
@@ -141,12 +146,25 @@ class _MealList extends StatelessWidget {
     BuildContext context,
     MealPlanProvider provider,
   ) async {
-    final can = await provider.canForceRefreshWeek();
+    final blockReason = await provider.forceRefreshBlockReason();
     if (!context.mounted) return;
-    if (!can) {
+    if (blockReason != AiRefreshBlockReason.none) {
+      final String message;
+      if (blockReason == AiRefreshBlockReason.cooldown) {
+        final sec = await provider.forceRefreshCooldownSecondsRemaining();
+        message = 'meal_plan.refresh_cooldown_banner'.tr(
+          namedArgs: {
+            'time': MealPlanProvider.formatCooldown(
+              sec > 0 ? sec : provider.refreshCooldownSeconds,
+            ),
+          },
+        );
+      } else {
+        message = 'limits.ai_refresh_exhausted'.tr();
+      }
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('limits.ai_refresh_exhausted'.tr()),
+          content: Text(message),
           behavior: SnackBarBehavior.floating,
         ),
       );
@@ -175,9 +193,26 @@ class _MealList extends StatelessWidget {
             ),
           ),
           TextButton(
-            onPressed: () {
+            onPressed: () async {
               Navigator.pop(context);
-              provider.autoFillWeek(forceRefresh: true);
+              final ok = await provider.autoFillWeek(forceRefresh: true);
+              if (!context.mounted) return;
+              if (ok) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(
+                      'meal_plan.refresh_success_cooldown'.tr(
+                        namedArgs: {
+                          'minutes':
+                              '${PlanLimits.aiRefreshCooldownMinutes}',
+                        },
+                      ),
+                    ),
+                    behavior: SnackBarBehavior.floating,
+                    duration: const Duration(seconds: 4),
+                  ),
+                );
+              }
             },
             child: Text(
               'meal_plan.refresh'.tr(),
@@ -241,50 +276,98 @@ class _MealList extends StatelessWidget {
 }
 
 class _RefreshSuggestionBanner extends StatelessWidget {
-  const _RefreshSuggestionBanner({required this.onRefresh});
+  const _RefreshSuggestionBanner({
+    required this.cooldownSeconds,
+    required this.weeklyExhausted,
+    required this.canRefresh,
+    required this.onRefresh,
+  });
+
+  final int cooldownSeconds;
+  final bool weeklyExhausted;
+  final bool canRefresh;
   final VoidCallback onRefresh;
 
   @override
   Widget build(BuildContext context) {
+    final onCooldown = cooldownSeconds > 0;
+    final countdown = MealPlanProvider.formatCooldown(cooldownSeconds);
+
     return Container(
       margin: const EdgeInsets.only(bottom: 14),
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
       decoration: BoxDecoration(
-        color: AppColors.primaryLight,
+        color: onCooldown
+            ? AppColors.surface
+            : AppColors.primaryLight,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: AppColors.primary.withValues(alpha: 0.15)),
+        border: Border.all(
+          color: onCooldown
+              ? AppColors.textSecondary.withValues(alpha: 0.2)
+              : AppColors.primary.withValues(alpha: 0.15),
+        ),
       ),
       child: Row(
         children: [
-          const Text('✨', style: TextStyle(fontSize: 14)),
+          Text(onCooldown ? '⏳' : '✨', style: const TextStyle(fontSize: 14)),
           AppGap.w8,
           Expanded(
             child: Text(
-              'meal_plan.banner_hint'.tr(),
+              onCooldown
+                  ? 'meal_plan.refresh_cooldown_banner'.tr(
+                      namedArgs: {'time': countdown},
+                    )
+                  : weeklyExhausted
+                  ? 'meal_plan.refresh_weekly_exhausted'.tr()
+                  : 'meal_plan.banner_hint'.tr(),
               style: AppTextStyles.s12.copyWith(
-                color: AppColors.primaryDark,
+                color: onCooldown
+                    ? AppColors.textSecondary
+                    : AppColors.primaryDark,
                 fontWeight: FontWeight.w600,
               ),
             ),
           ),
           AppGap.w8,
-          GestureDetector(
-            onTap: onRefresh,
-            child: Container(
+          if (onCooldown)
+            Container(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
               decoration: BoxDecoration(
-                color: AppColors.primary,
+                color: AppColors.textSecondary.withValues(alpha: 0.12),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Text(
-                'meal_plan.refresh'.tr(),
+                countdown,
                 style: AppTextStyles.s12.copyWith(
-                  color: Colors.white,
+                  color: AppColors.textSecondary,
                   fontWeight: FontWeight.w700,
+                  fontFeatures: const [FontFeature.tabularFigures()],
+                ),
+              ),
+            )
+          else
+            GestureDetector(
+              onTap: canRefresh ? onRefresh : null,
+              child: Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                decoration: BoxDecoration(
+                  color: canRefresh
+                      ? AppColors.primary
+                      : AppColors.textSecondary.withValues(alpha: 0.35),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Text(
+                  weeklyExhausted
+                      ? 'meal_plan.refresh'.tr()
+                      : 'meal_plan.refresh'.tr(),
+                  style: AppTextStyles.s12.copyWith(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
               ),
             ),
-          ),
         ],
       ),
     );

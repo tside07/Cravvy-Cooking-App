@@ -347,6 +347,7 @@
         "swaps_remaining": "{n} meal swaps left this week",
         "swap_exhausted": "No meal swaps left this week. Upgrade to Premium for 5 swaps/week.",
         "ai_refresh_exhausted": "No AI menu refreshes left this week.",
+        "ai_refresh_cooldown": "Please wait {minutes} more minute(s) before refreshing again.",
         "upgrade": "Upgrade",
         "unlock_week": "Unlock",
         "free_week_hint": "Free plan shows 3 days per week. Premium unlocks the full 7-day plan."
@@ -426,6 +427,9 @@
         "refresh": "Refresh",
         "refresh_dialog_title": "Refresh suggestions?",
         "refresh_dialog_body": "This week's menu will be regenerated based on your goals.",
+        "refresh_success_cooldown": "Menu updated! You can refresh again in {minutes} minute(s).",
+        "refresh_cooldown_banner": "Refresh again in {time}",
+        "refresh_weekly_exhausted": "No AI refreshes left this week.",
         "consumed": "Consumed",
         "goal": "Goal",
         "kcal_left": "kcal left",

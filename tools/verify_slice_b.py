@@ -44,4 +44,7 @@ try:
     client.table("user_weekly_usage").select("user_id").limit(1).execute()
     print("user_weekly_usage table: OK")
 except Exception as exc:
-    print(f"user_weekly_usage: MISSING — run supabase/RUN_IN_SQL_EDITOR_week6_premium.sql ({exc})")
+    print(f"user_weekly_usage: MISSING — run supabase/RUN_IN_SQL_EDITOR_slice_b.sql ({exc})")
+    raise SystemExit(1) from exc
+
+print("\nSlice B verify: PASS")

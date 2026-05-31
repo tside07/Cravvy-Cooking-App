@@ -1,10 +1,12 @@
 // Supabase Edge Function: generate 7-day meal plan via Gemini Flash
-// Secrets: GEMINI_API_KEY (required), GEMINI_MODEL (optional, default gemini-2.0-flash)
+// Secrets: GEMINI_API_KEY (required), GEMINI_MODEL (optional, default gemini-2.5-flash)
 // Auto-injected: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY
 
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.49.1";
 
 const MEAL_TYPES = ["breakfast", "lunch", "dinner", "snack"] as const;
+const MAX_CATALOG_PER_TYPE = 20;
+
 const CORS_HEADERS = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers":
@@ -13,6 +15,9 @@ const CORS_HEADERS = {
 
 // Keep in sync with `PlanLimits.freeRecipeSources` (Flutter).
 const FREE_RECIPE_SOURCES = ["cravvy_curated_vn"] as const;
+
+/** Min interval between force_refresh calls (protects Gemini quota). */
+const AI_REFRESH_COOLDOWN_MS = 5 * 60 * 1000;
 
 type MealSlot = { meal_type: string; recipe_id: string };
 type DayPlan = { date: string; meals: MealSlot[] };
@@ -42,6 +47,22 @@ function parseWeekStart(raw: string | undefined): Date {
   return monday;
 }
 
+function weekNumberFromDate(d: Date): number {
+  const startOfYear = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+  const dayOfYear = Math.floor(
+    (d.getTime() - startOfYear.getTime()) / 86400000,
+  );
+  return Math.floor((dayOfYear - d.getUTCDay() + 10) / 7);
+}
+
+function hashCode(s: string): number {
+  let h = 0;
+  for (let i = 0; i < s.length; i++) {
+    h = ((h << 5) - h + s.charCodeAt(i)) | 0;
+  }
+  return Math.abs(h);
+}
+
 async function sha256Hex(text: string): Promise<string> {
   const data = new TextEncoder().encode(text);
   const hash = await crypto.subtle.digest("SHA-256", data);
@@ -64,66 +85,339 @@ async function buildProfileHash(profile: Record<string, unknown>): Promise<strin
   return sha256Hex(payload);
 }
 
-function catalogLine(r: Record<string, unknown>): string {
-  return [
-    r.id,
-    r.meal_type,
-    r.name,
-    `${r.calories}kcal`,
-    `P${r.protein}g`,
-    (r.tags as string[] | undefined)?.slice(0, 3).join(",") ?? "",
-  ].join("|");
+function shuffleWithSeed<T>(arr: T[], seed: number): T[] {
+  const out = [...arr];
+  let s = seed >>> 0;
+  for (let i = out.length - 1; i > 0; i--) {
+    s = (s * 1664525 + 1013904223) >>> 0;
+    const j = s % (i + 1);
+    [out[i], out[j]] = [out[j], out[i]];
+  }
+  return out;
 }
 
-async function callGemini(
-  apiKey: string,
+function parseForceRefresh(body: Record<string, unknown>): boolean {
+  const raw = body.force_refresh;
+  return raw === true || raw === "true" || raw === 1 || raw === "1";
+}
+
+function compactCatalogLine(r: Record<string, unknown>): string {
+  return [r.id, r.meal_type, r.calories, r.protein].join("|");
+}
+
+function scoreRecipe(
+  r: Record<string, unknown>,
   profile: Record<string, unknown>,
+): number {
+  const goal = String(profile.goal ?? "maintain");
+  const calories = Number(r.calories ?? 0);
+  const protein = Number(r.protein ?? 0);
+  const tags = ((r.tags as string[]) ?? []).map((t) => t.toLowerCase());
+  const diets = ((profile.diets as string[]) ?? []).map((d) => d.toLowerCase());
+
+  let score = 0;
+  switch (goal) {
+    case "lose-weight":
+      if (calories < 350) score += 3;
+      if (calories < 450) score += 1;
+      if (tags.some((t) => t.includes("low carb"))) score += 2;
+      break;
+    case "build-muscle":
+      if (protein >= 30) score += 4;
+      if (protein >= 20) score += 2;
+      if (tags.some((t) => t.includes("high protein"))) score += 2;
+      break;
+    default:
+      if (calories < 600) score += 1;
+  }
+  for (const diet of diets) {
+    if (tags.some((t) => t.includes(diet))) score += 3;
+  }
+  return score;
+}
+
+function applyAvoidFoods(
   recipes: Record<string, unknown>[],
-  weekStart: Date,
-): Promise<DayPlan[]> {
-  const weekDates = Array.from({ length: 7 }, (_, i) => {
-    const d = new Date(weekStart);
-    d.setUTCDate(weekStart.getUTCDate() + i);
-    return dateStr(d);
+  avoid: string[],
+): Record<string, unknown>[] {
+  if (!avoid.length) return recipes;
+  return recipes.filter((r) => {
+    const nameLower = String(r.name ?? "").toLowerCase();
+    const tagsLower = ((r.tags as string[]) ?? []).map((t) => t.toLowerCase());
+    return !avoid.some((a) => {
+      const al = a.toLowerCase();
+      return nameLower.includes(al) ||
+        tagsLower.some((t) => t.includes(al));
+    });
   });
+}
 
-  const catalog = recipes.map(catalogLine).join("\n");
-  const prompt = `You are a nutrition meal planner. Build a 7-day meal plan using ONLY recipe IDs from the catalog below.
+/** Trim catalog sent to Gemini — max N recipes per meal type, profile-aware. */
+function trimCatalogForGemini(
+  recipes: Record<string, unknown>[],
+  profile: Record<string, unknown>,
+  options: { forceRefresh?: boolean; refreshSeed?: number } = {},
+): Record<string, unknown>[] {
+  const { forceRefresh = false, refreshSeed = 0 } = options;
+  const avoid = ((profile.avoid_foods as string[]) ?? []);
+  const cookingTime = String(profile.cooking_time ?? "any");
+  const byType = new Map<string, Record<string, unknown>[]>();
 
-User profile:
-- goal: ${profile.goal ?? "maintain"}
-- diets: ${JSON.stringify(profile.diets ?? [])}
-- avoid_foods: ${JSON.stringify(profile.avoid_foods ?? [])}
-- age: ${profile.age}, gender: ${profile.gender}
-- weight_kg: ${profile.weight_kg}, height_cm: ${profile.height_cm}
-- cooking_time preference: ${profile.cooking_time ?? "any"}
+  for (const r of recipes) {
+    const t = String(r.meal_type);
+    if (!byType.has(t)) byType.set(t, []);
+    byType.get(t)!.push(r);
+  }
 
-Week dates (use exactly these): ${weekDates.join(", ")}
+  const trimmed: Record<string, unknown>[] = [];
+  for (const mealType of MEAL_TYPES) {
+    let pool = applyAvoidFoods(byType.get(mealType) ?? [], avoid);
+    if (!pool.length) pool = byType.get(mealType) ?? [];
+    if (!pool.length) continue;
 
-For EACH date, assign exactly one recipe per meal_type: breakfast, lunch, dinner, snack.
-Rules:
-1. ONLY use recipe_id values that appear in the catalog (UUID format).
-2. Match meal_type on each recipe to the slot.
-3. Respect avoid_foods and diets.
-4. Prefer lower calories for lose-weight; higher protein for build-muscle.
-5. Do not repeat the same recipe_id more than 3 times in the week.
+    if (cookingTime === "quick" || cookingTime === "15") {
+      const quick = pool.filter((r) => Number(r.prep_time ?? 999) <= 20);
+      if (quick.length) pool = quick;
+    }
 
-Catalog (id|meal_type|name|calories|protein|tags):
-${catalog}
+    pool = [...pool].sort(
+      (a, b) => scoreRecipe(b, profile) - scoreRecipe(a, profile),
+    );
 
-Respond with ONLY valid JSON, no markdown:
-{
-  "days": [
-    { "date": "YYYY-MM-DD", "meals": [
-      { "meal_type": "breakfast", "recipe_id": "uuid" },
-      { "meal_type": "lunch", "recipe_id": "uuid" },
-      { "meal_type": "dinner", "recipe_id": "uuid" },
-      { "meal_type": "snack", "recipe_id": "uuid" }
-    ]}
-  ]
-}`;
+    if (forceRefresh && pool.length > MAX_CATALOG_PER_TYPE) {
+      const window = pool.slice(0, Math.min(pool.length, MAX_CATALOG_PER_TYPE * 2));
+      pool = shuffleWithSeed(
+        window,
+        refreshSeed + mealType.charCodeAt(0),
+      ).slice(0, MAX_CATALOG_PER_TYPE);
+    } else {
+      pool = pool.slice(0, MAX_CATALOG_PER_TYPE);
+    }
 
-  const model = Deno.env.get("GEMINI_MODEL") ?? "gemini-2.0-flash";
+    trimmed.push(...pool);
+  }
+  return trimmed;
+}
+
+const WEEK_RESPONSE_SCHEMA = {
+  type: "OBJECT",
+  properties: {
+    days: {
+      type: "ARRAY",
+      items: {
+        type: "OBJECT",
+        properties: {
+          date: { type: "STRING" },
+          meals: {
+            type: "ARRAY",
+            items: {
+              type: "OBJECT",
+              properties: {
+                meal_type: { type: "STRING" },
+                recipe_id: { type: "STRING" },
+              },
+              required: ["meal_type", "recipe_id"],
+            },
+          },
+        },
+        required: ["date", "meals"],
+      },
+    },
+  },
+  required: ["days"],
+};
+
+function sleep(ms: number): Promise<void> {
+  return new Promise((r) => setTimeout(r, ms));
+}
+
+function isRateLimitError(err: unknown): boolean {
+  return String(err).includes("429");
+}
+
+function stripCodeFences(text: string): string {
+  return text.replace(/```json\n?/g, "").replace(/```/g, "").trim();
+}
+
+function repairJsonText(raw: string): string {
+  let s = stripCodeFences(raw);
+  s = s.replace(/,\s*(\]|\})/g, "$1");
+  const openBrace = (s.match(/\{/g) || []).length;
+  const closeBrace = (s.match(/\}/g) || []).length;
+  const openBracket = (s.match(/\[/g) || []).length;
+  const closeBracket = (s.match(/\]/g) || []).length;
+  for (let i = 0; i < openBracket - closeBracket; i++) s += "]";
+  for (let i = 0; i < openBrace - closeBrace; i++) s += "}";
+  return s;
+}
+
+function extractMealsFromText(text: string): MealSlot[] {
+  const meals: MealSlot[] = [];
+  const seen = new Set<string>();
+
+  const patterns = [
+    /"meal_type"\s*:\s*"(breakfast|lunch|dinner|snack)"\s*,\s*"recipe_id"\s*:\s*"([^"]+)"/gi,
+    /"recipe_id"\s*:\s*"([^"]+)"\s*,\s*"meal_type"\s*:\s*"(breakfast|lunch|dinner|snack)"/gi,
+  ];
+
+  for (const re of patterns) {
+    for (const m of text.matchAll(re)) {
+      const mealType = (re === patterns[0] ? m[1] : m[2]).toLowerCase();
+      const recipeId = re === patterns[0] ? m[2] : m[1];
+      if (!seen.has(mealType)) {
+        seen.add(mealType);
+        meals.push({ meal_type: mealType, recipe_id: recipeId });
+      }
+    }
+  }
+  return meals;
+}
+
+function normalizeDay(raw: Record<string, unknown>, expectedDate: string): DayPlan {
+  const meals = ((raw.meals as MealSlot[]) ?? [])
+    .filter((m) => m?.meal_type && m?.recipe_id)
+    .map((m) => ({
+      meal_type: String(m.meal_type).toLowerCase(),
+      recipe_id: String(m.recipe_id),
+    }));
+  return {
+    date: String(raw.date ?? expectedDate).slice(0, 10),
+    meals,
+  };
+}
+
+function parseGeminiDay(text: string, expectedDate: string): DayPlan {
+  const cleaned = stripCodeFences(text);
+  for (const attempt of [
+    () => JSON.parse(cleaned),
+    () => JSON.parse(repairJsonText(cleaned)),
+  ]) {
+    try {
+      const parsed = attempt() as Record<string, unknown> & { days?: DayPlan[] };
+      if (parsed?.days?.[0]) {
+        return normalizeDay(
+          parsed.days[0] as unknown as Record<string, unknown>,
+          expectedDate,
+        );
+      }
+      if (parsed?.date || parsed?.meals) {
+        return normalizeDay(parsed, expectedDate);
+      }
+    } catch {
+      // next
+    }
+  }
+  const meals = extractMealsFromText(text);
+  if (meals.length) return { date: expectedDate, meals };
+  throw new Error(`Could not parse day JSON: ${cleaned.slice(0, 120)}`);
+}
+
+function parseGeminiWeek(text: string, expectedDates: string[]): DayPlan[] {
+  const cleaned = stripCodeFences(text);
+  const parseAttempts: (() => { days?: DayPlan[] })[] = [
+    () => JSON.parse(cleaned),
+    () => JSON.parse(repairJsonText(cleaned)),
+    () => {
+      const match = cleaned.match(/\{[\s\S]*\}/);
+      if (!match) throw new Error("no json object");
+      return JSON.parse(repairJsonText(match[0]));
+    },
+  ];
+
+  for (const attempt of parseAttempts) {
+    try {
+      const parsed = attempt();
+      const rawDays = parsed?.days ?? [];
+      if (rawDays.length) {
+        return expectedDates.map((date) => {
+          const src = rawDays.find((d) =>
+            String(d.date).slice(0, 10) === date
+          );
+          return src
+            ? normalizeDay(src as unknown as Record<string, unknown>, date)
+            : { date, meals: [] as MealSlot[] };
+        });
+      }
+    } catch {
+      // next strategy
+    }
+  }
+
+  // Regex salvage: pull complete day objects from broken JSON.
+  const salvaged: DayPlan[] = [];
+  for (const date of expectedDates) {
+    const blockRe = new RegExp(
+      `"date"\\s*:\\s*"${date}"[\\s\\S]*?"meals"\\s*:\\s*\\[[\\s\\S]*?\\]`,
+      "i",
+    );
+    const block = text.match(blockRe);
+    if (block) {
+      try {
+        salvaged.push(parseGeminiDay(`{${block[0]}}`, date));
+        continue;
+      } catch {
+        // fall through
+      }
+    }
+    const meals = extractMealsFromText(text);
+    if (meals.length >= 4) {
+      salvaged.push({ date, meals: meals.slice(0, 4) });
+    }
+  }
+
+  if (salvaged.length === expectedDates.length) return salvaged;
+  throw new Error(
+    `Could not parse week JSON (${salvaged.length}/${expectedDates.length} days): ${
+      cleaned.slice(0, 120)
+    }`,
+  );
+}
+
+function geminiModelName(): string {
+  return Deno.env.get("GEMINI_MODEL") ?? "gemini-2.5-flash";
+}
+
+function usesThinkingBudget(model: string): boolean {
+  return model.includes("2.5");
+}
+
+function extractTextFromGeminiResponse(data: unknown): string {
+  const candidates = (data as {
+    candidates?: Array<{ content?: { parts?: Array<{ text?: string; thought?: boolean }> } }>;
+  })?.candidates;
+  const parts = candidates?.[0]?.content?.parts ?? [];
+  const visible = parts
+    .filter((p) => p.text && !p.thought)
+    .map((p) => p.text as string);
+  if (visible.length) return visible.join("");
+  const anyText = parts.map((p) => p.text).filter(Boolean).join("");
+  if (anyText) return anyText;
+  throw new Error("Empty Gemini response");
+}
+
+async function fetchGeminiTextOnce(
+  apiKey: string,
+  prompt: string,
+  temperature: number,
+  model: string,
+  useSchema: boolean,
+  maxOutputTokens: number,
+  schema: Record<string, unknown>,
+): Promise<string> {
+  const generationConfig: Record<string, unknown> = {
+    temperature,
+    maxOutputTokens,
+    responseMimeType: "application/json",
+  };
+
+  if (useSchema) {
+    generationConfig.responseSchema = schema;
+  }
+
+  if (usesThinkingBudget(model)) {
+    generationConfig.thinkingConfig = { thinkingBudget: 0 };
+  }
+
   const res = await fetch(
     `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`,
     {
@@ -131,28 +425,230 @@ Respond with ONLY valid JSON, no markdown:
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         contents: [{ parts: [{ text: prompt }] }],
-        generationConfig: {
-          temperature: 0.4,
-          maxOutputTokens: 8192,
-          responseMimeType: "application/json",
-        },
+        generationConfig,
       }),
     },
   );
 
   if (!res.ok) {
     const errText = await res.text();
-    throw new Error(`Gemini API error ${res.status}: ${errText}`);
+    throw new Error(
+      `Gemini API error ${res.status} (${model}): ${errText.slice(0, 240)}`,
+    );
   }
 
   const data = await res.json();
-  const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
-  if (!text) throw new Error("Empty Gemini response");
+  return extractTextFromGeminiResponse(data);
+}
 
-  const cleaned = text.replace(/```json\n?/g, "").replace(/```/g, "").trim();
-  const parsed = JSON.parse(cleaned) as { days: DayPlan[] };
-  if (!parsed?.days?.length) throw new Error("Invalid Gemini JSON shape");
-  return parsed.days;
+async function fetchGeminiText(
+  apiKey: string,
+  prompt: string,
+  temperature: number,
+  maxOutputTokens = 8192,
+): Promise<string> {
+  const model = geminiModelName();
+  let lastErr: unknown;
+
+  for (const useSchema of [true, false]) {
+    for (let retry = 0; retry < 3; retry++) {
+      try {
+        return await fetchGeminiTextOnce(
+          apiKey,
+          prompt,
+          temperature,
+          model,
+          useSchema,
+          maxOutputTokens,
+          WEEK_RESPONSE_SCHEMA,
+        );
+      } catch (e) {
+        lastErr = e;
+        if (isRateLimitError(e) && retry < 2) {
+          const waitMs = 4000 * (retry + 1);
+          console.warn(`Gemini 429 — retry ${retry + 1} in ${waitMs}ms`);
+          await sleep(waitMs);
+          continue;
+        }
+        break;
+      }
+    }
+  }
+
+  throw lastErr;
+}
+
+function buildWeekPrompt(
+  profile: Record<string, unknown>,
+  catalogRecipes: Record<string, unknown>[],
+  weekDates: string[],
+  options: {
+    forceRefresh?: boolean;
+    refreshSeed?: number;
+    previousRecipeIds?: string[];
+  },
+): string {
+  const { forceRefresh = false, refreshSeed = 0, previousRecipeIds = [] } =
+    options;
+  const catalog = catalogRecipes.map(compactCatalogLine).join("\n");
+  const avoidRepeat = previousRecipeIds.length
+    ? `\nAvoid repeating these recipe_ids where possible: ${
+      previousRecipeIds.slice(0, 20).join(", ")
+    }\n`
+    : "";
+  const refreshHint = forceRefresh
+    ? `\nRefresh #${refreshSeed} — create a different weekly menu.\n`
+    : "";
+
+  return (
+    `Build a 7-day meal plan for dates: ${weekDates.join(", ")}.\n` +
+    `Use ONLY recipe_id UUIDs from catalog. Match meal_type per slot.\n` +
+    `Profile goal: ${profile.goal ?? "maintain"}, diets: ${
+      JSON.stringify(profile.diets ?? [])
+    }, avoid: ${JSON.stringify(profile.avoid_foods ?? [])}.\n` +
+    refreshHint +
+    avoidRepeat +
+    `Each day: breakfast, lunch, dinner, snack. Max 2 repeats per recipe_id in the week.\n` +
+    `Catalog (id|meal_type|calories|protein):\n${catalog}\n` +
+    `Return JSON: {"days":[{"date":"YYYY-MM-DD","meals":[{"meal_type":"breakfast","recipe_id":"uuid"},...]},...]}`
+  );
+}
+
+async function callGeminiWeekBatch(
+  apiKey: string,
+  profile: Record<string, unknown>,
+  catalogRecipes: Record<string, unknown>[],
+  weekDates: string[],
+  options: {
+    forceRefresh?: boolean;
+    refreshSeed?: number;
+    previousRecipeIds?: string[];
+  },
+): Promise<DayPlan[]> {
+  const prompt = buildWeekPrompt(profile, catalogRecipes, weekDates, options);
+  const text = await fetchGeminiText(
+    apiKey,
+    prompt,
+    options.forceRefresh ? 0.7 : 0.35,
+    8192,
+  );
+  const days = parseGeminiWeek(text, weekDates);
+  const filled = days.filter((d) => d.meals.length >= 4);
+  if (filled.length < weekDates.length) {
+    throw new Error(
+      `Incomplete week from Gemini (${filled.length}/${weekDates.length} days)`,
+    );
+  }
+  return days;
+}
+
+async function callGemini(
+  apiKey: string,
+  profile: Record<string, unknown>,
+  catalogRecipes: Record<string, unknown>[],
+  _allRecipes: Record<string, unknown>[],
+  weekDates: string[],
+  _weekStart: Date,
+  _userId: string,
+  options: {
+    forceRefresh?: boolean;
+    refreshSeed?: number;
+    previousRecipeIds?: string[];
+  } = {},
+): Promise<{ days: DayPlan[]; aiDays: number }> {
+  const model = geminiModelName();
+
+  // 1 API call for full week (free tier ~15 RPM — day-by-day hits 429).
+  try {
+    const days = await callGeminiWeekBatch(
+      apiKey,
+      profile,
+      catalogRecipes,
+      weekDates,
+      options,
+    );
+    console.log(
+      `Gemini week batch: ${weekDates.length}/${weekDates.length} days from AI (1 call, ${model})`,
+    );
+    return { days, aiDays: weekDates.length };
+  } catch (fullWeekErr) {
+    console.warn("Gemini full week failed:", String(fullWeekErr).slice(0, 200));
+  }
+
+  // Fallback: 2 half-week calls (max 3 API calls total per refresh).
+  const mid = Math.ceil(weekDates.length / 2);
+  await sleep(2000);
+  const first = await callGeminiWeekBatch(
+    apiKey,
+    profile,
+    catalogRecipes,
+    weekDates.slice(0, mid),
+    options,
+  );
+  await sleep(2000);
+  const second = await callGeminiWeekBatch(
+    apiKey,
+    profile,
+    catalogRecipes,
+    weekDates.slice(mid),
+    options,
+  );
+  const days = [...first, ...second];
+  console.log(
+    `Gemini week batch: ${weekDates.length}/${weekDates.length} days from AI (2 calls, ${model})`,
+  );
+  return { days, aiDays: weekDates.length };
+}
+
+/** Deterministic server fallback — mirrors Flutter MealSuggester. */
+function buildLocalWeekPlan(
+  profile: Record<string, unknown>,
+  recipes: Record<string, unknown>[],
+  weekStart: Date,
+  userId: string,
+  refreshSeed = 0,
+): DayPlan[] {
+  const avoid = ((profile.avoid_foods as string[]) ?? []);
+  const cookingTime = String(profile.cooking_time ?? "any");
+  const weekNumber = weekNumberFromDate(weekStart);
+
+  const byType = new Map<string, Record<string, unknown>[]>();
+  for (const r of recipes) {
+    const t = String(r.meal_type);
+    if (!byType.has(t)) byType.set(t, []);
+    byType.get(t)!.push(r);
+  }
+
+  const weekDates = Array.from({ length: 7 }, (_, i) => {
+    const d = new Date(weekStart);
+    d.setUTCDate(weekStart.getUTCDate() + i);
+    return dateStr(d);
+  });
+
+  return weekDates.map((date, dayOffset) => {
+    const meals: MealSlot[] = [];
+    for (const mealType of MEAL_TYPES) {
+      let pool = applyAvoidFoods(byType.get(mealType) ?? [], avoid);
+      if (!pool.length) pool = byType.get(mealType) ?? [];
+      if (!pool.length) continue;
+
+      if (cookingTime === "quick" || cookingTime === "15") {
+        const quick = pool.filter((r) => Number(r.prep_time ?? 999) <= 20);
+        if (quick.length) pool = quick;
+      }
+
+      const scored = [...pool].sort(
+        (a, b) => scoreRecipe(b, profile) - scoreRecipe(a, profile),
+      );
+      const topN = scored.slice(0, Math.min(8, scored.length));
+      const seed = hashCode(userId) + weekNumber * 31 +
+        (mealType.charCodeAt(0) % 100) + dayOffset * 7 +
+        hashCode(String(refreshSeed));
+      const pick = topN[seed % topN.length];
+      meals.push({ meal_type: mealType, recipe_id: String(pick.id) });
+    }
+    return { date, meals };
+  });
 }
 
 function validateAndFillDays(
@@ -218,9 +714,10 @@ Deno.serve(async (req) => {
     }
 
     const body = await req.json().catch(() => ({}));
-    const forceRefresh = Boolean(body.force_refresh);
+    const forceRefresh = parseForceRefresh(body);
     const weekStart = parseWeekStart(body.week_start as string | undefined);
     const weekStartStr = dateStr(weekStart);
+    const refreshSeed = forceRefresh ? Date.now() : 0;
 
     const userClient = createClient(
       supabaseUrl,
@@ -236,6 +733,60 @@ Deno.serve(async (req) => {
     }
 
     const admin = createClient(supabaseUrl, serviceKey);
+
+    if (forceRefresh) {
+      const { data: usageRows } = await admin
+        .from("user_weekly_usage")
+        .select("last_ai_refresh_at")
+        .eq("user_id", user.id)
+        .not("last_ai_refresh_at", "is", null)
+        .order("last_ai_refresh_at", { ascending: false })
+        .limit(1);
+
+      const lastRaw = usageRows?.[0]?.last_ai_refresh_at;
+      if (lastRaw) {
+        const elapsed = Date.now() - new Date(String(lastRaw)).getTime();
+        if (elapsed < AI_REFRESH_COOLDOWN_MS) {
+          const retryAfterSeconds = Math.ceil(
+            (AI_REFRESH_COOLDOWN_MS - elapsed) / 1000,
+          );
+          return jsonResponse(
+            {
+              error: "cooldown",
+              retry_after_seconds: retryAfterSeconds,
+            },
+            429,
+          );
+        }
+      }
+
+      const nowIso = new Date().toISOString();
+      const { data: weekUsage } = await admin
+        .from("user_weekly_usage")
+        .select("swap_count, ai_refresh_count")
+        .eq("user_id", user.id)
+        .eq("week_start", weekStartStr)
+        .maybeSingle();
+
+      if (weekUsage) {
+        await admin
+          .from("user_weekly_usage")
+          .update({
+            last_ai_refresh_at: nowIso,
+            updated_at: nowIso,
+          })
+          .eq("user_id", user.id)
+          .eq("week_start", weekStartStr);
+      } else {
+        await admin.from("user_weekly_usage").insert({
+          user_id: user.id,
+          week_start: weekStartStr,
+          swap_count: 0,
+          ai_refresh_count: 0,
+          last_ai_refresh_at: nowIso,
+        });
+      }
+    }
 
     const { data: profile, error: profileError } = await admin
       .from("profiles")
@@ -269,6 +820,7 @@ Deno.serve(async (req) => {
         return jsonResponse({
           cached: true,
           success: true,
+          ai_generated: true,
           entries_count: count,
           week_start: weekStartStr,
         });
@@ -279,11 +831,12 @@ Deno.serve(async (req) => {
 
     let recipesQuery = admin
       .from("recipes")
-      .select("id, name, meal_type, calories, protein, carbs, fat, tags, source")
+      .select(
+        "id, name, meal_type, calories, protein, carbs, fat, prep_time, tags, source",
+      )
       .eq("is_active", true);
 
     if (!premium) {
-      // Free catalog: curated VN + legacy rows without source (early seed).
       recipesQuery = recipesQuery.or(
         `source.in.(${FREE_RECIPE_SOURCES.join(",")}),source.is.null`,
       );
@@ -301,15 +854,68 @@ Deno.serve(async (req) => {
       return dateStr(d);
     });
 
+    const weekEndStr = weekDates[weekDates.length - 1];
+
+    const { data: existingRows } = await admin
+      .from("meal_plans")
+      .select("date, meal_type, recipe_id")
+      .eq("user_id", user.id)
+      .gte("date", weekStartStr)
+      .lte("date", weekEndStr);
+
+    const previousRecipeIds = [
+      ...new Set(
+        (existingRows ?? []).map((r) => String(r.recipe_id)).filter(Boolean),
+      ),
+    ];
+
+    const existingKey = (date: string, mealType: string) =>
+      `${date}|${mealType}`;
+    const existingBySlot = new Map(
+      (existingRows ?? []).map((r) => [
+        existingKey(String(r.date), String(r.meal_type)),
+        String(r.recipe_id),
+      ]),
+    );
+
+    const catalogForGemini = trimCatalogForGemini(recipes, profile, {
+      forceRefresh,
+      refreshSeed,
+    });
     let days: DayPlan[];
+    let aiGenerated = true;
+    let aiDaysCount = 0;
+
     try {
-      days = await callGemini(geminiKey, profile, recipes, weekStart);
-    } catch (geminiErr) {
-      console.error("Gemini failed:", geminiErr);
-      return jsonResponse(
-        { error: "AI generation failed", details: String(geminiErr) },
-        502,
+      const geminiResult = await callGemini(
+        geminiKey,
+        profile,
+        catalogForGemini.length ? catalogForGemini : recipes,
+        recipes,
+        weekDates,
+        weekStart,
+        user.id,
+        { forceRefresh, refreshSeed, previousRecipeIds },
       );
+      days = geminiResult.days;
+      aiDaysCount = geminiResult.aiDays;
+      aiGenerated = aiDaysCount > 0;
+      console.log("Gemini OK", {
+        user_id: user.id,
+        force_refresh: forceRefresh,
+        refresh_seed: refreshSeed,
+        ai_days: aiDaysCount,
+      });
+    } catch (geminiErr) {
+      console.error("Gemini week generation failed:", geminiErr);
+      days = buildLocalWeekPlan(
+        profile,
+        recipes,
+        weekStart,
+        user.id,
+        refreshSeed,
+      );
+      aiGenerated = false;
     }
 
     days = validateAndFillDays(days, weekDates, recipes);
@@ -321,8 +927,16 @@ Deno.serve(async (req) => {
         meal_type: m.meal_type,
         recipe_id: m.recipe_id,
         is_logged: false,
-      })),
+      }))
     );
+
+    let recipesChanged = 0;
+    for (const row of rows) {
+      const prev = existingBySlot.get(
+        existingKey(row.date, row.meal_type),
+      );
+      if (prev !== row.recipe_id) recipesChanged++;
+    }
 
     const { error: upsertError } = await admin.from("meal_plans").upsert(
       rows,
@@ -344,6 +958,9 @@ Deno.serve(async (req) => {
     return jsonResponse({
       success: true,
       cached: false,
+      ai_generated: aiGenerated,
+      ai_days: aiDaysCount,
+      recipes_changed: recipesChanged,
       entries_count: rows.length,
       week_start: weekStartStr,
     });

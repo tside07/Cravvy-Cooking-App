@@ -2,6 +2,13 @@ import 'package:cravvy_cooking_app/core/constants/plan_limits.dart';
 import 'package:cravvy_cooking_app/data/models/user_model.dart';
 import 'package:cravvy_cooking_app/data/services/supabase_service.dart';
 
+/// Why [canAiRefresh] returned false.
+enum AiRefreshBlockReason {
+  none,
+  weeklyLimit,
+  cooldown,
+}
+
 /// Weekly usage counters (swap, AI refresh). Requires migration week6.
 class UsageLimitService {
   static final _client = SupabaseService.client;
@@ -98,14 +105,62 @@ class UsageLimitService {
     }
   }
 
-  static Future<bool> canAiRefresh(String userId, UserModel? user) async {
+  static Future<DateTime?> lastAiRefreshAt(String userId) async {
+    try {
+      final rows = await _client
+          .from(_table)
+          .select('last_ai_refresh_at')
+          .eq('user_id', userId)
+          .not('last_ai_refresh_at', 'is', null)
+          .order('last_ai_refresh_at', ascending: false)
+          .limit(1);
+      if (rows.isEmpty) return null;
+      final raw = rows.first['last_ai_refresh_at'];
+      if (raw == null) return null;
+      return DateTime.parse(raw as String).toLocal();
+    } catch (_) {
+      return null;
+    }
+  }
+
+  static Duration get aiRefreshCooldown =>
+      Duration(minutes: PlanLimits.aiRefreshCooldownMinutes);
+
+  /// Seconds left on cooldown; 0 if ready.
+  static Future<int> aiRefreshCooldownSecondsRemaining(String userId) async {
+    final last = await lastAiRefreshAt(userId);
+    if (last == null) return 0;
+    final elapsed = DateTime.now().difference(last);
+    final remaining = aiRefreshCooldown - elapsed;
+    if (remaining.isNegative) return 0;
+    return remaining.inSeconds;
+  }
+
+  static Future<AiRefreshBlockReason> aiRefreshBlockReason(
+    String userId,
+    UserModel? user,
+  ) async {
+    if (PlanLimits.bypassAiRefreshLimit) return AiRefreshBlockReason.none;
+
+    final cooldownSec = await aiRefreshCooldownSecondsRemaining(userId);
+    if (cooldownSec > 0) return AiRefreshBlockReason.cooldown;
+
     final tier = effectiveTier(user);
     final used = await aiRefreshCountThisWeek(userId);
-    return used < PlanLimits.aiRefreshPerWeek(tier);
+    if (used >= PlanLimits.aiRefreshPerWeek(tier)) {
+      return AiRefreshBlockReason.weeklyLimit;
+    }
+    return AiRefreshBlockReason.none;
+  }
+
+  static Future<bool> canAiRefresh(String userId, UserModel? user) async {
+    final reason = await aiRefreshBlockReason(userId, user);
+    return reason == AiRefreshBlockReason.none;
   }
 
   static Future<void> recordAiRefresh(String userId) async {
     final week = _weekStartStr(DateTime.now());
+    final now = DateTime.now().toUtc().toIso8601String();
     try {
       final existing = await _client
           .from(_table)
@@ -120,12 +175,14 @@ class UsageLimitService {
           'week_start': week,
           'swap_count': 0,
           'ai_refresh_count': 1,
+          'last_ai_refresh_at': now,
         });
       } else {
         final n = (existing['ai_refresh_count'] as num?)?.toInt() ?? 0;
         await _client.from(_table).update({
           'ai_refresh_count': n + 1,
-          'updated_at': DateTime.now().toIso8601String(),
+          'last_ai_refresh_at': now,
+          'updated_at': now,
         }).eq('user_id', userId).eq('week_start', week);
       }
     } catch (_) {}

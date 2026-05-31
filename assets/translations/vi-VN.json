@@ -346,6 +346,7 @@
         "swaps_remaining": "Còn {n} lần đổi món tuần này",
         "swap_exhausted": "Đã hết lượt đổi món tuần này. Nâng cấp Premium để có thêm 5 lần/tuần.",
         "ai_refresh_exhausted": "Đã hết lượt làm mới thực đơn AI tuần này.",
+        "ai_refresh_cooldown": "Vui lòng đợi thêm {minutes} phút trước khi làm mới lại.",
         "upgrade": "Nâng cấp",
         "unlock_week": "Mở khóa",
         "free_week_hint": "Gói Free xem 3 ngày/tuần. Premium mở khóa kế hoạch 7 ngày."
@@ -425,6 +426,9 @@
         "refresh": "Làm mới",
         "refresh_dialog_title": "Làm mới gợi ý?",
         "refresh_dialog_body": "Toàn bộ thực đơn tuần này sẽ được gợi ý lại theo mục tiêu của bạn.",
+        "refresh_success_cooldown": "Đã làm mới thực đơn! Bạn có thể refresh lại sau {minutes} phút.",
+        "refresh_cooldown_banner": "Làm mới lại sau {time}",
+        "refresh_weekly_exhausted": "Đã hết lượt làm mới AI tuần này.",
         "consumed": "Đã nạp",
         "goal": "Mục tiêu",
         "kcal_left": "kcal còn lại",

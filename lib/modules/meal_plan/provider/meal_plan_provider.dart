@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:cravvy_cooking_app/data/models/meal.dart';
 import 'package:cravvy_cooking_app/data/models/recipe.dart';
@@ -24,7 +26,28 @@ class MealPlanProvider extends ChangeNotifier {
   // key: '${dateStr}_${mealType}' → entryId (Supabase row id)
   final Map<String, String> _entryIdCache = {};
 
+  Timer? _refreshCooldownTimer;
+  int _refreshCooldownSeconds = 0;
+  bool _weeklyRefreshExhausted = false;
+
   // ─── Getters ─────────────────────────────────────────────────────────────
+  int get refreshCooldownSeconds => _refreshCooldownSeconds;
+  bool get isRefreshOnCooldown => _refreshCooldownSeconds > 0;
+  bool get isWeeklyRefreshExhausted => _weeklyRefreshExhausted;
+  bool get canTapRefresh =>
+      !isRefreshOnCooldown && !_weeklyRefreshExhausted;
+
+  static String formatCooldown(int totalSeconds) {
+    final m = (totalSeconds ~/ 60).toString().padLeft(2, '0');
+    final s = (totalSeconds % 60).toString().padLeft(2, '0');
+    return '$m:$s';
+  }
+
+  @override
+  void dispose() {
+    _refreshCooldownTimer?.cancel();
+    super.dispose();
+  }
   MealPlanStatus get status => _status;
   bool get isLoading => _status == MealPlanStatus.loading;
   bool get isLoaded => _status == MealPlanStatus.loaded;
@@ -76,6 +99,9 @@ class MealPlanProvider extends ChangeNotifier {
   // ─── Called by AuthProvider ───────────────────────────────────────────────
   void updateFromUser(UserModel? user) {
     if (user == null) {
+      _refreshCooldownTimer?.cancel();
+      _refreshCooldownSeconds = 0;
+      _weeklyRefreshExhausted = false;
       _target = NutritionTarget.defaultTarget;
       _userId = null;
       _user = null;
@@ -143,6 +169,7 @@ class MealPlanProvider extends ChangeNotifier {
 
       _clampSelectedDay();
       _status = MealPlanStatus.loaded;
+      await syncRefreshLimits();
     } catch (_) {
       if (suggestIfEmpty && _user != null) {
         _applyLocalWeekFromSuggester();
@@ -280,6 +307,54 @@ class MealPlanProvider extends ChangeNotifier {
     return UsageLimitService.canAiRefresh(_userId!, _user);
   }
 
+  Future<AiRefreshBlockReason> forceRefreshBlockReason() async {
+    if (_userId == null) return AiRefreshBlockReason.weeklyLimit;
+    return UsageLimitService.aiRefreshBlockReason(_userId!, _user);
+  }
+
+  Future<int> forceRefreshCooldownSecondsRemaining() async {
+    if (_userId == null) return 0;
+    return UsageLimitService.aiRefreshCooldownSecondsRemaining(_userId!);
+  }
+
+  Future<void> syncRefreshLimits() async {
+    if (_userId == null) return;
+    _refreshCooldownSeconds =
+        await UsageLimitService.aiRefreshCooldownSecondsRemaining(_userId!);
+    final tier = UsageLimitService.effectiveTier(_user);
+    final used = await UsageLimitService.aiRefreshCountThisWeek(_userId!);
+    _weeklyRefreshExhausted =
+        used >= PlanLimits.aiRefreshPerWeek(tier);
+    _ensureCooldownTimer();
+    notifyListeners();
+  }
+
+  void _ensureCooldownTimer() {
+    _refreshCooldownTimer?.cancel();
+    if (_refreshCooldownSeconds <= 0) return;
+    _refreshCooldownTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (_refreshCooldownSeconds <= 1) {
+        _refreshCooldownSeconds = 0;
+        timer.cancel();
+        _refreshCooldownTimer = null;
+      } else {
+        _refreshCooldownSeconds--;
+      }
+      notifyListeners();
+    });
+  }
+
+  Future<void> _applyCooldownAfterForceRefresh() async {
+    if (_userId == null) return;
+    await UsageLimitService.recordAiRefresh(_userId!);
+    await syncRefreshLimits();
+    if (_refreshCooldownSeconds <= 0) {
+      _refreshCooldownSeconds = PlanLimits.aiRefreshCooldownMinutes * 60;
+      _ensureCooldownTimer();
+      notifyListeners();
+    }
+  }
+
   void selectDay(int index) {
     if (!isDayVisible(index)) return;
     _selectedDayIndex = index;
@@ -300,15 +375,16 @@ class MealPlanProvider extends ChangeNotifier {
     await loadWeek();
   }
 
-  /// AI generate tuần (Edge Function) hoặc fallback MealSuggester local.
-  Future<void> autoFillWeek({bool forceRefresh = false}) async {
-    if (_user == null) return;
+  /// `true` when a force-refresh run finished and updated the week plan.
+  Future<bool> autoFillWeek({bool forceRefresh = false}) async {
+    if (_user == null) return false;
 
     if (forceRefresh && _userId != null) {
-      final canRefresh = await UsageLimitService.canAiRefresh(_userId!, _user);
-      if (!canRefresh) {
-        notifyListeners();
-        return;
+      final block =
+          await UsageLimitService.aiRefreshBlockReason(_userId!, _user);
+      if (block != AiRefreshBlockReason.none) {
+        await syncRefreshLimits();
+        return false;
       }
     }
 
@@ -317,25 +393,34 @@ class MealPlanProvider extends ChangeNotifier {
     try {
       if (_userId != null) {
         try {
-          await AiMealPlanService.generateWeek(
+          final result = await AiMealPlanService.generateWeek(
             weekStart: _currentWeekStart(),
             forceRefresh: forceRefresh,
           );
+          debugPrint(
+            'AI meal plan: ai_generated=${result.aiGenerated}, '
+            'recipes_changed=${result.recipesChanged}, cached=${result.cached}',
+          );
           if (forceRefresh) {
-            await UsageLimitService.recordAiRefresh(_userId!);
+            await _applyCooldownAfterForceRefresh();
           }
           await loadWeek(suggestIfEmpty: false);
-          return;
+          return forceRefresh;
         } on AiMealPlanException catch (e) {
           debugPrint('AI meal plan failed, using local fallback: $e');
         }
       }
       await _autoFillWeekLocal();
+      if (forceRefresh && _userId != null) {
+        await _applyCooldownAfterForceRefresh();
+      }
+      return forceRefresh;
     } catch (_) {
       _applyLocalWeekFromSuggester();
       _clampSelectedDay();
       _status = MealPlanStatus.loaded;
       notifyListeners();
+      return false;
     }
   }
 

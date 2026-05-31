@@ -23,6 +23,7 @@ CREATE TABLE IF NOT EXISTS user_weekly_usage (
   week_start date NOT NULL,
   swap_count int NOT NULL DEFAULT 0,
   ai_refresh_count int NOT NULL DEFAULT 0,
+  last_ai_refresh_at timestamptz,
   updated_at timestamptz NOT NULL DEFAULT now(),
   PRIMARY KEY (user_id, week_start)
 );
@@ -43,6 +44,10 @@ DROP POLICY IF EXISTS "Users update own weekly usage" ON user_weekly_usage;
 CREATE POLICY "Users update own weekly usage"
   ON user_weekly_usage FOR UPDATE
   USING (auth.uid() = user_id);
+
+-- Cooldown column (existing projects — safe to re-run)
+ALTER TABLE user_weekly_usage
+  ADD COLUMN IF NOT EXISTS last_ai_refresh_at timestamptz;
 
 -- ── (Tuỳ chọn) Gán Premium cho user test ─────────────────────────
 -- UPDATE profiles

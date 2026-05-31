@@ -6,12 +6,16 @@ class AiMealPlanResult {
   const AiMealPlanResult({
     required this.success,
     this.cached = false,
+    this.aiGenerated,
+    this.recipesChanged,
     this.entriesCount,
     this.weekStart,
   });
 
   final bool success;
   final bool cached;
+  final bool? aiGenerated;
+  final int? recipesChanged;
   final int? entriesCount;
   final String? weekStart;
 
@@ -19,6 +23,8 @@ class AiMealPlanResult {
     return AiMealPlanResult(
       success: json['success'] as bool? ?? false,
       cached: json['cached'] as bool? ?? false,
+      aiGenerated: json['ai_generated'] as bool?,
+      recipesChanged: (json['recipes_changed'] as num?)?.toInt(),
       entriesCount: (json['entries_count'] as num?)?.toInt(),
       weekStart: json['week_start'] as String?,
     );
@@ -39,7 +45,7 @@ class AiMealPlanException implements Exception {
 /// Invokes Supabase Edge Function `generate-meal-plan` (Gemini on server).
 class AiMealPlanService {
   static const _functionName = 'generate-meal-plan';
-  static const _timeout = Duration(seconds: 45);
+  static const _timeout = Duration(seconds: 90);
 
   /// Generate (or return cached) 7-day plan for [weekStart] Monday.
   static Future<AiMealPlanResult> generateWeek({
@@ -66,8 +72,18 @@ class AiMealPlanService {
       }
 
       if (data['error'] != null) {
+        final err = data['error'].toString();
+        if (err == 'cooldown') {
+          final retry = (data['retry_after_seconds'] as num?)?.toInt();
+          throw AiMealPlanException(
+            retry != null
+                ? 'cooldown:$retry'
+                : 'cooldown',
+            statusCode: response.status,
+          );
+        }
         throw AiMealPlanException(
-          data['error'].toString(),
+          err,
           statusCode: response.status,
         );
       }

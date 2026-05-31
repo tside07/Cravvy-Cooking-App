@@ -16,7 +16,13 @@ class PlanLimits {
 
   /// Edge Function `force_refresh` calls per week (excluding first auto-fill).
   static const int freeAiRefreshPerWeek = 1;
-  static const int premiumAiRefreshPerWeek = 3;
+  static const int premiumAiRefreshPerWeek = 2;
+
+  /// Min wait between two force_refresh calls (same user).
+  static const int aiRefreshCooldownMinutes = 5;
+
+  /// QA/dev only — must be false in production (protects Gemini free-tier quota).
+  static const bool bypassAiRefreshLimit = false;
 
   static const int freeMealPlanVisibleDays = 3;
   static const int premiumMealPlanVisibleDays = 7;
