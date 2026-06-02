@@ -7,6 +7,7 @@ class _Action {
   final String label;
   final Color bgColor;
   final Color iconColor;
+
   /// Dashboard tab index to switch to when tapped.
   final int? tabIndex;
   const _Action(
@@ -59,7 +60,7 @@ class QuickActionsGridWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(
         left: 16,
-        top: 24,
+        top: 8,
         right: 16,
       ),
       child: Column(

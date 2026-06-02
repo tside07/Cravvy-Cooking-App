@@ -48,7 +48,7 @@ class _FeaturedRecipesWidgetState extends State<FeaturedRecipesWidget> {
                   padding: EdgeInsets.only(
                     left: horizontalPadding + 4,
                     right: horizontalPadding + 4,
-                    top: 24,
+                    top: 8,
                     bottom: 12,
                   ),
                   child: Row(
@@ -68,7 +68,22 @@ class _FeaturedRecipesWidgetState extends State<FeaturedRecipesWidget> {
                                   ),
                                 )
                             : null,
-                        child: Text('home.recipes_see_all'.tr()),
+                        child: Row(
+                          children: [
+                            Text(
+                              'home.see_all'.tr(),
+                              style: AppTextStyles.s12.copyWith(
+                                color: AppColors.primary,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            const Icon(
+                              Icons.chevron_right_rounded,
+                              color: AppColors.primary,
+                              size: 18,
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),

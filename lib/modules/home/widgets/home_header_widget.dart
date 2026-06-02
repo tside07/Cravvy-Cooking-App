@@ -1,8 +1,3 @@
-// lib/modules/home/widgets/home_header_widget.dart
-//
-// Tuần 3: Hiển thị tên user thật + greeting theo giờ + ngày tháng thật.
-// Streak vẫn mock — sẽ làm thật ở Tuần 8 (push notifications + settings).
-
 import 'package:cravvy_cooking_app/init.dart';
 import 'package:cravvy_cooking_app/data/providers/auth_provider.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -40,7 +35,11 @@ class HomeHeaderWidget extends StatelessWidget {
               children: [
                 Text(
                   '${_greeting()}, $firstName! 👋',
-                  style: Theme.of(context).textTheme.headlineLarge,
+                  style: AppTextStyles.s20.copyWith(
+                    fontSize: 28,
+                    fontWeight: FontWeight.w800,
+                    color: AppColors.textPrimary,
+                  ),
                 ),
                 AppGap.h2,
                 Text(

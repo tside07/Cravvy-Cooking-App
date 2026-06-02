@@ -1,7 +1,7 @@
-import 'package:flutter/foundation.dart';
-import 'package:cravvy_cooking_app/modules/subscription/models/subscription_plan.dart';
-import 'package:cravvy_cooking_app/modules/subscription/models/subscription_highlight.dart';
+import 'package:cravvy_cooking_app/core/constants/plan_limits.dart';
 import 'package:cravvy_cooking_app/modules/subscription/models/feature_row.dart';
+import 'package:cravvy_cooking_app/modules/subscription/models/subscription_highlight.dart';
+import 'package:cravvy_cooking_app/modules/subscription/models/subscription_plan.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
@@ -52,19 +52,25 @@ class SubscriptionProvider extends ChangeNotifier {
       icon: Icons.swap_horiz_rounded,
       color: const Color(0xFF6A8A42),
       title: 'subscription.highlight.swap_title'.tr(),
-      desc: 'subscription.highlight.swap_desc'.tr(),
+      desc: 'subscription.highlight.swap_desc'.tr(namedArgs: {
+        'n': '${PlanLimits.premiumSwapsPerWeek}',
+      }),
     ),
     SubscriptionHighlight(
-      icon: Icons.bar_chart_rounded,
+      icon: Icons.calendar_month_outlined,
       color: const Color(0xFFD97706),
-      title: 'subscription.highlight.nutrition_title'.tr(),
-      desc: 'subscription.highlight.nutrition_desc'.tr(),
+      title: 'subscription.highlight.plan_title'.tr(),
+      desc: 'subscription.highlight.plan_desc'.tr(namedArgs: {
+        'days': '${PlanLimits.premiumMealPlanVisibleDays}',
+      }),
     ),
     SubscriptionHighlight(
-      icon: Icons.block_rounded,
+      icon: Icons.menu_book_outlined,
       color: const Color(0xFF6B7280),
-      title: 'subscription.highlight.adfree_title'.tr(),
-      desc: 'subscription.highlight.adfree_desc'.tr(),
+      title: 'subscription.highlight.recipes_title'.tr(),
+      desc: 'subscription.highlight.recipes_desc'.tr(namedArgs: {
+        'n': '${PlanLimits.premiumRecipeFetchLimit}',
+      }),
     ),
   ];
 
@@ -72,7 +78,7 @@ class SubscriptionProvider extends ChangeNotifier {
     FeatureRow(
       label: 'subscription.table.row_ai_suggestions'.tr(),
       freeVal: 'subscription.table.val_1_refresh_week'.tr(),
-      premiumVal: 'subscription.table.val_3_refresh_week'.tr(),
+      premiumVal: 'subscription.table.val_2_refresh_week'.tr(),
     ),
     FeatureRow(
       label: 'subscription.table.row_meal_plan'.tr(),
@@ -85,39 +91,14 @@ class SubscriptionProvider extends ChangeNotifier {
       premiumVal: 'subscription.table.val_5_per_week'.tr(),
     ),
     FeatureRow(
-      label: 'subscription.table.row_calorie'.tr(),
-      freeVal: 'subscription.table.val_basic'.tr(),
-      premiumVal: 'subscription.table.val_advanced'.tr(),
-    ),
-    FeatureRow(
-      label: 'subscription.table.row_macro'.tr(),
-      freeCheck: false,
-      premiumCheck: true,
-    ),
-    FeatureRow(
-      label: 'subscription.table.row_chatbot'.tr(),
-      freeCheck: false,
-      premiumCheck: true,
-    ),
-    FeatureRow(
       label: 'subscription.table.row_recipe'.tr(),
       freeVal: 'subscription.table.val_100_plus'.tr(),
-      premiumVal: 'subscription.table.val_250_plus'.tr(),
+      premiumVal: 'subscription.table.val_500_plus'.tr(),
     ),
     FeatureRow(
       label: 'subscription.table.row_shopping'.tr(),
       freeVal: 'subscription.table.val_basic'.tr(),
       premiumVal: 'subscription.table.val_advanced'.tr(),
-    ),
-    FeatureRow(
-      label: 'subscription.table.row_adfree'.tr(),
-      freeCheck: false,
-      premiumCheck: true,
-    ),
-    FeatureRow(
-      label: 'subscription.table.row_support'.tr(),
-      freeCheck: false,
-      premiumCheck: true,
     ),
   ];
 }

@@ -11,7 +11,6 @@ const _tabs = [
   _NavTab(icon: Icons.calendar_month_rounded, label: 'Plan'),
   _NavTab(icon: Icons.search_rounded, label: 'Search'),
   _NavTab(icon: Icons.bar_chart_rounded, label: 'Progress'),
-  _NavTab(icon: Icons.person_rounded, label: 'Profile'),
 ];
 
 class BottomNavBar extends StatelessWidget {

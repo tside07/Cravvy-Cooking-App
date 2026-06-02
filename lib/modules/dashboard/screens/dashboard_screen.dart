@@ -5,8 +5,9 @@ import 'package:cravvy_cooking_app/modules/home/screens/home_screen.dart';
 import 'package:cravvy_cooking_app/modules/meal_plan/screens/meal_plan_screen.dart';
 import 'package:cravvy_cooking_app/modules/search/screens/search_screen.dart';
 import 'package:cravvy_cooking_app/modules/progress/screens/progress_screen.dart';
-import 'package:cravvy_cooking_app/modules/profile/screen/profile_screen.dart';
 import 'package:cravvy_cooking_app/modules/dashboard/widgets/bottom_nav_bar.dart';
+import 'package:cravvy_cooking_app/modules/dashboard/widgets/app_drawer.dart';
+import 'package:cravvy_cooking_app/modules/dashboard/dashboard_scaffold_key.dart';
 import 'package:cravvy_cooking_app/modules/dashboard/provider/dashboard_tab_provider.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -24,7 +25,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
     MealPlanScreen(),
     SearchScreen(),
     ProgressScreen(),
-    ProfileScreen(),
   ];
 
   void _onTabTap(int index) {
@@ -46,7 +46,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
     }
 
     return Scaffold(
+      key: dashboardScaffoldKey,
       extendBody: true,
+      drawer: const AppDrawer(),
       body: IndexedStack(index: _currentIndex, children: _screens),
       bottomNavigationBar: BottomNavBar(
         currentIndex: _currentIndex,

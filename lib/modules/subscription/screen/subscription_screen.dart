@@ -267,7 +267,7 @@ class _SubscriptionView extends StatelessWidget {
       context.push(AppRouter.trialActivation);
       return;
     }
-    final msg = auth.errorMessage ?? 'Không kích hoạt được dùng thử.';
+    final msg = auth.errorMessage ?? 'subscription.trial_failed'.tr();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text(msg), behavior: SnackBarBehavior.floating),
     );

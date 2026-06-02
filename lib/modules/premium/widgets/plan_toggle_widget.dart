@@ -1,4 +1,5 @@
 import 'package:cravvy_cooking_app/init.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class PlanToggleWidget extends StatelessWidget {
   final bool isAnnual;
@@ -17,12 +18,12 @@ class PlanToggleWidget extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        _buildTab('Monthly', !isAnnual, () => onChanged(false)),
+        _buildTab('premium.monthly'.tr(), !isAnnual, () => onChanged(false)),
         AppGap.w8,
         Stack(
           clipBehavior: Clip.none,
           children: [
-            _buildTab('Annual', isAnnual, () => onChanged(true)),
+            _buildTab('premium.annual'.tr(), isAnnual, () => onChanged(true)),
             // "Save X%" badge
             Positioned(
               top: -10,
@@ -34,7 +35,7 @@ class PlanToggleWidget extends StatelessWidget {
                   borderRadius: AppBorderRadius.a8,
                 ),
                 child: Text(
-                  'Save $savePct%',
+                  'subscription.plan.annual_badge'.tr(),
                   style: AppTextStyles.s10.copyWith(
                     fontWeight: FontWeight.w700,
                     color: AppColors.white,

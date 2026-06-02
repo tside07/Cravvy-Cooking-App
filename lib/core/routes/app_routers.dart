@@ -16,6 +16,7 @@ import 'package:cravvy_cooking_app/modules/auth/reset_password/screen/reset_pass
 import 'package:cravvy_cooking_app/modules/meal_detail/screens/meal_detail_screen.dart';
 import 'package:cravvy_cooking_app/modules/cooking_mode/screen/cooking_mode_screen.dart';
 import 'package:cravvy_cooking_app/modules/shopping_list/screen/shopping_list_screen.dart';
+import 'package:cravvy_cooking_app/modules/shopping_list/screen/shopping_recipe_detail_screen.dart';
 import 'package:cravvy_cooking_app/modules/settings/screen/settings_screen.dart';
 import 'package:cravvy_cooking_app/modules/subscription/screen/subscription_screen.dart';
 import 'package:cravvy_cooking_app/modules/trial/screen/trial_activation_screen.dart';
@@ -63,6 +64,7 @@ class AppRouter {
   static const String subscription = '/subscription';
   static const String trialActivation = '/trial-success';
   static const String shoppingList = '/shopping-list';
+  static const String shoppingRecipeDetail = '/shopping-list/recipe';
   static const String settings = '/settings';
   static const String faq = '/faq';
   static const String privacyPolicy = '/privacy-policy';
@@ -223,6 +225,13 @@ class AppRouter {
       GoRoute(
           path: shoppingList,
           builder: (context, state) => const ShoppingListScreen()),
+      GoRoute(
+        path: shoppingRecipeDetail,
+        builder: (context, state) {
+          final recipeId = state.extra as String;
+          return ShoppingRecipeDetailScreen(recipeId: recipeId);
+        },
+      ),
       GoRoute(
           path: settings,
           builder: (context, state) => const SettingsScreen()),

@@ -8,6 +8,7 @@ import 'package:cravvy_cooking_app/modules/premium/widgets/premium_disclaimer_wi
 import 'package:cravvy_cooking_app/modules/premium/widgets/premium_features_card_widget.dart';
 import 'package:cravvy_cooking_app/modules/premium/widgets/premium_header_widget.dart';
 import 'package:cravvy_cooking_app/modules/premium/widgets/premium_price_card_widget.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class PremiumScreen extends StatefulWidget {
   const PremiumScreen({super.key});
@@ -19,14 +20,12 @@ class PremiumScreen extends StatefulWidget {
 class _PremiumScreenState extends State<PremiumScreen> {
   bool _isAnnual = true;
 
-  // Pricing constants
   static const int _annualPriceVND = 999000;
   static const int _monthlyPriceVND = 149000;
-  static const int _annualMonthly = 83250; // 999000 / 12
-  static const int _annualSavings = 789000; // (149000 * 12) - 999000
+  static const int _annualMonthly = 83250;
+  static const int _annualSavings = 789000;
   static const int _savePct = 44;
 
-  // Feature list
   Future<void> _onPremiumCta(BuildContext context) async {
     final auth = context.read<AuthProvider>();
     if (auth.canStartPremiumTrial) {
@@ -36,7 +35,7 @@ class _PremiumScreenState extends State<PremiumScreen> {
         context.push(AppRouter.trialActivation);
         return;
       }
-      final msg = auth.errorMessage ?? 'Không kích hoạt được dùng thử.';
+      final msg = auth.errorMessage ?? 'subscription.trial_failed'.tr();
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(msg), behavior: SnackBarBehavior.floating),
       );
@@ -49,30 +48,46 @@ class _PremiumScreenState extends State<PremiumScreen> {
     context.push(AppRouter.subscription);
   }
 
-  static const List<String> _features = [
-    'Up to 3 AI menu refreshes per week',
-    'Advanced nutrition tracking & insights',
-    'Expanded recipe library (250+ dishes)',
-    'Smart shopping lists with auto-sync',
-    'Ad-free experience',
-    'Priority customer support',
+  List<String> _features() => [
+    'premium.feat.1'.tr(),
+    'premium.feat.2'.tr(),
+    'premium.feat.3'.tr(),
+    'premium.feat.4'.tr(),
+    'premium.feat.5'.tr(),
+    'premium.feat.6'.tr(),
   ];
 
-  // Comparison rows
-  static const List<CompRow> _compRows = [
-    CompRow('AI menu refresh', '1/week', '3/week'),
-    CompRow('AI meal plan duration', '3 days', '7 days'),
-    CompRow('Meal swap', '2/week', '5/week'),
-    CompRow('Calorie tracking', 'Basic', 'Advanced'),
-    CompRow('Ads', 'Yes', 'No'),
-    CompRow('Diet personalization', 'Limited', 'Full'),
-    CompRow('Recipe collections', '100+', '250+'),
-    CompRow('Shopping lists', 'Basic', 'Smart'),
-    CompRow('Priority support', '—', '✓'),
+  List<CompRow> _compRows() => [
+    CompRow(
+      'subscription.table.row_ai_suggestions'.tr(),
+      'subscription.table.val_1_refresh_week'.tr(),
+      'subscription.table.val_2_refresh_week'.tr(),
+    ),
+    CompRow(
+      'subscription.table.row_meal_plan'.tr(),
+      'subscription.table.val_3_days'.tr(),
+      'subscription.table.val_7_days'.tr(),
+    ),
+    CompRow(
+      'subscription.table.row_meal_swap'.tr(),
+      'subscription.table.val_2_per_week'.tr(),
+      'subscription.table.val_5_per_week'.tr(),
+    ),
+    CompRow(
+      'subscription.table.row_recipe'.tr(),
+      'subscription.table.val_100_plus'.tr(),
+      'subscription.table.val_500_plus'.tr(),
+    ),
+    CompRow(
+      'subscription.table.row_shopping'.tr(),
+      'subscription.table.val_basic'.tr(),
+      'subscription.table.val_advanced'.tr(),
+    ),
   ];
 
   @override
   Widget build(BuildContext context) {
+    final _ = context.locale;
     return Scaffold(
       backgroundColor: AppColors.background,
       body: SafeArea(
@@ -85,20 +100,16 @@ class _PremiumScreenState extends State<PremiumScreen> {
                   children: [
                     const PremiumHeaderWidget(),
                     AppGap.h24,
-            
-                    PremiumFeaturesCardWidget(features: _features),
+                    PremiumFeaturesCardWidget(features: _features()),
                     AppGap.h20,
-            
-                    PremiumComparisonTableWidget(rows: _compRows),
+                    PremiumComparisonTableWidget(rows: _compRows()),
                     AppGap.h24,
-            
                     PlanToggleWidget(
                       isAnnual: _isAnnual,
                       savePct: _savePct,
                       onChanged: (value) => setState(() => _isAnnual = value),
                     ),
                     AppGap.h16,
-            
                     PremiumPriceCardWidget(
                       isAnnual: _isAnnual,
                       annualPrice: _annualPriceVND,
@@ -108,21 +119,18 @@ class _PremiumScreenState extends State<PremiumScreen> {
                       savePct: _savePct,
                     ),
                     AppGap.h24,
-            
                     PremiumCtaButtonWidget(
                       onPressed: () => _onPremiumCta(context),
                     ),
                     AppGap.h8,
-            
                     Text(
-                      'Cancel anytime. No charges during trial.',
+                      'premium.description'.tr(),
                       textAlign: TextAlign.center,
                       style: AppTextStyles.s12.copyWith(
                         color: AppColors.textSecondary,
                       ),
                     ),
                     AppGap.h16,
-            
                     const PremiumDisclaimerWidget(),
                     AppGap.h24,
                   ],

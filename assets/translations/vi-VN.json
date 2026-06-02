@@ -55,12 +55,12 @@
     },
     "premium": {
         "feat": {
-            "1": "Gợi ý bữa ăn AI không giới hạn mỗi ngày",
-            "2": "Theo dõi dinh dưỡng & thông tin chi tiết nâng cao",
-            "3": "Truy cập 1000+ công thức cao cấp",
-            "4": "Danh sách mua sắm thông minh với tự động đồng bộ",
-            "5": "Trải nghiệm không quảng cáo",
-            "6": "Hỗ trợ khách hàng ưu tiên"
+            "1": "2 lần làm mới thực đơn AI mỗi tuần",
+            "2": "Kế hoạch bữa ăn đủ 7 ngày",
+            "3": "5 lần đổi món mỗi tuần",
+            "4": "500+ công thức được tuyển chọn",
+            "5": "Danh sách mua sắm thông minh nâng cao",
+            "6": "Dùng thử miễn phí 14 ngày"
         },
         "compRow": {
             "daily_meal": "Gợi ý bữa ăn hàng ngày",
@@ -154,7 +154,11 @@
         "stat_age": "Tuổi",
         "stat_height": "Chiều cao",
         "stat_weight": "Cân nặng",
-        "language": "Ngôn ngữ"
+        "language": "Ngôn ngữ",
+        "account_info": "Thông tin tài khoản",
+        "premium": "Premium",
+        "plan_premium": "Thành viên Premium",
+        "plan_free": "Thành viên miễn phí"
     },
     "progress": {
         "title": "Tiến trình",
@@ -291,6 +295,7 @@
         "current_plan": "Gói hiện tại",
         "start_trial": "Dùng thử miễn phí 14 ngày",
         "cancel_note": "Hủy bất cứ lúc nào · Không tính phí trong thời gian dùng thử",
+        "trial_failed": "Không kích hoạt được dùng thử. Vui lòng thử lại.",
         "plan": {
             "free_name": "Miễn phí",
             "free_price": "Miễn phí",
@@ -305,13 +310,13 @@
         },
         "highlight": {
             "ai_chef_title": "AI Bếp Thông Minh",
-            "ai_chef_desc": "Thực đơn 30 ngày cá nhân hóa theo cơ thể, mục tiêu và khẩu vị",
+            "ai_chef_desc": "2 lần làm mới thực đơn AI mỗi tuần — cá nhân hóa theo mục tiêu và khẩu vị",
             "swap_title": "Đổi bữa ăn linh hoạt",
-            "swap_desc": "Tới 5 lần đổi món mỗi tuần — thay bữa ăn chỉ với một chạm",
-            "nutrition_title": "Phân tích dinh dưỡng chuyên sâu",
-            "nutrition_desc": "Theo dõi 20+ vi chất và nhận báo cáo điều chỉnh hàng tuần",
-            "adfree_title": "Trải nghiệm không quảng cáo",
-            "adfree_desc": "Tập trung hoàn toàn vào nấu ăn, không bị gián đoạn"
+            "swap_desc": "Tới {n} lần đổi món mỗi tuần — thay bữa ăn chỉ với một chạm",
+            "plan_title": "Kế hoạch bữa ăn cả tuần",
+            "plan_desc": "Xem và lên kế hoạch đủ {days} ngày trong tuần",
+            "recipes_title": "Thư viện công thức mở rộng",
+            "recipes_desc": "Truy cập tới {n} công thức được tuyển chọn"
         },
         "table": {
             "feature": "Tính năng",
@@ -329,17 +334,19 @@
             "row_support": "Hỗ trợ ưu tiên",
             "val_3_per_day": "3/ngày",
             "val_1_refresh_week": "1 lần/tuần",
+            "val_2_refresh_week": "2 lần/tuần",
             "val_unlimited": "Không giới hạn",
             "val_5_per_week": "5×/tuần",
             "val_3_refresh_week": "3 lần/tuần",
             "val_3_days": "3 ngày",
+            "val_7_days": "7 ngày",
             "val_7_30_days": "7 ngày",
             "val_2_per_week": "2×/tuần",
+            "val_100_plus": "100+",
+            "val_500_plus": "500+",
             "val_250_plus": "250+",
             "val_basic": "Cơ bản",
-            "val_advanced": "Nâng cao",
-            "val_100_plus": "100+",
-            "val_1000_plus": "1.000+"
+            "val_advanced": "Nâng cao"
         }
     },
     "limits": {
@@ -357,18 +364,25 @@
         "unlocked": "Những gì đã được mở khóa cho bạn",
         "expiry_note": "Dùng thử kết thúc sau 14 ngày. Hủy bất cứ lúc nào từ Hồ sơ → Cài đặt.",
         "explore_btn": "Khám phá tính năng Premium",
-        "feat_1": "Gợi ý bữa ăn AI không giới hạn",
-        "feat_2": "Theo dõi dinh dưỡng nâng cao",
-        "feat_3": "1.000+ công thức cao cấp",
-        "feat_4": "Danh sách mua sắm thông minh",
-        "feat_5": "Trải nghiệm không quảng cáo",
-        "feat_6": "Hỗ trợ ưu tiên"
+        "feat_1": "2 lần làm mới thực đơn AI mỗi tuần",
+        "feat_2": "Kế hoạch bữa ăn đủ 7 ngày",
+        "feat_3": "500+ công thức được tuyển chọn",
+        "feat_4": "5 lần đổi món mỗi tuần",
+        "feat_5": "Danh sách mua sắm thông minh nâng cao",
+        "feat_6": "Dùng thử miễn phí 14 ngày"
     },
     "home": {
         "greeting_morning": "Chào buổi sáng",
         "greeting_afternoon": "Chào buổi chiều",
         "greeting_evening": "Chào buổi tối",
         "streak_badge": "Streak {n} ngày",
+        "banner_featured_tag": "Nổi bật",
+        "banner_promo_plan_title": "Lên kế hoạch tuần với AI",
+        "banner_promo_plan_sub": "Mở thực đơn và làm mới kế hoạch bữa ăn",
+        "banner_promo_premium_title": "Dùng thử Premium 14 ngày",
+        "banner_promo_premium_sub": "Kế hoạch 7 ngày, thêm lượt đổi món & công thức",
+        "welcome_tagline": "Hôm nay bạn muốn nấu món gì?",
+        "default_name": "bạn",
         "nutrition_title": "Dinh dưỡng hôm nay",
         "kcal_left": "kcal còn lại",
         "macro_protein": "Protein",
@@ -466,6 +480,25 @@
         "no_recipes_found": "Không tìm thấy món {meal}",
         "added_success": "Đã thêm {name}",
         "select_meal": "Chọn món này"
+    },
+    "shopping_list": {
+        "title": "Danh sách mua sắm",
+        "cart_title": "Giỏ nguyên liệu",
+        "item_count": "Đã mua {checked}/{total}",
+        "remaining_count": "Còn thiếu {n} nguyên liệu",
+        "all_bought": "Đã mua đủ ✓",
+        "order_info": "Tổng quan",
+        "bought_of_total": "Đã mua {bought}/{total}",
+        "mark_all_bought": "Đánh dấu đã mua hết",
+        "empty_title": "Giỏ nguyên liệu trống",
+        "empty_desc": "Lưu nguyên liệu còn thiếu của một món để bắt đầu mua sắm.",
+        "browse_recipes": "Khám phá công thức",
+        "clear_all_title": "Xóa toàn bộ danh sách?",
+        "clear_all_desc": "Tất cả nguyên liệu đã lưu sẽ bị xóa.",
+        "clear_all": "Xóa tất cả",
+        "clear_checked": "Xóa mục đã mua",
+        "share_title": "Chia sẻ danh sách",
+        "copy_clipboard": "Sao chép vào bộ nhớ tạm"
     },
     "meal_detail": {
         "reviews": "({n} đánh giá)",

@@ -30,6 +30,24 @@ class ShoppingListProvider extends ChangeNotifier {
     return map;
   }
 
+  /// Distinct recipe ids in insertion order (for the cart list).
+  List<String> get recipeIds {
+    final seen = <String>[];
+    for (final item in _items) {
+      if (!seen.contains(item.recipeId)) seen.add(item.recipeId);
+    }
+    return seen;
+  }
+
+  List<ShoppingItem> itemsForRecipe(String recipeId) =>
+      _items.where((i) => i.recipeId == recipeId).toList();
+
+  int checkedCountForRecipe(String recipeId) =>
+      _items.where((i) => i.recipeId == recipeId && i.checked).length;
+
+  int totalCountForRecipe(String recipeId) =>
+      _items.where((i) => i.recipeId == recipeId).length;
+
   String recipeNameOf(String recipeId) {
     final match = _items.where((i) => i.recipeId == recipeId);
     if (match.isEmpty) return '';
@@ -97,6 +115,37 @@ class ShoppingListProvider extends ChangeNotifier {
   void toggle(String id) {
     final item = _items.firstWhere((i) => i.id == id);
     item.checked = !item.checked;
+    notifyListeners();
+    _persist();
+  }
+
+  void increment(String id) {
+    final item = _items.firstWhere((i) => i.id == id);
+    item.quantity += 1;
+    notifyListeners();
+    _persist();
+  }
+
+  void decrement(String id) {
+    final item = _items.firstWhere((i) => i.id == id);
+    if (item.quantity <= 1) return;
+    item.quantity -= 1;
+    notifyListeners();
+    _persist();
+  }
+
+  /// Marks every ingredient of a recipe as bought (checked).
+  void markRecipeBought(String recipeId) {
+    for (final item in _items.where((i) => i.recipeId == recipeId)) {
+      item.checked = true;
+    }
+    notifyListeners();
+    _persist();
+  }
+
+  /// Removes all ingredients belonging to a recipe.
+  void removeRecipe(String recipeId) {
+    _items.removeWhere((i) => i.recipeId == recipeId);
     notifyListeners();
     _persist();
   }

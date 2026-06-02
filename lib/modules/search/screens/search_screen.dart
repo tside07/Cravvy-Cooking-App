@@ -1,5 +1,6 @@
 import 'package:cravvy_cooking_app/init.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:cravvy_cooking_app/core/widgets/template/custom_app_bar.dart';
 import 'package:cravvy_cooking_app/data/providers/recipe_provider.dart';
 import 'package:cravvy_cooking_app/modules/search/widgets/filter_sheet_state_widget.dart';
 import 'package:cravvy_cooking_app/modules/search/widgets/coming_soon_tab_widget.dart';
@@ -125,24 +126,11 @@ class _SearchScreenState extends State<SearchScreen>
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 24, top: 20, right: 24),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'search.title'.tr(),
-                    style: Theme.of(context).textTheme.headlineLarge,
-                  ),
-                  AppGap.h4,
-                  Text(
-                    'search.subtitle'.tr(),
-                    style: Theme.of(context).textTheme.bodyMedium,
-                  ),
-                ],
-              ),
+            CustomAppBar(
+              title: 'search.title'.tr(),
+              subtitle: 'search.subtitle'.tr(),
             ),
-            AppGap.h20,
+            AppGap.h16,
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Container(

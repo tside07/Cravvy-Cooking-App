@@ -1,4 +1,5 @@
 import 'package:cravvy_cooking_app/init.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class PremiumFeaturesCardWidget extends StatelessWidget {
   final List<String> features;
@@ -24,7 +25,7 @@ class PremiumFeaturesCardWidget extends StatelessWidget {
               AppGap.w8,
               Expanded(
                 child: Text(
-                  "What's included in\nPremium",
+                  'premium.define'.tr(),
                   style: AppTextStyles.s16.copyWith(
                     fontWeight: FontWeight.w800,
                     color: AppColors.textPrimary,

@@ -1,4 +1,5 @@
 import 'package:cravvy_cooking_app/init.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class PremiumPriceCardWidget extends StatelessWidget {
   final bool isAnnual;
@@ -21,7 +22,7 @@ class PremiumPriceCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final price = isAnnual ? annualPrice : monthlyPrice;
-    final period = isAnnual ? '/year' : '/month';
+    final period = isAnnual ? 'premium.period_year'.tr() : 'premium.period_month'.tr();
 
     return AnimatedSwitcher(
       duration: const Duration(milliseconds: 300),
@@ -76,7 +77,7 @@ class PremiumPriceCardWidget extends StatelessWidget {
                 shape: BoxShape.circle,
               ),
               child: Text(
-                'Save\n$savePct%',
+                'premium.save_badge'.tr(namedArgs: {'pct': '$savePct'}),
                 textAlign: TextAlign.center,
                 style: AppTextStyles.s10.copyWith(
                   fontWeight: FontWeight.w800,
@@ -90,7 +91,10 @@ class PremiumPriceCardWidget extends StatelessWidget {
         ),
         AppGap.h8,
         Text(
-          'Only ${_formatVND(annualMonthly)}đ/month • Save up to ${_formatVND(annualSavings)}đ per year',
+          'premium.annual_detail'.tr(namedArgs: {
+            'monthly': _formatVND(annualMonthly),
+            'savings': _formatVND(annualSavings),
+          }),
           style: AppTextStyles.s12.copyWith(color: AppColors.textSecondary),
         ),
       ],
@@ -127,7 +131,7 @@ class PremiumPriceCardWidget extends StatelessWidget {
         ),
         AppGap.h8,
         Text(
-          'Billed monthly',
+          'premium.billed_monthly'.tr(),
           style: AppTextStyles.s12.copyWith(color: AppColors.textSecondary),
         ),
       ],

@@ -1,4 +1,5 @@
 import 'package:cravvy_cooking_app/init.dart';
+import 'package:cravvy_cooking_app/core/widgets/template/custom_app_bar.dart';
 import 'package:cravvy_cooking_app/common/widgets/centered_loading.dart';
 import 'package:cravvy_cooking_app/data/models/meal.dart';
 import 'package:cravvy_cooking_app/modules/meal_plan/provider/meal_plan_provider.dart';
@@ -178,15 +179,9 @@ class ProgressScreen extends StatelessWidget {
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
-            // Title
+            // Title + shared app bar
             SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.only(left: 24, top: 20, right: 24),
-                child: Text(
-                  'progress.title'.tr(),
-                  style: Theme.of(context).textTheme.headlineLarge,
-                ),
-              ),
+              child: CustomAppBar(title: 'progress.title'.tr()),
             ),
 
             // Streak + stats row

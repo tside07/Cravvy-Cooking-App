@@ -6,8 +6,8 @@ import 'package:cravvy_cooking_app/init.dart';
 import 'package:cravvy_cooking_app/data/models/meal.dart';
 import 'package:cravvy_cooking_app/data/providers/recipe_provider.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:cravvy_cooking_app/core/widgets/template/custom_app_bar.dart';
 import 'package:cravvy_cooking_app/modules/meal_plan/provider/meal_plan_provider.dart';
-import 'package:cravvy_cooking_app/modules/meal_plan/widgets/meal_plan_header_widget.dart';
 import 'package:cravvy_cooking_app/modules/meal_plan/widgets/free_week_upsell_banner.dart';
 import 'package:cravvy_cooking_app/modules/meal_plan/widgets/week_strip_widget.dart';
 import 'package:cravvy_cooking_app/modules/meal_plan/widgets/calorie_summary_widget.dart';
@@ -25,13 +25,46 @@ class MealPlanScreen extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            const MealPlanHeaderWidget(),
+            CustomAppBar(
+              title: 'meal_plan.title'.tr(),
+              subtitle: 'meal_plan.subtitle'.tr(),
+              trailing: const _StreakBadge(),
+            ),
             const WeekStripWidget(),
             const FreeWeekUpsellBanner(),
             const CalorieSummaryWidget(),
             const Expanded(child: _MealList()),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _StreakBadge extends StatelessWidget {
+  const _StreakBadge();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: AppPad.h12v6,
+      decoration: BoxDecoration(
+        color: AppColors.primaryLight,
+        borderRadius: AppBorderRadius.a20,
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const Text('🔥', style: AppTextStyles.s14),
+          AppGap.w4,
+          Text(
+            'meal_plan.streak_days'.tr(namedArgs: {'n': '7'}),
+            style: AppTextStyles.s12.copyWith(
+              color: AppColors.primary,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+        ],
       ),
     );
   }

@@ -1,7 +1,7 @@
 import 'package:cravvy_cooking_app/init.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:cravvy_cooking_app/modules/home/widgets/home_header_widget.dart';
-import 'package:cravvy_cooking_app/modules/home/widgets/nutrition_ring_card_widget.dart';
+import 'package:cravvy_cooking_app/core/widgets/template/custom_app_bar.dart';
+import 'package:cravvy_cooking_app/modules/home/widgets/home_banner_carousel_widget.dart';
 import 'package:cravvy_cooking_app/modules/home/widgets/today_meals_section_widget.dart';
 import 'package:cravvy_cooking_app/modules/home/widgets/quick_actions_grid_widget.dart';
 import 'package:cravvy_cooking_app/modules/home/widgets/nutrition_tip_widget.dart';
@@ -19,13 +19,13 @@ class HomeScreen extends StatelessWidget {
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
-            SliverToBoxAdapter(child: HomeHeaderWidget()),
-            SliverToBoxAdapter(child: NutritionRingCardWidget()),
-            SliverToBoxAdapter(child: TodayMealsSectionWidget()),
-            SliverToBoxAdapter(child: QuickActionsGridWidget()),
-            SliverToBoxAdapter(child: FeaturedRecipesWidget()),
-            SliverToBoxAdapter(child: NutritionTipWidget()),
-            AppGap.sh100,
+            const SliverToBoxAdapter(child: CustomAppBar(greeting: true)),
+            const SliverToBoxAdapter(child: HomeBannerCarouselWidget()),
+            const SliverToBoxAdapter(child: TodayMealsSectionWidget()),
+            const SliverToBoxAdapter(child: FeaturedRecipesWidget()),
+            const SliverToBoxAdapter(child: QuickActionsGridWidget()),
+            const SliverToBoxAdapter(child: NutritionTipWidget()),
+            AppGap.sh20,
           ],
         ),
       ),

@@ -1,4 +1,5 @@
 import 'package:cravvy_cooking_app/init.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class PremiumDisclaimerWidget extends StatelessWidget {
   const PremiumDisclaimerWidget({super.key});
@@ -12,9 +13,7 @@ class PremiumDisclaimerWidget extends StatelessWidget {
         borderRadius: AppBorderRadius.a12,
       ),
       child: Text(
-        'By subscribing, you agree to our Terms of Service and Privacy Policy. '
-        'Your subscription will automatically renew unless canceled at least '
-        '24 hours before the end of the current period.',
+        'premium.sub_desc'.tr(),
         textAlign: TextAlign.center,
         style: AppTextStyles.s12.copyWith(
           color: AppColors.textSecondary,

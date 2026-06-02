@@ -55,12 +55,12 @@
     },
     "premium": {
         "feat": {
-            "1": "Unlimited AI-powered meal suggestions daily",
-            "2": "Advanced nutrition tracking & insights",
-            "3": "Access to 1000+ premium recipes",
-            "4": "Smart shopping lists with auto-sync",
-            "5": "Ad-free experience",
-            "6": "Priority customer support"
+            "1": "2 AI menu refreshes per week",
+            "2": "Full 7-day meal plan",
+            "3": "5 meal swaps per week",
+            "4": "500+ curated recipes",
+            "5": "Advanced smart shopping lists",
+            "6": "14-day free trial included"
         },
         "compRow": {
             "daily_meal": "Daily meal suggestions",
@@ -154,7 +154,11 @@
         "stat_age": "Age",
         "stat_height": "Height",
         "stat_weight": "Weight",
-        "language": "Language"
+        "language": "Language",
+        "account_info": "Account Information",
+        "premium": "Premium",
+        "plan_premium": "Premium member",
+        "plan_free": "Free member"
     },
     "progress": {
         "title": "Progress",
@@ -291,6 +295,7 @@
         "current_plan": "Current Plan",
         "start_trial": "Start 14-Day Free Trial",
         "cancel_note": "Cancel anytime · No charges during trial",
+        "trial_failed": "Could not start trial. Please try again.",
         "plan": {
             "free_name": "Free",
             "free_price": "Free",
@@ -305,13 +310,13 @@
         },
         "highlight": {
             "ai_chef_title": "Smart AI Chef",
-            "ai_chef_desc": "Personalized 30-day menu based on your body, goals and taste",
+            "ai_chef_desc": "2 AI menu refreshes per week — personalized to your goals and taste",
             "swap_title": "Flexible Meal Swap",
-            "swap_desc": "Up to 5 swaps per week — replace any meal in one tap",
-            "nutrition_title": "Deep Nutrition Analysis",
-            "nutrition_desc": "Track 20+ micronutrients and get weekly adjustment reports",
-            "adfree_title": "Ad-Free Experience",
-            "adfree_desc": "Pure cooking focus, no interruptions"
+            "swap_desc": "Up to {n} swaps per week — replace any meal in one tap",
+            "plan_title": "Full Week Meal Plan",
+            "plan_desc": "See and plan all {days} days of your week",
+            "recipes_title": "Expanded Recipe Library",
+            "recipes_desc": "Access up to {n} curated recipes"
         },
         "table": {
             "feature": "Feature",
@@ -329,6 +334,7 @@
             "row_support": "Priority support",
             "val_3_per_day": "3/day",
             "val_1_refresh_week": "1×/week",
+            "val_2_refresh_week": "2×/week",
             "val_unlimited": "Unlimited",
             "val_5_per_week": "5×/week",
             "val_3_refresh_week": "3×/week",
@@ -339,6 +345,7 @@
             "val_basic": "Basic",
             "val_advanced": "Advanced",
             "val_100_plus": "100+",
+            "val_500_plus": "500+",
             "val_250_plus": "250+",
             "val_1000_plus": "1,000+"
         }
@@ -358,18 +365,25 @@
         "unlocked": "What's unlocked for you",
         "expiry_note": "Trial ends in 14 days. Cancel anytime from Profile → Settings.",
         "explore_btn": "Explore Premium Features",
-        "feat_1": "Unlimited AI meal suggestions",
-        "feat_2": "Advanced nutrition tracking",
-        "feat_3": "1,000+ premium recipes",
-        "feat_4": "Smart shopping lists",
-        "feat_5": "Ad-free experience",
-        "feat_6": "Priority support"
+        "feat_1": "2 AI menu refreshes per week",
+        "feat_2": "Full 7-day meal plan",
+        "feat_3": "500+ curated recipes",
+        "feat_4": "5 meal swaps per week",
+        "feat_5": "Advanced smart shopping lists",
+        "feat_6": "14-day free trial"
     },
     "home": {
         "greeting_morning": "Good morning",
         "greeting_afternoon": "Good afternoon",
         "greeting_evening": "Good evening",
         "streak_badge": "{n}-day streak",
+        "banner_featured_tag": "Featured",
+        "banner_promo_plan_title": "Plan your week with AI",
+        "banner_promo_plan_sub": "Open meal plan and refresh your menu",
+        "banner_promo_premium_title": "Try Premium free for 14 days",
+        "banner_promo_premium_sub": "7-day plan, more swaps and recipes",
+        "welcome_tagline": "What would you like to cook today?",
+        "default_name": "there",
         "nutrition_title": "Today's Nutrition",
         "kcal_left": "kcal left",
         "macro_protein": "Protein",
@@ -467,6 +481,25 @@
         "no_recipes_found": "No {meal} recipes found",
         "added_success": "Added {name}",
         "select_meal": "Select this meal"
+    },
+    "shopping_list": {
+        "title": "Shopping List",
+        "cart_title": "Ingredient Cart",
+        "item_count": "Bought {checked}/{total}",
+        "remaining_count": "{n} ingredients missing",
+        "all_bought": "All bought ✓",
+        "order_info": "Summary",
+        "bought_of_total": "Bought {bought}/{total}",
+        "mark_all_bought": "Mark all as bought",
+        "empty_title": "Your cart is empty",
+        "empty_desc": "Save the missing ingredients of a dish to start shopping.",
+        "browse_recipes": "Browse recipes",
+        "clear_all_title": "Clear the whole list?",
+        "clear_all_desc": "All saved ingredients will be removed.",
+        "clear_all": "Clear all",
+        "clear_checked": "Clear bought items",
+        "share_title": "Share list",
+        "copy_clipboard": "Copy to clipboard"
     },
     "meal_detail": {
         "reviews": "({n} reviews)",

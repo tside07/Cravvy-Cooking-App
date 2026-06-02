@@ -1,5 +1,6 @@
 import 'package:cravvy_cooking_app/init.dart';
 import 'package:cravvy_cooking_app/modules/premium/model/comp_row.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class PremiumComparisonTableWidget extends StatelessWidget {
   final List<CompRow> rows;
@@ -32,7 +33,7 @@ class PremiumComparisonTableWidget extends StatelessWidget {
           Expanded(
             flex: 5,
             child: Text(
-              'Feature',
+              'subscription.table.feature'.tr(),
               style: AppTextStyles.s14.copyWith(
                 fontWeight: FontWeight.w700,
                 color: AppColors.textPrimary,
@@ -42,7 +43,7 @@ class PremiumComparisonTableWidget extends StatelessWidget {
           Expanded(
             flex: 2,
             child: Text(
-              'Free',
+              'subscription.table.free'.tr(),
               textAlign: TextAlign.center,
               style: AppTextStyles.s14.copyWith(
                 fontWeight: FontWeight.w600,
@@ -53,7 +54,7 @@ class PremiumComparisonTableWidget extends StatelessWidget {
           Expanded(
             flex: 3,
             child: Text(
-              'Premium',
+              'subscription.table.premium'.tr(),
               textAlign: TextAlign.center,
               style: AppTextStyles.s14.copyWith(
                 fontWeight: FontWeight.w700,

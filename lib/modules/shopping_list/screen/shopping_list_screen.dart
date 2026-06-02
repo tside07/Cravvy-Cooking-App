@@ -1,9 +1,7 @@
 import 'package:cravvy_cooking_app/init.dart';
 import 'package:cravvy_cooking_app/modules/shopping_list/provider/shopping_list_provider.dart';
-import 'package:cravvy_cooking_app/modules/shopping_list/widgets/shopping_header_widget.dart';
-import 'package:cravvy_cooking_app/modules/shopping_list/widgets/shopping_recipe_group_widget.dart';
 import 'package:cravvy_cooking_app/modules/shopping_list/widgets/shopping_empty_state_widget.dart';
-import 'package:cravvy_cooking_app/modules/shopping_list/widgets/shopping_bottom_bar_widget.dart';
+import 'package:cravvy_cooking_app/modules/shopping_list/widgets/shopping_recipe_card_widget.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class ShoppingListScreen extends StatelessWidget {
@@ -32,89 +30,50 @@ class _ShoppingListView extends StatelessWidget {
 
     if (provider.isEmpty) return const ShoppingEmptyStateWidget();
 
+    final recipeIds = provider.recipeIds;
+
     return Scaffold(
       backgroundColor: AppColors.background,
-      body: SafeArea(
-        child: Column(
-          children: [
-            ShoppingHeaderWidget(
-              checkedCount: provider.checkedCount,
-              totalCount: provider.totalCount,
-              progress: provider.progress,
-              onShare: () => _showShareDialog(context),
-              onClearChecked: () =>
-                  context.read<ShoppingListProvider>().clearChecked(),
-              onClearAll: () => _showClearAllDialog(context),
-            ),
-            Expanded(
-              child: ListView.builder(
-                padding: AppPad.h16v12,
-                itemCount: provider.grouped.length,
-                itemBuilder: (context, groupIndex) {
-                  final recipeId = provider.grouped.keys.elementAt(groupIndex);
-                  final items = provider.grouped[recipeId]!;
-                  final recipeName = provider.recipeNameOf(recipeId);
-
-                  return ShoppingRecipeGroupWidget(
-                    recipeName: recipeName,
-                    items: items,
-                    onToggle: (id) =>
-                        context.read<ShoppingListProvider>().toggle(id),
-                    onRemove: (id) =>
-                        context.read<ShoppingListProvider>().remove(id),
-                  );
-                },
-              ),
-            ),
-            if (provider.checkedCount > 0)
-              ShoppingBottomBarWidget(
-                checkedCount: provider.checkedCount,
-                onClearChecked: () =>
-                    context.read<ShoppingListProvider>().clearChecked(),
-              ),
-          ],
+      appBar: AppBar(
+        backgroundColor: AppColors.background,
+        elevation: 0,
+        scrolledUnderElevation: 0,
+        centerTitle: true,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios_new_rounded,
+              color: AppColors.textPrimary),
+          onPressed: () => context.pop(),
         ),
+        title: Text(
+          'shopping_list.cart_title'.tr(),
+          style: AppTextStyles.s18.copyWith(fontWeight: FontWeight.w700),
+        ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.delete_sweep_outlined,
+                color: AppColors.textPrimary),
+            onPressed: () => _showClearAllDialog(context),
+          ),
+        ],
       ),
-    );
-  }
-
-  void _showShareDialog(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      builder: (_) => Padding(
-        padding: AppPad.a24,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              'shopping_list.share_title'.tr(),
-              style: AppTextStyles.s18.copyWith(fontWeight: FontWeight.w700),
-            ),
-            AppGap.h16,
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton.icon(
-                onPressed: () => Navigator.pop(context),
-                icon: const Icon(Icons.copy_rounded),
-                label: Text('shopping_list.copy_clipboard'.tr()),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.primary,
-                  foregroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: AppBorderRadius.a12,
-                  ),
-                ),
+      body: SafeArea(
+        child: ListView.builder(
+          padding: AppPad.h16v12,
+          itemCount: recipeIds.length,
+          itemBuilder: (context, index) {
+            final recipeId = recipeIds[index];
+            return ShoppingRecipeCardWidget(
+              recipeName: provider.recipeNameOf(recipeId),
+              totalCount: provider.totalCountForRecipe(recipeId),
+              checkedCount: provider.checkedCountForRecipe(recipeId),
+              onTap: () => context.push(
+                AppRouter.shoppingRecipeDetail,
+                extra: recipeId,
               ),
-            ),
-            AppGap.h8,
-            TextButton(
-              onPressed: () => Navigator.pop(context),
-              child: Text('common.cancel'.tr()),
-            ),
-          ],
+              onRemove: () =>
+                  context.read<ShoppingListProvider>().removeRecipe(recipeId),
+            );
+          },
         ),
       ),
     );
