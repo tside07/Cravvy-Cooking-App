@@ -169,6 +169,30 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
+  Future<bool> updateDisplayProfile({
+    required String fullName,
+    required DateTime birthDate,
+    String? email,
+  }) async {
+    if (_user == null) return false;
+    _setLoading();
+    try {
+      _user = await AuthService.updateDisplayProfile(
+        userId: _user!.id,
+        fullName: fullName,
+        birthDate: birthDate,
+        email: email,
+      );
+      _status = AuthStatus.authenticated;
+      _syncUserToProviders();
+      notifyListeners();
+      return _user != null;
+    } catch (e) {
+      _setError('Cập nhật hồ sơ thất bại. Vui lòng thử lại.');
+      return false;
+    }
+  }
+
   Future<bool> updateProfileBasicInfo({
     required int age,
     required String gender,

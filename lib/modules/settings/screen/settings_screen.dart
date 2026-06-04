@@ -1,3 +1,4 @@
+import 'package:cravvy_cooking_app/data/providers/auth_provider.dart';
 import 'package:cravvy_cooking_app/init.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:provider/provider.dart';
@@ -56,9 +57,10 @@ class SettingsScreen extends StatelessWidget {
             child: Text('common.cancel'.tr()),
           ),
           ElevatedButton(
-            onPressed: () {
+            onPressed: () async {
               Navigator.pop(ctx);
-              context.go(AppRouter.login);
+              await context.read<AuthProvider>().logout();
+              if (context.mounted) context.go(AppRouter.onboarding);
             },
             style: ElevatedButton.styleFrom(backgroundColor: AppColors.error),
             child: Text(

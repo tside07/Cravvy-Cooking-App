@@ -78,6 +78,36 @@ class AuthService {
     );
   }
 
+  static int ageFromBirthDate(DateTime birthDate) {
+    final now = DateTime.now();
+    var age = now.year - birthDate.year;
+    if (now.month < birthDate.month ||
+        (now.month == birthDate.month && now.day < birthDate.day)) {
+      age--;
+    }
+    return age;
+  }
+
+  /// Updates display fields on `profiles` (edit profile screen).
+  static Future<UserModel?> updateDisplayProfile({
+    required String userId,
+    required String fullName,
+    required DateTime birthDate,
+    String? email,
+  }) async {
+    final updates = <String, dynamic>{
+      'full_name': fullName.trim(),
+      'age': ageFromBirthDate(birthDate),
+    };
+    final trimmedEmail = email?.trim();
+    if (trimmedEmail != null && trimmedEmail.isNotEmpty) {
+      updates['email'] = trimmedEmail;
+    }
+
+    await _client.from('profiles').update(updates).eq('id', userId);
+    return getProfile(userId);
+  }
+
   static Future<UserModel?> updateProfileBasicInfo({
     required String userId,
     required int age,

@@ -1,4 +1,5 @@
 import 'package:flutter/services.dart';
+import 'package:cravvy_cooking_app/data/providers/auth_provider.dart';
 import 'package:cravvy_cooking_app/init.dart';
 import 'package:cravvy_cooking_app/modules/profile/provider/profile_provider.dart';
 import 'package:cravvy_cooking_app/modules/profile/widgets/edit_profile_section_header_widget.dart';
@@ -66,12 +67,27 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     if (picked != null) setState(() => _birthDate = picked);
   }
 
-  void _save() {
+  Future<void> _save() async {
     if (_formKey.currentState?.validate() != true) return;
     HapticFeedback.mediumImpact();
-    context.read<ProfileProvider>().updateProfile(
-      name: _nameCtrl.text.trim(),
+
+    final auth = context.read<AuthProvider>();
+    final ok = await auth.updateDisplayProfile(
+      fullName: _nameCtrl.text.trim(),
+      birthDate: _birthDate,
       email: _emailCtrl.text.trim(),
+    );
+    if (!mounted) return;
+    if (!ok) {
+      final msg = auth.errorMessage ??
+          'Cập nhật hồ sơ thất bại. Vui lòng thử lại.';
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(msg)),
+      );
+      return;
+    }
+
+    context.read<ProfileProvider>().updateLocalProfile(
       phone: _phoneCtrl.text.trim(),
       bio: _bioCtrl.text.trim(),
       birthDate: _birthDate,

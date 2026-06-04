@@ -44,7 +44,6 @@ void main() async {
         providers: [
           ChangeNotifierProvider(create: (_) => MealPlanProvider()),
           ChangeNotifierProvider(create: (_) => OnboardingProvider()),
-          ChangeNotifierProvider(create: (_) => ProfileProvider()),
           ChangeNotifierProvider(create: (_) => RecipeProvider()),
           ChangeNotifierProvider(create: (_) => ShoppingListProvider()),
           ChangeNotifierProxyProvider<MealPlanProvider, AuthProvider>(
@@ -58,6 +57,13 @@ void main() async {
               auth!.linkMealPlanProvider(mealPlan);
               auth.linkRecipeProvider(ctx.read<RecipeProvider>());
               return auth;
+            },
+          ),
+          ChangeNotifierProxyProvider<AuthProvider, ProfileProvider>(
+            create: (_) => ProfileProvider(),
+            update: (_, auth, profile) {
+              profile!.syncFromUser(auth.user);
+              return profile;
             },
           ),
         ],
