@@ -44,6 +44,21 @@ class SettingsScreen extends StatelessWidget {
     );
   }
 
+  Future<void> _confirmDeleteAccount(BuildContext context) async {
+    context.read<SettingsProvider>().hideDeleteConfirmCard();
+    final auth = context.read<AuthProvider>();
+    final ok = await auth.deleteAccount();
+    if (!context.mounted) return;
+    if (ok) {
+      context.go(AppRouter.onboarding);
+      return;
+    }
+    final msg = auth.errorMessage ?? 'settings.delete_failed'.tr();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(msg)),
+    );
+  }
+
   void _showSignOutDialog(BuildContext context) {
     showDialog(
       context: context,
@@ -346,9 +361,7 @@ class SettingsScreen extends StatelessWidget {
             AppGap.h12,
             SettingsDeleteConfirmCardWidget(
               onCancel: provider.hideDeleteConfirmCard,
-              onConfirm: () {
-                // TODO: call delete account API
-              },
+              onConfirm: () => _confirmDeleteAccount(context),
             ),
           ],
         ],

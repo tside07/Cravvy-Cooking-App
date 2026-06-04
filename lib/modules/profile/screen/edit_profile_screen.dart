@@ -108,6 +108,20 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     );
   }
 
+  Future<void> _confirmDeleteAccount() async {
+    final auth = context.read<AuthProvider>();
+    final ok = await auth.deleteAccount();
+    if (!mounted) return;
+    if (ok) {
+      context.go(AppRouter.onboarding);
+      return;
+    }
+    final msg = auth.errorMessage ?? 'settings.delete_failed'.tr();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(msg)),
+    );
+  }
+
   void _showDeleteAccount() {
     showDialog(
       context: context,
@@ -117,7 +131,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         confirmLabel: 'common.delete'.tr(),
         onConfirm: () {
           Navigator.pop(context);
-          context.go(AppRouter.onboarding);
+          _confirmDeleteAccount();
         },
         isDestructive: true,
       ),

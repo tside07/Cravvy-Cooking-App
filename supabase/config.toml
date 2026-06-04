@@ -17,3 +17,6 @@ port = 54323
 
 [functions.generate-meal-plan]
 verify_jwt = true
+
+[functions.delete-account]
+verify_jwt = true

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:cravvy_cooking_app/core/constants/plan_limits.dart';
 import 'package:cravvy_cooking_app/data/models/user_model.dart';
+import 'package:cravvy_cooking_app/data/services/account_deletion_service.dart';
 import 'package:cravvy_cooking_app/data/services/auth_service.dart';
 import 'package:cravvy_cooking_app/data/services/supabase_service.dart';
 import 'package:cravvy_cooking_app/data/providers/recipe_provider.dart';
@@ -281,6 +282,32 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  /// Permanently deletes account via Edge Function, then clears local session.
+  Future<bool> deleteAccount() async {
+    if (_user == null) {
+      _setError('Bạn cần đăng nhập để xóa tài khoản.');
+      return false;
+    }
+    _setLoading();
+    try {
+      await AccountDeletionService.deleteAccount();
+      await AuthService.logout();
+      _user = null;
+      _status = AuthStatus.unauthenticated;
+      _syncUserToProviders();
+      notifyListeners();
+      return true;
+    } on AccountDeletionException catch (e) {
+      _setError(_mapDeleteAccountError(e.message));
+      return false;
+    } catch (_) {
+      _setError(
+        'Không thể xóa tài khoản. Kiểm tra kết nối hoặc thử lại sau.',
+      );
+      return false;
+    }
+  }
+
   void clearError() {
     _errorMessage = null;
     notifyListeners();
@@ -323,5 +350,19 @@ class AuthProvider extends ChangeNotifier {
       return 'OTP không đúng';
     }
     return message;
+  }
+
+  String _mapDeleteAccountError(String message) {
+    final m = message.toLowerCase();
+    if (m.contains('unauthorized') || m.contains('missing authorization')) {
+      return 'Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại.';
+    }
+    if (m.contains('server configuration missing')) {
+      return 'Máy chủ chưa cấu hình xóa tài khoản. Liên hệ quản trị viên.';
+    }
+    if (m.contains('network') || m.contains('timeout')) {
+      return 'Mất kết nối. Vui lòng thử lại.';
+    }
+    return 'Không thể xóa tài khoản: $message';
   }
 }

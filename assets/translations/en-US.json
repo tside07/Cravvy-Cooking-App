@@ -275,6 +275,7 @@
         "delete_acc": "Delete Account",
         "delete_confirm_title": "Are you sure?",
         "delete_confirm_body": "Deleting your account is permanent. All your data, meal plans, and progress will be erased.",
+        "delete_failed": "Could not delete your account. Please try again.",
         "version": "Cravvy v1.0.0"
     },
     "common": {

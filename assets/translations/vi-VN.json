@@ -275,6 +275,7 @@
         "delete_acc": "Xóa tài khoản",
         "delete_confirm_title": "Bạn có chắc không?",
         "delete_confirm_body": "Xóa tài khoản là vĩnh viễn. Toàn bộ dữ liệu, kế hoạch bữa ăn và tiến trình của bạn sẽ bị xóa.",
+        "delete_failed": "Không thể xóa tài khoản. Vui lòng thử lại.",
         "version": "Cravvy v1.0.0"
     },
     "common": {
