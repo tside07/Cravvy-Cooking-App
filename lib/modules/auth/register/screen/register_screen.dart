@@ -3,7 +3,7 @@ import 'package:cravvy_cooking_app/data/providers/auth_provider.dart';
 import 'package:cravvy_cooking_app/core/widgets/template/custom_auth_app_bar.dart';
 import 'package:cravvy_cooking_app/modules/auth/widgets/auth_divider_widget.dart';
 import 'package:cravvy_cooking_app/modules/auth/widgets/auth_header_widget.dart';
-import 'package:cravvy_cooking_app/modules/auth/widgets/auth_social_section_widget.dart';
+import 'package:cravvy_cooking_app/modules/auth/widgets/auth_social_section_connected.dart';
 import 'package:cravvy_cooking_app/modules/auth/register/widgets/form_fields_widget.dart';
 import 'package:cravvy_cooking_app/modules/auth/register/widgets/terms_checkbox_widget.dart';
 import 'package:cravvy_cooking_app/modules/auth/register/widgets/login_link_widget.dart';
@@ -166,7 +166,7 @@ class _Body extends StatelessWidget {
                       subtitle: 'Start your healthy food journey',
                     ),
                     AppGap.h28,
-                    AuthSocialSectionWidget(onGoogleTap: () {}, onAppleTap: () {}),
+                    const AuthSocialSectionConnected(),
                     AppGap.h20,
                     const AuthDividerWidget(label: 'or sign up with email'),
                     AppGap.h20,

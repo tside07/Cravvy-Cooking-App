@@ -54,6 +54,7 @@ class _AuthTextFieldWidgetState extends State<AuthTextFieldWidget> {
           controller: widget.controller,
           keyboardType: widget.keyboardType,
           obscureText: widget.isPassword && _obscure,
+          onTapOutside: (_) => FocusManager.instance.primaryFocus?.unfocus(),
           validator: widget.validator,
           onChanged: widget.onChanged,
           textInputAction: widget.textInputAction,

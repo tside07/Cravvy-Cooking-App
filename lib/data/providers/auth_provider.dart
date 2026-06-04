@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:cravvy_cooking_app/core/constants/plan_limits.dart';
+import 'package:cravvy_cooking_app/core/utils/auth_oauth_error_mapper.dart';
 import 'package:cravvy_cooking_app/data/models/user_model.dart';
 import 'package:cravvy_cooking_app/data/services/account_deletion_service.dart';
+import 'package:cravvy_cooking_app/data/services/auth_oauth_exception.dart';
 import 'package:cravvy_cooking_app/data/services/auth_service.dart';
 import 'package:cravvy_cooking_app/data/services/supabase_service.dart';
 import 'package:cravvy_cooking_app/data/providers/recipe_provider.dart';
@@ -89,6 +91,36 @@ class AuthProvider extends ChangeNotifier {
       return false;
     } catch (e) {
       _setError('Đã có lỗi xảy ra. Vui lòng thử lại.');
+      return false;
+    }
+  }
+
+  Future<bool> signInWithGoogle() => _signInWithOAuth(AuthService.signInWithGoogle);
+
+  Future<bool> signInWithApple() => _signInWithOAuth(AuthService.signInWithApple);
+
+  Future<bool> _signInWithOAuth(
+    Future<UserModel?> Function() signIn,
+  ) async {
+    _setLoading();
+    try {
+      _user = await signIn();
+      if (_user != null) {
+        _status = AuthStatus.authenticated;
+        _syncUserToProviders();
+        notifyListeners();
+        return true;
+      }
+      _setError('Đăng nhập thất bại. Vui lòng thử lại.');
+      return false;
+    } on AuthOAuthException catch (e) {
+      _setError(_mapOAuthFailure(e));
+      return false;
+    } on AuthException catch (e) {
+      _setError(mapOAuthAuthError(_mapAuthError(e.message)));
+      return false;
+    } catch (e) {
+      _setError('Đăng nhập thất bại. Vui lòng thử lại.');
       return false;
     }
   }
@@ -325,6 +357,17 @@ class AuthProvider extends ChangeNotifier {
         : AuthStatus.unauthenticated;
     _errorMessage = message;
     notifyListeners();
+  }
+
+  String _mapOAuthFailure(AuthOAuthException e) {
+    switch (e.failure) {
+      case AuthOAuthFailure.browserNotLaunched:
+        return 'Không mở được trình duyệt đăng nhập. Kiểm tra ứng dụng mặc định.';
+      case AuthOAuthFailure.cancelledOrTimedOut:
+        return 'Đăng nhập đã hủy hoặc hết thời gian. Vui lòng thử lại.';
+      case AuthOAuthFailure.noProfile:
+        return 'Không tạo được hồ sơ. Kiểm tra trigger profiles trên Supabase.';
+    }
   }
 
   String _mapAuthError(String message) {

@@ -5,7 +5,7 @@ import 'package:cravvy_cooking_app/modules/auth/widgets/auth_form_fields_widget.
 import 'package:cravvy_cooking_app/modules/auth/widgets/auth_header_widget.dart';
 import 'package:cravvy_cooking_app/modules/auth/login/widgets/forgot_password_button_widget.dart';
 import 'package:cravvy_cooking_app/modules/auth/login/widgets/register_link_widget.dart';
-import 'package:cravvy_cooking_app/modules/auth/widgets/auth_social_section_widget.dart';
+import 'package:cravvy_cooking_app/modules/auth/widgets/auth_social_section_connected.dart';
 import 'package:cravvy_cooking_app/modules/widgets/common/cravvy_button.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -130,7 +130,7 @@ class _Body extends StatelessWidget {
             ),
             AppGap.h28,
 
-                    AuthSocialSectionWidget(onGoogleTap: () {}, onAppleTap: () {}),
+                    const AuthSocialSectionConnected(),
                     AppGap.h20,
 
             const AuthDividerWidget(label: 'or sign in with email'),

@@ -9,10 +9,12 @@ class AuthSocialLoginButton extends StatelessWidget {
     super.key,
     required this.provider,
     required this.onTap,
+    this.isEnabled = true,
   });
 
   final SocialProvider provider;
   final VoidCallback onTap;
+  final bool isEnabled;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +23,7 @@ class AuthSocialLoginButton extends StatelessWidget {
       width: double.infinity,
       height: 52,
       child: OutlinedButton(
-        onPressed: onTap,
+        onPressed: isEnabled ? onTap : null,
         style: OutlinedButton.styleFrom(
           backgroundColor: AppColors.surface,
           side: const BorderSide(color: AppColors.border),

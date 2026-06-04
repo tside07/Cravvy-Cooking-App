@@ -1,7 +1,11 @@
+import 'dart:async';
+
+import 'package:cravvy_cooking_app/core/constants/oauth_config.dart';
 import 'package:cravvy_cooking_app/core/constants/plan_limits.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:cravvy_cooking_app/data/services/supabase_service.dart';
 import 'package:cravvy_cooking_app/data/models/user_model.dart';
+import 'package:cravvy_cooking_app/data/services/auth_oauth_exception.dart';
+import 'package:cravvy_cooking_app/data/services/supabase_service.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class AuthService {
   static final _client = SupabaseService.client;
@@ -26,6 +30,80 @@ class AuthService {
         .eq('id', response.user!.id);
 
     return await getProfile(response.user!.id);
+  }
+
+  static const Duration oauthSessionTimeout = Duration(minutes: 5);
+
+  static Future<UserModel?> signInWithGoogle() =>
+      signInWithOAuthProvider(OAuthProvider.google);
+
+  static Future<UserModel?> signInWithApple() =>
+      signInWithOAuthProvider(OAuthProvider.apple);
+
+  /// Opens provider OAuth in browser; waits for PKCE deep-link session.
+  static Future<UserModel?> signInWithOAuthProvider(
+    OAuthProvider provider,
+  ) async {
+    final waiter = _listenForOAuthSignIn();
+    try {
+      final launched = await _client.auth.signInWithOAuth(
+        provider,
+        redirectTo: OAuthConfig.redirectUrl,
+        authScreenLaunchMode: LaunchMode.externalApplication,
+      );
+      if (!launched) {
+        throw const AuthOAuthException(AuthOAuthFailure.browserNotLaunched);
+      }
+
+      final user = await waiter.future.timeout(
+        oauthSessionTimeout,
+        onTimeout: () => null,
+      );
+      if (user == null) {
+        throw const AuthOAuthException(AuthOAuthFailure.cancelledOrTimedOut);
+      }
+
+      final profile = await ensureProfileFromAuthUser(user);
+      if (profile == null) {
+        throw const AuthOAuthException(AuthOAuthFailure.noProfile);
+      }
+      return profile;
+    } finally {
+      await waiter.cancel();
+    }
+  }
+
+  static _OAuthWaiter _listenForOAuthSignIn() {
+    final completer = Completer<User?>();
+    final sub = _client.auth.onAuthStateChange.listen((state) {
+      if (state.event == AuthChangeEvent.signedIn &&
+          state.session?.user != null &&
+          !completer.isCompleted) {
+        completer.complete(state.session!.user);
+      }
+    });
+    return _OAuthWaiter(completer, sub);
+  }
+
+  /// Creates or updates `profiles` row after OAuth when trigger did not run.
+  static Future<UserModel?> ensureProfileFromAuthUser(User user) async {
+    final existing = await getProfile(user.id);
+    if (existing != null) return existing;
+
+    final meta = user.userMetadata ?? {};
+    final fullName = (meta['full_name'] ?? meta['name'] ?? '') as String;
+    final email = user.email ?? '';
+    final avatarUrl = meta['avatar_url'] ?? meta['picture'];
+
+    final row = <String, dynamic>{
+      'id': user.id,
+      'email': email,
+      if (fullName.isNotEmpty) 'full_name': fullName,
+      if (avatarUrl != null) 'avatar_url': avatarUrl,
+    };
+
+    await _client.from('profiles').upsert(row);
+    return getProfile(user.id);
   }
 
   static Future<UserModel?> login({
@@ -165,4 +243,14 @@ class AuthService {
 
   static Stream<AuthState> get authStateChanges =>
       _client.auth.onAuthStateChange;
+}
+
+class _OAuthWaiter {
+  _OAuthWaiter(Completer<User?> completer, this._subscription)
+      : future = completer.future;
+
+  final Future<User?> future;
+  final StreamSubscription<AuthState> _subscription;
+
+  Future<void> cancel() => _subscription.cancel();
 }
