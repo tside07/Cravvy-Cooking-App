@@ -25,8 +25,8 @@ class WeekStripWidget extends StatelessWidget {
             !provider.hasPremiumAccess && visible.length < 7;
 
         return Container(
-          height: 90,
-          margin: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+          height: 64,
+          margin: const EdgeInsets.fromLTRB(16, 8, 16, 0),
           child: Row(
             children: [
               ...visible.map((i) => _DayCell(
@@ -69,6 +69,7 @@ class _DayCell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appColors = context.appColors;
     final date = weekStart.add(Duration(days: index));
     final isSelected = provider.selectedDayIndex == index;
     final isToday = index == DateTime.now().weekday - 1;
@@ -80,19 +81,20 @@ class _DayCell extends StatelessWidget {
     return Expanded(
       child: GestureDetector(
         onTap: () => provider.selectDay(index),
+        behavior: HitTestBehavior.opaque,
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 250),
-          margin: const EdgeInsets.symmetric(horizontal: 3),
-          padding: AppPad.v10,
+          margin: const EdgeInsets.symmetric(horizontal: 2),
+          padding: AppPad.v6,
           decoration: BoxDecoration(
-            color: isSelected ? AppColors.primary : AppColors.surface,
-            borderRadius: AppBorderRadius.a16,
+            color: isSelected ? AppColors.primary : appColors.cardSurface,
+            borderRadius: AppBorderRadius.a12,
             border: Border.all(
               color: isSelected
                   ? AppColors.primary
                   : isToday
                       ? AppColors.primary.withValues(alpha: 0.4)
-                      : AppColors.border,
+                      : appColors.borderDivider,
               width: isToday && !isSelected ? 1.5 : 1,
             ),
           ),
@@ -102,25 +104,25 @@ class _DayCell extends StatelessWidget {
               Text(
                 WeekStripWidget._dayKeys[index].tr(),
                 style: AppTextStyles.s12.copyWith(
-                  fontSize: 11,
+                  fontSize: 10,
                   fontWeight: FontWeight.w600,
                   color: isSelected
                       ? Colors.white.withValues(alpha: 0.8)
-                      : AppColors.textSecondary,
+                      : appColors.textSecondary,
                 ),
               ),
-              AppGap.h4,
+              AppGap.h2,
               Text(
                 DateFormat('d').format(date),
-                style: AppTextStyles.s16.copyWith(
+                style: AppTextStyles.s14.copyWith(
                   fontWeight: FontWeight.w800,
-                  color: isSelected ? AppColors.white : AppColors.textPrimary,
+                  color: isSelected ? appColors.onPrimary : appColors.textPrimary,
                 ),
               ),
-              AppGap.h6,
+              AppGap.h3,
               Container(
-                width: 6,
-                height: 6,
+                width: 5,
+                height: 5,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: !hasPlan
@@ -131,7 +133,7 @@ class _DayCell extends StatelessWidget {
                               ? AppColors.warning
                               : isSelected
                                   ? Colors.white.withValues(alpha: 0.4)
-                                  : AppColors.border,
+                                  : appColors.borderDivider,
                 ),
               ),
             ],
@@ -153,15 +155,18 @@ class _LockedDaysTeaser extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appColors = context.appColors;
+
     return Expanded(
       child: GestureDetector(
         onTap: onTap,
+        behavior: HitTestBehavior.opaque,
         child: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 3),
-          padding: AppPad.v10,
+          margin: const EdgeInsets.symmetric(horizontal: 2),
+          padding: AppPad.v6,
           decoration: BoxDecoration(
-            color: AppColors.surface,
-            borderRadius: AppBorderRadius.a16,
+            color: appColors.cardSurface,
+            borderRadius: AppBorderRadius.a12,
             border: Border.all(
               color: AppColors.primary.withValues(alpha: 0.35),
               width: 1,
@@ -173,25 +178,24 @@ class _LockedDaysTeaser extends StatelessWidget {
             children: [
               Icon(
                 Icons.lock_outline_rounded,
-                size: 18,
+                size: 14,
                 color: AppColors.primary.withValues(alpha: 0.8),
               ),
-              AppGap.h4,
+              AppGap.h2,
               Text(
                 '+$hiddenCount',
-                style: AppTextStyles.s14.copyWith(
+                style: AppTextStyles.s12.copyWith(
                   fontWeight: FontWeight.w800,
                   color: AppColors.primary,
                 ),
               ),
-              AppGap.h2,
               Text(
                 'limits.unlock_week'.tr(),
                 textAlign: TextAlign.center,
-                maxLines: 2,
+                maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: AppTextStyles.s10.copyWith(
-                  color: AppColors.textSecondary,
+                  color: appColors.textSecondary,
                   fontWeight: FontWeight.w600,
                   height: 1.1,
                 ),

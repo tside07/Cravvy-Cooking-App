@@ -13,8 +13,8 @@ class CalorieSummaryWidget extends StatelessWidget {
         final remaining = provider.remainingCalories;
 
         return Container(
-          margin: const EdgeInsets.fromLTRB(16, 14, 16, 0),
-          padding: AppPad.a18,
+          margin: const EdgeInsets.fromLTRB(16, 12, 16, 0),
+          padding: AppPad.a14,
           decoration: BoxDecoration(
             gradient: AppColors.primaryGradient,
             borderRadius: AppBorderRadius.a20,
@@ -34,7 +34,7 @@ class CalorieSummaryWidget extends StatelessWidget {
                       Text(
                         '${remaining > 0 ? remaining : 0}',
                         style: AppTextStyles.s20.copyWith(
-                          fontSize: 36,
+                          fontSize: 28,
                           fontWeight: FontWeight.w800,
                           color: AppColors.white,
                           height: 1,
@@ -57,7 +57,7 @@ class CalorieSummaryWidget extends StatelessWidget {
                   ),
                 ],
               ),
-              AppGap.h14,
+              AppGap.h12,
               ClipRRect(
                 borderRadius: AppBorderRadius.a8,
                 child: LinearProgressIndicator(
@@ -67,7 +67,7 @@ class CalorieSummaryWidget extends StatelessWidget {
                   valueColor: const AlwaysStoppedAnimation<Color>(Colors.white),
                 ),
               ),
-              AppGap.h16,
+              AppGap.h14,
               Row(
                 children: [
                   _MacroChip(
@@ -174,7 +174,7 @@ class _MacroChip extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
-        padding: AppPad.h10v8,
+        padding: AppPad.h10v6,
         decoration: BoxDecoration(
           color: Colors.white.withValues(alpha: 0.15),
           borderRadius: AppBorderRadius.a12,

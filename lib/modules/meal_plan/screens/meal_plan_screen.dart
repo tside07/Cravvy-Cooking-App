@@ -1,6 +1,7 @@
 // lib/modules/meal_plan/screens/meal_plan_screen.dart
 
 import 'package:cravvy_cooking_app/core/constants/plan_limits.dart';
+import 'package:cravvy_cooking_app/core/utils/meal_plan_streak.dart';
 import 'package:cravvy_cooking_app/data/services/usage_limit_service.dart';
 import 'package:cravvy_cooking_app/init.dart';
 import 'package:cravvy_cooking_app/data/models/meal.dart';
@@ -21,7 +22,6 @@ class MealPlanScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
       body: SafeArea(
         child: Column(
           children: [
@@ -46,6 +46,10 @@ class _StreakBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final streak = MealPlanStreak.days(
+      context.watch<MealPlanProvider>().weekPlan,
+    );
+
     return Container(
       padding: AppPad.h12v6,
       decoration: BoxDecoration(
@@ -58,7 +62,7 @@ class _StreakBadge extends StatelessWidget {
           const Text('🔥', style: AppTextStyles.s14),
           AppGap.w4,
           Text(
-            'meal_plan.streak_days'.tr(namedArgs: {'n': '7'}),
+            'meal_plan.streak_days'.tr(namedArgs: {'n': '$streak'}),
             style: AppTextStyles.s12.copyWith(
               color: AppColors.primary,
               fontWeight: FontWeight.w700,
@@ -135,7 +139,7 @@ class _MealList extends StatelessWidget {
           onRefresh: provider.reload,
           color: AppColors.primary,
           child: ListView.builder(
-            padding: const EdgeInsets.fromLTRB(16, 12, 16, 100),
+            padding: const EdgeInsets.fromLTRB(16, 8, 16, 20),
             itemCount: _allSlots.length + 1, // +1 cho banner
             itemBuilder: (context, i) {
               // Index 0: banner "Làm mới gợi ý"

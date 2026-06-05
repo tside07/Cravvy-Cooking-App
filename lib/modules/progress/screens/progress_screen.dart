@@ -1,4 +1,5 @@
 import 'package:cravvy_cooking_app/init.dart';
+import 'package:cravvy_cooking_app/core/utils/meal_plan_streak.dart';
 import 'package:cravvy_cooking_app/core/widgets/template/custom_app_bar.dart';
 import 'package:cravvy_cooking_app/common/widgets/centered_loading.dart';
 import 'package:cravvy_cooking_app/data/models/meal.dart';
@@ -66,14 +67,7 @@ class ProgressScreen extends StatelessWidget {
       );
     }
 
-    final today = todayIndex ?? DateTime.now().weekday - 1;
-    final clampedToday = today.clamp(0, weekPlan.length - 1);
-
-    var streak = 0;
-    for (var i = clampedToday; i >= 0; i--) {
-      if (weekPlan[i].loggedCount <= 0) break;
-      streak++;
-    }
+    final streak = MealPlanStreak.days(weekPlan, todayIndex: todayIndex);
 
     final mealsLogged = weekPlan.fold<int>(0, (sum, d) => sum + d.loggedCount);
 
@@ -175,7 +169,6 @@ class ProgressScreen extends StatelessWidget {
     ];
 
     return Scaffold(
-      backgroundColor: AppColors.background,
       body: SafeArea(
         child: CustomScrollView(
           slivers: [

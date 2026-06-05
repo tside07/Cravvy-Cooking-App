@@ -1,5 +1,7 @@
 import 'package:cravvy_cooking_app/init.dart';
+import 'package:cravvy_cooking_app/core/utils/meal_plan_streak.dart';
 import 'package:cravvy_cooking_app/data/providers/auth_provider.dart';
+import 'package:cravvy_cooking_app/modules/meal_plan/provider/meal_plan_provider.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class HomeHeaderWidget extends StatelessWidget {
@@ -24,6 +26,9 @@ class HomeHeaderWidget extends StatelessWidget {
     final _ = context.locale;
     final user = context.watch<AuthProvider>().user;
     final firstName = user?.fullName?.split(' ').first ?? 'there';
+    final streak = MealPlanStreak.days(
+      context.watch<MealPlanProvider>().weekPlan,
+    );
 
     return Padding(
       padding: const EdgeInsets.only(left: 24, top: 20, right: 24),
@@ -49,7 +54,6 @@ class HomeHeaderWidget extends StatelessWidget {
               ],
             ),
           ),
-          // Streak badge — mock, sẽ làm thật Tuần 8
           Container(
             padding: AppPad.h12v6,
             decoration: BoxDecoration(
@@ -61,7 +65,7 @@ class HomeHeaderWidget extends StatelessWidget {
                 const Text('🔥', style: TextStyle(fontSize: 14)),
                 AppGap.w4,
                 Text(
-                  'home.streak_badge'.tr(namedArgs: {'n': '7'}),
+                  'home.streak_badge'.tr(namedArgs: {'n': '$streak'}),
                   style: AppTextStyles.s12.copyWith(
                     fontWeight: FontWeight.w700,
                     color: AppColors.primary,
