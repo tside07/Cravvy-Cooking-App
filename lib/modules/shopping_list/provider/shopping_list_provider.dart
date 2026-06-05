@@ -1,3 +1,5 @@
+import 'package:cravvy_cooking_app/data/models/user_model.dart';
+import 'package:cravvy_cooking_app/data/services/shopping_list_service.dart';
 import 'package:cravvy_cooking_app/data/services/shopping_list_storage.dart';
 import 'package:cravvy_cooking_app/modules/meal_detail/models/meal_detail_ingredient.dart';
 import 'package:cravvy_cooking_app/modules/shopping_list/model/shopping_item.dart';
@@ -6,15 +8,18 @@ import 'package:uuid/uuid.dart';
 
 class ShoppingListProvider extends ChangeNotifier {
   ShoppingListProvider({bool autoLoad = true}) {
-    if (autoLoad) _load();
+    if (autoLoad) _loadLocalOnly();
   }
 
   static const _uuid = Uuid();
 
   final List<ShoppingItem> _items = [];
   bool _isLoaded = false;
+  String? _userId;
+  bool _isSyncing = false;
 
   bool get isLoaded => _isLoaded;
+  bool get isSyncing => _isSyncing;
   List<ShoppingItem> get items => List.unmodifiable(_items);
   bool get isEmpty => _items.isEmpty;
   int get checkedCount => _items.where((i) => i.checked).length;
@@ -30,7 +35,6 @@ class ShoppingListProvider extends ChangeNotifier {
     return map;
   }
 
-  /// Distinct recipe ids in insertion order (for the cart list).
   List<String> get recipeIds {
     final seen = <String>[];
     for (final item in _items) {
@@ -54,7 +58,20 @@ class ShoppingListProvider extends ChangeNotifier {
     return match.first.recipeName;
   }
 
-  Future<void> _load() async {
+  /// Called when auth session changes (login, logout, cold start).
+  Future<void> updateFromUser(UserModel? user) async {
+    final nextUserId = user?.id;
+    if (_userId == nextUserId && _isLoaded) return;
+
+    _userId = nextUserId;
+    if (nextUserId == null) {
+      await _loadLocalOnly();
+      return;
+    }
+    await _syncFromCloud(nextUserId);
+  }
+
+  Future<void> _loadLocalOnly() async {
     final stored = await ShoppingListStorage.load();
     _items
       ..clear()
@@ -63,9 +80,46 @@ class ShoppingListProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> _persist() => ShoppingListStorage.save(_items);
+  Future<void> _syncFromCloud(String userId) async {
+    _isSyncing = true;
+    notifyListeners();
+    try {
+      final remote = await ShoppingListService.fetchForUser(userId);
+      final local = await ShoppingListStorage.load();
 
-  /// Adds unchecked ingredients from meal detail. Returns count added (skips dupes).
+      if (remote.isEmpty && local.isNotEmpty) {
+        _items
+          ..clear()
+          ..addAll(local);
+        await ShoppingListService.replaceAll(userId, _items);
+        await ShoppingListStorage.save(_items);
+      } else {
+        _items
+          ..clear()
+          ..addAll(remote);
+        await ShoppingListStorage.save(_items);
+      }
+    } catch (e) {
+      debugPrint('ShoppingListProvider cloud sync failed: $e');
+      await _loadLocalOnly();
+    } finally {
+      _isSyncing = false;
+      _isLoaded = true;
+      notifyListeners();
+    }
+  }
+
+  Future<void> _persist() async {
+    await ShoppingListStorage.save(_items);
+    final uid = _userId;
+    if (uid == null) return;
+    try {
+      await ShoppingListService.replaceAll(uid, _items);
+    } catch (e) {
+      debugPrint('ShoppingListProvider cloud persist failed: $e');
+    }
+  }
+
   int addFromMeal({
     required String recipeId,
     required String recipeName,
@@ -134,7 +188,6 @@ class ShoppingListProvider extends ChangeNotifier {
     _persist();
   }
 
-  /// Marks every ingredient of a recipe as bought (checked).
   void markRecipeBought(String recipeId) {
     for (final item in _items.where((i) => i.recipeId == recipeId)) {
       item.checked = true;
@@ -143,7 +196,6 @@ class ShoppingListProvider extends ChangeNotifier {
     _persist();
   }
 
-  /// Removes all ingredients belonging to a recipe.
   void removeRecipe(String recipeId) {
     _items.removeWhere((i) => i.recipeId == recipeId);
     notifyListeners();

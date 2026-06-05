@@ -9,6 +9,7 @@ import 'package:cravvy_cooking_app/data/services/auth_service.dart';
 import 'package:cravvy_cooking_app/data/services/supabase_service.dart';
 import 'package:cravvy_cooking_app/data/providers/recipe_provider.dart';
 import 'package:cravvy_cooking_app/modules/meal_plan/provider/meal_plan_provider.dart';
+import 'package:cravvy_cooking_app/modules/shopping_list/provider/shopping_list_provider.dart';
 
 enum AuthStatus { initial, loading, authenticated, unauthenticated, error }
 
@@ -18,6 +19,7 @@ class AuthProvider extends ChangeNotifier {
   String? _errorMessage;
   MealPlanProvider? _mealPlanProvider;
   RecipeProvider? _recipeProvider;
+  ShoppingListProvider? _shoppingListProvider;
   bool? _lastRecipeCatalogPremium;
 
   AuthStatus get status => _status;
@@ -36,8 +38,16 @@ class AuthProvider extends ChangeNotifier {
     if (_user != null) _syncRecipeCatalog();
   }
 
+  void linkShoppingListProvider(ShoppingListProvider provider) {
+    _shoppingListProvider = provider;
+    if (_user != null) {
+      _shoppingListProvider!.updateFromUser(_user);
+    }
+  }
+
   void _syncUserToProviders() {
     _mealPlanProvider?.updateFromUser(_user);
+    _shoppingListProvider?.updateFromUser(_user);
     _syncRecipeCatalog();
   }
 

@@ -72,6 +72,15 @@ Deno.serve(async (req) => {
       return jsonResponse({ error: usageError.message }, 500);
     }
 
+    const { error: shoppingError } = await admin
+      .from("shopping_list_items")
+      .delete()
+      .eq("user_id", userId);
+    if (shoppingError) {
+      console.error("shopping_list_items delete:", shoppingError);
+      return jsonResponse({ error: shoppingError.message }, 500);
+    }
+
     const { error: profileError } = await admin
       .from("profiles")
       .delete()

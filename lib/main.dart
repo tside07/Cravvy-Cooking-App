@@ -59,11 +59,13 @@ void main() async {
               final auth = AuthProvider();
               auth.linkMealPlanProvider(ctx.read<MealPlanProvider>());
               auth.linkRecipeProvider(ctx.read<RecipeProvider>());
+              auth.linkShoppingListProvider(ctx.read<ShoppingListProvider>());
               return auth;
             },
             update: (ctx, mealPlan, auth) {
               auth!.linkMealPlanProvider(mealPlan);
               auth.linkRecipeProvider(ctx.read<RecipeProvider>());
+              auth.linkShoppingListProvider(ctx.read<ShoppingListProvider>());
               return auth;
             },
           ),
