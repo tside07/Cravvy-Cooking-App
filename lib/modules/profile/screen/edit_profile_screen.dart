@@ -154,15 +154,15 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         elevation: 0,
         scrolledUnderElevation: 0,
         leading: IconButton(
-          icon: const Icon(
+          icon: Icon(
             Icons.arrow_back_rounded,
-            color: AppColors.textPrimary,
+            color: context.appColors.textPrimary,
           ),
           onPressed: () => context.pop(),
         ),
         title: Text(
           'profile.edit_profile'.tr(),
-          style: AppTextStyles.s16.copyWith(fontWeight: FontWeight.w700),
+          style: context.themed(AppTextStyles.s16, fontWeight: FontWeight.w700),
         ),
         centerTitle: true,
       ),
@@ -236,21 +236,19 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               EditProfileSectionHeaderWidget(title: 'profile.basic_info'.tr()),
               AppGap.h8,
 
-              FieldCardWidget(
-                child: TextFormField(
+              TextFormField(
+                controller: _nameCtrl,
+                style: fieldStyle,
+                decoration: _fieldDecoration(
+                  context,
+                  icon: Icons.person_outline_rounded,
+                  hint: 'profile.hint_fullname'.tr(),
                   controller: _nameCtrl,
-                  style: fieldStyle,
-                  decoration: _fieldDecoration(
-                    context,
-                    icon: Icons.person_outline_rounded,
-                    hint: 'profile.hint_fullname'.tr(),
-                    controller: _nameCtrl,
-                    showCheckMark: true,
-                  ),
-                  validator: (v) => (v == null || v.trim().isEmpty)
-                      ? 'profile.val_name'.tr()
-                      : null,
+                  showCheckMark: true,
                 ),
+                validator: (v) => (v == null || v.trim().isEmpty)
+                    ? 'profile.val_name'.tr()
+                    : null,
               ),
 
               AppGap.h10,
@@ -258,35 +256,30 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               FieldCardWidget(
                 child: ListTile(
                   contentPadding: AppPad.h12v4,
-                  leading: Container(
-                    width: 34,
-                    height: 34,
-                    decoration: BoxDecoration(
-                      color: AppColors.primaryLight,
-                      borderRadius: AppBorderRadius.a8,
-                    ),
-                    child: const Icon(
-                      Icons.calendar_today_rounded,
-                      size: 16,
-                      color: AppColors.primary,
-                    ),
+                  leading: AppInputDecoration.prefixIconBox(
+                    context,
+                    Icons.calendar_today_rounded,
                   ),
                   title: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         'profile.dob'.tr(),
-                        style: AppTextStyles.s10.copyWith(
-                          color: AppColors.textSecondary,
+                        style: context.themed(
+                          AppTextStyles.s10,
+                          color: context.appColors.textSecondary,
                         ),
                       ),
-                      Text(formattedDate, style: AppTextStyles.s14),
+                      Text(
+                        formattedDate,
+                        style: context.themed(AppTextStyles.s14),
+                      ),
                     ],
                   ),
-                  trailing: const Icon(
+                  trailing: Icon(
                     Icons.calendar_today_outlined,
                     size: 18,
-                    color: AppColors.textHint,
+                    color: context.appColors.textDisabled,
                   ),
                   onTap: _pickDate,
                 ),
@@ -299,44 +292,40 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               ),
               AppGap.h8,
 
-              FieldCardWidget(
-                child: TextFormField(
+              TextFormField(
+                controller: _emailCtrl,
+                keyboardType: TextInputType.emailAddress,
+                style: fieldStyle,
+                decoration: _fieldDecoration(
+                  context,
+                  icon: Icons.email_outlined,
+                  hint: 'profile.hint_email'.tr(),
                   controller: _emailCtrl,
-                  keyboardType: TextInputType.emailAddress,
-                  style: fieldStyle,
-                  decoration: _fieldDecoration(
-                    context,
-                    icon: Icons.email_outlined,
-                    hint: 'profile.hint_email'.tr(),
-                    controller: _emailCtrl,
-                    showCheckMark: true,
-                  ),
-                  validator: (v) {
-                    if (v == null || v.trim().isEmpty) {
-                      return 'profile.val_email1'.tr();
-                    }
-                    if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(v.trim())) {
-                      return 'profile.val_email2'.tr();
-                    }
-                    return null;
-                  },
+                  showCheckMark: true,
                 ),
+                validator: (v) {
+                  if (v == null || v.trim().isEmpty) {
+                    return 'profile.val_email1'.tr();
+                  }
+                  if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(v.trim())) {
+                    return 'profile.val_email2'.tr();
+                  }
+                  return null;
+                },
               ),
 
               AppGap.h10,
 
-              FieldCardWidget(
-                child: TextFormField(
+              TextFormField(
+                controller: _phoneCtrl,
+                keyboardType: TextInputType.phone,
+                style: fieldStyle,
+                decoration: _fieldDecoration(
+                  context,
+                  icon: Icons.phone_outlined,
+                  hint: 'profile.phoneNo'.tr(),
                   controller: _phoneCtrl,
-                  keyboardType: TextInputType.phone,
-                  style: fieldStyle,
-                  decoration: _fieldDecoration(
-                    context,
-                    icon: Icons.phone_outlined,
-                    hint: 'profile.phoneNo'.tr(),
-                    controller: _phoneCtrl,
-                    showCheckMark: false,
-                  ),
+                  showCheckMark: false,
                 ),
               ),
 
@@ -345,64 +334,38 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               EditProfileSectionHeaderWidget(title: 'profile.about_u'.tr()),
               AppGap.h8,
 
-              FieldCardWidget(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    TextFormField(
-                      controller: _bioCtrl,
-                      maxLines: 4,
-                      maxLength: _bioMaxLength,
-                      style: fieldStyle,
-                      decoration: InputDecoration(
-                        hintText: 'profile.hint_bio'.tr(),
-                        hintStyle: AppTextStyles.s14.copyWith(
-                          color: context.appColors.inputHint,
-                        ),
-                        prefixIcon: Padding(
-                          padding: const EdgeInsets.only(
-                            left: 10,
-                            right: 10,
-                            top: 10,
-                            bottom: 10,
-                          ),
-                          child: Align(
-                            alignment: Alignment.topCenter,
-                            widthFactor: 1.0,
-                            heightFactor: 4.0,
-                            child: Container(
-                              width: 34,
-                              height: 34,
-                              decoration: BoxDecoration(
-                                color: AppColors.primaryLight,
-                                borderRadius: AppBorderRadius.a8,
-                              ),
-                              child: const Icon(
-                                Icons.description_outlined,
-                                size: 16,
-                                color: AppColors.primary,
-                              ),
-                            ),
-                          ),
-                        ),
-                        border: InputBorder.none,
-                        enabledBorder: InputBorder.none,
-                        focusedBorder: InputBorder.none,
-                        alignLabelWithHint: true,
-                        counterText: '',
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  TextFormField(
+                    controller: _bioCtrl,
+                    maxLines: 4,
+                    maxLength: _bioMaxLength,
+                    style: fieldStyle,
+                    decoration: AppInputDecoration.outlined(
+                      context,
+                      hintText: 'profile.hint_bio'.tr(),
+                      prefixIcon: AppInputDecoration.prefixIconBox(
+                        context,
+                        Icons.description_outlined,
+                      ),
+                      contentPadding: const EdgeInsets.fromLTRB(14, 14, 14, 12),
+                    ).copyWith(
+                      alignLabelWithHint: true,
+                      counterText: '',
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 12, bottom: 8, top: 4),
+                    child: Text(
+                      '${_bioCtrl.text.length}/$_bioMaxLength',
+                      style: context.themed(
+                        AppTextStyles.s10,
+                        color: context.appColors.textDisabled,
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 12, bottom: 8),
-                      child: Text(
-                        '${_bioCtrl.text.length}/$_bioMaxLength',
-                        style: AppTextStyles.s10.copyWith(
-                          color: AppColors.textHint,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
 
               AppGap.h32,
@@ -502,23 +465,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     required TextEditingController controller,
     required bool showCheckMark,
   }) {
-    final appColors = context.appColors;
-
-    return InputDecoration(
+    return AppInputDecoration.outlined(
+      context,
       hintText: hint,
-      hintStyle: AppTextStyles.s14.copyWith(color: appColors.inputHint),
-      prefixIcon: Padding(
-        padding: const EdgeInsets.all(10),
-        child: Container(
-          width: 34,
-          height: 34,
-          decoration: BoxDecoration(
-            color: AppColors.primaryLight,
-            borderRadius: AppBorderRadius.a8,
-          ),
-          child: Icon(icon, size: 16, color: AppColors.primary),
-        ),
-      ),
+      prefixIcon: AppInputDecoration.prefixIconBox(context, icon),
       suffixIcon: showCheckMark
           ? ValueListenableBuilder<TextEditingValue>(
               valueListenable: controller,
@@ -534,9 +484,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   : const SizedBox.shrink(),
             )
           : null,
-      border: InputBorder.none,
-      enabledBorder: InputBorder.none,
-      focusedBorder: InputBorder.none,
     );
   }
 }

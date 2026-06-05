@@ -22,7 +22,7 @@ class _Action {
 class QuickActionsGridWidget extends StatelessWidget {
   const QuickActionsGridWidget({super.key});
 
-  List<_Action> _actions() => [
+  List<_Action> _actions(AppColorExtension colors) => [
         _Action(
           '🥕',
           'home.action_ingredients'.tr(),
@@ -40,7 +40,7 @@ class QuickActionsGridWidget extends StatelessWidget {
         _Action(
           '📋',
           'home.action_plan'.tr(),
-          AppColors.surfaceVariant,
+          colors.elevated,
           AppColors.dinner,
           tabIndex: 1,
         ),
@@ -56,6 +56,7 @@ class QuickActionsGridWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _ = context.locale;
+    final colors = context.appColors;
 
     return Padding(
       padding: const EdgeInsets.only(
@@ -81,7 +82,9 @@ class QuickActionsGridWidget extends StatelessWidget {
             childAspectRatio: 1.6,
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
-            children: _actions().map((a) => _ActionCard(action: a)).toList(),
+            children: _actions(colors)
+                .map((a) => _ActionCard(action: a))
+                .toList(),
           ),
         ],
       ),
@@ -95,8 +98,10 @@ class _ActionCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
+
     return Material(
-      color: AppColors.surface,
+      color: colors.cardSurface,
       borderRadius: AppBorderRadius.a18,
       child: InkWell(
         borderRadius: AppBorderRadius.a18,
@@ -108,7 +113,7 @@ class _ActionCard extends StatelessWidget {
         child: Container(
           padding: AppPad.a14,
           decoration: BoxDecoration(
-            border: Border.all(color: AppColors.border),
+            border: Border.all(color: colors.borderDivider),
             borderRadius: AppBorderRadius.a18,
           ),
           child: Column(
@@ -131,9 +136,9 @@ class _ActionCard extends StatelessWidget {
               const Spacer(),
               Text(
                 action.label,
-                style: AppTextStyles.s12.copyWith(
+                style: context.themed(
+                  AppTextStyles.s12,
                   fontWeight: FontWeight.w700,
-                  color: AppColors.textPrimary,
                 ),
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,

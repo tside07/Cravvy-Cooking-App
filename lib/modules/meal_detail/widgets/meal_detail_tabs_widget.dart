@@ -8,6 +8,8 @@ class MealDetailTabsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
+
     return SliverToBoxAdapter(
       child: Consumer<MealDetailProvider>(
         builder: (context, provider, _) {
@@ -16,7 +18,7 @@ class MealDetailTabsWidget extends StatelessWidget {
             child: Container(
               padding: AppPad.a4,
               decoration: BoxDecoration(
-                color: AppColors.surfaceVariant,
+                color: colors.elevated,
                 borderRadius: AppBorderRadius.a16,
               ),
               child: Row(
@@ -29,24 +31,22 @@ class MealDetailTabsWidget extends StatelessWidget {
                         duration: const Duration(milliseconds: 200),
                         padding: AppPad.v10,
                         decoration: BoxDecoration(
-                          color: isActive
-                              ? AppColors.surface
-                              : Colors.transparent,
+                          color: isActive ? colors.cardSurface : Colors.transparent,
                           borderRadius: AppBorderRadius.a12,
                           border: isActive
-                              ? Border.all(color: AppColors.border)
+                              ? Border.all(color: colors.borderDivider)
                               : null,
                         ),
                         child: Text(
                           _label(tab),
                           textAlign: TextAlign.center,
-                          style: AppTextStyles.s14.copyWith(
-                            fontWeight: isActive
-                                ? FontWeight.w700
-                                : FontWeight.w500,
+                          style: context.themed(
+                            AppTextStyles.s14,
+                            fontWeight:
+                                isActive ? FontWeight.w700 : FontWeight.w500,
                             color: isActive
                                 ? AppColors.primary
-                                : AppColors.textSecondary,
+                                : colors.textSecondary,
                           ),
                         ),
                       ),

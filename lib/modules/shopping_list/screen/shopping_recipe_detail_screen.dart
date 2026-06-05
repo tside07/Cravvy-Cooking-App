@@ -12,6 +12,7 @@ class ShoppingRecipeDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _ = context.locale;
+    final colors = context.appColors;
     final provider = context.watch<ShoppingListProvider>();
     final items = provider.itemsForRecipe(recipeId);
     final recipeName = provider.recipeNameOf(recipeId);
@@ -22,8 +23,8 @@ class ShoppingRecipeDetailScreen extends StatelessWidget {
         scrolledUnderElevation: 0,
         centerTitle: true,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new_rounded,
-              color: AppColors.textPrimary),
+          icon: Icon(Icons.arrow_back_ios_new_rounded,
+              color: colors.textPrimary),
           onPressed: () => context.pop(),
         ),
         title: Text(
@@ -35,8 +36,10 @@ class ShoppingRecipeDetailScreen extends StatelessWidget {
           ? Center(
               child: Text(
                 'shopping_list.empty_desc'.tr(),
-                style: AppTextStyles.s14
-                    .copyWith(color: AppColors.textSecondary),
+                style: context.themed(
+                  AppTextStyles.s14,
+                  color: colors.textSecondary,
+                ),
               ),
             )
           : SafeArea(
@@ -106,14 +109,12 @@ class _IngredientCartTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
+
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
       padding: AppPad.h16v12,
-      decoration: BoxDecoration(
-        color: AppColors.surface,
-        borderRadius: AppBorderRadius.a16,
-        border: Border.all(color: AppColors.border),
-      ),
+      decoration: context.cardBox(radius: 16),
       child: Row(
         children: [
           GestureDetector(
@@ -124,7 +125,9 @@ class _IngredientCartTile extends StatelessWidget {
               decoration: BoxDecoration(
                 color: item.checked ? AppColors.success : Colors.transparent,
                 border: Border.all(
-                  color: item.checked ? AppColors.success : AppColors.border,
+                  color: item.checked
+                      ? AppColors.success
+                      : colors.borderDivider,
                   width: 2,
                 ),
                 borderRadius: AppBorderRadius.a6,
@@ -142,8 +145,8 @@ class _IngredientCartTile extends StatelessWidget {
               style: AppTextStyles.s14.copyWith(
                 fontWeight: FontWeight.w600,
                 color: item.checked
-                    ? AppColors.textSecondary
-                    : AppColors.textPrimary,
+                    ? colors.textSecondary
+                    : colors.textPrimary,
                 decoration:
                     item.checked ? TextDecoration.lineThrough : null,
               ),
@@ -161,7 +164,7 @@ class _IngredientCartTile extends StatelessWidget {
           _StepperButton(icon: Icons.add_rounded, onTap: onIncrement),
           IconButton(
             icon: const Icon(Icons.delete_outline_rounded, size: 20),
-            color: AppColors.textHint,
+            color: colors.textDisabled,
             onPressed: onRemove,
             padding: const EdgeInsets.only(left: 4),
             constraints: const BoxConstraints(),
@@ -180,6 +183,8 @@ class _StepperButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
+
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(20),
@@ -187,11 +192,11 @@ class _StepperButton extends StatelessWidget {
         width: 30,
         height: 30,
         decoration: BoxDecoration(
-          color: AppColors.surfaceVariant,
+          color: colors.elevated,
           shape: BoxShape.circle,
-          border: Border.all(color: AppColors.border),
+          border: Border.all(color: colors.borderDivider),
         ),
-        child: Icon(icon, size: 16, color: AppColors.textPrimary),
+        child: Icon(icon, size: 16, color: colors.textPrimary),
       ),
     );
   }
@@ -212,11 +217,13 @@ class _OrderSummaryBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final allBought = boughtCount >= totalCount && totalCount > 0;
 
+    final colors = context.appColors;
+
     return Container(
       padding: AppPad.a16,
       decoration: BoxDecoration(
-        color: AppColors.surface,
-        border: Border(top: BorderSide(color: AppColors.border)),
+        color: colors.cardSurface,
+        border: Border(top: BorderSide(color: colors.borderDivider)),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -233,8 +240,10 @@ class _OrderSummaryBar extends StatelessWidget {
                   'bought': '$boughtCount',
                   'total': '$totalCount',
                 }),
-                style: AppTextStyles.s14
-                    .copyWith(color: AppColors.textSecondary),
+                style: context.themed(
+                  AppTextStyles.s14,
+                  color: colors.textSecondary,
+                ),
               ),
             ],
           ),

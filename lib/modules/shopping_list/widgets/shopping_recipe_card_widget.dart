@@ -20,16 +20,13 @@ class ShoppingRecipeCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
     final remaining = totalCount - checkedCount;
     final allDone = remaining <= 0 && totalCount > 0;
 
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
-      decoration: BoxDecoration(
-        color: AppColors.surface,
-        borderRadius: AppBorderRadius.a16,
-        border: Border.all(color: AppColors.border),
-      ),
+      decoration: context.cardBox(radius: 16),
       clipBehavior: Clip.hardEdge,
       child: Material(
         color: Colors.transparent,
@@ -65,9 +62,9 @@ class ShoppingRecipeCardWidget extends StatelessWidget {
                         recipeName,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: AppTextStyles.s14.copyWith(
+                        style: context.themed(
+                          AppTextStyles.s14,
                           fontWeight: FontWeight.w700,
-                          color: AppColors.textPrimary,
                         ),
                       ),
                       AppGap.h4,
@@ -77,10 +74,11 @@ class ShoppingRecipeCardWidget extends StatelessWidget {
                             : 'shopping_list.remaining_count'.tr(
                                 namedArgs: {'n': '$remaining'},
                               ),
-                        style: AppTextStyles.s12.copyWith(
+                        style: context.themed(
+                          AppTextStyles.s12,
                           color: allDone
                               ? AppColors.success
-                              : AppColors.textSecondary,
+                              : colors.textSecondary,
                         ),
                       ),
                     ],
@@ -88,11 +86,13 @@ class ShoppingRecipeCardWidget extends StatelessWidget {
                 ),
                 IconButton(
                   icon: const Icon(Icons.delete_outline_rounded, size: 20),
-                  color: AppColors.textHint,
+                  color: colors.textDisabled,
                   onPressed: onRemove,
                 ),
-                const Icon(Icons.chevron_right_rounded,
-                    color: AppColors.textHint),
+                Icon(
+                  Icons.chevron_right_rounded,
+                  color: colors.textDisabled,
+                ),
               ],
             ),
           ),

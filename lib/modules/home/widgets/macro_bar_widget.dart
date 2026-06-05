@@ -18,6 +18,7 @@ class MacroBarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
     final progress = (current / target).clamp(0.0, 1.0);
     return Column(
       children: [
@@ -32,9 +33,10 @@ class MacroBarWidget extends StatelessWidget {
             ),
             Text(
               '$current / $target$unit',
-              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+              style: context.themed(
+                Theme.of(context).textTheme.bodySmall ??
+                    AppTextStyles.s12,
                 fontWeight: FontWeight.w600,
-                color: AppColors.textPrimary,
               ),
             ),
           ],
@@ -45,7 +47,7 @@ class MacroBarWidget extends StatelessWidget {
           child: LinearProgressIndicator(
             value: progress,
             minHeight: 7,
-            backgroundColor: AppColors.surfaceVariant,
+            backgroundColor: colors.elevated,
             valueColor: AlwaysStoppedAnimation<Color>(color),
           ),
         ),

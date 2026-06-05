@@ -88,11 +88,7 @@ class _MacroCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: AppPad.a16,
-      decoration: BoxDecoration(
-        color: AppColors.surface,
-        borderRadius: AppBorderRadius.a16,
-        border: Border.all(color: AppColors.border),
-      ),
+      decoration: context.cardBox(radius: 16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -111,8 +107,9 @@ class _MacroCard extends StatelessWidget {
               Expanded(
                 child: Text(
                   label,
-                  style: AppTextStyles.s12.copyWith(
-                    color: AppColors.textSecondary,
+                  style: context.themed(
+                    AppTextStyles.s12,
+                    color: context.appColors.textSecondary,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -125,15 +122,16 @@ class _MacroCard extends StatelessWidget {
               children: [
                 TextSpan(
                   text: value,
-                  style: AppTextStyles.s20.copyWith(
+                  style: context.themed(
+                    AppTextStyles.s20,
                     fontWeight: FontWeight.w800,
-                    color: AppColors.textPrimary,
                   ),
                 ),
                 TextSpan(
                   text: ' $unit',
-                  style: AppTextStyles.s12.copyWith(
-                    color: AppColors.textSecondary,
+                  style: context.themed(
+                    AppTextStyles.s12,
+                    color: context.appColors.textSecondary,
                     fontWeight: FontWeight.w500,
                   ),
                 ),

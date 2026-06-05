@@ -35,6 +35,7 @@ class _FeaturedRecipesWidgetState extends State<FeaturedRecipesWidget> {
   @override
   Widget build(BuildContext context) {
     final _ = context.locale;
+    final colors = context.appColors;
 
     return Consumer<RecipeProvider>(
       builder: (context, provider, _) {
@@ -110,12 +111,12 @@ class _FeaturedRecipesWidgetState extends State<FeaturedRecipesWidget> {
                           decoration: BoxDecoration(
                             color: isSelected
                                 ? AppColors.primary
-                                : AppColors.surface,
+                                : colors.cardSurface,
                             borderRadius: BorderRadius.circular(20),
                             border: Border.all(
                               color: isSelected
                                   ? AppColors.primary
-                                  : AppColors.border,
+                                  : colors.borderDivider,
                             ),
                           ),
                           child: Text(
@@ -124,7 +125,7 @@ class _FeaturedRecipesWidgetState extends State<FeaturedRecipesWidget> {
                               fontWeight: FontWeight.w700,
                               color: isSelected
                                   ? Colors.white
-                                  : AppColors.textSecondary,
+                                  : colors.textSecondary,
                             ),
                           ),
                         ),
@@ -136,6 +137,7 @@ class _FeaturedRecipesWidgetState extends State<FeaturedRecipesWidget> {
                 SizedBox(
                   height: 260,
                   child: _buildContent(
+                    context,
                     provider,
                     horizontalPadding: horizontalPadding,
                   ),
@@ -149,11 +151,17 @@ class _FeaturedRecipesWidgetState extends State<FeaturedRecipesWidget> {
   }
 
   Widget _buildContent(
+    BuildContext context,
     RecipeProvider provider, {
     required double horizontalPadding,
   }) {
+    final colors = context.appColors;
+
     if (provider.isLoading || provider.status == RecipeStatus.initial) {
-      return _buildShimmer(horizontalPadding: horizontalPadding);
+      return _buildShimmer(
+        colors,
+        horizontalPadding: horizontalPadding,
+      );
     }
 
     if (provider.status == RecipeStatus.error) {
@@ -165,7 +173,10 @@ class _FeaturedRecipesWidgetState extends State<FeaturedRecipesWidget> {
             AppGap.h8,
             Text(
               'home.load_error'.tr(),
-              style: AppTextStyles.s14.copyWith(color: AppColors.textSecondary),
+              style: context.themed(
+                AppTextStyles.s14,
+                color: colors.textSecondary,
+              ),
             ),
             AppGap.h8,
             TextButton(
@@ -195,7 +206,10 @@ class _FeaturedRecipesWidgetState extends State<FeaturedRecipesWidget> {
             AppGap.h8,
             Text(
               'home.no_recipes'.tr(),
-              style: AppTextStyles.s14.copyWith(color: AppColors.textSecondary),
+              style: context.themed(
+                AppTextStyles.s14,
+                color: colors.textSecondary,
+              ),
             ),
           ],
         ),
@@ -213,14 +227,17 @@ class _FeaturedRecipesWidgetState extends State<FeaturedRecipesWidget> {
     );
   }
 
-  Widget _buildShimmer({required double horizontalPadding}) {
+  Widget _buildShimmer(
+    AppColorExtension colors, {
+    required double horizontalPadding,
+  }) {
     return ListView.builder(
       scrollDirection: Axis.horizontal,
       padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
       itemCount: 4,
       itemBuilder: (_, __) => Shimmer.fromColors(
-        baseColor: AppColors.border,
-        highlightColor: AppColors.surface,
+        baseColor: colors.shimmerBase,
+        highlightColor: colors.shimmerHighlight,
         child: Container(
           width: 180,
           height: 240,

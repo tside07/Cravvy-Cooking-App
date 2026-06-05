@@ -16,15 +16,17 @@ class AchievementCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
+
     return Container(
       padding: AppPad.a12,
       decoration: BoxDecoration(
-        color: unlocked ? AppColors.surface : AppColors.surfaceVariant,
+        color: unlocked ? colors.cardSurface : colors.elevated,
         borderRadius: AppBorderRadius.a16,
         border: Border.all(
           color: unlocked
               ? AppColors.primary.withValues(alpha: 0.3)
-              : AppColors.border,
+              : colors.borderDivider,
         ),
       ),
       child: Column(
@@ -36,7 +38,7 @@ class AchievementCardWidget extends StatelessWidget {
                 emoji,
                 style: AppTextStyles.s20.copyWith(
                   fontSize: 22,
-                  color: unlocked ? null : const Color(0x66000000),
+                  color: unlocked ? null : colors.textDisabled.withValues(alpha: 0.6),
                 ),
               ),
               const Spacer(),
@@ -57,25 +59,27 @@ class AchievementCardWidget extends StatelessWidget {
                   ),
                 )
               else
-                const Icon(
+                Icon(
                   Icons.lock_outline_rounded,
                   size: 14,
-                  color: AppColors.textHint,
+                  color: colors.textDisabled,
                 ),
             ],
           ),
           const Spacer(),
           Text(
             title,
-            style: AppTextStyles.s12.copyWith(
+            style: context.themed(
+              AppTextStyles.s12,
+              color: unlocked ? colors.textPrimary : colors.textDisabled,
               fontWeight: FontWeight.w700,
-              color: unlocked ? AppColors.textPrimary : AppColors.textHint,
             ),
           ),
           Text(
             desc,
-            style: AppTextStyles.s10.copyWith(
-              color: AppColors.textHint,
+            style: context.themed(
+              AppTextStyles.s10,
+              color: colors.textDisabled,
             ),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,

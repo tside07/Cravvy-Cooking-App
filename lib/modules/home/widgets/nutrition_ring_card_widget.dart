@@ -15,6 +15,7 @@ class NutritionRingCardWidget extends StatelessWidget {
 
     return Consumer<MealPlanProvider>(
       builder: (context, provider, _) {
+        final colors = context.appColors;
         final day = provider.todayDay;
         final remaining =
             (provider.targetCalories - day.totalCalories).clamp(0, 9999);
@@ -28,11 +29,7 @@ class NutritionRingCardWidget extends StatelessWidget {
             right: 16,
           ), //TODO: no AppPad equivalent for this multi-directional EdgeInsets.only
           padding: AppPad.a20,
-          decoration: BoxDecoration(
-            color: AppColors.surface,
-            borderRadius: AppBorderRadius.a24,
-            border: Border.all(color: AppColors.border),
-          ),
+          decoration: context.cardBox(radius: 24),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -51,7 +48,10 @@ class NutritionRingCardWidget extends StatelessWidget {
                       children: [
                         CustomPaint(
                           size: const Size(130, 130),
-                          painter: RingPainterWidget(progress: progress),
+                          painter: RingPainterWidget(
+                            progress: progress,
+                            trackColor: colors.elevated,
+                          ),
                         ),
                         Center(
                           child: Column(
@@ -67,9 +67,9 @@ class NutritionRingCardWidget extends StatelessWidget {
                               ),
                               Text(
                                 'home.kcal_left'.tr(),
-                                style: AppTextStyles.s12.copyWith(
-                                  fontSize: 11,
-                                  color: AppColors.textSecondary,
+                                style: context.themed(
+                                  AppTextStyles.s12.copyWith(fontSize: 11),
+                                  color: colors.textSecondary,
                                 ),
                               ),
                             ],

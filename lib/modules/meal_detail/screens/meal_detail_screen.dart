@@ -36,6 +36,8 @@ class _MealDetailBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
+
     return Consumer<MealDetailProvider>(
       builder: (context, provider, _) {
         return LayoutBuilder(
@@ -52,9 +54,10 @@ class _MealDetailBody extends StatelessWidget {
             SliverToBoxAdapter(
               child: Container(
                 margin: const EdgeInsets.only(top: 0),
-                decoration: const BoxDecoration(
-                  color: AppColors.background,
-                  borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
+                decoration: BoxDecoration(
+                  color: colors.backgroundMain,
+                  borderRadius:
+                      const BorderRadius.vertical(top: Radius.circular(28)),
                 ),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -66,7 +69,7 @@ class _MealDetailBody extends StatelessWidget {
                         width: 40,
                         height: 4,
                         decoration: BoxDecoration(
-                          color: AppColors.border,
+                          color: colors.borderDivider,
                           borderRadius: AppBorderRadius.a8,
                         ),
                       ),
@@ -80,10 +83,10 @@ class _MealDetailBody extends StatelessWidget {
                     MealDetailStatsWidget(meal: meal),
 
                     // ── Divider ─────────────────────────────────────────────────────
-                    const SliverToBoxAdapter(
+                    SliverToBoxAdapter(
                       child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 16),
-                        child: Divider(color: AppColors.border, height: 1),
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: Divider(color: colors.borderDivider, height: 1),
                       ),
                     ),
 

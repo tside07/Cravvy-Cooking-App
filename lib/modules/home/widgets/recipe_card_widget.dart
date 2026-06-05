@@ -61,7 +61,7 @@ class RecipeCardWidget extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 10),
-          _buildRecipeMeta(padding: EdgeInsets.zero),
+          _buildRecipeMeta(context, padding: EdgeInsets.zero),
         ],
       ),
     );
@@ -73,6 +73,7 @@ class RecipeCardWidget extends StatelessWidget {
     required double imageHeight,
     EdgeInsetsGeometry? margin,
   }) {
+    final colors = context.appColors;
     final emoji = MealTypeHelper.emoji(recipe.mealType);
     final lightColor = MealTypeHelper.lightColor(recipe.mealType);
     final typeColor = MealTypeHelper.color(recipe.mealType);
@@ -82,11 +83,7 @@ class RecipeCardWidget extends StatelessWidget {
       child: Container(
         width: width,
         margin: margin,
-        decoration: BoxDecoration(
-          color: AppColors.surface,
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: AppColors.border),
-        ),
+        decoration: context.cardBox(radius: 20),
         clipBehavior: Clip.hardEdge,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -130,7 +127,7 @@ class RecipeCardWidget extends StatelessWidget {
                         vertical: 2,
                       ),
                       decoration: BoxDecoration(
-                        color: _difficultyColor(recipe.difficulty),
+                        color: _difficultyColor(recipe.difficulty, colors),
                         borderRadius: BorderRadius.circular(6),
                       ),
                       child: Text(
@@ -146,7 +143,7 @@ class RecipeCardWidget extends StatelessWidget {
                 ],
               ),
             ),
-            _buildRecipeMeta(),
+            _buildRecipeMeta(context),
           ],
         ),
       ),
@@ -189,7 +186,12 @@ class RecipeCardWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildRecipeMeta({EdgeInsetsGeometry padding = const EdgeInsets.all(10)}) {
+  Widget _buildRecipeMeta(
+    BuildContext context, {
+    EdgeInsetsGeometry padding = const EdgeInsets.all(10),
+  }) {
+    final colors = context.appColors;
+
     return Padding(
       padding: padding,
       child: Column(
@@ -197,21 +199,21 @@ class RecipeCardWidget extends StatelessWidget {
         children: [
           Text(
             recipe.name,
-            style: AppTextStyles.s12.copyWith(
+            style: context.themed(
+              AppTextStyles.s12,
               fontWeight: FontWeight.w700,
-              color: AppColors.textPrimary,
             ),
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
           ),
           AppGap.h6,
-          _buildCalorieTimeRow(),
+          _buildCalorieTimeRow(colors),
         ],
       ),
     );
   }
 
-  Widget _buildCalorieTimeRow() {
+  Widget _buildCalorieTimeRow(AppColorExtension colors) {
     return Row(
       children: [
         const Icon(
@@ -229,24 +231,24 @@ class RecipeCardWidget extends StatelessWidget {
           ),
         ),
         const Spacer(),
-        const Icon(
+        Icon(
           Icons.timer_outlined,
           size: 11,
-          color: AppColors.textSecondary,
+          color: colors.textSecondary,
         ),
         const SizedBox(width: 2),
         Text(
           '${recipe.prepTime}${'meal_plan.minutes_short'.tr()}',
           style: AppTextStyles.s12.copyWith(
             fontSize: 11,
-            color: AppColors.textSecondary,
+            color: colors.textSecondary,
           ),
         ),
       ],
     );
   }
 
-  Color _difficultyColor(String difficulty) {
+  Color _difficultyColor(String difficulty, AppColorExtension colors) {
     switch (difficulty) {
       case 'easy':
         return AppColors.success;
@@ -255,7 +257,7 @@ class RecipeCardWidget extends StatelessWidget {
       case 'hard':
         return AppColors.error;
       default:
-        return AppColors.textSecondary;
+        return colors.textSecondary;
     }
   }
 }

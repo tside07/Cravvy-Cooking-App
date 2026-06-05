@@ -25,17 +25,19 @@ class MealCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
+
     return GestureDetector(
       onTap: () => context.push(AppRouter.mealDetail, extra: meal),
       child: Container(
         margin: const EdgeInsets.only(bottom: 12),
         decoration: BoxDecoration(
-          color: AppColors.surface,
+          color: colors.cardSurface,
           borderRadius: AppBorderRadius.a16,
           border: Border.all(
             color: meal.isLogged
                 ? AppColors.success.withValues(alpha: 0.35)
-                : AppColors.border,
+                : colors.borderDivider,
           ),
         ),
         child: Row(
@@ -91,9 +93,9 @@ class MealCardWidget extends StatelessWidget {
                     // Tên món
                     Text(
                       meal.name,
-                      style: AppTextStyles.s14.copyWith(
+                      style: context.themed(
+                        AppTextStyles.s14,
                         fontWeight: FontWeight.w700,
-                        color: AppColors.textPrimary,
                       ),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
@@ -117,16 +119,16 @@ class MealCardWidget extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(width: 10),
-                        const Icon(
+                        Icon(
                           Icons.timer_outlined,
                           size: 13,
-                          color: AppColors.textSecondary,
+                          color: colors.textSecondary,
                         ),
                         const SizedBox(width: 2),
                         Text(
                           '${meal.prepTime}${'meal_plan.minutes_short'.tr()}',
                           style: AppTextStyles.s12.copyWith(
-                            color: AppColors.textSecondary,
+                            color: colors.textSecondary,
                           ),
                         ),
                       ],
@@ -176,12 +178,12 @@ class MealCardWidget extends StatelessWidget {
                       decoration: BoxDecoration(
                         color: meal.isLogged
                             ? AppColors.success
-                            : AppColors.surfaceVariant,
+                            : colors.elevated,
                         shape: BoxShape.circle,
                         border: Border.all(
                           color: meal.isLogged
                               ? AppColors.success
-                              : AppColors.border,
+                              : colors.borderDivider,
                           width: 1.5,
                         ),
                       ),
@@ -190,7 +192,7 @@ class MealCardWidget extends StatelessWidget {
                         size: 16,
                         color: meal.isLogged
                             ? Colors.white
-                            : AppColors.textHint,
+                            : colors.textDisabled,
                       ),
                     ),
                   ),
@@ -203,13 +205,13 @@ class MealCardWidget extends StatelessWidget {
                       width: 32,
                       height: 32,
                       decoration: BoxDecoration(
-                        color: AppColors.surfaceVariant,
+                        color: colors.elevated,
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: Icon(
                         Icons.edit_outlined,
                         size: 16,
-                        color: AppColors.textSecondary,
+                        color: colors.textSecondary,
                       ),
                     ),
                   ),
@@ -237,16 +239,14 @@ class EmptyMealSlotCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
+
     return GestureDetector(
       onTap: onAdd,
       child: Container(
         margin: const EdgeInsets.only(bottom: 12),
         padding: const EdgeInsets.symmetric(vertical: 18),
-        decoration: BoxDecoration(
-          color: AppColors.surface,
-          borderRadius: AppBorderRadius.a16,
-          border: Border.all(color: AppColors.border, style: BorderStyle.solid),
-        ),
+        decoration: context.cardBox(radius: 16),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -269,9 +269,10 @@ class EmptyMealSlotCard extends StatelessWidget {
               'meal_plan.add_meal'.tr(
                 namedArgs: {'meal': mealType.localizedLabel},
               ),
-              style: AppTextStyles.s14.copyWith(
+              style: context.themed(
+                AppTextStyles.s14,
+                color: colors.textSecondary,
                 fontWeight: FontWeight.w600,
-                color: AppColors.textSecondary,
               ),
             ),
             AppGap.w8,

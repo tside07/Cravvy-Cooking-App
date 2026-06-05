@@ -65,7 +65,10 @@ class _MealDetailInstructionsWidgetState
           padding: const EdgeInsets.fromLTRB(20, 24, 20, 100),
           child: Text(
             'cooking_mode.no_steps'.tr(),
-            style: AppTextStyles.s14.copyWith(color: AppColors.textSecondary),
+            style: context.themed(
+              AppTextStyles.s14,
+              color: context.appColors.textSecondary,
+            ),
             textAlign: TextAlign.center,
           ),
         ),
@@ -121,11 +124,7 @@ class _StepCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: AppPad.a16,
-      decoration: BoxDecoration(
-        color: AppColors.surface,
-        borderRadius: AppBorderRadius.a16,
-        border: Border.all(color: AppColors.border),
-      ),
+      decoration: context.cardBox(radius: 16),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -152,10 +151,7 @@ class _StepCard extends StatelessWidget {
               padding: const EdgeInsets.only(top: 6),
               child: Text(
                 text,
-                style: AppTextStyles.s14.copyWith(
-                  color: AppColors.textPrimary,
-                  height: 1.5,
-                ),
+                style: context.themed(AppTextStyles.s14).copyWith(height: 1.5),
               ),
             ),
           ),

@@ -1,5 +1,7 @@
 import 'package:cravvy_cooking_app/init.dart';
 
+/// Themed surface wrapper. Prefer [AppInputDecoration.outlined] on fields
+/// without this wrapper to avoid double borders/backgrounds.
 class FieldCardWidget extends StatelessWidget {
   const FieldCardWidget({super.key, required this.child});
 
@@ -7,11 +9,7 @@ class FieldCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-        decoration: BoxDecoration(
-          color: AppColors.surface,
-          borderRadius: AppBorderRadius.a14,
-          border: Border.all(color: AppColors.border),
-        ),
+        decoration: context.cardBox(radius: 14),
         child: child,
       );
 }

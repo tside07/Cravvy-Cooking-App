@@ -15,6 +15,8 @@ class MealDetailIngredientItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
+
     return Consumer<MealDetailProvider>(
       builder: (context, provider, _) {
         final checked = provider.isChecked(index);
@@ -38,7 +40,7 @@ class MealDetailIngredientItemWidget extends StatelessWidget {
                     border: Border.all(
                       color: checked
                           ? AppColors.primary
-                          : AppColors.border,
+                          : colors.borderDivider,
                       width: 1.5,
                     ),
                   ),
@@ -62,8 +64,8 @@ class MealDetailIngredientItemWidget extends StatelessWidget {
                           style: AppTextStyles.s14.copyWith(
                             fontWeight: FontWeight.w700,
                             color: checked
-                                ? AppColors.textHint
-                                : AppColors.textPrimary,
+                                ? colors.textDisabled
+                                : colors.textPrimary,
                             decoration: checked
                                 ? TextDecoration.lineThrough
                                 : TextDecoration.none,
@@ -74,8 +76,8 @@ class MealDetailIngredientItemWidget extends StatelessWidget {
                           style: AppTextStyles.s14.copyWith(
                             fontWeight: FontWeight.w500,
                             color: checked
-                                ? AppColors.textHint
-                                : AppColors.textPrimary,
+                                ? colors.textDisabled
+                                : colors.textPrimary,
                             decoration: checked
                                 ? TextDecoration.lineThrough
                                 : TextDecoration.none,

@@ -17,13 +17,12 @@ class ProfileHeaderCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
+
     return Container(
       margin: const EdgeInsets.only(left: 16, top: 20, right: 16),
       padding: AppPad.a20,
-      decoration: BoxDecoration(
-        color: AppColors.surface,
-        borderRadius: AppBorderRadius.a24,
-        border: Border.all(color: AppColors.border),
+      decoration: context.cardBox(radius: 24).copyWith(
         boxShadow: [
           BoxShadow(
             color: AppColors.shadowBlack15,
@@ -80,16 +79,17 @@ class ProfileHeaderCardWidget extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Icon(
+              Icon(
                 Icons.email_outlined,
                 size: 14,
-                color: AppColors.textSecondary,
+                color: colors.textSecondary,
               ),
               AppGap.w4,
               Text(
                 profile.email,
-                style: AppTextStyles.s12.copyWith(
-                  color: AppColors.textSecondary,
+                style: context.themed(
+                  AppTextStyles.s12,
+                  color: colors.textSecondary,
                 ),
               ),
             ],
@@ -98,16 +98,17 @@ class ProfileHeaderCardWidget extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Icon(
+              Icon(
                 Icons.phone_outlined,
                 size: 14,
-                color: AppColors.textSecondary,
+                color: colors.textSecondary,
               ),
               AppGap.w4,
               Text(
                 profile.phone,
-                style: AppTextStyles.s12.copyWith(
-                  color: AppColors.textSecondary,
+                style: context.themed(
+                  AppTextStyles.s12,
+                  color: colors.textSecondary,
                 ),
               ),
             ],
@@ -117,7 +118,10 @@ class ProfileHeaderCardWidget extends StatelessWidget {
             Text(
               profile.bio,
               textAlign: TextAlign.center,
-              style: AppTextStyles.s12.copyWith(color: AppColors.textSecondary),
+              style: context.themed(
+                AppTextStyles.s12,
+                color: colors.textSecondary,
+              ),
             ),
             AppGap.h10,
           ],
@@ -151,7 +155,7 @@ class ProfileHeaderCardWidget extends StatelessWidget {
           Container(
             padding: AppPad.a12,
             decoration: BoxDecoration(
-              color: AppColors.surfaceVariant,
+              color: colors.elevated,
               borderRadius: AppBorderRadius.a16,
             ),
             child: Row(
@@ -198,7 +202,7 @@ class ProfileHeaderCardWidget extends StatelessWidget {
               width: double.infinity,
               padding: AppPad.h16v12,
               decoration: BoxDecoration(
-                border: Border.all(color: AppColors.border),
+                border: Border.all(color: colors.borderDivider),
                 borderRadius: AppBorderRadius.a12,
               ),
               child: Row(

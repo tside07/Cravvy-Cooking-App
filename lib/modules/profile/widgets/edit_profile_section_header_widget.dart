@@ -10,11 +10,10 @@ class EditProfileSectionHeaderWidget extends StatelessWidget {
         padding: const EdgeInsets.only(left: 4),
         child: Text(
           title,
-          style: const TextStyle(
-            fontSize: 11,
+          style: context.themed(
+            const TextStyle(fontSize: 11, letterSpacing: 0.8),
+            color: context.appColors.textSecondary,
             fontWeight: FontWeight.w700,
-            color: AppColors.textSecondary,
-            letterSpacing: 0.8,
           ),
         ),
       );

@@ -14,6 +14,7 @@ class MealDetailIngredientsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _ = context.locale;
+    final colors = context.appColors;
 
     return Consumer<MealDetailProvider>(
       builder: (context, provider, _) {
@@ -33,7 +34,10 @@ class MealDetailIngredientsWidget extends StatelessWidget {
               padding: const EdgeInsets.fromLTRB(20, 24, 20, 100),
               child: Text(
                 'meal_detail.no_ingredients'.tr(),
-                style: AppTextStyles.s14.copyWith(color: AppColors.textSecondary),
+                style: context.themed(
+                  AppTextStyles.s14,
+                  color: colors.textSecondary,
+                ),
                 textAlign: TextAlign.center,
               ),
             ),
@@ -87,7 +91,7 @@ class MealDetailIngredientsWidget extends StatelessWidget {
                                 ),
                                 backgroundColor: added > 0
                                     ? AppColors.primary
-                                    : AppColors.textSecondary,
+                                    : colors.textSecondary,
                                 behavior: SnackBarBehavior.floating,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: AppBorderRadius.a12,
@@ -106,11 +110,11 @@ class MealDetailIngredientsWidget extends StatelessWidget {
                     index: index,
                   ),
                   if (index < ingredients.length - 1)
-                    const Divider(
+                    Divider(
                       height: 1,
                       indent: 52,
                       endIndent: 16,
-                      color: AppColors.border,
+                      color: colors.borderDivider,
                     ),
                 ],
               );

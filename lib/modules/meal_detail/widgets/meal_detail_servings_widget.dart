@@ -22,9 +22,9 @@ class MealDetailServingsWidget extends StatelessWidget {
               children: [
                 Text(
                   'meal_detail.servings'.tr(),
-                  style: AppTextStyles.s16.copyWith(
+                  style: context.themed(
+                    AppTextStyles.s16,
                     fontWeight: FontWeight.w700,
-                    color: AppColors.textPrimary,
                   ),
                 ),
                 const Spacer(),
@@ -36,9 +36,9 @@ class MealDetailServingsWidget extends StatelessWidget {
                   padding: AppPad.h16,
                   child: Text(
                     '${provider.servings}',
-                    style: AppTextStyles.s18.copyWith(
+                    style: context.themed(
+                      AppTextStyles.s18,
                       fontWeight: FontWeight.w800,
-                      color: AppColors.textPrimary,
                     ),
                   ),
                 ),
@@ -63,17 +63,19 @@ class _StepButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
+
     return GestureDetector(
       onTap: onTap,
       child: Container(
         width: 36,
         height: 36,
         decoration: BoxDecoration(
-          color: AppColors.surface,
+          color: colors.cardSurface,
           shape: BoxShape.circle,
-          border: Border.all(color: AppColors.border),
+          border: Border.all(color: colors.borderDivider),
         ),
-        child: Icon(icon, size: 18, color: AppColors.textPrimary),
+        child: Icon(icon, size: 18, color: colors.textPrimary),
       ),
     );
   }

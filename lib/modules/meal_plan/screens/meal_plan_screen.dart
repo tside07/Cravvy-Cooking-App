@@ -88,6 +88,8 @@ class _MealList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<MealPlanProvider>(
       builder: (context, provider, _) {
+        final colors = context.appColors;
+
         if (provider.isLoading) {
           return Center(
             child: Column(
@@ -97,8 +99,9 @@ class _MealList extends StatelessWidget {
                 const SizedBox(height: 16),
                 Text(
                   'meal_plan.loading'.tr(),
-                  style: AppTextStyles.s14.copyWith(
-                    color: AppColors.textSecondary,
+                  style: context.themed(
+                    AppTextStyles.s14,
+                    color: colors.textSecondary,
                   ),
                 ),
               ],
@@ -115,8 +118,9 @@ class _MealList extends StatelessWidget {
                 AppGap.h12,
                 Text(
                   'meal_plan.load_error'.tr(),
-                  style: AppTextStyles.s14.copyWith(
-                    color: AppColors.textSecondary,
+                  style: context.themed(
+                    AppTextStyles.s14,
+                    color: colors.textSecondary,
                   ),
                 ),
                 AppGap.h12,
@@ -208,25 +212,36 @@ class _MealList extends StatelessWidget {
       return;
     }
 
+    final colors = context.appColors;
+
     showDialog(
       context: context,
       builder: (_) => AlertDialog(
-        backgroundColor: AppColors.surface,
+        backgroundColor: colors.cardSurface,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         title: Text(
           'meal_plan.refresh_dialog_title'.tr(),
-          style: AppTextStyles.s16.copyWith(fontWeight: FontWeight.w700),
+          style: context.themed(
+            AppTextStyles.s16,
+            fontWeight: FontWeight.w700,
+          ),
         ),
         content: Text(
           'meal_plan.refresh_dialog_body'.tr(),
-          style: AppTextStyles.s14.copyWith(color: AppColors.textSecondary),
+          style: context.themed(
+            AppTextStyles.s14,
+            color: colors.textSecondary,
+          ),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
             child: Text(
               'common.cancel'.tr(),
-              style: AppTextStyles.s14.copyWith(color: AppColors.textSecondary),
+              style: context.themed(
+                AppTextStyles.s14,
+                color: colors.textSecondary,
+              ),
             ),
           ),
           TextButton(
@@ -327,6 +342,7 @@ class _RefreshSuggestionBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
     final onCooldown = cooldownSeconds > 0;
     final countdown = MealPlanProvider.formatCooldown(cooldownSeconds);
 
@@ -335,12 +351,12 @@ class _RefreshSuggestionBanner extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
       decoration: BoxDecoration(
         color: onCooldown
-            ? AppColors.surface
+            ? colors.cardSurface
             : AppColors.primaryLight,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
           color: onCooldown
-              ? AppColors.textSecondary.withValues(alpha: 0.2)
+              ? colors.textSecondary.withValues(alpha: 0.2)
               : AppColors.primary.withValues(alpha: 0.15),
         ),
       ),
@@ -359,7 +375,7 @@ class _RefreshSuggestionBanner extends StatelessWidget {
                   : 'meal_plan.banner_hint'.tr(),
               style: AppTextStyles.s12.copyWith(
                 color: onCooldown
-                    ? AppColors.textSecondary
+                    ? colors.textSecondary
                     : AppColors.primaryDark,
                 fontWeight: FontWeight.w600,
               ),
@@ -370,13 +386,13 @@ class _RefreshSuggestionBanner extends StatelessWidget {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
               decoration: BoxDecoration(
-                color: AppColors.textSecondary.withValues(alpha: 0.12),
+                color: colors.textSecondary.withValues(alpha: 0.12),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Text(
                 countdown,
                 style: AppTextStyles.s12.copyWith(
-                  color: AppColors.textSecondary,
+                  color: colors.textSecondary,
                   fontWeight: FontWeight.w700,
                   fontFeatures: const [FontFeature.tabularFigures()],
                 ),
@@ -391,7 +407,7 @@ class _RefreshSuggestionBanner extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: canRefresh
                       ? AppColors.primary
-                      : AppColors.textSecondary.withValues(alpha: 0.35),
+                      : colors.textSecondary.withValues(alpha: 0.35),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Text(

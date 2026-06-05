@@ -6,6 +6,8 @@ class ShoppingEmptyStateWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -28,13 +30,13 @@ class ShoppingEmptyStateWidget extends StatelessWidget {
                 width: 96,
                 height: 96,
                 decoration: BoxDecoration(
-                  color: AppColors.surfaceVariant,
+                  color: colors.elevated,
                   shape: BoxShape.circle,
                 ),
-                child: const Icon(
+                child: Icon(
                   Icons.shopping_cart_outlined,
                   size: 44,
-                  color: AppColors.textHint,
+                  color: colors.textDisabled,
                 ),
               ),
               AppGap.h24,
@@ -46,8 +48,9 @@ class ShoppingEmptyStateWidget extends StatelessWidget {
               Text(
                 'shopping_list.empty_desc'.tr(),
                 textAlign: TextAlign.center,
-                style: AppTextStyles.s14.copyWith(
-                  color: AppColors.textSecondary,
+                style: context.themed(
+                  AppTextStyles.s14,
+                  color: colors.textSecondary,
                 ),
               ),
               AppGap.h24,

@@ -16,17 +16,14 @@ class AlternativeTileWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
     final calDiff = meal.calories - originalCalories;
     final isLower = calDiff < 0;
     final diffColor = isLower ? AppColors.success : AppColors.warning;
 
     return Container(
       margin: AppPad.b12,
-      decoration: BoxDecoration(
-        color: AppColors.surface,
-        borderRadius: AppBorderRadius.a18,
-        border: Border.all(color: AppColors.border),
-      ),
+      decoration: context.cardBox(radius: 18),
       child: InkWell(
         onTap: onSelect,
         borderRadius: AppBorderRadius.a18,
@@ -61,10 +58,9 @@ class AlternativeTileWidget extends StatelessWidget {
                   children: [
                     Text(
                       meal.name,
-                      style: AppTextStyles.s16.copyWith(
-                        fontSize: 15,
+                      style: context.themed(
+                        AppTextStyles.s16.copyWith(fontSize: 15),
                         fontWeight: FontWeight.w600,
-                        color: AppColors.textPrimary,
                       ),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
@@ -74,10 +70,9 @@ class AlternativeTileWidget extends StatelessWidget {
                       children: [
                         Text(
                           '${meal.calories} ${'meal_plan.kcal_unit'.tr()}',
-                          style: AppTextStyles.s14.copyWith(
-                            fontSize: 13,
+                          style: context.themed(
+                            AppTextStyles.s14.copyWith(fontSize: 13),
                             fontWeight: FontWeight.w600,
-                            color: AppColors.textPrimary,
                           ),
                         ),
                         AppGap.w6,
@@ -108,14 +103,15 @@ class AlternativeTileWidget extends StatelessWidget {
                             (tag) => Container(
                               padding: AppPad.h6v2,
                               decoration: BoxDecoration(
-                                color: AppColors.surfaceVariant,
+                                color: colors.elevated,
                                 borderRadius: AppBorderRadius.a6,
                               ),
                               child: Text(
                                 tag,
-                                style: AppTextStyles.s10.copyWith(
+                                style: context.themed(
+                                  AppTextStyles.s10,
+                                  color: colors.textSecondary,
                                   fontWeight: FontWeight.w600,
-                                  color: AppColors.textSecondary,
                                 ),
                               ),
                             ),

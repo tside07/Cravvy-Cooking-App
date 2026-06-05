@@ -10,6 +10,8 @@ class MealDetailStatsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
+
     return SliverToBoxAdapter(
       child: Padding(
         padding: AppPad.h16v20,
@@ -22,21 +24,21 @@ class MealDetailStatsWidget extends StatelessWidget {
                   '${meal.prepTime}${'meal_plan.minutes_short'.tr()}',
               label: 'meal_detail.stat_prep'.tr(),
             ),
-            _divider,
+            _divider(colors),
             _StatItem(
               icon: Icons.local_fire_department_rounded,
               iconColor: AppColors.warning,
               value: '${meal.calories}',
               label: 'meal_detail.stat_cal'.tr(),
             ),
-            _divider,
+            _divider(colors),
             _StatItem(
               icon: Icons.people_alt_outlined,
               iconColor: AppColors.secondary,
               value: '2',
               label: 'meal_detail.stat_servings'.tr(),
             ),
-            _divider,
+            _divider(colors),
             _StatItem(
               icon: Icons.trending_up_rounded,
               iconColor: AppColors.secondaryDark,
@@ -49,11 +51,11 @@ class MealDetailStatsWidget extends StatelessWidget {
     );
   }
 
-  Widget get _divider => Container(
+  Widget _divider(AppColorExtension colors) => Container(
         width: 1,
         height: 36,
         margin: AppPad.h16,
-        color: AppColors.border,
+        color: colors.borderDivider,
       );
 }
 
@@ -72,6 +74,8 @@ class _StatItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
+
     return Expanded(
       child: Column(
         children: [
@@ -87,17 +91,18 @@ class _StatItem extends StatelessWidget {
           AppGap.h6,
           Text(
             label,
-            style: AppTextStyles.s10.copyWith(
-              color: AppColors.textSecondary,
+            style: context.themed(
+              AppTextStyles.s10,
+              color: colors.textSecondary,
               fontWeight: FontWeight.w500,
             ),
           ),
           AppGap.h2,
           Text(
             value,
-            style: AppTextStyles.s14.copyWith(
+            style: context.themed(
+              AppTextStyles.s14,
               fontWeight: FontWeight.w800,
-              color: AppColors.textPrimary,
             ),
           ),
         ],

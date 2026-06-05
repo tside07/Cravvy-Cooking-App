@@ -55,10 +55,11 @@ class _MealSwapSheetState extends State<MealSwapSheet> {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
     // RecipeProvider đã loaded từ app start — không cần async ở đây
     final recipeProvider = context.watch<RecipeProvider>();
 
-  final mealTypeName = _mealTypeToString(meal.type);
+    final mealTypeName = _mealTypeToString(meal.type);
     final alternatives = recipeProvider.allRecipes
         .where(
           (r) => r.mealType == mealTypeName && r.id != meal.recipeId,
@@ -67,9 +68,9 @@ class _MealSwapSheetState extends State<MealSwapSheet> {
 
     return Container(
       height: MediaQuery.of(context).size.height * 0.75,
-      decoration: const BoxDecoration(
-        color: AppColors.background,
-        borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
+      decoration: BoxDecoration(
+        color: colors.backgroundMain,
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
       ),
       child: Column(
         children: [
@@ -79,7 +80,7 @@ class _MealSwapSheetState extends State<MealSwapSheet> {
             width: 40,
             height: 4,
             decoration: BoxDecoration(
-              color: AppColors.border,
+              color: colors.borderDivider,
               borderRadius: AppBorderRadius.a2,
             ),
           ),
@@ -95,9 +96,9 @@ class _MealSwapSheetState extends State<MealSwapSheet> {
                     children: [
                       Text(
                         'meal_plan.swap_title'.tr(),
-                        style: AppTextStyles.s18.copyWith(
+                        style: context.themed(
+                          AppTextStyles.s18,
                           fontWeight: FontWeight.w600,
-                          color: AppColors.textPrimary,
                         ),
                       ),
                       if (_swapsLeft != null)
@@ -105,16 +106,18 @@ class _MealSwapSheetState extends State<MealSwapSheet> {
                           'limits.swaps_remaining'.tr(
                             namedArgs: {'n': '$_swapsLeft'},
                           ),
-                          style: AppTextStyles.s12.copyWith(
-                            color: AppColors.textSecondary,
+                          style: context.themed(
+                            AppTextStyles.s12,
+                            color: colors.textSecondary,
                           ),
                         ),
                       Text(
                         'meal_plan.swap_subtitle'.tr(
                           namedArgs: {'name': meal.name},
                         ),
-                        style: AppTextStyles.s14.copyWith(
-                          color: AppColors.textSecondary,
+                        style: context.themed(
+                          AppTextStyles.s14,
+                          color: colors.textSecondary,
                         ),
                       ),
                     ],
@@ -124,7 +127,7 @@ class _MealSwapSheetState extends State<MealSwapSheet> {
                   onPressed: () => Navigator.pop(context),
                   icon: const Icon(Icons.close_rounded),
                   style: IconButton.styleFrom(
-                    backgroundColor: AppColors.surfaceVariant,
+                    backgroundColor: colors.elevated,
                   ),
                 ),
               ],
@@ -254,6 +257,8 @@ class _EmptyAlternatives extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
+
     return Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -262,15 +267,18 @@ class _EmptyAlternatives extends StatelessWidget {
           AppGap.h12,
           Text(
             'meal_plan.swap_empty_title'.tr(),
-            style: AppTextStyles.s16.copyWith(
+            style: context.themed(
+              AppTextStyles.s16,
               fontWeight: FontWeight.w600,
-              color: AppColors.textPrimary,
             ),
           ),
           AppGap.h6,
           Text(
             'meal_plan.swap_empty_subtitle'.tr(),
-            style: AppTextStyles.s14.copyWith(color: AppColors.textSecondary),
+            style: context.themed(
+              AppTextStyles.s14,
+              color: colors.textSecondary,
+            ),
           ),
         ],
       ),

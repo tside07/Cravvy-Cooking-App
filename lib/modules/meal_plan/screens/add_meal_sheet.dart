@@ -40,11 +40,13 @@ class _AddMealSheetState extends State<AddMealSheet> {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
+
     return Container(
       height: MediaQuery.of(context).size.height * 0.85,
-      decoration: const BoxDecoration(
-        color: AppColors.background,
-        borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
+      decoration: BoxDecoration(
+        color: colors.backgroundMain,
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
       ),
       child: Column(
         children: [
@@ -54,7 +56,7 @@ class _AddMealSheetState extends State<AddMealSheet> {
             width: 40,
             height: 4,
             decoration: BoxDecoration(
-              color: AppColors.border,
+              color: colors.borderDivider,
               borderRadius: BorderRadius.circular(2),
             ),
           ),
@@ -71,15 +73,16 @@ class _AddMealSheetState extends State<AddMealSheet> {
                       'meal_plan.add_sheet_title'.tr(
                         namedArgs: {'meal': widget.mealType.localizedLabel},
                       ),
-                      style: AppTextStyles.s18.copyWith(
+                      style: context.themed(
+                        AppTextStyles.s18,
                         fontWeight: FontWeight.w700,
-                        color: AppColors.textPrimary,
                       ),
                     ),
                     Text(
                       'meal_plan.add_sheet_subtitle'.tr(),
-                      style: AppTextStyles.s14.copyWith(
-                        color: AppColors.textSecondary,
+                      style: context.themed(
+                        AppTextStyles.s14,
+                        color: colors.textSecondary,
                       ),
                     ),
                   ],
@@ -89,7 +92,7 @@ class _AddMealSheetState extends State<AddMealSheet> {
                   onPressed: () => Navigator.pop(context),
                   icon: const Icon(Icons.close_rounded),
                   style: IconButton.styleFrom(
-                    backgroundColor: AppColors.surfaceVariant,
+                    backgroundColor: colors.elevated,
                   ),
                 ),
               ],
@@ -101,11 +104,7 @@ class _AddMealSheetState extends State<AddMealSheet> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Container(
-              decoration: BoxDecoration(
-                color: AppColors.surface,
-                borderRadius: BorderRadius.circular(14),
-                border: Border.all(color: AppColors.border),
-              ),
+              decoration: context.cardBox(radius: 14),
               child: TextField(
                 controller: _searchCtrl,
                 onChanged: (v) => setState(() => _query = v.toLowerCase()),
@@ -116,11 +115,11 @@ class _AddMealSheetState extends State<AddMealSheet> {
                     },
                   ),
                   hintStyle: AppTextStyles.s14.copyWith(
-                    color: AppColors.textHint,
+                    color: colors.textDisabled,
                   ),
-                  prefixIcon: const Icon(
+                  prefixIcon: Icon(
                     Icons.search_rounded,
-                    color: AppColors.textHint,
+                    color: colors.textDisabled,
                     size: 20,
                   ),
                   border: InputBorder.none,
@@ -174,8 +173,9 @@ class _AddMealSheetState extends State<AddMealSheet> {
                               'meal': widget.mealType.localizedLabel.toLowerCase(),
                             },
                           ),
-                          style: AppTextStyles.s14.copyWith(
-                            color: AppColors.textSecondary,
+                          style: context.themed(
+                            AppTextStyles.s14,
+                            color: colors.textSecondary,
                           ),
                         ),
                       ],
@@ -219,11 +219,7 @@ class _AddMealSheetState extends State<AddMealSheet> {
                       },
                       child: Container(
                         margin: const EdgeInsets.only(bottom: 10),
-                        decoration: BoxDecoration(
-                          color: AppColors.surface,
-                          borderRadius: BorderRadius.circular(16),
-                          border: Border.all(color: AppColors.border),
-                        ),
+                        decoration: context.cardBox(radius: 16),
                         clipBehavior: Clip.hardEdge,
                         child: Row(
                           children: [
@@ -280,9 +276,9 @@ class _AddMealSheetState extends State<AddMealSheet> {
                                   children: [
                                     Text(
                                       recipe.name,
-                                      style: AppTextStyles.s14.copyWith(
+                                      style: context.themed(
+                                        AppTextStyles.s14,
                                         fontWeight: FontWeight.w700,
-                                        color: AppColors.textPrimary,
                                       ),
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
@@ -304,10 +300,10 @@ class _AddMealSheetState extends State<AddMealSheet> {
                                           ),
                                         ),
                                         const SizedBox(width: 8),
-                                        const Icon(
+                                        Icon(
                                           Icons.timer_outlined,
                                           size: 13,
-                                          color: AppColors.textSecondary,
+                                          color: colors.textSecondary,
                                         ),
                                         const SizedBox(width: 2),
                                         Text(
@@ -317,7 +313,7 @@ class _AddMealSheetState extends State<AddMealSheet> {
                                             },
                                           ),
                                           style: AppTextStyles.s12.copyWith(
-                                            color: AppColors.textSecondary,
+                                            color: colors.textSecondary,
                                           ),
                                         ),
                                       ],

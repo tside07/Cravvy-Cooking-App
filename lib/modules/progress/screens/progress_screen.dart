@@ -227,11 +227,7 @@ class ProgressScreen extends StatelessWidget {
               child: Container(
                 margin: const EdgeInsets.only(left: 16, top: 16, right: 16),
                 padding: AppPad.a20,
-                decoration: BoxDecoration(
-                  color: AppColors.surface,
-                  borderRadius: AppBorderRadius.a24,
-                  border: Border.all(color: AppColors.border),
-                ),
+                decoration: context.cardBox(),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -281,11 +277,7 @@ class ProgressScreen extends StatelessWidget {
               child: Container(
                 margin: const EdgeInsets.only(left: 16, top: 14, right: 16),
                 padding: AppPad.a20,
-                decoration: BoxDecoration(
-                  color: AppColors.surface,
-                  borderRadius: AppBorderRadius.a24,
-                  border: Border.all(color: AppColors.border),
-                ),
+                decoration: context.cardBox(),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

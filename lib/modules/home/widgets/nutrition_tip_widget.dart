@@ -7,6 +7,7 @@ class NutritionTipWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _ = context.locale;
+    final colors = context.appColors;
 
     return Container(
       margin: const EdgeInsets.only(
@@ -49,7 +50,7 @@ class NutritionTipWidget extends StatelessWidget {
                 Text(
                   'home.tip_body'.tr(),
                   style: AppTextStyles.s12.copyWith(
-                    color: AppColors.textSecondary,
+                    color: colors.textSecondary,
                     height: 1.4,
                   ),
                 ),

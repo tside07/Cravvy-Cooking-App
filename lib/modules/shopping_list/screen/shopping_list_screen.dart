@@ -19,6 +19,7 @@ class _ShoppingListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _ = context.locale;
+    final colors = context.appColors;
     final provider = context.watch<ShoppingListProvider>();
 
     if (!provider.isLoaded) {
@@ -37,8 +38,8 @@ class _ShoppingListView extends StatelessWidget {
         scrolledUnderElevation: 0,
         centerTitle: true,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new_rounded,
-              color: AppColors.textPrimary),
+          icon: Icon(Icons.arrow_back_ios_new_rounded,
+              color: colors.textPrimary),
           onPressed: () => context.pop(),
         ),
         title: Text(
@@ -47,8 +48,8 @@ class _ShoppingListView extends StatelessWidget {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.delete_sweep_outlined,
-                color: AppColors.textPrimary),
+            icon: Icon(Icons.delete_sweep_outlined,
+                color: colors.textPrimary),
             onPressed: () => _showClearAllDialog(context),
           ),
         ],

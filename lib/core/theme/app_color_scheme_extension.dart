@@ -201,4 +201,26 @@ extension AppColorContext on BuildContext {
       Theme.of(this).extension<AppColorExtension>() ?? AppColorExtension.light;
 
   ColorScheme get colors => Theme.of(this).colorScheme;
+
+  /// [AppTextStyles] with theme-aware primary/secondary/disabled colors.
+  TextStyle themed(
+    TextStyle style, {
+    Color? color,
+    FontWeight? fontWeight,
+  }) =>
+      style.copyWith(
+        color: color ?? appColors.textPrimary,
+        fontWeight: fontWeight,
+      );
+
+  BoxDecoration cardBox({
+    double radius = 24,
+    Color? color,
+    Border? border,
+  }) =>
+      BoxDecoration(
+        color: color ?? appColors.cardSurface,
+        borderRadius: BorderRadius.circular(radius),
+        border: border ?? Border.all(color: appColors.borderDivider),
+      );
 }
