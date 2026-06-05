@@ -5,6 +5,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 import 'core/theme/app_theme.dart';
+import 'core/theme/theme_mode_provider.dart';
 import 'core/routes/app_routers.dart';
 import 'data/services/supabase_service.dart';
 import 'data/providers/auth_provider.dart';
@@ -42,6 +43,13 @@ void main() async {
       startLocale: const Locale('en', 'US'),
       child: MultiProvider(
         providers: [
+          ChangeNotifierProvider(
+            create: (_) {
+              final theme = ThemeModeProvider();
+              theme.loadSavedPreference();
+              return theme;
+            },
+          ),
           ChangeNotifierProvider(create: (_) => MealPlanProvider()),
           ChangeNotifierProvider(create: (_) => OnboardingProvider()),
           ChangeNotifierProvider(create: (_) => RecipeProvider()),
@@ -80,14 +88,29 @@ class CravvyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final el = EasyLocalization.of(context)!;
 
-    return MaterialApp.router(
-      title: 'Cravvy',
-      debugShowCheckedModeBanner: false,
-      theme: AppTheme.lightTheme,
-      routerConfig: AppRouter.router,
-      locale: el.locale,
-      supportedLocales: el.supportedLocales,
-      localizationsDelegates: el.delegates,
+    return Consumer<ThemeModeProvider>(
+      builder: (context, themeProvider, _) {
+        final isDark = themeProvider.themeMode == ThemeMode.dark;
+        SystemChrome.setSystemUIOverlayStyle(
+          SystemUiOverlayStyle(
+            statusBarColor: Colors.transparent,
+            statusBarIconBrightness:
+                isDark ? Brightness.light : Brightness.dark,
+          ),
+        );
+
+        return MaterialApp.router(
+          title: 'Cravvy',
+          debugShowCheckedModeBanner: false,
+          theme: AppTheme.lightTheme,
+          darkTheme: AppTheme.darkTheme,
+          themeMode: themeProvider.themeMode,
+          routerConfig: AppRouter.router,
+          locale: el.locale,
+          supportedLocales: el.supportedLocales,
+          localizationsDelegates: el.delegates,
+        );
+      },
     );
   }
 }

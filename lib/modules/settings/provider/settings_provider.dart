@@ -31,15 +31,6 @@ class SettingsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  bool _isDarkMode = false;
-
-  bool get isDarkMode => _isDarkMode;
-
-  void setDarkMode(bool value) {
-    _isDarkMode = value;
-    notifyListeners();
-  }
-
   bool _showDeleteConfirm = false;
 
   bool get showDeleteConfirm => _showDeleteConfirm;

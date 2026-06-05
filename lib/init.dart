@@ -9,6 +9,7 @@ export 'core/constants/app_constants.dart';
 
 export 'core/theme/app_border_radius.dart';
 export 'core/theme/app_colors.dart';
+export 'core/theme/app_color_scheme_extension.dart';
 export 'core/theme/app_pad.dart';
 export 'core/theme/app_text_styles.dart';
 export 'core/theme/app_decorations.dart';
