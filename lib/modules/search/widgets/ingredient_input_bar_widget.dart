@@ -20,14 +20,19 @@ class IngredientInputBarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appColors = context.appColors;
+
     return Row(
       children: [
         Expanded(
           child: TextField(
             controller: controller,
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
               hintText: 'Type an ingredient...',
-              prefixIcon: Icon(Icons.search_rounded, color: AppColors.textHint),
+              prefixIcon: Icon(
+                Icons.search_rounded,
+                color: appColors.inputHint,
+              ),
             ),
             onSubmitted: (_) => _submit(),
           ),

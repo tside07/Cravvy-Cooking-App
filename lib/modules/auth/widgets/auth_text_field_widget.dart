@@ -37,6 +37,13 @@ class _AuthTextFieldWidgetState extends State<AuthTextFieldWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final appColors = context.appColors;
+    final inputStyle = Theme.of(context).textTheme.bodyLarge?.copyWith(
+          fontSize: 16,
+          fontWeight: FontWeight.w500,
+          color: appColors.textPrimary,
+        );
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -44,7 +51,7 @@ class _AuthTextFieldWidgetState extends State<AuthTextFieldWidget> {
           Text(
             widget.label!,
             style: AppTextStyles.s14.copyWith(
-              color: AppColors.textPrimary,
+              color: appColors.textPrimary,
               fontWeight: FontWeight.w600,
             ),
           ),
@@ -64,11 +71,11 @@ class _AuthTextFieldWidgetState extends State<AuthTextFieldWidget> {
               FocusScope.of(context).requestFocus(widget.nextFocusNode);
             }
           },
-          style: AppTextStyles.s16.copyWith(color: AppColors.textPrimary),
+          style: inputStyle,
           decoration: InputDecoration(
             hintText: widget.hint,
             prefixIcon: widget.prefixIcon != null
-                ? Icon(widget.prefixIcon, size: 20, color: AppColors.textHint)
+                ? Icon(widget.prefixIcon, size: 20, color: appColors.inputHint)
                 : null,
             suffixIcon: widget.isPassword
                 ? GestureDetector(
@@ -78,7 +85,7 @@ class _AuthTextFieldWidgetState extends State<AuthTextFieldWidget> {
                           ? Icons.visibility_outlined
                           : Icons.visibility_off_outlined,
                       size: 20,
-                      color: AppColors.textHint,
+                      color: appColors.inputHint,
                     ),
                   )
                 : null,

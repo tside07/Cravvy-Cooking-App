@@ -38,6 +38,11 @@ class ResetPasswordFormWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appColors = context.appColors;
+    final inputStyle = Theme.of(context).textTheme.bodyLarge?.copyWith(
+          color: appColors.textPrimary,
+        );
+
     return Form(
       key: formKey,
       child: Padding(
@@ -77,17 +82,21 @@ class ResetPasswordFormWidget extends StatelessWidget {
             // Password field
             Text(
               'New Password',
-              style: AppTextStyles.s14.copyWith(fontWeight: FontWeight.w600),
+              style: AppTextStyles.s14.copyWith(
+                fontWeight: FontWeight.w600,
+                color: appColors.textPrimary,
+              ),
             ),
             AppGap.h8,
             TextFormField(
               controller: passwordController,
               obscureText: !showPassword,
               onChanged: onPasswordChanged,
+              style: inputStyle,
               decoration: InputDecoration(
                 hintText: 'Enter new password',
                 filled: true,
-                fillColor: AppColors.surfaceVariant,
+                fillColor: appColors.inputFieldBg,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(14),
                   borderSide: BorderSide.none,
@@ -163,16 +172,20 @@ class ResetPasswordFormWidget extends StatelessWidget {
             // Confirm field
             Text(
               'Confirm Password',
-              style: AppTextStyles.s14.copyWith(fontWeight: FontWeight.w600),
+              style: AppTextStyles.s14.copyWith(
+                fontWeight: FontWeight.w600,
+                color: appColors.textPrimary,
+              ),
             ),
             AppGap.h8,
             TextFormField(
               controller: confirmController,
               obscureText: !showConfirm,
+              style: inputStyle,
               decoration: InputDecoration(
                 hintText: 'Confirm new password',
                 filled: true,
-                fillColor: AppColors.surfaceVariant,
+                fillColor: appColors.inputFieldBg,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(14),
                   borderSide: BorderSide.none,

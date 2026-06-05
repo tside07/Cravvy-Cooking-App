@@ -138,17 +138,19 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     );
   }
 
+  TextStyle _fieldTextStyle(BuildContext context) =>
+      AppTextStyles.s14.copyWith(color: context.appColors.textPrimary);
+
   @override
   Widget build(BuildContext context) {
     final formattedDate =
         '${_birthDate.month.toString().padLeft(2, '0')}/${_birthDate.day.toString().padLeft(2, '0')}/${_birthDate.year}';
 
     final profile = context.read<ProfileProvider>();
+    final fieldStyle = _fieldTextStyle(context);
 
     return Scaffold(
-      backgroundColor: AppColors.background,
       appBar: AppBar(
-        backgroundColor: AppColors.background,
         elevation: 0,
         scrolledUnderElevation: 0,
         leading: IconButton(
@@ -237,8 +239,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               FieldCardWidget(
                 child: TextFormField(
                   controller: _nameCtrl,
-                  style: AppTextStyles.s14,
+                  style: fieldStyle,
                   decoration: _fieldDecoration(
+                    context,
                     icon: Icons.person_outline_rounded,
                     hint: 'profile.hint_fullname'.tr(),
                     controller: _nameCtrl,
@@ -300,8 +303,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 child: TextFormField(
                   controller: _emailCtrl,
                   keyboardType: TextInputType.emailAddress,
-                  style: AppTextStyles.s14,
+                  style: fieldStyle,
                   decoration: _fieldDecoration(
+                    context,
                     icon: Icons.email_outlined,
                     hint: 'profile.hint_email'.tr(),
                     controller: _emailCtrl,
@@ -325,8 +329,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 child: TextFormField(
                   controller: _phoneCtrl,
                   keyboardType: TextInputType.phone,
-                  style: AppTextStyles.s14,
+                  style: fieldStyle,
                   decoration: _fieldDecoration(
+                    context,
                     icon: Icons.phone_outlined,
                     hint: 'profile.phoneNo'.tr(),
                     controller: _phoneCtrl,
@@ -348,11 +353,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       controller: _bioCtrl,
                       maxLines: 4,
                       maxLength: _bioMaxLength,
-                      style: AppTextStyles.s14,
+                      style: fieldStyle,
                       decoration: InputDecoration(
                         hintText: 'profile.hint_bio'.tr(),
                         hintStyle: AppTextStyles.s14.copyWith(
-                          color: AppColors.textHint,
+                          color: context.appColors.inputHint,
                         ),
                         prefixIcon: Padding(
                           padding: const EdgeInsets.only(
@@ -490,15 +495,18 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     );
   }
 
-  InputDecoration _fieldDecoration({
+  InputDecoration _fieldDecoration(
+    BuildContext context, {
     required IconData icon,
     required String hint,
     required TextEditingController controller,
     required bool showCheckMark,
   }) {
+    final appColors = context.appColors;
+
     return InputDecoration(
       hintText: hint,
-      hintStyle: AppTextStyles.s14.copyWith(color: AppColors.textHint),
+      hintStyle: AppTextStyles.s14.copyWith(color: appColors.inputHint),
       prefixIcon: Padding(
         padding: const EdgeInsets.all(10),
         child: Container(

@@ -38,6 +38,8 @@ class TypeTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appColors = context.appColors;
+
     return Consumer<RecipeProvider>(
       builder: (context, provider, _) {
         return SingleChildScrollView(
@@ -51,21 +53,24 @@ class TypeTab extends StatelessWidget {
                   Expanded(
                     child: Container(
                       decoration: BoxDecoration(
-                        color: AppColors.surface,
+                        color: appColors.inputFieldBg,
                         borderRadius: BorderRadius.circular(14),
-                        border: Border.all(color: AppColors.border),
+                        border: Border.all(color: appColors.inputBorder),
                       ),
                       child: TextField(
                         controller: searchCtrl,
                         onChanged: onSearchChanged,
+                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                              color: appColors.textPrimary,
+                            ),
                         decoration: InputDecoration(
                           hintText: 'search.search_recipes'.tr(),
                           hintStyle: AppTextStyles.s14.copyWith(
-                            color: AppColors.textHint,
+                            color: appColors.inputHint,
                           ),
-                          prefixIcon: const Icon(
+                          prefixIcon: Icon(
                             Icons.search_rounded,
-                            color: AppColors.textHint,
+                            color: appColors.inputHint,
                             size: 20,
                           ),
                           border: InputBorder.none,
@@ -86,19 +91,19 @@ class TypeTab extends StatelessWidget {
                       decoration: BoxDecoration(
                         color: hasActiveFilter
                             ? AppColors.primary
-                            : AppColors.surface,
+                            : appColors.inputFieldBg,
                         borderRadius: BorderRadius.circular(14),
                         border: Border.all(
                           color: hasActiveFilter
                               ? AppColors.primary
-                              : AppColors.border,
+                              : appColors.inputBorder,
                         ),
                       ),
                       child: Icon(
                         Icons.tune_rounded,
                         color: hasActiveFilter
-                            ? Colors.white
-                            : AppColors.textSecondary,
+                            ? appColors.onPrimary
+                            : appColors.textSecondary,
                         size: 20,
                       ),
                     ),
@@ -130,16 +135,19 @@ class TypeTab extends StatelessWidget {
                   Expanded(
                     child: Container(
                       decoration: BoxDecoration(
-                        color: AppColors.surface,
+                        color: appColors.inputFieldBg,
                         borderRadius: AppBorderRadius.a12,
-                        border: Border.all(color: AppColors.border),
+                        border: Border.all(color: appColors.inputBorder),
                       ),
                       child: TextField(
                         controller: ingredientCtrl,
+                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                              color: appColors.textPrimary,
+                            ),
                         decoration: InputDecoration(
                           hintText: 'search.add_ingredient'.tr(),
                           hintStyle: AppTextStyles.s14.copyWith(
-                            color: AppColors.textHint,
+                            color: appColors.inputHint,
                           ),
                           border: InputBorder.none,
                           contentPadding: const EdgeInsets.symmetric(
@@ -175,7 +183,7 @@ class TypeTab extends StatelessWidget {
                           borderRadius: AppBorderRadius.a12,
                         ),
                       ),
-                      child: const Icon(Icons.add_rounded, color: Colors.white),
+                      child: Icon(Icons.add_rounded, color: appColors.onPrimary),
                     ),
                   ),
                 ],
@@ -190,7 +198,7 @@ class TypeTab extends StatelessWidget {
                   ),
                   style: AppTextStyles.s14.copyWith(
                     fontWeight: FontWeight.w600,
-                    color: AppColors.textPrimary,
+                    color: appColors.textPrimary,
                   ),
                 ),
                 AppGap.h8,
@@ -204,14 +212,14 @@ class TypeTab extends StatelessWidget {
                           labelStyle: AppTextStyles.s14.copyWith(
                             fontSize: 13,
                             fontWeight: FontWeight.w600,
-                            color: AppColors.primaryDark,
+                            color: appColors.chipSelectedText,
                           ),
-                          backgroundColor: AppColors.primaryLight,
-                          side: const BorderSide(
-                            color: AppColors.primary,
+                          backgroundColor: appColors.chipSelectedBg,
+                          side: BorderSide(
+                            color: appColors.chipSelectedBorder,
                             width: 1,
                           ),
-                          deleteIcon: const Icon(
+                          deleteIcon: Icon(
                             Icons.close_rounded,
                             size: 16,
                             color: AppColors.primary,
@@ -249,11 +257,13 @@ class TypeTab extends StatelessWidget {
                       padding: AppPad.h12v8,
                       decoration: BoxDecoration(
                         color: isAdded
-                            ? AppColors.primaryLight
-                            : AppColors.surface,
+                            ? appColors.chipSelectedBg
+                            : appColors.chipBg,
                         borderRadius: AppBorderRadius.a12,
                         border: Border.all(
-                          color: isAdded ? AppColors.primary : AppColors.border,
+                          color: isAdded
+                              ? appColors.chipSelectedBorder
+                              : appColors.chipBorder,
                           width: isAdded ? 1.5 : 1,
                         ),
                       ),
@@ -264,7 +274,7 @@ class TypeTab extends StatelessWidget {
                           fontWeight: FontWeight.w600,
                           color: isAdded
                               ? AppColors.primary
-                              : AppColors.textPrimary,
+                              : appColors.textPrimary,
                         ),
                       ),
                     ),
@@ -281,14 +291,16 @@ class TypeTab extends StatelessWidget {
                       'search.recipe_results'.tr(),
                       style: AppTextStyles.s18.copyWith(
                         fontWeight: FontWeight.w600,
+                        color: appColors.textPrimary,
                       ),
                     ),
                     AppGap.w8,
                     Container(
                       padding: AppPad.h8v4,
                       decoration: BoxDecoration(
-                        color: AppColors.primaryLight,
+                        color: appColors.chipSelectedBg,
                         borderRadius: AppBorderRadius.a8,
+                        border: Border.all(color: appColors.chipSelectedBorder),
                       ),
                       child: Text(
                         '${provider.searchResults.length}',
@@ -305,13 +317,13 @@ class TypeTab extends StatelessWidget {
                   ...List.generate(
                     3,
                     (_) => Shimmer.fromColors(
-                      baseColor: AppColors.border,
-                      highlightColor: AppColors.surface,
+                      baseColor: appColors.shimmerBase,
+                      highlightColor: appColors.shimmerHighlight,
                       child: Container(
                         height: 80,
                         margin: const EdgeInsets.only(bottom: 10),
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: appColors.cardSurface,
                           borderRadius: BorderRadius.circular(16),
                         ),
                       ),
@@ -350,7 +362,7 @@ class TypeTab extends StatelessWidget {
                                 Text(
                                   'search.no_results'.tr(),
                                   style: AppTextStyles.s14.copyWith(
-                                    color: AppColors.textSecondary,
+                                    color: appColors.textSecondary,
                                   ),
                                 ),
                               ],
@@ -377,15 +389,16 @@ class TypeTab extends StatelessWidget {
                       'search.recipe_suggestions'.tr(),
                       style: AppTextStyles.s18.copyWith(
                         fontWeight: FontWeight.w600,
-                        color: AppColors.textPrimary,
+                        color: appColors.textPrimary,
                       ),
                     ),
                     AppGap.w8,
                     Container(
                       padding: AppPad.h8v4,
                       decoration: BoxDecoration(
-                        color: AppColors.primaryLight,
+                        color: appColors.chipSelectedBg,
                         borderRadius: AppBorderRadius.a8,
+                        border: Border.all(color: appColors.chipSelectedBorder),
                       ),
                       child: Text(
                         '${provider.searchResults.length}',
