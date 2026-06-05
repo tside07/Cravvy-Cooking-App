@@ -1,19 +1,19 @@
 import 'package:cravvy_cooking_app/init.dart';
 
-// ─── Filter chip display ──────────────────────────────────────────────────────
-
 class FilterChipWidget extends StatelessWidget {
   const FilterChipWidget({super.key, required this.label});
   final String label;
 
   @override
   Widget build(BuildContext context) {
+    final appColors = context.appColors;
+
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
       decoration: BoxDecoration(
-        color: AppColors.primaryLight,
+        color: appColors.chipSelectedBg,
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: AppColors.primary),
+        border: Border.all(color: appColors.chipSelectedBorder),
       ),
       child: Text(
         label,

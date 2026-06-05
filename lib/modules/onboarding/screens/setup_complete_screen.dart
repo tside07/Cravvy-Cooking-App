@@ -49,7 +49,6 @@ class _SetupCompleteScreenState extends State<SetupCompleteScreen>
     final user = auth.user;
 
     return Scaffold(
-      backgroundColor: AppColors.background,
       body: SafeArea(
         child: Padding(
           padding: AppPad.a24,

@@ -54,7 +54,9 @@ class _LoginScreenState extends State<LoginScreen> {
       final error = auth.errorMessage ?? 'Đăng nhập thất bại';
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(error, style: AppTextStyles.s14.copyWith(color: AppColors.white)),
+          content: Text(error,
+              style: AppTextStyles.s14.copyWith(
+                  color: context.appColors.onPrimary)),
           backgroundColor: AppColors.error,
           behavior: SnackBarBehavior.floating,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -70,7 +72,6 @@ class _LoginScreenState extends State<LoginScreen> {
       child: SafeArea(
         top: false,
         child: Scaffold(
-          backgroundColor: AppColors.background,
           body: Consumer<AuthProvider>(
             builder: (context, auth, _) => _Body(
               formKey: _formKey,

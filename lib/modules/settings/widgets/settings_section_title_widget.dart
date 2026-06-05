@@ -12,7 +12,7 @@ class SettingsSectionTitleWidget extends StatelessWidget {
       child: Text(
         title,
         style: AppTextStyles.s12.copyWith(
-          color: AppColors.textSecondary,
+          color: context.appColors.textSecondary,
           fontWeight: FontWeight.w700,
           letterSpacing: 0.5,
         ),

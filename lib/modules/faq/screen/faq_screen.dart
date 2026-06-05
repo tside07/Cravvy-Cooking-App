@@ -79,7 +79,6 @@ class _FAQScreenState extends State<FAQScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
       body: SafeArea(
         child: Column(
           children: [
@@ -105,10 +104,24 @@ class _FAQScreenState extends State<FAQScreen> {
                       onChanged: (v) => setState(() => _searchQuery = v),
                       decoration: InputDecoration(
                         hintText: 'Search questions...',
-                        hintStyle: AppTextStyles.s14.copyWith(color: AppColors.textHint),
-                        prefixIcon: const Icon(Icons.search_rounded, color: AppColors.textHint),
+                        hintStyle: AppTextStyles.s14.copyWith(
+                          color: context.appColors.inputHint,
+                        ),
+                        prefixIcon: Icon(
+                          Icons.search_rounded,
+                          color: context.appColors.inputHint,
+                        ),
                         suffixIcon: _searchQuery.isNotEmpty
-                            ? IconButton(icon: const Icon(Icons.close_rounded, color: AppColors.textHint), onPressed: () { _searchController.clear(); setState(() => _searchQuery = ''); })
+                            ? IconButton(
+                                icon: Icon(
+                                  Icons.close_rounded,
+                                  color: context.appColors.inputHint,
+                                ),
+                                onPressed: () {
+                                  _searchController.clear();
+                                  setState(() => _searchQuery = '');
+                                },
+                              )
                             : null,
                         border: InputBorder.none,
                         contentPadding: const EdgeInsets.symmetric(vertical: 12),

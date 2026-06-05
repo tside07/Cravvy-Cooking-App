@@ -20,6 +20,8 @@ class SettingsNavTileWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appColors = context.appColors;
+
     return InkWell(
       onTap: onTap,
       borderRadius: AppBorderRadius.a16,
@@ -42,7 +44,7 @@ class SettingsNavTileWidget extends StatelessWidget {
                 title,
                 style: AppTextStyles.s14.copyWith(
                   fontWeight: FontWeight.w600,
-                  color: titleColor ?? AppColors.textPrimary,
+                  color: titleColor ?? appColors.textPrimary,
                 ),
               ),
             ),
@@ -50,7 +52,7 @@ class SettingsNavTileWidget extends StatelessWidget {
               Text(
                 trailing!,
                 style: AppTextStyles.s12.copyWith(
-                  color: AppColors.textSecondary,
+                  color: appColors.textSecondary,
                 ),
               ),
               AppGap.w4,
@@ -58,7 +60,7 @@ class SettingsNavTileWidget extends StatelessWidget {
             Icon(
               Icons.arrow_forward_ios_rounded,
               size: 14,
-              color: AppColors.textHint,
+              color: appColors.textDisabled,
             ),
           ],
         ),

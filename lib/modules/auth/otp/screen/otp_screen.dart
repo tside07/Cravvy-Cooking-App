@@ -135,7 +135,6 @@ class _OtpScreenState extends State<OtpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
       appBar: const CustomAuthAppBar(),
       body: SafeArea(
         child: Consumer<AuthProvider>(

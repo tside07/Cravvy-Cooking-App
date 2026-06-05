@@ -31,7 +31,6 @@ class _SubscriptionView extends StatelessWidget {
     final features = SubscriptionProvider.featureRows();
 
     return Scaffold(
-      backgroundColor: AppColors.background,
       body: SafeArea(
         child: Column(
           children: [

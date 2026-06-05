@@ -10,6 +10,7 @@ class RecipeSearchResultTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appColors = context.appColors;
     final emoji = MealTypeHelper.emoji(recipe.mealType);
     final lightColor = MealTypeHelper.lightColor(recipe.mealType);
 
@@ -18,9 +19,9 @@ class RecipeSearchResultTile extends StatelessWidget {
       child: Container(
         margin: const EdgeInsets.only(bottom: 10),
         decoration: BoxDecoration(
-          color: AppColors.surface,
+          color: appColors.cardSurface,
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: AppColors.border),
+          border: Border.all(color: appColors.borderDivider),
         ),
         clipBehavior: Clip.hardEdge,
         child: Row(
@@ -56,7 +57,7 @@ class RecipeSearchResultTile extends StatelessWidget {
                       recipe.name,
                       style: AppTextStyles.s14.copyWith(
                         fontWeight: FontWeight.w700,
-                        color: AppColors.textPrimary,
+                        color: appColors.textPrimary,
                       ),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
@@ -74,11 +75,13 @@ class RecipeSearchResultTile extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(width: 8),
-                        const Icon(Icons.timer_outlined, size: 13, color: AppColors.textSecondary),
+                        Icon(Icons.timer_outlined,
+                            size: 13, color: appColors.textSecondary),
                         const SizedBox(width: 2),
                         Text(
                           '${recipe.prepTime} min',
-                          style: AppTextStyles.s12.copyWith(color: AppColors.textSecondary),
+                          style: AppTextStyles.s12.copyWith(
+                              color: appColors.textSecondary),
                         ),
                       ],
                     ),
@@ -108,9 +111,10 @@ class RecipeSearchResultTile extends StatelessWidget {
                 ),
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.only(right: 12),
-              child: Icon(Icons.chevron_right_rounded, color: AppColors.textHint, size: 22),
+            Padding(
+              padding: const EdgeInsets.only(right: 12),
+              child: Icon(Icons.chevron_right_rounded,
+                  color: appColors.textDisabled, size: 22),
             ),
           ],
         ),

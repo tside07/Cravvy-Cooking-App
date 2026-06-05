@@ -23,7 +23,6 @@ class MealDetailScreen extends StatelessWidget {
         recipeLookup: ctx.read<RecipeProvider>(),
       ),
       child: Scaffold(
-        backgroundColor: AppColors.background,
         body: _MealDetailBody(meal: meal),
       ),
     );

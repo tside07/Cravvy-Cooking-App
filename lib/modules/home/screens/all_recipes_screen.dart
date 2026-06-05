@@ -616,8 +616,6 @@ class _AllRecipesScreenState extends State<AllRecipesScreen> {
 
     return Scaffold(
 
-      backgroundColor: AppColors.background,
-
       appBar: AppBar(
 
         title: Text('home.recipes_title'.tr()),

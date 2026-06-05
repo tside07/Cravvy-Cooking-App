@@ -51,7 +51,6 @@ class _TrialActivationScreenState extends State<TrialActivationScreen>
   Widget build(BuildContext context) {
     final _ = context.locale;
     return Scaffold(
-      backgroundColor: AppColors.background,
       body: SafeArea(
         child: Stack(
           children: [

@@ -23,7 +23,6 @@ class _ShoppingListView extends StatelessWidget {
 
     if (!provider.isLoaded) {
       return const Scaffold(
-        backgroundColor: AppColors.background,
         body: Center(child: CircularProgressIndicator()),
       );
     }
@@ -33,9 +32,7 @@ class _ShoppingListView extends StatelessWidget {
     final recipeIds = provider.recipeIds;
 
     return Scaffold(
-      backgroundColor: AppColors.background,
       appBar: AppBar(
-        backgroundColor: AppColors.background,
         elevation: 0,
         scrolledUnderElevation: 0,
         centerTitle: true,

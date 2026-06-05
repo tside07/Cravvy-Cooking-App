@@ -20,6 +20,8 @@ class SettingsSwitchTileWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appColors = context.appColors;
+
     return Padding(
       padding: AppPad.h16v12,
       child: Row(
@@ -42,12 +44,13 @@ class SettingsSwitchTileWidget extends StatelessWidget {
                   title,
                   style: AppTextStyles.s14.copyWith(
                     fontWeight: FontWeight.w600,
+                    color: appColors.textPrimary,
                   ),
                 ),
                 Text(
                   subtitle,
                   style: AppTextStyles.s12.copyWith(
-                    color: AppColors.textSecondary,
+                    color: appColors.textSecondary,
                   ),
                 ),
               ],
@@ -56,7 +59,6 @@ class SettingsSwitchTileWidget extends StatelessWidget {
           Switch(
             value: value,
             onChanged: onChanged,
-            activeThumbColor: AppColors.primary,
           ),
         ],
       ),

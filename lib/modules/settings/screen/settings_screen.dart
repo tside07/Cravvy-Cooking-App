@@ -3,6 +3,7 @@ import 'package:cravvy_cooking_app/init.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:provider/provider.dart';
 
+import 'package:cravvy_cooking_app/core/theme/theme_mode_provider.dart';
 import 'package:cravvy_cooking_app/modules/settings/provider/settings_provider.dart';
 import 'package:cravvy_cooking_app/modules/settings/widgets/settings_card_widget.dart';
 import 'package:cravvy_cooking_app/modules/settings/widgets/settings_delete_confirm_card_widget.dart';
@@ -98,7 +99,6 @@ class SettingsScreen extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (_) => SettingsProvider(),
       child: Scaffold(
-        backgroundColor: AppColors.background,
         body: SafeArea(
           child: Column(
             children: [
@@ -114,21 +114,26 @@ class SettingsScreen extends StatelessWidget {
   // ─── Header ──────────────────────────────────────────────────────────────────
 
   Widget _buildHeader(BuildContext context) {
+    final appColors = context.appColors;
     return Container(
       padding: const EdgeInsets.fromLTRB(8, 12, 16, 12),
       decoration: BoxDecoration(
-        color: AppColors.surface,
-        border: Border(bottom: BorderSide(color: AppColors.border)),
+        color: appColors.cardSurface,
+        border: Border(bottom: BorderSide(color: appColors.borderDivider)),
       ),
       child: Row(
         children: [
           IconButton(
-            icon: const Icon(Icons.arrow_back_ios_new_rounded),
+            icon: Icon(Icons.arrow_back_ios_new_rounded,
+                color: appColors.textPrimary),
             onPressed: () => context.pop(),
           ),
           Text(
             'settings.title'.tr(),
-            style: AppTextStyles.s18.copyWith(fontWeight: FontWeight.w700),
+            style: AppTextStyles.s18.copyWith(
+              fontWeight: FontWeight.w700,
+              color: appColors.textPrimary,
+            ),
           ),
         ],
       ),
@@ -155,7 +160,7 @@ class SettingsScreen extends StatelessWidget {
           AppGap.h20,
           _buildDangerZoneSection(context),
           AppGap.h32,
-          _buildVersionText(),
+          _buildVersionText(context),
           AppGap.h16,
         ],
       ),
@@ -233,16 +238,16 @@ class SettingsScreen extends StatelessWidget {
       children: [
         SettingsSectionTitleWidget(title: 'settings.section_appearance'.tr()),
         AppGap.h8,
-        Consumer<SettingsProvider>(
-          builder: (context, provider, _) => SettingsCardWidget(
+        Consumer<ThemeModeProvider>(
+          builder: (context, theme, _) => SettingsCardWidget(
             children: [
               SettingsSwitchTileWidget(
                 icon: Icons.dark_mode_outlined,
                 iconColor: const Color(0xFF64748B),
                 title: 'settings.dark_mode'.tr(),
                 subtitle: 'settings.dark_mode_sub'.tr(),
-                value: provider.isDarkMode,
-                onChanged: provider.setDarkMode,
+                value: theme.isDarkMode,
+                onChanged: theme.setDarkMode,
               ),
               const SettingsTileDividerWidget(),
               SettingsNavTileWidget(
@@ -369,11 +374,13 @@ class SettingsScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildVersionText() {
+  Widget _buildVersionText(BuildContext context) {
     return Center(
       child: Text(
         'settings.version'.tr(),
-        style: AppTextStyles.s12.copyWith(color: AppColors.textHint),
+        style: AppTextStyles.s12.copyWith(
+          color: context.appColors.textDisabled,
+        ),
       ),
     );
   }

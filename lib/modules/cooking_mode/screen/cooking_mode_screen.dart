@@ -121,7 +121,6 @@ class _CookingModeScreenState extends State<CookingModeScreen> {
 
     if (_loadingSteps) {
       return Scaffold(
-        backgroundColor: AppColors.background,
         body: SafeArea(
           child: Column(
             children: [
@@ -143,7 +142,6 @@ class _CookingModeScreenState extends State<CookingModeScreen> {
 
     if (_steps.isEmpty) {
       return Scaffold(
-        backgroundColor: AppColors.background,
         body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(24),
@@ -191,7 +189,6 @@ class _CookingModeScreenState extends State<CookingModeScreen> {
     final imageUrl = widget.meal.imageUrl.trim();
 
     return Scaffold(
-      backgroundColor: AppColors.background,
       body: SafeArea(
         child: Column(
           children: [

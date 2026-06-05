@@ -15,7 +15,6 @@ class HomeScreen extends StatelessWidget {
     final _ = context.locale;
 
     return Scaffold(
-      backgroundColor: AppColors.background,
       body: SafeArea(
         child: CustomScrollView(
           slivers: [

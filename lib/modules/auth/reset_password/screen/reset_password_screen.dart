@@ -83,9 +83,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
       onTap: () => FocusScope.of(context).unfocus(),
       child: Consumer<AuthProvider>(
         builder: (context, auth, _) => Scaffold(
-          backgroundColor: AppColors.background,
           appBar: AppBar(
-            backgroundColor: AppColors.background,
             elevation: 0,
             leading: IconButton(
               icon: const Icon(

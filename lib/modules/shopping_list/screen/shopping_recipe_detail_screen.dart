@@ -17,9 +17,7 @@ class ShoppingRecipeDetailScreen extends StatelessWidget {
     final recipeName = provider.recipeNameOf(recipeId);
 
     return Scaffold(
-      backgroundColor: AppColors.background,
       appBar: AppBar(
-        backgroundColor: AppColors.background,
         elevation: 0,
         scrolledUnderElevation: 0,
         centerTitle: true,

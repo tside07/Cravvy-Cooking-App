@@ -89,7 +89,7 @@ class _SearchScreenState extends State<SearchScreen>
   void _showFilterSheet() {
     showModalBottomSheet(
       context: context,
-      backgroundColor: AppColors.background,
+      backgroundColor: context.appColors.elevated,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
       ),
@@ -120,8 +120,8 @@ class _SearchScreenState extends State<SearchScreen>
   @override
   Widget build(BuildContext context) {
     final _ = context.locale;
+    final appColors = context.appColors;
     return Scaffold(
-      backgroundColor: AppColors.background,
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -136,20 +136,15 @@ class _SearchScreenState extends State<SearchScreen>
               child: Container(
                 height: 44,
                 decoration: BoxDecoration(
-                  color: AppColors.surfaceVariant,
+                  color: appColors.cardSurface,
                   borderRadius: BorderRadius.circular(14),
+                  border: Border.all(color: appColors.borderDivider),
                 ),
                 child: TabBar(
                   controller: _tabController,
                   indicator: BoxDecoration(
-                    color: AppColors.surface,
+                    color: appColors.elevated,
                     borderRadius: BorderRadius.circular(12),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withValues(alpha: 0.06),
-                        blurRadius: 8,
-                      ),
-                    ],
                   ),
                   indicatorSize: TabBarIndicatorSize.tab,
                   dividerColor: Colors.transparent,
@@ -160,7 +155,7 @@ class _SearchScreenState extends State<SearchScreen>
                     fontWeight: FontWeight.w500,
                   ),
                   labelColor: AppColors.primary,
-                  unselectedLabelColor: AppColors.textSecondary,
+                  unselectedLabelColor: appColors.textSecondary,
                   tabs: [
                     Tab(text: 'search.tab_type'.tr()),
                     Tab(text: 'search.tab_scan'.tr()),

@@ -5,6 +5,6 @@ class SettingsTileDividerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Divider(height: 1, indent: 56, color: AppColors.border);
+    return Divider(height: 1, indent: 56, color: context.appColors.borderDivider);
   }
 }
