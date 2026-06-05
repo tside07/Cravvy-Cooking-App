@@ -14,7 +14,11 @@ class WeeklyBarChartWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final max = data.reduce((a, b) => a > b ? a : b).toDouble() * 1.2;
+    final peak = data.isEmpty
+        ? 0.0
+        : data.reduce((a, b) => a > b ? a : b).toDouble();
+    // Empty week plan (e.g. logout) yields all zeros → peak 0 → 0/0 NaN heights.
+    final max = (peak > 0 ? peak : 1.0) * 1.2;
     final today = DateTime.now().weekday - 1;
 
     return SizedBox(
