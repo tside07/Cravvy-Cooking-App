@@ -34,13 +34,13 @@ class OtpBoxWidget extends StatelessWidget {
           counterText: '',
           filled: true,
           fillColor: controller.text.isEmpty
-              ? AppColors.surfaceVariant
+              ? appColors.inputFieldBg
               : AppColors.primaryLight,
           enabledBorder: OutlineInputBorder(
             borderRadius: AppBorderRadius.a12,
             borderSide: BorderSide(
               color: controller.text.isEmpty
-                  ? AppColors.border
+                  ? appColors.inputBorder
                   : AppColors.primary,
             ),
           ),

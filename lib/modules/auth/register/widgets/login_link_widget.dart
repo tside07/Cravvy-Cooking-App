@@ -1,3 +1,4 @@
+import 'package:cravvy_cooking_app/core/theme/pre_auth_theme.dart';
 import 'package:cravvy_cooking_app/init.dart';
 
 class LoginLinkWidget extends StatelessWidget {
@@ -9,7 +10,9 @@ class LoginLinkWidget extends StatelessWidget {
       child: RichText(
         text: TextSpan(
           text: 'Already have an account? ',
-          style: AppTextStyles.s14.copyWith(color: AppColors.textSecondary),
+          style: AppTextStyles.s14.copyWith(
+            color: PreAuthTheme.textSecondary,
+          ),
           children: [
             WidgetSpan(
               child: GestureDetector(

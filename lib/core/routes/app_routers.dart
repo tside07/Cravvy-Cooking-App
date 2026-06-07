@@ -1,12 +1,11 @@
 import 'package:cravvy_cooking_app/init.dart';
 import 'package:cravvy_cooking_app/modules/dashboard/screens/dashboard_screen.dart';
 import 'package:cravvy_cooking_app/modules/splash/screens/splash_screen.dart';
+import 'package:cravvy_cooking_app/modules/onboarding/screens/landing_screen.dart';
 import 'package:cravvy_cooking_app/modules/onboarding/screens/onboarding_screen.dart';
-import 'package:cravvy_cooking_app/modules/onboarding/screens/goal_selection_screen.dart';
-import 'package:cravvy_cooking_app/modules/onboarding/screens/diet_selection_screen.dart';
+import 'package:cravvy_cooking_app/modules/onboarding/screens/welcome_choice_screen.dart';
 import 'package:cravvy_cooking_app/modules/onboarding/screens/setup_complete_screen.dart';
 import 'package:cravvy_cooking_app/modules/onboarding/screens/setup/setup_screen.dart';
-import 'package:cravvy_cooking_app/modules/onboarding/provider/onboarding_provider.dart';
 import 'package:cravvy_cooking_app/modules/dashboard/provider/dashboard_tab_provider.dart';
 import 'package:cravvy_cooking_app/modules/auth/login/screen/login_screen.dart';
 import 'package:cravvy_cooking_app/modules/auth/register/screen/register_screen.dart';
@@ -29,17 +28,11 @@ import 'package:cravvy_cooking_app/data/models/meal.dart';
 import 'package:cravvy_cooking_app/data/providers/auth_provider.dart';
 import 'package:cravvy_cooking_app/modules/home/screens/all_recipes_screen.dart';
 
-class OnboardingArgs {
-  final HealthGoal? goal;
-  final Set<DietType> diets;
-  const OnboardingArgs({this.goal, required this.diets});
-}
-
 class AppRouter {
   static const String splash = '/';
+  static const String landing = '/landing';
   static const String onboarding = '/onboarding';
-  static const String goalSelection = '/onboarding/goal';
-  static const String dietSelection = '/onboarding/diet';
+  static const String welcomeChoice = '/onboarding/welcome';
   static const String setupComplete = '/onboarding/complete';
 
   static const String setupStep1 = '/setup/1';
@@ -72,12 +65,24 @@ class AppRouter {
   static const String disclaimer = '/disclaimer';
 
   static const List<String> _setupRoutes = [
-    setupStep1, setupStep2, setupStep3, setupStep4, setupStep5, setupComplete,
+    setupStep1,
+    setupStep2,
+    setupStep3,
+    setupStep4,
+    setupStep5,
+    setupComplete,
   ];
 
   static const List<String> _publicRoutes = [
-    splash, login, register, forgotPassword, otp, resetPassword,
-    onboarding, goalSelection, dietSelection,
+    splash,
+    landing,
+    login,
+    register,
+    forgotPassword,
+    otp,
+    resetPassword,
+    onboarding,
+    welcomeChoice,
   ];
 
   static final GoRouter router = GoRouter(
@@ -94,16 +99,19 @@ class AppRouter {
       final isSetup = _setupRoutes.contains(location);
 
       if (!auth.isLoggedIn && !isPublic && !isSetup) {
-        if (isSetup) return login;
-        return login;
+        return landing;
       }
 
-      if (auth.isLoggedIn && (location == login || location == register)) {
+      if (auth.isLoggedIn &&
+          (location == login ||
+              location == register ||
+              location == landing ||
+              location == welcomeChoice)) {
         if (auth.user?.onboardingComplete == true) return app;
         return setupStep1;
       }
 
-      return null; // không redirect
+      return null;
     },
     routes: [
       GoRoute(
@@ -113,29 +121,20 @@ class AppRouter {
       ),
 
       GoRoute(
+        path: landing,
+        builder: (context, state) => const LandingScreen(),
+      ),
+      GoRoute(
         path: onboarding,
         builder: (context, state) => const OnboardingScreen(),
       ),
       GoRoute(
-        path: goalSelection,
-        builder: (context, state) => ChangeNotifierProvider(
-          create: (_) => OnboardingProvider(),
-          child: const GoalSelectionScreen(),
+        path: welcomeChoice,
+        builder: (context, state) => WelcomeChoiceScreen(
+          mode: state.extra is WelcomeMode
+              ? state.extra as WelcomeMode
+              : WelcomeMode.signup,
         ),
-      ),
-      GoRoute(
-        path: dietSelection,
-        builder: (context, state) {
-          final goal = state.extra as HealthGoal?;
-          return ChangeNotifierProvider(
-            create: (_) {
-              final provider = OnboardingProvider();
-              if (goal != null) provider.selectGoal(goal);
-              return provider;
-            },
-            child: const DietSelectionScreen(),
-          );
-        },
       ),
       GoRoute(
         path: setupComplete,

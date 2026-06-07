@@ -1,11 +1,9 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:cravvy_cooking_app/core/theme/pre_auth_theme.dart';
 import 'package:cravvy_cooking_app/init.dart';
 import 'package:cravvy_cooking_app/data/providers/auth_provider.dart';
-import 'package:cravvy_cooking_app/modules/auth/widgets/auth_divider_widget.dart';
 import 'package:cravvy_cooking_app/modules/auth/widgets/auth_form_fields_widget.dart';
-import 'package:cravvy_cooking_app/modules/auth/widgets/auth_header_widget.dart';
 import 'package:cravvy_cooking_app/modules/auth/login/widgets/forgot_password_button_widget.dart';
-import 'package:cravvy_cooking_app/modules/auth/login/widgets/register_link_widget.dart';
-import 'package:cravvy_cooking_app/modules/auth/widgets/auth_social_section_connected.dart';
 import 'package:cravvy_cooking_app/modules/widgets/common/cravvy_button.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -43,20 +41,19 @@ class _LoginScreenState extends State<LoginScreen> {
     if (!mounted) return;
 
     if (success) {
-      // Kiểm tra onboarding xong chưa
       if (auth.user?.onboardingComplete == true) {
         context.go(AppRouter.app);
       } else {
         context.go(AppRouter.setupStep1);
       }
     } else {
-      // Hiển thị lỗi
-      final error = auth.errorMessage ?? 'Đăng nhập thất bại';
+      final error = auth.errorMessage ?? 'auth.login_failed'.tr();
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(error,
-              style: AppTextStyles.s14.copyWith(
-                  color: context.appColors.onPrimary)),
+          content: Text(
+            error,
+            style: AppTextStyles.s14.copyWith(color: AppColors.white),
+          ),
           backgroundColor: AppColors.error,
           behavior: SnackBarBehavior.floating,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -69,10 +66,14 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
-      child: SafeArea(
-        top: false,
-        child: Scaffold(
-          body: Consumer<AuthProvider>(
+      child: PreAuthScaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          leading: const PreAuthBackButton(fallbackRoute: AppRouter.welcomeChoice),
+        ),
+        body: SafeArea(
+          child: Consumer<AuthProvider>(
             builder: (context, auth, _) => _Body(
               formKey: _formKey,
               emailController: _emailController,
@@ -123,21 +124,26 @@ class _Body extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    AppGap.h20,
-
-            const AuthHeaderWidget(
-              title: 'Welcome Back!',
-              subtitle: 'Sign in to continue your healthy food journey',
-            ),
-            AppGap.h28,
-
-                    const AuthSocialSectionConnected(),
-                    AppGap.h20,
-
-            const AuthDividerWidget(label: 'or sign in with email'),
-            AppGap.h20,
-
+                    AppGap.h12,
+                    Text(
+                      'auth.login_title'.tr(),
+                      style: AppTextStyles.s20.copyWith(
+                        fontWeight: FontWeight.w800,
+                        color: PreAuthTheme.textPrimary,
+                        fontSize: 28,
+                      ),
+                    ),
+                    AppGap.h8,
+                    Text(
+                      'auth.login_subtitle'.tr(),
+                      style: AppTextStyles.s15.copyWith(
+                        color: PreAuthTheme.textSecondary,
+                        height: 1.5,
+                      ),
+                    ),
+                    AppGap.h28,
                     AuthFormFieldsWidget(
+                      preAuth: true,
                       fields: [
                         AuthFormFieldConfig(
                           hint: 'Email',
@@ -145,8 +151,12 @@ class _Body extends StatelessWidget {
                           keyboardType: TextInputType.emailAddress,
                           focusNode: emailFocus,
                           validator: (v) {
-                            if (v == null || v.isEmpty) return 'Vui lòng nhập email';
-                            if (!v.contains('@')) return 'Email không hợp lệ';
+                            if (v == null || v.isEmpty) {
+                              return 'auth.val_email_required'.tr();
+                            }
+                            if (!v.contains('@')) {
+                              return 'auth.val_email_invalid'.tr();
+                            }
                             return null;
                           },
                         ),
@@ -156,24 +166,21 @@ class _Body extends StatelessWidget {
                           isPassword: true,
                           focusNode: passwordFocus,
                           validator: (v) {
-                            if (v == null || v.isEmpty) return 'Vui lòng nhập mật khẩu';
+                            if (v == null || v.isEmpty) {
+                              return 'auth.val_password_required'.tr();
+                            }
                             return null;
                           },
                         ),
                       ],
                     ),
-
                     const ForgotPasswordButtonWidget(),
                     AppGap.h8,
-
                     CravvyButton(
-                      label: 'Sign In',
+                      label: 'auth.sign_in'.tr(),
                       isLoading: isLoading,
                       onTap: onSubmit,
                     ),
-                    AppGap.h20,
-
-                    const RegisterLinkWidget(),
                     AppGap.h24,
                   ],
                 ),

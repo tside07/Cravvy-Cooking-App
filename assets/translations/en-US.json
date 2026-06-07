@@ -591,7 +591,29 @@
         "val_terms": "Please agree to the terms of use.",
         "login_failed": "Login failed",
         "register_failed": "Registration failed",
-        "otp_failed": "Could not send OTP"
+        "otp_failed": "Could not send OTP",
+        "try_without_account": "Try without an account"
+    },
+    "landing": {
+        "title": "This is the start of eating better",
+        "subtitle": "You've already taken a big step \u2014 deciding to change.",
+        "create_account": "CREATE ACCOUNT",
+        "log_in": "LOG IN"
+    },
+    "welcome": {
+        "title": "Your personalized plan is ready",
+        "subtitle": "Create an account to begin your progress",
+        "login_title": "Log in",
+        "login_subtitle": "Sign in to continue your journey",
+        "continue_apple": "CONTINUE WITH APPLE",
+        "continue_google": "CONTINUE WITH GOOGLE",
+        "continue_email": "CONTINUE WITH EMAIL",
+        "terms_prefix": "By continuing, you agree to Cravvy's",
+        "terms": "Terms & Conditions",
+        "terms_and": "and",
+        "privacy": "Privacy Policy",
+        "oauth_waiting": "Complete sign-in in your browser, or cancel to choose another option.",
+        "oauth_cancel": "Cancel sign-in"
     },
     "setup_complete": {
         "your_goal": "Your goal",

@@ -5,6 +5,7 @@ class ResetPasswordSuccessWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(32),
@@ -27,16 +28,19 @@ class ResetPasswordSuccessWidget extends StatelessWidget {
             AppGap.h24,
             Text(
               'Password Updated!',
-              style: AppTextStyles.s20.copyWith(
+              style: context.themed(
+                AppTextStyles.s20,
                 fontWeight: FontWeight.w700,
-                fontSize: 24,
-              ),
+              ).copyWith(fontSize: 24),
             ),
             AppGap.h12,
             Text(
               'Your password has been reset successfully.\nRedirecting to login…',
               textAlign: TextAlign.center,
-              style: AppTextStyles.s14.copyWith(color: AppColors.textSecondary),
+              style: context.themed(
+                AppTextStyles.s14,
+                color: colors.textSecondary,
+              ),
             ),
           ],
         ),

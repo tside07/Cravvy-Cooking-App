@@ -26,6 +26,7 @@ class RegisterFormFieldsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AuthFormFieldsWidget(
+      preAuth: true,
       fields: [
         AuthFormFieldConfig(
           hint: 'Full Name',

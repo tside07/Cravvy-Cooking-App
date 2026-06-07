@@ -18,6 +18,7 @@ class AuthSocialLoginButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
     final isGoogle = provider == SocialProvider.google;
     return SizedBox(
       width: double.infinity,
@@ -25,8 +26,8 @@ class AuthSocialLoginButton extends StatelessWidget {
       child: OutlinedButton(
         onPressed: isEnabled ? onTap : null,
         style: OutlinedButton.styleFrom(
-          backgroundColor: AppColors.surface,
-          side: const BorderSide(color: AppColors.border),
+          backgroundColor: colors.cardSurface,
+          side: BorderSide(color: colors.borderDivider),
           shape: RoundedRectangleBorder(
             borderRadius: AppBorderRadius.a14,
           ),
@@ -43,8 +44,8 @@ class AuthSocialLoginButton extends StatelessWidget {
             AppGap.w10,
             Text(
               isGoogle ? 'Continue with Google' : 'Continue with Apple',
-              style: AppTextStyles.s16.copyWith(
-                color: AppColors.textPrimary,
+              style: context.themed(
+                AppTextStyles.s16,
                 fontWeight: FontWeight.w600,
               ),
             ),

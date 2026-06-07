@@ -12,6 +12,7 @@ class SetupProgressWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
     return Container(
       padding: const EdgeInsets.fromLTRB(20, 16, 20, 12),
       child: Column(
@@ -22,8 +23,9 @@ class SetupProgressWidget extends StatelessWidget {
             children: [
               Text(
                 'Step $current of $total',
-                style: AppTextStyles.s12.copyWith(
-                  color: AppColors.textSecondary,
+                style: context.themed(
+                  AppTextStyles.s12,
+                  color: colors.textSecondary,
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -41,7 +43,7 @@ class SetupProgressWidget extends StatelessWidget {
             borderRadius: AppBorderRadius.a4,
             child: LinearProgressIndicator(
               value: current / total,
-              backgroundColor: AppColors.surfaceVariant,
+              backgroundColor: colors.elevated,
               color: AppColors.primary,
               minHeight: 6,
             ),

@@ -5,9 +5,13 @@ class HelpTextWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
     return Text(
       "Didn't receive the code? Check your spam folder or make sure the email address is correct.",
-      style: AppTextStyles.s12.copyWith(color: AppColors.textHint, height: 1.5),
+      style: context.themed(
+        AppTextStyles.s12,
+        color: colors.textDisabled,
+      ).copyWith(height: 1.5),
       textAlign: TextAlign.center,
     );
   }

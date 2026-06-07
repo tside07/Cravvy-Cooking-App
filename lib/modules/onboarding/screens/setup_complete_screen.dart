@@ -1,3 +1,4 @@
+import 'package:cravvy_cooking_app/core/theme/pre_auth_theme.dart';
 import 'package:cravvy_cooking_app/init.dart';
 import 'package:cravvy_cooking_app/modules/widgets/common/cravvy_button.dart';
 import 'package:cravvy_cooking_app/data/providers/auth_provider.dart';
@@ -48,7 +49,7 @@ class _SetupCompleteScreenState extends State<SetupCompleteScreen>
     final auth = context.watch<AuthProvider>();
     final user = auth.user;
 
-    return Scaffold(
+    return PreAuthScaffold(
       body: SafeArea(
         child: Padding(
           padding: AppPad.a24,
@@ -83,13 +84,20 @@ class _SetupCompleteScreenState extends State<SetupCompleteScreen>
                       user != null
                           ? 'You\'re all set, ${user.fullName?.split(' ').first ?? ''}!'
                           : 'You\'re all set!',
-                      style: Theme.of(context).textTheme.displayMedium,
+                      style: AppTextStyles.s20.copyWith(
+                        fontWeight: FontWeight.w800,
+                        color: PreAuthTheme.textPrimary,
+                        fontSize: 28,
+                      ),
                       textAlign: TextAlign.center,
                     ),
                     AppGap.h12,
                     Text(
                       'Your personalized meal plan is ready.\nLet\'s start eating better today!',
-                      style: Theme.of(context).textTheme.bodyLarge,
+                      style: AppTextStyles.s15.copyWith(
+                        color: PreAuthTheme.textSecondary,
+                        height: 1.5,
+                      ),
                       textAlign: TextAlign.center,
                     ),
                     AppGap.h36,
@@ -97,11 +105,7 @@ class _SetupCompleteScreenState extends State<SetupCompleteScreen>
                     // Summary card — dùng data thật từ Supabase
                     Container(
                       padding: AppPad.a20,
-                      decoration: BoxDecoration(
-                        color: AppColors.surface,
-                        borderRadius: AppBorderRadius.a20,
-                        border: Border.all(color: AppColors.border),
-                      ),
+                      decoration: context.cardBox(radius: 20),
                       child: Column(
                         children: [
                           if (user?.goal != null) ...[
@@ -199,6 +203,7 @@ class _SummaryRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
     return Row(
       children: [
         Text(icon, style: const TextStyle(fontSize: 20)),
@@ -209,13 +214,17 @@ class _SummaryRow extends StatelessWidget {
             children: [
               Text(
                 label,
-                style: AppTextStyles.s12.copyWith(
-                  color: AppColors.textSecondary,
+                style: context.themed(
+                  AppTextStyles.s12,
+                  color: colors.textSecondary,
                 ),
               ),
               Text(
                 value,
-                style: AppTextStyles.s14.copyWith(fontWeight: FontWeight.w600),
+                style: context.themed(
+                  AppTextStyles.s14,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ],
           ),

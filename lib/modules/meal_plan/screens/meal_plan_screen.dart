@@ -165,10 +165,12 @@ class _MealList extends StatelessWidget {
                   meal: meal,
                   onToggle: () => provider.toggleMealLogged(meal.id),
                   onSwap: () => _showSwapSheet(context, provider, meal),
-                  onRemove: () => provider.removeMeal(
-                    date: day.date,
-                    mealType: _typeStr(slotType),
-                  ),
+                  onRemove: () {
+                    provider.removeMeal(
+                      date: day.date,
+                      mealType: _typeStr(slotType),
+                    );
+                  },
                 );
               }
 

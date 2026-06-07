@@ -1,13 +1,10 @@
+import 'package:cravvy_cooking_app/core/theme/pre_auth_theme.dart';
 import 'package:cravvy_cooking_app/init.dart';
 import 'package:cravvy_cooking_app/data/providers/auth_provider.dart';
-import 'package:cravvy_cooking_app/core/widgets/template/custom_auth_app_bar.dart';
-import 'package:cravvy_cooking_app/modules/auth/widgets/auth_divider_widget.dart';
-import 'package:cravvy_cooking_app/modules/auth/widgets/auth_header_widget.dart';
-import 'package:cravvy_cooking_app/modules/auth/widgets/auth_social_section_connected.dart';
 import 'package:cravvy_cooking_app/modules/auth/register/widgets/form_fields_widget.dart';
 import 'package:cravvy_cooking_app/modules/auth/register/widgets/terms_checkbox_widget.dart';
-import 'package:cravvy_cooking_app/modules/auth/register/widgets/login_link_widget.dart';
 import 'package:cravvy_cooking_app/modules/widgets/common/cravvy_button.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -88,8 +85,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const CustomAuthAppBar(),
+    return PreAuthScaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: const PreAuthBackButton(),
+      ),
       body: SafeArea(
         child: Consumer<AuthProvider>(
           builder: (context, auth, _) => _Body(
@@ -159,16 +160,24 @@ class _Body extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    AppGap.h12,
+                    Text(
+                      'auth.register_title'.tr(),
+                      style: AppTextStyles.s20.copyWith(
+                        fontWeight: FontWeight.w800,
+                        color: PreAuthTheme.textPrimary,
+                        fontSize: 28,
+                      ),
+                    ),
                     AppGap.h8,
-                    const AuthHeaderWidget(
-                      title: 'Create Account',
-                      subtitle: 'Start your healthy food journey',
+                    Text(
+                      'auth.register_subtitle'.tr(),
+                      style: AppTextStyles.s15.copyWith(
+                        color: PreAuthTheme.textSecondary,
+                        height: 1.5,
+                      ),
                     ),
                     AppGap.h28,
-                    const AuthSocialSectionConnected(),
-                    AppGap.h20,
-                    const AuthDividerWidget(label: 'or sign up with email'),
-                    AppGap.h20,
                     RegisterFormFieldsWidget(
                       nameController: nameController,
                       emailController: emailController,
@@ -186,12 +195,10 @@ class _Body extends StatelessWidget {
                     ),
                     AppGap.h24,
                     CravvyButton(
-                      label: 'Create Account',
+                      label: 'auth.create_account'.tr(),
                       isLoading: isLoading,
                       onTap: onSubmit,
                     ),
-                    AppGap.h20,
-                    const LoginLinkWidget(),
                     AppGap.h24,
                   ],
                 ),

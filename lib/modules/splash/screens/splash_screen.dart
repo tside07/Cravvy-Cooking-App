@@ -82,17 +82,13 @@ class _SplashScreenState extends State<SplashScreen>
       _redirected = true;
 
       if (auth.isLoggedIn) {
-        // Đã login: check onboarding xong chưa
         if (auth.user?.onboardingComplete == true) {
           context.go(AppRouter.app);
         } else {
-          // Chưa onboard xong → vào setup step 1
           context.go(AppRouter.setupStep1);
         }
       } else {
-        // Chưa login → onboarding (lần đầu) hoặc login
-        // Dùng onboarding làm entry point — user có thể skip vào login
-        context.go(AppRouter.onboarding);
+        context.go(AppRouter.landing);
       }
     });
   }

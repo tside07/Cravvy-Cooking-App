@@ -1,3 +1,4 @@
+import 'package:cravvy_cooking_app/core/theme/pre_auth_theme.dart';
 import 'package:cravvy_cooking_app/init.dart';
 import 'package:cravvy_cooking_app/data/providers/auth_provider.dart';
 import 'package:cravvy_cooking_app/modules/auth/reset_password/widgets/reset_password_form_widget.dart';
@@ -82,16 +83,11 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Consumer<AuthProvider>(
-        builder: (context, auth, _) => Scaffold(
+        builder: (context, auth, _) => PreAuthScaffold(
           appBar: AppBar(
+            backgroundColor: Colors.transparent,
             elevation: 0,
-            leading: IconButton(
-              icon: const Icon(
-                Icons.arrow_back_ios_new_rounded,
-                color: AppColors.textPrimary,
-              ),
-              onPressed: () => context.pop(),
-            ),
+            leading: const PreAuthBackButton(),
           ),
           body: SafeArea(
             child: _isSuccess

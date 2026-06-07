@@ -1,6 +1,7 @@
 enum AuthOAuthFailure {
   browserNotLaunched,
   cancelledOrTimedOut,
+  userCancelled,
   noProfile,
 }
 

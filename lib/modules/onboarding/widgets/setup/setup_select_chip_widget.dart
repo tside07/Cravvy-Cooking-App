@@ -14,13 +14,14 @@ class SetupSelectChipWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
     return GestureDetector(
       onTap: onTap,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 180),
         padding: AppPad.h16v10,
         decoration: BoxDecoration(
-          color: selected ? AppColors.primary : AppColors.surfaceVariant,
+          color: selected ? AppColors.primary : colors.chipBg,
           borderRadius: AppBorderRadius.a50,
           border: Border.all(
             color: selected ? AppColors.primary : Colors.transparent,
@@ -29,7 +30,7 @@ class SetupSelectChipWidget extends StatelessWidget {
         child: Text(
           label,
           style: AppTextStyles.s14.copyWith(
-            color: selected ? Colors.white : AppColors.textPrimary,
+            color: selected ? colors.onPrimary : colors.textPrimary,
             fontWeight: FontWeight.w600,
           ),
         ),

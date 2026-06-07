@@ -12,6 +12,7 @@ class TermsCheckboxWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -32,7 +33,10 @@ class TermsCheckboxWidget extends StatelessWidget {
           child: RichText(
             text: TextSpan(
               text: 'I agree to the ',
-              style: AppTextStyles.s14.copyWith(color: AppColors.textSecondary),
+              style: context.themed(
+                AppTextStyles.s14,
+                color: colors.textSecondary,
+              ),
               children: [
                 WidgetSpan(
                   child: GestureDetector(
@@ -48,8 +52,9 @@ class TermsCheckboxWidget extends StatelessWidget {
                 ),
                 TextSpan(
                   text: ' and ',
-                  style: AppTextStyles.s14.copyWith(
-                    color: AppColors.textSecondary,
+                  style: context.themed(
+                    AppTextStyles.s14,
+                    color: colors.textSecondary,
                   ),
                 ),
                 WidgetSpan(

@@ -1,3 +1,4 @@
+import 'package:cravvy_cooking_app/core/theme/pre_auth_theme.dart';
 import 'package:cravvy_cooking_app/init.dart';
 import 'package:cravvy_cooking_app/data/providers/auth_provider.dart';
 import 'package:cravvy_cooking_app/modules/onboarding/widgets/setup/setup_progress_widget.dart';
@@ -15,7 +16,7 @@ class _SetupShell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return PreAuthScaffold(
       body: SafeArea(
         child: LayoutBuilder(
           builder: (context, constraints) {
@@ -76,9 +77,9 @@ class _SetupStep1ScreenState extends State<SetupStep1Screen> {
     return 'Obese';
   }
 
-  Color get _bmiColor {
+  Color _bmiColor(AppColorExtension colors) {
     final b = _bmi;
-    if (b == null) return AppColors.textSecondary;
+    if (b == null) return colors.textSecondary;
     if (b < 18.5) return AppColors.warning;
     if (b < 25) return AppColors.success;
     if (b < 30) return AppColors.warning;
@@ -110,6 +111,7 @@ class _SetupStep1ScreenState extends State<SetupStep1Screen> {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
     return _SetupShell(
       child: Column(
         children: [
@@ -136,7 +138,7 @@ class _SetupStep1ScreenState extends State<SetupStep1Screen> {
                       Text(
                         'Your meals will be tailored to your body and goals',
                         style: AppTextStyles.s14.copyWith(
-                          color: AppColors.textSecondary,
+                          color: colors.textSecondary,
                         ),
                       ),
                       AppGap.h28,
@@ -170,7 +172,7 @@ class _SetupStep1ScreenState extends State<SetupStep1Screen> {
                                       decoration: BoxDecoration(
                                         color: _gender == g
                                             ? AppColors.primary
-                                            : AppColors.surface,
+                                            : colors.cardSurface,
                                         borderRadius: BorderRadius.circular(50),
                                         border: Border.all(
                                           color: _gender == g
@@ -184,7 +186,7 @@ class _SetupStep1ScreenState extends State<SetupStep1Screen> {
                                           style: AppTextStyles.s14.copyWith(
                                             color: _gender == g
                                                 ? Colors.white
-                                                : AppColors.textPrimary,
+                                                : colors.textPrimary,
                                             fontWeight: FontWeight.w600,
                                           ),
                                         ),
@@ -220,7 +222,7 @@ class _SetupStep1ScreenState extends State<SetupStep1Screen> {
                         Container(
                           padding: AppPad.a16,
                           decoration: BoxDecoration(
-                            color: AppColors.surface,
+                            color: colors.cardSurface,
                             borderRadius: BorderRadius.circular(16),
                             border: Border.all(color: AppColors.border),
                           ),
@@ -233,7 +235,7 @@ class _SetupStep1ScreenState extends State<SetupStep1Screen> {
                                     Text(
                                       'Your BMI',
                                       style: AppTextStyles.s12.copyWith(
-                                        color: AppColors.textSecondary,
+                                        color: colors.textSecondary,
                                       ),
                                     ),
                                     AppGap.h4,
@@ -250,13 +252,13 @@ class _SetupStep1ScreenState extends State<SetupStep1Screen> {
                               Container(
                                 padding: AppPad.h12,
                                 decoration: BoxDecoration(
-                                  color: _bmiColor.withValues(alpha: 0.1),
+                                  color: _bmiColor(colors).withValues(alpha: 0.1),
                                   borderRadius: BorderRadius.circular(20),
                                 ),
                                 child: Text(
                                   _bmiCategory,
                                   style: AppTextStyles.s14.copyWith(
-                                    color: _bmiColor,
+                                    color: _bmiColor(colors),
                                     fontWeight: FontWeight.w700,
                                   ),
                                 ),
@@ -335,6 +337,7 @@ class _SetupStep2ScreenState extends State<SetupStep2Screen> {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
     return _SetupShell(
       child: Column(
         children: [
@@ -357,7 +360,7 @@ class _SetupStep2ScreenState extends State<SetupStep2Screen> {
                   Text(
                     "We'll customize your meal plan to help you achieve it",
                     style: AppTextStyles.s14.copyWith(
-                      color: AppColors.textSecondary,
+                      color: colors.textSecondary,
                     ),
                   ),
                   AppGap.h28,
@@ -380,7 +383,7 @@ class _SetupStep2ScreenState extends State<SetupStep2Screen> {
                             decoration: BoxDecoration(
                               color: isSelected
                                   ? AppColors.primaryLight
-                                  : AppColors.surface,
+                                  : colors.cardSurface,
                               borderRadius: AppBorderRadius.a20,
                               border: Border.all(
                                 color: isSelected
@@ -418,7 +421,7 @@ class _SetupStep2ScreenState extends State<SetupStep2Screen> {
                                 Text(
                                   g['desc'] as String,
                                   style: AppTextStyles.s12.copyWith(
-                                    color: AppColors.textSecondary,
+                                    color: colors.textSecondary,
                                   ),
                                 ),
                               ],
@@ -493,6 +496,7 @@ class _SetupStep3ScreenState extends State<SetupStep3Screen> {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
     return _SetupShell(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -516,7 +520,7 @@ class _SetupStep3ScreenState extends State<SetupStep3Screen> {
                   Text(
                     'Select all that apply',
                     style: AppTextStyles.s14.copyWith(
-                      color: AppColors.textSecondary,
+                      color: colors.textSecondary,
                     ),
                   ),
                   AppGap.h24,
@@ -620,6 +624,7 @@ class _SetupStep4ScreenState extends State<SetupStep4Screen> {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
     return _SetupShell(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -643,7 +648,7 @@ class _SetupStep4ScreenState extends State<SetupStep4Screen> {
                   Text(
                     "We'll never suggest these in your meals",
                     style: AppTextStyles.s14.copyWith(
-                      color: AppColors.textSecondary,
+                      color: colors.textSecondary,
                     ),
                   ),
                   AppGap.h24,
@@ -696,7 +701,7 @@ class _SetupStep4ScreenState extends State<SetupStep4Screen> {
                                   decoration: InputDecoration(
                                     hintText: 'e.g. Mushrooms',
                                     filled: true,
-                                    fillColor: AppColors.surfaceVariant,
+                                    fillColor: colors.inputFieldBg,
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(12),
                                       borderSide: BorderSide.none,
@@ -775,7 +780,7 @@ class _SetupStep4ScreenState extends State<SetupStep4Screen> {
                               decoration: BoxDecoration(
                                 color: _noRestrictions
                                     ? AppColors.primaryLight
-                                    : AppColors.surface,
+                                    : colors.cardSurface,
                                 borderRadius: AppBorderRadius.a14,
                                 border: Border.all(
                                   color: _noRestrictions
@@ -791,7 +796,7 @@ class _SetupStep4ScreenState extends State<SetupStep4Screen> {
                                         : Icons.circle_outlined,
                                     color: _noRestrictions
                                         ? AppColors.primary
-                                        : AppColors.textHint,
+                                        : colors.textDisabled,
                                   ),
                                   AppGap.w10,
                                   Expanded(
@@ -801,7 +806,7 @@ class _SetupStep4ScreenState extends State<SetupStep4Screen> {
                                         fontWeight: FontWeight.w600,
                                         color: _noRestrictions
                                             ? AppColors.primary
-                                            : AppColors.textPrimary,
+                                            : colors.textPrimary,
                                       ),
                                     ),
                                   ),
@@ -884,6 +889,7 @@ class _SetupStep5ScreenState extends State<SetupStep5Screen> {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
     return _SetupShell(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -907,7 +913,7 @@ class _SetupStep5ScreenState extends State<SetupStep5Screen> {
                   Text(
                     'Help us personalize your cooking experience',
                     style: AppTextStyles.s14.copyWith(
-                      color: AppColors.textSecondary,
+                      color: colors.textSecondary,
                     ),
                   ),
                   AppGap.h28,
@@ -938,7 +944,7 @@ class _SetupStep5ScreenState extends State<SetupStep5Screen> {
                                   decoration: BoxDecoration(
                                     color: isSelected
                                         ? AppColors.primaryLight
-                                        : AppColors.surface,
+                                        : colors.cardSurface,
                                     borderRadius: AppBorderRadius.a14,
                                     border: Border.all(
                                       color: isSelected
@@ -954,7 +960,7 @@ class _SetupStep5ScreenState extends State<SetupStep5Screen> {
                                         size: 20,
                                         color: isSelected
                                             ? AppColors.primary
-                                            : AppColors.textSecondary,
+                                            : colors.textSecondary,
                                       ),
                                       AppGap.w8,
                                       Flexible(
@@ -964,7 +970,7 @@ class _SetupStep5ScreenState extends State<SetupStep5Screen> {
                                           style: AppTextStyles.s14.copyWith(
                                             color: isSelected
                                                 ? AppColors.primary
-                                                : AppColors.textPrimary,
+                                                : colors.textPrimary,
                                             fontWeight: FontWeight.w600,
                                           ),
                                         ),
@@ -992,7 +998,7 @@ class _SetupStep5ScreenState extends State<SetupStep5Screen> {
                                   decoration: BoxDecoration(
                                     color: isSelected
                                         ? AppColors.primaryLight
-                                        : AppColors.surface,
+                                        : colors.cardSurface,
                                     borderRadius: AppBorderRadius.a14,
                                     border: Border.all(
                                       color: isSelected
@@ -1019,13 +1025,13 @@ class _SetupStep5ScreenState extends State<SetupStep5Screen> {
                                                 fontWeight: FontWeight.w700,
                                                 color: isSelected
                                                     ? AppColors.primary
-                                                    : AppColors.textPrimary,
+                                                    : colors.textPrimary,
                                               ),
                                             ),
                                             Text(
                                               s['desc'] as String,
                                               style: AppTextStyles.s12.copyWith(
-                                                color: AppColors.textSecondary,
+                                                color: colors.textSecondary,
                                               ),
                                             ),
                                           ],

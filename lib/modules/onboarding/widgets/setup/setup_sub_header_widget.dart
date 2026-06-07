@@ -8,9 +8,9 @@ class SetupSubHeaderWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Text(
         text,
-        style: AppTextStyles.s14.copyWith(
+        style: context.themed(
+          AppTextStyles.s14,
           fontWeight: FontWeight.w700,
-          color: AppColors.textPrimary,
         ),
       );
 }

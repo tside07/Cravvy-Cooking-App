@@ -37,6 +37,7 @@ abstract final class AppConst {
   static const String keyCalorieGoal = 'calorie_goal';
   static const String keyShoppingList = 'shopping_list_v1';
   static const String keyDarkMode = 'dark_mode_enabled';
+  static const String keyGuestMode = 'guest_mode_enabled';
 
   // ignore: library_private_types_in_public_api, non_constant_identifier_names
   static final _RegExp Pattern = _RegExp();

@@ -1,12 +1,12 @@
+import 'package:cravvy_cooking_app/core/theme/pre_auth_theme.dart';
 import 'package:cravvy_cooking_app/init.dart';
 import 'package:cravvy_cooking_app/data/providers/auth_provider.dart';
-import 'package:cravvy_cooking_app/core/widgets/template/custom_auth_app_bar.dart';
 import 'package:cravvy_cooking_app/modules/auth/widgets/auth_form_fields_widget.dart';
-import 'package:cravvy_cooking_app/modules/auth/widgets/auth_header_widget.dart';
 import 'package:cravvy_cooking_app/modules/auth/forgot_password/widgets/icon_section_widget.dart';
 import 'package:cravvy_cooking_app/modules/auth/forgot_password/widgets/back_to_login_widget.dart';
 import 'package:cravvy_cooking_app/modules/auth/forgot_password/widgets/note_box_widget.dart';
 import 'package:cravvy_cooking_app/modules/widgets/common/cravvy_button.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({super.key});
@@ -53,8 +53,12 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const CustomAuthAppBar(),
+    return PreAuthScaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: const PreAuthBackButton(),
+      ),
       body: SafeArea(
         child: Consumer<AuthProvider>(
           builder: (context, auth, _) => _Body(
@@ -100,14 +104,27 @@ class _Body extends StatelessWidget {
                     AppGap.h16,
                     const IconSectionWidget(icon: Icons.mail_outline_rounded),
                     AppGap.h28,
-                    const AuthHeaderWidget(
-                      title: 'Forgot Password?',
-                      subtitle:
-                          "Don't worry! Enter your registered email address and we will send you an OTP code to verify your identity.",
+                    Text(
+                      'auth.forgot_title'.tr(),
                       textAlign: TextAlign.center,
+                      style: AppTextStyles.s20.copyWith(
+                        fontWeight: FontWeight.w800,
+                        color: PreAuthTheme.textPrimary,
+                        fontSize: 26,
+                      ),
+                    ),
+                    AppGap.h12,
+                    Text(
+                      'auth.forgot_subtitle'.tr(),
+                      textAlign: TextAlign.center,
+                      style: AppTextStyles.s15.copyWith(
+                        color: PreAuthTheme.textSecondary,
+                        height: 1.5,
+                      ),
                     ),
                     AppGap.h36,
                     AuthFormFieldsWidget(
+                      preAuth: true,
                       fields: [
                         AuthFormFieldConfig(
                           hint: 'Enter your email',
@@ -124,7 +141,7 @@ class _Body extends StatelessWidget {
                     ),
                     AppGap.h28,
                     CravvyButton(
-                      label: 'SEND OTP',
+                      label: 'auth.send_otp'.tr(),
                       isLoading: isLoading,
                       onTap: onSubmit,
                     ),

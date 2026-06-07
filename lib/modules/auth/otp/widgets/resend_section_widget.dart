@@ -14,12 +14,16 @@ class ResendSectionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
           secondsLeft > 0 ? 'Resend code in: ' : '',
-          style: AppTextStyles.s14.copyWith(color: AppColors.textSecondary),
+          style: context.themed(
+            AppTextStyles.s14,
+            color: colors.textSecondary,
+          ),
         ),
         GestureDetector(
           onTap: secondsLeft == 0 ? onResend : null,

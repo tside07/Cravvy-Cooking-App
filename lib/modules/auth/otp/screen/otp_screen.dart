@@ -1,8 +1,7 @@
 import 'dart:async';
+import 'package:cravvy_cooking_app/core/theme/pre_auth_theme.dart';
 import 'package:cravvy_cooking_app/init.dart';
 import 'package:cravvy_cooking_app/data/providers/auth_provider.dart';
-import 'package:cravvy_cooking_app/core/widgets/template/custom_auth_app_bar.dart';
-import 'package:cravvy_cooking_app/modules/auth/widgets/auth_header_widget.dart';
 import 'package:cravvy_cooking_app/modules/auth/otp/widgets/icon_section_widget.dart';
 import 'package:cravvy_cooking_app/modules/auth/otp/widgets/otp_input_row_widget.dart';
 import 'package:cravvy_cooking_app/modules/auth/otp/widgets/resend_section_widget.dart';
@@ -134,8 +133,12 @@ class _OtpScreenState extends State<OtpScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const CustomAuthAppBar(),
+    return PreAuthScaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: const PreAuthBackButton(),
+      ),
       body: SafeArea(
         child: Consumer<AuthProvider>(
           builder: (context, auth, _) => _Body(
@@ -191,10 +194,23 @@ class _Body extends StatelessWidget {
           AppGap.h16,
           const IconSectionWidget(icon: Icons.verified_user_outlined),
           AppGap.h28,
-          AuthHeaderWidget(
-            title: 'Verify Your Identity',
-            subtitle: 'We have sent a 6-digit OTP code to $maskedEmail',
+          Text(
+            'Verify Your Identity',
             textAlign: TextAlign.center,
+            style: AppTextStyles.s20.copyWith(
+              fontWeight: FontWeight.w800,
+              color: PreAuthTheme.textPrimary,
+              fontSize: 26,
+            ),
+          ),
+          AppGap.h12,
+          Text(
+            'We have sent a 6-digit OTP code to $maskedEmail',
+            textAlign: TextAlign.center,
+            style: AppTextStyles.s15.copyWith(
+              color: PreAuthTheme.textSecondary,
+              height: 1.5,
+            ),
           ),
           AppGap.h40,
           OtpInputRowWidget(

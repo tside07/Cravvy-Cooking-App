@@ -590,7 +590,29 @@
         "val_terms": "Vui lòng đồng ý với điều khoản sử dụng.",
         "login_failed": "Đăng nhập thất bại",
         "register_failed": "Đăng ký thất bại",
-        "otp_failed": "Không thể gửi OTP"
+        "otp_failed": "Không thể gửi OTP",
+        "try_without_account": "Dùng thử không cần tài khoản"
+    },
+    "landing": {
+        "title": "Khởi đầu cho việc ăn uống tốt hơn",
+        "subtitle": "Bạn đã có một bước tiến lớn \u2014 quyết định thay đổi.",
+        "create_account": "TẠO TÀI KHOẢN",
+        "log_in": "ĐĂNG NHẬP"
+    },
+    "welcome": {
+        "title": "Kế hoạch cá nhân của bạn đã sẵn sàng",
+        "subtitle": "Tạo tài khoản để bắt đầu hành trình của bạn",
+        "login_title": "Đăng nhập",
+        "login_subtitle": "Đăng nhập để tiếp tục hành trình của bạn",
+        "continue_apple": "TIẾP TỤC VỚI APPLE",
+        "continue_google": "TIẾP TỤC VỚI GOOGLE",
+        "continue_email": "TIẾP TỤC VỚI EMAIL",
+        "terms_prefix": "Bằng việc tiếp tục, bạn đồng ý với",
+        "terms": "Điều khoản & Điều kiện",
+        "terms_and": "và",
+        "privacy": "Chính sách bảo mật",
+        "oauth_waiting": "Hoàn tất đăng nhập trên trình duyệt, hoặc hủy để chọn cách khác.",
+        "oauth_cancel": "Hủy đăng nhập"
     },
     "setup_complete": {
         "your_goal": "Mục tiêu của bạn",

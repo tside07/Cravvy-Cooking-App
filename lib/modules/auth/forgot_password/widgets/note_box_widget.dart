@@ -5,6 +5,7 @@ class NoteBoxWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
     return Container(
       padding: AppPad.a14,
       decoration: BoxDecoration(
@@ -15,10 +16,10 @@ class NoteBoxWidget extends StatelessWidget {
       child: RichText(
         text: TextSpan(
           text: 'Note: The OTP code is valid for ',
-          style: AppTextStyles.s14.copyWith(
-            color: AppColors.textSecondary,
-            height: 1.5,
-          ),
+          style: context.themed(
+            AppTextStyles.s14,
+            color: colors.textSecondary,
+          ).copyWith(height: 1.5),
           children: [
             TextSpan(
               text: '10 minutes',
@@ -29,7 +30,10 @@ class NoteBoxWidget extends StatelessWidget {
             ),
             TextSpan(
               text: '. Please check your inbox and spam folder.',
-              style: AppTextStyles.s14.copyWith(color: AppColors.textSecondary),
+              style: context.themed(
+                AppTextStyles.s14,
+                color: colors.textSecondary,
+              ),
             ),
           ],
         ),

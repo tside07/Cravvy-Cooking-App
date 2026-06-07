@@ -32,7 +32,20 @@ class AuthService {
     return await getProfile(response.user!.id);
   }
 
-  static const Duration oauthSessionTimeout = Duration(minutes: 5);
+  static const Duration oauthSessionTimeout = Duration(seconds: 30);
+
+  static _OAuthWaiter? _pendingWaiter;
+  static Completer<void>? _cancelCompleter;
+
+  /// Aborts an in-flight OAuth wait (user tapped Cancel or returned to the app).
+  static void cancelPendingOAuth() {
+    if (_cancelCompleter != null && !_cancelCompleter!.isCompleted) {
+      _cancelCompleter!.complete();
+    }
+    _cancelCompleter = null;
+    _pendingWaiter?.cancelWait(completeWithNull: true);
+    _pendingWaiter = null;
+  }
 
   static Future<UserModel?> signInWithGoogle() =>
       signInWithOAuthProvider(OAuthProvider.google);
@@ -45,6 +58,10 @@ class AuthService {
     OAuthProvider provider,
   ) async {
     final waiter = _listenForOAuthSignIn();
+    _pendingWaiter = waiter;
+    _cancelCompleter = Completer<void>();
+    final cancelSignal = _cancelCompleter!.future;
+
     try {
       final launched = await _client.auth.signInWithOAuth(
         provider,
@@ -55,10 +72,7 @@ class AuthService {
         throw const AuthOAuthException(AuthOAuthFailure.browserNotLaunched);
       }
 
-      final user = await waiter.future.timeout(
-        oauthSessionTimeout,
-        onTimeout: () => null,
-      );
+      final user = await _waitForOAuthSession(waiter, cancelSignal);
       if (user == null) {
         throw const AuthOAuthException(AuthOAuthFailure.cancelledOrTimedOut);
       }
@@ -68,8 +82,36 @@ class AuthService {
         throw const AuthOAuthException(AuthOAuthFailure.noProfile);
       }
       return profile;
+    } catch (e) {
+      try {
+        await _client.auth.signOut();
+      } catch (_) {}
+      rethrow;
     } finally {
-      await waiter.cancel();
+      _cancelCompleter = null;
+      _pendingWaiter = null;
+      await waiter.cancelWait();
+    }
+  }
+
+  static Future<User?> _waitForOAuthSession(
+    _OAuthWaiter waiter,
+    Future<void> cancelSignal,
+  ) async {
+    try {
+      return await Future.any<User?>([
+        waiter.future,
+        cancelSignal.then(
+          (_) => throw const AuthOAuthException(AuthOAuthFailure.userCancelled),
+        ),
+      ]).timeout(
+        oauthSessionTimeout,
+        onTimeout: () {
+          throw const AuthOAuthException(AuthOAuthFailure.cancelledOrTimedOut);
+        },
+      );
+    } on AuthOAuthException {
+      rethrow;
     }
   }
 
@@ -247,10 +289,17 @@ class AuthService {
 
 class _OAuthWaiter {
   _OAuthWaiter(Completer<User?> completer, this._subscription)
-      : future = completer.future;
+      : _completer = completer,
+        future = completer.future;
 
+  final Completer<User?> _completer;
   final Future<User?> future;
   final StreamSubscription<AuthState> _subscription;
 
-  Future<void> cancel() => _subscription.cancel();
+  Future<void> cancelWait({bool completeWithNull = false}) async {
+    if (completeWithNull && !_completer.isCompleted) {
+      _completer.complete(null);
+    }
+    await _subscription.cancel();
+  }
 }

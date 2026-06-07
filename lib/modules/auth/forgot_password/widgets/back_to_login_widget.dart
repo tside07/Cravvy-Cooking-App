@@ -5,11 +5,15 @@ class BackToLoginWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
     return TextButton(
       onPressed: () => Navigator.pop(context),
       child: Text(
         'Back to Login',
-        style: AppTextStyles.s14.copyWith(color: AppColors.textSecondary),
+        style: context.themed(
+          AppTextStyles.s14,
+          color: colors.textSecondary,
+        ),
       ),
     );
   }

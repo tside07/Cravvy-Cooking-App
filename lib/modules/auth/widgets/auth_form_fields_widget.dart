@@ -2,9 +2,14 @@ import 'package:cravvy_cooking_app/init.dart';
 import 'package:cravvy_cooking_app/modules/auth/widgets/auth_text_field_widget.dart';
 
 class AuthFormFieldsWidget extends StatelessWidget {
-  const AuthFormFieldsWidget({super.key, required this.fields});
+  const AuthFormFieldsWidget({
+    super.key,
+    required this.fields,
+    this.preAuth = false,
+  });
 
   final List<AuthFormFieldConfig> fields;
+  final bool preAuth;
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +31,7 @@ class AuthFormFieldsWidget extends StatelessWidget {
                 : TextInputAction.done,
             validator: fields[i].validator,
             onChanged: fields[i].onChanged,
+            preAuth: preAuth,
           ),
           if (i < fields.length - 1) AppGap.h12,
         ],

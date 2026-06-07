@@ -11,7 +11,13 @@ import 'package:cravvy_cooking_app/data/providers/recipe_provider.dart';
 import 'package:cravvy_cooking_app/modules/meal_plan/provider/meal_plan_provider.dart';
 import 'package:cravvy_cooking_app/modules/shopping_list/provider/shopping_list_provider.dart';
 
-enum AuthStatus { initial, loading, authenticated, unauthenticated, error }
+enum AuthStatus {
+  initial,
+  loading,
+  authenticated,
+  unauthenticated,
+  error,
+}
 
 class AuthProvider extends ChangeNotifier {
   AuthStatus _status = AuthStatus.initial;
@@ -21,27 +27,35 @@ class AuthProvider extends ChangeNotifier {
   RecipeProvider? _recipeProvider;
   ShoppingListProvider? _shoppingListProvider;
   bool? _lastRecipeCatalogPremium;
+  bool _oauthInProgress = false;
 
   AuthStatus get status => _status;
   UserModel? get user => _user;
   String? get errorMessage => _errorMessage;
   bool get isLoggedIn => _status == AuthStatus.authenticated;
+  bool get isOAuthInProgress => _oauthInProgress;
 
   void linkMealPlanProvider(MealPlanProvider mp) {
     _mealPlanProvider = mp;
-    if (_user != null) _mealPlanProvider!.updateFromUser(_user);
+    if (_user != null) {
+      _mealPlanProvider!.updateFromUser(_user);
+    }
   }
 
   void linkRecipeProvider(RecipeProvider rp) {
     if (identical(_recipeProvider, rp)) return;
     _recipeProvider = rp;
-    if (_user != null) _syncRecipeCatalog();
+    if (_user != null) {
+      _syncRecipeCatalog();
+    }
   }
 
   void linkShoppingListProvider(ShoppingListProvider provider) {
     _shoppingListProvider = provider;
-    if (_user != null) {
+    if (isLoggedIn) {
       _shoppingListProvider!.updateFromUser(_user);
+    } else {
+      _shoppingListProvider!.updateFromUser(null);
     }
   }
 
@@ -109,9 +123,29 @@ class AuthProvider extends ChangeNotifier {
 
   Future<bool> signInWithApple() => _signInWithOAuth(AuthService.signInWithApple);
 
+  /// Clears stuck loading state after OAuth/email failures.
+  void recoverFromFailedSignIn([String? message]) {
+    _oauthInProgress = false;
+    _status = AuthStatus.unauthenticated;
+    _errorMessage = message;
+    notifyListeners();
+  }
+
+  /// User closed the browser or tapped Cancel — return to auth hub immediately.
+  Future<void> cancelOAuthSignIn() async {
+    if (!_oauthInProgress) return;
+    AuthService.cancelPendingOAuth();
+    await _cleanupPartialOAuthSession();
+    _oauthInProgress = false;
+    _errorMessage = null;
+    _status = AuthStatus.unauthenticated;
+    notifyListeners();
+  }
+
   Future<bool> _signInWithOAuth(
     Future<UserModel?> Function() signIn,
   ) async {
+    _oauthInProgress = true;
     _setLoading();
     try {
       _user = await signIn();
@@ -121,18 +155,43 @@ class AuthProvider extends ChangeNotifier {
         notifyListeners();
         return true;
       }
+      await _cleanupPartialOAuthSession();
       _setError('Đăng nhập thất bại. Vui lòng thử lại.');
       return false;
     } on AuthOAuthException catch (e) {
+      await _cleanupPartialOAuthSession();
+      if (e.failure == AuthOAuthFailure.userCancelled) {
+        _errorMessage = null;
+        _status = AuthStatus.unauthenticated;
+        notifyListeners();
+        return false;
+      }
       _setError(_mapOAuthFailure(e));
       return false;
     } on AuthException catch (e) {
+      await _cleanupPartialOAuthSession();
       _setError(mapOAuthAuthError(_mapAuthError(e.message)));
       return false;
     } catch (e) {
+      await _cleanupPartialOAuthSession();
       _setError('Đăng nhập thất bại. Vui lòng thử lại.');
       return false;
+    } finally {
+      _oauthInProgress = false;
+      if (_status == AuthStatus.loading) {
+        _status = AuthStatus.unauthenticated;
+        notifyListeners();
+      }
     }
+  }
+
+  Future<void> _cleanupPartialOAuthSession() async {
+    try {
+      if (SupabaseService.currentUser != null) {
+        await AuthService.logout();
+      }
+    } catch (_) {}
+    _user = null;
   }
 
   Future<bool> register(String email, String password, String fullName) async {
@@ -181,7 +240,7 @@ class AuthProvider extends ChangeNotifier {
     try {
       final success = await AuthService.verifyOtp(email: email, token: token);
       if (success) {
-        _status = AuthStatus.unauthenticated; // vẫn chưa "login" hẳn
+        _status = AuthStatus.unauthenticated;
         notifyListeners();
         return true;
       }
@@ -217,7 +276,7 @@ class AuthProvider extends ChangeNotifier {
     required DateTime birthDate,
     String? email,
   }) async {
-    if (_user == null) return false;
+    if (!isLoggedIn) return false;
     _setLoading();
     try {
       _user = await AuthService.updateDisplayProfile(
@@ -242,7 +301,7 @@ class AuthProvider extends ChangeNotifier {
     required double heightCm,
     required double weightKg,
   }) async {
-    if (_user == null) return false;
+    if (!isLoggedIn) return false;
     _setLoading();
     try {
       _user = await AuthService.updateProfileBasicInfo(
@@ -270,7 +329,7 @@ class AuthProvider extends ChangeNotifier {
     String? skillLevel,
     bool? onboardingComplete,
   }) async {
-    if (_user == null) return false;
+    if (!isLoggedIn) return false;
     try {
       _user = await AuthService.updateSetupData(
         userId: _user!.id,
@@ -291,7 +350,7 @@ class AuthProvider extends ChangeNotifier {
 
   /// Starts 14-day trial; refreshes meal plan & recipe catalog for Premium access.
   Future<bool> startPremiumTrial() async {
-    if (_user == null) return false;
+    if (!isLoggedIn) return false;
     try {
       _user = await AuthService.startPremiumTrial(_user!.id);
       if (_user == null) {
@@ -311,7 +370,7 @@ class AuthProvider extends ChangeNotifier {
   }
 
   bool get canStartPremiumTrial {
-    if (_user == null) return false;
+    if (!isLoggedIn) return false;
     if (_user!.isPremium) return false;
     return _user!.subscriptionTier == PlanLimits.tierFree;
   }
@@ -326,7 +385,7 @@ class AuthProvider extends ChangeNotifier {
 
   /// Permanently deletes account via Edge Function, then clears local session.
   Future<bool> deleteAccount() async {
-    if (_user == null) {
+    if (!isLoggedIn) {
       _setError('Bạn cần đăng nhập để xóa tài khoản.');
       return false;
     }
@@ -371,6 +430,8 @@ class AuthProvider extends ChangeNotifier {
 
   String _mapOAuthFailure(AuthOAuthException e) {
     switch (e.failure) {
+      case AuthOAuthFailure.userCancelled:
+        return '';
       case AuthOAuthFailure.browserNotLaunched:
         return 'Không mở được trình duyệt đăng nhập. Kiểm tra ứng dụng mặc định.';
       case AuthOAuthFailure.cancelledOrTimedOut:

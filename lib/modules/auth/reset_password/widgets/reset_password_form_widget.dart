@@ -105,16 +105,16 @@ class ResetPasswordFormWidget extends StatelessWidget {
                   horizontal: 16,
                   vertical: 14,
                 ),
-                prefixIcon: const Icon(
+                prefixIcon: Icon(
                   Icons.lock_outline_rounded,
-                  color: AppColors.textSecondary,
+                  color: appColors.iconInactive,
                 ),
                 suffixIcon: IconButton(
                   icon: Icon(
                     showPassword
                         ? Icons.visibility_off_outlined
                         : Icons.visibility_outlined,
-                    color: AppColors.textSecondary,
+                    color: appColors.iconInactive,
                   ),
                   onPressed: onTogglePassword,
                 ),
@@ -136,7 +136,7 @@ class ResetPasswordFormWidget extends StatelessWidget {
                       borderRadius: BorderRadius.circular(4),
                       child: LinearProgressIndicator(
                         value: strengthPct,
-                        backgroundColor: AppColors.surfaceVariant,
+                        backgroundColor: appColors.elevated,
                         color: strengthColor,
                         minHeight: 6,
                       ),
@@ -194,16 +194,16 @@ class ResetPasswordFormWidget extends StatelessWidget {
                   horizontal: 16,
                   vertical: 14,
                 ),
-                prefixIcon: const Icon(
+                prefixIcon: Icon(
                   Icons.lock_outline_rounded,
-                  color: AppColors.textSecondary,
+                  color: appColors.iconInactive,
                 ),
                 suffixIcon: IconButton(
                   icon: Icon(
                     showConfirm
                         ? Icons.visibility_off_outlined
                         : Icons.visibility_outlined,
-                    color: AppColors.textSecondary,
+                    color: appColors.iconInactive,
                   ),
                   onPressed: onToggleConfirm,
                 ),

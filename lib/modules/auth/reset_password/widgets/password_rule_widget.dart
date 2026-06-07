@@ -8,6 +8,7 @@ class PasswordRuleWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
     return Padding(
       padding: const EdgeInsets.only(bottom: 2),
       child: Row(
@@ -15,13 +16,13 @@ class PasswordRuleWidget extends StatelessWidget {
           Icon(
             met ? Icons.check_circle_rounded : Icons.circle_outlined,
             size: 14,
-            color: met ? AppColors.success : AppColors.textHint,
+            color: met ? AppColors.success : colors.textDisabled,
           ),
           const SizedBox(width: 6),
           Text(
             label,
             style: AppTextStyles.s12.copyWith(
-              color: met ? AppColors.success : AppColors.textHint,
+              color: met ? AppColors.success : colors.textDisabled,
             ),
           ),
         ],

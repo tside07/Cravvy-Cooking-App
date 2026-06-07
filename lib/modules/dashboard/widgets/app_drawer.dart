@@ -36,11 +36,9 @@ class AppDrawer extends StatelessWidget {
 
     final appColors = context.appColors;
 
+    final auth = context.watch<AuthProvider>();
     final profile = context.watch<ProfileProvider>();
-
-    final isPremium = context.watch<AuthProvider>().user?.isPremium ?? false;
-
-
+    final isPremium = auth.user?.isPremium ?? false;
 
     return Drawer(
 
@@ -72,7 +70,10 @@ class AppDrawer extends StatelessWidget {
 
               ),
 
-              _DrawerHeader(profile: profile, isPremium: isPremium),
+              _DrawerHeader(
+                profile: profile,
+                isPremium: isPremium,
+              ),
 
               AppGap.h12,
 
@@ -87,23 +88,14 @@ class AppDrawer extends StatelessWidget {
                     _DarkModeItem(),
 
                     _DrawerItem(
-
                       icon: Icons.person_outline_rounded,
-
                       label: 'profile.account_info'.tr(),
-
                       onTap: () => _go(context, AppRouter.editProfile),
-
                     ),
-
                     _DrawerItem(
-
                       icon: Icons.lock_outline_rounded,
-
                       label: 'profile.change_pw'.tr(),
-
                       onTap: () => _go(context, AppRouter.settings),
-
                     ),
 
                     _DrawerItem(
@@ -147,24 +139,15 @@ class AppDrawer extends StatelessWidget {
               Divider(height: 1, color: appColors.borderDivider),
 
               _DrawerItem(
-
                 icon: Icons.logout_rounded,
-
                 label: 'profile.log_out'.tr(),
-
                 isDestructive: true,
-
-                onTap: () async {
-
-                  Navigator.pop(context);
-
-                  await context.read<AuthProvider>().logout();
-
-                  if (context.mounted) context.go(AppRouter.onboarding);
-
-                },
-
-              ),
+                  onTap: () async {
+                    Navigator.pop(context);
+                    await context.read<AuthProvider>().logout();
+                    if (context.mounted) context.go(AppRouter.onboarding);
+                  },
+                ),
 
               AppGap.h8,
 
@@ -186,9 +169,10 @@ class AppDrawer extends StatelessWidget {
 
 class _DrawerHeader extends StatelessWidget {
 
-  const _DrawerHeader({required this.profile, required this.isPremium});
-
-
+  const _DrawerHeader({
+    required this.profile,
+    required this.isPremium,
+  });
 
   final ProfileProvider profile;
 
@@ -295,14 +279,14 @@ class _DrawerHeader extends StatelessWidget {
                     Icon(
 
                       isPremium
-
                           ? Icons.workspace_premium_rounded
-
                           : Icons.check_circle_rounded,
 
                       size: 14,
 
-                      color: isPremium ? AppColors.primary : AppColors.success,
+                      color: isPremium
+                          ? AppColors.primary
+                          : AppColors.success,
 
                     ),
 
@@ -311,9 +295,7 @@ class _DrawerHeader extends StatelessWidget {
                     Text(
 
                       isPremium
-
                           ? 'profile.plan_premium'.tr()
-
                           : 'profile.plan_free'.tr(),
 
                       style: AppTextStyles.s12.copyWith(
