@@ -53,16 +53,20 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       initialDate: _birthDate,
       firstDate: DateTime(1920),
       lastDate: DateTime.now(),
-      builder: (ctx, child) => Theme(
-        data: Theme.of(ctx).copyWith(
-          colorScheme: ColorScheme.light(
-            primary: AppColors.primary,
-            onPrimary: AppColors.white,
-            surface: AppColors.surface,
+      builder: (ctx, child) {
+        final colors = ctx.appColors;
+        final base = Theme.of(ctx).colorScheme;
+        return Theme(
+          data: Theme.of(ctx).copyWith(
+            colorScheme: base.copyWith(
+              primary: AppColors.primary,
+              onPrimary: colors.onPrimary,
+              surface: colors.cardSurface,
+            ),
           ),
-        ),
-        child: child!,
-      ),
+          child: child!,
+        );
+      },
     );
     if (picked != null) setState(() => _birthDate = picked);
   }
@@ -256,9 +260,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               FieldCardWidget(
                 child: ListTile(
                   contentPadding: AppPad.h12v4,
-                  leading: AppInputDecoration.prefixIconBox(
-                    context,
+                  leading: Icon(
                     Icons.calendar_today_rounded,
+                    size: 20,
+                    color: AppColors.primary,
                   ),
                   title: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -342,15 +347,18 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     maxLines: 4,
                     maxLength: _bioMaxLength,
                     style: fieldStyle,
-                    decoration: AppInputDecoration.outlined(
-                      context,
+                    decoration: AppInputDecoration.underline.copyWith(
                       hintText: 'profile.hint_bio'.tr(),
-                      prefixIcon: AppInputDecoration.prefixIconBox(
-                        context,
-                        Icons.description_outlined,
+                      hintStyle: context.themed(
+                        AppTextStyles.s14,
+                        color: context.appColors.inputHint,
                       ),
-                      contentPadding: const EdgeInsets.fromLTRB(14, 14, 14, 12),
-                    ).copyWith(
+                      prefixIcon: Icon(
+                        Icons.description_outlined,
+                        size: 20,
+                        color: context.appColors.textSecondary,
+                      ),
+                      contentPadding: const EdgeInsets.fromLTRB(0, 14, 0, 12),
                       alignLabelWithHint: true,
                       counterText: '',
                     ),
@@ -465,10 +473,13 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     required TextEditingController controller,
     required bool showCheckMark,
   }) {
-    return AppInputDecoration.outlined(
-      context,
+    return AppInputDecoration.underline.copyWith(
       hintText: hint,
-      prefixIcon: AppInputDecoration.prefixIconBox(context, icon),
+      hintStyle: context.themed(
+        AppTextStyles.s14,
+        color: context.appColors.inputHint,
+      ),
+      prefixIcon: Icon(icon, size: 20, color: context.appColors.textSecondary),
       suffixIcon: showCheckMark
           ? ValueListenableBuilder<TextEditingValue>(
               valueListenable: controller,

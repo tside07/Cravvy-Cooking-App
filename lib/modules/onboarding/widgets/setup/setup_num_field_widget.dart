@@ -18,13 +18,12 @@ class SetupNumFieldWidget extends StatelessWidget {
       controller: controller,
       keyboardType: TextInputType.number,
       onChanged: onChanged,
-      decoration: InputDecoration(
+      style: context.themed(AppTextStyles.s14),
+      decoration: AppInputDecoration.underline.copyWith(
         hintText: hint,
-        filled: true,
-        fillColor: AppColors.surfaceVariant,
-        border: OutlineInputBorder(
-          borderRadius: AppBorderRadius.a14,
-          borderSide: BorderSide.none,
+        hintStyle: context.themed(
+          AppTextStyles.s14,
+          color: context.appColors.inputHint,
         ),
         contentPadding: AppPad.h16v14,
       ),

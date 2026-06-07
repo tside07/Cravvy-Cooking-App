@@ -1,69 +1,56 @@
 import 'package:flutter/material.dart';
 
-import 'package:cravvy_cooking_app/core/theme/app_border_radius.dart';
-import 'package:cravvy_cooking_app/core/theme/app_color_scheme_extension.dart';
 import 'package:cravvy_cooking_app/core/theme/app_colors.dart';
-import 'package:cravvy_cooking_app/core/theme/app_pad.dart';
 
-/// Shared [InputDecoration] — single bordered field (no outer card wrapper).
+/// Shared [InputDecoration]s for the project.
+///
+/// Use with a plain [TextField]/[TextFormField] and `.copyWith(...)` to set
+/// per-field bits (labelText, hintText, suffixIcon, styles), e.g.:
+/// ```dart
+/// TextField(
+///   decoration: AppInputDecoration.underline.copyWith(
+///     labelText: 'Username',
+///     suffixIcon: isValid ? const Icon(Icons.check) : null,
+///   ),
+/// )
+/// ```
 abstract final class AppInputDecoration {
-  static const double _radius = 14;
+  static const Color _idleLine = Color(0xFF9E9E9E);
+  static const Color _focusLine = Color(0xFF34C358);
 
-  static InputDecoration outlined(
-    BuildContext context, {
-    String? hintText,
-    String? labelText,
-    Widget? prefixIcon,
-    Widget? suffixIcon,
-    EdgeInsetsGeometry? contentPadding,
-  }) {
-    final colors = context.appColors;
-    final border = OutlineInputBorder(
-      borderRadius: BorderRadius.circular(_radius),
-      borderSide: BorderSide(color: colors.inputBorder),
-    );
+  /// Minimal underline field: grey line when idle, green when focused.
+  /// Floating label stays above the value (matches the Sign Up mock).
+  static final InputDecoration underline = InputDecoration(
+    isDense: false,
+    floatingLabelBehavior: FloatingLabelBehavior.always,
+    contentPadding: const EdgeInsets.symmetric(vertical: 10),
+    enabledBorder: const UnderlineInputBorder(
+      borderSide: BorderSide(color: _idleLine, width: 0.8),
+    ),
+    focusedBorder: const UnderlineInputBorder(
+      borderSide: BorderSide(color: _focusLine, width: 1.4),
+    ),
+    errorBorder: const UnderlineInputBorder(
+      borderSide: BorderSide(color: AppColors.error, width: 0.8),
+    ),
+    focusedErrorBorder: const UnderlineInputBorder(
+      borderSide: BorderSide(color: AppColors.error, width: 1.4),
+    ),
+  );
 
-    return InputDecoration(
-      hintText: hintText,
-      labelText: labelText,
-      prefixIcon: prefixIcon,
-      suffixIcon: suffixIcon,
-      filled: true,
-      fillColor: colors.inputFieldBg,
-      contentPadding:
-          contentPadding ?? const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
-      hintStyle: TextStyle(color: colors.inputHint, fontSize: 14, fontFamily: 'Inter'),
-      labelStyle: TextStyle(color: colors.textSecondary, fontSize: 12, fontFamily: 'Inter'),
-      border: border,
-      enabledBorder: border,
-      focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(_radius),
-        borderSide: const BorderSide(color: AppColors.primary, width: 1.5),
-      ),
-      errorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(_radius),
-        borderSide: const BorderSide(color: AppColors.error),
-      ),
-      focusedErrorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(_radius),
-        borderSide: const BorderSide(color: AppColors.error, width: 1.5),
-      ),
-    );
-  }
-
-  static Widget prefixIconBox(BuildContext context, IconData icon) {
-    final colors = context.appColors;
-    return Padding(
-      padding: const EdgeInsets.all(10),
-      child: Container(
-        width: 34,
-        height: 34,
-        decoration: BoxDecoration(
-          color: colors.chipBg,
-          borderRadius: AppBorderRadius.a8,
-        ),
-        child: Icon(icon, size: 16, color: AppColors.primary),
-      ),
-    );
-  }
+  /// Filled, rounded box with no visible border until focused.
+  static final InputDecoration outline = InputDecoration(
+    border: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(10),
+      borderSide: BorderSide.none,
+    ),
+    enabledBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(10),
+      borderSide: BorderSide.none,
+    ),
+    focusedBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(10),
+      borderSide: const BorderSide(color: _focusLine, width: 1.5),
+    ),
+  );
 }
