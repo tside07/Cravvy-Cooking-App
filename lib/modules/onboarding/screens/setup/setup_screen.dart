@@ -7,6 +7,86 @@ import 'package:cravvy_cooking_app/modules/onboarding/widgets/setup/setup_input_
 import 'package:cravvy_cooking_app/modules/onboarding/widgets/setup/setup_sub_header_widget.dart';
 import 'package:cravvy_cooking_app/modules/onboarding/widgets/setup/setup_num_field_widget.dart';
 import 'package:cravvy_cooking_app/modules/onboarding/widgets/setup/setup_continue_button_widget.dart';
+import 'package:easy_localization/easy_localization.dart';
+
+String _genderLabel(String gender) => switch (gender) {
+      'Male' => 'onboarding_setup.male'.tr(),
+      'Female' => 'onboarding_setup.female'.tr(),
+      'Other' => 'onboarding_setup.other'.tr(),
+      _ => gender,
+    };
+
+String _dietLabel(String diet) => switch (diet) {
+      'Eat Clean' => 'onboarding_setup.diet_eat_clean'.tr(),
+      'Low-Carb' => 'onboarding_setup.diet_low_carb'.tr(),
+      'Keto' => 'onboarding_setup.diet_keto'.tr(),
+      'Intermittent Fasting' =>
+        'onboarding_setup.diet_intermittent_fasting'.tr(),
+      'Vegetarian' => 'onboarding_setup.diet_vegetarian'.tr(),
+      'Vegan' => 'onboarding_setup.diet_vegan'.tr(),
+      'High-Protein' => 'onboarding_setup.diet_high_protein'.tr(),
+      'Low-Sugar' => 'onboarding_setup.diet_low_sugar'.tr(),
+      'Gluten-Free' => 'onboarding_setup.diet_gluten_free'.tr(),
+      'No Specific Diet' => 'onboarding_setup.diet_no_specific'.tr(),
+      _ => diet,
+    };
+
+String _allergyLabel(String item) => switch (item) {
+      'Peanuts' => 'onboarding_setup.allergy_peanuts'.tr(),
+      'Shellfish' => 'onboarding_setup.allergy_shellfish'.tr(),
+      'Dairy' => 'onboarding_setup.allergy_dairy'.tr(),
+      'Gluten' => 'onboarding_setup.allergy_gluten'.tr(),
+      'Eggs' => 'onboarding_setup.allergy_eggs'.tr(),
+      'Soy' => 'onboarding_setup.allergy_soy'.tr(),
+      'Tree Nuts' => 'onboarding_setup.allergy_tree_nuts'.tr(),
+      'Fish' => 'onboarding_setup.allergy_fish'.tr(),
+      _ => item,
+    };
+
+String _prefLabel(String item) => switch (item) {
+      'No Pork' => 'onboarding_setup.pref_no_pork'.tr(),
+      'No Beef' => 'onboarding_setup.pref_no_beef'.tr(),
+      'No Seafood' => 'onboarding_setup.pref_no_seafood'.tr(),
+      'No Spicy' => 'onboarding_setup.pref_no_spicy'.tr(),
+      'No Raw Foods' => 'onboarding_setup.pref_no_raw_foods'.tr(),
+      _ => item,
+    };
+
+String _avoidLabel(String item) {
+  final allergy = _allergyLabel(item);
+  if (allergy != item) return allergy;
+  return _prefLabel(item);
+}
+
+String _bmiCategoryLabel(double? bmi) {
+  if (bmi == null) return '';
+  if (bmi < 18.5) return 'onboarding_setup.bmi_underweight'.tr();
+  if (bmi < 25) return 'onboarding_setup.bmi_normal'.tr();
+  if (bmi < 30) return 'onboarding_setup.bmi_overweight'.tr();
+  return 'onboarding_setup.bmi_obese'.tr();
+}
+
+String _cookingTimeLabel(String id) => switch (id) {
+      'quick' => 'setup_complete.time_quick'.tr(),
+      'short' => 'setup_complete.time_short'.tr(),
+      'medium' => 'setup_complete.time_medium'.tr(),
+      'long' => 'setup_complete.time_long'.tr(),
+      _ => 'setup_complete.time_flexible'.tr(),
+    };
+
+String _skillLabel(String id) => switch (id) {
+      'beginner' => 'onboarding_setup.skill_beginner'.tr(),
+      'intermediate' => 'onboarding_setup.skill_intermediate'.tr(),
+      'advanced' => 'onboarding_setup.skill_advanced'.tr(),
+      _ => id,
+    };
+
+String _skillDesc(String id) => switch (id) {
+      'beginner' => 'onboarding_setup.skill_beginner_desc'.tr(),
+      'intermediate' => 'onboarding_setup.skill_intermediate_desc'.tr(),
+      'advanced' => 'onboarding_setup.skill_advanced_desc'.tr(),
+      _ => id,
+    };
 
 // TODO: Helper: bọc body để fix infinite width trên cả web lẫn mobile
 // Mọi setup screen đều dùng cái này thay vì Scaffold trực tiếp
@@ -68,17 +148,9 @@ class _SetupStep1ScreenState extends State<SetupStep1Screen> {
     return w / ((h / 100) * (h / 100));
   }
 
-  String get _bmiCategory {
-    final b = _bmi;
-    if (b == null) return '';
-    if (b < 18.5) return 'Underweight';
-    if (b < 25) return 'Normal';
-    if (b < 30) return 'Overweight';
-    return 'Obese';
-  }
+  String get _bmiCategory => _bmiCategoryLabel(_bmi);
 
-  Color _bmiColor(AppColorExtension colors) {
-    final b = _bmi;
+  Color _bmiColor(AppColorExtension colors) {    final b = _bmi;
     if (b == null) return colors.textSecondary;
     if (b < 18.5) return AppColors.warning;
     if (b < 25) return AppColors.success;
@@ -93,7 +165,7 @@ class _SetupStep1ScreenState extends State<SetupStep1Screen> {
 
     if (age == null || height == null || weight == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Vui lòng nhập đầy đủ thông tin')),
+        SnackBar(content: Text('onboarding_setup.val_incomplete'.tr())),
       );
       return;
     }
@@ -128,31 +200,32 @@ class _SetupStep1ScreenState extends State<SetupStep1Screen> {
                     children: [
                       AppGap.h8,
                       Text(
-                        "Let's personalize your experience",
+                        'onboarding_setup.personalize'.tr(),
                         style: AppTextStyles.s20.copyWith(
                           fontWeight: FontWeight.w800,
                           fontSize: 26,
+                          color: PreAuthTheme.textPrimary,
                         ),
                       ),
                       AppGap.h8,
                       Text(
-                        'Your meals will be tailored to your body and goals',
+                        'onboarding_setup.personalize_desc'.tr(),
                         style: AppTextStyles.s14.copyWith(
-                          color: colors.textSecondary,
+                          color: PreAuthTheme.textSecondary,
                         ),
                       ),
                       AppGap.h28,
 
-                      const SetupInputLabelWidget('Age'),
+                      SetupInputLabelWidget('onboarding_setup.age'.tr()),
                       AppGap.h8,
                       SetupNumFieldWidget(
                         controller: _ageCtrl,
-                        hint: 'Enter age',
+                        hint: 'onboarding_setup.hint_age'.tr(),
                         onChanged: (_) => setState(() {}),
                       ),
                       AppGap.h20,
 
-                      const SetupInputLabelWidget('Gender'),
+                      SetupInputLabelWidget('onboarding_setup.gender'.tr()),
                       AppGap.h8,
                       Row(
                         children: ['Male', 'Female', 'Other']
@@ -172,21 +245,22 @@ class _SetupStep1ScreenState extends State<SetupStep1Screen> {
                                       decoration: BoxDecoration(
                                         color: _gender == g
                                             ? AppColors.primary
-                                            : colors.cardSurface,
+                                            : const Color(0xFF2A3A44),
                                         borderRadius: BorderRadius.circular(50),
                                         border: Border.all(
                                           color: _gender == g
                                               ? AppColors.primary
-                                              : AppColors.border,
+                                              : PreAuthTheme.textSecondary
+                                                  .withValues(alpha: 0.35),
                                         ),
                                       ),
                                       child: Center(
                                         child: Text(
-                                          g,
+                                          _genderLabel(g),
                                           style: AppTextStyles.s14.copyWith(
                                             color: _gender == g
                                                 ? Colors.white
-                                                : colors.textPrimary,
+                                                : PreAuthTheme.textPrimary,
                                             fontWeight: FontWeight.w600,
                                           ),
                                         ),
@@ -200,20 +274,20 @@ class _SetupStep1ScreenState extends State<SetupStep1Screen> {
                       ),
                       AppGap.h20,
 
-                      const SetupInputLabelWidget('Height (cm)'),
+                      SetupInputLabelWidget('onboarding_setup.height'.tr()),
                       AppGap.h8,
                       SetupNumFieldWidget(
                         controller: _heightCtrl,
-                        hint: 'e.g. 170',
+                        hint: 'onboarding_setup.hint_height'.tr(),
                         onChanged: (_) => setState(() {}),
                       ),
                       AppGap.h20,
 
-                      const SetupInputLabelWidget('Weight (kg)'),
+                      SetupInputLabelWidget('onboarding_setup.weight'.tr()),
                       AppGap.h8,
                       SetupNumFieldWidget(
                         controller: _weightCtrl,
-                        hint: 'e.g. 70',
+                        hint: 'onboarding_setup.hint_weight'.tr(),
                         onChanged: (_) => setState(() {}),
                       ),
                       AppGap.h20,
@@ -233,7 +307,7 @@ class _SetupStep1ScreenState extends State<SetupStep1Screen> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      'Your BMI',
+                                      'onboarding_setup.bmi'.tr(),
                                       style: AppTextStyles.s12.copyWith(
                                         color: colors.textSecondary,
                                       ),
@@ -300,29 +374,29 @@ class _SetupStep2ScreenState extends State<SetupStep2Screen> {
   static const _goals = [
     {
       'id': 'lose-weight',
-      'title': 'Lose Weight',
-      'desc': 'Burn fat, feel lighter',
+      'titleKey': 'onboarding_setup.goal_lose_weight',
+      'descKey': 'onboarding_setup.goal_lose_weight_desc',
       'icon': Icons.local_fire_department_rounded,
       'color': 0xFFEF4444,
     },
     {
       'id': 'build-muscle',
-      'title': 'Build Muscle',
-      'desc': 'Gain strength & mass',
+      'titleKey': 'onboarding_setup.goal_build_muscle',
+      'descKey': 'onboarding_setup.goal_build_muscle_desc',
       'icon': Icons.fitness_center_rounded,
       'color': 0xFF3B82F6,
     },
     {
       'id': 'maintain',
-      'title': 'Maintain Weight',
-      'desc': 'Stay balanced & healthy',
+      'titleKey': 'onboarding_setup.goal_maintain',
+      'descKey': 'onboarding_setup.goal_maintain_desc',
       'icon': Icons.balance_rounded,
       'color': 0xFF6A8A42,
     },
     {
       'id': 'health',
-      'title': 'Manage Condition',
-      'desc': 'Diet for health needs',
+      'titleKey': 'onboarding_setup.goal_health',
+      'descKey': 'onboarding_setup.goal_health_desc',
       'icon': Icons.favorite_rounded,
       'color': 0xFF8B5CF6,
     },
@@ -350,17 +424,18 @@ class _SetupStep2ScreenState extends State<SetupStep2Screen> {
                 children: [
                   AppGap.h8,
                   Text(
-                    "What's your main goal?",
+                    'onboarding_setup.main_goal'.tr(),
                     style: AppTextStyles.s20.copyWith(
                       fontWeight: FontWeight.w800,
                       fontSize: 26,
+                      color: PreAuthTheme.textPrimary,
                     ),
                   ),
                   AppGap.h8,
                   Text(
-                    "We'll customize your meal plan to help you achieve it",
+                    'onboarding_setup.main_goal_desc'.tr(),
                     style: AppTextStyles.s14.copyWith(
-                      color: colors.textSecondary,
+                      color: PreAuthTheme.textSecondary,
                     ),
                   ),
                   AppGap.h28,
@@ -412,14 +487,14 @@ class _SetupStep2ScreenState extends State<SetupStep2Screen> {
                                 ),
                                 const Spacer(),
                                 Text(
-                                  g['title'] as String,
+                                  (g['titleKey'] as String).tr(),
                                   style: AppTextStyles.s14.copyWith(
                                     fontWeight: FontWeight.w700,
                                   ),
                                 ),
                                 AppGap.h4,
                                 Text(
-                                  g['desc'] as String,
+                                  (g['descKey'] as String).tr(),
                                   style: AppTextStyles.s12.copyWith(
                                     color: colors.textSecondary,
                                   ),
@@ -496,7 +571,6 @@ class _SetupStep3ScreenState extends State<SetupStep3Screen> {
 
   @override
   Widget build(BuildContext context) {
-    final colors = context.appColors;
     return _SetupShell(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -510,17 +584,18 @@ class _SetupStep3ScreenState extends State<SetupStep3Screen> {
                 children: [
                   AppGap.h8,
                   Text(
-                    'Do you follow any diet?',
+                    'onboarding_setup.follow_diet'.tr(),
                     style: AppTextStyles.s20.copyWith(
                       fontWeight: FontWeight.w800,
                       fontSize: 26,
+                      color: PreAuthTheme.textPrimary,
                     ),
                   ),
                   AppGap.h8,
                   Text(
-                    'Select all that apply',
+                    'onboarding_setup.select_diet'.tr(),
                     style: AppTextStyles.s14.copyWith(
-                      color: colors.textSecondary,
+                      color: PreAuthTheme.textSecondary,
                     ),
                   ),
                   AppGap.h24,
@@ -532,7 +607,7 @@ class _SetupStep3ScreenState extends State<SetupStep3Screen> {
                         children: _diets
                             .map(
                               (d) => SetupSelectChipWidget(
-                                label: d,
+                                label: _dietLabel(d),
                                 selected: _selected.contains(d),
                                 onTap: () => _toggle(d),
                               ),
@@ -638,17 +713,18 @@ class _SetupStep4ScreenState extends State<SetupStep4Screen> {
                 children: [
                   AppGap.h8,
                   Text(
-                    'Any foods to avoid?',
+                    'onboarding_setup.restrictions'.tr(),
                     style: AppTextStyles.s20.copyWith(
                       fontWeight: FontWeight.w800,
                       fontSize: 26,
+                      color: PreAuthTheme.textPrimary,
                     ),
                   ),
                   AppGap.h8,
                   Text(
-                    "We'll never suggest these in your meals",
+                    'onboarding_setup.restrictions_desc'.tr(),
                     style: AppTextStyles.s14.copyWith(
-                      color: colors.textSecondary,
+                      color: PreAuthTheme.textSecondary,
                     ),
                   ),
                   AppGap.h24,
@@ -657,7 +733,9 @@ class _SetupStep4ScreenState extends State<SetupStep4Screen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          const SetupSubHeaderWidget('Allergies'),
+                          SetupSubHeaderWidget(
+                            'onboarding_setup.section_allergies'.tr(),
+                          ),
                           AppGap.h10,
                           Wrap(
                             spacing: 8,
@@ -665,7 +743,7 @@ class _SetupStep4ScreenState extends State<SetupStep4Screen> {
                             children: _allergies
                                 .map(
                                   (a) => SetupSelectChipWidget(
-                                    label: a,
+                                    label: _allergyLabel(a),
                                     selected: _selected.contains(a),
                                     onTap: () => _toggle(a),
                                   ),
@@ -673,7 +751,9 @@ class _SetupStep4ScreenState extends State<SetupStep4Screen> {
                                 .toList(),
                           ),
                           AppGap.h20,
-                          const SetupSubHeaderWidget('Food Preferences'),
+                          SetupSubHeaderWidget(
+                            'onboarding_setup.section_preferences'.tr(),
+                          ),
                           AppGap.h10,
                           Wrap(
                             spacing: 8,
@@ -681,7 +761,7 @@ class _SetupStep4ScreenState extends State<SetupStep4Screen> {
                             children: _prefs
                                 .map(
                                   (p) => SetupSelectChipWidget(
-                                    label: p,
+                                    label: _prefLabel(p),
                                     selected: _selected.contains(p),
                                     onTap: () => _toggle(p),
                                   ),
@@ -689,7 +769,9 @@ class _SetupStep4ScreenState extends State<SetupStep4Screen> {
                                 .toList(),
                           ),
                           AppGap.h20,
-                          const SetupSubHeaderWidget('Add Custom'),
+                          SetupSubHeaderWidget(
+                            'onboarding_setup.section_add_custom'.tr(),
+                          ),
                           AppGap.h10,
                           // KEY FIX: Row cần parent có bounded width
                           // crossAxisAlignment.stretch trên Column cha đảm bảo điều này
@@ -698,13 +780,34 @@ class _SetupStep4ScreenState extends State<SetupStep4Screen> {
                               Expanded(
                                 child: TextField(
                                   controller: _customCtrl,
+                                  style: AppTextStyles.s14.copyWith(
+                                    color: PreAuthTheme.textPrimary,
+                                  ),
+                                  cursorColor: PreAuthTheme.textPrimary,
                                   decoration: InputDecoration(
-                                    hintText: 'e.g. Mushrooms',
+                                    hintText:
+                                        'onboarding_setup.hint_restrictions'.tr(),
+                                    hintStyle: AppTextStyles.s14.copyWith(
+                                      color: PreAuthTheme.textSecondary,
+                                    ),
                                     filled: true,
-                                    fillColor: colors.inputFieldBg,
+                                    fillColor: const Color(0xFF2A3A44),
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(12),
                                       borderSide: BorderSide.none,
+                                    ),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(12),
+                                      borderSide: BorderSide(
+                                        color: PreAuthTheme.textSecondary
+                                            .withValues(alpha: 0.35),
+                                      ),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(12),
+                                      borderSide: const BorderSide(
+                                        color: PreAuthTheme.textPrimary,
+                                      ),
                                     ),
                                     contentPadding: const EdgeInsets.symmetric(
                                       horizontal: 14,
@@ -745,7 +848,7 @@ class _SetupStep4ScreenState extends State<SetupStep4Screen> {
                                   .map(
                                     (s) => Chip(
                                       label: Text(
-                                        s,
+                                        _avoidLabel(s),
                                         style: AppTextStyles.s12.copyWith(
                                           color: AppColors.primary,
                                         ),
@@ -801,7 +904,7 @@ class _SetupStep4ScreenState extends State<SetupStep4Screen> {
                                   AppGap.w10,
                                   Expanded(
                                     child: Text(
-                                      'No restrictions — I eat everything!',
+                                      'onboarding_setup.no_restrictions'.tr(),
                                       style: AppTextStyles.s14.copyWith(
                                         fontWeight: FontWeight.w600,
                                         color: _noRestrictions
@@ -849,31 +952,16 @@ class _SetupStep5ScreenState extends State<SetupStep5Screen> {
   bool _isLoading = false;
 
   static const _times = [
-    {'id': 'quick', 'label': 'Under 15 min', 'icon': Icons.bolt_rounded},
-    {'id': 'short', 'label': '15–30 min', 'icon': Icons.schedule_rounded},
-    {'id': 'medium', 'label': '30–60 min', 'icon': Icons.timer_outlined},
-    {'id': 'long', 'label': '1 hour+', 'icon': Icons.restaurant_menu_rounded},
+    {'id': 'quick', 'icon': Icons.bolt_rounded},
+    {'id': 'short', 'icon': Icons.schedule_rounded},
+    {'id': 'medium', 'icon': Icons.timer_outlined},
+    {'id': 'long', 'icon': Icons.restaurant_menu_rounded},
   ];
 
   static const _skills = [
-    {
-      'id': 'beginner',
-      'emoji': '🥚',
-      'label': 'Beginner',
-      'desc': 'Simple recipes',
-    },
-    {
-      'id': 'intermediate',
-      'emoji': '🍳',
-      'label': 'Intermediate',
-      'desc': 'Moderate skills',
-    },
-    {
-      'id': 'advanced',
-      'emoji': '👨‍🍳',
-      'label': 'Advanced',
-      'desc': 'Complex dishes',
-    },
+    {'id': 'beginner', 'emoji': '🥚'},
+    {'id': 'intermediate', 'emoji': '🍳'},
+    {'id': 'advanced', 'emoji': '👨‍🍳'},
   ];
 
   Future<void> _buildPlan() async {
@@ -903,17 +991,18 @@ class _SetupStep5ScreenState extends State<SetupStep5Screen> {
                 children: [
                   AppGap.h8,
                   Text(
-                    'A few more things about you',
+                    'onboarding_setup.about_you'.tr(),
                     style: AppTextStyles.s20.copyWith(
                       fontWeight: FontWeight.w800,
                       fontSize: 26,
+                      color: PreAuthTheme.textPrimary,
                     ),
                   ),
                   AppGap.h8,
                   Text(
-                    'Help us personalize your cooking experience',
+                    'onboarding_setup.cooking_experience'.tr(),
                     style: AppTextStyles.s14.copyWith(
-                      color: colors.textSecondary,
+                      color: PreAuthTheme.textSecondary,
                     ),
                   ),
                   AppGap.h28,
@@ -922,7 +1011,9 @@ class _SetupStep5ScreenState extends State<SetupStep5Screen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          const SetupSubHeaderWidget('Available cooking time'),
+                          SetupSubHeaderWidget(
+                            'onboarding_setup.available_time'.tr(),
+                          ),
                           AppGap.h12,
                           GridView.count(
                             shrinkWrap: true,
@@ -965,7 +1056,7 @@ class _SetupStep5ScreenState extends State<SetupStep5Screen> {
                                       AppGap.w8,
                                       Flexible(
                                         child: Text(
-                                          t['label'] as String,
+                                          _cookingTimeLabel(t['id'] as String),
                                           overflow: TextOverflow.ellipsis,
                                           style: AppTextStyles.s14.copyWith(
                                             color: isSelected
@@ -982,7 +1073,9 @@ class _SetupStep5ScreenState extends State<SetupStep5Screen> {
                             }).toList(),
                           ),
                           AppGap.h24,
-                          const SetupSubHeaderWidget('Cooking skill level'),
+                          SetupSubHeaderWidget(
+                            'onboarding_setup.cooking_skill'.tr(),
+                          ),
                           AppGap.h12,
                           ..._skills.map((s) {
                             final isSelected = _skillLevel == s['id'] as String;
@@ -1020,7 +1113,7 @@ class _SetupStep5ScreenState extends State<SetupStep5Screen> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                              s['label'] as String,
+                                              _skillLabel(s['id'] as String),
                                               style: AppTextStyles.s14.copyWith(
                                                 fontWeight: FontWeight.w700,
                                                 color: isSelected
@@ -1029,7 +1122,7 @@ class _SetupStep5ScreenState extends State<SetupStep5Screen> {
                                               ),
                                             ),
                                             Text(
-                                              s['desc'] as String,
+                                              _skillDesc(s['id'] as String),
                                               style: AppTextStyles.s12.copyWith(
                                                 color: colors.textSecondary,
                                               ),
@@ -1083,7 +1176,7 @@ class _SetupStep5ScreenState extends State<SetupStep5Screen> {
                   : ElevatedButton.icon(
                       onPressed: _buildPlan,
                       icon: const Icon(Icons.auto_awesome_rounded, size: 20),
-                      label: const Text('Build My Plan'),
+                      label: Text('onboarding_setup.build_plan'.tr()),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.primary,
                         foregroundColor: Colors.white,

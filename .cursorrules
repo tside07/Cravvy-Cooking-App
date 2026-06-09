@@ -1,0 +1,131 @@
+# MASTER SKILL DISPATCHER
+# Đọc file này TRƯỚC KHI làm bất cứ thứ gì.
+# Tự động chọn đúng skill dựa trên loại task — không cần người dùng chỉ định.
+
+## SKILL AUTO-DETECTION TREE
+
+Khi nhận task, đi qua cây này theo thứ tự. Dừng ở nhánh đầu tiên khớp:
+
+```
+Task đến
+ │
+ ├── Chưa rõ muốn gì / yêu cầu mơ hồ?
+ │     → LOAD: .cursor/rules/00-interview.md
+ │
+ ├── Có ý tưởng nhưng chưa thành spec?
+ │     → LOAD: .cursor/rules/01-spec.md
+ │
+ ├── Có spec, cần breakdown tasks?
+ │     → LOAD: .cursor/rules/02-plan.md
+ │
+ ├── Đang IMPLEMENT feature/code mới?
+ │   ├── Là UI/component? → LOAD: .cursor/rules/03-build-ui.md
+ │   ├── Là API/backend?  → LOAD: .cursor/rules/03-build-api.md
+ │   └── General?         → LOAD: .cursor/rules/03-build.md
+ │
+ ├── Đang VIẾT TESTS hoặc cần prove it works?
+ │     → LOAD: .cursor/rules/04-test.md
+ │
+ ├── Có BUG / build fail / behavior sai?
+ │     → LOAD: .cursor/rules/05-debug.md
+ │
+ ├── Đang REVIEW code trước merge?
+ │   ├── Security concern?     → ALSO LOAD: .cursor/rules/06-security.md
+ │   ├── Performance concern?  → ALSO LOAD: .cursor/rules/06-perf.md
+ │   └── Code quá phức tạp?    → ALSO LOAD: .cursor/rules/06-simplify.md
+ │         → LOAD: .cursor/rules/06-review.md
+ │
+ ├── COMMIT / branching / git?
+ │     → LOAD: .cursor/rules/07-git.md
+ │
+ ├── DEPLOY / launch / ship?
+ │     → LOAD: .cursor/rules/08-ship.md
+ │
+ └── Quyết định có rủi ro cao / production / security-sensitive?
+       → ALWAYS LOAD: .cursor/rules/99-doubt.md (on top of any other skill)
+```
+
+---
+
+## CORE BEHAVIORS — KHÔNG BAO GIỜ VI PHẠM
+
+Những quy tắc này áp dụng 100% thời gian, bất kể skill nào đang active:
+
+### 1. SURFACE ASSUMPTIONS TRƯỚC KHI CODE
+Trước mọi task không-trivial, hiển thị:
+```
+ASSUMPTIONS:
+1. [assumption]
+2. [assumption]
+→ Confirm hoặc tôi sẽ proceed với những điều này.
+```
+Không được silently fill in ambiguous requirements.
+
+### 2. STOP KHI BỊ CONFUSED
+Khi gặp mâu thuẫn hoặc không chắc:
+1. DỪNG lại. Không đoán mò.
+2. Nêu rõ confusion cụ thể.
+3. Hỏi clarifying question.
+4. Chờ trả lời trước khi tiếp tục.
+
+### 3. PUSH BACK KHI CÓ VẤN ĐỀ
+Không phải yes-machine. Khi approach có lỗi:
+- Nêu vấn đề thẳng thắn
+- Quantify downside ("thêm ~200ms latency", không phải "có thể chậm hơn")
+- Đề xuất alternative
+- Chấp nhận quyết định của human nếu họ override với đầy đủ thông tin
+
+### 4. SCOPE DISCIPLINE — KHÔNG TỰ Ý MỞ RỘNG
+- KHÔNG xóa comments không hiểu
+- KHÔNG "clean up" code ngoài phạm vi task
+- KHÔNG thêm feature không có trong spec vì "trông có vẻ useful"
+- Touch ĐÚNG những gì được yêu cầu, không hơn
+
+### 5. VERIFY — KHÔNG ASSUME
+Task chưa done cho đến khi có evidence:
+- Tests pass
+- Build output clean
+- Runtime data confirms behavior
+
+---
+
+## LIFECYCLE CHUẨN (full feature)
+
+Không phải mọi task đều cần hết. Bug fix chỉ cần steps 5→6→7.
+
+```
+1. interview     → Hiểu rõ user thực sự muốn gì
+2. spec          → Viết spec trước khi code bất cứ thứ gì
+3. plan          → Breakdown thành tasks nhỏ có acceptance criteria
+4. build         → Incremental, từng slice nhỏ
+5. test          → Failing test trước, sau đó make it pass
+6. review        → Five-axis review trước merge
+7. git           → Atomic commits, clean history
+8. ship          → Pre-launch checklist, monitoring, rollback plan
+```
+
+---
+
+## QUICK SLASH COMMANDS
+
+Gõ một trong các lệnh này để kích hoạt đúng workflow:
+
+| Lệnh | Skill được kích hoạt |
+|------|---------------------|
+| `/spec` | spec-driven-development |
+| `/plan` | planning-and-task-breakdown |
+| `/build` | incremental-implementation + TDD |
+| `/test` | test-driven-development |
+| `/review` | code-review-and-quality |
+| `/debug` | debugging-and-error-recovery |
+| `/simplify` | code-simplification |
+| `/ship` | shipping-and-launch |
+| `/doubt` | doubt-driven-development |
+
+---
+
+## FAIL-SAFE DEFAULT
+
+Khi không biết dùng skill nào → mặc định: **viết spec trước**.
+Nếu task > 30 phút implement → **bắt buộc có spec**.
+Nếu task chạm production/security → **bắt buộc chạy doubt-check**.

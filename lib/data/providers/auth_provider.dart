@@ -108,13 +108,13 @@ class AuthProvider extends ChangeNotifier {
         notifyListeners();
         return true;
       }
-      _setError('Email hoặc mật khẩu không đúng');
+      _setError('auth.err_wrong_credentials');
       return false;
     } on AuthException catch (e) {
       _setError(_mapAuthError(e.message));
       return false;
     } catch (e) {
-      _setError('Đã có lỗi xảy ra. Vui lòng thử lại.');
+      _setError('auth.err_generic');
       return false;
     }
   }
@@ -156,7 +156,7 @@ class AuthProvider extends ChangeNotifier {
         return true;
       }
       await _cleanupPartialOAuthSession();
-      _setError('Đăng nhập thất bại. Vui lòng thử lại.');
+      _setError('auth.err_login_failed');
       return false;
     } on AuthOAuthException catch (e) {
       await _cleanupPartialOAuthSession();
@@ -174,7 +174,7 @@ class AuthProvider extends ChangeNotifier {
       return false;
     } catch (e) {
       await _cleanupPartialOAuthSession();
-      _setError('Đăng nhập thất bại. Vui lòng thử lại.');
+      _setError('auth.err_login_failed');
       return false;
     } finally {
       _oauthInProgress = false;
@@ -208,13 +208,13 @@ class AuthProvider extends ChangeNotifier {
         notifyListeners();
         return true;
       }
-      _setError('Đăng ký thất bại. Vui lòng thử lại.');
+      _setError('auth.err_register_failed');
       return false;
     } on AuthException catch (e) {
       _setError(_mapAuthError(e.message));
       return false;
     } catch (e) {
-      _setError('Đã có lỗi xảy ra. Vui lòng thử lại.');
+      _setError('auth.err_generic');
       return false;
     }
   }
@@ -230,7 +230,7 @@ class AuthProvider extends ChangeNotifier {
       _setError(_mapAuthError(e.message));
       return false;
     } catch (e) {
-      _setError('Không thể gửi OTP. Vui lòng thử lại.');
+      _setError('auth.err_otp_send_failed');
       return false;
     }
   }
@@ -244,13 +244,13 @@ class AuthProvider extends ChangeNotifier {
         notifyListeners();
         return true;
       }
-      _setError('OTP không đúng hoặc đã hết hạn');
+      _setError('auth.err_otp_invalid_expired');
       return false;
     } on AuthException catch (e) {
       _setError(_mapAuthError(e.message));
       return false;
     } catch (e) {
-      _setError('Xác thực thất bại. Vui lòng thử lại.');
+      _setError('auth.err_otp_verify_failed');
       return false;
     }
   }
@@ -266,7 +266,7 @@ class AuthProvider extends ChangeNotifier {
       _setError(_mapAuthError(e.message));
       return false;
     } catch (e) {
-      _setError('Cập nhật mật khẩu thất bại. Vui lòng thử lại.');
+      _setError('auth.err_reset_failed');
       return false;
     }
   }
@@ -290,7 +290,7 @@ class AuthProvider extends ChangeNotifier {
       notifyListeners();
       return _user != null;
     } catch (e) {
-      _setError('Cập nhật hồ sơ thất bại. Vui lòng thử lại.');
+      _setError('auth.err_profile_update_failed');
       return false;
     }
   }
@@ -316,7 +316,7 @@ class AuthProvider extends ChangeNotifier {
       notifyListeners();
       return true;
     } catch (e) {
-      _setError('Cập nhật thông tin thất bại. Vui lòng thử lại.');
+      _setError('auth.err_info_update_failed');
       return false;
     }
   }
@@ -354,7 +354,7 @@ class AuthProvider extends ChangeNotifier {
     try {
       _user = await AuthService.startPremiumTrial(_user!.id);
       if (_user == null) {
-        _setError('Không kích hoạt được dùng thử. Kiểm tra kết nối.');
+        _setError('auth.err_trial_failed');
         return false;
       }
       _status = AuthStatus.authenticated;
@@ -362,9 +362,7 @@ class AuthProvider extends ChangeNotifier {
       notifyListeners();
       return true;
     } catch (e) {
-      _setError(
-        'Không lưu được gói dùng thử. Chạy migration Tuần 6 trên Supabase.',
-      );
+      _setError('auth.err_trial_migration');
       return false;
     }
   }
@@ -386,7 +384,7 @@ class AuthProvider extends ChangeNotifier {
   /// Permanently deletes account via Edge Function, then clears local session.
   Future<bool> deleteAccount() async {
     if (!isLoggedIn) {
-      _setError('Bạn cần đăng nhập để xóa tài khoản.');
+      _setError('auth.err_delete_login_required');
       return false;
     }
     _setLoading();
@@ -402,9 +400,7 @@ class AuthProvider extends ChangeNotifier {
       _setError(_mapDeleteAccountError(e.message));
       return false;
     } catch (_) {
-      _setError(
-        'Không thể xóa tài khoản. Kiểm tra kết nối hoặc thử lại sau.',
-      );
+      _setError('settings.delete_failed');
       return false;
     }
   }
@@ -433,11 +429,11 @@ class AuthProvider extends ChangeNotifier {
       case AuthOAuthFailure.userCancelled:
         return '';
       case AuthOAuthFailure.browserNotLaunched:
-        return 'Không mở được trình duyệt đăng nhập. Kiểm tra ứng dụng mặc định.';
+        return 'auth.err_oauth_browser';
       case AuthOAuthFailure.cancelledOrTimedOut:
-        return 'Đăng nhập đã hủy hoặc hết thời gian. Vui lòng thử lại.';
+        return 'auth.err_oauth_cancelled_timeout';
       case AuthOAuthFailure.noProfile:
-        return 'Không tạo được hồ sơ. Kiểm tra trigger profiles trên Supabase.';
+        return 'auth.err_oauth_no_profile';
     }
   }
 
@@ -445,23 +441,23 @@ class AuthProvider extends ChangeNotifier {
     final m = message.toLowerCase();
     if (m.contains('invalid login credentials') ||
         m.contains('invalid email or password')) {
-      return 'Email hoặc mật khẩu không đúng';
+      return 'auth.err_wrong_credentials';
     }
     if (m.contains('email already registered') ||
         m.contains('user already registered')) {
-      return 'Email này đã được đăng ký';
+      return 'auth.err_email_registered';
     }
     if (m.contains('password should be at least')) {
-      return 'Mật khẩu phải có ít nhất 6 ký tự';
+      return 'auth.err_password_min_6';
     }
     if (m.contains('email rate limit exceeded')) {
-      return 'Gửi quá nhiều lần. Vui lòng thử lại sau.';
+      return 'auth.err_rate_limit';
     }
     if (m.contains('token has expired') || m.contains('otp expired')) {
-      return 'OTP đã hết hạn. Vui lòng gửi lại.';
+      return 'auth.err_otp_expired';
     }
     if (m.contains('invalid otp') || m.contains('token is invalid')) {
-      return 'OTP không đúng';
+      return 'auth.err_otp_invalid';
     }
     return message;
   }
@@ -469,14 +465,14 @@ class AuthProvider extends ChangeNotifier {
   String _mapDeleteAccountError(String message) {
     final m = message.toLowerCase();
     if (m.contains('unauthorized') || m.contains('missing authorization')) {
-      return 'Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại.';
+      return 'settings.delete_session_expired';
     }
     if (m.contains('server configuration missing')) {
-      return 'Máy chủ chưa cấu hình xóa tài khoản. Liên hệ quản trị viên.';
+      return 'settings.delete_not_configured';
     }
     if (m.contains('network') || m.contains('timeout')) {
-      return 'Mất kết nối. Vui lòng thử lại.';
+      return 'settings.delete_network';
     }
-    return 'Không thể xóa tài khoản: $message';
+    return 'settings.delete_failed';
   }
 }

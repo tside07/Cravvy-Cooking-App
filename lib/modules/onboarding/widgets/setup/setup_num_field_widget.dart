@@ -1,3 +1,4 @@
+import 'package:cravvy_cooking_app/core/theme/pre_auth_theme.dart';
 import 'package:cravvy_cooking_app/init.dart';
 
 class SetupNumFieldWidget extends StatelessWidget {
@@ -18,13 +19,11 @@ class SetupNumFieldWidget extends StatelessWidget {
       controller: controller,
       keyboardType: TextInputType.number,
       onChanged: onChanged,
-      style: context.themed(AppTextStyles.s14),
+      style: AppTextStyles.s14.copyWith(color: PreAuthTheme.textPrimary),
+      cursorColor: PreAuthTheme.textPrimary,
       decoration: AppInputDecoration.underline.copyWith(
         hintText: hint,
-        hintStyle: context.themed(
-          AppTextStyles.s14,
-          color: context.appColors.inputHint,
-        ),
+        hintStyle: AppTextStyles.s14.copyWith(color: PreAuthTheme.textSecondary),
         contentPadding: AppPad.h16v14,
       ),
     );

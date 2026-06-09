@@ -1,5 +1,6 @@
 import 'package:cravvy_cooking_app/init.dart';
 import 'package:cravvy_cooking_app/resources/resources.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 enum SocialProvider { google, apple }
 
@@ -43,7 +44,9 @@ class AuthSocialLoginButton extends StatelessWidget {
               // const Icon(Icons.apple, size: 22, color: AppColors.textPrimary),
             AppGap.w10,
             Text(
-              isGoogle ? 'Continue with Google' : 'Continue with Apple',
+              isGoogle
+                  ? 'auth.continue_google'.tr()
+                  : 'auth.continue_apple'.tr(),
               style: context.themed(
                 AppTextStyles.s16,
                 fontWeight: FontWeight.w600,

@@ -17,16 +17,40 @@ abstract final class ShoppingListService {
         .toList();
   }
 
-  /// Replaces all rows for [userId] with [items] (full sync after local edits).
+  /// Upserts [items] for [userId] and removes rows that are no longer present.
+  /// Avoids delete-then-insert races that cause duplicate primary-key errors.
   static Future<void> replaceAll(
     String userId,
     List<ShoppingItem> items,
   ) async {
-    await _client.from(_table).delete().eq('user_id', userId);
-    if (items.isEmpty) return;
+    final unique = dedupeById(items);
+    final keepIds = unique.map((i) => i.id).toSet();
 
-    final rows = items.map((i) => _toRow(userId, i)).toList();
-    await _client.from(_table).insert(rows);
+    if (unique.isEmpty) {
+      await _client.from(_table).delete().eq('user_id', userId);
+      return;
+    }
+
+    final rows = unique.map((i) => _toRow(userId, i)).toList();
+    await _client.from(_table).upsert(rows, onConflict: 'id');
+
+    final existing = await fetchForUser(userId);
+    final staleIds = existing
+        .where((row) => !keepIds.contains(row.id))
+        .map((row) => row.id)
+        .toList();
+    if (staleIds.isEmpty) return;
+
+    await _client
+        .from(_table)
+        .delete()
+        .eq('user_id', userId)
+        .inFilter('id', staleIds);
+  }
+
+  static List<ShoppingItem> dedupeById(List<ShoppingItem> items) {
+    final seen = <String>{};
+    return items.where((item) => seen.add(item.id)).toList();
   }
 
   static ShoppingItem _fromRow(Map<String, dynamic> json) => ShoppingItem(

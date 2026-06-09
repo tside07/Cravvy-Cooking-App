@@ -11,9 +11,7 @@ class TrialUnlockedCardWidget extends StatelessWidget {
     return Container(
       width: double.infinity,
       padding: AppPad.a20,
-      decoration: BoxDecoration(
-        color: AppColors.surface,
-        borderRadius: AppBorderRadius.a20,
+      decoration: context.cardBox(radius: 20).copyWith(
         boxShadow: [
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.06),
@@ -36,7 +34,10 @@ class TrialUnlockedCardWidget extends StatelessWidget {
               AppGap.w8,
               Text(
                 'trial.unlocked'.tr(),
-                style: AppTextStyles.s14.copyWith(fontWeight: FontWeight.w700),
+                style: context.themed(
+                  AppTextStyles.s14,
+                  fontWeight: FontWeight.w700,
+                ),
               ),
             ],
           ),
@@ -62,7 +63,7 @@ class TrialUnlockedCardWidget extends StatelessWidget {
                     ),
                   ),
                   AppGap.w10,
-                  Expanded(child: Text(f, style: AppTextStyles.s14)),
+                  Expanded(child: Text(f, style: context.themed(AppTextStyles.s14))),
                 ],
               ),
             ),

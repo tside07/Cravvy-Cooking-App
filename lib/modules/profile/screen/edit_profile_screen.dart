@@ -1,4 +1,5 @@
 import 'package:flutter/services.dart';
+import 'package:cravvy_cooking_app/core/utils/localized_message.dart';
 import 'package:cravvy_cooking_app/data/providers/auth_provider.dart';
 import 'package:cravvy_cooking_app/init.dart';
 import 'package:cravvy_cooking_app/modules/profile/provider/profile_provider.dart';
@@ -83,8 +84,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     );
     if (!mounted) return;
     if (!ok) {
-      final msg = auth.errorMessage ??
-          'Cập nhật hồ sơ thất bại. Vui lòng thử lại.';
+      final msg = localizeMessage(
+        auth.errorMessage ?? 'auth.err_profile_update_failed',
+      );
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(msg)),
       );
@@ -120,7 +122,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       context.go(AppRouter.onboarding);
       return;
     }
-    final msg = auth.errorMessage ?? 'settings.delete_failed'.tr();
+    final msg = localizeMessage(auth.errorMessage ?? 'settings.delete_failed');
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text(msg)),
     );

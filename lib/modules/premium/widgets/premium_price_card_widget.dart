@@ -36,13 +36,14 @@ class PremiumPriceCardWidget extends StatelessWidget {
           border: Border.all(color: AppColors.primary.withValues(alpha: 0.3)),
         ),
         child: isAnnual
-            ? _buildAnnualLayout(price, period)
-            : _buildMonthlyLayout(price, period),
+            ? _buildAnnualLayout(context, price, period)
+            : _buildMonthlyLayout(context, price, period),
       ),
     );
   }
 
-  Widget _buildAnnualLayout(int price, String period) {
+  Widget _buildAnnualLayout(BuildContext context, int price, String period) {
+    final colors = context.appColors;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -62,8 +63,9 @@ class PremiumPriceCardWidget extends StatelessWidget {
               padding: const EdgeInsets.only(bottom: 4),
               child: Text(
                 period,
-                style: AppTextStyles.s14.copyWith(
-                  color: AppColors.textSecondary,
+                style: context.themed(
+                  AppTextStyles.s14,
+                  color: colors.textSecondary,
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -95,13 +97,17 @@ class PremiumPriceCardWidget extends StatelessWidget {
             'monthly': _formatVND(annualMonthly),
             'savings': _formatVND(annualSavings),
           }),
-          style: AppTextStyles.s12.copyWith(color: AppColors.textSecondary),
+          style: context.themed(
+            AppTextStyles.s12,
+            color: colors.textSecondary,
+          ),
         ),
       ],
     );
   }
 
-  Widget _buildMonthlyLayout(int price, String period) {
+  Widget _buildMonthlyLayout(BuildContext context, int price, String period) {
+    final colors = context.appColors;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -121,8 +127,9 @@ class PremiumPriceCardWidget extends StatelessWidget {
               padding: AppPad.b4,
               child: Text(
                 period,
-                style: AppTextStyles.s14.copyWith(
-                  color: AppColors.textSecondary,
+                style: context.themed(
+                  AppTextStyles.s14,
+                  color: colors.textSecondary,
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -132,7 +139,10 @@ class PremiumPriceCardWidget extends StatelessWidget {
         AppGap.h8,
         Text(
           'premium.billed_monthly'.tr(),
-          style: AppTextStyles.s12.copyWith(color: AppColors.textSecondary),
+          style: context.themed(
+            AppTextStyles.s12,
+            color: colors.textSecondary,
+          ),
         ),
       ],
     );

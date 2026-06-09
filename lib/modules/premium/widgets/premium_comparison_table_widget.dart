@@ -9,23 +9,21 @@ class PremiumComparisonTableWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
     return Container(
-      decoration: BoxDecoration(
-        color: AppColors.surface,
-        borderRadius: AppBorderRadius.a16,
-        border: Border.all(color: AppColors.border.withValues(alpha: 0.5)),
-      ),
+      decoration: context.cardBox(radius: 16),
       child: Column(
         children: [
-          _buildHeader(),
-          const Divider(height: 1, color: AppColors.border),
-          ...rows.map((row) => _buildTableRow(row)),
+          _buildHeader(context),
+          Divider(height: 1, color: colors.borderDivider),
+          ...rows.map((row) => _buildTableRow(context, row)),
         ],
       ),
     );
   }
 
-  Widget _buildHeader() {
+  Widget _buildHeader(BuildContext context) {
+    final colors = context.appColors;
     return Padding(
       padding: AppPad.h16v14,
       child: Row(
@@ -34,9 +32,9 @@ class PremiumComparisonTableWidget extends StatelessWidget {
             flex: 5,
             child: Text(
               'subscription.table.feature'.tr(),
-              style: AppTextStyles.s14.copyWith(
+              style: context.themed(
+                AppTextStyles.s14,
                 fontWeight: FontWeight.w700,
-                color: AppColors.textPrimary,
               ),
             ),
           ),
@@ -45,9 +43,10 @@ class PremiumComparisonTableWidget extends StatelessWidget {
             child: Text(
               'subscription.table.free'.tr(),
               textAlign: TextAlign.center,
-              style: AppTextStyles.s14.copyWith(
+              style: context.themed(
+                AppTextStyles.s14,
+                color: colors.textSecondary,
                 fontWeight: FontWeight.w600,
-                color: AppColors.textSecondary,
               ),
             ),
           ),
@@ -67,11 +66,14 @@ class PremiumComparisonTableWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildTableRow(CompRow row) {
+  Widget _buildTableRow(BuildContext context, CompRow row) {
+    final colors = context.appColors;
     return Container(
       padding: AppPad.h16v12,
-      decoration: const BoxDecoration(
-        border: Border(bottom: BorderSide(color: AppColors.border, width: 0.5)),
+      decoration: BoxDecoration(
+        border: Border(
+          bottom: BorderSide(color: colors.borderDivider, width: 0.5),
+        ),
       ),
       child: Row(
         children: [
@@ -79,9 +81,9 @@ class PremiumComparisonTableWidget extends StatelessWidget {
             flex: 5,
             child: Text(
               row.feature,
-              style: AppTextStyles.s12.copyWith(
+              style: context.themed(
+                AppTextStyles.s12,
                 fontWeight: FontWeight.w600,
-                color: AppColors.textPrimary,
               ),
             ),
           ),
@@ -90,7 +92,10 @@ class PremiumComparisonTableWidget extends StatelessWidget {
             child: Text(
               row.free,
               textAlign: TextAlign.center,
-              style: AppTextStyles.s12.copyWith(color: AppColors.textSecondary),
+              style: context.themed(
+                AppTextStyles.s12,
+                color: colors.textSecondary,
+              ),
             ),
           ),
           Expanded(

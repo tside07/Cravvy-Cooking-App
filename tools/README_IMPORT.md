@@ -30,7 +30,7 @@ Target: **≥ 100** rows.
 
 ## Prerequisites
 
-- Run **`supabase/RUN_IN_SQL_EDITOR_recipes_provenance.sql`** in Supabase SQL Editor  
+- Run **`supabase/migrations/20260522120000_recipes_provenance.sql`** in Supabase SQL Editor  
   (fixes error `42P10` / `no unique constraint matching ON CONFLICT`)
 - Service role key in `tools/.env` (never commit real keys)
 

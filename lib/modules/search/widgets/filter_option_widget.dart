@@ -7,14 +7,15 @@ class FilterOptionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
     return AnimatedContainer(
       duration: const Duration(milliseconds: 150),
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
       decoration: BoxDecoration(
-        color: selected ? AppColors.primary : AppColors.surface,
+        color: selected ? AppColors.primary : colors.chipBg,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: selected ? AppColors.primary : AppColors.border,
+          color: selected ? AppColors.primary : colors.chipBorder,
         ),
       ),
       child: Text(
@@ -22,7 +23,7 @@ class FilterOptionWidget extends StatelessWidget {
         style: AppTextStyles.s14.copyWith(
           fontSize: 13,
           fontWeight: FontWeight.w600,
-          color: selected ? Colors.white : AppColors.textPrimary,
+          color: selected ? colors.onPrimary : colors.textPrimary,
         ),
       ),
     );

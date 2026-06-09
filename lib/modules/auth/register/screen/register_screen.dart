@@ -1,4 +1,5 @@
 import 'package:cravvy_cooking_app/core/theme/pre_auth_theme.dart';
+import 'package:cravvy_cooking_app/core/utils/localized_message.dart';
 import 'package:cravvy_cooking_app/init.dart';
 import 'package:cravvy_cooking_app/data/providers/auth_provider.dart';
 import 'package:cravvy_cooking_app/modules/auth/register/widgets/form_fields_widget.dart';
@@ -43,7 +44,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            'Vui lòng đồng ý với điều khoản sử dụng.',
+            'auth.val_terms'.tr(),
             style: AppTextStyles.s14.copyWith(color: AppColors.white),
           ),
           backgroundColor: AppColors.error,
@@ -69,11 +70,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
       // Đăng ký xong → vào setup step 1 (onboarding chưa xong)
       context.go(AppRouter.setupStep1);
     } else {
-      final error = auth.errorMessage ?? 'Đăng ký thất bại';
+      final error = localizeMessage(auth.errorMessage ?? 'auth.register_failed');
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content:
-              Text(error, style: AppTextStyles.s14.copyWith(color: AppColors.white)),
+          content: Text(
+            error,
+            style: AppTextStyles.s14.copyWith(color: AppColors.white),
+          ),
           backgroundColor: AppColors.error,
           behavior: SnackBarBehavior.floating,
           shape:

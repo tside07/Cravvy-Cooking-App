@@ -1,4 +1,5 @@
 import 'package:cravvy_cooking_app/init.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class HelpTextWidget extends StatelessWidget {
   const HelpTextWidget({super.key});
@@ -7,7 +8,7 @@ class HelpTextWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final colors = context.appColors;
     return Text(
-      "Didn't receive the code? Check your spam folder or make sure the email address is correct.",
+      'auth.otp_help_text'.tr(),
       style: context.themed(
         AppTextStyles.s12,
         color: colors.textDisabled,

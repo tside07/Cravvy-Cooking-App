@@ -18,11 +18,7 @@ class MealScrollCardWidget extends StatelessWidget {
         margin: const EdgeInsets.only(
           right: 12,
         ), //TODO: no AppPad equivalent for this multi-directional EdgeInsets.only
-        decoration: BoxDecoration(
-          color: AppColors.surface,
-          borderRadius: AppBorderRadius.a20,
-          border: Border.all(color: AppColors.border),
-        ),
+        decoration: context.cardBox(radius: 20),
         clipBehavior: Clip.hardEdge,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -103,9 +99,9 @@ class MealScrollCardWidget extends StatelessWidget {
                 children: [
                   Text(
                     meal.name,
-                    style: AppTextStyles.s12.copyWith(
+                    style: context.themed(
+                      AppTextStyles.s12,
                       fontWeight: FontWeight.w700,
-                      color: AppColors.textPrimary,
                     ),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,

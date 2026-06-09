@@ -1,4 +1,5 @@
 import 'package:cravvy_cooking_app/init.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class ResendSectionWidget extends StatelessWidget {
   const ResendSectionWidget({
@@ -19,7 +20,7 @@ class ResendSectionWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          secondsLeft > 0 ? 'Resend code in: ' : '',
+          secondsLeft > 0 ? 'auth.otp_resend_countdown_prefix'.tr() : '',
           style: context.themed(
             AppTextStyles.s14,
             color: colors.textSecondary,
@@ -28,7 +29,7 @@ class ResendSectionWidget extends StatelessWidget {
         GestureDetector(
           onTap: secondsLeft == 0 ? onResend : null,
           child: Text(
-            secondsLeft > 0 ? countdownLabel : 'Resend',
+            secondsLeft > 0 ? countdownLabel : 'auth.otp_resend'.tr(),
             style: AppTextStyles.s14.copyWith(
               color: AppColors.primary,
               fontWeight: FontWeight.w700,

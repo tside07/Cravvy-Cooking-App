@@ -1,0 +1,6 @@
+{
+  "yaml.schemaStore.enable": false,
+  "yaml.schemas": {
+    "./.vscode/schemas/pubspec.json": "pubspec.yaml"
+  }
+}

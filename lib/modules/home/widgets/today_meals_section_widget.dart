@@ -76,27 +76,24 @@ class TodayMealsSectionWidget extends StatelessWidget {
                   child: Container(
                     width: double.infinity,
                     padding: const EdgeInsets.symmetric(vertical: 24),
-                    decoration: BoxDecoration(
-                      color: AppColors.surface,
-                      borderRadius: AppBorderRadius.a20,
-                      border: Border.all(color: AppColors.border),
-                    ),
+                    decoration: context.cardBox(radius: 20),
                     child: Column(
                       children: [
                         const Text('🍽️', style: TextStyle(fontSize: 32)),
                         AppGap.h8,
                         Text(
                           'home.no_meals_title'.tr(),
-                          style: AppTextStyles.s14.copyWith(
+                          style: context.themed(
+                            AppTextStyles.s14,
                             fontWeight: FontWeight.w600,
-                            color: AppColors.textPrimary,
                           ),
                         ),
                         AppGap.h4,
                         Text(
                           'home.no_meals_desc'.tr(),
-                          style: AppTextStyles.s12.copyWith(
-                            color: AppColors.textSecondary,
+                          style: context.themed(
+                            AppTextStyles.s12,
+                            color: context.appColors.textSecondary,
                           ),
                         ),
                       ],

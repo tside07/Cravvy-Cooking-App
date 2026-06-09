@@ -79,7 +79,7 @@ class RecipeProvider extends ChangeNotifier {
       _featuredCache.clear();
       _status = RecipeStatus.loaded;
     } catch (e) {
-      _errorMessage = 'Không thể tải danh sách món ăn. Vui lòng thử lại.';
+      _errorMessage = 'recipe.err_load_failed';
       _status = RecipeStatus.error;
     }
     notifyListeners();

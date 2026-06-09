@@ -10,11 +10,7 @@ class PremiumFeaturesCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: AppPad.a20,
-      decoration: BoxDecoration(
-        color: AppColors.surface,
-        borderRadius: AppBorderRadius.a16,
-        border: Border.all(color: AppColors.border.withValues(alpha: 1)),
-      ),
+      decoration: context.cardBox(radius: 16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -26,9 +22,9 @@ class PremiumFeaturesCardWidget extends StatelessWidget {
               Expanded(
                 child: Text(
                   'premium.define'.tr(),
-                  style: AppTextStyles.s16.copyWith(
+                  style: context.themed(
+                    AppTextStyles.s16,
                     fontWeight: FontWeight.w800,
-                    color: AppColors.textPrimary,
                   ),
                 ),
               ),
@@ -52,9 +48,7 @@ class PremiumFeaturesCardWidget extends StatelessWidget {
                   Expanded(
                     child: Text(
                       feature,
-                      style: AppTextStyles.s14.copyWith(
-                        color: AppColors.textPrimary,
-                      ),
+                      style: context.themed(AppTextStyles.s14),
                     ),
                   ),
                 ],

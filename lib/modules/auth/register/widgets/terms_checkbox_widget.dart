@@ -1,4 +1,5 @@
 import 'package:cravvy_cooking_app/init.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class TermsCheckboxWidget extends StatelessWidget {
   const TermsCheckboxWidget({
@@ -32,7 +33,7 @@ class TermsCheckboxWidget extends StatelessWidget {
         Expanded(
           child: RichText(
             text: TextSpan(
-              text: 'I agree to the ',
+              text: 'auth.terms_prefix'.tr(),
               style: context.themed(
                 AppTextStyles.s14,
                 color: colors.textSecondary,
@@ -42,7 +43,7 @@ class TermsCheckboxWidget extends StatelessWidget {
                   child: GestureDetector(
                     onTap: () => context.push(AppRouter.termsOfService),
                     child: Text(
-                      'Terms of Service',
+                      'auth.terms_link'.tr(),
                       style: AppTextStyles.s14.copyWith(
                         color: AppColors.primary,
                         fontWeight: FontWeight.w600,
@@ -51,7 +52,7 @@ class TermsCheckboxWidget extends StatelessWidget {
                   ),
                 ),
                 TextSpan(
-                  text: ' and ',
+                  text: ' ${'auth.terms_and'.tr()} ',
                   style: context.themed(
                     AppTextStyles.s14,
                     color: colors.textSecondary,
@@ -61,7 +62,7 @@ class TermsCheckboxWidget extends StatelessWidget {
                   child: GestureDetector(
                     onTap: () => context.push(AppRouter.privacyPolicy),
                     child: Text(
-                      'Privacy Policy',
+                      'auth.privacy_link'.tr(),
                       style: AppTextStyles.s14.copyWith(
                         color: AppColors.primary,
                         fontWeight: FontWeight.w600,

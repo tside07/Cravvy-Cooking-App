@@ -1,4 +1,5 @@
 import 'package:cravvy_cooking_app/init.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class ResetPasswordSuccessWidget extends StatelessWidget {
   const ResetPasswordSuccessWidget({super.key});
@@ -27,7 +28,7 @@ class ResetPasswordSuccessWidget extends StatelessWidget {
             ),
             AppGap.h24,
             Text(
-              'Password Updated!',
+              'auth.reset_success_title'.tr(),
               style: context.themed(
                 AppTextStyles.s20,
                 fontWeight: FontWeight.w700,
@@ -35,7 +36,7 @@ class ResetPasswordSuccessWidget extends StatelessWidget {
             ),
             AppGap.h12,
             Text(
-              'Your password has been reset successfully.\nRedirecting to login…',
+              'auth.reset_success_body'.tr(),
               textAlign: TextAlign.center,
               style: context.themed(
                 AppTextStyles.s14,

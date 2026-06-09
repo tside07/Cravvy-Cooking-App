@@ -12,17 +12,24 @@ class ProfileStatBoxWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
     return Expanded(
       child: Column(
         children: [
           Text(
             label,
-            style: AppTextStyles.s10.copyWith(color: AppColors.textSecondary),
+            style: context.themed(
+              AppTextStyles.s10,
+              color: colors.textSecondary,
+            ),
           ),
           AppGap.h2,
           Text(
             value,
-            style: AppTextStyles.s16.copyWith(fontWeight: FontWeight.w800),
+            style: context.themed(
+              AppTextStyles.s16,
+              fontWeight: FontWeight.w800,
+            ),
           ),
         ],
       ),

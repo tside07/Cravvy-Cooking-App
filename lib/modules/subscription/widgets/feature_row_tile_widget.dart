@@ -11,13 +11,14 @@ class FeatureRowTileWidget extends StatelessWidget {
   final FeatureRow row;
   final bool isLast;
 
-  Widget _cell(String val, bool check, bool isPremium) {
+  Widget _cell(BuildContext context, String val, bool check, bool isPremium) {
+    final colors = context.appColors;
     if (val.isNotEmpty) {
       return Text(
         val,
         textAlign: TextAlign.center,
         style: AppTextStyles.s12.copyWith(
-          color: isPremium ? AppColors.primary : AppColors.textSecondary,
+          color: isPremium ? AppColors.primary : colors.textSecondary,
           fontWeight: FontWeight.w600,
         ),
       );
@@ -26,13 +27,14 @@ class FeatureRowTileWidget extends StatelessWidget {
       check ? Icons.check_circle_rounded : Icons.cancel_rounded,
       size: 18,
       color: check
-          ? (isPremium ? AppColors.primary : AppColors.textHint)
-          : AppColors.border,
+          ? (isPremium ? AppColors.primary : colors.textDisabled)
+          : colors.borderDivider,
     );
   }
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
     return Column(
       children: [
         Padding(
@@ -43,23 +45,29 @@ class FeatureRowTileWidget extends StatelessWidget {
                 flex: 3,
                 child: Text(
                   row.label,
-                  style: AppTextStyles.s14.copyWith(
-                    color: AppColors.textPrimary,
-                  ),
+                  style: context.themed(AppTextStyles.s14),
                 ),
               ),
               Expanded(
-                child: Center(child: _cell(row.freeVal, row.freeCheck, false)),
+                child: Center(
+                  child: _cell(context, row.freeVal, row.freeCheck, false),
+                ),
               ),
               Expanded(
                 child: Center(
-                  child: _cell(row.premiumVal, row.premiumCheck, true),
+                  child: _cell(
+                    context,
+                    row.premiumVal,
+                    row.premiumCheck,
+                    true,
+                  ),
                 ),
               ),
             ],
           ),
         ),
-        if (!isLast) Divider(height: 1, indent: 16, color: AppColors.border),
+        if (!isLast)
+          Divider(height: 1, indent: 16, color: colors.borderDivider),
       ],
     );
   }

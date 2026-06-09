@@ -18,12 +18,12 @@ class PlanToggleWidget extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        _buildTab('premium.monthly'.tr(), !isAnnual, () => onChanged(false)),
+        _buildTab(context, 'premium.monthly'.tr(), !isAnnual, () => onChanged(false)),
         AppGap.w8,
         Stack(
           clipBehavior: Clip.none,
           children: [
-            _buildTab('premium.annual'.tr(), isAnnual, () => onChanged(true)),
+            _buildTab(context, 'premium.annual'.tr(), isAnnual, () => onChanged(true)),
             // "Save X%" badge
             Positioned(
               top: -10,
@@ -50,17 +50,23 @@ class PlanToggleWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildTab(String label, bool active, VoidCallback onTap) {
+  Widget _buildTab(
+    BuildContext context,
+    String label,
+    bool active,
+    VoidCallback onTap,
+  ) {
+    final colors = context.appColors;
     return GestureDetector(
       onTap: onTap,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
         padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 10),
         decoration: BoxDecoration(
-          color: active ? AppColors.surface : Colors.transparent,
+          color: active ? colors.cardSurface : Colors.transparent,
           borderRadius: AppBorderRadius.a24,
           border: Border.all(
-            color: active ? AppColors.border : Colors.transparent,
+            color: active ? colors.borderDivider : Colors.transparent,
           ),
           boxShadow: active
               ? [
@@ -74,9 +80,10 @@ class PlanToggleWidget extends StatelessWidget {
         ),
         child: Text(
           label,
-          style: AppTextStyles.s14.copyWith(
+          style: context.themed(
+            AppTextStyles.s14,
+            color: active ? colors.textPrimary : colors.textSecondary,
             fontWeight: active ? FontWeight.w700 : FontWeight.w500,
-            color: active ? AppColors.textPrimary : AppColors.textSecondary,
           ),
         ),
       ),

@@ -40,11 +40,10 @@ class HomeHeaderWidget extends StatelessWidget {
               children: [
                 Text(
                   '${_greeting()}, $firstName! 👋',
-                  style: AppTextStyles.s20.copyWith(
-                    fontSize: 28,
+                  style: context.themed(
+                    AppTextStyles.s20,
                     fontWeight: FontWeight.w800,
-                    color: AppColors.textPrimary,
-                  ),
+                  ).copyWith(fontSize: 28),
                 ),
                 AppGap.h2,
                 Text(

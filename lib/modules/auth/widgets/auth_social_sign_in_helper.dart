@@ -1,4 +1,5 @@
 import 'package:cravvy_cooking_app/core/routes/app_routers.dart';
+import 'package:cravvy_cooking_app/core/utils/localized_message.dart';
 import 'package:cravvy_cooking_app/data/providers/auth_provider.dart';
 import 'package:cravvy_cooking_app/init.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +31,7 @@ Future<void> handleSocialSignIn(
     _maybeShowOAuthError(context, auth.errorMessage);
   } catch (_) {
     if (!context.mounted) return;
-    auth.recoverFromFailedSignIn('Đăng nhập thất bại. Vui lòng thử lại.');
+    auth.recoverFromFailedSignIn('auth.oauth_failed');
     _rollbackToAuthHub(context, fallbackRoute);
     _maybeShowOAuthError(context, auth.errorMessage);
   }
@@ -53,7 +54,7 @@ void _showOAuthError(BuildContext context, String message) {
     ..showSnackBar(
       SnackBar(
         content: Text(
-          message,
+          localizeMessage(message),
           style: AppTextStyles.s14.copyWith(color: AppColors.white),
         ),
         backgroundColor: AppColors.error,

@@ -1,7 +1,6 @@
--- Slice B: chạy toàn bộ trong Supabase → SQL Editor → Run
--- Gồm: cột ingredients (recipes) + freemium/trial + weekly usage counters
--- Sau khi chạy: Table Editor → Refresh schema (F5)
-
+-- Chạy trong Supabase → SQL Editor khi KHÔNG dùng `supabase db push`.
+-- Schema đầy đủ nằm trong supabase/migrations/ (source of truth).
+-- File này gom Slice B + cooldown refresh — an toàn chạy lại (IF NOT EXISTS).
 -- ── Recipes: ingredients ────────────────────────────────────────
 ALTER TABLE public.recipes
   ADD COLUMN IF NOT EXISTS ingredients text[] NOT NULL DEFAULT '{}';

@@ -1,29 +1,26 @@
 import 'package:flutter/material.dart';
 
 import 'package:cravvy_cooking_app/core/theme/app_colors.dart';
+import 'package:cravvy_cooking_app/core/theme/app_text_styles.dart';
+import 'package:cravvy_cooking_app/core/theme/pre_auth_theme.dart';
 
-/// Shared [InputDecoration]s for the project.
-///
-/// Use with a plain [TextField]/[TextFormField] and `.copyWith(...)` to set
-/// per-field bits (labelText, hintText, suffixIcon, styles), e.g.:
-/// ```dart
-/// TextField(
-///   decoration: AppInputDecoration.underline.copyWith(
-///     labelText: 'Username',
-///     suffixIcon: isValid ? const Icon(Icons.check) : null,
-///   ),
-/// )
-/// ```
 abstract final class AppInputDecoration {
   static const Color _idleLine = Color(0xFF9E9E9E);
-  static const Color _focusLine = Color(0xFF34C358);
+  static const Color _focusLine = Color(0xFFFFFFFF);
 
-  /// Minimal underline field: grey line when idle, green when focused.
-  /// Floating label stays above the value (matches the Sign Up mock).
   static final InputDecoration underline = InputDecoration(
     isDense: false,
+    filled: false,
+    fillColor: Colors.transparent,
     floatingLabelBehavior: FloatingLabelBehavior.always,
     contentPadding: const EdgeInsets.symmetric(vertical: 10),
+    labelStyle: AppTextStyles.s16.copyWith(color: PreAuthTheme.textSecondary),
+    floatingLabelStyle: AppTextStyles.s13.copyWith(
+      color: PreAuthTheme.textSecondary,
+    ),
+    border: const UnderlineInputBorder(
+      borderSide: BorderSide(color: _idleLine, width: 0.8),
+    ),
     enabledBorder: const UnderlineInputBorder(
       borderSide: BorderSide(color: _idleLine, width: 0.8),
     ),

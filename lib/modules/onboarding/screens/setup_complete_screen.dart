@@ -2,6 +2,7 @@ import 'package:cravvy_cooking_app/core/theme/pre_auth_theme.dart';
 import 'package:cravvy_cooking_app/init.dart';
 import 'package:cravvy_cooking_app/modules/widgets/common/cravvy_button.dart';
 import 'package:cravvy_cooking_app/data/providers/auth_provider.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 // SetupCompleteScreen không cần OnboardingArgs nữa —
 // data đã lưu lên Supabase ở step 5 rồi
@@ -44,10 +45,57 @@ class _SetupCompleteScreenState extends State<SetupCompleteScreen>
     super.dispose();
   }
 
+  String _goalLabel(String goal) {
+    switch (goal) {
+      case 'lose-weight':
+        return 'setup_complete.goal_lose'.tr();
+      case 'build-muscle':
+        return 'setup_complete.goal_muscle'.tr();
+      case 'maintain':
+        return 'setup_complete.goal_maintain'.tr();
+      case 'health':
+        return 'setup_complete.goal_health'.tr();
+      default:
+        return goal;
+    }
+  }
+
+  String _cookingTimeLabel(String? time) {
+    switch (time) {
+      case 'quick':
+        return 'setup_complete.time_quick'.tr();
+      case 'short':
+        return 'setup_complete.time_short'.tr();
+      case 'medium':
+        return 'setup_complete.time_medium'.tr();
+      case 'long':
+        return 'setup_complete.time_long'.tr();
+      default:
+        return 'setup_complete.time_flexible'.tr();
+    }
+  }
+
+  String _dietLabel(String diet) {
+    return switch (diet) {
+      'Eat Clean' => 'onboarding_setup.diet_eat_clean'.tr(),
+      'Low-Carb' => 'onboarding_setup.diet_low_carb'.tr(),
+      'Keto' => 'onboarding_setup.diet_keto'.tr(),
+      'Intermittent Fasting' => 'onboarding_setup.diet_intermittent_fasting'.tr(),
+      'Vegetarian' => 'onboarding_setup.diet_vegetarian'.tr(),
+      'Vegan' => 'onboarding_setup.diet_vegan'.tr(),
+      'High-Protein' => 'onboarding_setup.diet_high_protein'.tr(),
+      'Low-Sugar' => 'onboarding_setup.diet_low_sugar'.tr(),
+      'Gluten-Free' => 'onboarding_setup.diet_gluten_free'.tr(),
+      'No Specific Diet' => 'onboarding_setup.diet_no_specific'.tr(),
+      _ => diet,
+    };
+  }
+
   @override
   Widget build(BuildContext context) {
     final auth = context.watch<AuthProvider>();
     final user = auth.user;
+    final firstName = user?.fullName?.split(' ').first ?? '';
 
     return PreAuthScaffold(
       body: SafeArea(
@@ -81,9 +129,11 @@ class _SetupCompleteScreenState extends State<SetupCompleteScreen>
                 child: Column(
                   children: [
                     Text(
-                      user != null
-                          ? 'You\'re all set, ${user.fullName?.split(' ').first ?? ''}!'
-                          : 'You\'re all set!',
+                      user != null && firstName.isNotEmpty
+                          ? 'setup_complete.all_set_user'.tr(
+                              namedArgs: {'name': firstName},
+                            )
+                          : 'setup_complete.all_set'.tr(),
                       style: AppTextStyles.s20.copyWith(
                         fontWeight: FontWeight.w800,
                         color: PreAuthTheme.textPrimary,
@@ -93,7 +143,7 @@ class _SetupCompleteScreenState extends State<SetupCompleteScreen>
                     ),
                     AppGap.h12,
                     Text(
-                      'Your personalized meal plan is ready.\nLet\'s start eating better today!',
+                      'setup_complete.personalized_desc'.tr(),
                       style: AppTextStyles.s15.copyWith(
                         color: PreAuthTheme.textSecondary,
                         height: 1.5,
@@ -111,29 +161,32 @@ class _SetupCompleteScreenState extends State<SetupCompleteScreen>
                           if (user?.goal != null) ...[
                             _SummaryRow(
                               icon: '🎯',
-                              label: 'Your goal',
+                              label: 'setup_complete.your_goal'.tr(),
                               value: _goalLabel(user!.goal!),
                             ),
                             const Divider(height: 24, color: AppColors.divider),
                           ],
                           _SummaryRow(
                             icon: '🌿',
-                            label: 'Diet type',
+                            label: 'setup_complete.diet_type'.tr(),
                             value: user?.diets.isEmpty ?? true
-                                ? 'No restrictions'
-                                : user!.diets.take(3).join(', '),
+                                ? 'setup_complete.no_restrictions'.tr()
+                                : user!.diets
+                                    .take(3)
+                                    .map(_dietLabel)
+                                    .join(', '),
                           ),
                           const Divider(height: 24, color: AppColors.divider),
                           _SummaryRow(
                             icon: '⏱',
-                            label: 'Cooking time',
+                            label: 'setup_complete.cooking_time'.tr(),
                             value: _cookingTimeLabel(user?.cookingTime),
                           ),
                           const Divider(height: 24, color: AppColors.divider),
-                          const _SummaryRow(
+                          _SummaryRow(
                             icon: '📅',
-                            label: 'Meal plan',
-                            value: '7-day plan ready',
+                            label: 'setup_complete.meal_plan'.tr(),
+                            value: 'setup_complete.meal_plan_value'.tr(),
                           ),
                         ],
                       ),
@@ -147,7 +200,7 @@ class _SetupCompleteScreenState extends State<SetupCompleteScreen>
               FadeTransition(
                 opacity: _fadeAnim,
                 child: CravvyButton(
-                  label: 'View My Meal Plan',
+                  label: 'setup_complete.view_meal_plan'.tr(),
                   onTap: () => context.go(AppRouter.app),
                 ),
               ),
@@ -157,36 +210,6 @@ class _SetupCompleteScreenState extends State<SetupCompleteScreen>
         ),
       ),
     );
-  }
-
-  String _goalLabel(String goal) {
-    switch (goal) {
-      case 'lose-weight':
-        return 'Lose Weight';
-      case 'build-muscle':
-        return 'Build Muscle';
-      case 'maintain':
-        return 'Maintain Weight';
-      case 'health':
-        return 'Manage Condition';
-      default:
-        return goal;
-    }
-  }
-
-  String _cookingTimeLabel(String? time) {
-    switch (time) {
-      case 'quick':
-        return 'Under 15 min';
-      case 'short':
-        return '15–30 min';
-      case 'medium':
-        return '30–60 min';
-      case 'long':
-        return '1 hour+';
-      default:
-        return 'Flexible';
-    }
   }
 }
 

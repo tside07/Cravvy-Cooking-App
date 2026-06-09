@@ -10,25 +10,26 @@ class LegalContentItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (content.subtitle != null) ...[
           Text(
             content.subtitle!,
-            style: AppTextStyles.s14.copyWith(
+            style: context.themed(
+              AppTextStyles.s14,
               fontWeight: FontWeight.w700,
-              color: AppColors.textPrimary,
             ),
           ),
           AppGap.h4,
         ],
         Text(
           content.text,
-          style: AppTextStyles.s14.copyWith(
-            color: AppColors.textSecondary,
-            height: 1.65,
-          ),
+          style: context.themed(
+            AppTextStyles.s14,
+            color: colors.textSecondary,
+          ).copyWith(height: 1.65),
         ),
       ],
     );

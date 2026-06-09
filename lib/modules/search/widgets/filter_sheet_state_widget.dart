@@ -57,6 +57,7 @@ class _FilterSheetState extends State<FilterSheet> {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
     return Padding(
       padding: const EdgeInsets.fromLTRB(24, 20, 24, 32),
       child: SingleChildScrollView(
@@ -70,7 +71,7 @@ class _FilterSheetState extends State<FilterSheet> {
                 width: 40,
                 height: 4,
                 decoration: BoxDecoration(
-                  color: AppColors.border,
+                  color: colors.borderDivider,
                   borderRadius: AppBorderRadius.a2,
                 ),
               ),
@@ -93,8 +94,9 @@ class _FilterSheetState extends State<FilterSheet> {
                   },
                   child: Text(
                     'search.filter.reset'.tr(),
-                    style: AppTextStyles.s14.copyWith(
-                      color: AppColors.textSecondary,
+                    style: context.themed(
+                      AppTextStyles.s14,
+                      color: colors.textSecondary,
                     ),
                   ),
                 ),

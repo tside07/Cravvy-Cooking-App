@@ -6,6 +6,7 @@ import 'package:cravvy_cooking_app/modules/onboarding/screens/welcome_choice_scr
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:cravvy_cooking_app/modules/widgets/common/cravvy_button.dart';
 import 'package:cravvy_cooking_app/modules/onboarding/widgets/slide_page_widget.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -26,7 +27,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   /// pull them forward while they're still reading.
   bool _userTookControl = false;
 
-  bool get _isLastPage => _currentPage >= kOnboardingSlides.length - 1;
+  static const _slideCount = 3;
+
+  bool get _isLastPage => _currentPage >= _slideCount - 1;
 
   @override
   void initState() {
@@ -75,6 +78,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final slides = kOnboardingSlides(context);
     return PreAuthScaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -96,9 +100,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         child: PageView.builder(
                           controller: _pageController,
                           onPageChanged: _onPageChanged,
-                          itemCount: kOnboardingSlides.length,
+                          itemCount: slides.length,
                           itemBuilder: (context, i) =>
-                              SlidePageWidget(slide: kOnboardingSlides[i]),
+                              SlidePageWidget(slide: slides[i]),
                         ),
                       ),
                     ),
@@ -114,7 +118,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           Center(
                             child: SmoothPageIndicator(
                               controller: _pageController,
-                              count: kOnboardingSlides.length,
+                              count: slides.length,
                               effect: ExpandingDotsEffect(
                                 activeDotColor: Colors.white,
                                 dotColor: Colors.white24,
@@ -131,7 +135,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             height: 56,
                             child: _isLastPage
                                 ? CravvyButton(
-                                    label: 'Get Started',
+                                    label: 'onboarding.get_started'.tr(),
                                     onTap: _finish,
                                   )
                                 : null,

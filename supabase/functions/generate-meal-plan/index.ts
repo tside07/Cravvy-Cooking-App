@@ -1,8 +1,243 @@
+// Profile-aware recipe filtering for meal plans.
+// Keep logic in sync with lib/core/utils/profile_recipe_filter.dart
+
+export const SOFT_DIETS = new Set([
+  "No Specific Diet",
+  "Eat Clean",
+  "High-Protein",
+  "Intermittent Fasting",
+]);
+
+export const AVOID_TOKEN_MAP: Record<string, string[]> = {
+  Peanuts: ["peanut", "peanuts", "đậu phộng", "lac"],
+  Shellfish: ["shellfish", "shrimp", "prawn", "crab", "lobster", "tôm", "cua"],
+  Dairy: ["dairy", "milk", "cheese", "cream", "butter", "yogurt", "sữa", "phô mai"],
+  Gluten: ["gluten", "wheat", "flour", "bread", "mì", "bánh mì"],
+  Eggs: ["egg", "eggs", "trứng"],
+  Soy: ["soy", "tofu", "đậu nành", "tương"],
+  "Tree Nuts": ["almond", "walnut", "cashew", "pecan", "hazelnut", "hạnh nhân", "óc chó"],
+  Fish: ["fish", "salmon", "tuna", "cá"],
+  "No Pork": ["pork", "heo", "thịt heo"],
+  "No Beef": ["beef", "bò", "thịt bò"],
+  "No Seafood": [
+    "seafood",
+    "fish",
+    "shellfish",
+    "shrimp",
+    "prawn",
+    "crab",
+    "lobster",
+    "tôm",
+    "cua",
+    "cá",
+  ],
+  "No Spicy": ["spicy", "chili", "chilli", "pepper", "cay", "ớt"],
+  "No Raw Foods": ["raw", "sống", "sashimi"],
+};
+
+const MEAT_FISH_TOKENS = [
+  "pork",
+  "beef",
+  "chicken",
+  "meat",
+  "fish",
+  "seafood",
+  "shellfish",
+  "shrimp",
+  "prawn",
+  "crab",
+  "lobster",
+  "salmon",
+  "tuna",
+  "thịt",
+  "gà",
+  "bò",
+  "heo",
+  "cá",
+  "tôm",
+  "cua",
+];
+
+const ANIMAL_PRODUCT_TOKENS = [
+  ...MEAT_FISH_TOKENS,
+  "egg",
+  "eggs",
+  "dairy",
+  "milk",
+  "cheese",
+  "cream",
+  "butter",
+  "yogurt",
+  "honey",
+  "gelatin",
+  "trứng",
+  "sữa",
+  "phô mai",
+];
+
+const GLUTEN_TOKENS = [
+  "gluten",
+  "wheat",
+  "flour",
+  "bread",
+  "noodle",
+  "pasta",
+  "mì",
+  "bánh mì",
+];
+
+const SUGAR_TOKENS = [
+  "sugar",
+  "sweet",
+  "dessert",
+  "candy",
+  "syrup",
+  "đường",
+  "ngọt",
+];
+
+export function normalizeDietToken(value: string): string {
+  return value.toLowerCase().replaceAll("-", " ").trim();
+}
+
+export function expandAvoidTokens(label: string): string[] {
+  const trimmed = label.trim();
+  if (!trimmed) return [];
+  return AVOID_TOKEN_MAP[trimmed] ?? [trimmed.toLowerCase()];
+}
+
+export function recipeCorpus(r: Record<string, unknown>): string {
+  const tags = ((r.tags as string[]) ?? []).join(" ");
+  const ingredients = ((r.ingredients as string[]) ?? []).join(" ");
+  return `${String(r.name ?? "")} ${tags} ${ingredients}`.toLowerCase();
+}
+
+function corpusContainsAny(corpus: string, tokens: string[]): boolean {
+  return tokens.some((t) => corpus.includes(t));
+}
+
+export function violatesAvoidFoods(
+  r: Record<string, unknown>,
+  avoidFoods: string[],
+): boolean {
+  if (!avoidFoods.length) return false;
+  const corpus = recipeCorpus(r);
+  for (const item of avoidFoods) {
+    const tokens = expandAvoidTokens(item);
+    if (corpusContainsAny(corpus, tokens)) return true;
+  }
+  return false;
+}
+
+function passesSingleDiet(
+  r: Record<string, unknown>,
+  diet: string,
+): boolean {
+  const corpus = recipeCorpus(r);
+  const tags = ((r.tags as string[]) ?? []).map(normalizeDietToken);
+  const carbs = Number(r.carbs ?? 0);
+
+  switch (diet) {
+    case "Vegan":
+      return !corpusContainsAny(corpus, ANIMAL_PRODUCT_TOKENS);
+    case "Vegetarian":
+      return !corpusContainsAny(corpus, MEAT_FISH_TOKENS);
+    case "Gluten-Free":
+      if (tags.some((t) => t.includes("gluten free"))) return true;
+      return !corpusContainsAny(corpus, GLUTEN_TOKENS);
+    case "Keto":
+      if (tags.some((t) => t.includes("keto"))) return true;
+      return carbs <= 25;
+    case "Low-Carb":
+      if (tags.some((t) => t.includes("low carb"))) return true;
+      return carbs <= 45;
+    case "Low-Sugar":
+      if (tags.some((t) => t.includes("low sugar"))) return true;
+      return !corpusContainsAny(corpus, SUGAR_TOKENS);
+    default:
+      return true;
+  }
+}
+
+export function passesDietHardFilters(
+  r: Record<string, unknown>,
+  diets: string[],
+): boolean {
+  if (!diets.length || diets.includes("No Specific Diet")) return true;
+
+  const active = diets.filter((d) => !SOFT_DIETS.has(d));
+  if (!active.length) return true;
+
+  return active.every((diet) => passesSingleDiet(r, diet));
+}
+
+export function matchesProfile(
+  r: Record<string, unknown>,
+  profile: Record<string, unknown>,
+): boolean {
+  const avoid = ((profile.avoid_foods as string[]) ?? []);
+  const diets = ((profile.diets as string[]) ?? []);
+  if (violatesAvoidFoods(r, avoid)) return false;
+  if (!passesDietHardFilters(r, diets)) return false;
+  return true;
+}
+
+export function filterRecipesForProfile(
+  recipes: Record<string, unknown>[],
+  profile: Record<string, unknown>,
+): Record<string, unknown>[] {
+  return recipes.filter((r) => matchesProfile(r, profile));
+}
+
+function tagMatchesDiet(tag: string, diet: string): boolean {
+  const normalizedTag = normalizeDietToken(tag);
+  const normalizedDiet = normalizeDietToken(diet);
+  return normalizedTag.includes(normalizedDiet) ||
+    normalizedDiet.includes(normalizedTag);
+}
+
+export function scoreRecipe(
+  r: Record<string, unknown>,
+  profile: Record<string, unknown>,
+): number {
+  const goal = String(profile.goal ?? "maintain");
+  const calories = Number(r.calories ?? 0);
+  const protein = Number(r.protein ?? 0);
+  const tags = ((r.tags as string[]) ?? []);
+  const diets = ((profile.diets as string[]) ?? []);
+
+  let score = 0;
+  switch (goal) {
+    case "lose-weight":
+      if (calories < 350) score += 3;
+      if (calories < 450) score += 1;
+      if (tags.some((t) => normalizeDietToken(t).includes("low carb"))) {
+        score += 2;
+      }
+      break;
+    case "build-muscle":
+      if (protein >= 30) score += 4;
+      if (protein >= 20) score += 2;
+      if (tags.some((t) => normalizeDietToken(t).includes("high protein"))) {
+        score += 2;
+      }
+      break;
+    default:
+      if (calories < 600) score += 1;
+  }
+
+  for (const diet of diets) {
+    if (SOFT_DIETS.has(diet)) continue;
+    if (tags.some((t) => tagMatchesDiet(t, diet))) score += 3;
+  }
+  return score;
+}
+
+
+
 // Supabase Edge Function: generate 7-day meal plan via Gemini Flash
 // Secrets: GEMINI_API_KEY (required), GEMINI_MODEL (optional, default gemini-2.5-flash)
 // Auto-injected: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY
-
-import { createClient } from "https://esm.sh/@supabase/supabase-js@2.49.1";
 
 const MEAL_TYPES = ["breakfast", "lunch", "dinner", "snack"] as const;
 const MAX_CATALOG_PER_TYPE = 20;
@@ -105,53 +340,6 @@ function compactCatalogLine(r: Record<string, unknown>): string {
   return [r.id, r.meal_type, r.calories, r.protein].join("|");
 }
 
-function scoreRecipe(
-  r: Record<string, unknown>,
-  profile: Record<string, unknown>,
-): number {
-  const goal = String(profile.goal ?? "maintain");
-  const calories = Number(r.calories ?? 0);
-  const protein = Number(r.protein ?? 0);
-  const tags = ((r.tags as string[]) ?? []).map((t) => t.toLowerCase());
-  const diets = ((profile.diets as string[]) ?? []).map((d) => d.toLowerCase());
-
-  let score = 0;
-  switch (goal) {
-    case "lose-weight":
-      if (calories < 350) score += 3;
-      if (calories < 450) score += 1;
-      if (tags.some((t) => t.includes("low carb"))) score += 2;
-      break;
-    case "build-muscle":
-      if (protein >= 30) score += 4;
-      if (protein >= 20) score += 2;
-      if (tags.some((t) => t.includes("high protein"))) score += 2;
-      break;
-    default:
-      if (calories < 600) score += 1;
-  }
-  for (const diet of diets) {
-    if (tags.some((t) => t.includes(diet))) score += 3;
-  }
-  return score;
-}
-
-function applyAvoidFoods(
-  recipes: Record<string, unknown>[],
-  avoid: string[],
-): Record<string, unknown>[] {
-  if (!avoid.length) return recipes;
-  return recipes.filter((r) => {
-    const nameLower = String(r.name ?? "").toLowerCase();
-    const tagsLower = ((r.tags as string[]) ?? []).map((t) => t.toLowerCase());
-    return !avoid.some((a) => {
-      const al = a.toLowerCase();
-      return nameLower.includes(al) ||
-        tagsLower.some((t) => t.includes(al));
-    });
-  });
-}
-
 /** Trim catalog sent to Gemini — max N recipes per meal type, profile-aware. */
 function trimCatalogForGemini(
   recipes: Record<string, unknown>[],
@@ -159,7 +347,6 @@ function trimCatalogForGemini(
   options: { forceRefresh?: boolean; refreshSeed?: number } = {},
 ): Record<string, unknown>[] {
   const { forceRefresh = false, refreshSeed = 0 } = options;
-  const avoid = ((profile.avoid_foods as string[]) ?? []);
   const cookingTime = String(profile.cooking_time ?? "any");
   const byType = new Map<string, Record<string, unknown>[]>();
 
@@ -171,8 +358,7 @@ function trimCatalogForGemini(
 
   const trimmed: Record<string, unknown>[] = [];
   for (const mealType of MEAL_TYPES) {
-    let pool = applyAvoidFoods(byType.get(mealType) ?? [], avoid);
-    if (!pool.length) pool = byType.get(mealType) ?? [];
+    let pool = filterRecipesForProfile(byType.get(mealType) ?? [], profile);
     if (!pool.length) continue;
 
     if (cookingTime === "quick" || cookingTime === "15") {
@@ -608,7 +794,6 @@ function buildLocalWeekPlan(
   userId: string,
   refreshSeed = 0,
 ): DayPlan[] {
-  const avoid = ((profile.avoid_foods as string[]) ?? []);
   const cookingTime = String(profile.cooking_time ?? "any");
   const weekNumber = weekNumberFromDate(weekStart);
 
@@ -628,8 +813,7 @@ function buildLocalWeekPlan(
   return weekDates.map((date, dayOffset) => {
     const meals: MealSlot[] = [];
     for (const mealType of MEAL_TYPES) {
-      let pool = applyAvoidFoods(byType.get(mealType) ?? [], avoid);
-      if (!pool.length) pool = byType.get(mealType) ?? [];
+      let pool = filterRecipesForProfile(byType.get(mealType) ?? [], profile);
       if (!pool.length) continue;
 
       if (cookingTime === "quick" || cookingTime === "15") {
@@ -655,6 +839,7 @@ function validateAndFillDays(
   days: DayPlan[],
   weekDates: string[],
   recipes: Record<string, unknown>[],
+  profile: Record<string, unknown>,
 ): DayPlan[] {
   const byType = new Map<string, Record<string, unknown>[]>();
   for (const r of recipes) {
@@ -667,14 +852,22 @@ function validateAndFillDays(
   for (const date of weekDates) {
     const src = days.find((d) => d.date === date);
     const meals: MealSlot[] = [];
+    const dayOffset = weekDates.indexOf(date);
     for (const mealType of MEAL_TYPES) {
       const slot = src?.meals?.find((m) => m.meal_type === mealType);
-      const pool = byType.get(mealType) ?? [];
+      const pool = filterRecipesForProfile(byType.get(mealType) ?? [], profile);
+      if (!pool.length) continue;
+
       let recipeId = slot?.recipe_id;
-      const valid = pool.some((r) => r.id === recipeId);
-      if (!valid && pool.length > 0) {
-        const pick = pool[Math.floor(Math.random() * pool.length)];
-        recipeId = pick.id as string;
+      const inPool = pool.some((r) => r.id === recipeId);
+      if (!inPool) {
+        const scored = [...pool].sort(
+          (a, b) => scoreRecipe(b, profile) - scoreRecipe(a, profile),
+        );
+        const topN = scored.slice(0, Math.min(5, scored.length));
+        const seed = hashCode(String(profile.id ?? "")) + dayOffset * 7 +
+          (mealType.charCodeAt(0) % 100);
+        recipeId = String(topN[seed % topN.length].id);
       }
       if (recipeId) meals.push({ meal_type: mealType, recipe_id: recipeId });
     }
@@ -832,7 +1025,7 @@ Deno.serve(async (req) => {
     let recipesQuery = admin
       .from("recipes")
       .select(
-        "id, name, meal_type, calories, protein, carbs, fat, prep_time, tags, source",
+        "id, name, meal_type, calories, protein, carbs, fat, prep_time, tags, ingredients, source",
       )
       .eq("is_active", true);
 
@@ -918,7 +1111,7 @@ Deno.serve(async (req) => {
       aiGenerated = false;
     }
 
-    days = validateAndFillDays(days, weekDates, recipes);
+    days = validateAndFillDays(days, weekDates, recipes, profile);
 
     const rows = days.flatMap((day) =>
       day.meals.map((m) => ({

@@ -1,4 +1,5 @@
 import 'package:cravvy_cooking_app/init.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class SetupContinueButtonWidget extends StatelessWidget {
   final VoidCallback? onPressed;
@@ -37,7 +38,7 @@ class SetupContinueButtonWidget extends StatelessWidget {
                   ),
                 )
               : Text(
-                  'Continue',
+                  'onboarding.setup_continue'.tr(),
                   style: AppTextStyles.s16.copyWith(
                     color: Colors.white,
                     fontWeight: FontWeight.w700,

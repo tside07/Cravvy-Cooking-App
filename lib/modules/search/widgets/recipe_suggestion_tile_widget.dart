@@ -9,15 +9,12 @@ class RecipeSuggestionTileWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
     final (name, cal, time, emoji, match) = recipe;
     return Container(
       margin: AppPad.b10,
       padding: AppPad.a14,
-      decoration: BoxDecoration(
-        color: AppColors.surface,
-        borderRadius: AppBorderRadius.a16,
-        border: Border.all(color: AppColors.border),
-      ),
+      decoration: context.cardBox(radius: 16),
       child: Row(
         children: [
           Container(
@@ -41,11 +38,10 @@ class RecipeSuggestionTileWidget extends StatelessWidget {
               children: [
                 Text(
                   name,
-                  style: AppTextStyles.s16.copyWith(
-                    fontSize: 15,
+                  style: context.themed(
+                    AppTextStyles.s16,
                     fontWeight: FontWeight.w600,
-                    color: AppColors.textPrimary,
-                  ),
+                  ).copyWith(fontSize: 15),
                 ),
                 AppGap.h4,
                 Row(
@@ -57,10 +53,10 @@ class RecipeSuggestionTileWidget extends StatelessWidget {
                     ),
                     Text(
                       ' $cal · ⏱ $time',
-                      style: AppTextStyles.s12.copyWith(
-                        fontSize: 11,
-                        color: AppColors.textSecondary,
-                      ),
+                      style: context.themed(
+                        AppTextStyles.s12,
+                        color: colors.textSecondary,
+                      ).copyWith(fontSize: 11),
                     ),
                   ],
                 ),
@@ -78,10 +74,10 @@ class RecipeSuggestionTileWidget extends StatelessWidget {
               ),
               Text(
                 'search.match'.tr(),
-                style: AppTextStyles.s12.copyWith(
-                  fontSize: 10,
-                  color: AppColors.textSecondary,
-                ),
+                style: context.themed(
+                  AppTextStyles.s12,
+                  color: colors.textSecondary,
+                ).copyWith(fontSize: 10),
               ),
             ],
           ),

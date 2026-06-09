@@ -1,6 +1,6 @@
 import 'package:cravvy_cooking_app/core/theme/pre_auth_theme.dart';
 import 'package:cravvy_cooking_app/init.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class OnboardingSlide {
   final String imagePath;
   final String title;
@@ -13,27 +13,23 @@ class OnboardingSlide {
   });
 }
 
-const kOnboardingSlides = [
+List<OnboardingSlide> kOnboardingSlides(BuildContext context) => [
   OnboardingSlide(
     imagePath: ImagePath.onboarding1,
-    title: 'What should\nI eat today?',
-    subtitle:
-        'Tell us what\'s in your fridge and we\'ll suggest delicious, healthy meals tailored just for you.',
+    title: 'onboarding_slide.sl1_title'.tr(),
+    subtitle: 'onboarding_slide.sl1_subtitle'.tr(),
   ),
   OnboardingSlide(
     imagePath: ImagePath.onboarding2,
-    title: 'Plan your\nweek effortlessly',
-    subtitle:
-        'Get a personalized 7-day meal plan based on your health goals, diet type, and cooking time.',
+    title: 'onboarding_slide.sl2_title'.tr(),
+    subtitle: 'onboarding_slide.sl2_subtitle'.tr(),
   ),
   OnboardingSlide(
     imagePath: ImagePath.onboarding3,
-    title: 'Track nutrition\nwith ease',
-    subtitle:
-        'Monitor calories, macros and streaks automatically — no manual logging required.',
+    title: 'onboarding_slide.sl3_title'.tr(),
+    subtitle: 'onboarding_slide.sl3_subtitle'.tr(),
   ),
 ];
-
 class SlidePageWidget extends StatelessWidget {
   const SlidePageWidget({super.key, required this.slide});
 

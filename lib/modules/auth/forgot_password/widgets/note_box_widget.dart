@@ -1,4 +1,5 @@
 import 'package:cravvy_cooking_app/init.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class NoteBoxWidget extends StatelessWidget {
   const NoteBoxWidget({super.key});
@@ -15,21 +16,21 @@ class NoteBoxWidget extends StatelessWidget {
       ),
       child: RichText(
         text: TextSpan(
-          text: 'Note: The OTP code is valid for ',
+          text: 'auth.otp_note_prefix'.tr(),
           style: context.themed(
             AppTextStyles.s14,
             color: colors.textSecondary,
           ).copyWith(height: 1.5),
           children: [
             TextSpan(
-              text: '10 minutes',
+              text: 'auth.otp_valid_duration'.tr(),
               style: AppTextStyles.s14.copyWith(
                 color: AppColors.primary,
                 fontWeight: FontWeight.w700,
               ),
             ),
             TextSpan(
-              text: '. Please check your inbox and spam folder.',
+              text: 'auth.otp_note_suffix'.tr(),
               style: context.themed(
                 AppTextStyles.s14,
                 color: colors.textSecondary,

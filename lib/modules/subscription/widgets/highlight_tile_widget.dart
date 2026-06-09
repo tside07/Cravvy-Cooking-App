@@ -8,10 +8,11 @@ class HighlightTileWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
     return Container(
       padding: AppPad.a14,
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: colors.cardSurface,
         borderRadius: AppBorderRadius.a14,
         boxShadow: [
           BoxShadow(color: Colors.black.withValues(alpha: 0.04), blurRadius: 8),
@@ -42,8 +43,9 @@ class HighlightTileWidget extends StatelessWidget {
                 AppGap.h2,
                 Text(
                   highlight.desc,
-                  style: AppTextStyles.s12.copyWith(
-                    color: AppColors.textSecondary,
+                  style: context.themed(
+                    AppTextStyles.s12,
+                    color: colors.textSecondary,
                   ),
                 ),
               ],

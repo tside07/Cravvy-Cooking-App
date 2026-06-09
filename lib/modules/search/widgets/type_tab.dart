@@ -236,9 +236,9 @@ class TypeTab extends StatelessWidget {
               // ── Common ingredients ──────────────────────────────────────
               Text(
                 'search.common_ingredients'.tr(),
-                style: AppTextStyles.s14.copyWith(
+                style: context.themed(
+                  AppTextStyles.s14,
                   fontWeight: FontWeight.w600,
-                  color: AppColors.textPrimary,
                 ),
               ),
               AppGap.h10,

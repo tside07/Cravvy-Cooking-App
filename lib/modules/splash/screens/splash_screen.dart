@@ -3,6 +3,7 @@ import 'package:cravvy_cooking_app/core/routes/app_routers.dart';
 import 'package:cravvy_cooking_app/data/providers/auth_provider.dart';
 import 'package:cravvy_cooking_app/modules/splash/widgets/loading_dot.dart';
 import 'package:cravvy_cooking_app/resources/resources.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -127,7 +128,7 @@ class _SplashScreenState extends State<SplashScreen>
                     Image.asset(ImagePath.appName, height: 65, width: 220),
                     AppGap.h8,
                     Text(
-                      'Find your flavor',
+                      'splash.tagline'.tr(),
                       style: AppTextStyles.s18.copyWith(
                         fontWeight: FontWeight.w700,
                         color: AppColors.textColor,

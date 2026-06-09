@@ -11,12 +11,11 @@ class LegalSectionCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
       padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: AppColors.surface,
-        borderRadius: BorderRadius.circular(20),
+      decoration: context.cardBox(radius: 20).copyWith(
         boxShadow: [
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.04),
@@ -24,7 +23,6 @@ class LegalSectionCardWidget extends StatelessWidget {
             offset: const Offset(0, 4),
           ),
         ],
-        border: Border.all(color: AppColors.border.withValues(alpha: 0.5)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -45,16 +43,16 @@ class LegalSectionCardWidget extends StatelessWidget {
               Expanded(
                 child: Text(
                   section.title,
-                  style: AppTextStyles.s16.copyWith(
+                  style: context.themed(
+                    AppTextStyles.s16,
                     fontWeight: FontWeight.w700,
-                    color: AppColors.textPrimary,
                   ),
                 ),
               ),
             ],
           ),
           const SizedBox(height: 16),
-          Divider(height: 1, color: AppColors.border.withValues(alpha: 0.5)),
+          Divider(height: 1, color: colors.borderDivider),
           const SizedBox(height: 16),
 
           // ── Content items ─────────────────────────────────────────────

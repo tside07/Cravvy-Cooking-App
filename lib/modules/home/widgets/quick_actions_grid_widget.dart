@@ -10,12 +10,16 @@ class _Action {
 
   /// Dashboard tab index to switch to when tapped.
   final int? tabIndex;
+
+  /// Route to push when tapped (takes precedence over [tabIndex]).
+  final String? route;
   const _Action(
     this.emoji,
     this.label,
     this.bgColor,
     this.iconColor, {
     this.tabIndex,
+    this.route,
   });
 }
 
@@ -49,7 +53,7 @@ class QuickActionsGridWidget extends StatelessWidget {
           'home.action_ai'.tr(),
           AppColors.warningLight,
           AppColors.warning,
-          tabIndex: 2,
+          route: AppRouter.chat,
         ),
       ];
 
@@ -106,7 +110,9 @@ class _ActionCard extends StatelessWidget {
       child: InkWell(
         borderRadius: AppBorderRadius.a18,
         onTap: () {
-          if (action.tabIndex != null) {
+          if (action.route != null) {
+            context.push(action.route!);
+          } else if (action.tabIndex != null) {
             context.read<DashboardTabProvider>().switchTo(action.tabIndex!);
           }
         },

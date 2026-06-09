@@ -1,4 +1,5 @@
 import 'package:cravvy_cooking_app/init.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:cravvy_cooking_app/modules/auth/widgets/auth_form_fields_widget.dart';
 
 class RegisterFormFieldsWidget extends StatelessWidget {
@@ -29,45 +30,50 @@ class RegisterFormFieldsWidget extends StatelessWidget {
       preAuth: true,
       fields: [
         AuthFormFieldConfig(
-          hint: 'Full Name',
+          hint: 'auth.hint_full_name'.tr(),
           controller: nameController,
           keyboardType: TextInputType.name,
           focusNode: nameFocus,
           validator: (v) {
-            if (v == null || v.trim().isEmpty)
-              return 'Please enter your full name';
+            if (v == null || v.trim().isEmpty) {
+              return 'auth.val_name_required'.tr();
+            }
             return null;
           },
         ),
         AuthFormFieldConfig(
-          hint: 'Email',
+          hint: 'auth.email_hint'.tr(),
           controller: emailController,
           keyboardType: TextInputType.emailAddress,
           focusNode: emailFocus,
           validator: (v) {
-            if (v == null || v.isEmpty) return 'Please enter your email';
-            if (!v.contains('@')) return 'Invalid email address';
+            if (v == null || v.isEmpty) return 'auth.val_email_required'.tr();
+            if (!v.contains('@')) return 'auth.val_email_invalid'.tr();
             return null;
           },
         ),
         AuthFormFieldConfig(
-          hint: 'Password',
+          hint: 'auth.password_hint'.tr(),
           controller: passwordController,
           isPassword: true,
           focusNode: passwordFocus,
           validator: (v) {
-            if (v == null || v.isEmpty) return 'Please enter a password';
-            if (v.length < 6) return 'Password must be at least 6 characters';
+            if (v == null || v.isEmpty) {
+              return 'auth.val_password_required'.tr();
+            }
+            if (v.length < 6) return 'auth.val_password_min_6'.tr();
             return null;
           },
         ),
         AuthFormFieldConfig(
-          hint: 'Confirm Password',
+          hint: 'auth.hint_confirm_password'.tr(),
           controller: confirmPasswordController,
           isPassword: true,
           focusNode: confirmFocus,
           validator: (v) {
-            if (v != passwordController.text) return 'Passwords do not match';
+            if (v != passwordController.text) {
+              return 'auth.val_password_mismatch'.tr();
+            }
             return null;
           },
         ),

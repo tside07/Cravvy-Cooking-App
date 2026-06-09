@@ -25,6 +25,7 @@ class _SettingsTileState extends State<SettingsTileWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
     return Column(
       children: [
         ListTile(
@@ -33,7 +34,7 @@ class _SettingsTileState extends State<SettingsTileWidget> {
             width: 38,
             height: 38,
             decoration: BoxDecoration(
-              color: AppColors.surfaceVariant,
+              color: colors.elevated,
               borderRadius: AppBorderRadius.a10,
             ),
             child: Center(child: Text(widget.emoji, style: AppTextStyles.s18)),
@@ -43,7 +44,7 @@ class _SettingsTileState extends State<SettingsTileWidget> {
             style: Theme.of(context).textTheme.titleMedium?.copyWith(
               color: widget.label == 'Log Out'
                   ? AppColors.error
-                  : AppColors.textPrimary,
+                  : colors.textPrimary,
             ),
           ),
           trailing: widget.isToggle
@@ -57,7 +58,7 @@ class _SettingsTileState extends State<SettingsTileWidget> {
                   width: 20,
                   height: 20,
                   colorFilter: ColorFilter.mode(
-                    AppColors.black50,
+                    colors.iconInactive,
                     BlendMode.srcIn,
                   ),
                 ),
@@ -69,7 +70,7 @@ class _SettingsTileState extends State<SettingsTileWidget> {
           onTap: widget.isToggle ? null : widget.onTap,
         ),
         if (widget.showDivider)
-          const Divider(height: 0.1, color: AppColors.divider),
+          Divider(height: 0.1, color: colors.borderDivider),
       ],
     );
   }

@@ -1,6 +1,9 @@
+import 'package:cravvy_cooking_app/core/theme/app_input_decoration.dart';
+import 'package:cravvy_cooking_app/core/theme/pre_auth_theme.dart';
 import 'package:cravvy_cooking_app/init.dart';
 import 'package:cravvy_cooking_app/modules/auth/reset_password/widgets/password_rule_widget.dart';
 import 'package:cravvy_cooking_app/modules/auth/widgets/auth_header_widget.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class ResetPasswordFormWidget extends StatelessWidget {
   final GlobalKey<FormState> formKey;
@@ -39,9 +42,9 @@ class ResetPasswordFormWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appColors = context.appColors;
-    final inputStyle = Theme.of(context).textTheme.bodyLarge?.copyWith(
-          color: appColors.textPrimary,
-        );
+    final inputStyle = Theme.of(
+      context,
+    ).textTheme.bodyLarge?.copyWith(color: PreAuthTheme.textPrimary);
 
     return Form(
       key: formKey,
@@ -69,8 +72,10 @@ class ResetPasswordFormWidget extends StatelessWidget {
                   ),
                   AppGap.h20,
                   AuthHeaderWidget(
-                    title: 'Create New Password',
-                    subtitle: 'Enter a strong password for $email',
+                    title: 'auth.reset_title'.tr(),
+                    subtitle: 'auth.reset_subtitle'.tr(
+                      namedArgs: {'email': email},
+                    ),
                     textAlign: TextAlign.center,
                   ),
                 ],
@@ -80,48 +85,42 @@ class ResetPasswordFormWidget extends StatelessWidget {
             AppGap.h32,
 
             // Password field
-            Text(
-              'New Password',
-              style: AppTextStyles.s14.copyWith(
-                fontWeight: FontWeight.w600,
-                color: appColors.textPrimary,
-              ),
-            ),
-            AppGap.h8,
             TextFormField(
               controller: passwordController,
               obscureText: !showPassword,
               onChanged: onPasswordChanged,
               style: inputStyle,
-              decoration: InputDecoration(
-                hintText: 'Enter new password',
-                filled: true,
-                fillColor: appColors.inputFieldBg,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(14),
-                  borderSide: BorderSide.none,
+              decoration: AppInputDecoration.underline.copyWith(
+                labelText: 'auth.hint_new_password'.tr(),
+                labelStyle: AppTextStyles.s16.copyWith(
+                  color: PreAuthTheme.textSecondary,
                 ),
-                contentPadding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 14,
+                floatingLabelStyle: AppTextStyles.s13.copyWith(
+                  color: PreAuthTheme.textPrimary,
                 ),
+                errorStyle: AppTextStyles.s12.copyWith(color: AppColors.error),
+                contentPadding: const EdgeInsets.symmetric(vertical: 12),
                 prefixIcon: Icon(
                   Icons.lock_outline_rounded,
                   color: appColors.iconInactive,
+                  size: 20,
                 ),
-                suffixIcon: IconButton(
-                  icon: Icon(
+                suffixIcon: GestureDetector(
+                  onTap: onTogglePassword,
+                  child: Icon(
                     showPassword
                         ? Icons.visibility_off_outlined
                         : Icons.visibility_outlined,
                     color: appColors.iconInactive,
+                    size: 20,
                   ),
-                  onPressed: onTogglePassword,
                 ),
               ),
               validator: (v) {
-                if (v == null || v.isEmpty) return 'Password is required';
-                if (v.length < 8) return 'At least 8 characters';
+                if (v == null || v.isEmpty) {
+                  return 'auth.val_password_required'.tr();
+                }
+                if (v.length < 8) return 'auth.val_password_min_8'.tr();
                 return null;
               },
             ),
@@ -154,15 +153,15 @@ class ResetPasswordFormWidget extends StatelessWidget {
               ),
               AppGap.h4,
               PasswordRuleWidget(
-                label: 'At least 8 characters',
+                label: 'auth.password_rule_min_8'.tr(),
                 met: passwordController.text.length >= 8,
               ),
               PasswordRuleWidget(
-                label: 'Contains uppercase',
+                label: 'auth.password_rule_uppercase'.tr(),
                 met: RegExp(r'[A-Z]').hasMatch(passwordController.text),
               ),
               PasswordRuleWidget(
-                label: 'Contains number',
+                label: 'auth.password_rule_number'.tr(),
                 met: RegExp(r'\d').hasMatch(passwordController.text),
               ),
             ],
@@ -170,48 +169,43 @@ class ResetPasswordFormWidget extends StatelessWidget {
             AppGap.h20,
 
             // Confirm field
-            Text(
-              'Confirm Password',
-              style: AppTextStyles.s14.copyWith(
-                fontWeight: FontWeight.w600,
-                color: appColors.textPrimary,
-              ),
-            ),
-            AppGap.h8,
             TextFormField(
               controller: confirmController,
               obscureText: !showConfirm,
               style: inputStyle,
-              decoration: InputDecoration(
-                hintText: 'Confirm new password',
-                filled: true,
-                fillColor: appColors.inputFieldBg,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(14),
-                  borderSide: BorderSide.none,
+              decoration: AppInputDecoration.underline.copyWith(
+                labelText: 'auth.hint_confirm_password'.tr(),
+                labelStyle: AppTextStyles.s16.copyWith(
+                  color: PreAuthTheme.textSecondary,
                 ),
-                contentPadding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 14,
+                floatingLabelStyle: AppTextStyles.s13.copyWith(
+                  color: PreAuthTheme.textPrimary,
                 ),
+                errorStyle: AppTextStyles.s12.copyWith(color: AppColors.error),
+                contentPadding: const EdgeInsets.symmetric(vertical: 12),
                 prefixIcon: Icon(
                   Icons.lock_outline_rounded,
                   color: appColors.iconInactive,
+                  size: 20,
                 ),
-                suffixIcon: IconButton(
-                  icon: Icon(
+                suffixIcon: GestureDetector(
+                  onTap: onToggleConfirm,
+                  child: Icon(
                     showConfirm
                         ? Icons.visibility_off_outlined
                         : Icons.visibility_outlined,
                     color: appColors.iconInactive,
+                    size: 20,
                   ),
-                  onPressed: onToggleConfirm,
                 ),
               ),
               validator: (v) {
-                if (v == null || v.isEmpty) return 'Please confirm password';
-                if (v != passwordController.text)
-                  return 'Passwords do not match';
+                if (v == null || v.isEmpty) {
+                  return 'auth.val_confirm_required'.tr();
+                }
+                if (v != passwordController.text) {
+                  return 'auth.val_password_mismatch'.tr();
+                }
                 return null;
               },
             ),
@@ -238,7 +232,7 @@ class ResetPasswordFormWidget extends StatelessWidget {
                         ),
                       )
                     : Text(
-                        'Reset Password',
+                        'auth.reset_button'.tr(),
                         style: AppTextStyles.s16.copyWith(
                           color: Colors.white,
                           fontWeight: FontWeight.w700,

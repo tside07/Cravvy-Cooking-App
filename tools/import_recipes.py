@@ -310,8 +310,8 @@ def main() -> None:
         elif "42p10" in err or "on conflict" in err:
             print(
                 "\nDatabase missing UNIQUE (source, source_id) on table recipes.\n"
-                "Run in Supabase SQL Editor:\n"
-                "  supabase/RUN_IN_SQL_EDITOR_recipes_provenance.sql\n"
+                "Run migration in Supabase SQL Editor:\n"
+                "  supabase/migrations/20260522120000_recipes_provenance.sql\n"
                 "Then run import again.",
                 file=sys.stderr,
             )

@@ -23,6 +23,7 @@ class _SubscriptionView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
     final _ = context.locale;
     final provider = context.watch<SubscriptionProvider>();
     final auth = context.watch<AuthProvider>();
@@ -38,8 +39,8 @@ class _SubscriptionView extends StatelessWidget {
             Container(
               padding: const EdgeInsets.fromLTRB(8, 12, 16, 12),
               decoration: BoxDecoration(
-                color: AppColors.surface,
-                border: Border(bottom: BorderSide(color: AppColors.border)),
+                color: colors.cardSurface,
+                border: Border(bottom: BorderSide(color: colors.borderDivider)),
               ),
               child: Row(
                 children: [
@@ -90,8 +91,9 @@ class _SubscriptionView extends StatelessWidget {
                           AppGap.h8,
                           Text(
                             'subscription.hero_subtitle'.tr(),
-                            style: AppTextStyles.s14.copyWith(
-                              color: AppColors.textSecondary,
+                            style: context.themed(
+                              AppTextStyles.s14,
+                              color: colors.textSecondary,
                             ),
                           ),
                         ],
@@ -135,7 +137,7 @@ class _SubscriptionView extends StatelessWidget {
                     AppGap.h12,
                     Container(
                       decoration: BoxDecoration(
-                        color: AppColors.surface,
+                        color: colors.cardSurface,
                         borderRadius: AppBorderRadius.a16,
                         boxShadow: [
                           BoxShadow(
@@ -150,7 +152,7 @@ class _SubscriptionView extends StatelessWidget {
                           Container(
                             padding: AppPad.h16v12,
                             decoration: BoxDecoration(
-                              color: AppColors.surfaceVariant,
+                              color: colors.elevated,
                               borderRadius: const BorderRadius.vertical(
                                 top: Radius.circular(16),
                               ),
@@ -161,9 +163,10 @@ class _SubscriptionView extends StatelessWidget {
                                   flex: 3,
                                   child: Text(
                                     'subscription.table.feature'.tr(),
-                                    style: AppTextStyles.s12.copyWith(
+                                    style: context.themed(
+                                      AppTextStyles.s12,
+                                      color: colors.textSecondary,
                                       fontWeight: FontWeight.w700,
-                                      color: AppColors.textSecondary,
                                     ),
                                   ),
                                 ),
@@ -210,8 +213,8 @@ class _SubscriptionView extends StatelessWidget {
             Container(
               padding: AppPad.a20,
               decoration: BoxDecoration(
-                color: AppColors.surface,
-                border: Border(top: BorderSide(color: AppColors.border)),
+                color: colors.cardSurface,
+                border: Border(top: BorderSide(color: colors.borderDivider)),
               ),
               child: Column(
                 children: [
@@ -224,7 +227,7 @@ class _SubscriptionView extends StatelessWidget {
                           : null,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.primary,
-                        disabledBackgroundColor: AppColors.surfaceVariant,
+                        disabledBackgroundColor: colors.elevated,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16),
                         ),
@@ -235,8 +238,8 @@ class _SubscriptionView extends StatelessWidget {
                             : 'subscription.current_plan'.tr(),
                         style: AppTextStyles.s16.copyWith(
                           color: auth.canStartPremiumTrial
-                              ? Colors.white
-                              : AppColors.textSecondary,
+                              ? colors.onPrimary
+                              : colors.textSecondary,
                           fontWeight: FontWeight.w700,
                         ),
                       ),
@@ -245,8 +248,9 @@ class _SubscriptionView extends StatelessWidget {
                   AppGap.h8,
                   Text(
                     'subscription.cancel_note'.tr(),
-                    style: AppTextStyles.s12.copyWith(
-                      color: AppColors.textSecondary,
+                    style: context.themed(
+                      AppTextStyles.s12,
+                      color: colors.textSecondary,
                     ),
                   ),
                 ],

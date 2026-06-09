@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:cravvy_cooking_app/core/theme/pre_auth_theme.dart';
+import 'package:cravvy_cooking_app/core/utils/localized_message.dart';
 import 'package:cravvy_cooking_app/init.dart';
 import 'package:cravvy_cooking_app/data/providers/auth_provider.dart';
 import 'package:cravvy_cooking_app/modules/auth/widgets/auth_form_fields_widget.dart';
@@ -47,7 +48,7 @@ class _LoginScreenState extends State<LoginScreen> {
         context.go(AppRouter.setupStep1);
       }
     } else {
-      final error = auth.errorMessage ?? 'auth.login_failed'.tr();
+      final error = localizeMessage(auth.errorMessage ?? 'auth.login_failed');
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
@@ -146,7 +147,7 @@ class _Body extends StatelessWidget {
                       preAuth: true,
                       fields: [
                         AuthFormFieldConfig(
-                          hint: 'Email',
+                          hint: 'auth.email_hint'.tr(),
                           controller: emailController,
                           keyboardType: TextInputType.emailAddress,
                           focusNode: emailFocus,
@@ -161,7 +162,7 @@ class _Body extends StatelessWidget {
                           },
                         ),
                         AuthFormFieldConfig(
-                          hint: 'Password',
+                          hint: 'auth.password_hint'.tr(),
                           controller: passwordController,
                           isPassword: true,
                           focusNode: passwordFocus,

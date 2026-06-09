@@ -1,8 +1,10 @@
 import 'package:cravvy_cooking_app/core/theme/pre_auth_theme.dart';
+import 'package:cravvy_cooking_app/core/utils/localized_message.dart';
 import 'package:cravvy_cooking_app/init.dart';
 import 'package:cravvy_cooking_app/data/providers/auth_provider.dart';
 import 'package:cravvy_cooking_app/modules/auth/reset_password/widgets/reset_password_form_widget.dart';
 import 'package:cravvy_cooking_app/modules/auth/reset_password/widgets/reset_password_success_widget.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class ResetPasswordScreen extends StatefulWidget {
   final String email;
@@ -44,9 +46,9 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   }
 
   String get _strengthLabel {
-    if (_strengthPct < 0.4) return 'Weak';
-    if (_strengthPct < 0.8) return 'Medium';
-    return 'Strong';
+    if (_strengthPct < 0.4) return 'auth.password_strength_weak'.tr();
+    if (_strengthPct < 0.8) return 'auth.password_strength_medium'.tr();
+    return 'auth.password_strength_strong'.tr();
   }
 
   Future<void> _submit() async {
@@ -65,7 +67,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            auth.errorMessage ?? 'Cập nhật mật khẩu thất bại',
+            localizeMessage(auth.errorMessage ?? 'auth.reset_failed'),
             style: AppTextStyles.s14.copyWith(color: AppColors.white),
           ),
           backgroundColor: AppColors.error,

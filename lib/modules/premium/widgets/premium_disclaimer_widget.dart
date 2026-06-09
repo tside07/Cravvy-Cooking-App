@@ -6,19 +6,20 @@ class PremiumDisclaimerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
     return Container(
       padding: AppPad.a16,
       decoration: BoxDecoration(
-        color: AppColors.surfaceVariant,
+        color: colors.elevated,
         borderRadius: AppBorderRadius.a12,
       ),
       child: Text(
         'premium.sub_desc'.tr(),
         textAlign: TextAlign.center,
-        style: AppTextStyles.s12.copyWith(
-          color: AppColors.textSecondary,
-          height: 1.5,
-        ),
+        style: context.themed(
+          AppTextStyles.s12,
+          color: colors.textSecondary,
+        ).copyWith(height: 1.5),
       ),
     );
   }

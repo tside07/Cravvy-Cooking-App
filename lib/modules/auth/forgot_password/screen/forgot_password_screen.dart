@@ -1,6 +1,6 @@
 import 'package:cravvy_cooking_app/core/theme/pre_auth_theme.dart';
-import 'package:cravvy_cooking_app/init.dart';
-import 'package:cravvy_cooking_app/data/providers/auth_provider.dart';
+import 'package:cravvy_cooking_app/core/utils/localized_message.dart';
+import 'package:cravvy_cooking_app/init.dart';import 'package:cravvy_cooking_app/data/providers/auth_provider.dart';
 import 'package:cravvy_cooking_app/modules/auth/widgets/auth_form_fields_widget.dart';
 import 'package:cravvy_cooking_app/modules/auth/forgot_password/widgets/icon_section_widget.dart';
 import 'package:cravvy_cooking_app/modules/auth/forgot_password/widgets/back_to_login_widget.dart';
@@ -37,12 +37,13 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     if (success) {
       context.push(AppRouter.otp, extra: email);
     } else {
-      final error = auth.errorMessage ?? 'Không thể gửi OTP';
+      final error = localizeMessage(auth.errorMessage ?? 'auth.otp_failed');
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(error,
-              style: AppTextStyles.s14.copyWith(color: AppColors.white)),
-          backgroundColor: AppColors.error,
+          content: Text(
+            error,
+            style: AppTextStyles.s14.copyWith(color: AppColors.white),
+          ),          backgroundColor: AppColors.error,
           behavior: SnackBarBehavior.floating,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -127,17 +128,20 @@ class _Body extends StatelessWidget {
                       preAuth: true,
                       fields: [
                         AuthFormFieldConfig(
-                          hint: 'Enter your email',
+                          hint: 'auth.email_hint'.tr(),
                           controller: emailController,
                           keyboardType: TextInputType.emailAddress,
                           prefixIcon: Icons.email_outlined,
                           validator: (v) {
-                            if (v == null || v.isEmpty) return 'Vui lòng nhập email';
-                            if (!v.contains('@')) return 'Email không hợp lệ';
+                            if (v == null || v.isEmpty) {
+                              return 'auth.val_email_required'.tr();
+                            }
+                            if (!v.contains('@')) {
+                              return 'auth.val_email_invalid'.tr();
+                            }
                             return null;
                           },
-                        ),
-                      ],
+                        ),                      ],
                     ),
                     AppGap.h28,
                     CravvyButton(

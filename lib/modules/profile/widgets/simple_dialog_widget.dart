@@ -17,22 +17,33 @@ class SimpleDialogWidget extends StatelessWidget {
   final bool isDestructive;
 
   @override
-  Widget build(BuildContext context) => AlertDialog(
+  Widget build(BuildContext context) {
+    final colors = context.appColors;
+    return AlertDialog(
         shape: RoundedRectangleBorder(borderRadius: AppBorderRadius.a20),
         title: Text(
           title,
-          style: AppTextStyles.s16.copyWith(fontWeight: FontWeight.w700),
+          style: context.themed(
+            AppTextStyles.s16,
+            fontWeight: FontWeight.w700,
+          ),
         ),
         content: Text(
           body,
-          style: AppTextStyles.s14.copyWith(color: AppColors.textSecondary),
+          style: context.themed(
+            AppTextStyles.s14,
+            color: colors.textSecondary,
+          ),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
             child: Text(
               'Cancel',
-              style: AppTextStyles.s14.copyWith(color: AppColors.textSecondary),
+              style: context.themed(
+                AppTextStyles.s14,
+                color: colors.textSecondary,
+              ),
             ),
           ),
           TextButton(
@@ -47,4 +58,5 @@ class SimpleDialogWidget extends StatelessWidget {
           ),
         ],
       );
+  }
 }

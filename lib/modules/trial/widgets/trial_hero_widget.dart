@@ -13,6 +13,7 @@ class TrialHeroWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
     return Column(
       children: [
         // Animated icon
@@ -48,19 +49,19 @@ class TrialHeroWidget extends StatelessWidget {
               Text(
                 'trial.started'.tr(),
                 textAlign: TextAlign.center,
-                style: AppTextStyles.s20.copyWith(
+                style: context.themed(
+                  AppTextStyles.s20,
                   fontWeight: FontWeight.w800,
-                  fontSize: 28,
-                ),
+                ).copyWith(fontSize: 28),
               ),
               AppGap.h12,
               Text(
                 'trial.welcome'.tr(),
                 textAlign: TextAlign.center,
-                style: AppTextStyles.s14.copyWith(
-                  color: AppColors.textSecondary,
-                  height: 1.6,
-                ),
+                style: context.themed(
+                  AppTextStyles.s14,
+                  color: colors.textSecondary,
+                ).copyWith(height: 1.6),
               ),
             ],
           ),

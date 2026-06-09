@@ -6,6 +6,7 @@ class PremiumHeaderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
     return Column(
       children: [
         // Back button
@@ -13,9 +14,9 @@ class PremiumHeaderWidget extends StatelessWidget {
           alignment: Alignment.centerLeft,
           child: GestureDetector(
             onTap: () => context.pop(),
-            child: const Icon(
+            child: Icon(
               Icons.arrow_back,
-              color: AppColors.textPrimary,
+              color: colors.textPrimary,
               size: 24,
             ),
           ),
@@ -41,12 +42,10 @@ class PremiumHeaderWidget extends StatelessWidget {
           'premium.title'.tr(),
           textAlign: TextAlign.center,
           overflow: TextOverflow.ellipsis,
-          style: AppTextStyles.s20.copyWith(
-            fontSize: 24,
+          style: context.themed(
+            AppTextStyles.s20,
             fontWeight: FontWeight.w800,
-            color: AppColors.textPrimary,
-            height: 1.25,
-          ),
+          ).copyWith(fontSize: 24, height: 1.25),
         ),
         AppGap.h8,
 
@@ -54,7 +53,10 @@ class PremiumHeaderWidget extends StatelessWidget {
         Text(
           'premium.subtitle'.tr(),
           textAlign: TextAlign.center,
-          style: AppTextStyles.s14.copyWith(color: AppColors.textSecondary),
+          style: context.themed(
+            AppTextStyles.s14,
+            color: colors.textSecondary,
+          ),
         ),
       ],
     );

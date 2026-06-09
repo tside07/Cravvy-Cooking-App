@@ -15,6 +15,7 @@ class PlanCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
     return Padding(
       padding: AppPad.b10,
       child: GestureDetector(
@@ -23,10 +24,10 @@ class PlanCardWidget extends StatelessWidget {
           duration: const Duration(milliseconds: 200),
           padding: AppPad.a16,
           decoration: BoxDecoration(
-            color: isSelected ? AppColors.primaryLight : AppColors.surface,
+            color: isSelected ? AppColors.primaryLight : colors.cardSurface,
             borderRadius: AppBorderRadius.a16,
             border: Border.all(
-              color: isSelected ? AppColors.primary : AppColors.border,
+              color: isSelected ? AppColors.primary : colors.borderDivider,
               width: isSelected ? 2 : 1,
             ),
             boxShadow: isSelected
@@ -47,7 +48,7 @@ class PlanCardWidget extends StatelessWidget {
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   border: Border.all(
-                    color: isSelected ? AppColors.primary : AppColors.border,
+                    color: isSelected ? AppColors.primary : colors.borderDivider,
                     width: 2,
                   ),
                   color: isSelected ? AppColors.primary : Colors.transparent,
@@ -97,8 +98,9 @@ class PlanCardWidget extends StatelessWidget {
                     AppGap.h2,
                     Text(
                       plan.priceNote,
-                      style: AppTextStyles.s12.copyWith(
-                        color: AppColors.textSecondary,
+                      style: context.themed(
+                        AppTextStyles.s12,
+                        color: colors.textSecondary,
                       ),
                     ),
                   ],

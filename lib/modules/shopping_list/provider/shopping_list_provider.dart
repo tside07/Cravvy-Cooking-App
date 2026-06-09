@@ -18,6 +18,8 @@ class ShoppingListProvider extends ChangeNotifier {
   String? _userId;
   bool _isSyncing = false;
 
+  Future<void>? _operationChain;
+
   bool get isLoaded => _isLoaded;
   bool get isSyncing => _isSyncing;
   List<ShoppingItem> get items => List.unmodifiable(_items);
@@ -65,14 +67,21 @@ class ShoppingListProvider extends ChangeNotifier {
 
     _userId = nextUserId;
     if (nextUserId == null) {
-      await _loadLocalOnly();
+      await _runSerialized(_loadLocalOnly);
       return;
     }
-    await _syncFromCloud(nextUserId);
+    await _runSerialized(() => _syncFromCloud(nextUserId));
+  }
+
+  Future<void> _runSerialized(Future<void> Function() action) async {
+    final previous = _operationChain ?? Future<void>.value();
+    final next = previous.then((_) => action());
+    _operationChain = next;
+    await next;
   }
 
   Future<void> _loadLocalOnly() async {
-    final stored = await ShoppingListStorage.load();
+    final stored = await ShoppingListStorage.load(userId: _userId);
     _items
       ..clear()
       ..addAll(stored);
@@ -85,19 +94,19 @@ class ShoppingListProvider extends ChangeNotifier {
     notifyListeners();
     try {
       final remote = await ShoppingListService.fetchForUser(userId);
-      final local = await ShoppingListStorage.load();
+      final local = await ShoppingListStorage.load(userId: userId);
 
       if (remote.isEmpty && local.isNotEmpty) {
         _items
           ..clear()
           ..addAll(local);
         await ShoppingListService.replaceAll(userId, _items);
-        await ShoppingListStorage.save(_items);
+        await ShoppingListStorage.save(_items, userId: userId);
       } else {
         _items
           ..clear()
           ..addAll(remote);
-        await ShoppingListStorage.save(_items);
+        await ShoppingListStorage.save(_items, userId: userId);
       }
     } catch (e) {
       debugPrint('ShoppingListProvider cloud sync failed: $e');
@@ -110,7 +119,11 @@ class ShoppingListProvider extends ChangeNotifier {
   }
 
   Future<void> _persist() async {
-    await ShoppingListStorage.save(_items);
+    await _runSerialized(_persistImpl);
+  }
+
+  Future<void> _persistImpl() async {
+    await ShoppingListStorage.save(_items, userId: _userId);
     final uid = _userId;
     if (uid == null) return;
     try {

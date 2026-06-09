@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:cravvy_cooking_app/core/theme/pre_auth_theme.dart';
+import 'package:cravvy_cooking_app/core/utils/localized_message.dart';
 import 'package:cravvy_cooking_app/init.dart';
 import 'package:cravvy_cooking_app/data/providers/auth_provider.dart';
 import 'package:cravvy_cooking_app/modules/auth/otp/widgets/icon_section_widget.dart';
@@ -7,6 +8,7 @@ import 'package:cravvy_cooking_app/modules/auth/otp/widgets/otp_input_row_widget
 import 'package:cravvy_cooking_app/modules/auth/otp/widgets/resend_section_widget.dart';
 import 'package:cravvy_cooking_app/modules/auth/otp/widgets/help_text_widget.dart';
 import 'package:cravvy_cooking_app/modules/widgets/common/cravvy_button.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class OtpScreen extends StatefulWidget {
   const OtpScreen({super.key, required this.email});
@@ -63,7 +65,7 @@ class _OtpScreenState extends State<OtpScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            auth.errorMessage ?? 'Error Occurred. Unable to resend OTP',
+            localizeMessage(auth.errorMessage ?? 'auth.otp_resend_failed'),
             style: AppTextStyles.s14.copyWith(color: AppColors.white),
           ),
           backgroundColor: AppColors.error,
@@ -100,13 +102,12 @@ class _OtpScreenState extends State<OtpScreen> {
     if (!mounted) return;
 
     if (success) {
-      // OTP đúng → vào reset password
       context.push(AppRouter.resetPassword, extra: widget.email);
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            auth.errorMessage ?? 'Invalid OTP',
+            localizeMessage(auth.errorMessage ?? 'auth.otp_invalid'),
             style: AppTextStyles.s14.copyWith(color: AppColors.white),
           ),
           backgroundColor: AppColors.error,
@@ -116,7 +117,6 @@ class _OtpScreenState extends State<OtpScreen> {
           ),
         ),
       );
-      // Clear input
       for (final c in _controllers) c.clear();
       if (_focusNodes.isNotEmpty) _focusNodes[0].requestFocus();
       setState(() {});
@@ -195,7 +195,7 @@ class _Body extends StatelessWidget {
           const IconSectionWidget(icon: Icons.verified_user_outlined),
           AppGap.h28,
           Text(
-            'Verify Your Identity',
+            'auth.otp_title'.tr(),
             textAlign: TextAlign.center,
             style: AppTextStyles.s20.copyWith(
               fontWeight: FontWeight.w800,
@@ -205,7 +205,7 @@ class _Body extends StatelessWidget {
           ),
           AppGap.h12,
           Text(
-            'We have sent a 6-digit OTP code to $maskedEmail',
+            'auth.otp_subtitle'.tr(namedArgs: {'email': maskedEmail}),
             textAlign: TextAlign.center,
             style: AppTextStyles.s15.copyWith(
               color: PreAuthTheme.textSecondary,
@@ -226,7 +226,7 @@ class _Body extends StatelessWidget {
           ),
           AppGap.h36,
           CravvyButton(
-            label: 'Verify',
+            label: 'auth.otp_verify'.tr(),
             isLoading: isLoading,
             onTap: isComplete ? onVerify : null,
             backgroundColor: isComplete

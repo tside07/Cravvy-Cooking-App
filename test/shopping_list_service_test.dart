@@ -1,7 +1,37 @@
+import 'package:cravvy_cooking_app/data/services/shopping_list_service.dart';
 import 'package:cravvy_cooking_app/modules/shopping_list/model/shopping_item.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
+  test('dedupeById keeps first occurrence only', () {
+    final items = [
+      ShoppingItem(
+        id: 'dup',
+        name: 'first',
+        recipeName: 'A',
+        recipeId: 'r1',
+      ),
+      ShoppingItem(
+        id: 'dup',
+        name: 'second',
+        recipeName: 'A',
+        recipeId: 'r1',
+      ),
+      ShoppingItem(
+        id: 'unique',
+        name: 'only',
+        recipeName: 'B',
+        recipeId: 'r2',
+      ),
+    ];
+
+    final deduped = ShoppingListService.dedupeById(items);
+
+    expect(deduped, hasLength(2));
+    expect(deduped.first.name, 'first');
+    expect(deduped.last.id, 'unique');
+  });
+
   test('ShoppingItem round-trip matches Supabase row shape', () {
     final item = ShoppingItem(
       id: '550e8400-e29b-41d4-a716-446655440000',

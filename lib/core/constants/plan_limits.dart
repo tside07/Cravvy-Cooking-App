@@ -30,6 +30,11 @@ class PlanLimits {
   static const int freeRecipeFetchLimit = 100;
   static const int premiumRecipeFetchLimit = 500;
 
+  /// AI cooking chatbot messages per day (protects Gemini free-tier quota).
+  /// Keep in sync with `cooking-chat` Edge Function.
+  static const int freeChatDailyLimit = 15;
+  static const int premiumChatDailyLimit = 60;
+
   /// Supabase `recipes.source` values visible to Free users.
   static const List<String> freeRecipeSources = [
     'cravvy_curated_vn',
@@ -48,4 +53,7 @@ class PlanLimits {
 
   static int recipeFetchLimit(String? tier) =>
       isPremiumTier(tier) ? premiumRecipeFetchLimit : freeRecipeFetchLimit;
+
+  static int chatDailyLimit(String? tier) =>
+      isPremiumTier(tier) ? premiumChatDailyLimit : freeChatDailyLimit;
 }

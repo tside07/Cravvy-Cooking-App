@@ -12,6 +12,7 @@ class LanguageToggleTileWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
     final currentLocale = context.locale;
     final isVi = currentLocale.languageCode == 'vi';
 
@@ -23,7 +24,7 @@ class LanguageToggleTileWidget extends StatelessWidget {
             width: 38,
             height: 38,
             decoration: BoxDecoration(
-              color: AppColors.surfaceVariant,
+              color: colors.elevated,
               borderRadius: AppBorderRadius.a10,
             ),
             child: Center(child: Text('🌐', style: AppTextStyles.s18)),
@@ -32,7 +33,7 @@ class LanguageToggleTileWidget extends StatelessWidget {
             'profile.language'.tr(),
             style: Theme.of(
               context,
-            ).textTheme.titleMedium?.copyWith(color: AppColors.textPrimary),
+            ).textTheme.titleMedium?.copyWith(color: colors.textPrimary),
           ),
           trailing: GestureDetector(
             onTap: () {
@@ -75,7 +76,7 @@ class LanguageToggleTileWidget extends StatelessWidget {
             ),
           ),
         ),
-        if (showDivider) const Divider(height: 0.1, color: AppColors.divider),
+        if (showDivider) Divider(height: 0.1, color: colors.borderDivider),
       ],
     );
   }

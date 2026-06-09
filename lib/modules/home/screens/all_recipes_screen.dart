@@ -282,7 +282,7 @@ class _AllRecipesScreenState extends State<AllRecipesScreen> {
 
       isScrollControlled: true,
 
-      backgroundColor: AppColors.surface,
+      backgroundColor: context.appColors.cardSurface,
 
       shape: const RoundedRectangleBorder(
 
@@ -358,7 +358,7 @@ class _AllRecipesScreenState extends State<AllRecipesScreen> {
 
                       fontWeight: FontWeight.w600,
 
-                      color: AppColors.textSecondary,
+                      color: context.appColors.textSecondary,
 
                     ),
 
@@ -408,7 +408,7 @@ class _AllRecipesScreenState extends State<AllRecipesScreen> {
 
                       fontWeight: FontWeight.w600,
 
-                      color: AppColors.textSecondary,
+                      color: context.appColors.textSecondary,
 
                     ),
 
@@ -528,7 +528,7 @@ class _AllRecipesScreenState extends State<AllRecipesScreen> {
 
       context: context,
 
-      backgroundColor: AppColors.surface,
+      backgroundColor: context.appColors.cardSurface,
 
       shape: const RoundedRectangleBorder(
 
@@ -620,9 +620,9 @@ class _AllRecipesScreenState extends State<AllRecipesScreen> {
 
         title: Text('home.recipes_title'.tr()),
 
-        backgroundColor: AppColors.surface,
+        backgroundColor: context.appColors.cardSurface,
 
-        foregroundColor: AppColors.textPrimary,
+        foregroundColor: context.appColors.textPrimary,
 
         elevation: 0,
 
@@ -652,7 +652,7 @@ class _AllRecipesScreenState extends State<AllRecipesScreen> {
 
                 filled: true,
 
-                fillColor: AppColors.surface,
+                fillColor: context.appColors.inputFieldBg,
 
                 border: OutlineInputBorder(
 
@@ -726,7 +726,7 @@ class _AllRecipesScreenState extends State<AllRecipesScreen> {
 
                             style: AppTextStyles.s12.copyWith(
 
-                              color: AppColors.textSecondary,
+                              color: context.appColors.textSecondary,
 
                             ),
 
@@ -816,7 +816,7 @@ class _AllRecipesScreenState extends State<AllRecipesScreen> {
 
                   style:
 
-                      AppTextStyles.s14.copyWith(color: AppColors.textSecondary),
+                      AppTextStyles.s14.copyWith(color: context.appColors.textSecondary),
 
                 ),
 
@@ -862,7 +862,7 @@ class _AllRecipesScreenState extends State<AllRecipesScreen> {
 
               hasSearch ? 'search.no_results'.tr() : 'home.no_recipes'.tr(),
 
-              style: AppTextStyles.s14.copyWith(color: AppColors.textSecondary),
+              style: AppTextStyles.s14.copyWith(color: context.appColors.textSecondary),
 
               textAlign: TextAlign.center,
 
@@ -992,7 +992,7 @@ class _ToolbarIconButton extends StatelessWidget {
 
     return Material(
 
-      color: AppColors.surface,
+      color: context.appColors.cardSurface,
 
       borderRadius: AppBorderRadius.a12,
 
@@ -1022,7 +1022,7 @@ class _ToolbarIconButton extends StatelessWidget {
 
             children: [
 
-              Icon(icon, size: 22, color: AppColors.textPrimary),
+              Icon(icon, size: 22, color: context.appColors.textPrimary),
 
               if (showBadge)
 
@@ -1090,7 +1090,7 @@ class _ToolbarTextButton extends StatelessWidget {
 
     return Material(
 
-      color: AppColors.surface,
+      color: context.appColors.cardSurface,
 
       borderRadius: AppBorderRadius.a12,
 

@@ -1,4 +1,5 @@
 import 'package:cravvy_cooking_app/init.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:cravvy_cooking_app/modules/dashboard/screens/dashboard_screen.dart';
 import 'package:cravvy_cooking_app/modules/splash/screens/splash_screen.dart';
 import 'package:cravvy_cooking_app/modules/onboarding/screens/landing_screen.dart';
@@ -27,6 +28,8 @@ import 'package:cravvy_cooking_app/core/routes/all_recipes_args.dart';
 import 'package:cravvy_cooking_app/data/models/meal.dart';
 import 'package:cravvy_cooking_app/data/providers/auth_provider.dart';
 import 'package:cravvy_cooking_app/modules/home/screens/all_recipes_screen.dart';
+import 'package:cravvy_cooking_app/modules/chat/screens/chat_screen.dart';
+import 'package:cravvy_cooking_app/modules/chat/provider/chat_provider.dart';
 
 class AppRouter {
   static const String splash = '/';
@@ -52,6 +55,7 @@ class AppRouter {
   static const String allRecipes = '/recipes/all';
   static const String mealDetail = '/meal-detail';
   static const String cookingMode = '/cooking';
+  static const String chat = '/chat';
   static const String editProfile = '/profile/edit';
   static const String premium = '/premium';
   static const String subscription = '/subscription';
@@ -210,6 +214,13 @@ class AppRouter {
         },
       ),
       GoRoute(
+        path: chat,
+        builder: (context, state) => ChangeNotifierProvider(
+          create: (_) => ChatProvider(),
+          child: const ChatScreen(),
+        ),
+      ),
+      GoRoute(
           path: editProfile,
           builder: (context, state) => const EditProfileScreen()),
       GoRoute(
@@ -245,7 +256,14 @@ class AppRouter {
           path: disclaimer,
           builder: (context, state) => const DisclaimerScreen()),
     ],
-    errorBuilder: (context, state) =>
-        Scaffold(body: Center(child: Text('Route not found: ${state.uri}'))),
+    errorBuilder: (context, state) => Scaffold(
+      body: Center(
+        child: Text(
+          'common.route_not_found'.tr(
+            namedArgs: {'route': state.uri.toString()},
+          ),
+        ),
+      ),
+    ),
   );
 }

@@ -1,4 +1,5 @@
 import 'package:cravvy_cooking_app/init.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 
 
@@ -14,17 +15,12 @@ class _NavTab {
 
 
 
-const _tabs = [
-
-  _NavTab(icon: Icons.home_rounded, label: 'Home'),
-
-  _NavTab(icon: Icons.calendar_month_rounded, label: 'Plan'),
-
-  _NavTab(icon: Icons.search_rounded, label: 'Search'),
-
-  _NavTab(icon: Icons.bar_chart_rounded, label: 'Progress'),
-
-];
+List<_NavTab> _tabs(BuildContext context) => [
+      _NavTab(icon: Icons.home_rounded, label: 'nav.home'.tr()),
+      _NavTab(icon: Icons.calendar_month_rounded, label: 'nav.plan'.tr()),
+      _NavTab(icon: Icons.search_rounded, label: 'nav.search'.tr()),
+      _NavTab(icon: Icons.bar_chart_rounded, label: 'nav.progress'.tr()),
+    ];
 
 
 
@@ -76,11 +72,11 @@ class BottomNavBar extends StatelessWidget {
 
             children: List.generate(
 
-              _tabs.length,
+              _tabs(context).length,
 
               (i) => _NavItem(
 
-                tab: _tabs[i],
+                tab: _tabs(context)[i],
 
                 isSelected: currentIndex == i,
 

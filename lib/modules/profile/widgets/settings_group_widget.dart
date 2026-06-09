@@ -20,11 +20,7 @@ class SettingsGroupWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(left: 16, top: 14, right: 16),
-      decoration: BoxDecoration(
-        color: AppColors.surface,
-        borderRadius: AppBorderRadius.a18,
-        border: Border.all(color: AppColors.border),
-      ),
+      decoration: context.cardBox(radius: 18),
       child: Column(
         children: List.generate(items.length, (i) {
           final (emoji, label, route, isToggle) = items[i];

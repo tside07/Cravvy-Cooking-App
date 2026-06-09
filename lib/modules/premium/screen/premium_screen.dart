@@ -125,8 +125,9 @@ class _PremiumScreenState extends State<PremiumScreen> {
                     Text(
                       'premium.description'.tr(),
                       textAlign: TextAlign.center,
-                      style: AppTextStyles.s12.copyWith(
-                        color: AppColors.textSecondary,
+                      style: context.themed(
+                        AppTextStyles.s12,
+                        color: context.appColors.textSecondary,
                       ),
                     ),
                     AppGap.h16,

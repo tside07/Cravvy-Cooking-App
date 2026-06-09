@@ -5,5 +5,5 @@ class ProfileVSepWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) =>
-      Container(width: 1, height: 32, color: AppColors.border);
+      Container(width: 1, height: 32, color: context.appColors.borderDivider);
 }

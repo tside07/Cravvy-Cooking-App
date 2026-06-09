@@ -1,4 +1,6 @@
+import 'package:cravvy_cooking_app/core/theme/pre_auth_theme.dart';
 import 'package:cravvy_cooking_app/init.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class SetupProgressWidget extends StatelessWidget {
   final int current;
@@ -12,7 +14,6 @@ class SetupProgressWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = context.appColors;
     return Container(
       padding: const EdgeInsets.fromLTRB(20, 16, 20, 12),
       child: Column(
@@ -22,10 +23,14 @@ class SetupProgressWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Step $current of $total',
-                style: context.themed(
-                  AppTextStyles.s12,
-                  color: colors.textSecondary,
+                'onboarding_setup.setup_step'.tr(
+                  namedArgs: {
+                    'current': '$current',
+                    'total': '$total',
+                  },
+                ),
+                style: AppTextStyles.s12.copyWith(
+                  color: PreAuthTheme.textSecondary,
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -43,7 +48,7 @@ class SetupProgressWidget extends StatelessWidget {
             borderRadius: AppBorderRadius.a4,
             child: LinearProgressIndicator(
               value: current / total,
-              backgroundColor: colors.elevated,
+              backgroundColor: const Color(0xFF2A3A44),
               color: AppColors.primary,
               minHeight: 6,
             ),

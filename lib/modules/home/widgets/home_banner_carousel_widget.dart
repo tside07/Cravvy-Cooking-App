@@ -112,6 +112,7 @@ class _HomeBannerCarouselWidgetState extends State<HomeBannerCarouselWidget> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: List.generate(slideCount, (i) {
+                  final colors = context.appColors;
                   final active = i == _currentIndex;
                   return AnimatedContainer(
                     duration: const Duration(milliseconds: 250),
@@ -120,8 +121,8 @@ class _HomeBannerCarouselWidgetState extends State<HomeBannerCarouselWidget> {
                     height: 7,
                     decoration: BoxDecoration(
                       color: active
-                          ? AppColors.textPrimary
-                          : AppColors.border,
+                          ? colors.textPrimary
+                          : colors.borderDivider,
                       borderRadius: BorderRadius.circular(4),
                     ),
                   );

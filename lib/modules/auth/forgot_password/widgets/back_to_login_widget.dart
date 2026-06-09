@@ -1,4 +1,5 @@
 import 'package:cravvy_cooking_app/init.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class BackToLoginWidget extends StatelessWidget {
   const BackToLoginWidget({super.key});
@@ -9,7 +10,7 @@ class BackToLoginWidget extends StatelessWidget {
     return TextButton(
       onPressed: () => Navigator.pop(context),
       child: Text(
-        'Back to Login',
+        'auth.back_to_login'.tr(),
         style: context.themed(
           AppTextStyles.s14,
           color: colors.textSecondary,
