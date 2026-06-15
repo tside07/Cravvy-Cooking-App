@@ -35,10 +35,6 @@ class NutritionCalculator {
       return _adjustForGoal(NutritionTarget.defaultTarget, goal);
     }
 
-    // ── Bước 1: BMR theo Mifflin-St Jeor ─────────────────────────────────
-    // Nam:    BMR = 10W + 6.25H - 5A + 5
-    // Nữ:     BMR = 10W + 6.25H - 5A - 161
-    // Other:  lấy trung bình
     double bmr;
     if (gender == 'male') {
       bmr = 10 * weightKg + 6.25 * heightCm - 5 * age + 5;

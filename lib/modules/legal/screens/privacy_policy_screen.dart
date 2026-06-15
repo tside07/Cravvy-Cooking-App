@@ -7,7 +7,7 @@ import 'package:easy_localization/easy_localization.dart';
 class PrivacyPolicyScreen extends StatelessWidget {
   const PrivacyPolicyScreen({super.key});
 
-  static const _lastUpdated = 'January 15, 2025';
+  static const _lastUpdated = '12 Tháng 6, 2026';
 
   List<LegalSection> _sections() => [
         LegalSection(

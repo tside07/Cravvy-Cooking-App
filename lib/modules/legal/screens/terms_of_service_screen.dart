@@ -7,7 +7,7 @@ import 'package:easy_localization/easy_localization.dart';
 class TermsOfServiceScreen extends StatelessWidget {
   const TermsOfServiceScreen({super.key});
 
-  static const _lastUpdated = 'January 15, 2025';
+  static const _lastUpdated = '12 Tháng 6, 2026';
 
   List<LegalSection> _sections() => [
         LegalSection(

@@ -10,47 +10,46 @@ import 'package:cravvy_cooking_app/modules/onboarding/widgets/setup/setup_contin
 import 'package:easy_localization/easy_localization.dart';
 
 String _genderLabel(String gender) => switch (gender) {
-      'Male' => 'onboarding_setup.male'.tr(),
-      'Female' => 'onboarding_setup.female'.tr(),
-      'Other' => 'onboarding_setup.other'.tr(),
-      _ => gender,
-    };
+  'Male' => 'onboarding_setup.male'.tr(),
+  'Female' => 'onboarding_setup.female'.tr(),
+  'Other' => 'onboarding_setup.other'.tr(),
+  _ => gender,
+};
 
 String _dietLabel(String diet) => switch (diet) {
-      'Eat Clean' => 'onboarding_setup.diet_eat_clean'.tr(),
-      'Low-Carb' => 'onboarding_setup.diet_low_carb'.tr(),
-      'Keto' => 'onboarding_setup.diet_keto'.tr(),
-      'Intermittent Fasting' =>
-        'onboarding_setup.diet_intermittent_fasting'.tr(),
-      'Vegetarian' => 'onboarding_setup.diet_vegetarian'.tr(),
-      'Vegan' => 'onboarding_setup.diet_vegan'.tr(),
-      'High-Protein' => 'onboarding_setup.diet_high_protein'.tr(),
-      'Low-Sugar' => 'onboarding_setup.diet_low_sugar'.tr(),
-      'Gluten-Free' => 'onboarding_setup.diet_gluten_free'.tr(),
-      'No Specific Diet' => 'onboarding_setup.diet_no_specific'.tr(),
-      _ => diet,
-    };
+  'Eat Clean' => 'onboarding_setup.diet_eat_clean'.tr(),
+  'Low-Carb' => 'onboarding_setup.diet_low_carb'.tr(),
+  'Keto' => 'onboarding_setup.diet_keto'.tr(),
+  'Intermittent Fasting' => 'onboarding_setup.diet_intermittent_fasting'.tr(),
+  'Vegetarian' => 'onboarding_setup.diet_vegetarian'.tr(),
+  'Vegan' => 'onboarding_setup.diet_vegan'.tr(),
+  'High-Protein' => 'onboarding_setup.diet_high_protein'.tr(),
+  'Low-Sugar' => 'onboarding_setup.diet_low_sugar'.tr(),
+  'Gluten-Free' => 'onboarding_setup.diet_gluten_free'.tr(),
+  'No Specific Diet' => 'onboarding_setup.diet_no_specific'.tr(),
+  _ => diet,
+};
 
 String _allergyLabel(String item) => switch (item) {
-      'Peanuts' => 'onboarding_setup.allergy_peanuts'.tr(),
-      'Shellfish' => 'onboarding_setup.allergy_shellfish'.tr(),
-      'Dairy' => 'onboarding_setup.allergy_dairy'.tr(),
-      'Gluten' => 'onboarding_setup.allergy_gluten'.tr(),
-      'Eggs' => 'onboarding_setup.allergy_eggs'.tr(),
-      'Soy' => 'onboarding_setup.allergy_soy'.tr(),
-      'Tree Nuts' => 'onboarding_setup.allergy_tree_nuts'.tr(),
-      'Fish' => 'onboarding_setup.allergy_fish'.tr(),
-      _ => item,
-    };
+  'Peanuts' => 'onboarding_setup.allergy_peanuts'.tr(),
+  'Shellfish' => 'onboarding_setup.allergy_shellfish'.tr(),
+  'Dairy' => 'onboarding_setup.allergy_dairy'.tr(),
+  'Gluten' => 'onboarding_setup.allergy_gluten'.tr(),
+  'Eggs' => 'onboarding_setup.allergy_eggs'.tr(),
+  'Soy' => 'onboarding_setup.allergy_soy'.tr(),
+  'Tree Nuts' => 'onboarding_setup.allergy_tree_nuts'.tr(),
+  'Fish' => 'onboarding_setup.allergy_fish'.tr(),
+  _ => item,
+};
 
 String _prefLabel(String item) => switch (item) {
-      'No Pork' => 'onboarding_setup.pref_no_pork'.tr(),
-      'No Beef' => 'onboarding_setup.pref_no_beef'.tr(),
-      'No Seafood' => 'onboarding_setup.pref_no_seafood'.tr(),
-      'No Spicy' => 'onboarding_setup.pref_no_spicy'.tr(),
-      'No Raw Foods' => 'onboarding_setup.pref_no_raw_foods'.tr(),
-      _ => item,
-    };
+  'No Pork' => 'onboarding_setup.pref_no_pork'.tr(),
+  'No Beef' => 'onboarding_setup.pref_no_beef'.tr(),
+  'No Seafood' => 'onboarding_setup.pref_no_seafood'.tr(),
+  'No Spicy' => 'onboarding_setup.pref_no_spicy'.tr(),
+  'No Raw Foods' => 'onboarding_setup.pref_no_raw_foods'.tr(),
+  _ => item,
+};
 
 String _avoidLabel(String item) {
   final allergy = _allergyLabel(item);
@@ -67,26 +66,26 @@ String _bmiCategoryLabel(double? bmi) {
 }
 
 String _cookingTimeLabel(String id) => switch (id) {
-      'quick' => 'setup_complete.time_quick'.tr(),
-      'short' => 'setup_complete.time_short'.tr(),
-      'medium' => 'setup_complete.time_medium'.tr(),
-      'long' => 'setup_complete.time_long'.tr(),
-      _ => 'setup_complete.time_flexible'.tr(),
-    };
+  'quick' => 'setup_complete.time_quick'.tr(),
+  'short' => 'setup_complete.time_short'.tr(),
+  'medium' => 'setup_complete.time_medium'.tr(),
+  'long' => 'setup_complete.time_long'.tr(),
+  _ => 'setup_complete.time_flexible'.tr(),
+};
 
 String _skillLabel(String id) => switch (id) {
-      'beginner' => 'onboarding_setup.skill_beginner'.tr(),
-      'intermediate' => 'onboarding_setup.skill_intermediate'.tr(),
-      'advanced' => 'onboarding_setup.skill_advanced'.tr(),
-      _ => id,
-    };
+  'beginner' => 'onboarding_setup.skill_beginner'.tr(),
+  'intermediate' => 'onboarding_setup.skill_intermediate'.tr(),
+  'advanced' => 'onboarding_setup.skill_advanced'.tr(),
+  _ => id,
+};
 
 String _skillDesc(String id) => switch (id) {
-      'beginner' => 'onboarding_setup.skill_beginner_desc'.tr(),
-      'intermediate' => 'onboarding_setup.skill_intermediate_desc'.tr(),
-      'advanced' => 'onboarding_setup.skill_advanced_desc'.tr(),
-      _ => id,
-    };
+  'beginner' => 'onboarding_setup.skill_beginner_desc'.tr(),
+  'intermediate' => 'onboarding_setup.skill_intermediate_desc'.tr(),
+  'advanced' => 'onboarding_setup.skill_advanced_desc'.tr(),
+  _ => id,
+};
 
 // TODO: Helper: bọc body để fix infinite width trên cả web lẫn mobile
 // Mọi setup screen đều dùng cái này thay vì Scaffold trực tiếp
@@ -103,10 +102,7 @@ class _SetupShell extends StatelessWidget {
             return Center(
               child: ConstrainedBox(
                 constraints: const BoxConstraints(maxWidth: 760),
-                child: SizedBox(
-                  width: constraints.maxWidth,
-                  child: child,
-                ),
+                child: SizedBox(width: constraints.maxWidth, child: child),
               ),
             );
           },
@@ -150,7 +146,8 @@ class _SetupStep1ScreenState extends State<SetupStep1Screen> {
 
   String get _bmiCategory => _bmiCategoryLabel(_bmi);
 
-  Color _bmiColor(AppColorExtension colors) {    final b = _bmi;
+  Color _bmiColor(AppColorExtension colors) {
+    final b = _bmi;
     if (b == null) return colors.textSecondary;
     if (b < 18.5) return AppColors.warning;
     if (b < 25) return AppColors.success;
@@ -204,14 +201,14 @@ class _SetupStep1ScreenState extends State<SetupStep1Screen> {
                         style: AppTextStyles.s20.copyWith(
                           fontWeight: FontWeight.w800,
                           fontSize: 26,
-                          color: PreAuthTheme.textPrimary,
+                          color: colors.textPrimary,
                         ),
                       ),
                       AppGap.h8,
                       Text(
                         'onboarding_setup.personalize_desc'.tr(),
                         style: AppTextStyles.s14.copyWith(
-                          color: PreAuthTheme.textSecondary,
+                          color: colors.textSecondary,
                         ),
                       ),
                       AppGap.h28,
@@ -250,8 +247,9 @@ class _SetupStep1ScreenState extends State<SetupStep1Screen> {
                                         border: Border.all(
                                           color: _gender == g
                                               ? AppColors.primary
-                                              : PreAuthTheme.textSecondary
-                                                  .withValues(alpha: 0.35),
+                                              : colors.textSecondary.withValues(
+                                                  alpha: 0.35,
+                                                ),
                                         ),
                                       ),
                                       child: Center(
@@ -260,7 +258,7 @@ class _SetupStep1ScreenState extends State<SetupStep1Screen> {
                                           style: AppTextStyles.s14.copyWith(
                                             color: _gender == g
                                                 ? Colors.white
-                                                : PreAuthTheme.textPrimary,
+                                                : colors.textPrimary,
                                             fontWeight: FontWeight.w600,
                                           ),
                                         ),
@@ -318,6 +316,7 @@ class _SetupStep1ScreenState extends State<SetupStep1Screen> {
                                       style: AppTextStyles.s20.copyWith(
                                         fontWeight: FontWeight.w800,
                                         fontSize: 28,
+                                        color: colors.textPrimary,
                                       ),
                                     ),
                                   ],
@@ -326,7 +325,9 @@ class _SetupStep1ScreenState extends State<SetupStep1Screen> {
                               Container(
                                 padding: AppPad.h12,
                                 decoration: BoxDecoration(
-                                  color: _bmiColor(colors).withValues(alpha: 0.1),
+                                  color: _bmiColor(
+                                    colors,
+                                  ).withValues(alpha: 0.1),
                                   borderRadius: BorderRadius.circular(20),
                                 ),
                                 child: Text(
@@ -428,14 +429,14 @@ class _SetupStep2ScreenState extends State<SetupStep2Screen> {
                     style: AppTextStyles.s20.copyWith(
                       fontWeight: FontWeight.w800,
                       fontSize: 26,
-                      color: PreAuthTheme.textPrimary,
+                      color: colors.textPrimary,
                     ),
                   ),
                   AppGap.h8,
                   Text(
                     'onboarding_setup.main_goal_desc'.tr(),
                     style: AppTextStyles.s14.copyWith(
-                      color: PreAuthTheme.textSecondary,
+                      color: colors.textSecondary,
                     ),
                   ),
                   AppGap.h28,
@@ -490,13 +491,20 @@ class _SetupStep2ScreenState extends State<SetupStep2Screen> {
                                   (g['titleKey'] as String).tr(),
                                   style: AppTextStyles.s14.copyWith(
                                     fontWeight: FontWeight.w700,
+                                    color: isSelected
+                                        ? AppColors.primary
+                                        : colors.textPrimary,
                                   ),
                                 ),
                                 AppGap.h4,
                                 Text(
                                   (g['descKey'] as String).tr(),
                                   style: AppTextStyles.s12.copyWith(
-                                    color: colors.textSecondary,
+                                    color: isSelected
+                                        ? AppColors.primary.withValues(
+                                            alpha: 0.75,
+                                          )
+                                        : colors.textSecondary,
                                   ),
                                 ),
                               ],
@@ -571,6 +579,7 @@ class _SetupStep3ScreenState extends State<SetupStep3Screen> {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
     return _SetupShell(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -588,14 +597,14 @@ class _SetupStep3ScreenState extends State<SetupStep3Screen> {
                     style: AppTextStyles.s20.copyWith(
                       fontWeight: FontWeight.w800,
                       fontSize: 26,
-                      color: PreAuthTheme.textPrimary,
+                      color: colors.textPrimary,
                     ),
                   ),
                   AppGap.h8,
                   Text(
                     'onboarding_setup.select_diet'.tr(),
                     style: AppTextStyles.s14.copyWith(
-                      color: PreAuthTheme.textSecondary,
+                      color: colors.textSecondary,
                     ),
                   ),
                   AppGap.h24,
@@ -717,14 +726,14 @@ class _SetupStep4ScreenState extends State<SetupStep4Screen> {
                     style: AppTextStyles.s20.copyWith(
                       fontWeight: FontWeight.w800,
                       fontSize: 26,
-                      color: PreAuthTheme.textPrimary,
+                      color: colors.textPrimary,
                     ),
                   ),
                   AppGap.h8,
                   Text(
                     'onboarding_setup.restrictions_desc'.tr(),
                     style: AppTextStyles.s14.copyWith(
-                      color: PreAuthTheme.textSecondary,
+                      color: colors.textSecondary,
                     ),
                   ),
                   AppGap.h24,
@@ -781,14 +790,15 @@ class _SetupStep4ScreenState extends State<SetupStep4Screen> {
                                 child: TextField(
                                   controller: _customCtrl,
                                   style: AppTextStyles.s14.copyWith(
-                                    color: PreAuthTheme.textPrimary,
+                                    color: colors.textPrimary,
                                   ),
-                                  cursorColor: PreAuthTheme.textPrimary,
+                                  cursorColor: colors.textPrimary,
                                   decoration: InputDecoration(
                                     hintText:
-                                        'onboarding_setup.hint_restrictions'.tr(),
+                                        'onboarding_setup.hint_restrictions'
+                                            .tr(),
                                     hintStyle: AppTextStyles.s14.copyWith(
-                                      color: PreAuthTheme.textSecondary,
+                                      color: colors.textSecondary,
                                     ),
                                     filled: true,
                                     fillColor: const Color(0xFF2A3A44),
@@ -799,14 +809,15 @@ class _SetupStep4ScreenState extends State<SetupStep4Screen> {
                                     enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(12),
                                       borderSide: BorderSide(
-                                        color: PreAuthTheme.textSecondary
-                                            .withValues(alpha: 0.35),
+                                        color: colors.textSecondary.withValues(
+                                          alpha: 0.35,
+                                        ),
                                       ),
                                     ),
                                     focusedBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(12),
-                                      borderSide: const BorderSide(
-                                        color: PreAuthTheme.textPrimary,
+                                      borderSide: BorderSide(
+                                        color: colors.textPrimary,
                                       ),
                                     ),
                                     contentPadding: const EdgeInsets.symmetric(
@@ -995,14 +1006,14 @@ class _SetupStep5ScreenState extends State<SetupStep5Screen> {
                     style: AppTextStyles.s20.copyWith(
                       fontWeight: FontWeight.w800,
                       fontSize: 26,
-                      color: PreAuthTheme.textPrimary,
+                      color: colors.textPrimary,
                     ),
                   ),
                   AppGap.h8,
                   Text(
                     'onboarding_setup.cooking_experience'.tr(),
                     style: AppTextStyles.s14.copyWith(
-                      color: PreAuthTheme.textSecondary,
+                      color: colors.textSecondary,
                     ),
                   ),
                   AppGap.h28,
