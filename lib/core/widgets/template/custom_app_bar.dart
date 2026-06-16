@@ -246,35 +246,29 @@ class _CircleIconButton extends StatelessWidget {
 
       children: [
 
-        Material(
+        Pressable(
 
-          color: appColors.cardSurface,
+          onTap: onTap,
 
-          shape: const CircleBorder(),
+          child: Container(
 
-          child: InkWell(
+            width: 44,
 
-            customBorder: const CircleBorder(),
+            height: 44,
 
-            onTap: onTap,
+            decoration: BoxDecoration(
 
-            child: Container(
+              color: appColors.cardSurface,
 
-              width: 42,
+              shape: BoxShape.circle,
 
-              height: 42,
+              border: Border.all(color: appColors.borderDivider),
 
-              decoration: BoxDecoration(
-
-                shape: BoxShape.circle,
-
-                border: Border.all(color: appColors.borderDivider),
-
-              ),
-
-              child: Icon(icon, size: 22, color: appColors.textPrimary),
+              boxShadow: AppShadows.e1Of(Theme.of(context).brightness),
 
             ),
+
+            child: Icon(icon, size: 22, color: appColors.textPrimary),
 
           ),
 

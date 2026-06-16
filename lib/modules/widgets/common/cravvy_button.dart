@@ -20,17 +20,33 @@ class CravvyButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (isOutlined) {
-      return OutlinedButton(onPressed: isLoading ? null : onTap, child: _child);
-    }
-    return ElevatedButton(
-      onPressed: isLoading ? null : onTap,
-      style: ElevatedButton.styleFrom(
-        backgroundColor: backgroundColor ?? AppColors.primary,
-        minimumSize: const Size(double.infinity, 56),
-        shape: RoundedRectangleBorder(borderRadius: AppBorderRadius.a16),
-      ),
-      child: _child,
+    // Disabled while loading or when no handler is provided.
+    final isDisabled = isLoading || onTap == null;
+    final shape = RoundedRectangleBorder(borderRadius: AppBorderRadius.button);
+
+    final Widget button = isOutlined
+        ? OutlinedButton(
+            onPressed: isDisabled ? null : onTap,
+            style: OutlinedButton.styleFrom(shape: shape),
+            child: _child,
+          )
+        : ElevatedButton(
+            onPressed: isDisabled ? null : onTap,
+            style: ElevatedButton.styleFrom(
+              backgroundColor: backgroundColor ?? AppColors.primary,
+              disabledBackgroundColor:
+                  (backgroundColor ?? AppColors.primary).withValues(alpha: 0.4),
+              disabledForegroundColor: Colors.white.withValues(alpha: 0.7),
+              minimumSize: const Size(double.infinity, 56),
+              shape: shape,
+            ),
+            child: _child,
+          );
+
+    // Press feedback (scale) only when the button is actually actionable.
+    return Pressable(
+      onTap: isDisabled ? null : onTap,
+      child: AbsorbPointer(child: button),
     );
   }
 
