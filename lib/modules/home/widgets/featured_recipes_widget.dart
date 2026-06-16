@@ -57,7 +57,7 @@ class _FeaturedRecipesWidgetState extends State<FeaturedRecipesWidget> {
                       Expanded(
                         child: Text(
                           'home.recipes_title'.tr(),
-                          style: Theme.of(context).textTheme.headlineSmall,
+                          style: context.themed(AppTextStyles.h2),
                         ),
                       ),
                       TextButton(

@@ -180,7 +180,7 @@ class ProgressScreen extends StatelessWidget {
             // Streak + stats row
             SliverToBoxAdapter(
               child: Padding(
-                padding: const EdgeInsets.only(left: 16, top: 20, right: 16),
+                padding: AppPad.section16t20,
                 child: Consumer<MealPlanProvider>(
                   builder: (context, provider, _) {
                     if (provider.isLoading) {
@@ -225,15 +225,15 @@ class ProgressScreen extends StatelessWidget {
             // Weekly calorie chart
             SliverToBoxAdapter(
               child: Container(
-                margin: const EdgeInsets.only(left: 16, top: 16, right: 16),
+                margin: AppPad.section16t16,
                 padding: AppPad.a20,
-                decoration: context.cardBox(),
+                decoration: context.cardBox(radius: 16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       'progress.weekly_calories'.tr(),
-                      style: Theme.of(context).textTheme.headlineSmall,
+                      style: context.themed(AppTextStyles.h2),
                     ),
                     AppGap.h4,
                     Consumer<MealPlanProvider>(
@@ -275,15 +275,15 @@ class ProgressScreen extends StatelessWidget {
             // Nutrition consistency
             SliverToBoxAdapter(
               child: Container(
-                margin: const EdgeInsets.only(left: 16, top: 14, right: 16),
+                margin: AppPad.section16t14,
                 padding: AppPad.a20,
-                decoration: context.cardBox(),
+                decoration: context.cardBox(radius: 16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       'progress.nutrition_consistency'.tr(),
-                      style: Theme.of(context).textTheme.headlineSmall,
+                      style: context.themed(AppTextStyles.h2),
                     ),
                     AppGap.h16,
                     Consumer<MealPlanProvider>(
@@ -331,10 +331,10 @@ class ProgressScreen extends StatelessWidget {
             // Achievements title
             SliverToBoxAdapter(
               child: Padding(
-                padding: const EdgeInsets.only(left: 24, top: 20, right: 24),
+                padding: AppPad.section24t20,
                 child: Text(
                   'progress.achievements'.tr(),
-                  style: Theme.of(context).textTheme.headlineSmall,
+                  style: context.themed(AppTextStyles.h2),
                 ),
               ),
             ),

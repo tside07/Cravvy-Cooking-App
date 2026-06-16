@@ -30,7 +30,7 @@ class TodayMealsSectionWidget extends StatelessWidget {
                 children: [
                   Text(
                     'home.meals_title'.tr(),
-                    style: Theme.of(context).textTheme.headlineSmall,
+                    style: context.themed(AppTextStyles.h2),
                   ),
                   TextButton(
                     onPressed: () =>
@@ -76,7 +76,7 @@ class TodayMealsSectionWidget extends StatelessWidget {
                   child: Container(
                     width: double.infinity,
                     padding: const EdgeInsets.symmetric(vertical: 24),
-                    decoration: context.cardBox(radius: 20),
+                    decoration: context.cardBox(radius: 16),
                     child: Column(
                       children: [
                         const Text('🍽️', style: TextStyle(fontSize: 32)),

@@ -141,7 +141,7 @@ class _LastUpdatedBadge extends StatelessWidget {
         decoration: BoxDecoration(
           color: AppColors.primaryLight,
 
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: AppBorderRadius.chip,
 
           border: Border.all(color: AppColors.primary.withValues(alpha: 0.2)),
         ),

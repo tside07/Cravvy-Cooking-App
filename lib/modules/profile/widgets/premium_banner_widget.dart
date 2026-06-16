@@ -6,14 +6,15 @@ class PremiumBannerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return Pressable(
       onTap: () => context.push(AppRouter.premium),
       child: Container(
-        margin: const EdgeInsets.only(left: 16, top: 14, right: 16),
+        margin: AppPad.section16t14,
         padding: AppPad.a16,
         decoration: BoxDecoration(
           color: AppColors.orange,
-          borderRadius: AppBorderRadius.a18,
+          borderRadius: AppBorderRadius.card,
+          boxShadow: AppShadows.e2Of(Theme.of(context).brightness),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

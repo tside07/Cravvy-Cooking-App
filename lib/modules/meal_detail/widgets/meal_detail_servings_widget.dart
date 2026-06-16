@@ -65,17 +65,24 @@ class _StepButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final colors = context.appColors;
 
-    return GestureDetector(
+    // 36px visual inside a 44px tap target.
+    return Pressable(
       onTap: onTap,
-      child: Container(
-        width: 36,
-        height: 36,
-        decoration: BoxDecoration(
-          color: colors.cardSurface,
-          shape: BoxShape.circle,
-          border: Border.all(color: colors.borderDivider),
+      child: SizedBox(
+        width: 44,
+        height: 44,
+        child: Center(
+          child: Container(
+            width: 36,
+            height: 36,
+            decoration: BoxDecoration(
+              color: colors.cardSurface,
+              shape: BoxShape.circle,
+              border: Border.all(color: colors.borderDivider),
+            ),
+            child: Icon(icon, size: 18, color: colors.textPrimary),
+          ),
         ),
-        child: Icon(icon, size: 18, color: colors.textPrimary),
       ),
     );
   }

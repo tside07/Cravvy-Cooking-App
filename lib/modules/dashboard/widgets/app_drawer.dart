@@ -200,7 +200,7 @@ class _DrawerHeader extends StatelessWidget {
 
         color: appColors.cardSurface,
 
-        borderRadius: AppBorderRadius.a16,
+        borderRadius: AppBorderRadius.card,
 
       ),
 
@@ -530,7 +530,7 @@ class _LanguageItem extends StatelessWidget {
 
                 color: appColors.chipSelectedBg,
 
-                borderRadius: AppBorderRadius.a20,
+                borderRadius: AppBorderRadius.chip,
 
                 border: Border.all(color: appColors.chipSelectedBorder),
 
@@ -538,7 +538,7 @@ class _LanguageItem extends StatelessWidget {
 
               child: Text(
 
-                isVi ? '🇻🇳 VI' : '🇺🇸 EN',
+                isVi ? 'VI' : 'EN',
 
                 style: AppTextStyles.s12.copyWith(
 

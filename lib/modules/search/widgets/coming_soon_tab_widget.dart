@@ -19,7 +19,7 @@ class ComingSoonTabWidget extends StatelessWidget {
         children: [
           Text(icon, style: AppTextStyles.s20.copyWith(fontSize: 52)),
           AppGap.h16,
-          Text(label, style: Theme.of(context).textTheme.headlineSmall),
+          Text(label, style: context.themed(AppTextStyles.h2)),
           AppGap.h8,
           Text(
             'search.coming_soon'.tr(),

@@ -30,7 +30,7 @@ class AuthSocialLoginButton extends StatelessWidget {
           backgroundColor: colors.cardSurface,
           side: BorderSide(color: colors.borderDivider),
           shape: RoundedRectangleBorder(
-            borderRadius: AppBorderRadius.a14,
+            borderRadius: AppBorderRadius.button,
           ),
         ),
         child: Row(

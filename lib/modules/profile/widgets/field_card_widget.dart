@@ -9,7 +9,7 @@ class FieldCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-        decoration: context.cardBox(radius: 14),
+        decoration: context.cardBox(),
         child: child,
       );
 }

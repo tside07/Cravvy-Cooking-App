@@ -166,8 +166,7 @@ class _Body extends StatelessWidget {
                     AppGap.h12,
                     Text(
                       'auth.register_title'.tr(),
-                      style: AppTextStyles.s20.copyWith(
-                        fontWeight: FontWeight.w800,
+                      style: AppTextStyles.h1.copyWith(
                         color: PreAuthTheme.textPrimary,
                         fontSize: 28,
                       ),

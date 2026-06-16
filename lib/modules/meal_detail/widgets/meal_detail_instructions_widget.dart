@@ -102,7 +102,7 @@ class _MealDetailInstructionsWidgetState
                   foregroundColor: Colors.white,
                   padding: const EdgeInsets.symmetric(vertical: 14),
                   shape: RoundedRectangleBorder(
-                    borderRadius: AppBorderRadius.a16,
+                    borderRadius: AppBorderRadius.button,
                   ),
                 ),
               ),

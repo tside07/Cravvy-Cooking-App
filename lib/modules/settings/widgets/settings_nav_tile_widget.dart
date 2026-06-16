@@ -24,7 +24,7 @@ class SettingsNavTileWidget extends StatelessWidget {
 
     return InkWell(
       onTap: onTap,
-      borderRadius: AppBorderRadius.a16,
+      borderRadius: AppBorderRadius.card,
       child: Padding(
         padding: AppPad.h16v14,
         child: Row(
@@ -34,7 +34,7 @@ class SettingsNavTileWidget extends StatelessWidget {
               height: 36,
               decoration: BoxDecoration(
                 color: iconColor.withValues(alpha: 0.12),
-                borderRadius: AppBorderRadius.a10,
+                borderRadius: AppBorderRadius.chip,
               ),
               child: Icon(icon, color: iconColor, size: 20),
             ),

@@ -26,10 +26,11 @@ class ProfileStatBoxWidget extends StatelessWidget {
           AppGap.h2,
           Text(
             value,
-            style: context.themed(
-              AppTextStyles.s16,
-              fontWeight: FontWeight.w800,
-            ),
+            style: context
+                .themed(AppTextStyles.s16, fontWeight: FontWeight.w800)
+                .copyWith(
+                  fontFeatures: const [FontFeature.tabularFigures()],
+                ),
           ),
         ],
       ),

@@ -8,20 +8,14 @@ class SettingsPremiumBannerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return Pressable(
       onTap: onTap,
       child: Container(
         padding: AppPad.a20,
         decoration: BoxDecoration(
           gradient: AppColors.primaryGradient,
-          borderRadius: AppBorderRadius.a20,
-          boxShadow: [
-            BoxShadow(
-              color: AppColors.primary.withValues(alpha: 0.35),
-              blurRadius: 16,
-              offset: const Offset(0, 6),
-            ),
-          ],
+          borderRadius: AppBorderRadius.a16,
+          boxShadow: AppShadows.e2Of(Theme.of(context).brightness),
         ),
         child: Row(
           children: [
@@ -30,7 +24,7 @@ class SettingsPremiumBannerWidget extends StatelessWidget {
               height: 48,
               decoration: BoxDecoration(
                 color: Colors.white.withValues(alpha: 0.2),
-                borderRadius: AppBorderRadius.a14,
+                borderRadius: AppBorderRadius.card,
               ),
               child: const Icon(
                 Icons.workspace_premium_rounded,

@@ -23,19 +23,15 @@ class NutritionRingCardWidget extends StatelessWidget {
             (day.totalCalories / provider.targetCalories).clamp(0.0, 1.0);
 
         return Container(
-          margin: const EdgeInsets.only(
-            left: 16,
-            top: 20,
-            right: 16,
-          ), //TODO: no AppPad equivalent for this multi-directional EdgeInsets.only
+          margin: AppPad.section16t20,
           padding: AppPad.a20,
-          decoration: context.cardBox(radius: 24),
+          decoration: context.cardBox(radius: 16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 'home.nutrition_title'.tr(),
-                style: Theme.of(context).textTheme.headlineSmall,
+                style: context.themed(AppTextStyles.h2),
               ),
               AppGap.h20,
               Row(
@@ -59,10 +55,11 @@ class NutritionRingCardWidget extends StatelessWidget {
                             children: [
                               Text(
                                 '$remaining',
-                                style: AppTextStyles.s20.copyWith(
-                                  fontSize: 30,
-                                  fontWeight: FontWeight.w800,
-                                  height: 1,
+                                style: context.themed(
+                                  AppTextStyles.display.copyWith(
+                                    fontSize: 34,
+                                    height: 1,
+                                  ),
                                 ),
                               ),
                               Text(

@@ -25,7 +25,7 @@ class ShoppingRecipeCardWidget extends StatelessWidget {
     final allDone = remaining <= 0 && totalCount > 0;
 
     return Container(
-      margin: const EdgeInsets.only(bottom: 12),
+      margin: AppPad.b12,
       decoration: context.cardBox(radius: 16),
       clipBehavior: Clip.hardEdge,
       child: Material(

@@ -9,11 +9,13 @@ class FilterOptionWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final colors = context.appColors;
     return AnimatedContainer(
-      duration: const Duration(milliseconds: 150),
+      duration: (MediaQuery.maybeDisableAnimationsOf(context) ?? false)
+          ? Duration.zero
+          : const Duration(milliseconds: 150),
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
       decoration: BoxDecoration(
         color: selected ? AppColors.primary : colors.chipBg,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: AppBorderRadius.chip,
         border: Border.all(
           color: selected ? AppColors.primary : colors.chipBorder,
         ),

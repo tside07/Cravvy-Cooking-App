@@ -62,6 +62,11 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+    // Respect reduced-motion: skip the intro animation to its end state.
+    if ((MediaQuery.maybeDisableAnimationsOf(context) ?? false) &&
+        !_controller.isCompleted) {
+      _controller.value = 1.0;
+    }
     // Lắng nghe AuthProvider thay đổi
     final auth = Provider.of<AuthProvider>(context);
     _handleAuthState(auth);
@@ -129,8 +134,7 @@ class _SplashScreenState extends State<SplashScreen>
                     AppGap.h8,
                     Text(
                       'splash.tagline'.tr(),
-                      style: AppTextStyles.s18.copyWith(
-                        fontWeight: FontWeight.w700,
+                      style: AppTextStyles.h2.copyWith(
                         color: AppColors.textColor,
                       ),
                     ),

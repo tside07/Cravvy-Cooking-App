@@ -17,7 +17,7 @@ class SettingsDeleteConfirmCardWidget extends StatelessWidget {
       padding: AppPad.a16,
       decoration: BoxDecoration(
         color: AppColors.errorLight,
-        borderRadius: AppBorderRadius.a16,
+        borderRadius: AppBorderRadius.card,
         border: Border.all(color: AppColors.error.withValues(alpha: 0.3)),
       ),
       child: Column(
@@ -44,7 +44,7 @@ class SettingsDeleteConfirmCardWidget extends StatelessWidget {
                   style: OutlinedButton.styleFrom(
                     side: BorderSide(color: AppColors.error),
                     shape: RoundedRectangleBorder(
-                      borderRadius: AppBorderRadius.a10,
+                      borderRadius: AppBorderRadius.button,
                     ),
                   ),
                   child: Text(
@@ -60,7 +60,7 @@ class SettingsDeleteConfirmCardWidget extends StatelessWidget {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.error,
                     shape: RoundedRectangleBorder(
-                      borderRadius: AppBorderRadius.a10,
+                      borderRadius: AppBorderRadius.button,
                     ),
                   ),
                   child: Text(

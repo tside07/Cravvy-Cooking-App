@@ -31,7 +31,7 @@ class SettingsSwitchTileWidget extends StatelessWidget {
             height: 36,
             decoration: BoxDecoration(
               color: iconColor.withValues(alpha: 0.12),
-              borderRadius: AppBorderRadius.a10,
+              borderRadius: AppBorderRadius.chip,
             ),
             child: Icon(icon, color: iconColor, size: 20),
           ),

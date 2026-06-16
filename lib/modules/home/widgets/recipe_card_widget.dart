@@ -34,14 +34,14 @@ class RecipeCardWidget extends StatelessWidget {
         context,
         width: 160,
         imageHeight: 110,
-        margin: const EdgeInsets.only(right: 12),
+        margin: AppPad.r12,
       );
 
   Widget _buildFeatured(BuildContext context) => _buildCard(
         context,
         width: 180,
         imageHeight: 150,
-        margin: const EdgeInsets.only(right: 12),
+        margin: AppPad.r12,
       );
 
   Widget _buildGrid(BuildContext context) {
@@ -83,7 +83,7 @@ class RecipeCardWidget extends StatelessWidget {
       child: Container(
         width: width,
         margin: margin,
-        decoration: context.cardBox(radius: 20),
+        decoration: context.cardBox(radius: 16),
         clipBehavior: Clip.hardEdge,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

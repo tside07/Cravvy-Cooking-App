@@ -155,7 +155,7 @@ class _SetupCompleteScreenState extends State<SetupCompleteScreen>
                     // Summary card — dùng data thật từ Supabase
                     Container(
                       padding: AppPad.a20,
-                      decoration: context.cardBox(radius: 20),
+                      decoration: context.cardBox(),
                       child: Column(
                         children: [
                           if (user?.goal != null) ...[

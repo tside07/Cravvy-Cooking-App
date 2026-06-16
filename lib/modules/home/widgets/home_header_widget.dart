@@ -41,9 +41,8 @@ class HomeHeaderWidget extends StatelessWidget {
                 Text(
                   '${_greeting()}, $firstName! 👋',
                   style: context.themed(
-                    AppTextStyles.s20,
-                    fontWeight: FontWeight.w800,
-                  ).copyWith(fontSize: 28),
+                    AppTextStyles.h1.copyWith(fontSize: 26),
+                  ),
                 ),
                 AppGap.h2,
                 Text(

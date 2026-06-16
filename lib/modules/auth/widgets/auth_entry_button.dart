@@ -29,7 +29,7 @@ class AuthEntryButton extends StatelessWidget {
           disabledBackgroundColor: PreAuthTheme.buttonFill.withValues(alpha: 0.5),
           elevation: 0,
           shape: RoundedRectangleBorder(
-            borderRadius: AppBorderRadius.a14,
+            borderRadius: AppBorderRadius.button,
           ),
         ),
         child: Row(

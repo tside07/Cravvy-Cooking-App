@@ -1,3 +1,5 @@
+import 'package:flutter/services.dart';
+
 import 'package:cravvy_cooking_app/init.dart';
 import 'package:cravvy_cooking_app/core/routes/app_routers.dart';
 import 'package:cravvy_cooking_app/data/models/meal.dart';
@@ -206,6 +208,8 @@ class _MealSwapSheetState extends State<MealSwapSheet> {
                             return;
                           }
                           if (err != null) return;
+                          // Confirm the swap with a light haptic.
+                          HapticFeedback.lightImpact();
                           Navigator.pop(context);
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(

@@ -45,7 +45,7 @@ class SlidePageWidget extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: AppBorderRadius.a16,
               child: Image.asset(
                 slide.imagePath,
                 width: double.infinity,

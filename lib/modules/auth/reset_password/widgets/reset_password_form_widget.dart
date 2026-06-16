@@ -62,7 +62,7 @@ class ResetPasswordFormWidget extends StatelessWidget {
                     height: 56,
                     decoration: BoxDecoration(
                       color: AppColors.primaryLight,
-                      borderRadius: BorderRadius.circular(16),
+                      borderRadius: AppBorderRadius.card,
                     ),
                     child: const Icon(
                       Icons.lock_outline_rounded,
@@ -132,7 +132,7 @@ class ResetPasswordFormWidget extends StatelessWidget {
                 children: [
                   Expanded(
                     child: ClipRRect(
-                      borderRadius: BorderRadius.circular(4),
+                      borderRadius: const BorderRadius.all(AppRadius.c4),
                       child: LinearProgressIndicator(
                         value: strengthPct,
                         backgroundColor: appColors.elevated,
@@ -219,7 +219,7 @@ class ResetPasswordFormWidget extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.primary,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
+                    borderRadius: AppBorderRadius.button,
                   ),
                 ),
                 child: isLoading

@@ -24,7 +24,7 @@ class SettingsScreen extends StatelessWidget {
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
-        shape: RoundedRectangleBorder(borderRadius: AppBorderRadius.a20),
+        shape: RoundedRectangleBorder(borderRadius: AppBorderRadius.sheet),
         title: Text('settings.export_dialog_title'.tr()),
         content: Text('settings.export_dialog_body'.tr()),
         actions: [
@@ -130,10 +130,7 @@ class SettingsScreen extends StatelessWidget {
           ),
           Text(
             'settings.title'.tr(),
-            style: AppTextStyles.s18.copyWith(
-              fontWeight: FontWeight.w700,
-              color: appColors.textPrimary,
-            ),
+            style: context.themed(AppTextStyles.h2),
           ),
         ],
       ),

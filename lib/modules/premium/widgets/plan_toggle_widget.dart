@@ -57,10 +57,12 @@ class PlanToggleWidget extends StatelessWidget {
     VoidCallback onTap,
   ) {
     final colors = context.appColors;
-    return GestureDetector(
+    return Pressable(
       onTap: onTap,
       child: AnimatedContainer(
-        duration: const Duration(milliseconds: 200),
+        duration: (MediaQuery.maybeDisableAnimationsOf(context) ?? false)
+            ? Duration.zero
+            : const Duration(milliseconds: 200),
         padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 10),
         decoration: BoxDecoration(
           color: active ? colors.cardSurface : Colors.transparent,
@@ -68,15 +70,8 @@ class PlanToggleWidget extends StatelessWidget {
           border: Border.all(
             color: active ? colors.borderDivider : Colors.transparent,
           ),
-          boxShadow: active
-              ? [
-                  BoxShadow(
-                    color: Colors.black.withValues(alpha: 0.06),
-                    blurRadius: 6,
-                    offset: const Offset(0, 2),
-                  ),
-                ]
-              : null,
+          boxShadow:
+              active ? AppShadows.e1Of(Theme.of(context).brightness) : null,
         ),
         child: Text(
           label,

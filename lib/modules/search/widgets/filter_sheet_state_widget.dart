@@ -82,9 +82,7 @@ class _FilterSheetState extends State<FilterSheet> {
               children: [
                 Text(
                   'search.filter.title'.tr(),
-                  style: AppTextStyles.s18.copyWith(
-                    fontWeight: FontWeight.w700,
-                  ),
+                  style: context.themed(AppTextStyles.h2),
                 ),
                 const Spacer(),
                 TextButton(
@@ -107,7 +105,7 @@ class _FilterSheetState extends State<FilterSheet> {
             // Meal type
             Text(
               'search.filter.meal_type'.tr(),
-              style: AppTextStyles.s14.copyWith(fontWeight: FontWeight.w600),
+              style: context.themed(AppTextStyles.h2.copyWith(fontSize: 15)),
             ),
             AppGap.h8,
             Wrap(
@@ -131,7 +129,7 @@ class _FilterSheetState extends State<FilterSheet> {
             // Max calories
             Text(
               'search.filter.max_calories'.tr(),
-              style: AppTextStyles.s14.copyWith(fontWeight: FontWeight.w600),
+              style: context.themed(AppTextStyles.h2.copyWith(fontSize: 15)),
             ),
             AppGap.h8,
             Wrap(
@@ -154,7 +152,7 @@ class _FilterSheetState extends State<FilterSheet> {
             // Difficulty
             Text(
               'search.filter.difficulty'.tr(),
-              style: AppTextStyles.s14.copyWith(fontWeight: FontWeight.w600),
+              style: context.themed(AppTextStyles.h2.copyWith(fontSize: 15)),
             ),
             AppGap.h8,
             Wrap(

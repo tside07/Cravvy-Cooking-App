@@ -54,7 +54,7 @@ class TypeTab extends StatelessWidget {
                     child: Container(
                       decoration: BoxDecoration(
                         color: appColors.inputFieldBg,
-                        borderRadius: BorderRadius.circular(14),
+                        borderRadius: AppBorderRadius.button,
                         border: Border.all(color: appColors.inputBorder),
                       ),
                       child: TextField(
@@ -83,7 +83,7 @@ class TypeTab extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(width: 8),
-                  GestureDetector(
+                  Pressable(
                     onTap: onFilterTap,
                     child: Container(
                       width: 48,
@@ -92,7 +92,7 @@ class TypeTab extends StatelessWidget {
                         color: hasActiveFilter
                             ? AppColors.primary
                             : appColors.inputFieldBg,
-                        borderRadius: BorderRadius.circular(14),
+                        borderRadius: AppBorderRadius.button,
                         border: Border.all(
                           color: hasActiveFilter
                               ? AppColors.primary
@@ -180,7 +180,7 @@ class TypeTab extends StatelessWidget {
                         backgroundColor: AppColors.primary,
                         padding: EdgeInsets.zero,
                         shape: RoundedRectangleBorder(
-                          borderRadius: AppBorderRadius.a12,
+                          borderRadius: AppBorderRadius.button,
                         ),
                       ),
                       child: Icon(Icons.add_rounded, color: appColors.onPrimary),
@@ -250,16 +250,19 @@ class TypeTab extends StatelessWidget {
                       ? item.substring(item.indexOf(' ') + 1)
                       : item;
                   final isAdded = addedIngredients.contains(clean);
-                  return GestureDetector(
+                  return Pressable(
                     onTap: () => onAdd(item),
                     child: AnimatedContainer(
-                      duration: const Duration(milliseconds: 200),
+                      duration: (MediaQuery.maybeDisableAnimationsOf(context) ??
+                              false)
+                          ? Duration.zero
+                          : const Duration(milliseconds: 200),
                       padding: AppPad.h12v8,
                       decoration: BoxDecoration(
                         color: isAdded
                             ? appColors.chipSelectedBg
                             : appColors.chipBg,
-                        borderRadius: AppBorderRadius.a12,
+                        borderRadius: AppBorderRadius.chip,
                         border: Border.all(
                           color: isAdded
                               ? appColors.chipSelectedBorder
@@ -289,10 +292,7 @@ class TypeTab extends StatelessWidget {
                   children: [
                     Text(
                       'search.recipe_results'.tr(),
-                      style: AppTextStyles.s18.copyWith(
-                        fontWeight: FontWeight.w600,
-                        color: appColors.textPrimary,
-                      ),
+                      style: context.themed(AppTextStyles.h2),
                     ),
                     AppGap.w8,
                     Container(
@@ -387,10 +387,7 @@ class TypeTab extends StatelessWidget {
                   children: [
                     Text(
                       'search.recipe_suggestions'.tr(),
-                      style: AppTextStyles.s18.copyWith(
-                        fontWeight: FontWeight.w600,
-                        color: appColors.textPrimary,
-                      ),
+                      style: context.themed(AppTextStyles.h2),
                     ),
                     AppGap.w8,
                     Container(

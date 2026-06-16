@@ -138,13 +138,10 @@ class _SubscriptionView extends StatelessWidget {
                     Container(
                       decoration: BoxDecoration(
                         color: colors.cardSurface,
-                        borderRadius: AppBorderRadius.a16,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withValues(alpha: 0.05),
-                            blurRadius: 8,
-                          ),
-                        ],
+                        borderRadius: AppBorderRadius.card,
+                        boxShadow: AppShadows.e1Of(
+                          Theme.of(context).brightness,
+                        ),
                       ),
                       child: Column(
                         children: [
@@ -229,7 +226,7 @@ class _SubscriptionView extends StatelessWidget {
                         backgroundColor: AppColors.primary,
                         disabledBackgroundColor: colors.elevated,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(16),
+                          borderRadius: AppBorderRadius.button,
                         ),
                       ),
                       child: Text(

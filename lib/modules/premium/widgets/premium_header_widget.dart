@@ -42,10 +42,7 @@ class PremiumHeaderWidget extends StatelessWidget {
           'premium.title'.tr(),
           textAlign: TextAlign.center,
           overflow: TextOverflow.ellipsis,
-          style: context.themed(
-            AppTextStyles.s20,
-            fontWeight: FontWeight.w800,
-          ).copyWith(fontSize: 24, height: 1.25),
+          style: context.themed(AppTextStyles.h1),
         ),
         AppGap.h8,
 

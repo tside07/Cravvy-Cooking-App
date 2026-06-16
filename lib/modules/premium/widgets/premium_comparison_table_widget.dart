@@ -11,7 +11,7 @@ class PremiumComparisonTableWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final colors = context.appColors;
     return Container(
-      decoration: context.cardBox(radius: 16),
+      decoration: context.cardBox(),
       child: Column(
         children: [
           _buildHeader(context),

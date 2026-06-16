@@ -25,10 +25,8 @@ class AuthHeaderWidget extends StatelessWidget {
         Text(
           title,
           textAlign: textAlign,
-          style: AppTextStyles.s20.copyWith(
-            fontSize: 28,
-            fontWeight: FontWeight.w800,
-            color: appColors.textPrimary,
+          style: context.themed(
+            AppTextStyles.h1.copyWith(fontSize: 28),
           ),
         ),
         AppGap.h6,

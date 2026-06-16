@@ -19,7 +19,7 @@ class MealDetailTabsWidget extends StatelessWidget {
               padding: AppPad.a4,
               decoration: BoxDecoration(
                 color: colors.elevated,
-                borderRadius: AppBorderRadius.a16,
+                borderRadius: AppBorderRadius.card,
               ),
               child: Row(
                 children: MealDetailTab.values.map((tab) {

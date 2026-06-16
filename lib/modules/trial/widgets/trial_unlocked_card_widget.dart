@@ -11,15 +11,7 @@ class TrialUnlockedCardWidget extends StatelessWidget {
     return Container(
       width: double.infinity,
       padding: AppPad.a20,
-      decoration: context.cardBox(radius: 20).copyWith(
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.06),
-            blurRadius: 16,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
+      decoration: context.cardBox(),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

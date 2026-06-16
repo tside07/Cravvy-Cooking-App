@@ -23,8 +23,8 @@ class TermsCheckboxWidget extends StatelessWidget {
           child: Checkbox(
             value: agreedToTerms,
             activeColor: AppColors.primary,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(4),
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(AppRadius.c4),
             ),
             onChanged: onChanged,
           ),

@@ -75,7 +75,7 @@ class QuickActionsGridWidget extends StatelessWidget {
             padding: AppPad.l8,
             child: Text(
               'home.quick_actions'.tr(),
-              style: Theme.of(context).textTheme.headlineSmall,
+              style: context.themed(AppTextStyles.h2),
             ),
           ),
           AppGap.h14,

@@ -132,6 +132,11 @@ class _NavItem extends StatelessWidget {
 
     final inactiveColor = appColors.iconInactive;
 
+    final reduceMotion = MediaQuery.maybeDisableAnimationsOf(context) ?? false;
+
+    final animDuration =
+        reduceMotion ? Duration.zero : const Duration(milliseconds: 220);
+
 
 
     return Expanded(
@@ -150,7 +155,7 @@ class _NavItem extends StatelessWidget {
 
             AnimatedContainer(
 
-              duration: const Duration(milliseconds: 220),
+              duration: animDuration,
 
               padding: AppPad.h12v4,
 
@@ -182,13 +187,9 @@ class _NavItem extends StatelessWidget {
 
             AnimatedDefaultTextStyle(
 
-              duration: const Duration(milliseconds: 220),
+              duration: animDuration,
 
-              style: TextStyle(
-
-                fontFamily: 'Inter',
-
-                fontSize: 10,
+              style: AppTextStyles.s10.copyWith(
 
                 fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
 

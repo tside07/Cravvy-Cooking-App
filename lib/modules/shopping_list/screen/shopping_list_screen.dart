@@ -44,7 +44,7 @@ class _ShoppingListView extends StatelessWidget {
         ),
         title: Text(
           'shopping_list.cart_title'.tr(),
-          style: AppTextStyles.s18.copyWith(fontWeight: FontWeight.w700),
+          style: context.themed(AppTextStyles.h2),
         ),
         actions: [
           IconButton(

@@ -214,8 +214,8 @@ class _CookingModeScreenState extends State<CookingModeScreen> {
                         ),
                         Text(
                           widget.meal.name,
-                          style: AppTextStyles.s16.copyWith(
-                            fontWeight: FontWeight.w700,
+                          style: context.themed(
+                            AppTextStyles.h2.copyWith(fontSize: 17),
                           ),
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -229,7 +229,7 @@ class _CookingModeScreenState extends State<CookingModeScreen> {
                     ),
                     decoration: BoxDecoration(
                       color: AppColors.primaryLight,
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: AppBorderRadius.chip,
                     ),
                     child: Text(
                       '${_currentStep + 1}/${_steps.length}',
@@ -245,7 +245,7 @@ class _CookingModeScreenState extends State<CookingModeScreen> {
             Padding(
               padding: const EdgeInsets.fromLTRB(16, 12, 16, 0),
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(4),
+                borderRadius: const BorderRadius.all(AppRadius.c4),
                 child: LinearProgressIndicator(
                   value: progress,
                   backgroundColor: colors.elevated,
@@ -291,21 +291,16 @@ class _CookingModeScreenState extends State<CookingModeScreen> {
                       decoration: BoxDecoration(
                         gradient: AppColors.primaryGradient,
                         shape: BoxShape.circle,
-                        boxShadow: [
-                          BoxShadow(
-                            color: AppColors.primary.withValues(alpha: 0.3),
-                            blurRadius: 16,
-                            offset: const Offset(0, 6),
-                          ),
-                        ],
+                        boxShadow: AppShadows.e2Of(
+                          Theme.of(context).brightness,
+                        ),
                       ),
                       child: Center(
                         child: Text(
                           '${step.number}',
-                          style: const TextStyle(
+                          style: AppTextStyles.display.copyWith(
                             color: Colors.white,
                             fontSize: 24,
-                            fontWeight: FontWeight.w700,
                           ),
                         ),
                       ),
@@ -316,17 +311,7 @@ class _CookingModeScreenState extends State<CookingModeScreen> {
                         child: Container(
                           width: double.infinity,
                           padding: const EdgeInsets.all(24),
-                          decoration: BoxDecoration(
-                            color: colors.cardSurface,
-                            borderRadius: BorderRadius.circular(20),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withValues(alpha: 0.06),
-                                blurRadius: 16,
-                                offset: const Offset(0, 4),
-                              ),
-                            ],
-                          ),
+                          decoration: context.cardBox(radius: 16),
                           child: Text(
                             step.text,
                             style: context.themed(AppTextStyles.s16).copyWith(
@@ -343,9 +328,12 @@ class _CookingModeScreenState extends State<CookingModeScreen> {
                         padding: const EdgeInsets.all(20),
                         decoration: BoxDecoration(
                           color: colors.cardSurface,
-                          borderRadius: BorderRadius.circular(20),
+                          borderRadius: AppBorderRadius.card,
                           border: Border.all(
                             color: AppColors.primary.withValues(alpha: 0.2),
+                          ),
+                          boxShadow: AppShadows.e1Of(
+                            Theme.of(context).brightness,
                           ),
                         ),
                         child: Column(
@@ -377,11 +365,14 @@ class _CookingModeScreenState extends State<CookingModeScreen> {
                               _timeRemaining > 0
                                   ? _formatTime(_timeRemaining)
                                   : '${step.timerMinutes!.toString().padLeft(2, '0')}:00',
-                              style: TextStyle(
-                                fontSize: 40,
-                                fontWeight: FontWeight.w700,
-                                color: colors.textPrimary,
-                                letterSpacing: 2,
+                              style: context.themed(
+                                AppTextStyles.display.copyWith(
+                                  fontSize: 40,
+                                  letterSpacing: 2,
+                                  fontFeatures: const [
+                                    FontFeature.tabularFigures(),
+                                  ],
+                                ),
                               ),
                             ),
                             const SizedBox(height: 12),
@@ -394,7 +385,7 @@ class _CookingModeScreenState extends State<CookingModeScreen> {
                                       _resetTimer(step.timerMinutes!),
                                 ),
                                 const SizedBox(width: 12),
-                                GestureDetector(
+                                Pressable(
                                   onTap: _timerRunning
                                       ? _pauseTimer
                                       : () =>
@@ -405,14 +396,9 @@ class _CookingModeScreenState extends State<CookingModeScreen> {
                                     decoration: BoxDecoration(
                                       color: AppColors.primary,
                                       shape: BoxShape.circle,
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: AppColors.primary
-                                              .withValues(alpha: 0.4),
-                                          blurRadius: 12,
-                                          offset: const Offset(0, 4),
-                                        ),
-                                      ],
+                                      boxShadow: AppShadows.e2Of(
+                                        Theme.of(context).brightness,
+                                      ),
                                     ),
                                     child: Icon(
                                       _timerRunning
@@ -450,7 +436,7 @@ class _CookingModeScreenState extends State<CookingModeScreen> {
                           foregroundColor: colors.textPrimary,
                           side: BorderSide(color: colors.borderDivider),
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(14),
+                            borderRadius: AppBorderRadius.button,
                           ),
                           padding: const EdgeInsets.symmetric(vertical: 14),
                         ),
@@ -478,7 +464,7 @@ class _CookingModeScreenState extends State<CookingModeScreen> {
                         backgroundColor: AppColors.primary,
                         foregroundColor: Colors.white,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(14),
+                          borderRadius: AppBorderRadius.button,
                         ),
                         padding: const EdgeInsets.symmetric(vertical: 14),
                       ),
@@ -497,7 +483,7 @@ class _CookingModeScreenState extends State<CookingModeScreen> {
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        shape: RoundedRectangleBorder(borderRadius: AppBorderRadius.sheet),
         title: Text('cooking_mode.exit_title'.tr()),
         content: Text('cooking_mode.exit_body'.tr()),
         actions: [
@@ -528,7 +514,7 @@ class _TimerButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = context.appColors;
-    return GestureDetector(
+    return Pressable(
       onTap: onTap,
       child: Container(
         width: 44,

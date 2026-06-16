@@ -112,33 +112,40 @@ class _IngredientCartTile extends StatelessWidget {
     final colors = context.appColors;
 
     return Container(
-      margin: const EdgeInsets.only(bottom: 12),
+      margin: AppPad.b12,
       padding: AppPad.h16v12,
-      decoration: context.cardBox(radius: 16),
+      decoration: context.cardBox(),
       child: Row(
         children: [
-          GestureDetector(
+          // 24px checkbox inside a 44px tap target.
+          Pressable(
             onTap: onToggle,
-            child: Container(
-              width: 24,
-              height: 24,
-              decoration: BoxDecoration(
-                color: item.checked ? AppColors.success : Colors.transparent,
-                border: Border.all(
-                  color: item.checked
-                      ? AppColors.success
-                      : colors.borderDivider,
-                  width: 2,
+            child: SizedBox(
+              width: 44,
+              height: 44,
+              child: Center(
+                child: Container(
+                  width: 24,
+                  height: 24,
+                  decoration: BoxDecoration(
+                    color:
+                        item.checked ? AppColors.success : Colors.transparent,
+                    border: Border.all(
+                      color: item.checked
+                          ? AppColors.success
+                          : colors.borderDivider,
+                      width: 2,
+                    ),
+                    borderRadius: AppBorderRadius.a6,
+                  ),
+                  child: item.checked
+                      ? const Icon(Icons.check_rounded,
+                          color: Colors.white, size: 14)
+                      : null,
                 ),
-                borderRadius: AppBorderRadius.a6,
               ),
-              child: item.checked
-                  ? const Icon(Icons.check_rounded,
-                      color: Colors.white, size: 14)
-                  : null,
             ),
           ),
-          AppGap.w12,
           Expanded(
             child: Text(
               item.name,
@@ -185,18 +192,25 @@ class _StepperButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final colors = context.appColors;
 
+    // 30px visual inside a 44px tap target.
     return InkWell(
       onTap: onTap,
-      borderRadius: BorderRadius.circular(20),
-      child: Container(
-        width: 30,
-        height: 30,
-        decoration: BoxDecoration(
-          color: colors.elevated,
-          shape: BoxShape.circle,
-          border: Border.all(color: colors.borderDivider),
+      customBorder: const CircleBorder(),
+      child: SizedBox(
+        width: 44,
+        height: 44,
+        child: Center(
+          child: Container(
+            width: 30,
+            height: 30,
+            decoration: BoxDecoration(
+              color: colors.elevated,
+              shape: BoxShape.circle,
+              border: Border.all(color: colors.borderDivider),
+            ),
+            child: Icon(icon, size: 16, color: colors.textPrimary),
+          ),
         ),
-        child: Icon(icon, size: 16, color: colors.textPrimary),
       ),
     );
   }

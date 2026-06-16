@@ -25,14 +25,16 @@ class PremiumPriceCardWidget extends StatelessWidget {
     final period = isAnnual ? 'premium.period_year'.tr() : 'premium.period_month'.tr();
 
     return AnimatedSwitcher(
-      duration: const Duration(milliseconds: 300),
+      duration: (MediaQuery.maybeDisableAnimationsOf(context) ?? false)
+          ? Duration.zero
+          : const Duration(milliseconds: 300),
       child: Container(
         key: ValueKey(isAnnual),
         width: double.infinity,
         padding: AppPad.a20,
         decoration: BoxDecoration(
           color: AppColors.primary.withValues(alpha: 0.08),
-          borderRadius: AppBorderRadius.a16,
+          borderRadius: AppBorderRadius.card,
           border: Border.all(color: AppColors.primary.withValues(alpha: 0.3)),
         ),
         child: isAnnual
@@ -52,10 +54,10 @@ class PremiumPriceCardWidget extends StatelessWidget {
           children: [
             Text(
               '${_formatVND(price)}đ',
-              style: AppTextStyles.s20.copyWith(
+              style: AppTextStyles.display.copyWith(
                 fontSize: 28,
-                fontWeight: FontWeight.w700,
                 color: AppColors.primary,
+                fontFeatures: const [FontFeature.tabularFigures()],
               ),
             ),
             AppGap.w4,
@@ -116,10 +118,10 @@ class PremiumPriceCardWidget extends StatelessWidget {
           children: [
             Text(
               '${_formatVND(price)}đ',
-              style: AppTextStyles.s20.copyWith(
+              style: AppTextStyles.display.copyWith(
                 fontSize: 28,
-                fontWeight: FontWeight.w700,
                 color: AppColors.primary,
+                fontFeatures: const [FontFeature.tabularFigures()],
               ),
             ),
             AppGap.w4,

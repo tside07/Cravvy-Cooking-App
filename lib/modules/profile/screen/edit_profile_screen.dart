@@ -390,14 +390,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     begin: Alignment.centerLeft,
                     end: Alignment.centerRight,
                   ),
-                  borderRadius: AppBorderRadius.a16,
-                  boxShadow: [
-                    BoxShadow(
-                      color: AppColors.primary.withValues(alpha: 0.3),
-                      blurRadius: 12,
-                      offset: const Offset(0, 4),
-                    ),
-                  ],
+                  borderRadius: AppBorderRadius.button,
+                  boxShadow: AppShadows.e2Of(Theme.of(context).brightness),
                 ),
                 child: Material(
                   color: Colors.transparent,
@@ -424,7 +418,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 padding: AppPad.a16,
                 decoration: BoxDecoration(
                   color: AppColors.errorLight,
-                  borderRadius: AppBorderRadius.a16,
+                  borderRadius: AppBorderRadius.card,
                   border: Border.all(
                     color: AppColors.error.withValues(alpha: 0.25),
                   ),

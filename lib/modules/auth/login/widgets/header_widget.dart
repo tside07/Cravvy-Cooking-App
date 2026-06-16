@@ -11,10 +11,7 @@ class HeaderWidget extends StatelessWidget {
       children: [
         Text(
           'Welcome Back!',
-          style: context.themed(
-            AppTextStyles.s20,
-            fontWeight: FontWeight.w800,
-          ).copyWith(fontSize: 28),
+          style: context.themed(AppTextStyles.h1.copyWith(fontSize: 28)),
         ),
         AppGap.h6,
         Text(

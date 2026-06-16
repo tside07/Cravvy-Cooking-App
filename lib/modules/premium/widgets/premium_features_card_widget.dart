@@ -10,7 +10,7 @@ class PremiumFeaturesCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: AppPad.a20,
-      decoration: context.cardBox(radius: 16),
+      decoration: context.cardBox(),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

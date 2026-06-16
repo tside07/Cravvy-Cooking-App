@@ -22,7 +22,7 @@ class RecipeSuggestionTileWidget extends StatelessWidget {
             height: 52,
             decoration: BoxDecoration(
               color: AppColors.primaryLight,
-              borderRadius: AppBorderRadius.a12,
+              borderRadius: AppBorderRadius.chip,
             ),
             child: Center(
               child: Text(

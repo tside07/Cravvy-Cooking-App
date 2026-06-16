@@ -14,17 +14,14 @@ class RecipeSearchResultTile extends StatelessWidget {
     final emoji = MealTypeHelper.emoji(recipe.mealType);
     final lightColor = MealTypeHelper.lightColor(recipe.mealType);
 
-    return GestureDetector(
-      onTap: () => context.push(AppRouter.mealDetail, extra: recipe.toMeal()),
-      child: Container(
-        margin: const EdgeInsets.only(bottom: 10),
-        decoration: BoxDecoration(
-          color: appColors.cardSurface,
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: appColors.borderDivider),
-        ),
-        clipBehavior: Clip.hardEdge,
-        child: Row(
+    return Padding(
+      padding: AppPad.b10,
+      child: Pressable(
+        onTap: () => context.push(AppRouter.mealDetail, extra: recipe.toMeal()),
+        child: Container(
+          decoration: context.cardBox(radius: 16),
+          clipBehavior: Clip.hardEdge,
+          child: Row(
           children: [
             SizedBox(
               width: 80,
@@ -117,6 +114,7 @@ class RecipeSearchResultTile extends StatelessWidget {
                   color: appColors.textDisabled, size: 22),
             ),
           ],
+          ),
         ),
       ),
     );

@@ -197,8 +197,7 @@ class _Body extends StatelessWidget {
           Text(
             'auth.otp_title'.tr(),
             textAlign: TextAlign.center,
-            style: AppTextStyles.s20.copyWith(
-              fontWeight: FontWeight.w800,
+            style: AppTextStyles.h1.copyWith(
               color: PreAuthTheme.textPrimary,
               fontSize: 26,
             ),

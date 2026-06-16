@@ -18,7 +18,7 @@ class TrialCtaButtonWidget extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.primary,
           foregroundColor: Colors.white,
-          shape: RoundedRectangleBorder(borderRadius: AppBorderRadius.a16),
+          shape: RoundedRectangleBorder(borderRadius: AppBorderRadius.button),
           textStyle: AppTextStyles.s16.copyWith(fontWeight: FontWeight.w700),
         ),
       ),

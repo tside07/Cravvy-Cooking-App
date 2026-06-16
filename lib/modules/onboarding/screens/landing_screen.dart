@@ -176,7 +176,7 @@ class _LandingPrimaryButton extends StatelessWidget {
           foregroundColor: Colors.black,
           elevation: 0,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: AppBorderRadius.button,
           ),
           textStyle: const TextStyle(
             fontFamily: 'Inter',
@@ -213,7 +213,7 @@ class _LandingOutlineButton extends StatelessWidget {
           side: const BorderSide(color: Colors.white, width: 1),
           elevation: 0,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: AppBorderRadius.button,
           ),
           textStyle: const TextStyle(
             fontFamily: 'Inter',

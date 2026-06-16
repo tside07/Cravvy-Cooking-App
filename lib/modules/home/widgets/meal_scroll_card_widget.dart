@@ -15,10 +15,8 @@ class MealScrollCardWidget extends StatelessWidget {
       onTap: () => context.push(AppRouter.mealDetail, extra: meal),
       child: Container(
         width: 150,
-        margin: const EdgeInsets.only(
-          right: 12,
-        ), //TODO: no AppPad equivalent for this multi-directional EdgeInsets.only
-        decoration: context.cardBox(radius: 20),
+        margin: AppPad.r12,
+        decoration: context.cardBox(radius: 16),
         clipBehavior: Clip.hardEdge,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

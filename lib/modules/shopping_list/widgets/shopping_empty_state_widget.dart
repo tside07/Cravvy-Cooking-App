@@ -42,7 +42,7 @@ class ShoppingEmptyStateWidget extends StatelessWidget {
               AppGap.h24,
               Text(
                 'shopping_list.empty_title'.tr(),
-                style: AppTextStyles.s18.copyWith(fontWeight: FontWeight.w700),
+                style: context.themed(AppTextStyles.h2),
               ),
               AppGap.h8,
               Text(

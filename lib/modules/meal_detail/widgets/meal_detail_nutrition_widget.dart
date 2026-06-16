@@ -161,7 +161,7 @@ class _NutritionNote extends StatelessWidget {
       padding: AppPad.a16,
       decoration: BoxDecoration(
         color: AppColors.secondaryLight,
-        borderRadius: AppBorderRadius.a16,
+        borderRadius: AppBorderRadius.card,
       ),
       child: Row(
         children: [

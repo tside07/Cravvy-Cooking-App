@@ -295,8 +295,8 @@ class _SetupStep1ScreenState extends State<SetupStep1Screen> {
                           padding: AppPad.a16,
                           decoration: BoxDecoration(
                             color: colors.cardSurface,
-                            borderRadius: BorderRadius.circular(16),
-                            border: Border.all(color: AppColors.border),
+                            borderRadius: AppBorderRadius.card,
+                            border: Border.all(color: colors.borderDivider),
                           ),
                           child: Row(
                             children: [
@@ -313,10 +313,13 @@ class _SetupStep1ScreenState extends State<SetupStep1Screen> {
                                     AppGap.h4,
                                     Text(
                                       _bmi!.toStringAsFixed(1),
-                                      style: AppTextStyles.s20.copyWith(
-                                        fontWeight: FontWeight.w800,
-                                        fontSize: 28,
-                                        color: colors.textPrimary,
+                                      style: context.themed(
+                                        AppTextStyles.display.copyWith(
+                                          fontSize: 28,
+                                          fontFeatures: const [
+                                            FontFeature.tabularFigures(),
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ],
@@ -328,7 +331,7 @@ class _SetupStep1ScreenState extends State<SetupStep1Screen> {
                                   color: _bmiColor(
                                     colors,
                                   ).withValues(alpha: 0.1),
-                                  borderRadius: BorderRadius.circular(20),
+                                  borderRadius: AppBorderRadius.chip,
                                 ),
                                 child: Text(
                                   _bmiCategory,

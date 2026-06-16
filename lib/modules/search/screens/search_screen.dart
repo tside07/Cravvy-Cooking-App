@@ -137,14 +137,14 @@ class _SearchScreenState extends State<SearchScreen>
                 height: 44,
                 decoration: BoxDecoration(
                   color: appColors.cardSurface,
-                  borderRadius: BorderRadius.circular(14),
+                  borderRadius: AppBorderRadius.button,
                   border: Border.all(color: appColors.borderDivider),
                 ),
                 child: TabBar(
                   controller: _tabController,
                   indicator: BoxDecoration(
                     color: appColors.elevated,
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: AppBorderRadius.card,
                   ),
                   indicatorSize: TabBarIndicatorSize.tab,
                   dividerColor: Colors.transparent,

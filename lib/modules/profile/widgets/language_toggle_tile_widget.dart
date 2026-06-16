@@ -8,8 +8,6 @@ class LanguageToggleTileWidget extends StatelessWidget {
 
   static const _locales = [Locale('en', 'US'), Locale('vi', 'VN')];
 
-  static const _labels = {'en': '🇺🇸 English', 'vi': '🇻🇳 Tiếng Việt'};
-
   @override
   Widget build(BuildContext context) {
     final colors = context.appColors;
@@ -25,9 +23,10 @@ class LanguageToggleTileWidget extends StatelessWidget {
             height: 38,
             decoration: BoxDecoration(
               color: colors.elevated,
-              borderRadius: AppBorderRadius.a10,
+              borderRadius: AppBorderRadius.chip,
             ),
-            child: Center(child: Text('🌐', style: AppTextStyles.s18)),
+            child: Icon(Icons.language_rounded,
+                size: 20, color: colors.textPrimary),
           ),
           title: Text(
             'profile.language'.tr(),
@@ -35,13 +34,15 @@ class LanguageToggleTileWidget extends StatelessWidget {
               context,
             ).textTheme.titleMedium?.copyWith(color: colors.textPrimary),
           ),
-          trailing: GestureDetector(
+          trailing: Pressable(
             onTap: () {
               final next = isVi ? _locales[0] : _locales[1];
               context.setLocale(next);
             },
             child: AnimatedContainer(
-              duration: const Duration(milliseconds: 250),
+              duration: (MediaQuery.maybeDisableAnimationsOf(context) ?? false)
+                  ? Duration.zero
+                  : const Duration(milliseconds: 250),
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
               decoration: BoxDecoration(
                 color: AppColors.primaryLight,
@@ -53,11 +54,6 @@ class LanguageToggleTileWidget extends StatelessWidget {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(
-                    isVi ? '🇻🇳' : '🇺🇸',
-                    style: const TextStyle(fontSize: 16),
-                  ),
-                  const SizedBox(width: 6),
                   Text(
                     isVi ? 'VI' : 'EN',
                     style: AppTextStyles.s12.copyWith(

@@ -18,26 +18,23 @@ class PlanCardWidget extends StatelessWidget {
     final colors = context.appColors;
     return Padding(
       padding: AppPad.b10,
-      child: GestureDetector(
+      child: Pressable(
         onTap: onTap,
         child: AnimatedContainer(
-          duration: const Duration(milliseconds: 200),
+          duration: (MediaQuery.maybeDisableAnimationsOf(context) ?? false)
+              ? Duration.zero
+              : const Duration(milliseconds: 200),
           padding: AppPad.a16,
           decoration: BoxDecoration(
             color: isSelected ? AppColors.primaryLight : colors.cardSurface,
-            borderRadius: AppBorderRadius.a16,
+            borderRadius: AppBorderRadius.card,
             border: Border.all(
               color: isSelected ? AppColors.primary : colors.borderDivider,
               width: isSelected ? 2 : 1,
             ),
             boxShadow: isSelected
-                ? [
-                    BoxShadow(
-                      color: AppColors.primary.withValues(alpha: 0.15),
-                      blurRadius: 12,
-                    ),
-                  ]
-                : [],
+                ? AppShadows.e2Of(Theme.of(context).brightness)
+                : const [],
           ),
           child: Row(
             children: [

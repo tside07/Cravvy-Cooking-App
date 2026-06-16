@@ -161,16 +161,37 @@ class _MealList extends StatelessWidget {
 
               if (match.isNotEmpty) {
                 final meal = match.first;
-                return MealCardWidget(
-                  meal: meal,
-                  onToggle: () => provider.toggleMealLogged(meal.id),
-                  onSwap: () => _showSwapSheet(context, provider, meal),
-                  onRemove: () {
-                    provider.removeMeal(
-                      date: day.date,
-                      mealType: _typeStr(slotType),
-                    );
-                  },
+                // Animate (fade + scale) when a slot's meal is swapped out for
+                // a different recipe — transform/opacity only, no layout anim.
+                // Honor reduced-motion by collapsing the duration.
+                final reduceMotion =
+                    MediaQuery.maybeDisableAnimationsOf(context) ?? false;
+                return AnimatedSwitcher(
+                  duration: reduceMotion
+                      ? Duration.zero
+                      : const Duration(milliseconds: 250),
+                  switchInCurve: Curves.easeOut,
+                  switchOutCurve: Curves.easeIn,
+                  transitionBuilder: (child, animation) => FadeTransition(
+                    opacity: animation,
+                    child: ScaleTransition(
+                      scale: Tween<double>(begin: 0.97, end: 1.0)
+                          .animate(animation),
+                      child: child,
+                    ),
+                  ),
+                  child: MealCardWidget(
+                    key: ValueKey(meal.id),
+                    meal: meal,
+                    onToggle: () => provider.toggleMealLogged(meal.id),
+                    onSwap: () => _showSwapSheet(context, provider, meal),
+                    onRemove: () {
+                      provider.removeMeal(
+                        date: day.date,
+                        mealType: _typeStr(slotType),
+                      );
+                    },
+                  ),
                 );
               }
 

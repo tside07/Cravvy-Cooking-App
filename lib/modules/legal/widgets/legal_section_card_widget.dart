@@ -13,17 +13,9 @@ class LegalSectionCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final colors = context.appColors;
     return Container(
-      margin: const EdgeInsets.only(bottom: 16),
+      margin: AppPad.b16,
       padding: const EdgeInsets.all(20),
-      decoration: context.cardBox(radius: 20).copyWith(
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.04),
-            blurRadius: 12,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
+      decoration: context.cardBox(),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

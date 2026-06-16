@@ -29,10 +29,7 @@ class ResetPasswordSuccessWidget extends StatelessWidget {
             AppGap.h24,
             Text(
               'auth.reset_success_title'.tr(),
-              style: context.themed(
-                AppTextStyles.s20,
-                fontWeight: FontWeight.w700,
-              ).copyWith(fontSize: 24),
+              style: context.themed(AppTextStyles.h1),
             ),
             AppGap.h12,
             Text(

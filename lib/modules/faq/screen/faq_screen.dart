@@ -257,7 +257,7 @@ class _FAQScreenState extends State<FAQScreen> {
                                     ? AppColors.primary
                                     : colors.chipBg,
 
-                                borderRadius: BorderRadius.circular(20),
+                                borderRadius: AppBorderRadius.chip,
                               ),
 
                               child: Text(
@@ -328,7 +328,7 @@ class _FAQScreenState extends State<FAQScreen> {
               decoration: BoxDecoration(
                 color: AppColors.primaryLight,
 
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: AppBorderRadius.card,
 
                 border: Border.all(
                   color: AppColors.primary.withValues(alpha: 0.2),
@@ -426,15 +426,8 @@ class _FAQTile extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 10),
 
       decoration: context
-          .cardBox(radius: 16)
+          .cardBox()
           .copyWith(
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withValues(alpha: 0.04),
-                blurRadius: 8,
-              ),
-            ],
-
             border: isExpanded
                 ? Border.all(color: AppColors.primary.withValues(alpha: 0.25))
                 : null,

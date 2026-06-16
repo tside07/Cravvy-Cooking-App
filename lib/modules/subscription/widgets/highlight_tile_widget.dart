@@ -13,10 +13,8 @@ class HighlightTileWidget extends StatelessWidget {
       padding: AppPad.a14,
       decoration: BoxDecoration(
         color: colors.cardSurface,
-        borderRadius: AppBorderRadius.a14,
-        boxShadow: [
-          BoxShadow(color: Colors.black.withValues(alpha: 0.04), blurRadius: 8),
-        ],
+        borderRadius: AppBorderRadius.card,
+        boxShadow: AppShadows.e1Of(Theme.of(context).brightness),
       ),
       child: Row(
         children: [

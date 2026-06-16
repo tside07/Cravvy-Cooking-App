@@ -26,27 +26,25 @@ class MealCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = context.appColors;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
 
-    return GestureDetector(
-      onTap: () => context.push(AppRouter.mealDetail, extra: meal),
-      child: Container(
-        margin: const EdgeInsets.only(bottom: 12),
-        decoration: BoxDecoration(
-          color: colors.cardSurface,
-          borderRadius: AppBorderRadius.a16,
-          border: Border.all(
-            color: meal.isLogged
-                ? AppColors.success.withValues(alpha: 0.35)
-                : colors.borderDivider,
-          ),
-        ),
+    return Padding(
+      padding: AppPad.b12,
+      child: PressableCard(
+        onTap: () => context.push(AppRouter.mealDetail, extra: meal),
+        radius: 12,
+        // Logged meals keep a success-tinted outline; otherwise rely on shadow
+        // (light) / hairline border (dark) like the rest of the Soft UI cards.
+        border: meal.isLogged
+            ? Border.all(color: AppColors.success.withValues(alpha: 0.35))
+            : (isDark ? Border.all(color: colors.borderDivider) : null),
         child: Row(
           children: [
             // ── Ảnh món ăn ──────────────────────────────────────────────
             ClipRRect(
               borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(16),
-                bottomLeft: Radius.circular(16),
+                topLeft: Radius.circular(12),
+                bottomLeft: Radius.circular(12),
               ),
               child: meal.imageUrl.isNotEmpty
                   ? CachedNetworkImage(
@@ -168,50 +166,61 @@ class MealCardWidget extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // Log toggle
-                  GestureDetector(
+                  // Log toggle — 32px visual inside a 44px tap target.
+                  Pressable(
                     onTap: onToggle,
-                    child: AnimatedContainer(
-                      duration: const Duration(milliseconds: 200),
-                      width: 32,
-                      height: 32,
-                      decoration: BoxDecoration(
-                        color: meal.isLogged
-                            ? AppColors.success
-                            : colors.elevated,
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                          color: meal.isLogged
-                              ? AppColors.success
-                              : colors.borderDivider,
-                          width: 1.5,
+                    child: SizedBox(
+                      width: 44,
+                      height: 44,
+                      child: Center(
+                        child: AnimatedContainer(
+                          duration: const Duration(milliseconds: 200),
+                          width: 32,
+                          height: 32,
+                          decoration: BoxDecoration(
+                            color: meal.isLogged
+                                ? AppColors.success
+                                : colors.elevated,
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                              color: meal.isLogged
+                                  ? AppColors.success
+                                  : colors.borderDivider,
+                              width: 1.5,
+                            ),
+                          ),
+                          child: Icon(
+                            Icons.check_rounded,
+                            size: 16,
+                            color: meal.isLogged
+                                ? Colors.white
+                                : colors.textDisabled,
+                          ),
                         ),
-                      ),
-                      child: Icon(
-                        Icons.check_rounded,
-                        size: 16,
-                        color: meal.isLogged
-                            ? Colors.white
-                            : colors.textDisabled,
                       ),
                     ),
                   ),
-                  const SizedBox(height: 8),
 
-                  // Đổi món — tap mở sheet chọn món khác (như design mẫu)
-                  GestureDetector(
+                  // Đổi món — tap mở sheet chọn món khác (như design mẫu).
+                  Pressable(
                     onTap: onSwap,
-                    child: Container(
-                      width: 32,
-                      height: 32,
-                      decoration: BoxDecoration(
-                        color: colors.elevated,
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Icon(
-                        Icons.edit_outlined,
-                        size: 16,
-                        color: colors.textSecondary,
+                    child: SizedBox(
+                      width: 44,
+                      height: 44,
+                      child: Center(
+                        child: Container(
+                          width: 32,
+                          height: 32,
+                          decoration: BoxDecoration(
+                            color: colors.elevated,
+                            borderRadius: AppBorderRadius.chip,
+                          ),
+                          child: Icon(
+                            Icons.edit_outlined,
+                            size: 16,
+                            color: colors.textSecondary,
+                          ),
+                        ),
                       ),
                     ),
                   ),

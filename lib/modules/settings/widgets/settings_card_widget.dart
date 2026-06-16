@@ -13,16 +13,9 @@ class SettingsCardWidget extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: appColors.cardSurface,
-        borderRadius: AppBorderRadius.a16,
+        borderRadius: AppBorderRadius.card,
         border: isDark ? Border.all(color: appColors.borderDivider) : null,
-        boxShadow: isDark
-            ? null
-            : [
-                BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.04),
-                  blurRadius: 8,
-                ),
-              ],
+        boxShadow: isDark ? null : AppShadows.e1,
       ),
       child: Column(children: children),
     );
