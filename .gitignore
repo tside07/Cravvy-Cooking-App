@@ -65,3 +65,5 @@ supabase/.temp
 
 # Project docs / weekly progress (local only — not pushed)
 /docs/
+# Claude Code local memory (not part of the project)
+memory/
