@@ -4,6 +4,37 @@ import '../constants/app_constants.dart';
 import 'app_colors.dart';
 
 abstract final class AppTextStyles {
+  // ─── Heading / display (Baloo 2) ─────────────────────────────────────────
+  // Rounded display font for screen titles and large figures
+  // (calorie counts, "Hôm nay ăn gì?"). Body stays Inter.
+
+  /// Largest figure / hero number (e.g. calorie total).
+  static const TextStyle display = TextStyle(
+    fontFamily: AppConst.headingFont,
+    color: AppColors.textPrimary,
+    fontSize: 32,
+    fontWeight: FontWeight.w700,
+    height: 1.15,
+  );
+
+  /// Screen title.
+  static const TextStyle h1 = TextStyle(
+    fontFamily: AppConst.headingFont,
+    color: AppColors.textPrimary,
+    fontSize: 24,
+    fontWeight: FontWeight.w700,
+    height: 1.2,
+  );
+
+  /// Section heading.
+  static const TextStyle h2 = TextStyle(
+    fontFamily: AppConst.headingFont,
+    color: AppColors.textPrimary,
+    fontSize: 20,
+    fontWeight: FontWeight.w600,
+    height: 1.25,
+  );
+
   static const TextStyle s10 = TextStyle(
     fontFamily: AppConst.interFont,
     color: AppColors.textPrimary,

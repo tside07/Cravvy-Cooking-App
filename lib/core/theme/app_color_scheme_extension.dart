@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:cravvy_cooking_app/core/constants/app_color_tokens.dart';
+import 'package:cravvy_cooking_app/core/theme/app_shadows.dart';
 
 /// Semantic app colors beyond [ColorScheme], resolved per brightness.
 @immutable
@@ -213,14 +214,24 @@ extension AppColorContext on BuildContext {
         fontWeight: fontWeight,
       );
 
+  /// Soft UI card surface.
+  ///
+  /// Light mode conveys depth with a soft [shadow] (default [AppShadows.e1])
+  /// and no border. Dark mode keeps a hairline border for definition and
+  /// softer shadows. Pass `shadow: const []` to opt out (e.g. flat sections).
   BoxDecoration cardBox({
-    double radius = 24,
+    double radius = 12,
     Color? color,
     Border? border,
-  }) =>
-      BoxDecoration(
-        color: color ?? appColors.cardSurface,
-        borderRadius: BorderRadius.circular(radius),
-        border: border ?? Border.all(color: appColors.borderDivider),
-      );
+    List<BoxShadow>? shadow,
+  }) {
+    final isDark = Theme.of(this).brightness == Brightness.dark;
+    return BoxDecoration(
+      color: color ?? appColors.cardSurface,
+      borderRadius: BorderRadius.circular(radius),
+      border: border ??
+          (isDark ? Border.all(color: appColors.borderDivider) : null),
+      boxShadow: shadow ?? AppShadows.e1Of(Theme.of(this).brightness),
+    );
+  }
 }

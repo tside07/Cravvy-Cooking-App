@@ -112,4 +112,29 @@ abstract final class AppPad {
   static const EdgeInsets l24 = EdgeInsets.only(left: 24);
   static const EdgeInsets l26 = EdgeInsets.only(left: 26);
 
+  // ─── Asymmetric aliases (replace scattered EdgeInsets.only) ──────────────
+  // Right-only: horizontal gaps between cards/tiles in a row or list.
+  static const EdgeInsets r8 = EdgeInsets.only(right: 8);
+  static const EdgeInsets r12 = EdgeInsets.only(right: 12);
+
+  // Top-only.
+  static const EdgeInsets t6 = EdgeInsets.only(top: 6);
+  static const EdgeInsets t8 = EdgeInsets.only(top: 8);
+  static const EdgeInsets t20 = EdgeInsets.only(top: 20);
+
+  // Bottom-only: vertical gaps between stacked cards/items.
+  static const EdgeInsets b2 = EdgeInsets.only(bottom: 2);
+  static const EdgeInsets b6 = EdgeInsets.only(bottom: 6);
+  static const EdgeInsets b14 = EdgeInsets.only(bottom: 14);
+  static const EdgeInsets b16 = EdgeInsets.only(bottom: 16);
+
+  // Section-header card insets: 16 horizontal + a top offset, no bottom.
+  static const EdgeInsets section16t14 =
+      EdgeInsets.only(left: 16, top: 14, right: 16);
+  static const EdgeInsets section16t16 =
+      EdgeInsets.only(left: 16, top: 16, right: 16);
+  static const EdgeInsets section16t20 =
+      EdgeInsets.only(left: 16, top: 20, right: 16);
+  static const EdgeInsets section24t20 =
+      EdgeInsets.only(left: 24, top: 20, right: 24);
 }

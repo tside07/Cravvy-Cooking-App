@@ -7,6 +7,9 @@ abstract final class AppConst {
   static const String interFont = 'Inter';
   static const String nunitoFont = interFont;
 
+  /// Display/heading font: Baloo 2 (rounded, friendly, full Vietnamese support).
+  static const String headingFont = 'Baloo2';
+
   // Business
   static const int otpLength = 6;
   static const int minPasswordLength = 6;
