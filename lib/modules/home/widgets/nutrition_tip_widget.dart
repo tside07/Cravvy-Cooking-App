@@ -1,10 +1,14 @@
 import 'package:cravvy_cooking_app/init.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class NutritionTipWidget extends StatelessWidget {
   const NutritionTipWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final _ = context.locale;
+    final colors = context.appColors;
+
     return Container(
       margin: const EdgeInsets.only(
         left: 16,
@@ -36,7 +40,7 @@ class NutritionTipWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Tip of the Day',
+                  'home.tip_title'.tr(),
                   style: AppTextStyles.s12.copyWith(
                     fontWeight: FontWeight.w700,
                     color: AppColors.secondaryDark,
@@ -44,9 +48,9 @@ class NutritionTipWidget extends StatelessWidget {
                 ),
                 AppGap.h3,
                 Text(
-                  'Drink water 30 min before meals to help with digestion and portion control.',
+                  'home.tip_body'.tr(),
                   style: AppTextStyles.s12.copyWith(
-                    color: AppColors.textSecondary,
+                    color: colors.textSecondary,
                     height: 1.4,
                   ),
                 ),

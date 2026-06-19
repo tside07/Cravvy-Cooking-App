@@ -1,4 +1,5 @@
 import 'package:cravvy_cooking_app/init.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class PlanToggleWidget extends StatelessWidget {
   final bool isAnnual;
@@ -17,12 +18,12 @@ class PlanToggleWidget extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        _buildTab('Monthly', !isAnnual, () => onChanged(false)),
+        _buildTab(context, 'premium.monthly'.tr(), !isAnnual, () => onChanged(false)),
         AppGap.w8,
         Stack(
           clipBehavior: Clip.none,
           children: [
-            _buildTab('Annual', isAnnual, () => onChanged(true)),
+            _buildTab(context, 'premium.annual'.tr(), isAnnual, () => onChanged(true)),
             // "Save X%" badge
             Positioned(
               top: -10,
@@ -34,7 +35,7 @@ class PlanToggleWidget extends StatelessWidget {
                   borderRadius: AppBorderRadius.a8,
                 ),
                 child: Text(
-                  'Save $savePct%',
+                  'subscription.plan.annual_badge'.tr(),
                   style: AppTextStyles.s10.copyWith(
                     fontWeight: FontWeight.w700,
                     color: AppColors.white,
@@ -49,33 +50,35 @@ class PlanToggleWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildTab(String label, bool active, VoidCallback onTap) {
-    return GestureDetector(
+  Widget _buildTab(
+    BuildContext context,
+    String label,
+    bool active,
+    VoidCallback onTap,
+  ) {
+    final colors = context.appColors;
+    return Pressable(
       onTap: onTap,
       child: AnimatedContainer(
-        duration: const Duration(milliseconds: 200),
+        duration: (MediaQuery.maybeDisableAnimationsOf(context) ?? false)
+            ? Duration.zero
+            : const Duration(milliseconds: 200),
         padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 10),
         decoration: BoxDecoration(
-          color: active ? AppColors.surface : Colors.transparent,
+          color: active ? colors.cardSurface : Colors.transparent,
           borderRadius: AppBorderRadius.a24,
           border: Border.all(
-            color: active ? AppColors.border : Colors.transparent,
+            color: active ? colors.borderDivider : Colors.transparent,
           ),
-          boxShadow: active
-              ? [
-                  BoxShadow(
-                    color: Colors.black.withValues(alpha: 0.06),
-                    blurRadius: 6,
-                    offset: const Offset(0, 2),
-                  ),
-                ]
-              : null,
+          boxShadow:
+              active ? AppShadows.e1Of(Theme.of(context).brightness) : null,
         ),
         child: Text(
           label,
-          style: AppTextStyles.s14.copyWith(
+          style: context.themed(
+            AppTextStyles.s14,
+            color: active ? colors.textPrimary : colors.textSecondary,
             fontWeight: active ? FontWeight.w700 : FontWeight.w500,
-            color: active ? AppColors.textPrimary : AppColors.textSecondary,
           ),
         ),
       ),

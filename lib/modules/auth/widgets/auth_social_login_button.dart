@@ -1,5 +1,6 @@
 import 'package:cravvy_cooking_app/init.dart';
 import 'package:cravvy_cooking_app/resources/resources.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 enum SocialProvider { google, apple }
 
@@ -9,24 +10,27 @@ class AuthSocialLoginButton extends StatelessWidget {
     super.key,
     required this.provider,
     required this.onTap,
+    this.isEnabled = true,
   });
 
   final SocialProvider provider;
   final VoidCallback onTap;
+  final bool isEnabled;
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
     final isGoogle = provider == SocialProvider.google;
     return SizedBox(
       width: double.infinity,
       height: 52,
       child: OutlinedButton(
-        onPressed: onTap,
+        onPressed: isEnabled ? onTap : null,
         style: OutlinedButton.styleFrom(
-          backgroundColor: AppColors.surface,
-          side: const BorderSide(color: AppColors.border),
+          backgroundColor: colors.cardSurface,
+          side: BorderSide(color: colors.borderDivider),
           shape: RoundedRectangleBorder(
-            borderRadius: AppBorderRadius.a14,
+            borderRadius: AppBorderRadius.button,
           ),
         ),
         child: Row(
@@ -40,9 +44,11 @@ class AuthSocialLoginButton extends StatelessWidget {
               // const Icon(Icons.apple, size: 22, color: AppColors.textPrimary),
             AppGap.w10,
             Text(
-              isGoogle ? 'Continue with Google' : 'Continue with Apple',
-              style: AppTextStyles.s16.copyWith(
-                color: AppColors.textPrimary,
+              isGoogle
+                  ? 'auth.continue_google'.tr()
+                  : 'auth.continue_apple'.tr(),
+              style: context.themed(
+                AppTextStyles.s16,
                 fontWeight: FontWeight.w600,
               ),
             ),

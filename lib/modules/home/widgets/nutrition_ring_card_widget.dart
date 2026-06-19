@@ -1,4 +1,5 @@
 import 'package:cravvy_cooking_app/init.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:cravvy_cooking_app/modules/meal_plan/provider/meal_plan_provider.dart';
 import 'package:cravvy_cooking_app/modules/home/widgets/macro_bar_widget.dart';
 import 'package:cravvy_cooking_app/modules/home/widgets/ring_painter_widget.dart';
@@ -8,30 +9,29 @@ class NutritionRingCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Rebuild when locale changes (.tr() alone does not subscribe).
+    // Source: https://pub.dev/documentation/easy_localization/latest/easy_localization/EasyLocalization/of.html
+    final _ = context.locale;
+
     return Consumer<MealPlanProvider>(
       builder: (context, provider, _) {
-        final day = provider.selectedDay;
-        final remaining = provider.remainingCalories.clamp(0, 9999);
-        final progress = provider.calorieProgress;
+        final colors = context.appColors;
+        final day = provider.todayDay;
+        final remaining =
+            (provider.targetCalories - day.totalCalories).clamp(0, 9999);
+        final progress =
+            (day.totalCalories / provider.targetCalories).clamp(0.0, 1.0);
 
         return Container(
-          margin: const EdgeInsets.only(
-            left: 16,
-            top: 20,
-            right: 16,
-          ), //TODO: no AppPad equivalent for this multi-directional EdgeInsets.only
+          margin: AppPad.section16t20,
           padding: AppPad.a20,
-          decoration: BoxDecoration(
-            color: AppColors.surface,
-            borderRadius: AppBorderRadius.a24,
-            border: Border.all(color: AppColors.border),
-          ),
+          decoration: context.cardBox(radius: 16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Today's Nutrition",
-                style: Theme.of(context).textTheme.headlineSmall,
+                'home.nutrition_title'.tr(),
+                style: context.themed(AppTextStyles.h2),
               ),
               AppGap.h20,
               Row(
@@ -44,7 +44,10 @@ class NutritionRingCardWidget extends StatelessWidget {
                       children: [
                         CustomPaint(
                           size: const Size(130, 130),
-                          painter: RingPainterWidget(progress: progress),
+                          painter: RingPainterWidget(
+                            progress: progress,
+                            trackColor: colors.elevated,
+                          ),
                         ),
                         Center(
                           child: Column(
@@ -52,17 +55,18 @@ class NutritionRingCardWidget extends StatelessWidget {
                             children: [
                               Text(
                                 '$remaining',
-                                style: AppTextStyles.s20.copyWith(
-                                  fontSize: 30,
-                                  fontWeight: FontWeight.w800,
-                                  height: 1,
+                                style: context.themed(
+                                  AppTextStyles.display.copyWith(
+                                    fontSize: 34,
+                                    height: 1,
+                                  ),
                                 ),
                               ),
                               Text(
-                                'kcal left',
-                                style: AppTextStyles.s12.copyWith(
-                                  fontSize: 11,
-                                  color: AppColors.textSecondary,
+                                'home.kcal_left'.tr(),
+                                style: context.themed(
+                                  AppTextStyles.s12.copyWith(fontSize: 11),
+                                  color: colors.textSecondary,
                                 ),
                               ),
                             ],
@@ -78,7 +82,7 @@ class NutritionRingCardWidget extends StatelessWidget {
                     child: Column(
                       children: [
                         MacroBarWidget(
-                          label: 'Protein',
+                          label: 'home.macro_protein'.tr(),
                           current: day.totalProtein,
                           target: provider.targetProtein,
                           unit: 'g',
@@ -86,7 +90,7 @@ class NutritionRingCardWidget extends StatelessWidget {
                         ),
                         AppGap.h12,
                         MacroBarWidget(
-                          label: 'Carbs',
+                          label: 'home.macro_carbs'.tr(),
                           current: day.totalCarbs,
                           target: provider.targetCarbs,
                           unit: 'g',
@@ -94,7 +98,7 @@ class NutritionRingCardWidget extends StatelessWidget {
                         ),
                         AppGap.h12,
                         MacroBarWidget(
-                          label: 'Fat',
+                          label: 'home.macro_fat'.tr(),
                           current: day.totalFat,
                           target: provider.targetFat,
                           unit: 'g',

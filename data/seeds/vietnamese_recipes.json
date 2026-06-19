@@ -1,0 +1,3345 @@
+{
+  "version": 2,
+  "project": "Cravvy Cooking App",
+  "catalog_note": "Curated for eat-clean / urban 18-30, aligns with MVP meal plan + swap",
+  "count": 99,
+  "recipes": [
+    {
+      "name": "Phở gà nạc",
+      "description": "Phở gà nạc — gợi ý Cravvy cho bữa sáng, ~30 phút, khoảng 360 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: ức gà, bánh phở, hành lá, gừng, rau thơm.",
+      "image_url": null,
+      "calories": 360,
+      "protein": 28,
+      "carbs": 42,
+      "fat": 8,
+      "prep_time": 30,
+      "difficulty": "medium",
+      "meal_type": "breakfast",
+      "tags": [
+        "vietnamese",
+        "eat clean",
+        "high protein",
+        "chicken"
+      ],
+      "steps": [
+        "Chuẩn bị nguyên liệu: ức gà, bánh phở, hành lá, gừng, rau thơm.",
+        "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
+        "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
+        "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "ức gà",
+        "bánh phở",
+        "hành lá",
+        "gừng",
+        "rau thơm"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "pho-ga-nac",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Phở chay rau củ",
+      "description": "Phở chay rau củ — gợi ý Cravvy cho bữa sáng, ~25 phút, khoảng 300 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: bánh phở, đậu phụ, nấm, cà rốt, ngò.",
+      "image_url": null,
+      "calories": 300,
+      "protein": 12,
+      "carbs": 48,
+      "fat": 6,
+      "prep_time": 25,
+      "difficulty": "easy",
+      "meal_type": "breakfast",
+      "tags": [
+        "vietnamese",
+        "vegetarian",
+        "vegan",
+        "eat clean"
+      ],
+      "steps": [
+        "Chuẩn bị nguyên liệu: bánh phở, đậu phụ, nấm, cà rốt, ngò.",
+        "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
+        "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
+        "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "bánh phở",
+        "đậu phụ",
+        "nấm",
+        "cà rốt",
+        "ngò"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "pho-chay-rau-cu",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Cháo gà gạo lứt",
+      "description": "Cháo gà gạo lứt — gợi ý Cravvy cho bữa sáng, ~25 phút, khoảng 280 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: gạo lứt, ức gà, gừng, hành lá.",
+      "image_url": null,
+      "calories": 280,
+      "protein": 22,
+      "carbs": 36,
+      "fat": 6,
+      "prep_time": 25,
+      "difficulty": "easy",
+      "meal_type": "breakfast",
+      "tags": [
+        "vietnamese",
+        "eat clean",
+        "high protein",
+        "gluten-free",
+        "chicken"
+      ],
+      "steps": [
+        "Nấu cơm/gạo; chuẩn bị topping: gạo lứt, ức gà, gừng, hành lá.",
+        "Protein nướng/luộc hoặc xào ít dầu.",
+        "Xếp cơm + protein + rau, kiểm soát khẩu phần (~1 bát cơm).",
+        "Ghi nhận bữa ăn trên Cravvy để cập nhật calories."
+      ],
+      "ingredients": [
+        "gạo lứt",
+        "ức gà",
+        "gừng",
+        "hành lá"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "chao-ga-gao-lut",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Cháo yến mạch trứng",
+      "description": "Cháo yến mạch trứng — gợi ý Cravvy cho bữa sáng, ~15 phút, khoảng 320 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: yến mạch, trứng gà, sữa ít béo, chuối.",
+      "image_url": null,
+      "calories": 320,
+      "protein": 18,
+      "carbs": 38,
+      "fat": 10,
+      "prep_time": 15,
+      "difficulty": "easy",
+      "meal_type": "breakfast",
+      "tags": [
+        "eat clean",
+        "high protein",
+        "quick",
+        "egg"
+      ],
+      "steps": [
+        "Chuẩn bị nguyên liệu: yến mạch, trứng gà, sữa ít béo, chuối.",
+        "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
+        "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
+        "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "yến mạch",
+        "trứng gà",
+        "sữa ít béo",
+        "chuối"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "chao-yen-mach-trung",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Bánh mì trứng ốp la ",
+      "description": "Bánh mì trứng ốp la  — gợi ý Cravvy cho bữa sáng, ~12 phút, khoảng 340 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: bánh mì nguyên cám, trứng, rau xà lách, cà chua.",
+      "image_url": null,
+      "calories": 340,
+      "protein": 16,
+      "carbs": 36,
+      "fat": 14,
+      "prep_time": 12,
+      "difficulty": "easy",
+      "meal_type": "breakfast",
+      "tags": [
+        "vietnamese",
+        "eat clean",
+        "quick",
+        "egg",
+        "gluten"
+      ],
+      "steps": [
+        "Chuẩn bị nguyên liệu: bánh mì nguyên cám, trứng, rau xà lách, cà chua.",
+        "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
+        "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
+        "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "bánh mì nguyên cám",
+        "trứng",
+        "rau xà lách",
+        "cà chua"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "banh-mi-trung-op-la",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Bánh mì gà nướng",
+      "description": "Bánh mì gà nướng — gợi ý Cravvy cho bữa sáng, ~15 phút, khoảng 360 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: bánh mì, ức gà nướng, dưa leo, rau.",
+      "image_url": null,
+      "calories": 360,
+      "protein": 24,
+      "carbs": 38,
+      "fat": 12,
+      "prep_time": 15,
+      "difficulty": "easy",
+      "meal_type": "breakfast",
+      "tags": [
+        "vietnamese",
+        "eat clean",
+        "high protein",
+        "quick",
+        "chicken",
+        "gluten"
+      ],
+      "steps": [
+        "Chuẩn bị nguyên liệu: bánh mì, ức gà nướng, dưa leo, rau.",
+        "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
+        "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
+        "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "bánh mì",
+        "ức gà nướng",
+        "dưa leo",
+        "rau"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "banh-mi-ga-nuong",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Bánh cuốn chay",
+      "description": "Bánh cuốn chay — gợi ý Cravvy cho bữa sáng, ~25 phút, khoảng 260 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: bột gạo, nấm, đậu xanh, hành phi.",
+      "image_url": null,
+      "calories": 260,
+      "protein": 10,
+      "carbs": 44,
+      "fat": 6,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "breakfast",
+      "tags": [
+        "vietnamese",
+        "vegetarian",
+        "eat clean",
+        "low carb"
+      ],
+      "steps": [
+        "Chuẩn bị nguyên liệu: bột gạo, nấm, đậu xanh, hành phi.",
+        "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
+        "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
+        "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "bột gạo",
+        "nấm",
+        "đậu xanh",
+        "hành phi"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "banh-cuon-chay",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Xôi gấc ít đường",
+      "description": "Xôi gấc ít đường — gợi ý Cravvy cho bữa sáng, ~20 phút, khoảng 300 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: gạo nếp, gấc, đậu xanh, muối.",
+      "image_url": null,
+      "calories": 300,
+      "protein": 8,
+      "carbs": 58,
+      "fat": 5,
+      "prep_time": 20,
+      "difficulty": "easy",
+      "meal_type": "breakfast",
+      "tags": [
+        "vietnamese",
+        "vegetarian",
+        "low sugar",
+        "quick"
+      ],
+      "steps": [
+        "Chuẩn bị nguyên liệu: gạo nếp, gấc, đậu xanh, muối.",
+        "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
+        "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
+        "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "gạo nếp",
+        "gấc",
+        "đậu xanh",
+        "muối"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "xoi-gac-it-uong",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Sữa chua granola trái cây",
+      "description": "Sữa chua granola trái cây — gợi ý Cravvy cho bữa sáng, ~5 phút, khoảng 280 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: sữa chua không đường, granola, dâu, chuối.",
+      "image_url": null,
+      "calories": 280,
+      "protein": 14,
+      "carbs": 36,
+      "fat": 8,
+      "prep_time": 5,
+      "difficulty": "easy",
+      "meal_type": "breakfast",
+      "tags": [
+        "eat clean",
+        "quick",
+        "low sugar",
+        "dairy"
+      ],
+      "steps": [
+        "Chuẩn bị nguyên liệu: sữa chua không đường, granola, dâu, chuối.",
+        "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
+        "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
+        "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "sữa chua không đường",
+        "granola",
+        "dâu",
+        "chuối"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "sua-chua-granola-trai-cay",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Smoothie xanh táo bơ",
+      "description": "Smoothie xanh táo bơ — gợi ý Cravvy cho bữa sáng, ~5 phút, khoảng 260 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: bơ, táo, rau bina, nước dừa.",
+      "image_url": null,
+      "calories": 260,
+      "protein": 8,
+      "carbs": 28,
+      "fat": 14,
+      "prep_time": 5,
+      "difficulty": "easy",
+      "meal_type": "breakfast",
+      "tags": [
+        "eat clean",
+        "vegan",
+        "quick",
+        "low sugar",
+        "keto"
+      ],
+      "steps": [
+        "Chuẩn bị nguyên liệu: bơ, táo, rau bina, nước dừa.",
+        "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
+        "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
+        "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "bơ",
+        "táo",
+        "rau bina",
+        "nước dừa"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "smoothie-xanh-tao-bo",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Trứng luộc + bánh mì đen",
+      "description": "Trứng luộc + bánh mì đen — gợi ý Cravvy cho bữa sáng, ~12 phút, khoảng 300 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: trứng gà, bánh mì đen, bơ lạt.",
+      "image_url": null,
+      "calories": 300,
+      "protein": 18,
+      "carbs": 28,
+      "fat": 12,
+      "prep_time": 12,
+      "difficulty": "easy",
+      "meal_type": "breakfast",
+      "tags": [
+        "eat clean",
+        "high protein",
+        "quick",
+        "egg",
+        "gluten"
+      ],
+      "steps": [
+        "Chuẩn bị nguyên liệu: trứng gà, bánh mì đen, bơ lạt.",
+        "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
+        "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
+        "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "trứng gà",
+        "bánh mì đen",
+        "bơ lạt"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "trung-luoc-banh-mi-en",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Ức gà áp chảo rau củ",
+      "description": "Ức gà áp chảo rau củ — gợi ý Cravvy cho bữa sáng, ~18 phút, khoảng 320 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: ức gà, bông cải, cà rốt, tỏi.",
+      "image_url": null,
+      "calories": 320,
+      "protein": 36,
+      "carbs": 14,
+      "fat": 12,
+      "prep_time": 18,
+      "difficulty": "easy",
+      "meal_type": "breakfast",
+      "tags": [
+        "eat clean",
+        "high protein",
+        "low carb",
+        "quick",
+        "chicken"
+      ],
+      "steps": [
+        "Chuẩn bị nguyên liệu: ức gà, bông cải, cà rốt, tỏi.",
+        "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
+        "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
+        "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "ức gà",
+        "bông cải",
+        "cà rốt",
+        "tỏi"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "uc-ga-ap-chao-rau-cu",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Bún gà sốt me ít dầu",
+      "description": "Bún gà sốt me ít dầu — gợi ý Cravvy cho bữa sáng, ~25 phút, khoảng 380 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: bún, gà luộc, me, rau sống, đậu phộng.",
+      "image_url": null,
+      "calories": 380,
+      "protein": 26,
+      "carbs": 48,
+      "fat": 10,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "breakfast",
+      "tags": [
+        "vietnamese",
+        "eat clean",
+        "high protein",
+        "chicken"
+      ],
+      "steps": [
+        "Chuẩn bị nguyên liệu: bún, gà luộc, me, rau sống, đậu phộng.",
+        "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
+        "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
+        "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "bún",
+        "gà luộc",
+        "me",
+        "rau sống",
+        "đậu phộng"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "bun-ga-sot-me-it-dau",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Hủ tiếu Nam Vang rau",
+      "description": "Hủ tiếu Nam Vang rau — gợi ý Cravvy cho bữa sáng, ~30 phút, khoảng 360 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: hủ tiếu, thịt heo nạc, tôm, giá, hành.",
+      "image_url": null,
+      "calories": 360,
+      "protein": 20,
+      "carbs": 50,
+      "fat": 10,
+      "prep_time": 30,
+      "difficulty": "medium",
+      "meal_type": "breakfast",
+      "tags": [
+        "vietnamese",
+        "eat clean",
+        "pork"
+      ],
+      "steps": [
+        "Chuẩn bị nguyên liệu: hủ tiếu, thịt heo nạc, tôm, giá, hành.",
+        "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
+        "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
+        "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "hủ tiếu",
+        "thịt heo nạc",
+        "tôm",
+        "giá",
+        "hành"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "hu-tieu-nam-vang-rau",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Mì Quảng gà",
+      "description": "Mì Quảng gà — gợi ý Cravvy cho bữa sáng, ~30 phút, khoảng 400 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: mì Quảng, gà, trứng cút, rau sống.",
+      "image_url": null,
+      "calories": 400,
+      "protein": 24,
+      "carbs": 52,
+      "fat": 12,
+      "prep_time": 30,
+      "difficulty": "medium",
+      "meal_type": "breakfast",
+      "tags": [
+        "vietnamese",
+        "eat clean",
+        "chicken"
+      ],
+      "steps": [
+        "Chuẩn bị nguyên liệu: mì Quảng, gà, trứng cút, rau sống.",
+        "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
+        "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
+        "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "mì Quảng",
+        "gà",
+        "trứng cút",
+        "rau sống"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "mi-quang-ga",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Cháo cá hồi",
+      "description": "Cháo cá hồi — gợi ý Cravvy cho bữa sáng, ~25 phút, khoảng 290 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: gạo, cá hồi, gừng, hành lá.",
+      "image_url": null,
+      "calories": 290,
+      "protein": 24,
+      "carbs": 34,
+      "fat": 8,
+      "prep_time": 25,
+      "difficulty": "easy",
+      "meal_type": "breakfast",
+      "tags": [
+        "eat clean",
+        "high protein",
+        "seafood",
+        "gluten-free"
+      ],
+      "steps": [
+        "Chuẩn bị nguyên liệu: gạo, cá hồi, gừng, hành lá.",
+        "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
+        "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
+        "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "gạo",
+        "cá hồi",
+        "gừng",
+        "hành lá"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "chao-ca-hoi",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Bánh mì trứng rau",
+      "description": "Bánh mì trứng rau — gợi ý Cravvy cho bữa sáng, ~10 phút, khoảng 310 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: bánh mì, trứng, dưa leo, ngò.",
+      "image_url": null,
+      "calories": 310,
+      "protein": 14,
+      "carbs": 36,
+      "fat": 12,
+      "prep_time": 10,
+      "difficulty": "easy",
+      "meal_type": "breakfast",
+      "tags": [
+        "vietnamese",
+        "quick",
+        "egg",
+        "gluten"
+      ],
+      "steps": [
+        "Chuẩn bị nguyên liệu: bánh mì, trứng, dưa leo, ngò.",
+        "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
+        "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
+        "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "bánh mì",
+        "trứng",
+        "dưa leo",
+        "ngò"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "banh-mi-trung-rau",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Đậu hũ sốt cà breakfast bowl",
+      "description": "Đậu hũ sốt cà breakfast bowl — gợi ý Cravvy cho bữa sáng, ~15 phút, khoảng 260 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: đậu hũ, cà chua, nấm, hành tây.",
+      "image_url": null,
+      "calories": 260,
+      "protein": 18,
+      "carbs": 20,
+      "fat": 12,
+      "prep_time": 15,
+      "difficulty": "easy",
+      "meal_type": "breakfast",
+      "tags": [
+        "vegetarian",
+        "vegan",
+        "eat clean",
+        "quick",
+        "low carb"
+      ],
+      "steps": [
+        "Rửa sạch và thái: đậu hũ, cà chua, nấm, hành tây.",
+        "Chế biến protein (luộc/nướng) ít dầu, để nguội vừa phải.",
+        "Trộn rau, sốt nhẹ (ít muối/đường), chia khẩu phần một người.",
+        "Kiểm tra dị ứng đã khai báo trong hồ sơ Cravvy trước khi dùng."
+      ],
+      "ingredients": [
+        "đậu hũ",
+        "cà chua",
+        "nấm",
+        "hành tây"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "au-hu-sot-ca-breakfast-bowl",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Yogurt parfait đào",
+      "description": "Yogurt parfait đào — gợi ý Cravvy cho bữa sáng, ~5 phút, khoảng 240 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: sữa chua Hy Lạp, đào, hạt chia.",
+      "image_url": null,
+      "calories": 240,
+      "protein": 12,
+      "carbs": 32,
+      "fat": 6,
+      "prep_time": 5,
+      "difficulty": "easy",
+      "meal_type": "breakfast",
+      "tags": [
+        "eat clean",
+        "quick",
+        "low sugar",
+        "dairy"
+      ],
+      "steps": [
+        "Chuẩn bị nguyên liệu: sữa chua Hy Lạp, đào, hạt chia.",
+        "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
+        "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
+        "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "sữa chua Hy Lạp",
+        "đào",
+        "hạt chia"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "yogurt-parfait-ao",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Bún chả nướng ít mỡ",
+      "description": "Bún chả nướng ít mỡ — gợi ý Cravvy cho bữa sáng, ~35 phút, khoảng 420 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: bún, thịt heo nạc nướng, dưa góp, rau thơm.",
+      "image_url": null,
+      "calories": 420,
+      "protein": 28,
+      "carbs": 46,
+      "fat": 14,
+      "prep_time": 35,
+      "difficulty": "medium",
+      "meal_type": "breakfast",
+      "tags": [
+        "vietnamese",
+        "high protein",
+        "pork"
+      ],
+      "steps": [
+        "Chuẩn bị nguyên liệu: bún, thịt heo nạc nướng, dưa góp, rau thơm.",
+        "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
+        "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
+        "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "bún",
+        "thịt heo nạc nướng",
+        "dưa góp",
+        "rau thơm"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "bun-cha-nuong-it-mo",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Súp bí đỏ kem nhạt",
+      "description": "Súp bí đỏ kem nhạt — gợi ý Cravvy cho bữa sáng, ~20 phút, khoảng 180 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: bí đỏ, sữa ít béo, hành tây.",
+      "image_url": null,
+      "calories": 180,
+      "protein": 6,
+      "carbs": 24,
+      "fat": 6,
+      "prep_time": 20,
+      "difficulty": "easy",
+      "meal_type": "breakfast",
+      "tags": [
+        "vegetarian",
+        "eat clean",
+        "low carb",
+        "quick"
+      ],
+      "steps": [
+        "Chuẩn bị nguyên liệu: bí đỏ, sữa ít béo, hành tây.",
+        "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
+        "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
+        "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "bí đỏ",
+        "sữa ít béo",
+        "hành tây"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "sup-bi-o-kem-nhat",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Phở bò nạc",
+      "description": "Phở bò nạc — gợi ý Cravvy cho bữa sáng, ~40 phút, khoảng 400 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: thịt bò nạc, bánh phở, xương hầm, rau thơm.",
+      "image_url": null,
+      "calories": 400,
+      "protein": 30,
+      "carbs": 46,
+      "fat": 12,
+      "prep_time": 40,
+      "difficulty": "medium",
+      "meal_type": "breakfast",
+      "tags": [
+        "vietnamese",
+        "high protein",
+        "beef"
+      ],
+      "steps": [
+        "Chuẩn bị nguyên liệu: thịt bò nạc, bánh phở, xương hầm, rau thơm.",
+        "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
+        "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
+        "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "thịt bò nạc",
+        "bánh phở",
+        "xương hầm",
+        "rau thơm"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "pho-bo-nac",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Bánh bao chay nấm",
+      "description": "Bánh bao chay nấm — gợi ý Cravvy cho bữa sáng, ~20 phút, khoảng 280 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: bột mì, nấm hương, đậu phụ.",
+      "image_url": null,
+      "calories": 280,
+      "protein": 10,
+      "carbs": 48,
+      "fat": 6,
+      "prep_time": 20,
+      "difficulty": "easy",
+      "meal_type": "breakfast",
+      "tags": [
+        "vegetarian",
+        "eat clean",
+        "quick"
+      ],
+      "steps": [
+        "Chuẩn bị nguyên liệu: bột mì, nấm hương, đậu phụ.",
+        "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
+        "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
+        "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "bột mì",
+        "nấm hương",
+        "đậu phụ"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "banh-bao-chay-nam",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Cơm gạo lứt trứng chiên ít dầu",
+      "description": "Cơm gạo lứt trứng chiên ít dầu — gợi ý Cravvy cho bữa sáng, ~15 phút, khoảng 350 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: gạo lứt, trứng, cà rốt, đậu Hà Lan.",
+      "image_url": null,
+      "calories": 350,
+      "protein": 16,
+      "carbs": 48,
+      "fat": 10,
+      "prep_time": 15,
+      "difficulty": "easy",
+      "meal_type": "breakfast",
+      "tags": [
+        "eat clean",
+        "quick",
+        "egg",
+        "gluten-free"
+      ],
+      "steps": [
+        "Nấu cơm/gạo; chuẩn bị topping: gạo lứt, trứng, cà rốt, đậu Hà Lan.",
+        "Protein nướng/luộc hoặc xào ít dầu.",
+        "Xếp cơm + protein + rau, kiểm soát khẩu phần (~1 bát cơm).",
+        "Ghi nhận bữa ăn trên Cravvy để cập nhật calories."
+      ],
+      "ingredients": [
+        "gạo lứt",
+        "trứng",
+        "cà rốt",
+        "đậu Hà Lan"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "com-gao-lut-trung-chien-it-dau",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Sinh tố chuối đậu phộng",
+      "description": "Sinh tố chuối đậu phộng — gợi ý Cravvy cho bữa sáng, ~5 phút, khoảng 300 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: chuối, đậu phộng, sữa hạnh nhân.",
+      "image_url": null,
+      "calories": 300,
+      "protein": 12,
+      "carbs": 38,
+      "fat": 12,
+      "prep_time": 5,
+      "difficulty": "easy",
+      "meal_type": "breakfast",
+      "tags": [
+        "eat clean",
+        "high protein",
+        "quick",
+        "peanut"
+      ],
+      "steps": [
+        "Chuẩn bị nguyên liệu: chuối, đậu phộng, sữa hạnh nhân.",
+        "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
+        "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
+        "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "chuối",
+        "đậu phộng",
+        "sữa hạnh nhân"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "sinh-to-chuoi-au-phong",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Gỏi cuốn tôm gạo lứt",
+      "description": "Gỏi cuốn tôm gạo lứt — gợi ý Cravvy cho bữa trưa, ~20 phút, khoảng 280 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: tôm, bánh tráng, bún, rau sống, bạc hà.",
+      "image_url": null,
+      "calories": 280,
+      "protein": 22,
+      "carbs": 32,
+      "fat": 8,
+      "prep_time": 20,
+      "difficulty": "easy",
+      "meal_type": "lunch",
+      "tags": [
+        "vietnamese",
+        "eat clean",
+        "low carb",
+        "seafood",
+        "shellfish",
+        "quick"
+      ],
+      "steps": [
+        "Rửa sạch và thái: tôm, bánh tráng, bún, rau sống, bạc hà.",
+        "Chế biến protein (luộc/nướng) ít dầu, để nguội vừa phải.",
+        "Trộn rau, sốt nhẹ (ít muối/đường), chia khẩu phần một người.",
+        "Kiểm tra dị ứng đã khai báo trong hồ sơ Cravvy trước khi dùng."
+      ],
+      "ingredients": [
+        "tôm",
+        "bánh tráng",
+        "bún",
+        "rau sống",
+        "bạc hà"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "goi-cuon-tom-gao-lut",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Gỏi gà bắp cải",
+      "description": "Gỏi gà bắp cải — gợi ý Cravvy cho bữa trưa, ~15 phút, khoảng 260 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: ức gà, bắp cải, cà rốt, đậu phộng.",
+      "image_url": null,
+      "calories": 260,
+      "protein": 28,
+      "carbs": 18,
+      "fat": 8,
+      "prep_time": 15,
+      "difficulty": "easy",
+      "meal_type": "lunch",
+      "tags": [
+        "eat clean",
+        "high protein",
+        "low carb",
+        "quick",
+        "chicken"
+      ],
+      "steps": [
+        "Rửa sạch và thái: ức gà, bắp cải, cà rốt, đậu phộng.",
+        "Chế biến protein (luộc/nướng) ít dầu, để nguội vừa phải.",
+        "Trộn rau, sốt nhẹ (ít muối/đường), chia khẩu phần một người.",
+        "Kiểm tra dị ứng đã khai báo trong hồ sơ Cravvy trước khi dùng."
+      ],
+      "ingredients": [
+        "ức gà",
+        "bắp cải",
+        "cà rốt",
+        "đậu phộng"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "goi-ga-bap-cai",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Gỏi đu đủ tôm",
+      "description": "Gỏi đu đủ tôm — gợi ý Cravvy cho bữa trưa, ~15 phút, khoảng 240 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: đu đủ xanh, tôm luộc, rau thơm, me.",
+      "image_url": null,
+      "calories": 240,
+      "protein": 20,
+      "carbs": 22,
+      "fat": 8,
+      "prep_time": 15,
+      "difficulty": "easy",
+      "meal_type": "lunch",
+      "tags": [
+        "vietnamese",
+        "eat clean",
+        "low carb",
+        "seafood",
+        "quick"
+      ],
+      "steps": [
+        "Rửa sạch và thái: đu đủ xanh, tôm luộc, rau thơm, me.",
+        "Chế biến protein (luộc/nướng) ít dầu, để nguội vừa phải.",
+        "Trộn rau, sốt nhẹ (ít muối/đường), chia khẩu phần một người.",
+        "Kiểm tra dị ứng đã khai báo trong hồ sơ Cravvy trước khi dùng."
+      ],
+      "ingredients": [
+        "đu đủ xanh",
+        "tôm luộc",
+        "rau thơm",
+        "me"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "goi-u-u-tom",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Cơm gạo lứt gà nướng",
+      "description": "Cơm gạo lứt gà nướng — gợi ý Cravvy cho bữa trưa, ~30 phút, khoảng 480 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: gạo lứt, đùi gà bỏ da, rau luộc.",
+      "image_url": null,
+      "calories": 480,
+      "protein": 38,
+      "carbs": 52,
+      "fat": 12,
+      "prep_time": 30,
+      "difficulty": "medium",
+      "meal_type": "lunch",
+      "tags": [
+        "eat clean",
+        "high protein",
+        "gluten-free",
+        "chicken"
+      ],
+      "steps": [
+        "Nấu cơm/gạo; chuẩn bị topping: gạo lứt, đùi gà bỏ da, rau luộc.",
+        "Protein nướng/luộc hoặc xào ít dầu.",
+        "Xếp cơm + protein + rau, kiểm soát khẩu phần (~1 bát cơm).",
+        "Ghi nhận bữa ăn trên Cravvy để cập nhật calories."
+      ],
+      "ingredients": [
+        "gạo lứt",
+        "đùi gà bỏ da",
+        "rau luộc"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "com-gao-lut-ga-nuong",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Cơm tấm sườn nướng (phần fit)",
+      "description": "Cơm tấm sườn nướng (phần fit) — gợi ý Cravvy cho bữa trưa, ~25 phút, khoảng 520 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: sườn heo nạc, gạo tấm, dưa leo, đồ chua.",
+      "image_url": null,
+      "calories": 520,
+      "protein": 32,
+      "carbs": 58,
+      "fat": 16,
+      "prep_time": 25,
+      "difficulty": "easy",
+      "meal_type": "lunch",
+      "tags": [
+        "vietnamese",
+        "high protein",
+        "pork"
+      ],
+      "steps": [
+        "Nấu cơm/gạo; chuẩn bị topping: sườn heo nạc, gạo tấm, dưa leo, đồ chua.",
+        "Protein nướng/luộc hoặc xào ít dầu.",
+        "Xếp cơm + protein + rau, kiểm soát khẩu phần (~1 bát cơm).",
+        "Ghi nhận bữa ăn trên Cravvy để cập nhật calories."
+      ],
+      "ingredients": [
+        "sườn heo nạc",
+        "gạo tấm",
+        "dưa leo",
+        "đồ chua"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "com-tam-suon-nuong-phan-fit",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Cơm rang dưa bò ít dầu",
+      "description": "Cơm rang dưa bò ít dầu — gợi ý Cravvy cho bữa trưa, ~18 phút, khoảng 460 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: thịt bò, cơm nguội, dưa chuột, trứng.",
+      "image_url": null,
+      "calories": 460,
+      "protein": 28,
+      "carbs": 54,
+      "fat": 14,
+      "prep_time": 18,
+      "difficulty": "easy",
+      "meal_type": "lunch",
+      "tags": [
+        "vietnamese",
+        "high protein",
+        "quick",
+        "beef"
+      ],
+      "steps": [
+        "Nấu cơm/gạo; chuẩn bị topping: thịt bò, cơm nguội, dưa chuột, trứng.",
+        "Protein nướng/luộc hoặc xào ít dầu.",
+        "Xếp cơm + protein + rau, kiểm soát khẩu phần (~1 bát cơm).",
+        "Ghi nhận bữa ăn trên Cravvy để cập nhật calories."
+      ],
+      "ingredients": [
+        "thịt bò",
+        "cơm nguội",
+        "dưa chuột",
+        "trứng"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "com-rang-dua-bo-it-dau",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Cơm chiên rau củ trứng",
+      "description": "Cơm chiên rau củ trứng — gợi ý Cravvy cho bữa trưa, ~15 phút, khoảng 380 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: cơm, trứng, đậu Hà Lan, cà rốt.",
+      "image_url": null,
+      "calories": 380,
+      "protein": 14,
+      "carbs": 58,
+      "fat": 10,
+      "prep_time": 15,
+      "difficulty": "easy",
+      "meal_type": "lunch",
+      "tags": [
+        "vegetarian",
+        "eat clean",
+        "quick",
+        "egg"
+      ],
+      "steps": [
+        "Nấu cơm/gạo; chuẩn bị topping: cơm, trứng, đậu Hà Lan, cà rốt.",
+        "Protein nướng/luộc hoặc xào ít dầu.",
+        "Xếp cơm + protein + rau, kiểm soát khẩu phần (~1 bát cơm).",
+        "Ghi nhận bữa ăn trên Cravvy để cập nhật calories."
+      ],
+      "ingredients": [
+        "cơm",
+        "trứng",
+        "đậu Hà Lan",
+        "cà rốt"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "com-chien-rau-cu-trung",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Cơm chay đậu hũ sốt cà",
+      "description": "Cơm chay đậu hũ sốt cà — gợi ý Cravvy cho bữa trưa, ~20 phút, khoảng 360 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: gạo, đậu hũ, cà chua, nấm.",
+      "image_url": null,
+      "calories": 360,
+      "protein": 18,
+      "carbs": 48,
+      "fat": 12,
+      "prep_time": 20,
+      "difficulty": "easy",
+      "meal_type": "lunch",
+      "tags": [
+        "vegetarian",
+        "vegan",
+        "eat clean",
+        "quick"
+      ],
+      "steps": [
+        "Nấu cơm/gạo; chuẩn bị topping: gạo, đậu hũ, cà chua, nấm.",
+        "Protein nướng/luộc hoặc xào ít dầu.",
+        "Xếp cơm + protein + rau, kiểm soát khẩu phần (~1 bát cơm).",
+        "Ghi nhận bữa ăn trên Cravvy để cập nhật calories."
+      ],
+      "ingredients": [
+        "gạo",
+        "đậu hũ",
+        "cà chua",
+        "nấm"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "com-chay-au-hu-sot-ca",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Cơm cá hồi sốt teriyaki nhạt",
+      "description": "Cơm cá hồi sốt teriyaki nhạt — gợi ý Cravvy cho bữa trưa, ~25 phút, khoảng 440 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: cá hồi, gạo, bông cải, tương ít muối.",
+      "image_url": null,
+      "calories": 440,
+      "protein": 34,
+      "carbs": 42,
+      "fat": 14,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "lunch",
+      "tags": [
+        "eat clean",
+        "high protein",
+        "seafood",
+        "gluten-free"
+      ],
+      "steps": [
+        "Nấu cơm/gạo; chuẩn bị topping: cá hồi, gạo, bông cải, tương ít muối.",
+        "Protein nướng/luộc hoặc xào ít dầu.",
+        "Xếp cơm + protein + rau, kiểm soát khẩu phần (~1 bát cơm).",
+        "Ghi nhận bữa ăn trên Cravvy để cập nhật calories."
+      ],
+      "ingredients": [
+        "cá hồi",
+        "gạo",
+        "bông cải",
+        "tương ít muối"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "com-ca-hoi-sot-teriyaki-nhat",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Cơm bò lúc lắc",
+      "description": "Cơm bò lúc lắc — gợi ý Cravvy cho bữa trưa, ~22 phút, khoảng 500 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: thịt bò, cơm, cà chua, dưa leo.",
+      "image_url": null,
+      "calories": 500,
+      "protein": 36,
+      "carbs": 48,
+      "fat": 18,
+      "prep_time": 22,
+      "difficulty": "medium",
+      "meal_type": "lunch",
+      "tags": [
+        "vietnamese",
+        "high protein",
+        "beef"
+      ],
+      "steps": [
+        "Nấu cơm/gạo; chuẩn bị topping: thịt bò, cơm, cà chua, dưa leo.",
+        "Protein nướng/luộc hoặc xào ít dầu.",
+        "Xếp cơm + protein + rau, kiểm soát khẩu phần (~1 bát cơm).",
+        "Ghi nhận bữa ăn trên Cravvy để cập nhật calories."
+      ],
+      "ingredients": [
+        "thịt bò",
+        "cơm",
+        "cà chua",
+        "dưa leo"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "com-bo-luc-lac",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Bún thịt nướng chảo",
+      "description": "Bún thịt nướng chảo — gợi ý Cravvy cho bữa trưa, ~22 phút, khoảng 420 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: bún, thịt heo nạc, dưa góp, rau.",
+      "image_url": null,
+      "calories": 420,
+      "protein": 28,
+      "carbs": 50,
+      "fat": 12,
+      "prep_time": 22,
+      "difficulty": "easy",
+      "meal_type": "lunch",
+      "tags": [
+        "vietnamese",
+        "eat clean",
+        "high protein",
+        "pork"
+      ],
+      "steps": [
+        "Chuẩn bị nguyên liệu: bún, thịt heo nạc, dưa góp, rau.",
+        "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
+        "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
+        "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "bún",
+        "thịt heo nạc",
+        "dưa góp",
+        "rau"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "bun-thit-nuong-chao",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Bún cá chua cay nhẹ",
+      "description": "Bún cá chua cay nhẹ — gợi ý Cravvy cho bữa trưa, ~28 phút, khoảng 360 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: cá phi lê, bún, cà chua, thì là.",
+      "image_url": null,
+      "calories": 360,
+      "protein": 26,
+      "carbs": 44,
+      "fat": 8,
+      "prep_time": 28,
+      "difficulty": "medium",
+      "meal_type": "lunch",
+      "tags": [
+        "vietnamese",
+        "eat clean",
+        "seafood"
+      ],
+      "steps": [
+        "Chuẩn bị nguyên liệu: cá phi lê, bún, cà chua, thì là.",
+        "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
+        "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
+        "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "cá phi lê",
+        "bún",
+        "cà chua",
+        "thì là"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "bun-ca-chua-cay-nhe",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Mì xào bò rau củ",
+      "description": "Mì xào bò rau củ — gợi ý Cravvy cho bữa trưa, ~18 phút, khoảng 480 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: mì trứng, thịt bò, bắp cải, cà rốt.",
+      "image_url": null,
+      "calories": 480,
+      "protein": 30,
+      "carbs": 52,
+      "fat": 16,
+      "prep_time": 18,
+      "difficulty": "easy",
+      "meal_type": "lunch",
+      "tags": [
+        "vietnamese",
+        "high protein",
+        "quick",
+        "beef",
+        "gluten"
+      ],
+      "steps": [
+        "Chuẩn bị nguyên liệu: mì trứng, thịt bò, bắp cải, cà rốt.",
+        "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
+        "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
+        "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "mì trứng",
+        "thịt bò",
+        "bắp cải",
+        "cà rốt"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "mi-xao-bo-rau-cu",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Mì hoành thánh nhạt mặn",
+      "description": "Mì hoành thánh nhạt mặn — gợi ý Cravvy cho bữa trưa, ~25 phút, khoảng 400 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: mì, hoành thánh, rau cải, hành.",
+      "image_url": null,
+      "calories": 400,
+      "protein": 22,
+      "carbs": 48,
+      "fat": 12,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "lunch",
+      "tags": [
+        "vietnamese",
+        "pork",
+        "gluten"
+      ],
+      "steps": [
+        "Chuẩn bị nguyên liệu: mì, hoành thánh, rau cải, hành.",
+        "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
+        "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
+        "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "mì",
+        "hoành thánh",
+        "rau cải",
+        "hành"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "mi-hoanh-thanh-nhat-man",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Salad quinoa gà nướng",
+      "description": "Salad quinoa gà nướng — gợi ý Cravvy cho bữa trưa, ~20 phút, khoảng 380 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: quinoa, gà nướng, xà lách, dầu olive.",
+      "image_url": null,
+      "calories": 380,
+      "protein": 34,
+      "carbs": 32,
+      "fat": 12,
+      "prep_time": 20,
+      "difficulty": "easy",
+      "meal_type": "lunch",
+      "tags": [
+        "eat clean",
+        "high protein",
+        "low carb",
+        "gluten-free",
+        "chicken",
+        "quick"
+      ],
+      "steps": [
+        "Rửa sạch và thái: quinoa, gà nướng, xà lách, dầu olive.",
+        "Chế biến protein (luộc/nướng) ít dầu, để nguội vừa phải.",
+        "Trộn rau, sốt nhẹ (ít muối/đường), chia khẩu phần một người.",
+        "Kiểm tra dị ứng đã khai báo trong hồ sơ Cravvy trước khi dùng."
+      ],
+      "ingredients": [
+        "quinoa",
+        "gà nướng",
+        "xà lách",
+        "dầu olive"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "salad-quinoa-ga-nuong",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Bowl ức gà sốt yogurt",
+      "description": "Bowl ức gà sốt yogurt — gợi ý Cravvy cho bữa trưa, ~18 phút, khoảng 360 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: ức gà, khoai lang, bông cải, sữa chua.",
+      "image_url": null,
+      "calories": 360,
+      "protein": 38,
+      "carbs": 28,
+      "fat": 10,
+      "prep_time": 18,
+      "difficulty": "easy",
+      "meal_type": "lunch",
+      "tags": [
+        "eat clean",
+        "high protein",
+        "low carb",
+        "quick",
+        "chicken",
+        "dairy"
+      ],
+      "steps": [
+        "Rửa sạch và thái: ức gà, khoai lang, bông cải, sữa chua.",
+        "Chế biến protein (luộc/nướng) ít dầu, để nguội vừa phải.",
+        "Trộn rau, sốt nhẹ (ít muối/đường), chia khẩu phần một người.",
+        "Kiểm tra dị ứng đã khai báo trong hồ sơ Cravvy trước khi dùng."
+      ],
+      "ingredients": [
+        "ức gà",
+        "khoai lang",
+        "bông cải",
+        "sữa chua"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "bowl-uc-ga-sot-yogurt",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Canh chua cá nhẹ",
+      "description": "Canh chua cá nhẹ — gợi ý Cravvy cho bữa trưa, ~25 phút, khoảng 260 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: cá basa, cà chua, dứa, đậu bắp.",
+      "image_url": null,
+      "calories": 260,
+      "protein": 24,
+      "carbs": 18,
+      "fat": 8,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "lunch",
+      "tags": [
+        "vietnamese",
+        "eat clean",
+        "low carb",
+        "seafood"
+      ],
+      "steps": [
+        "Chuẩn bị nguyên liệu: cá basa, cà chua, dứa, đậu bắp.",
+        "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
+        "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
+        "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "cá basa",
+        "cà chua",
+        "dứa",
+        "đậu bắp"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "canh-chua-ca-nhe",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Canh bí đỏ thịt bằm nạc",
+      "description": "Canh bí đỏ thịt bằm nạc — gợi ý Cravvy cho bữa trưa, ~25 phút, khoảng 220 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: bí đỏ, thịt heo bằm nạc, hành.",
+      "image_url": null,
+      "calories": 220,
+      "protein": 18,
+      "carbs": 16,
+      "fat": 10,
+      "prep_time": 25,
+      "difficulty": "easy",
+      "meal_type": "lunch",
+      "tags": [
+        "vietnamese",
+        "eat clean",
+        "pork"
+      ],
+      "steps": [
+        "Chuẩn bị nguyên liệu: bí đỏ, thịt heo bằm nạc, hành.",
+        "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
+        "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
+        "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "bí đỏ",
+        "thịt heo bằm nạc",
+        "hành"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "canh-bi-o-thit-bam-nac",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Rau muống xào tỏi",
+      "description": "Rau muống xào tỏi — gợi ý Cravvy cho bữa trưa, ~10 phút, khoảng 120 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: rau muống, tỏi, dầu olive.",
+      "image_url": null,
+      "calories": 120,
+      "protein": 4,
+      "carbs": 14,
+      "fat": 6,
+      "prep_time": 10,
+      "difficulty": "easy",
+      "meal_type": "lunch",
+      "tags": [
+        "vegetarian",
+        "vegan",
+        "eat clean",
+        "quick",
+        "low carb"
+      ],
+      "steps": [
+        "Chuẩn bị nguyên liệu: rau muống, tỏi, dầu olive.",
+        "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
+        "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
+        "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "rau muống",
+        "tỏi",
+        "dầu olive"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "rau-muong-xao-toi",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Đậu phụ sốt cà",
+      "description": "Đậu phụ sốt cà — gợi ý Cravvy cho bữa trưa, ~15 phút, khoảng 240 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: đậu phụ, cà chua, hành.",
+      "image_url": null,
+      "calories": 240,
+      "protein": 16,
+      "carbs": 18,
+      "fat": 12,
+      "prep_time": 15,
+      "difficulty": "easy",
+      "meal_type": "lunch",
+      "tags": [
+        "vegetarian",
+        "vegan",
+        "eat clean",
+        "quick"
+      ],
+      "steps": [
+        "Chuẩn bị nguyên liệu: đậu phụ, cà chua, hành.",
+        "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
+        "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
+        "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "đậu phụ",
+        "cà chua",
+        "hành"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "au-phu-sot-ca",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Cá kho tộ ít đường",
+      "description": "Cá kho tộ ít đường — gợi ý Cravvy cho bữa trưa, ~35 phút, khoảng 340 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: cá lóc, nước mắm, ớt, gừng.",
+      "image_url": null,
+      "calories": 340,
+      "protein": 32,
+      "carbs": 14,
+      "fat": 16,
+      "prep_time": 35,
+      "difficulty": "medium",
+      "meal_type": "lunch",
+      "tags": [
+        "vietnamese",
+        "high protein",
+        "low carb",
+        "seafood"
+      ],
+      "steps": [
+        "Chuẩn bị nguyên liệu: cá lóc, nước mắm, ớt, gừng.",
+        "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
+        "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
+        "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "cá lóc",
+        "nước mắm",
+        "ớt",
+        "gừng"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "ca-kho-to-it-uong",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Tôm rim nhẹ",
+      "description": "Tôm rim nhẹ — gợi ý Cravvy cho bữa trưa, ~20 phút, khoảng 280 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: tôm, nước mắm, ớt, tiêu.",
+      "image_url": null,
+      "calories": 280,
+      "protein": 30,
+      "carbs": 12,
+      "fat": 12,
+      "prep_time": 20,
+      "difficulty": "easy",
+      "meal_type": "lunch",
+      "tags": [
+        "vietnamese",
+        "high protein",
+        "low carb",
+        "seafood",
+        "shellfish",
+        "quick"
+      ],
+      "steps": [
+        "Chuẩn bị nguyên liệu: tôm, nước mắm, ớt, tiêu.",
+        "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
+        "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
+        "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "tôm",
+        "nước mắm",
+        "ớt",
+        "tiêu"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "tom-rim-nhe",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Nem nướng cuốn rau",
+      "description": "Nem nướng cuốn rau — gợi ý Cravvy cho bữa trưa, ~28 phút, khoảng 400 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: nem nướng, bánh tráng, bún, rau sống.",
+      "image_url": null,
+      "calories": 400,
+      "protein": 26,
+      "carbs": 32,
+      "fat": 18,
+      "prep_time": 28,
+      "difficulty": "medium",
+      "meal_type": "lunch",
+      "tags": [
+        "vietnamese",
+        "high protein",
+        "pork"
+      ],
+      "steps": [
+        "Chuẩn bị nguyên liệu: nem nướng, bánh tráng, bún, rau sống.",
+        "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
+        "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
+        "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "nem nướng",
+        "bánh tráng",
+        "bún",
+        "rau sống"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "nem-nuong-cuon-rau",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Bún đậu chay sốt tương",
+      "description": "Bún đậu chay sốt tương — gợi ý Cravvy cho bữa trưa, ~18 phút, khoảng 380 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: đậu phụ, bún, dưa leo, rau thơm.",
+      "image_url": null,
+      "calories": 380,
+      "protein": 20,
+      "carbs": 36,
+      "fat": 16,
+      "prep_time": 18,
+      "difficulty": "easy",
+      "meal_type": "lunch",
+      "tags": [
+        "vegetarian",
+        "eat clean",
+        "quick"
+      ],
+      "steps": [
+        "Chuẩn bị nguyên liệu: đậu phụ, bún, dưa leo, rau thơm.",
+        "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
+        "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
+        "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "đậu phụ",
+        "bún",
+        "dưa leo",
+        "rau thơm"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "bun-au-chay-sot-tuong",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Cơm niêu gà luộc",
+      "description": "Cơm niêu gà luộc — gợi ý Cravvy cho bữa trưa, ~30 phút, khoảng 480 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: gà ta, gạo, muối, gừng.",
+      "image_url": null,
+      "calories": 480,
+      "protein": 36,
+      "carbs": 50,
+      "fat": 12,
+      "prep_time": 30,
+      "difficulty": "medium",
+      "meal_type": "lunch",
+      "tags": [
+        "vietnamese",
+        "high protein",
+        "chicken",
+        "gluten-free"
+      ],
+      "steps": [
+        "Nấu cơm/gạo; chuẩn bị topping: gà ta, gạo, muối, gừng.",
+        "Protein nướng/luộc hoặc xào ít dầu.",
+        "Xếp cơm + protein + rau, kiểm soát khẩu phần (~1 bát cơm).",
+        "Ghi nhận bữa ăn trên Cravvy để cập nhật calories."
+      ],
+      "ingredients": [
+        "gà ta",
+        "gạo",
+        "muối",
+        "gừng"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "com-nieu-ga-luoc",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Salad cá ngừ light",
+      "description": "Salad cá ngừ light — gợi ý Cravvy cho bữa trưa, ~12 phút, khoảng 300 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: cá ngừ hộp in water, xà lách, cà chua, dầu olive.",
+      "image_url": null,
+      "calories": 300,
+      "protein": 32,
+      "carbs": 16,
+      "fat": 12,
+      "prep_time": 12,
+      "difficulty": "easy",
+      "meal_type": "lunch",
+      "tags": [
+        "eat clean",
+        "high protein",
+        "low carb",
+        "quick",
+        "seafood"
+      ],
+      "steps": [
+        "Rửa sạch và thái: cá ngừ hộp in water, xà lách, cà chua, dầu olive.",
+        "Chế biến protein (luộc/nướng) ít dầu, để nguội vừa phải.",
+        "Trộn rau, sốt nhẹ (ít muối/đường), chia khẩu phần một người.",
+        "Kiểm tra dị ứng đã khai báo trong hồ sơ Cravvy trước khi dùng."
+      ],
+      "ingredients": [
+        "cá ngừ hộp in water",
+        "xà lách",
+        "cà chua",
+        "dầu olive"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "salad-ca-ngu-light",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Bánh xèo rau củ",
+      "description": "Bánh xèo rau củ — gợi ý Cravvy cho bữa trưa, ~25 phút, khoảng 360 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: bột gạo, giá, nấm, rau sống.",
+      "image_url": null,
+      "calories": 360,
+      "protein": 14,
+      "carbs": 42,
+      "fat": 14,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "lunch",
+      "tags": [
+        "vietnamese",
+        "vegetarian"
+      ],
+      "steps": [
+        "Chuẩn bị nguyên liệu: bột gạo, giá, nấm, rau sống.",
+        "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
+        "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
+        "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "bột gạo",
+        "giá",
+        "nấm",
+        "rau sống"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "banh-xeo-rau-cu",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Súp nấm kem nhạt",
+      "description": "Súp nấm kem nhạt — gợi ý Cravvy cho bữa trưa, ~20 phút, khoảng 200 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: nấm button, kem ít béo, hành tây.",
+      "image_url": null,
+      "calories": 200,
+      "protein": 8,
+      "carbs": 18,
+      "fat": 10,
+      "prep_time": 20,
+      "difficulty": "easy",
+      "meal_type": "lunch",
+      "tags": [
+        "vegetarian",
+        "eat clean",
+        "low carb",
+        "dairy",
+        "quick"
+      ],
+      "steps": [
+        "Chuẩn bị nguyên liệu: nấm button, kem ít béo, hành tây.",
+        "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
+        "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
+        "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "nấm button",
+        "kem ít béo",
+        "hành tây"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "sup-nam-kem-nhat",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Cơm gà xối mỡ (phần vừa)",
+      "description": "Cơm gà xối mỡ (phần vừa) — gợi ý Cravvy cho bữa trưa, ~28 phút, khoảng 520 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: gà luộc, cơm, nước tương, gừng.",
+      "image_url": null,
+      "calories": 520,
+      "protein": 34,
+      "carbs": 54,
+      "fat": 16,
+      "prep_time": 28,
+      "difficulty": "medium",
+      "meal_type": "lunch",
+      "tags": [
+        "vietnamese",
+        "high protein",
+        "chicken"
+      ],
+      "steps": [
+        "Nấu cơm/gạo; chuẩn bị topping: gà luộc, cơm, nước tương, gừng.",
+        "Protein nướng/luộc hoặc xào ít dầu.",
+        "Xếp cơm + protein + rau, kiểm soát khẩu phần (~1 bát cơm).",
+        "Ghi nhận bữa ăn trên Cravvy để cập nhật calories."
+      ],
+      "ingredients": [
+        "gà luộc",
+        "cơm",
+        "nước tương",
+        "gừng"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "com-ga-xoi-mo-phan-vua",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Bún riêu đậu (chay protein)",
+      "description": "Bún riêu đậu (chay protein) — gợi ý Cravvy cho bữa trưa, ~30 phút, khoảng 340 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: bún, đậu hũ, cà chua, rau thơm.",
+      "image_url": null,
+      "calories": 340,
+      "protein": 18,
+      "carbs": 48,
+      "fat": 10,
+      "prep_time": 30,
+      "difficulty": "medium",
+      "meal_type": "lunch",
+      "tags": [
+        "vegetarian",
+        "eat clean"
+      ],
+      "steps": [
+        "Chuẩn bị nguyên liệu: bún, đậu hũ, cà chua, rau thơm.",
+        "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
+        "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
+        "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "bún",
+        "đậu hũ",
+        "cà chua",
+        "rau thơm"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "bun-rieu-au-chay-protein",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Gà xào sả ớt",
+      "description": "Gà xào sả ớt — gợi ý Cravvy cho bữa trưa, ~20 phút, khoảng 360 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: đùi gà phi lê, sả, ớt, nấm.",
+      "image_url": null,
+      "calories": 360,
+      "protein": 34,
+      "carbs": 12,
+      "fat": 18,
+      "prep_time": 20,
+      "difficulty": "easy",
+      "meal_type": "lunch",
+      "tags": [
+        "vietnamese",
+        "high protein",
+        "low carb",
+        "keto",
+        "chicken",
+        "quick"
+      ],
+      "steps": [
+        "Chuẩn bị nguyên liệu: đùi gà phi lê, sả, ớt, nấm.",
+        "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
+        "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
+        "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "đùi gà phi lê",
+        "sả",
+        "ớt",
+        "nấm"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "ga-xao-sa-ot",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Cơm thịt kho trứng (ít mỡ)",
+      "description": "Cơm thịt kho trứng (ít mỡ) — gợi ý Cravvy cho bữa trưa, ~40 phút, khoảng 460 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: thịt ba chỉ cắt mỏng, trứng, nước dừa.",
+      "image_url": null,
+      "calories": 460,
+      "protein": 26,
+      "carbs": 48,
+      "fat": 18,
+      "prep_time": 40,
+      "difficulty": "medium",
+      "meal_type": "lunch",
+      "tags": [
+        "vietnamese",
+        "pork",
+        "egg"
+      ],
+      "steps": [
+        "Nấu cơm/gạo; chuẩn bị topping: thịt ba chỉ cắt mỏng, trứng, nước dừa.",
+        "Protein nướng/luộc hoặc xào ít dầu.",
+        "Xếp cơm + protein + rau, kiểm soát khẩu phần (~1 bát cơm).",
+        "Ghi nhận bữa ăn trên Cravvy để cập nhật calories."
+      ],
+      "ingredients": [
+        "thịt ba chỉ cắt mỏng",
+        "trứng",
+        "nước dừa"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "com-thit-kho-trung-it-mo",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Hủ tiếu bò kho",
+      "description": "Hủ tiếu bò kho — gợi ý Cravvy cho bữa trưa, ~40 phút, khoảng 440 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: thịt bò, hủ tiếu, cà rốt, hành tây.",
+      "image_url": null,
+      "calories": 440,
+      "protein": 30,
+      "carbs": 46,
+      "fat": 14,
+      "prep_time": 40,
+      "difficulty": "medium",
+      "meal_type": "lunch",
+      "tags": [
+        "vietnamese",
+        "high protein",
+        "beef"
+      ],
+      "steps": [
+        "Chuẩn bị nguyên liệu: thịt bò, hủ tiếu, cà rốt, hành tây.",
+        "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
+        "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
+        "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "thịt bò",
+        "hủ tiếu",
+        "cà rốt",
+        "hành tây"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "hu-tieu-bo-kho",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Poke bowl cá hồi",
+      "description": "Poke bowl cá hồi — gợi ý Cravvy cho bữa trưa, ~15 phút, khoảng 420 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: cá hồi, gạo, edamame, dưa leo.",
+      "image_url": null,
+      "calories": 420,
+      "protein": 32,
+      "carbs": 38,
+      "fat": 16,
+      "prep_time": 15,
+      "difficulty": "easy",
+      "meal_type": "lunch",
+      "tags": [
+        "eat clean",
+        "high protein",
+        "quick",
+        "seafood",
+        "gluten-free"
+      ],
+      "steps": [
+        "Rửa sạch và thái: cá hồi, gạo, edamame, dưa leo.",
+        "Chế biến protein (luộc/nướng) ít dầu, để nguội vừa phải.",
+        "Trộn rau, sốt nhẹ (ít muối/đường), chia khẩu phần một người.",
+        "Kiểm tra dị ứng đã khai báo trong hồ sơ Cravvy trước khi dùng."
+      ],
+      "ingredients": [
+        "cá hồi",
+        "gạo",
+        "edamame",
+        "dưa leo"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "poke-bowl-ca-hoi",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Gà nướng mật ong",
+      "description": "Gà nướng mật ong — gợi ý Cravvy cho bữa tối, ~35 phút, khoảng 420 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: cánh gà, mật ong, tỏi, rau củ nướng.",
+      "image_url": null,
+      "calories": 420,
+      "protein": 38,
+      "carbs": 28,
+      "fat": 16,
+      "prep_time": 35,
+      "difficulty": "medium",
+      "meal_type": "dinner",
+      "tags": [
+        "eat clean",
+        "high protein",
+        "low sugar",
+        "chicken"
+      ],
+      "steps": [
+        "Chuẩn bị nguyên liệu: cánh gà, mật ong, tỏi, rau củ nướng.",
+        "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
+        "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
+        "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "cánh gà",
+        "mật ong",
+        "tỏi",
+        "rau củ nướng"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "ga-nuong-mat-ong",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Cá hồi nướng chanh",
+      "description": "Cá hồi nướng chanh — gợi ý Cravvy cho bữa tối, ~22 phút, khoảng 380 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: cá hồi, chanh, dầu olive, rau xanh.",
+      "image_url": null,
+      "calories": 380,
+      "protein": 36,
+      "carbs": 8,
+      "fat": 22,
+      "prep_time": 22,
+      "difficulty": "easy",
+      "meal_type": "dinner",
+      "tags": [
+        "eat clean",
+        "high protein",
+        "keto",
+        "low carb",
+        "seafood"
+      ],
+      "steps": [
+        "Chuẩn bị nguyên liệu: cá hồi, chanh, dầu olive, rau xanh.",
+        "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
+        "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
+        "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "cá hồi",
+        "chanh",
+        "dầu olive",
+        "rau xanh"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "ca-hoi-nuong-chanh",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Tôm nướng muối ớt",
+      "description": "Tôm nướng muối ớt — gợi ý Cravvy cho bữa tối, ~18 phút, khoảng 260 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: tôm sú, muối ớt, sả, chanh.",
+      "image_url": null,
+      "calories": 260,
+      "protein": 32,
+      "carbs": 6,
+      "fat": 12,
+      "prep_time": 18,
+      "difficulty": "easy",
+      "meal_type": "dinner",
+      "tags": [
+        "eat clean",
+        "high protein",
+        "low carb",
+        "quick",
+        "seafood",
+        "shellfish"
+      ],
+      "steps": [
+        "Chuẩn bị nguyên liệu: tôm sú, muối ớt, sả, chanh.",
+        "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
+        "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
+        "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "tôm sú",
+        "muối ớt",
+        "sả",
+        "chanh"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "tom-nuong-muoi-ot",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Bò xào rau củ",
+      "description": "Bò xào rau củ — gợi ý Cravvy cho bữa tối, ~18 phút, khoảng 400 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: thịt bò, bông cải, ớt chuông, tỏi.",
+      "image_url": null,
+      "calories": 400,
+      "protein": 34,
+      "carbs": 18,
+      "fat": 20,
+      "prep_time": 18,
+      "difficulty": "easy",
+      "meal_type": "dinner",
+      "tags": [
+        "high protein",
+        "low carb",
+        "quick",
+        "beef"
+      ],
+      "steps": [
+        "Chuẩn bị nguyên liệu: thịt bò, bông cải, ớt chuông, tỏi.",
+        "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
+        "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
+        "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "thịt bò",
+        "bông cải",
+        "ớt chuông",
+        "tỏi"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "bo-xao-rau-cu",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Sườn nướng than",
+      "description": "Sườn nướng than — gợi ý Cravvy cho bữa tối, ~30 phút, khoảng 460 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: sườn heo, ướp tỏi, rau salad.",
+      "image_url": null,
+      "calories": 460,
+      "protein": 32,
+      "carbs": 20,
+      "fat": 28,
+      "prep_time": 30,
+      "difficulty": "medium",
+      "meal_type": "dinner",
+      "tags": [
+        "high protein",
+        "pork"
+      ],
+      "steps": [
+        "Chuẩn bị nguyên liệu: sườn heo, ướp tỏi, rau salad.",
+        "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
+        "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
+        "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "sườn heo",
+        "ướp tỏi",
+        "rau salad"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "suon-nuong-than",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Cá lóc nướng giấy bạc",
+      "description": "Cá lóc nướng giấy bạc — gợi ý Cravvy cho bữa tối, ~30 phút, khoảng 320 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: cá lóc, sả, ớt, nước mắm.",
+      "image_url": null,
+      "calories": 320,
+      "protein": 36,
+      "carbs": 4,
+      "fat": 16,
+      "prep_time": 30,
+      "difficulty": "medium",
+      "meal_type": "dinner",
+      "tags": [
+        "vietnamese",
+        "eat clean",
+        "high protein",
+        "low carb",
+        "seafood"
+      ],
+      "steps": [
+        "Chuẩn bị nguyên liệu: cá lóc, sả, ớt, nước mắm.",
+        "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
+        "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
+        "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "cá lóc",
+        "sả",
+        "ớt",
+        "nước mắm"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "ca-loc-nuong-giay-bac",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Lẩu nấm chay",
+      "description": "Lẩu nấm chay — gợi ý Cravvy cho bữa tối, ~30 phút, khoảng 280 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: nấm kim châm, nấm hương, cải thảo, đậu phụ.",
+      "image_url": null,
+      "calories": 280,
+      "protein": 14,
+      "carbs": 32,
+      "fat": 10,
+      "prep_time": 30,
+      "difficulty": "easy",
+      "meal_type": "dinner",
+      "tags": [
+        "vegetarian",
+        "vegan",
+        "eat clean",
+        "low carb"
+      ],
+      "steps": [
+        "Chuẩn bị nguyên liệu: nấm kim châm, nấm hương, cải thảo, đậu phụ.",
+        "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
+        "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
+        "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "nấm kim châm",
+        "nấm hương",
+        "cải thảo",
+        "đậu phụ"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "lau-nam-chay",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Lẩu gà lá é",
+      "description": "Lẩu gà lá é — gợi ý Cravvy cho bữa tối, ~35 phút, khoảng 360 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: gà ta, lá é, nấm, bún.",
+      "image_url": null,
+      "calories": 360,
+      "protein": 32,
+      "carbs": 16,
+      "fat": 16,
+      "prep_time": 35,
+      "difficulty": "medium",
+      "meal_type": "dinner",
+      "tags": [
+        "vietnamese",
+        "high protein",
+        "chicken"
+      ],
+      "steps": [
+        "Chuẩn bị nguyên liệu: gà ta, lá é, nấm, bún.",
+        "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
+        "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
+        "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "gà ta",
+        "lá é",
+        "nấm",
+        "bún"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "lau-ga-la-e",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Canh khổ qua nhồi thịt nạc",
+      "description": "Canh khổ qua nhồi thịt nạc — gợi ý Cravvy cho bữa tối, ~35 phút, khoảng 260 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: khổ qua, thịt heo bằm, nấm mèo.",
+      "image_url": null,
+      "calories": 260,
+      "protein": 22,
+      "carbs": 12,
+      "fat": 14,
+      "prep_time": 35,
+      "difficulty": "medium",
+      "meal_type": "dinner",
+      "tags": [
+        "vietnamese",
+        "eat clean",
+        "pork"
+      ],
+      "steps": [
+        "Chuẩn bị nguyên liệu: khổ qua, thịt heo bằm, nấm mèo.",
+        "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
+        "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
+        "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "khổ qua",
+        "thịt heo bằm",
+        "nấm mèo"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "canh-kho-qua-nhoi-thit-nac",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Canh chua đậu bắp",
+      "description": "Canh chua đậu bắp — gợi ý Cravvy cho bữa tối, ~22 phút, khoảng 180 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: đậu bắp, cà chua, dứa, rau om.",
+      "image_url": null,
+      "calories": 180,
+      "protein": 10,
+      "carbs": 22,
+      "fat": 6,
+      "prep_time": 22,
+      "difficulty": "easy",
+      "meal_type": "dinner",
+      "tags": [
+        "vegetarian",
+        "vegan",
+        "eat clean",
+        "low carb"
+      ],
+      "steps": [
+        "Chuẩn bị nguyên liệu: đậu bắp, cà chua, dứa, rau om.",
+        "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
+        "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
+        "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "đậu bắp",
+        "cà chua",
+        "dứa",
+        "rau om"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "canh-chua-au-bap",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Rau cải xào nấm",
+      "description": "Rau cải xào nấm — gợi ý Cravvy cho bữa tối, ~12 phút, khoảng 140 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: cải ngọt, nấm, tỏi.",
+      "image_url": null,
+      "calories": 140,
+      "protein": 6,
+      "carbs": 16,
+      "fat": 6,
+      "prep_time": 12,
+      "difficulty": "easy",
+      "meal_type": "dinner",
+      "tags": [
+        "vegetarian",
+        "vegan",
+        "eat clean",
+        "quick",
+        "low carb"
+      ],
+      "steps": [
+        "Chuẩn bị nguyên liệu: cải ngọt, nấm, tỏi.",
+        "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
+        "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
+        "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "cải ngọt",
+        "nấm",
+        "tỏi"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "rau-cai-xao-nam",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Cà tím om thịt nạc",
+      "description": "Cà tím om thịt nạc — gợi ý Cravvy cho bữa tối, ~30 phút, khoảng 300 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: cà tím, thịt heo bằm, hành.",
+      "image_url": null,
+      "calories": 300,
+      "protein": 24,
+      "carbs": 16,
+      "fat": 16,
+      "prep_time": 30,
+      "difficulty": "medium",
+      "meal_type": "dinner",
+      "tags": [
+        "vietnamese",
+        "eat clean",
+        "pork"
+      ],
+      "steps": [
+        "Chuẩn bị nguyên liệu: cà tím, thịt heo bằm, hành.",
+        "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
+        "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
+        "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "cà tím",
+        "thịt heo bằm",
+        "hành"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "ca-tim-om-thit-nac",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Đậu hũ nhồi nấm sốt cà",
+      "description": "Đậu hũ nhồi nấm sốt cà — gợi ý Cravvy cho bữa tối, ~25 phút, khoảng 280 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: đậu hũ, nấm, cà chua.",
+      "image_url": null,
+      "calories": 280,
+      "protein": 20,
+      "carbs": 14,
+      "fat": 16,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "dinner",
+      "tags": [
+        "vegetarian",
+        "vegan",
+        "eat clean",
+        "low carb"
+      ],
+      "steps": [
+        "Chuẩn bị nguyên liệu: đậu hũ, nấm, cà chua.",
+        "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
+        "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
+        "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "đậu hũ",
+        "nấm",
+        "cà chua"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "au-hu-nhoi-nam-sot-ca",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Bò kho bánh mì (phần vừa)",
+      "description": "Bò kho bánh mì (phần vừa) — gợi ý Cravvy cho bữa tối, ~50 phút, khoảng 480 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: thịt bò, cà rốt, bánh mì.",
+      "image_url": null,
+      "calories": 480,
+      "protein": 30,
+      "carbs": 44,
+      "fat": 18,
+      "prep_time": 50,
+      "difficulty": "medium",
+      "meal_type": "dinner",
+      "tags": [
+        "vietnamese",
+        "high protein",
+        "beef",
+        "gluten"
+      ],
+      "steps": [
+        "Chuẩn bị nguyên liệu: thịt bò, cà rốt, bánh mì.",
+        "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
+        "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
+        "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "thịt bò",
+        "cà rốt",
+        "bánh mì"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "bo-kho-banh-mi-phan-vua",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Gà hấp gừng",
+      "description": "Gà hấp gừng — gợi ý Cravvy cho bữa tối, ~30 phút, khoảng 340 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: gà ta, gừng, nấm, hành.",
+      "image_url": null,
+      "calories": 340,
+      "protein": 40,
+      "carbs": 6,
+      "fat": 16,
+      "prep_time": 30,
+      "difficulty": "easy",
+      "meal_type": "dinner",
+      "tags": [
+        "eat clean",
+        "high protein",
+        "low carb",
+        "gluten-free",
+        "chicken"
+      ],
+      "steps": [
+        "Chuẩn bị nguyên liệu: gà ta, gừng, nấm, hành.",
+        "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
+        "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
+        "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "gà ta",
+        "gừng",
+        "nấm",
+        "hành"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "ga-hap-gung",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Mực xào rau củ",
+      "description": "Mực xào rau củ — gợi ý Cravvy cho bữa tối, ~18 phút, khoảng 280 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: mực, cần tây, cà rốt, ớt.",
+      "image_url": null,
+      "calories": 280,
+      "protein": 28,
+      "carbs": 14,
+      "fat": 12,
+      "prep_time": 18,
+      "difficulty": "easy",
+      "meal_type": "dinner",
+      "tags": [
+        "high protein",
+        "low carb",
+        "quick",
+        "seafood"
+      ],
+      "steps": [
+        "Chuẩn bị nguyên liệu: mực, cần tây, cà rốt, ớt.",
+        "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
+        "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
+        "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "mực",
+        "cần tây",
+        "cà rốt",
+        "ớt"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "muc-xao-rau-cu",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Chả cá nướng rau",
+      "description": "Chả cá nướng rau — gợi ý Cravvy cho bữa tối, ~28 phút, khoảng 360 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: chả cá, bún, rau thìa là.",
+      "image_url": null,
+      "calories": 360,
+      "protein": 30,
+      "carbs": 20,
+      "fat": 18,
+      "prep_time": 28,
+      "difficulty": "medium",
+      "meal_type": "dinner",
+      "tags": [
+        "vietnamese",
+        "high protein",
+        "seafood"
+      ],
+      "steps": [
+        "Chuẩn bị nguyên liệu: chả cá, bún, rau thìa là.",
+        "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
+        "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
+        "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "chả cá",
+        "bún",
+        "rau thìa là"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "cha-ca-nuong-rau",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Nghêu hấp sả",
+      "description": "Nghêu hấp sả — gợi ý Cravvy cho bữa tối, ~15 phút, khoảng 200 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: nghêu, sả, gừng, ớt.",
+      "image_url": null,
+      "calories": 200,
+      "protein": 24,
+      "carbs": 8,
+      "fat": 6,
+      "prep_time": 15,
+      "difficulty": "easy",
+      "meal_type": "dinner",
+      "tags": [
+        "eat clean",
+        "high protein",
+        "low carb",
+        "quick",
+        "shellfish"
+      ],
+      "steps": [
+        "Chuẩn bị nguyên liệu: nghêu, sả, gừng, ớt.",
+        "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
+        "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
+        "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "nghêu",
+        "sả",
+        "gừng",
+        "ớt"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "ngheu-hap-sa",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Salad tôm bơ",
+      "description": "Salad tôm bơ — gợi ý Cravvy cho bữa tối, ~15 phút, khoảng 320 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: tôm, bơ, xà lách, cà chua.",
+      "image_url": null,
+      "calories": 320,
+      "protein": 28,
+      "carbs": 14,
+      "fat": 18,
+      "prep_time": 15,
+      "difficulty": "easy",
+      "meal_type": "dinner",
+      "tags": [
+        "eat clean",
+        "high protein",
+        "low carb",
+        "keto",
+        "quick",
+        "seafood"
+      ],
+      "steps": [
+        "Rửa sạch và thái: tôm, bơ, xà lách, cà chua.",
+        "Chế biến protein (luộc/nướng) ít dầu, để nguội vừa phải.",
+        "Trộn rau, sốt nhẹ (ít muối/đường), chia khẩu phần một người.",
+        "Kiểm tra dị ứng đã khai báo trong hồ sơ Cravvy trước khi dùng."
+      ],
+      "ingredients": [
+        "tôm",
+        "bơ",
+        "xà lách",
+        "cà chua"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "salad-tom-bo",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Cơm rang thập cẩm rau",
+      "description": "Cơm rang thập cẩm rau — gợi ý Cravvy cho bữa tối, ~18 phút, khoảng 400 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: cơm, trứng, ngô, đậu Hà Lan.",
+      "image_url": null,
+      "calories": 400,
+      "protein": 18,
+      "carbs": 58,
+      "fat": 12,
+      "prep_time": 18,
+      "difficulty": "easy",
+      "meal_type": "dinner",
+      "tags": [
+        "vietnamese",
+        "quick"
+      ],
+      "steps": [
+        "Nấu cơm/gạo; chuẩn bị topping: cơm, trứng, ngô, đậu Hà Lan.",
+        "Protein nướng/luộc hoặc xào ít dầu.",
+        "Xếp cơm + protein + rau, kiểm soát khẩu phần (~1 bát cơm).",
+        "Ghi nhận bữa ăn trên Cravvy để cập nhật calories."
+      ],
+      "ingredients": [
+        "cơm",
+        "trứng",
+        "ngô",
+        "đậu Hà Lan"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "com-rang-thap-cam-rau",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Bún bò Huế (phần nhẹ)",
+      "description": "Bún bò Huế (phần nhẹ) — gợi ý Cravvy cho bữa tối, ~45 phút, khoảng 440 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: bún, thịt bò, chả, rau.",
+      "image_url": null,
+      "calories": 440,
+      "protein": 28,
+      "carbs": 50,
+      "fat": 14,
+      "prep_time": 45,
+      "difficulty": "hard",
+      "meal_type": "dinner",
+      "tags": [
+        "vietnamese",
+        "high protein",
+        "beef"
+      ],
+      "steps": [
+        "Chuẩn bị nguyên liệu: bún, thịt bò, chả, rau.",
+        "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
+        "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
+        "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "bún",
+        "thịt bò",
+        "chả",
+        "rau"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "bun-bo-hue-phan-nhe",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Súp rau củ nấu gà",
+      "description": "Súp rau củ nấu gà — gợi ý Cravvy cho bữa tối, ~25 phút, khoảng 220 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: gà, khoai tây, cà rốt, bí đỏ.",
+      "image_url": null,
+      "calories": 220,
+      "protein": 20,
+      "carbs": 18,
+      "fat": 8,
+      "prep_time": 25,
+      "difficulty": "easy",
+      "meal_type": "dinner",
+      "tags": [
+        "eat clean",
+        "gluten-free",
+        "chicken"
+      ],
+      "steps": [
+        "Chuẩn bị nguyên liệu: gà, khoai tây, cà rốt, bí đỏ.",
+        "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
+        "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
+        "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "gà",
+        "khoai tây",
+        "cà rốt",
+        "bí đỏ"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "sup-rau-cu-nau-ga",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Ức vịt quay chảo (phần nhỏ)",
+      "description": "Ức vịt quay chảo (phần nhỏ) — gợi ý Cravvy cho bữa tối, ~35 phút, khoảng 380 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: ức vịt, tỏi, mật ong, salad.",
+      "image_url": null,
+      "calories": 380,
+      "protein": 32,
+      "carbs": 8,
+      "fat": 24,
+      "prep_time": 35,
+      "difficulty": "medium",
+      "meal_type": "dinner",
+      "tags": [
+        "high protein",
+        "low carb"
+      ],
+      "steps": [
+        "Chuẩn bị nguyên liệu: ức vịt, tỏi, mật ong, salad.",
+        "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
+        "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
+        "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "ức vịt",
+        "tỏi",
+        "mật ong",
+        "salad"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "uc-vit-quay-chao-phan-nho",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Cá basa hấp xì dầu",
+      "description": "Cá basa hấp xì dầu — gợi ý Cravvy cho bữa tối, ~20 phút, khoảng 300 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: cá basa, xì dầu, gừng, hành.",
+      "image_url": null,
+      "calories": 300,
+      "protein": 34,
+      "carbs": 6,
+      "fat": 14,
+      "prep_time": 20,
+      "difficulty": "easy",
+      "meal_type": "dinner",
+      "tags": [
+        "eat clean",
+        "high protein",
+        "low carb",
+        "seafood",
+        "gluten-free",
+        "quick"
+      ],
+      "steps": [
+        "Chuẩn bị nguyên liệu: cá basa, xì dầu, gừng, hành.",
+        "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
+        "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
+        "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "cá basa",
+        "xì dầu",
+        "gừng",
+        "hành"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "ca-basa-hap-xi-dau",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Bí đỏ hấp tôm",
+      "description": "Bí đỏ hấp tôm — gợi ý Cravvy cho bữa tối, ~20 phút, khoảng 240 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: bí đỏ, tôm, hành, tiêu.",
+      "image_url": null,
+      "calories": 240,
+      "protein": 26,
+      "carbs": 16,
+      "fat": 8,
+      "prep_time": 20,
+      "difficulty": "easy",
+      "meal_type": "dinner",
+      "tags": [
+        "eat clean",
+        "low carb",
+        "seafood",
+        "shellfish",
+        "quick"
+      ],
+      "steps": [
+        "Chuẩn bị nguyên liệu: bí đỏ, tôm, hành, tiêu.",
+        "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
+        "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
+        "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "bí đỏ",
+        "tôm",
+        "hành",
+        "tiêu"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "bi-o-hap-tom",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Gỏi bắp cải tôm",
+      "description": "Gỏi bắp cải tôm — gợi ý Cravvy cho bữa tối, ~15 phút, khoảng 220 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: bắp cải, tôm, cà rốt, rau thơm.",
+      "image_url": null,
+      "calories": 220,
+      "protein": 24,
+      "carbs": 18,
+      "fat": 6,
+      "prep_time": 15,
+      "difficulty": "easy",
+      "meal_type": "dinner",
+      "tags": [
+        "eat clean",
+        "low carb",
+        "quick",
+        "seafood"
+      ],
+      "steps": [
+        "Rửa sạch và thái: bắp cải, tôm, cà rốt, rau thơm.",
+        "Chế biến protein (luộc/nướng) ít dầu, để nguội vừa phải.",
+        "Trộn rau, sốt nhẹ (ít muối/đường), chia khẩu phần một người.",
+        "Kiểm tra dị ứng đã khai báo trong hồ sơ Cravvy trước khi dùng."
+      ],
+      "ingredients": [
+        "bắp cải",
+        "tôm",
+        "cà rốt",
+        "rau thơm"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "goi-bap-cai-tom",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Đậu hũ sốt nấm",
+      "description": "Đậu hũ sốt nấm — gợi ý Cravvy cho bữa tối, ~18 phút, khoảng 260 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: đậu hũ, nấm, tỏi, hành lá.",
+      "image_url": null,
+      "calories": 260,
+      "protein": 18,
+      "carbs": 12,
+      "fat": 16,
+      "prep_time": 18,
+      "difficulty": "easy",
+      "meal_type": "dinner",
+      "tags": [
+        "vegetarian",
+        "vegan",
+        "eat clean",
+        "low carb",
+        "quick"
+      ],
+      "steps": [
+        "Chuẩn bị nguyên liệu: đậu hũ, nấm, tỏi, hành lá.",
+        "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
+        "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
+        "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "đậu hũ",
+        "nấm",
+        "tỏi",
+        "hành lá"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "au-hu-sot-nam",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Cháo tôm nấm",
+      "description": "Cháo tôm nấm — gợi ý Cravvy cho bữa tối, ~25 phút, khoảng 300 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: gạo, tôm, nấm, hành lá.",
+      "image_url": null,
+      "calories": 300,
+      "protein": 22,
+      "carbs": 40,
+      "fat": 8,
+      "prep_time": 25,
+      "difficulty": "easy",
+      "meal_type": "dinner",
+      "tags": [
+        "eat clean",
+        "seafood",
+        "shellfish",
+        "gluten-free"
+      ],
+      "steps": [
+        "Chuẩn bị nguyên liệu: gạo, tôm, nấm, hành lá.",
+        "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
+        "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
+        "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "gạo",
+        "tôm",
+        "nấm",
+        "hành lá"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "chao-tom-nam",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Bánh mì kẹp gà sốt yogurt",
+      "description": "Bánh mì kẹp gà sốt yogurt — gợi ý Cravvy cho bữa tối, ~15 phút, khoảng 380 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: bánh mì, gà, sữa chua, rau.",
+      "image_url": null,
+      "calories": 380,
+      "protein": 30,
+      "carbs": 40,
+      "fat": 12,
+      "prep_time": 15,
+      "difficulty": "easy",
+      "meal_type": "dinner",
+      "tags": [
+        "eat clean",
+        "high protein",
+        "quick",
+        "chicken",
+        "gluten",
+        "dairy"
+      ],
+      "steps": [
+        "Chuẩn bị nguyên liệu: bánh mì, gà, sữa chua, rau.",
+        "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
+        "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
+        "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "bánh mì",
+        "gà",
+        "sữa chua",
+        "rau"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "banh-mi-kep-ga-sot-yogurt",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Trứng chiên rau củ",
+      "description": "Trứng chiên rau củ — gợi ý Cravvy cho bữa tối, ~12 phút, khoảng 280 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: trứng, cà rốt, hành lá, ớt.",
+      "image_url": null,
+      "calories": 280,
+      "protein": 18,
+      "carbs": 12,
+      "fat": 18,
+      "prep_time": 12,
+      "difficulty": "easy",
+      "meal_type": "dinner",
+      "tags": [
+        "vegetarian",
+        "quick",
+        "low carb",
+        "egg"
+      ],
+      "steps": [
+        "Chuẩn bị nguyên liệu: trứng, cà rốt, hành lá, ớt.",
+        "Nấu theo công thức chuẩn Việt, hạn chế dầu mỡ và muối so với mức thông thường.",
+        "Chia khẩu phần 1 người; ăn kèm rau xanh nếu có thể.",
+        "Dùng trong meal plan hoặc đổi món nhanh (Meal Swap) trên Cravvy."
+      ],
+      "ingredients": [
+        "trứng",
+        "cà rốt",
+        "hành lá",
+        "ớt"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "trung-chien-rau-cu",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Sinh tố xoài không đường",
+      "description": "Sinh tố xoài không đường — gợi ý Cravvy cho bữa phụ, ~5 phút, khoảng 160 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: xoài, đá, sữa hạnh nhân.",
+      "image_url": null,
+      "calories": 160,
+      "protein": 4,
+      "carbs": 32,
+      "fat": 2,
+      "prep_time": 5,
+      "difficulty": "easy",
+      "meal_type": "snack",
+      "tags": [
+        "eat clean",
+        "vegan",
+        "quick",
+        "low sugar"
+      ],
+      "steps": [
+        "Chuẩn bị: xoài, đá, sữa hạnh nhân.",
+        "Ưu tiên ít đường / portion vừa đủ (theo mục tiêu calories trong app).",
+        "Trình bày và ghi nhận bữa phụ trong Cravvy để theo dõi tự động."
+      ],
+      "ingredients": [
+        "xoài",
+        "đá",
+        "sữa hạnh nhân"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "sinh-to-xoai-khong-uong",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Sinh tố bơ cacao",
+      "description": "Sinh tố bơ cacao — gợi ý Cravvy cho bữa phụ, ~5 phút, khoảng 240 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: bơ, cacao, sữa hạnh nhân.",
+      "image_url": null,
+      "calories": 240,
+      "protein": 6,
+      "carbs": 18,
+      "fat": 18,
+      "prep_time": 5,
+      "difficulty": "easy",
+      "meal_type": "snack",
+      "tags": [
+        "eat clean",
+        "keto",
+        "quick",
+        "low sugar"
+      ],
+      "steps": [
+        "Chuẩn bị: bơ, cacao, sữa hạnh nhân.",
+        "Ưu tiên ít đường / portion vừa đủ (theo mục tiêu calories trong app).",
+        "Trình bày và ghi nhận bữa phụ trong Cravvy để theo dõi tự động."
+      ],
+      "ingredients": [
+        "bơ",
+        "cacao",
+        "sữa hạnh nhân"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "sinh-to-bo-cacao",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Trái cây tô mix",
+      "description": "Trái cây tô mix — gợi ý Cravvy cho bữa phụ, ~5 phút, khoảng 120 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: dưa hấu, dứa, nho, dâu.",
+      "image_url": null,
+      "calories": 120,
+      "protein": 2,
+      "carbs": 28,
+      "fat": 1,
+      "prep_time": 5,
+      "difficulty": "easy",
+      "meal_type": "snack",
+      "tags": [
+        "vegan",
+        "eat clean",
+        "quick",
+        "low sugar"
+      ],
+      "steps": [
+        "Chuẩn bị: dưa hấu, dứa, nho, dâu.",
+        "Ưu tiên ít đường / portion vừa đủ (theo mục tiêu calories trong app).",
+        "Trình bày và ghi nhận bữa phụ trong Cravvy để theo dõi tự động."
+      ],
+      "ingredients": [
+        "dưa hấu",
+        "dứa",
+        "nho",
+        "dâu"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "trai-cay-to-mix",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Hạnh nhân rang không muối",
+      "description": "Hạnh nhân rang không muối — gợi ý Cravvy cho bữa phụ, ~8 phút, khoảng 180 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: hạnh nhân.",
+      "image_url": null,
+      "calories": 180,
+      "protein": 6,
+      "carbs": 6,
+      "fat": 15,
+      "prep_time": 8,
+      "difficulty": "easy",
+      "meal_type": "snack",
+      "tags": [
+        "eat clean",
+        "keto",
+        "quick",
+        "low carb"
+      ],
+      "steps": [
+        "Chuẩn bị: hạnh nhân.",
+        "Ưu tiên ít đường / portion vừa đủ (theo mục tiêu calories trong app).",
+        "Trình bày và ghi nhận bữa phụ trong Cravvy để theo dõi tự động."
+      ],
+      "ingredients": [
+        "hạnh nhân"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "hanh-nhan-rang-khong-muoi",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Sữa chua Hy Lạp mật ong",
+      "description": "Sữa chua Hy Lạp mật ong — gợi ý Cravvy cho bữa phụ, ~3 phút, khoảng 160 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: sữa chua Hy Lạp, mật ong, óc chó.",
+      "image_url": null,
+      "calories": 160,
+      "protein": 12,
+      "carbs": 18,
+      "fat": 4,
+      "prep_time": 3,
+      "difficulty": "easy",
+      "meal_type": "snack",
+      "tags": [
+        "eat clean",
+        "high protein",
+        "quick",
+        "low sugar",
+        "dairy"
+      ],
+      "steps": [
+        "Chuẩn bị: sữa chua Hy Lạp, mật ong, óc chó.",
+        "Ưu tiên ít đường / portion vừa đủ (theo mục tiêu calories trong app).",
+        "Trình bày và ghi nhận bữa phụ trong Cravvy để theo dõi tự động."
+      ],
+      "ingredients": [
+        "sữa chua Hy Lạp",
+        "mật ong",
+        "óc chó"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "sua-chua-hy-lap-mat-ong",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Chuối + bơ đậu phộng",
+      "description": "Chuối + bơ đậu phộng — gợi ý Cravvy cho bữa phụ, ~3 phút, khoảng 220 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: chuối, bơ đậu phộng.",
+      "image_url": null,
+      "calories": 220,
+      "protein": 8,
+      "carbs": 26,
+      "fat": 12,
+      "prep_time": 3,
+      "difficulty": "easy",
+      "meal_type": "snack",
+      "tags": [
+        "eat clean",
+        "quick",
+        "peanut"
+      ],
+      "steps": [
+        "Chuẩn bị: chuối, bơ đậu phộng.",
+        "Ưu tiên ít đường / portion vừa đủ (theo mục tiêu calories trong app).",
+        "Trình bày và ghi nhận bữa phụ trong Cravvy để theo dõi tự động."
+      ],
+      "ingredients": [
+        "chuối",
+        "bơ đậu phộng"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "chuoi-bo-au-phong",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Chè đậu xanh ít đường",
+      "description": "Chè đậu xanh ít đường — gợi ý Cravvy cho bữa phụ, ~30 phút, khoảng 180 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: đậu xanh, đường phèn, dừa.",
+      "image_url": null,
+      "calories": 180,
+      "protein": 8,
+      "carbs": 32,
+      "fat": 2,
+      "prep_time": 30,
+      "difficulty": "easy",
+      "meal_type": "snack",
+      "tags": [
+        "vietnamese",
+        "vegetarian",
+        "low sugar"
+      ],
+      "steps": [
+        "Chuẩn bị: đậu xanh, đường phèn, dừa.",
+        "Ưu tiên ít đường / portion vừa đủ (theo mục tiêu calories trong app).",
+        "Trình bày và ghi nhận bữa phụ trong Cravvy để theo dõi tự động."
+      ],
+      "ingredients": [
+        "đậu xanh",
+        "đường phèn",
+        "dừa"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "che-au-xanh-it-uong",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Chè khúc bạch lite",
+      "description": "Chè khúc bạch lite — gợi ý Cravvy cho bữa phụ, ~35 phút, khoảng 220 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: đậu hũ, sữa tươi, almond jelly.",
+      "image_url": null,
+      "calories": 220,
+      "protein": 8,
+      "carbs": 28,
+      "fat": 8,
+      "prep_time": 35,
+      "difficulty": "medium",
+      "meal_type": "snack",
+      "tags": [
+        "vietnamese",
+        "low sugar",
+        "dairy"
+      ],
+      "steps": [
+        "Chuẩn bị: đậu hũ, sữa tươi, almond jelly.",
+        "Ưu tiên ít đường / portion vừa đủ (theo mục tiêu calories trong app).",
+        "Trình bày và ghi nhận bữa phụ trong Cravvy để theo dõi tự động."
+      ],
+      "ingredients": [
+        "đậu hũ",
+        "sữa tươi",
+        "almond jelly"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "che-khuc-bach-lite",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Bánh flan ít đường",
+      "description": "Bánh flan ít đường — gợi ý Cravvy cho bữa phụ, ~40 phút, khoảng 150 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: trứng, sữa, đường phèn.",
+      "image_url": null,
+      "calories": 150,
+      "protein": 6,
+      "carbs": 20,
+      "fat": 5,
+      "prep_time": 40,
+      "difficulty": "medium",
+      "meal_type": "snack",
+      "tags": [
+        "vietnamese",
+        "low sugar",
+        "egg",
+        "dairy"
+      ],
+      "steps": [
+        "Chuẩn bị: trứng, sữa, đường phèn.",
+        "Ưu tiên ít đường / portion vừa đủ (theo mục tiêu calories trong app).",
+        "Trình bày và ghi nhận bữa phụ trong Cravvy để theo dõi tự động."
+      ],
+      "ingredients": [
+        "trứng",
+        "sữa",
+        "đường phèn"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "banh-flan-it-uong",
+      "locale": "vi",
+      "is_active": true
+    },
+    {
+      "name": "Nước dừa tươi",
+      "description": "Nước dừa tươi — gợi ý Cravvy cho bữa phụ, ~2 phút, khoảng 60 kcal. Phù hợp người trẻ bận rộn, ăn lành và theo dõi dinh dưỡng tự động. Nguyên liệu chính: dừa tươi.",
+      "image_url": null,
+      "calories": 60,
+      "protein": 1,
+      "carbs": 12,
+      "fat": 1,
+      "prep_time": 2,
+      "difficulty": "easy",
+      "meal_type": "snack",
+      "tags": [
+        "vegan",
+        "eat clean",
+        "quick",
+        "low sugar",
+        "keto"
+      ],
+      "steps": [
+        "Chuẩn bị: dừa tươi.",
+        "Ưu tiên ít đường / portion vừa đủ (theo mục tiêu calories trong app).",
+        "Trình bày và ghi nhận bữa phụ trong Cravvy để theo dõi tự động."
+      ],
+      "ingredients": [
+        "dừa tươi"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "nuoc-dua-tuoi",
+      "locale": "vi",
+      "is_active": true
+    }
+  ]
+}

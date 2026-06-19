@@ -1,5 +1,6 @@
 import 'package:cravvy_cooking_app/init.dart';
 import 'package:cravvy_cooking_app/data/models/meal.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 /// Nutrition tab content – macros breakdown cards.
 class MealDetailNutritionWidget extends StatelessWidget {
@@ -14,9 +15,9 @@ class MealDetailNutritionWidget extends StatelessWidget {
       sliver: SliverList(
         delegate: SliverChildListDelegate([
           _MacroCard(
-            label: 'Calories',
+            label: 'meal_detail.stat_cal'.tr(),
             value: '${meal.calories}',
-            unit: 'kcal',
+            unit: 'meal_plan.kcal_unit'.tr(),
             icon: Icons.local_fire_department_rounded,
             color: AppColors.warning,
             progress: (meal.calories / 2200).clamp(0.0, 1.0),
@@ -26,7 +27,7 @@ class MealDetailNutritionWidget extends StatelessWidget {
             children: [
               Expanded(
                 child: _MacroCard(
-                  label: 'Protein',
+                  label: 'meal_plan.macro_protein'.tr(),
                   value: '${meal.protein}',
                   unit: 'g',
                   icon: Icons.fitness_center_rounded,
@@ -37,7 +38,7 @@ class MealDetailNutritionWidget extends StatelessWidget {
               AppGap.w12,
               Expanded(
                 child: _MacroCard(
-                  label: 'Carbs',
+                  label: 'meal_plan.macro_carbs'.tr(),
                   value: '${meal.carbs}',
                   unit: 'g',
                   icon: Icons.grain_rounded,
@@ -48,7 +49,7 @@ class MealDetailNutritionWidget extends StatelessWidget {
               AppGap.w12,
               Expanded(
                 child: _MacroCard(
-                  label: 'Fat',
+                  label: 'meal_plan.macro_fat'.tr(),
                   value: '${meal.fat}',
                   unit: 'g',
                   icon: Icons.water_drop_rounded,
@@ -87,11 +88,7 @@ class _MacroCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: AppPad.a16,
-      decoration: BoxDecoration(
-        color: AppColors.surface,
-        borderRadius: AppBorderRadius.a16,
-        border: Border.all(color: AppColors.border),
-      ),
+      decoration: context.cardBox(radius: 16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -110,8 +107,9 @@ class _MacroCard extends StatelessWidget {
               Expanded(
                 child: Text(
                   label,
-                  style: AppTextStyles.s12.copyWith(
-                    color: AppColors.textSecondary,
+                  style: context.themed(
+                    AppTextStyles.s12,
+                    color: context.appColors.textSecondary,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -124,15 +122,16 @@ class _MacroCard extends StatelessWidget {
               children: [
                 TextSpan(
                   text: value,
-                  style: AppTextStyles.s20.copyWith(
+                  style: context.themed(
+                    AppTextStyles.s20,
                     fontWeight: FontWeight.w800,
-                    color: AppColors.textPrimary,
                   ),
                 ),
                 TextSpan(
                   text: ' $unit',
-                  style: AppTextStyles.s12.copyWith(
-                    color: AppColors.textSecondary,
+                  style: context.themed(
+                    AppTextStyles.s12,
+                    color: context.appColors.textSecondary,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -162,7 +161,7 @@ class _NutritionNote extends StatelessWidget {
       padding: AppPad.a16,
       decoration: BoxDecoration(
         color: AppColors.secondaryLight,
-        borderRadius: AppBorderRadius.a16,
+        borderRadius: AppBorderRadius.card,
       ),
       child: Row(
         children: [
@@ -174,7 +173,7 @@ class _NutritionNote extends StatelessWidget {
           AppGap.w10,
           Expanded(
             child: Text(
-              'Nutritional values are estimates based on standard serving sizes.',
+              'meal_detail.nutrition_disclaimer'.tr(),
               style: AppTextStyles.s12.copyWith(
                 color: AppColors.secondaryDark,
                 fontWeight: FontWeight.w500,

@@ -19,7 +19,6 @@ class AppColors {
   // ─── Text ────────────────────────────────────────────────────────────
   static const Color textColor = Color(0xFF6A8042);
 
-
   // ─── Gradient ────────────────────────────────────────────────────────────
   static const LinearGradient primaryGradient = LinearGradient(
     begin: Alignment.topLeft,
@@ -42,7 +41,7 @@ class AppColors {
   static const Color warning = Color(0xFFF59E0B);
   static const Color warningLight = Color(0xFFFEF3C7);
   static const Color error = Color(0xFFDC3545);
-  static const Color errorLight = Color(0xFFFEE2E2);
+  static const Color errorLight = Color(0xFFFFEDED);
   static const Color lightGray = Color(0xFFD3D1D1);
 
   // ─── Macro colors ────────────────────────────────────────────────────────

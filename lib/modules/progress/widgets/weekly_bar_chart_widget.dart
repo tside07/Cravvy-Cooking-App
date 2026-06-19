@@ -14,7 +14,11 @@ class WeeklyBarChartWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final max = data.reduce((a, b) => a > b ? a : b).toDouble() * 1.2;
+    final colors = context.appColors;
+    final peak = data.isEmpty
+        ? 0.0
+        : data.reduce((a, b) => a > b ? a : b).toDouble();
+    final max = (peak > 0 ? peak : 1.0) * 1.2;
     final today = DateTime.now().weekday - 1;
 
     return SizedBox(
@@ -28,8 +32,8 @@ class WeeklyBarChartWidget extends StatelessWidget {
           final color = isToday
               ? AppColors.primary
               : isGoalMet
-              ? AppColors.success
-              : AppColors.border;
+                  ? AppColors.success
+                  : colors.borderDivider;
 
           return Expanded(
             child: Column(
@@ -38,10 +42,8 @@ class WeeklyBarChartWidget extends StatelessWidget {
                 if (isToday)
                   Text(
                     '${data[i]}',
-                    style: AppTextStyles.s10.copyWith(
-                      fontWeight: FontWeight.w700,
-                      color: AppColors.primary,
-                    ),
+                    style: context.themed(AppTextStyles.s10, fontWeight: FontWeight.w700)
+                        .copyWith(color: AppColors.primary),
                   ),
                 AppGap.h2,
                 Container(
@@ -55,11 +57,10 @@ class WeeklyBarChartWidget extends StatelessWidget {
                 AppGap.h6,
                 Text(
                   days[i],
-                  style: AppTextStyles.s12.copyWith(
+                  style: context.themed(
+                    AppTextStyles.s12,
+                    color: isToday ? AppColors.primary : colors.textSecondary,
                     fontWeight: isToday ? FontWeight.w700 : FontWeight.w500,
-                    color: isToday
-                        ? AppColors.primary
-                        : AppColors.textSecondary,
                   ),
                 ),
               ],

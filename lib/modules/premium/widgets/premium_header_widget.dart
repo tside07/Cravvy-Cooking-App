@@ -1,10 +1,12 @@
 import 'package:cravvy_cooking_app/init.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class PremiumHeaderWidget extends StatelessWidget {
   const PremiumHeaderWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
     return Column(
       children: [
         // Back button
@@ -12,9 +14,9 @@ class PremiumHeaderWidget extends StatelessWidget {
           alignment: Alignment.centerLeft,
           child: GestureDetector(
             onTap: () => context.pop(),
-            child: const Icon(
+            child: Icon(
               Icons.arrow_back,
-              color: AppColors.textPrimary,
+              color: colors.textPrimary,
               size: 24,
             ),
           ),
@@ -37,23 +39,21 @@ class PremiumHeaderWidget extends StatelessWidget {
 
         // Title
         Text(
-          'Upgrade to Cravvy Premium',
+          'premium.title'.tr(),
           textAlign: TextAlign.center,
           overflow: TextOverflow.ellipsis,
-          style: AppTextStyles.s20.copyWith(
-            fontSize: 24,
-            fontWeight: FontWeight.w800,
-            color: AppColors.textPrimary,
-            height: 1.25,
-          ),
+          style: context.themed(AppTextStyles.h1),
         ),
         AppGap.h8,
 
         // Subtitle
         Text(
-          'Unlock the full power of meal planning',
+          'premium.subtitle'.tr(),
           textAlign: TextAlign.center,
-          style: AppTextStyles.s14.copyWith(color: AppColors.textSecondary),
+          style: context.themed(
+            AppTextStyles.s14,
+            color: colors.textSecondary,
+          ),
         ),
       ],
     );

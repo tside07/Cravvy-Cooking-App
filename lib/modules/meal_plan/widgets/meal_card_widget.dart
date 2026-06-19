@@ -1,5 +1,13 @@
+// lib/modules/meal_plan/widgets/meal_card_widget.dart
+//
+// THAY ĐỔI: Nút "Swap" trong header bỏ đi,
+// thay bằng icon nhỏ góc phải trong content row (như ảnh mẫu).
+// Icon xóa vẫn giữ nhưng chuyển vào menu nhỏ để không chiếm chỗ.
+
 import 'package:cravvy_cooking_app/init.dart';
 import 'package:cravvy_cooking_app/data/models/meal.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class MealCardWidget extends StatelessWidget {
   const MealCardWidget({
@@ -7,192 +15,212 @@ class MealCardWidget extends StatelessWidget {
     required this.meal,
     required this.onToggle,
     required this.onSwap,
+    required this.onRemove,
   });
 
   final Meal meal;
   final VoidCallback onToggle;
   final VoidCallback onSwap;
+  final VoidCallback onRemove;
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => context.push(AppRouter.mealDetail, extra: meal),
-      child: Container(
-        margin: const EdgeInsets.only(
-          bottom: 14,
-        ), //TODO: no AppPad equivalent for bottom: 14
-        decoration: BoxDecoration(
-          color: AppColors.surface,
-          borderRadius: AppBorderRadius.a20,
-          border: Border.all(
-            color: meal.isLogged
-                ? AppColors.success.withValues(alpha: 0.3)
-                : AppColors.border,
-          ),
-        ),
-        child: Column(
+    final colors = context.appColors;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
+    return Padding(
+      padding: AppPad.b12,
+      child: PressableCard(
+        onTap: () => context.push(AppRouter.mealDetail, extra: meal),
+        radius: 12,
+        // Logged meals keep a success-tinted outline; otherwise rely on shadow
+        // (light) / hairline border (dark) like the rest of the Soft UI cards.
+        border: meal.isLogged
+            ? Border.all(color: AppColors.success.withValues(alpha: 0.35))
+            : (isDark ? Border.all(color: colors.borderDivider) : null),
+        child: Row(
           children: [
-            // Meal type header
-            Container(
-              padding: const EdgeInsets.only(
-                left: 16,
-                top: 12,
-                right: 12,
-                bottom: 12,
-              ), //TODO: no AppPad equivalent for this multi-directional EdgeInsets.only
-              decoration: BoxDecoration(
-                color: meal.type.lightColor,
-                borderRadius: const BorderRadius.vertical(
-                  top: Radius.circular(20),
-                ), //TODO: no AppBorderRadius equivalent for top-only r20
+            // ── Ảnh món ăn ──────────────────────────────────────────────
+            ClipRRect(
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(12),
+                bottomLeft: Radius.circular(12),
               ),
-              child: Row(
-                children: [
-                  Text(meal.type.emoji, style: AppTextStyles.s16),
-                  AppGap.w8,
-                  Text(
-                    meal.type.label,
-                    style: AppTextStyles.s14.copyWith(
-                      fontFamily: 'Nunito',
-                      fontWeight: FontWeight.w700,
-                      color: meal.type.color,
-                    ),
-                  ),
-                  const Spacer(),
-                  GestureDetector(
-                    onTap: onSwap,
-                    child: Container(
-                      padding: AppPad.h10v4,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: AppBorderRadius.a20,
-                        border: Border.all(color: AppColors.border),
-                      ),
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.swap_horiz_rounded,
-                            size: 14,
-                            color: meal.type.color,
-                          ),
-                          AppGap.w4,
-                          Text(
-                            'Swap',
-                            style: AppTextStyles.s10.copyWith(
-                              fontWeight: FontWeight.w600,
-                              color: meal.type.color,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+              child: meal.imageUrl.isNotEmpty
+                  ? CachedNetworkImage(
+                      imageUrl: meal.imageUrl,
+                      width: 90,
+                      height: 90,
+                      fit: BoxFit.cover,
+                      placeholder: (_, __) => _ImagePlaceholder(meal.type),
+                      errorWidget: (_, __, ___) => _ImagePlaceholder(meal.type),
+                    )
+                  : _ImagePlaceholder(meal.type),
             ),
 
-            // Meal content
-            Padding(
-              padding: AppPad.a14,
-              child: Row(
-                children: [
-                  ClipRRect(
-                    borderRadius: AppBorderRadius.a14,
-                    child: Image.network(
-                      meal.imageUrl,
-                      width: 80,
-                      height: 80,
-                      fit: BoxFit.cover,
-                      errorBuilder: (_, __, ___) => Container(
-                        width: 80,
-                        height: 80,
-                        color: meal.type.lightColor,
-                        child: Center(
-                          child: Text(
-                            meal.type.emoji,
-                            style: AppTextStyles.s20.copyWith(fontSize: 32),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  AppGap.w16,
-
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+            // ── Nội dung ─────────────────────────────────────────────────
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 10,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Label bữa (BREAKFAST / LUNCH / ...)
+                    Row(
                       children: [
                         Text(
-                          meal.name,
-                          style: Theme.of(context).textTheme.titleLarge,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
+                          meal.type.emoji,
+                          style: const TextStyle(fontSize: 12),
                         ),
-                        AppGap.h6,
-                        Row(
-                          children: [
-                            _InfoChip(
-                              icon: Icons.local_fire_department_rounded,
-                              label: '${meal.calories} cal',
-                              color: AppColors.primary,
-                            ),
-                            AppGap.w8,
-                            _InfoChip(
-                              icon: Icons.timer_outlined,
-                              label: '${meal.prepTime} min',
-                              color: AppColors.textSecondary,
-                            ),
-                          ],
-                        ),
-                        AppGap.h8,
-                        Row(
-                          children: [
-                            _MacroPill(
-                              'P ${meal.protein}g',
-                              AppColors.secondaryLight,
-                              AppColors.secondaryDark,
-                            ),
-                            AppGap.w4,
-                            _MacroPill(
-                              'C ${meal.carbs}g',
-                              const Color(0xFFFFFAE6),
-                              AppColors.accentDark,
-                            ),
-                            AppGap.w4,
-                            _MacroPill(
-                              'F ${meal.fat}g',
-                              AppColors.primaryLight,
-                              AppColors.primaryDark,
-                            ),
-                          ],
+                        const SizedBox(width: 4),
+                        Text(
+                          meal.type.localizedLabel.toUpperCase(),
+                          style: AppTextStyles.s10.copyWith(
+                            fontWeight: FontWeight.w700,
+                            color: meal.type.color,
+                            letterSpacing: 0.5,
+                          ),
                         ),
                       ],
                     ),
-                  ),
+                    const SizedBox(height: 4),
 
-                  AppGap.w8,
-                  GestureDetector(
+                    // Tên món
+                    Text(
+                      meal.name,
+                      style: context.themed(
+                        AppTextStyles.s14,
+                        fontWeight: FontWeight.w700,
+                      ),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    const SizedBox(height: 6),
+
+                    // Cal + time
+                    Row(
+                      children: [
+                        const Icon(
+                          Icons.local_fire_department_rounded,
+                          size: 13,
+                          color: AppColors.primary,
+                        ),
+                        const SizedBox(width: 2),
+                        Text(
+                          '${meal.calories} ${'meal_plan.calories_unit'.tr()}',
+                          style: AppTextStyles.s12.copyWith(
+                            color: AppColors.primary,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        const SizedBox(width: 10),
+                        Icon(
+                          Icons.timer_outlined,
+                          size: 13,
+                          color: colors.textSecondary,
+                        ),
+                        const SizedBox(width: 2),
+                        Text(
+                          '${meal.prepTime}${'meal_plan.minutes_short'.tr()}',
+                          style: AppTextStyles.s12.copyWith(
+                            color: colors.textSecondary,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 6),
+
+                    // Macros
+                    Row(
+                      children: [
+                        _MacroPill(
+                          '${'meal_plan.macro_protein_short'.tr()} ${meal.protein}g',
+                          AppColors.secondaryLight,
+                          AppColors.secondaryDark,
+                        ),
+                        const SizedBox(width: 4),
+                        _MacroPill(
+                          '${'meal_plan.macro_carbs_short'.tr()} ${meal.carbs}g',
+                          const Color(0xFFFFFAE6),
+                          AppColors.accentDark,
+                        ),
+                        const SizedBox(width: 4),
+                        _MacroPill(
+                          '${'meal_plan.macro_fat_short'.tr()} ${meal.fat}g',
+                          AppColors.primaryLight,
+                          AppColors.primaryDark,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+
+            // ── Action column: log check + edit icon ─────────────────────
+            Padding(
+              padding: const EdgeInsets.only(right: 12),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // Log toggle — 32px visual inside a 44px tap target.
+                  Pressable(
                     onTap: onToggle,
-                    child: AnimatedContainer(
-                      duration: const Duration(milliseconds: 250),
-                      width: 36,
-                      height: 36,
-                      decoration: BoxDecoration(
-                        color: meal.isLogged
-                            ? AppColors.success
-                            : AppColors.surfaceVariant,
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                          color: meal.isLogged
-                              ? AppColors.success
-                              : AppColors.border,
-                          width: 1.5,
+                    child: SizedBox(
+                      width: 44,
+                      height: 44,
+                      child: Center(
+                        child: AnimatedContainer(
+                          duration: const Duration(milliseconds: 200),
+                          width: 32,
+                          height: 32,
+                          decoration: BoxDecoration(
+                            color: meal.isLogged
+                                ? AppColors.success
+                                : colors.elevated,
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                              color: meal.isLogged
+                                  ? AppColors.success
+                                  : colors.borderDivider,
+                              width: 1.5,
+                            ),
+                          ),
+                          child: Icon(
+                            Icons.check_rounded,
+                            size: 16,
+                            color: meal.isLogged
+                                ? Colors.white
+                                : colors.textDisabled,
+                          ),
                         ),
                       ),
-                      child: Icon(
-                        Icons.check_rounded,
-                        size: 18,
-                        color: meal.isLogged ? Colors.white : AppColors.textHint,
+                    ),
+                  ),
+
+                  // Đổi món — tap mở sheet chọn món khác (như design mẫu).
+                  Pressable(
+                    onTap: onSwap,
+                    child: SizedBox(
+                      width: 44,
+                      height: 44,
+                      child: Center(
+                        child: Container(
+                          width: 32,
+                          height: 32,
+                          decoration: BoxDecoration(
+                            color: colors.elevated,
+                            borderRadius: AppBorderRadius.chip,
+                          ),
+                          child: Icon(
+                            Icons.edit_outlined,
+                            size: 16,
+                            color: colors.textSecondary,
+                          ),
+                        ),
                       ),
                     ),
                   ),
@@ -204,57 +232,114 @@ class MealCardWidget extends StatelessWidget {
       ),
     );
   }
+
 }
 
-class _InfoChip extends StatelessWidget {
-  const _InfoChip({
-    required this.icon,
-    required this.label,
-    required this.color,
+// ─── Empty slot (giữ nguyên) ──────────────────────────────────────────────────
+class EmptyMealSlotCard extends StatelessWidget {
+  const EmptyMealSlotCard({
+    super.key,
+    required this.mealType,
+    required this.onAdd,
   });
 
-  final IconData icon;
-  final String label;
-  final Color color;
+  final MealType mealType;
+  final VoidCallback onAdd;
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Icon(icon, size: 14, color: color),
-        AppGap.w4,
-        Text(
-          label,
-          style: AppTextStyles.s12.copyWith(
-            fontWeight: FontWeight.w600,
-            color: color,
-          ),
+    final colors = context.appColors;
+
+    return GestureDetector(
+      onTap: onAdd,
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 12),
+        padding: const EdgeInsets.symmetric(vertical: 18),
+        decoration: context.cardBox(radius: 16),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              width: 30,
+              height: 30,
+              decoration: BoxDecoration(
+                color: mealType.lightColor,
+                shape: BoxShape.circle,
+              ),
+              child: Center(
+                child: Text(
+                  mealType.emoji,
+                  style: const TextStyle(fontSize: 15),
+                ),
+              ),
+            ),
+            AppGap.w10,
+            Text(
+              'meal_plan.add_meal'.tr(
+                namedArgs: {'meal': mealType.localizedLabel},
+              ),
+              style: context.themed(
+                AppTextStyles.s14,
+                color: colors.textSecondary,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            AppGap.w8,
+            Container(
+              width: 22,
+              height: 22,
+              decoration: const BoxDecoration(
+                color: AppColors.primaryLight,
+                shape: BoxShape.circle,
+              ),
+              child: const Icon(
+                Icons.add_rounded,
+                size: 14,
+                color: AppColors.primary,
+              ),
+            ),
+          ],
         ),
-      ],
+      ),
     );
   }
 }
 
+// ─── Helpers ──────────────────────────────────────────────────────────────────
+class _ImagePlaceholder extends StatelessWidget {
+  const _ImagePlaceholder(this.type);
+  final MealType type;
+
+  @override
+  Widget build(BuildContext context) => Container(
+    width: 90,
+    height: 90,
+    color: type.lightColor,
+    child: Center(
+      child: Text(type.emoji, style: const TextStyle(fontSize: 28)),
+    ),
+  );
+}
+
 class _MacroPill extends StatelessWidget {
   const _MacroPill(this.label, this.bg, this.textColor);
-
   final String label;
   final Color bg;
   final Color textColor;
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: AppPad.h8v4,
-      decoration: BoxDecoration(color: bg, borderRadius: AppBorderRadius.a20),
-      child: Text(
-        label,
-        style: AppTextStyles.s10.copyWith(
-          fontWeight: FontWeight.w700,
-          color: textColor,
-        ),
+  Widget build(BuildContext context) => Container(
+    padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
+    decoration: BoxDecoration(
+      color: bg,
+      borderRadius: BorderRadius.circular(20),
+    ),
+    child: Text(
+      label,
+      style: AppTextStyles.s10.copyWith(
+        fontWeight: FontWeight.w700,
+        color: textColor,
       ),
-    );
-  }
+    ),
+  );
 }

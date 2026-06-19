@@ -1,5 +1,6 @@
 import 'package:cravvy_cooking_app/init.dart';
 import 'package:cravvy_cooking_app/data/models/meal.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 /// Hero image section with back/bookmark buttons, title, rating, and tags.
 class MealDetailHeaderWidget extends StatelessWidget {
@@ -101,7 +102,7 @@ class MealDetailHeaderWidget extends StatelessWidget {
                     ),
                     AppGap.w4,
                     Text(
-                      '(128 reviews)',
+                      'meal_detail.reviews'.tr(namedArgs: {'n': '128'}),
                       style: AppTextStyles.s12.copyWith(
                         color: Colors.white.withValues(alpha: 0.75),
                       ),
@@ -150,17 +151,24 @@ class _CircleIconButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    // 40px visual inside a 44px tap target.
+    return Pressable(
       onTap: onTap,
-      child: Container(
-        width: 40,
-        height: 40,
-        decoration: BoxDecoration(
-          color: Colors.white.withValues(alpha: 0.20),
-          shape: BoxShape.circle,
-          border: Border.all(color: Colors.white.withValues(alpha: 0.35)),
+      child: SizedBox(
+        width: 44,
+        height: 44,
+        child: Center(
+          child: Container(
+            width: 40,
+            height: 40,
+            decoration: BoxDecoration(
+              color: Colors.white.withValues(alpha: 0.20),
+              shape: BoxShape.circle,
+              border: Border.all(color: Colors.white.withValues(alpha: 0.35)),
+            ),
+            child: Icon(icon, color: Colors.white, size: 18),
+          ),
         ),
-        child: Icon(icon, color: Colors.white, size: 18),
       ),
     );
   }

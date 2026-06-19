@@ -1,10 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:cravvy_cooking_app/core/theme/pre_auth_theme.dart';
+import 'package:cravvy_cooking_app/core/utils/localized_message.dart';
 import 'package:cravvy_cooking_app/init.dart';
-import 'package:cravvy_cooking_app/modules/auth/widgets/auth_divider_widget.dart';
+import 'package:cravvy_cooking_app/data/providers/auth_provider.dart';
 import 'package:cravvy_cooking_app/modules/auth/widgets/auth_form_fields_widget.dart';
-import 'package:cravvy_cooking_app/modules/auth/widgets/auth_header_widget.dart';
 import 'package:cravvy_cooking_app/modules/auth/login/widgets/forgot_password_button_widget.dart';
-import 'package:cravvy_cooking_app/modules/auth/login/widgets/register_link_widget.dart';
-import 'package:cravvy_cooking_app/modules/auth/widgets/auth_social_section_widget.dart';
 import 'package:cravvy_cooking_app/modules/widgets/common/cravvy_button.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -20,7 +20,6 @@ class _LoginScreenState extends State<LoginScreen> {
   final _passwordController = TextEditingController();
   final _emailFocus = FocusNode();
   final _passwordFocus = FocusNode();
-  bool _isLoading = false;
 
   @override
   void dispose() {
@@ -31,30 +30,60 @@ class _LoginScreenState extends State<LoginScreen> {
     super.dispose();
   }
 
-  void _submit() {
+  Future<void> _submit() async {
     if (!_formKey.currentState!.validate()) return;
-    setState(() => _isLoading = true);
-    Future.delayed(const Duration(seconds: 2), () {
-      if (mounted) setState(() => _isLoading = false);
-    });
+
+    final auth = context.read<AuthProvider>();
+    final success = await auth.login(
+      _emailController.text.trim(),
+      _passwordController.text,
+    );
+
+    if (!mounted) return;
+
+    if (success) {
+      if (auth.user?.onboardingComplete == true) {
+        context.go(AppRouter.app);
+      } else {
+        context.go(AppRouter.setupStep1);
+      }
+    } else {
+      final error = localizeMessage(auth.errorMessage ?? 'auth.login_failed');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            error,
+            style: AppTextStyles.s14.copyWith(color: AppColors.white),
+          ),
+          backgroundColor: AppColors.error,
+          behavior: SnackBarBehavior.floating,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        ),
+      );
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
-      child: SafeArea(
-        top: false,
-        child: Scaffold(
-          backgroundColor: AppColors.background,
-          body: _Body(
-            formKey: _formKey,
-            emailController: _emailController,
-            passwordController: _passwordController,
-            emailFocus: _emailFocus,
-            passwordFocus: _passwordFocus,
-            isLoading: _isLoading,
-            onSubmit: _submit,
+      child: PreAuthScaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          leading: const PreAuthBackButton(fallbackRoute: AppRouter.welcomeChoice),
+        ),
+        body: SafeArea(
+          child: Consumer<AuthProvider>(
+            builder: (context, auth, _) => _Body(
+              formKey: _formKey,
+              emailController: _emailController,
+              passwordController: _passwordController,
+              emailFocus: _emailFocus,
+              passwordFocus: _passwordFocus,
+              isLoading: auth.status == AuthStatus.loading,
+              onSubmit: _submit,
+            ),
           ),
         ),
       ),
@@ -83,72 +112,83 @@ class _Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      padding: AppPad.h24,
-      child: Form(
-        key: formKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            AppGap.h20,
-
-            const AuthHeaderWidget(
-              title: 'Welcome Back!',
-              subtitle: 'Sign in to continue your healthy food journey',
-            ),
-            AppGap.h28,
-
-            AuthSocialSectionWidget(onGoogleTap: () {}, onAppleTap: () {}),
-            AppGap.h20,
-
-            const AuthDividerWidget(label: 'or sign in with email'),
-            AppGap.h20,
-
-            AuthFormFieldsWidget(
-              fields: [
-                AuthFormFieldConfig(
-                  hint: 'Email',
-                  controller: emailController,
-                  keyboardType: TextInputType.emailAddress,
-                  focusNode: emailFocus,
-                  validator: (v) {
-                    if (v == null || v.isEmpty) {
-                      return 'Please enter your email';
-                    }
-                    if (!v.contains('@')) return 'Invalid email address';
-                    return null;
-                  },
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final horizontalPadding = constraints.maxWidth >= 768 ? 32.0 : 24.0;
+        return Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 560),
+            child: SingleChildScrollView(
+              padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+              child: Form(
+                key: formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    AppGap.h12,
+                    Text(
+                      'auth.login_title'.tr(),
+                      style: AppTextStyles.h1.copyWith(
+                        color: PreAuthTheme.textPrimary,
+                        fontSize: 28,
+                      ),
+                    ),
+                    AppGap.h8,
+                    Text(
+                      'auth.login_subtitle'.tr(),
+                      style: AppTextStyles.s15.copyWith(
+                        color: PreAuthTheme.textSecondary,
+                        height: 1.5,
+                      ),
+                    ),
+                    AppGap.h28,
+                    AuthFormFieldsWidget(
+                      preAuth: true,
+                      fields: [
+                        AuthFormFieldConfig(
+                          hint: 'auth.email_hint'.tr(),
+                          controller: emailController,
+                          keyboardType: TextInputType.emailAddress,
+                          focusNode: emailFocus,
+                          validator: (v) {
+                            if (v == null || v.isEmpty) {
+                              return 'auth.val_email_required'.tr();
+                            }
+                            if (!v.contains('@')) {
+                              return 'auth.val_email_invalid'.tr();
+                            }
+                            return null;
+                          },
+                        ),
+                        AuthFormFieldConfig(
+                          hint: 'auth.password_hint'.tr(),
+                          controller: passwordController,
+                          isPassword: true,
+                          focusNode: passwordFocus,
+                          validator: (v) {
+                            if (v == null || v.isEmpty) {
+                              return 'auth.val_password_required'.tr();
+                            }
+                            return null;
+                          },
+                        ),
+                      ],
+                    ),
+                    const ForgotPasswordButtonWidget(),
+                    AppGap.h8,
+                    CravvyButton(
+                      label: 'auth.sign_in'.tr(),
+                      isLoading: isLoading,
+                      onTap: onSubmit,
+                    ),
+                    AppGap.h24,
+                  ],
                 ),
-                AuthFormFieldConfig(
-                  hint: 'Password',
-                  controller: passwordController,
-                  isPassword: true,
-                  focusNode: passwordFocus,
-                  validator: (v) {
-                    if (v == null || v.isEmpty) {
-                      return 'Please enter your password';
-                    }
-                    return null;
-                  },
-                ),
-              ],
+              ),
             ),
-
-            const ForgotPasswordButtonWidget(),
-            AppGap.h8,
-
-            CravvyButton(
-              label: 'Sign In',
-              isLoading: isLoading,
-              onTap: onSubmit,
-            ),
-            AppGap.h20,
-
-            const RegisterLinkWidget(),
-            AppGap.h24,
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }

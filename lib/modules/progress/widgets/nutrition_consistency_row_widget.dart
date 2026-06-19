@@ -14,16 +14,17 @@ class NutritionConsistencyRowWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
+
     return Row(
       children: [
         SizedBox(
           width: 60,
           child: Text(
             label,
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+            style: context.themed(
+              AppTextStyles.s13,
               fontWeight: FontWeight.w600,
-              fontSize: 13,
-              color: AppColors.textPrimary,
             ),
           ),
         ),
@@ -33,7 +34,7 @@ class NutritionConsistencyRowWidget extends StatelessWidget {
             child: LinearProgressIndicator(
               value: percent / 100,
               minHeight: 10,
-              backgroundColor: AppColors.surfaceVariant,
+              backgroundColor: colors.elevated,
               valueColor: AlwaysStoppedAnimation<Color>(color),
             ),
           ),
@@ -41,10 +42,8 @@ class NutritionConsistencyRowWidget extends StatelessWidget {
         AppGap.w10,
         Text(
           '$percent%',
-          style: AppTextStyles.s14.copyWith(
-            fontWeight: FontWeight.w700,
-            color: color,
-          ),
+          style: context.themed(AppTextStyles.s14, fontWeight: FontWeight.w700)
+              .copyWith(color: color),
         ),
       ],
     );

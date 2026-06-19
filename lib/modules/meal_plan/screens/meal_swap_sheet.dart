@@ -1,33 +1,93 @@
-import 'package:cravvy_cooking_app/init.dart';
-import 'package:cravvy_cooking_app/data/models/meal.dart';
-import 'package:cravvy_cooking_app/modules/meal_plan/provider/meal_plan_provider.dart';
+import 'package:flutter/services.dart';
 
-class MealSwapSheet extends StatelessWidget {
+import 'package:cravvy_cooking_app/init.dart';
+import 'package:cravvy_cooking_app/core/routes/app_routers.dart';
+import 'package:cravvy_cooking_app/data/models/meal.dart';
+import 'package:cravvy_cooking_app/data/models/recipe.dart';
+import 'package:cravvy_cooking_app/data/providers/recipe_provider.dart';
+import 'package:cravvy_cooking_app/modules/meal_plan/provider/meal_plan_provider.dart';
+import 'package:cravvy_cooking_app/modules/meal_plan/widgets/alternative_tile_widget.dart';
+import 'package:easy_localization/easy_localization.dart';
+
+class MealSwapSheet extends StatefulWidget {
   const MealSwapSheet({super.key, required this.meal});
 
   final Meal meal;
 
   @override
+  State<MealSwapSheet> createState() => _MealSwapSheetState();
+}
+
+class _MealSwapSheetState extends State<MealSwapSheet> {
+  int? _swapsLeft;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) => _loadQuota());
+  }
+
+  Future<void> _loadQuota() async {
+    final left =
+        await context.read<MealPlanProvider>().swapsRemainingThisWeek();
+    if (mounted) setState(() => _swapsLeft = left);
+  }
+
+  Meal get meal => widget.meal;
+
+  /// Convert Recipe → Meal để dùng với AlternativeTileWidget và swapMeal().
+  /// QUAN TRỌNG: meal.id phải là recipe.id (UUID thật từ Supabase),
+  /// không phải entry id — MealPlanProvider.swapMeal() dùng newMeal.id
+  /// làm newRecipeId khi gọi MealPlanService.swapMeal().
+  Meal _recipeToMeal(Recipe recipe) => Meal(
+    id: recipe.id,
+    recipeId: recipe.id,
+    name: recipe.name,
+    type: meal.type,
+    calories: recipe.calories,
+    protein: recipe.protein,
+    carbs: recipe.carbs,
+    fat: recipe.fat,
+    prepTime: recipe.prepTime,
+    imageUrl: recipe.imageUrl ?? '',
+    tags: recipe.tags,
+    steps: recipe.steps,
+    ingredients: recipe.ingredients,
+  );
+
+  @override
   Widget build(BuildContext context) {
-    final alternatives = MealData.getAlternatives(meal.type);
+    final colors = context.appColors;
+    // RecipeProvider đã loaded từ app start — không cần async ở đây
+    final recipeProvider = context.watch<RecipeProvider>();
+
+    final mealTypeName = _mealTypeToString(meal.type);
+    final alternatives = recipeProvider.allRecipes
+        .where(
+          (r) => r.mealType == mealTypeName && r.id != meal.recipeId,
+        )
+        .toList();
 
     return Container(
       height: MediaQuery.of(context).size.height * 0.75,
-      decoration: const BoxDecoration(
-        color: AppColors.background,
-        borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
+      decoration: BoxDecoration(
+        color: colors.backgroundMain,
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
       ),
       child: Column(
         children: [
+          // Handle
           Container(
             margin: AppPad.t12,
             width: 40,
             height: 4,
             decoration: BoxDecoration(
-              color: AppColors.border,
+              color: colors.borderDivider,
               borderRadius: AppBorderRadius.a2,
             ),
           ),
+
+          // Header
           Padding(
             padding: const EdgeInsets.fromLTRB(24, 20, 24, 0),
             child: Row(
@@ -37,16 +97,29 @@ class MealSwapSheet extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Swap Meal',
-                        style: AppTextStyles.s18.copyWith(
+                        'meal_plan.swap_title'.tr(),
+                        style: context.themed(
+                          AppTextStyles.s18,
                           fontWeight: FontWeight.w600,
-                          color: AppColors.textPrimary,
                         ),
                       ),
+                      if (_swapsLeft != null)
+                        Text(
+                          'limits.swaps_remaining'.tr(
+                            namedArgs: {'n': '$_swapsLeft'},
+                          ),
+                          style: context.themed(
+                            AppTextStyles.s12,
+                            color: colors.textSecondary,
+                          ),
+                        ),
                       Text(
-                        'Choose a replacement for ${meal.name}',
-                        style: AppTextStyles.s14.copyWith(
-                          color: AppColors.textSecondary,
+                        'meal_plan.swap_subtitle'.tr(
+                          namedArgs: {'name': meal.name},
+                        ),
+                        style: context.themed(
+                          AppTextStyles.s14,
+                          color: colors.textSecondary,
                         ),
                       ),
                     ],
@@ -56,19 +129,21 @@ class MealSwapSheet extends StatelessWidget {
                   onPressed: () => Navigator.pop(context),
                   icon: const Icon(Icons.close_rounded),
                   style: IconButton.styleFrom(
-                    backgroundColor: AppColors.surfaceVariant,
+                    backgroundColor: colors.elevated,
                   ),
                 ),
               ],
             ),
           ),
+
+          // Info banner — món đang được thay
           Container(
             margin: const EdgeInsets.fromLTRB(16, 16, 16, 0),
             padding: AppPad.a12,
             decoration: BoxDecoration(
               color: meal.type.lightColor,
               borderRadius: AppBorderRadius.a16,
-              border: Border.all(color: meal.type.color.withOpacity(0.3)),
+              border: Border.all(color: meal.type.color.withValues(alpha: 0.3)),
             ),
             child: Row(
               children: [
@@ -80,7 +155,9 @@ class MealSwapSheet extends StatelessWidget {
                 AppGap.w8,
                 Expanded(
                   child: Text(
-                    'Replacing: ${meal.name}',
+                    'meal_plan.swap_replacing'.tr(
+                      namedArgs: {'name': meal.name},
+                    ),
                     style: AppTextStyles.s14.copyWith(
                       fontSize: 13,
                       fontWeight: FontWeight.w600,
@@ -89,190 +166,125 @@ class MealSwapSheet extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  '${meal.calories} kcal',
+                  '${meal.calories} ${'meal_plan.kcal_unit'.tr()}',
                   style: AppTextStyles.s12.copyWith(color: meal.type.color),
                 ),
               ],
             ),
           ),
+
           AppGap.h16,
+
+          // List alternatives
           Expanded(
-            child: ListView.builder(
-              padding: AppPad.h16,
-              itemCount: alternatives.length,
-              itemBuilder: (context, i) => _AlternativeTile(
-                meal: alternatives[i],
-                originalCalories: meal.calories,
-                onSelect: () {
-                  context.read<MealPlanProvider>().swapMeal(
-                    meal.id,
-                    alternatives[i],
-                  );
-                  Navigator.pop(context);
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text(
-                        '✅ Swapped to ${alternatives[i].name}',
-                        style: AppTextStyles.s14.copyWith(
-                          color: AppColors.white,
-                        ),
-                      ),
-                      backgroundColor: AppColors.success,
-                      behavior: SnackBarBehavior.floating,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: AppBorderRadius.a12,
-                      ),
-                      duration: const Duration(seconds: 2),
-                    ),
-                  );
-                },
-              ),
-            ),
+            child: alternatives.isEmpty
+                ? _EmptyAlternatives(mealType: meal.type)
+                : ListView.builder(
+                    padding: AppPad.h16,
+                    itemCount: alternatives.length,
+                    itemBuilder: (context, i) {
+                      final newMeal = _recipeToMeal(alternatives[i]);
+                      return AlternativeTileWidget(
+                        meal: newMeal,
+                        originalCalories: meal.calories,
+                        onSelect: () async {
+                          final err = await context
+                              .read<MealPlanProvider>()
+                              .swapMeal(meal.id, newMeal);
+                          if (!context.mounted) return;
+                          if (err == 'swap_limit') {
+                            Navigator.pop(context);
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text('limits.swap_exhausted'.tr()),
+                                action: SnackBarAction(
+                                  label: 'limits.upgrade'.tr(),
+                                  onPressed: () =>
+                                      context.push(AppRouter.premium),
+                                ),
+                                behavior: SnackBarBehavior.floating,
+                              ),
+                            );
+                            return;
+                          }
+                          if (err != null) return;
+                          // Confirm the swap with a light haptic.
+                          HapticFeedback.lightImpact();
+                          Navigator.pop(context);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                'meal_plan.swap_success'.tr(
+                                  namedArgs: {'name': newMeal.name},
+                                ),
+                                style: AppTextStyles.s14.copyWith(
+                                  color: AppColors.white,
+                                ),
+                              ),
+                              backgroundColor: AppColors.success,
+                              behavior: SnackBarBehavior.floating,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: AppBorderRadius.a12,
+                              ),
+                              duration: const Duration(seconds: 2),
+                            ),
+                          );
+                        },
+                      );
+                    },
+                  ),
           ),
         ],
       ),
     );
   }
+
+  String _mealTypeToString(MealType type) {
+    switch (type) {
+      case MealType.breakfast:
+        return 'breakfast';
+      case MealType.lunch:
+        return 'lunch';
+      case MealType.dinner:
+        return 'dinner';
+      case MealType.snack:
+        return 'snack';
+    }
+  }
 }
 
-class _AlternativeTile extends StatelessWidget {
-  const _AlternativeTile({
-    required this.meal,
-    required this.originalCalories,
-    required this.onSelect,
-  });
+/// Fallback khi RecipeProvider chưa loaded hoặc không có món nào cùng type
+class _EmptyAlternatives extends StatelessWidget {
+  const _EmptyAlternatives({required this.mealType});
 
-  final Meal meal;
-  final int originalCalories;
-  final VoidCallback onSelect;
+  final MealType mealType;
 
   @override
   Widget build(BuildContext context) {
-    final calDiff = meal.calories - originalCalories;
-    final isLower = calDiff < 0;
-    final diffColor = isLower ? AppColors.success : AppColors.warning;
+    final colors = context.appColors;
 
-    return Container(
-      margin: AppPad.b12,
-      decoration: BoxDecoration(
-        color: AppColors.surface,
-        borderRadius: AppBorderRadius.a18,
-        border: Border.all(color: AppColors.border),
-      ),
-      child: InkWell(
-        onTap: onSelect,
-        borderRadius: AppBorderRadius.a18,
-        child: Padding(
-          padding: AppPad.a14,
-          child: Row(
-            children: [
-              ClipRRect(
-                borderRadius: AppBorderRadius.a12,
-                child: Image.network(
-                  meal.imageUrl,
-                  width: 70,
-                  height: 70,
-                  fit: BoxFit.cover,
-                  errorBuilder: (_, __, ___) => Container(
-                    width: 70,
-                    height: 70,
-                    color: meal.type.lightColor,
-                    child: Center(
-                      child: Text(
-                        meal.type.emoji,
-                        style: AppTextStyles.s20.copyWith(fontSize: 28),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              AppGap.w14,
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      meal.name,
-                      style: AppTextStyles.s16.copyWith(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w600,
-                        color: AppColors.textPrimary,
-                      ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    AppGap.h4,
-                    Row(
-                      children: [
-                        Text(
-                          '${meal.calories} kcal',
-                          style: AppTextStyles.s14.copyWith(
-                            fontSize: 13,
-                            fontWeight: FontWeight.w600,
-                            color: AppColors.textPrimary,
-                          ),
-                        ),
-                        AppGap.w6,
-                        Container(
-                          padding: AppPad.h6v2,
-                          decoration: BoxDecoration(
-                            color: diffColor.withValues(alpha: 0.1),
-                            borderRadius: AppBorderRadius.a6,
-                          ),
-                          child: Text(
-                            '${isLower ? '' : '+'}$calDiff',
-                            style: AppTextStyles.s12.copyWith(
-                              fontSize: 11,
-                              fontWeight: FontWeight.w700,
-                              color: diffColor,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    AppGap.h6,
-                    Wrap(
-                      spacing: 4,
-                      runSpacing: 4,
-                      children: meal.tags
-                          .take(2)
-                          .map(
-                            (tag) => Container(
-                              padding: AppPad.h6v2,
-                              decoration: BoxDecoration(
-                                color: AppColors.surfaceVariant,
-                                borderRadius: AppBorderRadius.a6,
-                              ),
-                              child: Text(
-                                tag,
-                                style: AppTextStyles.s10.copyWith(
-                                  fontWeight: FontWeight.w600,
-                                  color: AppColors.textSecondary,
-                                ),
-                              ),
-                            ),
-                          )
-                          .toList(),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                width: 36,
-                height: 36,
-                decoration: const BoxDecoration(
-                  color: AppColors.primaryLight,
-                  shape: BoxShape.circle,
-                ),
-                child: const Icon(
-                  Icons.arrow_forward_rounded,
-                  color: AppColors.primary,
-                  size: 18,
-                ),
-              ),
-            ],
+    return Center(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(mealType.emoji, style: const TextStyle(fontSize: 40)),
+          AppGap.h12,
+          Text(
+            'meal_plan.swap_empty_title'.tr(),
+            style: context.themed(
+              AppTextStyles.s16,
+              fontWeight: FontWeight.w600,
+            ),
           ),
-        ),
+          AppGap.h6,
+          Text(
+            'meal_plan.swap_empty_subtitle'.tr(),
+            style: context.themed(
+              AppTextStyles.s14,
+              color: colors.textSecondary,
+            ),
+          ),
+        ],
       ),
     );
   }

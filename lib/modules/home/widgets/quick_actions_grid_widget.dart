@@ -1,4 +1,5 @@
 import "package:cravvy_cooking_app/init.dart";
+import 'package:easy_localization/easy_localization.dart';
 import 'package:cravvy_cooking_app/modules/dashboard/provider/dashboard_tab_provider.dart';
 
 class _Action {
@@ -6,39 +7,65 @@ class _Action {
   final String label;
   final Color bgColor;
   final Color iconColor;
+
   /// Dashboard tab index to switch to when tapped.
   final int? tabIndex;
-  const _Action(this.emoji, this.label, this.bgColor, this.iconColor, {this.tabIndex});
-}
 
-const _kActions = [
-  _Action(
-    '🥕',
-    'Ingredients I have',
-    AppColors.primaryLight,
-    AppColors.primary,
-    tabIndex: 2, // Search tab
-  ),
-  _Action('⚡', 'Quick recipes', AppColors.secondaryLight, AppColors.secondary,
-    tabIndex: 2, // Search tab
-  ),
-  _Action('📋', "Today's full plan", Color(0xFFEDE9FE), Color(0xFF7C3AED),
-    tabIndex: 1, // Meal Plan tab
-  ),
-  _Action('🤖', 'Ask AI Chef', AppColors.warningLight, AppColors.warning,
-    tabIndex: 2, // Search tab
-  ),
-];
+  /// Route to push when tapped (takes precedence over [tabIndex]).
+  final String? route;
+  const _Action(
+    this.emoji,
+    this.label,
+    this.bgColor,
+    this.iconColor, {
+    this.tabIndex,
+    this.route,
+  });
+}
 
 class QuickActionsGridWidget extends StatelessWidget {
   const QuickActionsGridWidget({super.key});
 
+  List<_Action> _actions(AppColorExtension colors) => [
+        _Action(
+          '🥕',
+          'home.action_ingredients'.tr(),
+          AppColors.primaryLight,
+          AppColors.primary,
+          tabIndex: 2,
+        ),
+        _Action(
+          '⚡',
+          'home.action_quick'.tr(),
+          AppColors.secondaryLight,
+          AppColors.secondary,
+          tabIndex: 2,
+        ),
+        _Action(
+          '📋',
+          'home.action_plan'.tr(),
+          colors.elevated,
+          AppColors.dinner,
+          tabIndex: 1,
+        ),
+        _Action(
+          '🤖',
+          'home.action_ai'.tr(),
+          AppColors.warningLight,
+          AppColors.warning,
+          route: AppRouter.chat,
+        ),
+      ];
+
   @override
   Widget build(BuildContext context) {
+    final _ = context.locale;
+    final colors = context.appColors;
+
     return Padding(
       padding: const EdgeInsets.only(
         left: 16,
-        top: 24,
+        top: 8,
         right: 16,
       ),
       child: Column(
@@ -47,8 +74,8 @@ class QuickActionsGridWidget extends StatelessWidget {
           Padding(
             padding: AppPad.l8,
             child: Text(
-              'Quick Actions',
-              style: Theme.of(context).textTheme.headlineSmall,
+              'home.quick_actions'.tr(),
+              style: context.themed(AppTextStyles.h2),
             ),
           ),
           AppGap.h14,
@@ -59,7 +86,9 @@ class QuickActionsGridWidget extends StatelessWidget {
             childAspectRatio: 1.6,
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
-            children: _kActions.map((a) => _ActionCard(action: a)).toList(),
+            children: _actions(colors)
+                .map((a) => _ActionCard(action: a))
+                .toList(),
           ),
         ],
       ),
@@ -73,20 +102,24 @@ class _ActionCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
+
     return Material(
-      color: AppColors.surface,
+      color: colors.cardSurface,
       borderRadius: AppBorderRadius.a18,
       child: InkWell(
         borderRadius: AppBorderRadius.a18,
         onTap: () {
-          if (action.tabIndex != null) {
+          if (action.route != null) {
+            context.push(action.route!);
+          } else if (action.tabIndex != null) {
             context.read<DashboardTabProvider>().switchTo(action.tabIndex!);
           }
         },
         child: Container(
           padding: AppPad.a14,
           decoration: BoxDecoration(
-            border: Border.all(color: AppColors.border),
+            border: Border.all(color: colors.borderDivider),
             borderRadius: AppBorderRadius.a18,
           ),
           child: Column(
@@ -109,9 +142,9 @@ class _ActionCard extends StatelessWidget {
               const Spacer(),
               Text(
                 action.label,
-                style: AppTextStyles.s12.copyWith(
+                style: context.themed(
+                  AppTextStyles.s12,
                   fontWeight: FontWeight.w700,
-                  color: AppColors.textPrimary,
                 ),
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
@@ -123,4 +156,3 @@ class _ActionCard extends StatelessWidget {
     );
   }
 }
-

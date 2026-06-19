@@ -1,4 +1,5 @@
 import 'package:cravvy_cooking_app/init.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:cravvy_cooking_app/modules/meal_detail/provider/meal_detail_provider.dart';
 
 /// "Servings" row with decrement / count / increment controls.
@@ -20,10 +21,10 @@ class MealDetailServingsWidget extends StatelessWidget {
             child: Row(
               children: [
                 Text(
-                  'Servings',
-                  style: AppTextStyles.s16.copyWith(
+                  'meal_detail.servings'.tr(),
+                  style: context.themed(
+                    AppTextStyles.s16,
                     fontWeight: FontWeight.w700,
-                    color: AppColors.textPrimary,
                   ),
                 ),
                 const Spacer(),
@@ -35,9 +36,9 @@ class MealDetailServingsWidget extends StatelessWidget {
                   padding: AppPad.h16,
                   child: Text(
                     '${provider.servings}',
-                    style: AppTextStyles.s18.copyWith(
+                    style: context.themed(
+                      AppTextStyles.s18,
                       fontWeight: FontWeight.w800,
-                      color: AppColors.textPrimary,
                     ),
                   ),
                 ),
@@ -62,24 +63,26 @@ class _StepButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    final colors = context.appColors;
+
+    // 36px visual inside a 44px tap target.
+    return Pressable(
       onTap: onTap,
-      child: Container(
-        width: 36,
-        height: 36,
-        decoration: BoxDecoration(
-          color: AppColors.surface,
-          shape: BoxShape.circle,
-          border: Border.all(color: AppColors.border),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withValues(alpha: 0.05),
-              blurRadius: 4,
-              offset: const Offset(0, 1),
+      child: SizedBox(
+        width: 44,
+        height: 44,
+        child: Center(
+          child: Container(
+            width: 36,
+            height: 36,
+            decoration: BoxDecoration(
+              color: colors.cardSurface,
+              shape: BoxShape.circle,
+              border: Border.all(color: colors.borderDivider),
             ),
-          ],
+            child: Icon(icon, size: 18, color: colors.textPrimary),
+          ),
         ),
-        child: Icon(icon, size: 18, color: AppColors.textPrimary),
       ),
     );
   }

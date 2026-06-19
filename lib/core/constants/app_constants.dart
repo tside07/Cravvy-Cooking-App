@@ -3,8 +3,12 @@ abstract final class AppConst {
   static const String appTagline = 'Your AI Meal Planner';
   static const String bundleId = 'com.tside07.cravvy';
 
-  static const String robotoFont = 'Roboto';
-  static const String nunitoFont = 'Nunito';
+  static const String robotoFont = 'Inter';
+  static const String interFont = 'Inter';
+  static const String nunitoFont = interFont;
+
+  /// Display/heading font: Baloo 2 (rounded, friendly, full Vietnamese support).
+  static const String headingFont = 'Baloo2';
 
   // Business
   static const int otpLength = 6;
@@ -34,6 +38,9 @@ abstract final class AppConst {
   static const String keySelectedGoal = 'selected_goal';
   static const String keySelectedDiets = 'selected_diets';
   static const String keyCalorieGoal = 'calorie_goal';
+  static const String keyShoppingList = 'shopping_list_v1';
+  static const String keyDarkMode = 'dark_mode_enabled';
+  static const String keyGuestMode = 'guest_mode_enabled';
 
   // ignore: library_private_types_in_public_api, non_constant_identifier_names
   static final _RegExp Pattern = _RegExp();

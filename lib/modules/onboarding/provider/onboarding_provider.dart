@@ -1,5 +1,4 @@
 import 'package:cravvy_cooking_app/resources/resources.dart';
-import 'package:flutter/foundation.dart';
 
 enum HealthGoal { loseWeight, buildMuscle, maintain, manageCondition }
 
@@ -107,38 +106,4 @@ extension DietTypeExt on DietType {
         return '💪';
     }
   }
-}
-
-class OnboardingProvider extends ChangeNotifier {
-  HealthGoal? _selectedGoal;
-  final Set<DietType> _selectedDiets = {};
-
-  HealthGoal? get selectedGoal => _selectedGoal;
-  Set<DietType> get selectedDiets => Set.unmodifiable(_selectedDiets);
-
-  void selectGoal(HealthGoal? goal) {
-    if (goal == null) return;
-    _selectedGoal = goal;
-    notifyListeners();
-  }
-
-  void toggleDiet(DietType diet) {
-    if (diet == DietType.none) {
-      _selectedDiets.clear();
-      _selectedDiets.add(DietType.none);
-    } else {
-      _selectedDiets.remove(DietType.none);
-      if (_selectedDiets.contains(diet)) {
-        _selectedDiets.remove(diet);
-      } else {
-        _selectedDiets.add(diet);
-      }
-    }
-    notifyListeners();
-  }
-
-  bool isDietSelected(DietType diet) => _selectedDiets.contains(diet);
-
-  bool get canProceedGoal => _selectedGoal != null;
-  bool get canProceedDiet => _selectedDiets.isNotEmpty;
 }

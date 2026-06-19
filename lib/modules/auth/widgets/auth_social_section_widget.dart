@@ -6,18 +6,28 @@ class AuthSocialSectionWidget extends StatelessWidget {
     super.key,
     required this.onGoogleTap,
     required this.onAppleTap,
+    this.isEnabled = true,
   });
 
   final VoidCallback onGoogleTap;
   final VoidCallback onAppleTap;
+  final bool isEnabled;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        AuthSocialLoginButton(provider: SocialProvider.google, onTap: onGoogleTap),
+        AuthSocialLoginButton(
+          provider: SocialProvider.google,
+          onTap: onGoogleTap,
+          isEnabled: isEnabled,
+        ),
         AppGap.h12,
-        AuthSocialLoginButton(provider: SocialProvider.apple, onTap: onAppleTap),
+        AuthSocialLoginButton(
+          provider: SocialProvider.apple,
+          onTap: onAppleTap,
+          isEnabled: isEnabled,
+        ),
       ],
     );
   }

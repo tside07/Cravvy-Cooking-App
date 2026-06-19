@@ -1,48 +1,35 @@
+import 'package:cravvy_cooking_app/core/theme/pre_auth_theme.dart';
 import 'package:cravvy_cooking_app/init.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class OnboardingSlide {
-  final String emoji;
+  final String imagePath;
   final String title;
   final String subtitle;
-  final Color bgColor;
-  final Color accentColor;
 
   const OnboardingSlide({
-    required this.emoji,
+    required this.imagePath,
     required this.title,
     required this.subtitle,
-    required this.bgColor,
-    required this.accentColor,
   });
 }
 
-const kOnboardingSlides = [
+List<OnboardingSlide> kOnboardingSlides(BuildContext context) => [
   OnboardingSlide(
-    emoji: IconPath.plate,
-    title: 'What should\nI eat today?',
-    subtitle:
-        'Tell us what\'s in your fridge and we\'ll suggest delicious, healthy meals tailored just for you.',
-    bgColor: Color(0xFFFFF3EE),
-    accentColor: AppColors.primary,
+    imagePath: ImagePath.onboarding1,
+    title: 'onboarding_slide.sl1_title'.tr(),
+    subtitle: 'onboarding_slide.sl1_subtitle'.tr(),
   ),
   OnboardingSlide(
-    emoji: IconPath.calendar,
-    title: 'Plan your\nweek effortlessly',
-    subtitle:
-        'Get a personalized 7-day meal plan based on your health goals, diet type, and cooking time.',
-    bgColor: Color(0xFFE8FAF8),
-    accentColor: AppColors.secondary,
+    imagePath: ImagePath.onboarding2,
+    title: 'onboarding_slide.sl2_title'.tr(),
+    subtitle: 'onboarding_slide.sl2_subtitle'.tr(),
   ),
   OnboardingSlide(
-    emoji: IconPath.target,
-    title: 'Track nutrition\nwith ease',
-    subtitle:
-        'Monitor calories, macros and streaks automatically — no manual logging required.',
-    bgColor: Color(0xFFFFFAE6),
-    accentColor: AppColors.accentDark,
+    imagePath: ImagePath.onboarding3,
+    title: 'onboarding_slide.sl3_title'.tr(),
+    subtitle: 'onboarding_slide.sl3_subtitle'.tr(),
   ),
 ];
-
 class SlidePageWidget extends StatelessWidget {
   const SlidePageWidget({super.key, required this.slide});
 
@@ -50,52 +37,55 @@ class SlidePageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: AppPad.h32,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            width: 200,
-            height: 200,
-            decoration: BoxDecoration(
-              color: slide.accentColor.withValues(alpha: 0.12),
-              shape: BoxShape.circle,
-            ),
-            child: Center(
-              child: SvgPicture.asset(
-                slide.emoji,
-                width: 120,
-                height: 120,
-                colorFilter: ColorFilter.mode(
-                  slide.accentColor,
-                  BlendMode.srcIn,
-                ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Expanded(
+          flex: 55,
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+            child: ClipRRect(
+              borderRadius: AppBorderRadius.a16,
+              child: Image.asset(
+                slide.imagePath,
+                width: double.infinity,
+                fit: BoxFit.cover,
               ),
             ),
           ),
-          AppGap.h48,
-          Text(
-            slide.title,
-            textAlign: TextAlign.center,
-            style: AppTextStyles.s20.copyWith(
-              fontSize: 28,
-              fontWeight: FontWeight.w800,
-              color: AppColors.textPrimary,
-              height: 1.2,
+        ),
+
+        // ── Text phía dưới, left-aligned ──
+        Expanded(
+          flex: 45,
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(24, 32, 24, 0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  slide.title,
+                  style: AppTextStyles.s20.copyWith(
+                    fontWeight: FontWeight.w800,
+                    color: PreAuthTheme.textPrimary,
+                    fontSize: 32,
+                    height: 1.15,
+                  ),
+                ),
+                AppGap.h12,
+                Text(
+                  slide.subtitle,
+                  style: AppTextStyles.s16.copyWith(
+                    color: PreAuthTheme.textSecondary,
+                    fontSize: 15,
+                    height: 1.5,
+                  ),
+                ),
+              ],
             ),
           ),
-          AppGap.h16,
-          Text(
-            slide.subtitle,
-            textAlign: TextAlign.center,
-            style: AppTextStyles.s16.copyWith(
-              color: AppColors.textSecondary,
-              height: 1.6,
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

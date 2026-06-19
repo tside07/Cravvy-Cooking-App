@@ -5,24 +5,21 @@ class HeaderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           'Welcome Back!',
-          style: AppTextStyles.s20.copyWith(
-            fontSize: 28,
-            fontWeight: FontWeight.w800,
-            color: AppColors.textPrimary,
-          ),
+          style: context.themed(AppTextStyles.h1.copyWith(fontSize: 28)),
         ),
         AppGap.h6,
         Text(
           'Sign in to continue your healthy food journey',
-          style: AppTextStyles.s14.copyWith(
-            color: AppColors.textSecondary,
-            height: 1.5,
-          ),
+          style: context.themed(
+            AppTextStyles.s14,
+            color: colors.textSecondary,
+          ).copyWith(height: 1.5),
         ),
       ],
     );

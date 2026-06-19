@@ -1,18 +1,20 @@
 import 'package:cravvy_cooking_app/init.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class PremiumBannerWidget extends StatelessWidget {
   const PremiumBannerWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return Pressable(
       onTap: () => context.push(AppRouter.premium),
       child: Container(
-        margin: const EdgeInsets.only(left: 16, top: 14, right: 16),
+        margin: AppPad.section16t14,
         padding: AppPad.a16,
         decoration: BoxDecoration(
           color: AppColors.orange,
-          borderRadius: AppBorderRadius.a18,
+          borderRadius: AppBorderRadius.card,
+          boxShadow: AppShadows.e2Of(Theme.of(context).brightness),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -29,7 +31,7 @@ class PremiumBannerWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Upgrade to Premium',
+                    'profile.upgrade'.tr(),
                     style: AppTextStyles.s14.copyWith(
                       fontSize: 15,
                       fontWeight: FontWeight.w700,
@@ -37,7 +39,7 @@ class PremiumBannerWidget extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    'Unlock AI meal planning & more',
+                    'profile.upgrade_subtitle'.tr(),
                     style: AppTextStyles.s12.copyWith(
                       color: Colors.white.withValues(alpha: 0.6),
                     ),
@@ -49,7 +51,7 @@ class PremiumBannerWidget extends StatelessWidget {
               IconPath.rightArrow,
               width: 25,
               height: 25,
-              colorFilter: ColorFilter.mode(AppColors.white, BlendMode.srcIn,),
+              colorFilter: ColorFilter.mode(AppColors.white, BlendMode.srcIn),
             ),
           ],
         ),

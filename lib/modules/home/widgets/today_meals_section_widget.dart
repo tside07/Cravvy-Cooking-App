@@ -1,4 +1,5 @@
 import 'package:cravvy_cooking_app/init.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:cravvy_cooking_app/modules/meal_plan/provider/meal_plan_provider.dart';
 import 'package:cravvy_cooking_app/modules/home/widgets/meal_scroll_card_widget.dart';
 import 'package:cravvy_cooking_app/modules/dashboard/provider/dashboard_tab_provider.dart';
@@ -8,32 +9,36 @@ class TodayMealsSectionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _ = context.locale;
+
     return Consumer<MealPlanProvider>(
       builder: (context, provider, _) {
-        final meals = provider.selectedDay.meals;
+        final meals = provider.todayDay.meals;
+
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
               padding: const EdgeInsets.only(
                 left: 24,
-                top: 24,
+                top: 16,
                 right: 24,
                 bottom: 14,
-              ), //TODO: no AppPad equivalent for this multi-directional EdgeInsets.only
+              ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Today's Meals",
-                    style: Theme.of(context).textTheme.headlineSmall,
+                    'home.meals_title'.tr(),
+                    style: context.themed(AppTextStyles.h2),
                   ),
                   TextButton(
-                    onPressed: () => context.read<DashboardTabProvider>().switchTo(1),
+                    onPressed: () =>
+                        context.read<DashboardTabProvider>().switchTo(1),
                     child: Row(
                       children: [
                         Text(
-                          'See all',
+                          'home.see_all'.tr(),
                           style: AppTextStyles.s12.copyWith(
                             color: AppColors.primary,
                             fontWeight: FontWeight.w600,
@@ -50,16 +55,64 @@ class TodayMealsSectionWidget extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(
-              height: 200,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                padding: AppPad.h16,
-                itemCount: meals.length,
-                itemBuilder: (context, i) =>
-                    MealScrollCardWidget(meal: meals[i]),
+
+            // Loading state
+            if (provider.isLoading)
+              const SizedBox(
+                height: 120,
+                child: Center(
+                  child: CircularProgressIndicator(
+                    color: AppColors.primary,
+                    strokeWidth: 2,
+                  ),
+                ),
+              )
+            // Empty state — chưa có meal nào hôm nay
+            else if (meals.isEmpty)
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: GestureDetector(
+                  onTap: () => context.read<DashboardTabProvider>().switchTo(1),
+                  child: Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.symmetric(vertical: 24),
+                    decoration: context.cardBox(radius: 16),
+                    child: Column(
+                      children: [
+                        const Text('🍽️', style: TextStyle(fontSize: 32)),
+                        AppGap.h8,
+                        Text(
+                          'home.no_meals_title'.tr(),
+                          style: context.themed(
+                            AppTextStyles.s14,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        AppGap.h4,
+                        Text(
+                          'home.no_meals_desc'.tr(),
+                          style: context.themed(
+                            AppTextStyles.s12,
+                            color: context.appColors.textSecondary,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              )
+            // Has meals
+            else
+              SizedBox(
+                height: 200,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  padding: AppPad.h16,
+                  itemCount: meals.length,
+                  itemBuilder: (context, i) =>
+                      MealScrollCardWidget(meal: meals[i]),
+                ),
               ),
-            ),
           ],
         );
       },

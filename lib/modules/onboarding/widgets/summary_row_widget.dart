@@ -14,6 +14,7 @@ class SummaryRowWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
     return Row(
       children: [
         Text(icon, style: AppTextStyles.s20),
@@ -24,15 +25,16 @@ class SummaryRowWidget extends StatelessWidget {
             children: [
               Text(
                 label,
-                style: AppTextStyles.s14.copyWith(
-                  color: AppColors.textSecondary,
+                style: context.themed(
+                  AppTextStyles.s14,
+                  color: colors.textSecondary,
                 ),
               ),
               Text(
                 value,
-                style: AppTextStyles.s16.copyWith(
+                style: context.themed(
+                  AppTextStyles.s16,
                   fontWeight: FontWeight.w600,
-                  color: AppColors.textPrimary,
                 ),
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,

@@ -1,6 +1,10 @@
 import 'package:cravvy_cooking_app/init.dart';
-import '../widgets/type_tab.dart';
-import '../widgets/coming_soon_tab_widget.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:cravvy_cooking_app/core/widgets/template/custom_app_bar.dart';
+import 'package:cravvy_cooking_app/data/providers/recipe_provider.dart';
+import 'package:cravvy_cooking_app/modules/search/widgets/filter_sheet_state_widget.dart';
+import 'package:cravvy_cooking_app/modules/search/widgets/coming_soon_tab_widget.dart';
+import 'package:cravvy_cooking_app/modules/search/widgets/type_tab.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
@@ -12,41 +16,50 @@ class SearchScreen extends StatefulWidget {
 class _SearchScreenState extends State<SearchScreen>
     with SingleTickerProviderStateMixin {
   late final TabController _tabController;
-  final _controller = TextEditingController();
+  final _searchCtrl = TextEditingController();
+  final _ingredientCtrl = TextEditingController();
   final List<String> _addedIngredients = [];
 
-  static const _commonIngredients = [
-    '🥚 Eggs',
-    '🍗 Chicken',
-    '🥦 Broccoli',
-    '🍚 Rice',
-    '🥑 Avocado',
-    '🧀 Cheese',
-    '🍅 Tomato',
-    '🧄 Garlic',
-    '🥕 Carrot',
-    '🍋 Lemon',
-    '🐟 Salmon',
-    '🌽 Corn',
-  ];
+  String? _filterMealType;
+  int? _filterMaxCalories;
+  String? _filterDifficulty;
 
-  static const _suggestedRecipes = [
-    ('Egg Fried Rice', '350 kcal', '15 min', '🍳', 92),
-    ('Chicken Stir-Fry', '420 kcal', '20 min', '🥘', 87),
-    ('Avocado Omelette', '310 kcal', '12 min', '🥗', 78),
-    ('Garlic Broccoli', '180 kcal', '10 min', '🥦', 65),
+  bool get _hasActiveFilter =>
+      _filterMealType != null ||
+      _filterMaxCalories != null ||
+      _filterDifficulty != null;
+
+  /// Keys khớp với JSON search.ingredient.*
+  /// Giá trị clean (không có emoji) dùng để match với _addedIngredients
+  List<String> get _commonIngredients => [
+    'search.ingredient.eggs'.tr(),
+    'search.ingredient.chicken'.tr(),
+    'search.ingredient.broccoli'.tr(),
+    'search.ingredient.rice'.tr(),
+    'search.ingredient.avocado'.tr(),
+    'search.ingredient.cheese'.tr(),
+    'search.ingredient.tomato'.tr(),
+    'search.ingredient.garlic'.tr(),
+    'search.ingredient.carrot'.tr(),
+    'search.ingredient.lemon'.tr(),
+    'search.ingredient.salmon'.tr(),
+    'search.ingredient.corn'.tr(),
   ];
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: 3, vsync: this);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<RecipeProvider>().loadAll();
+    });
   }
 
   @override
   void dispose() {
     _tabController.dispose();
-    _controller.dispose();
+    _searchCtrl.dispose();
+    _ingredientCtrl.dispose();
     super.dispose();
   }
 
@@ -56,66 +69,82 @@ class _SearchScreenState extends State<SearchScreen>
         : item;
     if (!_addedIngredients.contains(clean)) {
       setState(() => _addedIngredients.add(clean));
+      _doSearch(clean);
     }
   }
 
-  void _removeIngredient(String item) =>
-      setState(() => _addedIngredients.remove(item));
+  void _removeIngredient(String item) {
+    setState(() => _addedIngredients.remove(item));
+    if (_addedIngredients.isEmpty) {
+      context.read<RecipeProvider>().clearSearch();
+    } else {
+      _doSearch(_addedIngredients.join(' '));
+    }
+  }
+
+  void _doSearch(String query) {
+    context.read<RecipeProvider>().search(query);
+  }
+
+  void _showFilterSheet() {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: context.appColors.elevated,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+      ),
+      builder: (_) => FilterSheet(
+        selectedMealType: _filterMealType,
+        selectedMaxCal: _filterMaxCalories,
+        selectedDifficulty: _filterDifficulty,
+        onApply: (mealType, maxCal, difficulty) {
+          setState(() {
+            _filterMealType = mealType;
+            _filterMaxCalories = maxCal;
+            _filterDifficulty = difficulty;
+          });
+          if (_searchCtrl.text.isNotEmpty) _doSearch(_searchCtrl.text);
+        },
+        onReset: () {
+          setState(() {
+            _filterMealType = null;
+            _filterMaxCalories = null;
+            _filterDifficulty = null;
+          });
+          if (_searchCtrl.text.isNotEmpty) _doSearch(_searchCtrl.text);
+        },
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
+    final _ = context.locale;
+    final appColors = context.appColors;
     return Scaffold(
-      backgroundColor: AppColors.background,
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Header
-            Padding(
-              padding: const EdgeInsets.only(
-                left: 24,
-                top: 20,
-                right: 24,
-              ), //TODO: no AppPad equivalent for this multi-directional EdgeInsets.only
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'What\'s in your\nfridge? 🛒',
-                    style: Theme.of(context).textTheme.headlineLarge,
-                  ),
-                  AppGap.h4,
-                  Text(
-                    'Add ingredients to get recipe ideas',
-                    style: Theme.of(context).textTheme.bodyMedium,
-                  ),
-                ],
-              ),
+            CustomAppBar(
+              title: 'search.title'.tr(),
+              subtitle: 'search.subtitle'.tr(),
             ),
-            AppGap.h20,
-
-            // Tab bar
+            AppGap.h16,
             Padding(
-              padding: AppPad.h16,
+              padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Container(
                 height: 44,
                 decoration: BoxDecoration(
-                  color: AppColors.surfaceVariant,
-                  borderRadius: AppBorderRadius.a14,
+                  color: appColors.cardSurface,
+                  borderRadius: AppBorderRadius.button,
+                  border: Border.all(color: appColors.borderDivider),
                 ),
                 child: TabBar(
                   controller: _tabController,
                   indicator: BoxDecoration(
-                    color: AppColors.surface,
-                    borderRadius: AppBorderRadius.a12,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withValues(
-                          alpha: 0.06,
-                        ),
-                        blurRadius: 8,
-                      ),
-                    ],
+                    color: appColors.elevated,
+                    borderRadius: AppBorderRadius.card,
                   ),
                   indicatorSize: TabBarIndicatorSize.tab,
                   dividerColor: Colors.transparent,
@@ -126,34 +155,42 @@ class _SearchScreenState extends State<SearchScreen>
                     fontWeight: FontWeight.w500,
                   ),
                   labelColor: AppColors.primary,
-                  unselectedLabelColor: AppColors.textSecondary,
-                  tabs: const [
-                    Tab(text: '⌨️  Type'),
-                    Tab(text: '📷  Scan'),
-                    Tab(text: '🎙️  Voice'),
+                  unselectedLabelColor: appColors.textSecondary,
+                  tabs: [
+                    Tab(text: 'search.tab_type'.tr()),
+                    Tab(text: 'search.tab_scan'.tr()),
+                    Tab(text: 'search.tab_voice'.tr()),
                   ],
                 ),
               ),
             ),
             AppGap.h16,
-
             Expanded(
               child: TabBarView(
                 controller: _tabController,
                 children: [
                   TypeTab(
-                    controller: _controller,
+                    searchCtrl: _searchCtrl,
+                    ingredientCtrl: _ingredientCtrl,
                     addedIngredients: _addedIngredients,
                     commonIngredients: _commonIngredients,
-                    suggestedRecipes: _suggestedRecipes,
                     onAdd: _addIngredient,
                     onRemove: _removeIngredient,
+                    onSearchChanged: _doSearch,
+                    onFilterTap: _showFilterSheet,
+                    hasActiveFilter: _hasActiveFilter,
+                    filterMealType: _filterMealType,
+                    filterMaxCalories: _filterMaxCalories,
+                    filterDifficulty: _filterDifficulty,
                   ),
-                  const ComingSoonTabWidget(
+                  ComingSoonTabWidget(
                     icon: '📷',
-                    label: 'Scan ingredients',
+                    label: 'search.tab_scan'.tr(),
                   ),
-                  const ComingSoonTabWidget(icon: '🎙️', label: 'Voice input'),
+                  ComingSoonTabWidget(
+                    icon: '🎙️',
+                    label: 'search.tab_voice'.tr(),
+                  ),
                 ],
               ),
             ),

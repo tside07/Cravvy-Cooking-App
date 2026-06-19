@@ -15,6 +15,8 @@ class AuthHeaderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appColors = context.appColors;
+
     return Column(
       crossAxisAlignment: textAlign == TextAlign.center
           ? CrossAxisAlignment.center
@@ -23,10 +25,8 @@ class AuthHeaderWidget extends StatelessWidget {
         Text(
           title,
           textAlign: textAlign,
-          style: AppTextStyles.s20.copyWith(
-            fontSize: 28,
-            fontWeight: FontWeight.w800,
-            color: AppColors.textPrimary,
+          style: context.themed(
+            AppTextStyles.h1.copyWith(fontSize: 28),
           ),
         ),
         AppGap.h6,
@@ -34,7 +34,7 @@ class AuthHeaderWidget extends StatelessWidget {
           subtitle,
           textAlign: textAlign,
           style: AppTextStyles.s14.copyWith(
-            color: AppColors.textSecondary,
+            color: appColors.textSecondary,
             height: 1.5,
           ),
         ),

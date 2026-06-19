@@ -1,4 +1,5 @@
 import 'package:cravvy_cooking_app/init.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class IngredientInputBarWidget extends StatelessWidget {
   const IngredientInputBarWidget({
@@ -20,14 +21,19 @@ class IngredientInputBarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appColors = context.appColors;
+
     return Row(
       children: [
         Expanded(
           child: TextField(
             controller: controller,
-            decoration: const InputDecoration(
-              hintText: 'Type an ingredient...',
-              prefixIcon: Icon(Icons.search_rounded, color: AppColors.textHint),
+            decoration: InputDecoration(
+              hintText: 'search.add_ingredient'.tr(),
+              prefixIcon: Icon(
+                Icons.search_rounded,
+                color: appColors.inputHint,
+              ),
             ),
             onSubmitted: (_) => _submit(),
           ),

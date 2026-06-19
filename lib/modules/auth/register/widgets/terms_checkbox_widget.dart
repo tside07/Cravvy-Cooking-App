@@ -1,4 +1,5 @@
 import 'package:cravvy_cooking_app/init.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class TermsCheckboxWidget extends StatelessWidget {
   const TermsCheckboxWidget({
@@ -12,6 +13,7 @@ class TermsCheckboxWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -21,8 +23,8 @@ class TermsCheckboxWidget extends StatelessWidget {
           child: Checkbox(
             value: agreedToTerms,
             activeColor: AppColors.primary,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(4),
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(AppRadius.c4),
             ),
             onChanged: onChanged,
           ),
@@ -31,14 +33,17 @@ class TermsCheckboxWidget extends StatelessWidget {
         Expanded(
           child: RichText(
             text: TextSpan(
-              text: 'I agree to the ',
-              style: AppTextStyles.s14.copyWith(color: AppColors.textSecondary),
+              text: 'auth.terms_prefix'.tr(),
+              style: context.themed(
+                AppTextStyles.s14,
+                color: colors.textSecondary,
+              ),
               children: [
                 WidgetSpan(
                   child: GestureDetector(
-                    onTap: () {}, // TODO: open terms
+                    onTap: () => context.push(AppRouter.termsOfService),
                     child: Text(
-                      'Terms of Service',
+                      'auth.terms_link'.tr(),
                       style: AppTextStyles.s14.copyWith(
                         color: AppColors.primary,
                         fontWeight: FontWeight.w600,
@@ -47,16 +52,17 @@ class TermsCheckboxWidget extends StatelessWidget {
                   ),
                 ),
                 TextSpan(
-                  text: ' and ',
-                  style: AppTextStyles.s14.copyWith(
-                    color: AppColors.textSecondary,
+                  text: ' ${'auth.terms_and'.tr()} ',
+                  style: context.themed(
+                    AppTextStyles.s14,
+                    color: colors.textSecondary,
                   ),
                 ),
                 WidgetSpan(
                   child: GestureDetector(
-                    onTap: () {}, // TODO: open privacy
+                    onTap: () => context.push(AppRouter.privacyPolicy),
                     child: Text(
-                      'Privacy Policy',
+                      'auth.privacy_link'.tr(),
                       style: AppTextStyles.s14.copyWith(
                         color: AppColors.primary,
                         fontWeight: FontWeight.w600,

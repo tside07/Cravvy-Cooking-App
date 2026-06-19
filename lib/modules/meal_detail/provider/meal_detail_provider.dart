@@ -1,30 +1,51 @@
-import 'package:flutter/foundation.dart';
+import 'package:cravvy_cooking_app/core/utils/recipe_ingredient_parser.dart';
 import 'package:cravvy_cooking_app/data/models/meal.dart';
+import 'package:cravvy_cooking_app/data/providers/recipe_provider.dart';
+import 'package:cravvy_cooking_app/data/services/recipe_service.dart';
 import 'package:cravvy_cooking_app/modules/meal_detail/models/meal_detail_ingredient.dart';
+import 'package:flutter/foundation.dart';
 
 /// Which tab is active on the detail screen.
 enum MealDetailTab { ingredients, nutrition, instructions }
 
 class MealDetailProvider extends ChangeNotifier {
-  MealDetailProvider(this.meal)
-      : _ingredients = _mockIngredients(meal.id),
-        _checkedIds = {};
+  MealDetailProvider(
+    this.meal, {
+    RecipeProvider? recipeLookup,
+  }) : _recipeLookup = recipeLookup {
+    _loadIngredients();
+  }
 
   final Meal meal;
+  final RecipeProvider? _recipeLookup;
 
-  // ── Tab state ─────────────────────────────────────────────────────────────
   MealDetailTab _activeTab = MealDetailTab.ingredients;
   MealDetailTab get activeTab => _activeTab;
+
+  bool _loadingIngredients = true;
+  bool get loadingIngredients => _loadingIngredients;
+
+  List<MealDetailIngredient> _ingredients = [];
+  List<MealDetailIngredient> get ingredients => _ingredients;
+
+  /// Unchecked rows = items the user still needs to buy.
+  List<MealDetailIngredient> get ingredientsToShop {
+    return [
+      for (var i = 0; i < _ingredients.length; i++)
+        if (!_checkedIds.contains(i)) _ingredients[i],
+    ];
+  }
+
+  int get servings => _servings;
+  int _servings = 2;
+
+  final Set<int> _checkedIds = {};
 
   void selectTab(MealDetailTab tab) {
     if (_activeTab == tab) return;
     _activeTab = tab;
     notifyListeners();
   }
-
-  // ── Servings ──────────────────────────────────────────────────────────────
-  int _servings = 2;
-  int get servings => _servings;
 
   void incrementServings() {
     _servings++;
@@ -37,16 +58,6 @@ class MealDetailProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ── Ingredients ───────────────────────────────────────────────────────────
-  final List<MealDetailIngredient> _ingredients;
-  List<MealDetailIngredient> get ingredients => _ingredients;
-
-  List<MealDetailIngredient> get missingIngredients =>
-      _ingredients.where((i) => i.status == IngredientStatus.missing).toList();
-
-  // ── Checkbox state ────────────────────────────────────────────────────────
-  final Set<int> _checkedIds;
-
   bool isChecked(int index) => _checkedIds.contains(index);
 
   void toggleChecked(int index) {
@@ -58,143 +69,39 @@ class MealDetailProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ── Mock data ─────────────────────────────────────────────────────────────
-  static List<MealDetailIngredient> _mockIngredients(String mealId) {
-    const base = [
-      MealDetailIngredient(
-        name: 'fresh salmon fillet',
-        quantity: '400g',
-        status: IngredientStatus.available,
-      ),
-      MealDetailIngredient(
-        name: 'broccoli florets',
-        quantity: '2 cups',
-        status: IngredientStatus.available,
-      ),
-      MealDetailIngredient(
-        name: 'cherry tomatoes',
-        quantity: '1 cup',
-        status: IngredientStatus.available,
-      ),
-      MealDetailIngredient(
-        name: 'olive oil',
-        quantity: '2 tbsp',
-        status: IngredientStatus.available,
-      ),
-      MealDetailIngredient(
-        name: 'garlic, minced',
-        quantity: '2 cloves',
-        status: IngredientStatus.missing,
-      ),
-      MealDetailIngredient(
-        name: 'lemon, sliced',
-        quantity: '1',
-        status: IngredientStatus.missing,
-      ),
-      MealDetailIngredient(
-        name: 'Salt and pepper',
-        quantity: 'to taste',
-        status: IngredientStatus.available,
-      ),
-      MealDetailIngredient(
-        name: 'Fresh herbs (dill or parsley)',
-        quantity: 'handful',
-        status: IngredientStatus.missing,
-      ),
-    ];
+  Future<void> _loadIngredients() async {
+    _loadingIngredients = true;
+    notifyListeners();
 
-    // Return some variations per meal so different dishes look different.
-    switch (mealId) {
-      case 'b1': // Avocado Toast Bowl
-        return const [
-          MealDetailIngredient(
-            name: 'sourdough bread',
-            quantity: '2 slices',
-            status: IngredientStatus.available,
-          ),
-          MealDetailIngredient(
-            name: 'ripe avocado',
-            quantity: '1 large',
-            status: IngredientStatus.available,
-          ),
-          MealDetailIngredient(
-            name: 'cherry tomatoes, halved',
-            quantity: '½ cup',
-            status: IngredientStatus.available,
-          ),
-          MealDetailIngredient(
-            name: 'poached eggs',
-            quantity: '2',
-            status: IngredientStatus.missing,
-          ),
-          MealDetailIngredient(
-            name: 'red pepper flakes',
-            quantity: '½ tsp',
-            status: IngredientStatus.missing,
-          ),
-          MealDetailIngredient(
-            name: 'lemon juice',
-            quantity: '1 tbsp',
-            status: IngredientStatus.available,
-          ),
-          MealDetailIngredient(
-            name: 'Salt and pepper',
-            quantity: 'to taste',
-            status: IngredientStatus.available,
-          ),
-          MealDetailIngredient(
-            name: 'microgreens',
-            quantity: 'handful',
-            status: IngredientStatus.missing,
-          ),
-        ];
+    final raw = await _resolveIngredientLines();
+    _ingredients = RecipeIngredientParser.parseAll(raw);
+    _loadingIngredients = false;
+    notifyListeners();
+  }
 
-      case 'l1': // Grilled Chicken Salad
-        return const [
-          MealDetailIngredient(
-            name: 'chicken breast',
-            quantity: '200g',
-            status: IngredientStatus.available,
-          ),
-          MealDetailIngredient(
-            name: 'mixed salad greens',
-            quantity: '3 cups',
-            status: IngredientStatus.available,
-          ),
-          MealDetailIngredient(
-            name: 'cucumber, sliced',
-            quantity: '1',
-            status: IngredientStatus.available,
-          ),
-          MealDetailIngredient(
-            name: 'red onion, thinly sliced',
-            quantity: '¼',
-            status: IngredientStatus.missing,
-          ),
-          MealDetailIngredient(
-            name: 'feta cheese',
-            quantity: '50g',
-            status: IngredientStatus.available,
-          ),
-          MealDetailIngredient(
-            name: 'olive oil',
-            quantity: '2 tbsp',
-            status: IngredientStatus.available,
-          ),
-          MealDetailIngredient(
-            name: 'lemon juice',
-            quantity: '1 tbsp',
-            status: IngredientStatus.available,
-          ),
-          MealDetailIngredient(
-            name: 'Dijon mustard',
-            quantity: '1 tsp',
-            status: IngredientStatus.missing,
-          ),
-        ];
+  Future<List<String>> _resolveIngredientLines() async {
+    if (meal.ingredients.isNotEmpty) return meal.ingredients;
 
-      default:
-        return base;
+    final cached = _recipeLookup?.allRecipes
+        .where((r) => r.id == meal.recipeId)
+        .firstOrNull;
+    if (cached != null && cached.ingredients.isNotEmpty) {
+      return cached.ingredients;
     }
+
+    final remote = await RecipeService.fetchById(meal.recipeId);
+    if (remote != null && remote.ingredients.isNotEmpty) {
+      return remote.ingredients;
+    }
+
+    return const [];
+  }
+}
+
+extension _FirstOrNull<E> on Iterable<E> {
+  E? get firstOrNull {
+    final it = iterator;
+    if (!it.moveNext()) return null;
+    return it.current;
   }
 }

@@ -16,12 +16,15 @@ class StatCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // The pastel [color] background stays light in both themes, so the dark
+    // value / muted label colors are intentionally fixed (not theme-aware).
     return Expanded(
       child: Container(
         padding: AppPad.h10v14,
         decoration: BoxDecoration(
           color: color,
           borderRadius: AppBorderRadius.a16,
+          boxShadow: AppShadows.e1Of(Theme.of(context).brightness),
         ),
         child: Column(
           children: [
@@ -29,9 +32,9 @@ class StatCardWidget extends StatelessWidget {
             AppGap.h4,
             Text(
               value,
-              style: AppTextStyles.s20.copyWith(
-                fontWeight: FontWeight.w800,
+              style: AppTextStyles.h2.copyWith(
                 color: AppColors.textPrimary,
+                fontFeatures: const [FontFeature.tabularFigures()],
               ),
             ),
             Text(

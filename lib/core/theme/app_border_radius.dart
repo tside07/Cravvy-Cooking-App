@@ -3,6 +3,26 @@ import 'package:flutter/material.dart';
 import 'app_radius.dart';
 
 abstract final class AppBorderRadius {
+  // ─── Soft UI Evolution — unified semantic radii ──────────────────────────
+  /// chip, badge, small pill.
+  static const BorderRadius chip = a8;
+  /// main card (standardized down from 16–24).
+  static const BorderRadius card = a12;
+  /// every button (CravvyButton + ElevatedButton in sync).
+  static const BorderRadius button = a14;
+  /// bottom sheet, large container.
+  static const BorderRadius sheet = a24;
+
+  // iOS17 baseline radii
+  static const BorderRadius iosSmall = a8;
+  static const BorderRadius iosField = a10;
+  static const BorderRadius iosCard = a12;
+  static const BorderRadius iosSection = a14;
+  static const BorderRadius iosButton = a16;
+  static const BorderRadius iosPill = a20;
+  static const BorderRadius iosSheet = a24;
+
+  // Backward-compatible existing constants.
   static const BorderRadius a2 = BorderRadius.all(AppRadius.c2);
   static const BorderRadius a3 = BorderRadius.all(AppRadius.c3);
   static const BorderRadius a4 = BorderRadius.all(AppRadius.c4);

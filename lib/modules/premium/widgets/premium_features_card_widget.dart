@@ -1,4 +1,5 @@
 import 'package:cravvy_cooking_app/init.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class PremiumFeaturesCardWidget extends StatelessWidget {
   final List<String> features;
@@ -9,11 +10,7 @@ class PremiumFeaturesCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: AppPad.a20,
-      decoration: BoxDecoration(
-        color: AppColors.surface,
-        borderRadius: AppBorderRadius.a16,
-        border: Border.all(color: AppColors.border.withValues(alpha: 1)),
-      ),
+      decoration: context.cardBox(),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -24,10 +21,10 @@ class PremiumFeaturesCardWidget extends StatelessWidget {
               AppGap.w8,
               Expanded(
                 child: Text(
-                  "What's included in\nPremium",
-                  style: AppTextStyles.s16.copyWith(
+                  'premium.define'.tr(),
+                  style: context.themed(
+                    AppTextStyles.s16,
                     fontWeight: FontWeight.w800,
-                    color: AppColors.textPrimary,
                   ),
                 ),
               ),
@@ -51,9 +48,7 @@ class PremiumFeaturesCardWidget extends StatelessWidget {
                   Expanded(
                     child: Text(
                       feature,
-                      style: AppTextStyles.s14.copyWith(
-                        color: AppColors.textPrimary,
-                      ),
+                      style: context.themed(AppTextStyles.s14),
                     ),
                   ),
                 ],

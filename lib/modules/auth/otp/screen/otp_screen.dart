@@ -1,13 +1,14 @@
 import 'dart:async';
+import 'package:cravvy_cooking_app/core/theme/pre_auth_theme.dart';
+import 'package:cravvy_cooking_app/core/utils/localized_message.dart';
 import 'package:cravvy_cooking_app/init.dart';
-import 'package:cravvy_cooking_app/core/routes/app_routers.dart';
-import 'package:cravvy_cooking_app/core/widgets/template/custom_auth_app_bar.dart';
-import 'package:cravvy_cooking_app/modules/auth/widgets/auth_header_widget.dart';
+import 'package:cravvy_cooking_app/data/providers/auth_provider.dart';
 import 'package:cravvy_cooking_app/modules/auth/otp/widgets/icon_section_widget.dart';
 import 'package:cravvy_cooking_app/modules/auth/otp/widgets/otp_input_row_widget.dart';
 import 'package:cravvy_cooking_app/modules/auth/otp/widgets/resend_section_widget.dart';
 import 'package:cravvy_cooking_app/modules/auth/otp/widgets/help_text_widget.dart';
 import 'package:cravvy_cooking_app/modules/widgets/common/cravvy_button.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class OtpScreen extends StatefulWidget {
   const OtpScreen({super.key, required this.email});
@@ -20,7 +21,7 @@ class OtpScreen extends StatefulWidget {
 
 class _OtpScreenState extends State<OtpScreen> {
   static const _otpLength = 6;
-  static const _countdownSeconds = 57;
+  static const _countdownSeconds = 60;
 
   final List<TextEditingController> _controllers = List.generate(
     _otpLength,
@@ -33,7 +34,6 @@ class _OtpScreenState extends State<OtpScreen> {
 
   late int _secondsLeft;
   Timer? _timer;
-  bool _isLoading = false;
 
   @override
   void initState() {
@@ -53,11 +53,26 @@ class _OtpScreenState extends State<OtpScreen> {
     });
   }
 
-  void _resend() {
+  Future<void> _resend() async {
     if (_secondsLeft > 0) return;
-    setState(() => _secondsLeft = _countdownSeconds);
-    _startCountdown();
-    // TODO: call resend OTP service
+    final auth = context.read<AuthProvider>();
+    final success = await auth.sendPasswordResetOtp(widget.email);
+    if (!mounted) return;
+    if (success) {
+      setState(() => _secondsLeft = _countdownSeconds);
+      _startCountdown();
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            localizeMessage(auth.errorMessage ?? 'auth.otp_resend_failed'),
+            style: AppTextStyles.s14.copyWith(color: AppColors.white),
+          ),
+          backgroundColor: AppColors.error,
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+    }
   }
 
   String get _otpValue => _controllers.map((c) => c.text).join();
@@ -78,16 +93,34 @@ class _OtpScreenState extends State<OtpScreen> {
     return '$m:$s';
   }
 
-  void _verify() {
+  Future<void> _verify() async {
     if (_otpValue.length < _otpLength) return;
-    setState(() => _isLoading = true);
-    // TODO: call verify OTP service
-    Future.delayed(const Duration(seconds: 2), () {
-      if (mounted) {
-        setState(() => _isLoading = false);
-        context.go(AppRouter.app);
-      }
-    });
+
+    final auth = context.read<AuthProvider>();
+    final success = await auth.verifyOtp(email: widget.email, token: _otpValue);
+
+    if (!mounted) return;
+
+    if (success) {
+      context.push(AppRouter.resetPassword, extra: widget.email);
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            localizeMessage(auth.errorMessage ?? 'auth.otp_invalid'),
+            style: AppTextStyles.s14.copyWith(color: AppColors.white),
+          ),
+          backgroundColor: AppColors.error,
+          behavior: SnackBarBehavior.floating,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+        ),
+      );
+      for (final c in _controllers) c.clear();
+      if (_focusNodes.isNotEmpty) _focusNodes[0].requestFocus();
+      setState(() {});
+    }
   }
 
   @override
@@ -100,21 +133,26 @@ class _OtpScreenState extends State<OtpScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.background,
-      appBar: const CustomAuthAppBar(),
+    return PreAuthScaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: const PreAuthBackButton(),
+      ),
       body: SafeArea(
-        child: _Body(
-          controllers: _controllers,
-          focusNodes: _focusNodes,
-          maskedEmail: _maskedEmail,
-          countdownLabel: _countdownLabel,
-          secondsLeft: _secondsLeft,
-          isLoading: _isLoading,
-          isComplete: _otpValue.length == _otpLength,
-          onChanged: (_) => setState(() {}),
-          onResend: _resend,
-          onVerify: _verify,
+        child: Consumer<AuthProvider>(
+          builder: (context, auth, _) => _Body(
+            controllers: _controllers,
+            focusNodes: _focusNodes,
+            maskedEmail: _maskedEmail,
+            countdownLabel: _countdownLabel,
+            secondsLeft: _secondsLeft,
+            isLoading: auth.status == AuthStatus.loading,
+            isComplete: _otpValue.length == _otpLength,
+            onChanged: (_) => setState(() {}),
+            onResend: _resend,
+            onVerify: _verify,
+          ),
         ),
       ),
     );
@@ -156,10 +194,22 @@ class _Body extends StatelessWidget {
           AppGap.h16,
           const IconSectionWidget(icon: Icons.verified_user_outlined),
           AppGap.h28,
-          AuthHeaderWidget(
-            title: 'Verify Your Identity',
-            subtitle: 'We have sent a 6-digit OTP code to $maskedEmail',
+          Text(
+            'auth.otp_title'.tr(),
             textAlign: TextAlign.center,
+            style: AppTextStyles.h1.copyWith(
+              color: PreAuthTheme.textPrimary,
+              fontSize: 26,
+            ),
+          ),
+          AppGap.h12,
+          Text(
+            'auth.otp_subtitle'.tr(namedArgs: {'email': maskedEmail}),
+            textAlign: TextAlign.center,
+            style: AppTextStyles.s15.copyWith(
+              color: PreAuthTheme.textSecondary,
+              height: 1.5,
+            ),
           ),
           AppGap.h40,
           OtpInputRowWidget(
@@ -175,7 +225,7 @@ class _Body extends StatelessWidget {
           ),
           AppGap.h36,
           CravvyButton(
-            label: 'Verify',
+            label: 'auth.otp_verify'.tr(),
             isLoading: isLoading,
             onTap: isComplete ? onVerify : null,
             backgroundColor: isComplete

@@ -1,7 +1,9 @@
 import 'package:cravvy_cooking_app/init.dart';
 import 'package:cravvy_cooking_app/core/routes/app_routers.dart';
+import 'package:cravvy_cooking_app/data/providers/auth_provider.dart';
 import 'package:cravvy_cooking_app/modules/splash/widgets/loading_dot.dart';
 import 'package:cravvy_cooking_app/resources/resources.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -18,12 +20,14 @@ class _SplashScreenState extends State<SplashScreen>
   late final Animation<double> _textFade;
   late final Animation<Offset> _textSlide;
 
+  bool _redirected = false;
+
   @override
   void initState() {
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 3000),
+      duration: const Duration(milliseconds: 2500),
     );
 
     _logoScale = Tween<double>(begin: 0.5, end: 1.0).animate(
@@ -44,17 +48,54 @@ class _SplashScreenState extends State<SplashScreen>
         curve: const Interval(0.4, 0.7, curve: Curves.easeIn),
       ),
     );
-    _textSlide = Tween<Offset>(begin: const Offset(0, 0.3), end: Offset.zero)
-        .animate(
+    _textSlide =
+        Tween<Offset>(begin: const Offset(0, 0.3), end: Offset.zero).animate(
           CurvedAnimation(
             parent: _controller,
             curve: const Interval(0.4, 0.7, curve: Curves.easeOut),
           ),
         );
 
-    _controller.forward().then((_) async {
-      await Future.delayed(const Duration(milliseconds: 800));
-      if (mounted) context.go(AppRouter.onboarding);
+    _controller.forward();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // Respect reduced-motion: skip the intro animation to its end state.
+    if ((MediaQuery.maybeDisableAnimationsOf(context) ?? false) &&
+        !_controller.isCompleted) {
+      _controller.value = 1.0;
+    }
+    // Lắng nghe AuthProvider thay đổi
+    final auth = Provider.of<AuthProvider>(context);
+    _handleAuthState(auth);
+  }
+
+  void _handleAuthState(AuthProvider auth) {
+    // Chưa resolve → chờ
+    if (auth.status == AuthStatus.initial) return;
+    // Đã redirect rồi → không làm gì nữa
+    if (_redirected) return;
+    // Đảm bảo animation xong ít nhất 1 lần rồi mới redirect
+    final minWait = Future.delayed(const Duration(milliseconds: 1500));
+    final animDone = _controller.isCompleted
+        ? Future.value()
+        : _controller.forward().orCancel.catchError((_) {});
+
+    Future.wait([minWait, animDone]).then((_) {
+      if (!mounted || _redirected) return;
+      _redirected = true;
+
+      if (auth.isLoggedIn) {
+        if (auth.user?.onboardingComplete == true) {
+          context.go(AppRouter.app);
+        } else {
+          context.go(AppRouter.setupStep1);
+        }
+      } else {
+        context.go(AppRouter.landing);
+      }
     });
   }
 
@@ -77,7 +118,8 @@ class _SplashScreenState extends State<SplashScreen>
               child: ScaleTransition(
                 scale: _logoScale,
                 child: Center(
-                  child: Image.asset(ImagePath.sticketLogo, width: 200, height: 200),
+                  child:
+                      Image.asset(ImagePath.sticketLogo, width: 200, height: 200),
                 ),
               ),
             ),
@@ -91,9 +133,8 @@ class _SplashScreenState extends State<SplashScreen>
                     Image.asset(ImagePath.appName, height: 65, width: 220),
                     AppGap.h8,
                     Text(
-                      'Find your flavor',
-                      style: AppTextStyles.s18.copyWith(
-                        fontWeight: FontWeight.w700,
+                      'splash.tagline'.tr(),
+                      style: AppTextStyles.h2.copyWith(
                         color: AppColors.textColor,
                       ),
                     ),

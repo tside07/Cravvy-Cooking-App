@@ -14,6 +14,8 @@ class OtpBoxWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appColors = context.appColors;
+
     return SizedBox(
       width: 48,
       height: 56,
@@ -26,19 +28,19 @@ class OtpBoxWidget extends StatelessWidget {
         onChanged: onChanged,
         style: AppTextStyles.s20.copyWith(
           fontWeight: FontWeight.w800,
-          color: AppColors.textPrimary,
+          color: appColors.textPrimary,
         ),
         decoration: InputDecoration(
           counterText: '',
           filled: true,
           fillColor: controller.text.isEmpty
-              ? AppColors.surfaceVariant
+              ? appColors.inputFieldBg
               : AppColors.primaryLight,
           enabledBorder: OutlineInputBorder(
             borderRadius: AppBorderRadius.a12,
             borderSide: BorderSide(
               color: controller.text.isEmpty
-                  ? AppColors.border
+                  ? appColors.inputBorder
                   : AppColors.primary,
             ),
           ),

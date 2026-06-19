@@ -1,4 +1,5 @@
 import 'package:cravvy_cooking_app/init.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class PremiumCtaButtonWidget extends StatelessWidget {
   final VoidCallback onPressed;
@@ -28,7 +29,7 @@ class PremiumCtaButtonWidget extends StatelessWidget {
               const Text('✨', style: TextStyle(fontSize: 18)),
               AppGap.w8,
               Text(
-                'Start 14-Day Free Trial',
+                'premium.trial'.tr(),
                 style: AppTextStyles.s16.copyWith(
                   fontWeight: FontWeight.w700,
                   color: AppColors.white,

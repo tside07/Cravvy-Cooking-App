@@ -1,4 +1,5 @@
 import 'package:cravvy_cooking_app/init.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class PremiumPriceCardWidget extends StatelessWidget {
   final bool isAnnual;
@@ -21,27 +22,30 @@ class PremiumPriceCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final price = isAnnual ? annualPrice : monthlyPrice;
-    final period = isAnnual ? '/year' : '/month';
+    final period = isAnnual ? 'premium.period_year'.tr() : 'premium.period_month'.tr();
 
     return AnimatedSwitcher(
-      duration: const Duration(milliseconds: 300),
+      duration: (MediaQuery.maybeDisableAnimationsOf(context) ?? false)
+          ? Duration.zero
+          : const Duration(milliseconds: 300),
       child: Container(
         key: ValueKey(isAnnual),
         width: double.infinity,
         padding: AppPad.a20,
         decoration: BoxDecoration(
           color: AppColors.primary.withValues(alpha: 0.08),
-          borderRadius: AppBorderRadius.a16,
+          borderRadius: AppBorderRadius.card,
           border: Border.all(color: AppColors.primary.withValues(alpha: 0.3)),
         ),
         child: isAnnual
-            ? _buildAnnualLayout(price, period)
-            : _buildMonthlyLayout(price, period),
+            ? _buildAnnualLayout(context, price, period)
+            : _buildMonthlyLayout(context, price, period),
       ),
     );
   }
 
-  Widget _buildAnnualLayout(int price, String period) {
+  Widget _buildAnnualLayout(BuildContext context, int price, String period) {
+    final colors = context.appColors;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -50,10 +54,10 @@ class PremiumPriceCardWidget extends StatelessWidget {
           children: [
             Text(
               '${_formatVND(price)}đ',
-              style: AppTextStyles.s20.copyWith(
+              style: AppTextStyles.display.copyWith(
                 fontSize: 28,
-                fontWeight: FontWeight.w700,
                 color: AppColors.primary,
+                fontFeatures: const [FontFeature.tabularFigures()],
               ),
             ),
             AppGap.w4,
@@ -61,8 +65,9 @@ class PremiumPriceCardWidget extends StatelessWidget {
               padding: const EdgeInsets.only(bottom: 4),
               child: Text(
                 period,
-                style: AppTextStyles.s14.copyWith(
-                  color: AppColors.textSecondary,
+                style: context.themed(
+                  AppTextStyles.s14,
+                  color: colors.textSecondary,
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -76,7 +81,7 @@ class PremiumPriceCardWidget extends StatelessWidget {
                 shape: BoxShape.circle,
               ),
               child: Text(
-                'Save\n$savePct%',
+                'premium.save_badge'.tr(namedArgs: {'pct': '$savePct'}),
                 textAlign: TextAlign.center,
                 style: AppTextStyles.s10.copyWith(
                   fontWeight: FontWeight.w800,
@@ -90,14 +95,21 @@ class PremiumPriceCardWidget extends StatelessWidget {
         ),
         AppGap.h8,
         Text(
-          'Only ${_formatVND(annualMonthly)}đ/month • Save up to ${_formatVND(annualSavings)}đ per year',
-          style: AppTextStyles.s12.copyWith(color: AppColors.textSecondary),
+          'premium.annual_detail'.tr(namedArgs: {
+            'monthly': _formatVND(annualMonthly),
+            'savings': _formatVND(annualSavings),
+          }),
+          style: context.themed(
+            AppTextStyles.s12,
+            color: colors.textSecondary,
+          ),
         ),
       ],
     );
   }
 
-  Widget _buildMonthlyLayout(int price, String period) {
+  Widget _buildMonthlyLayout(BuildContext context, int price, String period) {
+    final colors = context.appColors;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -106,10 +118,10 @@ class PremiumPriceCardWidget extends StatelessWidget {
           children: [
             Text(
               '${_formatVND(price)}đ',
-              style: AppTextStyles.s20.copyWith(
+              style: AppTextStyles.display.copyWith(
                 fontSize: 28,
-                fontWeight: FontWeight.w700,
                 color: AppColors.primary,
+                fontFeatures: const [FontFeature.tabularFigures()],
               ),
             ),
             AppGap.w4,
@@ -117,8 +129,9 @@ class PremiumPriceCardWidget extends StatelessWidget {
               padding: AppPad.b4,
               child: Text(
                 period,
-                style: AppTextStyles.s14.copyWith(
-                  color: AppColors.textSecondary,
+                style: context.themed(
+                  AppTextStyles.s14,
+                  color: colors.textSecondary,
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -127,8 +140,11 @@ class PremiumPriceCardWidget extends StatelessWidget {
         ),
         AppGap.h8,
         Text(
-          'Billed monthly',
-          style: AppTextStyles.s12.copyWith(color: AppColors.textSecondary),
+          'premium.billed_monthly'.tr(),
+          style: context.themed(
+            AppTextStyles.s12,
+            color: colors.textSecondary,
+          ),
         ),
       ],
     );

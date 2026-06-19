@@ -1,4 +1,5 @@
 import 'package:cravvy_cooking_app/init.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:cravvy_cooking_app/modules/meal_detail/provider/meal_detail_provider.dart';
 
 /// Segmented tab bar: Ingredients | Nutrition | Instructions.
@@ -7,6 +8,8 @@ class MealDetailTabsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
+
     return SliverToBoxAdapter(
       child: Consumer<MealDetailProvider>(
         builder: (context, provider, _) {
@@ -15,8 +18,8 @@ class MealDetailTabsWidget extends StatelessWidget {
             child: Container(
               padding: AppPad.a4,
               decoration: BoxDecoration(
-                color: AppColors.surfaceVariant,
-                borderRadius: AppBorderRadius.a16,
+                color: colors.elevated,
+                borderRadius: AppBorderRadius.card,
               ),
               child: Row(
                 children: MealDetailTab.values.map((tab) {
@@ -28,30 +31,22 @@ class MealDetailTabsWidget extends StatelessWidget {
                         duration: const Duration(milliseconds: 200),
                         padding: AppPad.v10,
                         decoration: BoxDecoration(
-                          color: isActive
-                              ? AppColors.surface
-                              : Colors.transparent,
+                          color: isActive ? colors.cardSurface : Colors.transparent,
                           borderRadius: AppBorderRadius.a12,
-                          boxShadow: isActive
-                              ? [
-                                  BoxShadow(
-                                    color: Colors.black.withValues(alpha: 0.06),
-                                    blurRadius: 6,
-                                    offset: const Offset(0, 2),
-                                  ),
-                                ]
+                          border: isActive
+                              ? Border.all(color: colors.borderDivider)
                               : null,
                         ),
                         child: Text(
                           _label(tab),
                           textAlign: TextAlign.center,
-                          style: AppTextStyles.s14.copyWith(
-                            fontWeight: isActive
-                                ? FontWeight.w700
-                                : FontWeight.w500,
+                          style: context.themed(
+                            AppTextStyles.s14,
+                            fontWeight:
+                                isActive ? FontWeight.w700 : FontWeight.w500,
                             color: isActive
                                 ? AppColors.primary
-                                : AppColors.textSecondary,
+                                : colors.textSecondary,
                           ),
                         ),
                       ),
@@ -69,11 +64,11 @@ class MealDetailTabsWidget extends StatelessWidget {
   String _label(MealDetailTab tab) {
     switch (tab) {
       case MealDetailTab.ingredients:
-        return 'Ingredients';
+        return 'meal_detail.tab_ingredients'.tr();
       case MealDetailTab.nutrition:
-        return 'Nutrition';
+        return 'meal_detail.tab_nutrition'.tr();
       case MealDetailTab.instructions:
-        return 'Instructions';
+        return 'meal_detail.tab_instructions'.tr();
     }
   }
 }

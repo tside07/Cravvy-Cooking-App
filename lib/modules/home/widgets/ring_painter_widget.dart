@@ -1,9 +1,13 @@
 import 'package:cravvy_cooking_app/init.dart';
 
 class RingPainterWidget extends CustomPainter {
-  const RingPainterWidget({required this.progress});
+  const RingPainterWidget({
+    required this.progress,
+    required this.trackColor,
+  });
 
   final double progress;
+  final Color trackColor;
 
   static const double _strokeWidth = 14.0;
   static const double _startAngle = -1.5708; // -π/2
@@ -18,7 +22,7 @@ class RingPainterWidget extends CustomPainter {
       center,
       radius,
       Paint()
-        ..color = AppColors.surfaceVariant
+        ..color = trackColor
         ..style = PaintingStyle.stroke
         ..strokeWidth = _strokeWidth,
     );
@@ -39,5 +43,6 @@ class RingPainterWidget extends CustomPainter {
 
   @override
   bool shouldRepaint(RingPainterWidget oldDelegate) =>
-      oldDelegate.progress != progress;
+      oldDelegate.progress != progress ||
+      oldDelegate.trackColor != trackColor;
 }
