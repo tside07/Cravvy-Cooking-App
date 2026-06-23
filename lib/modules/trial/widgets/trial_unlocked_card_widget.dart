@@ -44,8 +44,8 @@ class TrialUnlockedCardWidget extends StatelessWidget {
                   Container(
                     width: 22,
                     height: 22,
-                    decoration: const BoxDecoration(
-                      color: AppColors.successLight,
+                    decoration: BoxDecoration(
+                      color: AppColors.success.withValues(alpha: 0.12),
                       shape: BoxShape.circle,
                     ),
                     child: const Icon(

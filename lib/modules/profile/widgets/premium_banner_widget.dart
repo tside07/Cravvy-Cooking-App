@@ -7,7 +7,7 @@ class PremiumBannerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Pressable(
-      onTap: () => context.push(AppRouter.premium),
+      onTap: () => context.push(AppRouter.subscription),
       child: Container(
         margin: AppPad.section16t14,
         padding: AppPad.a16,

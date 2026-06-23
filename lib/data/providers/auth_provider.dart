@@ -95,6 +95,7 @@ class AuthProvider extends ChangeNotifier {
     } catch (_) {
       _status = AuthStatus.unauthenticated;
     }
+    checkTrialExpiry();
     notifyListeners();
   }
 
@@ -357,6 +358,7 @@ class AuthProvider extends ChangeNotifier {
         _setError('auth.err_trial_failed');
         return false;
       }
+      _trialExpiryHandled = false;
       _status = AuthStatus.authenticated;
       _syncUserToProviders();
       notifyListeners();
@@ -367,10 +369,72 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
+  /// Activates a paid plan ([planId] = `monthly` | `annual`) after a (mock)
+  /// payment. Unlike the trial this sets the `premium` tier (no auto-cancel).
+  Future<bool> activatePaidPlan(String planId) async {
+    if (!isLoggedIn) return false;
+    try {
+      _user = await AuthService.activatePaidPlan(
+        _user!.id,
+        planId,
+        currentPremiumUntil: _user!.premiumUntil,
+      );
+      if (_user == null) {
+        _setError('auth.err_trial_failed');
+        return false;
+      }
+      _trialExpiryHandled = false;
+      _status = AuthStatus.authenticated;
+      _syncUserToProviders();
+      notifyListeners();
+      return true;
+    } catch (e) {
+      _setError('auth.err_trial_migration');
+      return false;
+    }
+  }
+
+  /// Eligible to start the one-time 14-day trial: logged in, currently Free,
+  /// and has never been on the trial/premium tier before.
   bool get canStartPremiumTrial {
     if (!isLoggedIn) return false;
     if (_user!.isPremium) return false;
     return _user!.subscriptionTier == PlanLimits.tierFree;
+  }
+
+  /// Any logged-in account that isn't currently Premium can pay to upgrade
+  /// here — this is the single entry point for activating Premium.
+  bool get canUpgradeToPaid => isLoggedIn && _user!.isPremium == false;
+
+  /// This account has already consumed its one-time trial (tier latched to
+  /// `trial`). Combined with [canStartPremiumTrial] this enforces "once only".
+  bool get trialUsed => _user?.subscriptionTier == PlanLimits.tierTrial;
+
+  /// The 14-day trial has lapsed (tier still `trial` but [UserModel.premiumUntil]
+  /// is in the past). Premium access is already gone via [UserModel.isPremium].
+  bool get trialExpired {
+    final u = _user;
+    if (u == null || u.subscriptionTier != PlanLimits.tierTrial) return false;
+    final until = u.premiumUntil;
+    return until != null && until.isBefore(DateTime.now());
+  }
+
+  bool _trialExpiryHandled = false;
+
+  /// Client-side auto-cancel. When the trial lapses we keep the `trial` tier as
+  /// the "already used" marker (so it can't be restarted), but re-sync providers
+  /// once so any cached Premium features are dropped immediately. Safe to call
+  /// repeatedly (e.g. on app resume / when opening the subscription screen);
+  /// it only acts on the first detection of expiry. Never call during build.
+  void checkTrialExpiry() {
+    if (!trialExpired) {
+      _trialExpiryHandled = false;
+      return;
+    }
+    if (_trialExpiryHandled) return;
+    _trialExpiryHandled = true;
+    _syncUserToProviders();
+    notifyListeners();
   }
 
   Future<void> logout() async {

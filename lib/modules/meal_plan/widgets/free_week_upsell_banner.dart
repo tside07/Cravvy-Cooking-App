@@ -18,7 +18,7 @@ class FreeWeekUpsellBanner extends StatelessWidget {
             color: AppColors.primaryLight,
             borderRadius: BorderRadius.circular(12),
             child: InkWell(
-              onTap: () => context.push(AppRouter.premium),
+              onTap: () => context.push(AppRouter.subscription),
               borderRadius: BorderRadius.circular(12),
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),

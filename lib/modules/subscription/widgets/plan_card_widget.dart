@@ -16,6 +16,11 @@ class PlanCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = context.appColors;
+    // Selected cards use the fixed light `primaryLight` surface in both themes,
+    // so their text must stay dark; unselected cards follow the theme.
+    final nameColor = isSelected ? AppColors.textPrimary : colors.textPrimary;
+    final noteColor =
+        isSelected ? AppColors.textSecondary : colors.textSecondary;
     return Padding(
       padding: AppPad.b10,
       child: Pressable(
@@ -65,52 +70,54 @@ class PlanCardWidget extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      children: [
-                        Text(
-                          plan.name,
-                          style: AppTextStyles.s14.copyWith(
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                        if (plan.badge != null) ...[
-                          AppGap.w8,
-                          Container(
-                            padding: AppPad.h8v2,
-                            decoration: BoxDecoration(
-                              color: AppColors.primary,
-                              borderRadius: AppBorderRadius.a20,
-                            ),
-                            child: Text(
-                              plan.badge!,
-                              style: AppTextStyles.s10.copyWith(
-                                color: AppColors.white,
-                                fontWeight: FontWeight.w700
-                              ),
-                            ),
-                          ),
-                        ],
-                      ],
+                    Text(
+                      plan.name,
+                      style: AppTextStyles.s14.copyWith(
+                        fontWeight: FontWeight.w700,
+                        color: nameColor,
+                      ),
                     ),
                     AppGap.h2,
                     Text(
                       plan.priceNote,
-                      style: context.themed(
-                        AppTextStyles.s12,
-                        color: colors.textSecondary,
-                      ),
+                      style: AppTextStyles.s12.copyWith(color: noteColor),
                     ),
                   ],
                 ),
               ),
 
-              // Price
-              Text(
-                plan.priceLabel,
-                style: AppTextStyles.s16.copyWith(
-                  fontWeight: FontWeight.w800,
-                  color: AppColors.primary,
-                ),
+              AppGap.w8,
+
+              // Savings badge (above) + price
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  if (plan.badge != null) ...[
+                    Container(
+                      padding: AppPad.h8v2,
+                      decoration: BoxDecoration(
+                        color: AppColors.primary,
+                        borderRadius: AppBorderRadius.a20,
+                      ),
+                      child: Text(
+                        plan.badge!,
+                        style: AppTextStyles.s10.copyWith(
+                          color: AppColors.white,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ),
+                    AppGap.h6,
+                  ],
+                  Text(
+                    plan.priceLabel,
+                    style: AppTextStyles.s16.copyWith(
+                      fontWeight: FontWeight.w800,
+                      color: AppColors.primary,
+                    ),
+                  ),
+                ],
               ),
             ],
           ),

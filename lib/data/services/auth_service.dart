@@ -258,6 +258,28 @@ class AuthService {
     return getProfile(userId);
   }
 
+  /// Activates a paid Premium plan on `profiles` after a (mock) payment.
+  /// [planId] is `monthly` or `annual`; the access window extends from the
+  /// later of now / current `premium_until` so re-purchasing stacks time.
+  static Future<UserModel?> activatePaidPlan(
+    String userId,
+    String planId, {
+    DateTime? currentPremiumUntil,
+  }) async {
+    final days = planId == 'annual' ? 365 : 30;
+    final now = DateTime.now();
+    final base = (currentPremiumUntil != null && currentPremiumUntil.isAfter(now))
+        ? currentPremiumUntil
+        : now;
+    final until = base.add(Duration(days: days));
+    await _client.from('profiles').update({
+      'subscription_tier': PlanLimits.tierPremium,
+      'premium_until': until.toUtc().toIso8601String(),
+    }).eq('id', userId);
+
+    return getProfile(userId);
+  }
+
   static Future<UserModel?> updateSetupData({
     required String userId,
     String? goal,

@@ -200,7 +200,7 @@ class _MealSwapSheetState extends State<MealSwapSheet> {
                                 action: SnackBarAction(
                                   label: 'limits.upgrade'.tr(),
                                   onPressed: () =>
-                                      context.push(AppRouter.premium),
+                                      context.push(AppRouter.subscription),
                                 ),
                                 behavior: SnackBarBehavior.floating,
                               ),
@@ -267,7 +267,7 @@ class _EmptyAlternatives extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(mealType.emoji, style: const TextStyle(fontSize: 40)),
+          Icon(mealType.icon, size: 40, color: mealType.color),
           AppGap.h12,
           Text(
             'meal_plan.swap_empty_title'.tr(),

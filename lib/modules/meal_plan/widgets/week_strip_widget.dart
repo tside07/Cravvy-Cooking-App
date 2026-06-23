@@ -37,7 +37,7 @@ class WeekStripWidget extends StatelessWidget {
               if (showPremiumTeaser)
                 _LockedDaysTeaser(
                   hiddenCount: 7 - visible.length,
-                  onTap: () => context.push(AppRouter.premium),
+                  onTap: () => context.push(AppRouter.subscription),
                 ),
             ],
           ),

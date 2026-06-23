@@ -168,7 +168,7 @@ class SettingsScreen extends StatelessWidget {
 
   Widget _buildPremiumBanner(BuildContext context) {
     return SettingsPremiumBannerWidget(
-      onTap: () => context.push(AppRouter.premium),
+      onTap: () => context.push(AppRouter.subscription),
     );
   }
 

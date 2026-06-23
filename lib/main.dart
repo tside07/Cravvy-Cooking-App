@@ -82,8 +82,33 @@ void main() async {
   );
 }
 
-class CravvyApp extends StatelessWidget {
+class CravvyApp extends StatefulWidget {
   const CravvyApp({super.key});
+
+  @override
+  State<CravvyApp> createState() => _CravvyAppState();
+}
+
+class _CravvyAppState extends State<CravvyApp> with WidgetsBindingObserver {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    // Auto-cancel a lapsed 14-day trial as soon as the app comes back.
+    if (state == AppLifecycleState.resumed) {
+      context.read<AuthProvider>().checkTrialExpiry();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

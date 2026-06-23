@@ -104,7 +104,7 @@ class AppDrawer extends StatelessWidget {
 
                       label: 'profile.premium'.tr(),
 
-                      onTap: () => _go(context, AppRouter.premium),
+                      onTap: () => _go(context, AppRouter.subscription),
 
                     ),
 

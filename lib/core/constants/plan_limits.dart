@@ -35,6 +35,15 @@ class PlanLimits {
   static const int freeChatDailyLimit = 15;
   static const int premiumChatDailyLimit = 60;
 
+  /// AI "cook from my ingredients" suggestions per day. Counts only REAL Gemini
+  /// calls — cache/DB-matched results don't consume the cap. Tuned for Gemini
+  /// free tier; keep in sync with `suggest-from-ingredients` Edge Function.
+  static const int freeAiSuggestDailyLimit = 5;
+  static const int premiumAiSuggestDailyLimit = 15;
+
+  static int aiSuggestDailyLimit(String? tier) =>
+      isPremiumTier(tier) ? premiumAiSuggestDailyLimit : freeAiSuggestDailyLimit;
+
   /// Supabase `recipes.source` values visible to Free users.
   static const List<String> freeRecipeSources = [
     'cravvy_curated_vn',

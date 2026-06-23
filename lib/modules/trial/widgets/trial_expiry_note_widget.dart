@@ -9,7 +9,7 @@ class TrialExpiryNoteWidget extends StatelessWidget {
     return Container(
       padding: AppPad.h16v10,
       decoration: BoxDecoration(
-        color: AppColors.warningLight,
+        color: AppColors.warning.withValues(alpha: 0.12),
         borderRadius: AppBorderRadius.a12,
       ),
       child: Row(

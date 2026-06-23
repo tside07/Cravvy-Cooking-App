@@ -34,7 +34,8 @@ class HighlightTileWidget extends StatelessWidget {
               children: [
                 Text(
                   highlight.title,
-                  style: AppTextStyles.s14.copyWith(
+                  style: context.themed(
+                    AppTextStyles.s14,
                     fontWeight: FontWeight.w700,
                   ),
                 ),
