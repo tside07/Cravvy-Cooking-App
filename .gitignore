@@ -67,3 +67,7 @@ supabase/.temp
 /docs/
 # Claude Code local memory (not part of the project)
 memory/
+
+# AI / editor tool folders (local only — not part of the project)
+.claude/
+.cursor/
