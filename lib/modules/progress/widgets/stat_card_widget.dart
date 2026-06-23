@@ -3,13 +3,13 @@ import 'package:cravvy_cooking_app/init.dart';
 class StatCardWidget extends StatelessWidget {
   const StatCardWidget({
     super.key,
-    required this.emoji,
+    required this.icon,
     required this.value,
     required this.label,
     required this.color,
   });
 
-  final String emoji;
+  final IconData icon;
   final String value;
   final String label;
   final Color color;
@@ -28,7 +28,7 @@ class StatCardWidget extends StatelessWidget {
         ),
         child: Column(
           children: [
-            Text(emoji, style: AppTextStyles.s20.copyWith(fontSize: 22)),
+            Icon(icon, size: 24, color: AppColors.textPrimary),
             AppGap.h4,
             Text(
               value,

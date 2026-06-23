@@ -10,6 +10,18 @@ abstract final class PreAuthTheme {
   static const Color buttonFill = Color(0xFFFFFFFF);
   static const Color buttonText = Color(0xFF1A1A1A);
 
+  /// Raised card / input fill on the dark shell.
+  static const Color surface = Color(0xFF2A3A44);
+
+  /// Subtle divider/border visible on the dark shell.
+  static const Color border = Color(0x33FFFFFF);
+
+  /// Hairline highlight on the top edge of soft fields/cards (simulated lift).
+  static const Color fieldBorder = Color(0x1FFFFFFF);
+
+  /// Muted icon/text for inactive states on the dark shell.
+  static const Color textDisabled = Color(0x66FFFFFF);
+
   static const SystemUiOverlayStyle overlayStyle = SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
     statusBarIconBrightness: Brightness.light,
@@ -38,7 +50,36 @@ class PreAuthScaffold extends StatelessWidget {
         backgroundColor: PreAuthTheme.background,
         appBar: appBar,
         bottomNavigationBar: bottomNavigationBar,
-        body: body,
+        body: Stack(
+          children: [
+            const Positioned.fill(child: _PreAuthGlow()),
+            Positioned.fill(child: body),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+/// Ambient warm glow behind the dark shell — adds depth so flat sections
+/// (auth, onboarding) don't read as a sterile flat fill. Sits below content
+/// and ignores pointers. Full-bleed photo screens (e.g. landing) simply cover
+/// it, so it's safe to apply to every pre-auth screen.
+class _PreAuthGlow extends StatelessWidget {
+  const _PreAuthGlow();
+
+  @override
+  Widget build(BuildContext context) {
+    return const IgnorePointer(
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          gradient: RadialGradient(
+            center: Alignment(0, -0.72),
+            radius: 1.05,
+            colors: [Color(0x26FF6B35), Color(0x00FF6B35)],
+            stops: [0.0, 0.62],
+          ),
+        ),
       ),
     );
   }

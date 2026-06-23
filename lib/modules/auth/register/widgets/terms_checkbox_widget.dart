@@ -1,4 +1,6 @@
 import 'package:cravvy_cooking_app/init.dart';
+import 'package:cravvy_cooking_app/modules/legal/legal_docs.dart';
+import 'package:cravvy_cooking_app/modules/legal/widgets/legal_modal_sheet.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class TermsCheckboxWidget extends StatelessWidget {
@@ -40,8 +42,11 @@ class TermsCheckboxWidget extends StatelessWidget {
               ),
               children: [
                 WidgetSpan(
+                  alignment: PlaceholderAlignment.baseline,
+                  baseline: TextBaseline.alphabetic,
                   child: GestureDetector(
-                    onTap: () => context.push(AppRouter.termsOfService),
+                    behavior: HitTestBehavior.opaque,
+                    onTap: () => showLegalSheet(context, LegalDoc.terms),
                     child: Text(
                       'auth.terms_link'.tr(),
                       style: AppTextStyles.s14.copyWith(
@@ -59,8 +64,11 @@ class TermsCheckboxWidget extends StatelessWidget {
                   ),
                 ),
                 WidgetSpan(
+                  alignment: PlaceholderAlignment.baseline,
+                  baseline: TextBaseline.alphabetic,
                   child: GestureDetector(
-                    onTap: () => context.push(AppRouter.privacyPolicy),
+                    behavior: HitTestBehavior.opaque,
+                    onTap: () => showLegalSheet(context, LegalDoc.privacy),
                     child: Text(
                       'auth.privacy_link'.tr(),
                       style: AppTextStyles.s14.copyWith(

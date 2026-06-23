@@ -5,6 +5,8 @@ import 'package:cravvy_cooking_app/init.dart';
 import 'package:cravvy_cooking_app/modules/auth/widgets/auth_entry_button.dart';
 import 'package:cravvy_cooking_app/modules/auth/widgets/auth_social_sign_in_helper.dart';
 import 'package:cravvy_cooking_app/modules/auth/widgets/oauth_loading_overlay.dart';
+import 'package:cravvy_cooking_app/modules/legal/legal_docs.dart';
+import 'package:cravvy_cooking_app/modules/legal/widgets/legal_modal_sheet.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 /// Which flow the auth hub belongs to. Controls copy + the email destination.
@@ -191,7 +193,7 @@ class _TermsFooter extends StatelessWidget {
             alignment: PlaceholderAlignment.baseline,
             baseline: TextBaseline.alphabetic,
             child: GestureDetector(
-              onTap: () => context.push(AppRouter.termsOfService),
+              onTap: () => showLegalSheet(context, LegalDoc.terms),
               child: Text('welcome.terms'.tr(), style: linkStyle),
             ),
           ),
@@ -200,7 +202,7 @@ class _TermsFooter extends StatelessWidget {
             alignment: PlaceholderAlignment.baseline,
             baseline: TextBaseline.alphabetic,
             child: GestureDetector(
-              onTap: () => context.push(AppRouter.privacyPolicy),
+              onTap: () => showLegalSheet(context, LegalDoc.privacy),
               child: Text('welcome.privacy'.tr(), style: linkStyle),
             ),
           ),

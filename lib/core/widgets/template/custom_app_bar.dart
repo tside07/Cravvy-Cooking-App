@@ -78,7 +78,7 @@ class CustomAppBar extends StatelessWidget {
 
           user?.fullName?.split(' ').first ?? 'home.default_name'.tr();
 
-      headingText = '${_greetingText()}, $firstName 👋';
+      headingText = '${_greetingText()}, $firstName';
 
       subText = 'home.welcome_tagline'.tr();
 

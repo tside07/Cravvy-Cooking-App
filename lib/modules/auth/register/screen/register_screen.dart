@@ -4,6 +4,7 @@ import 'package:cravvy_cooking_app/init.dart';
 import 'package:cravvy_cooking_app/data/providers/auth_provider.dart';
 import 'package:cravvy_cooking_app/modules/auth/register/widgets/form_fields_widget.dart';
 import 'package:cravvy_cooking_app/modules/auth/register/widgets/terms_checkbox_widget.dart';
+import 'package:cravvy_cooking_app/modules/auth/widgets/auth_brand_mark_widget.dart';
 import 'package:cravvy_cooking_app/modules/widgets/common/cravvy_button.dart';
 import 'package:easy_localization/easy_localization.dart';
 
@@ -49,8 +50,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
           ),
           backgroundColor: AppColors.error,
           behavior: SnackBarBehavior.floating,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
         ),
       );
       return;
@@ -70,7 +72,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
       // Đăng ký xong → vào setup step 1 (onboarding chưa xong)
       context.go(AppRouter.setupStep1);
     } else {
-      final error = localizeMessage(auth.errorMessage ?? 'auth.register_failed');
+      final error = localizeMessage(
+        auth.errorMessage ?? 'auth.register_failed',
+      );
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
@@ -79,8 +83,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
           ),
           backgroundColor: AppColors.error,
           behavior: SnackBarBehavior.floating,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
         ),
       );
     }
@@ -164,11 +169,14 @@ class _Body extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     AppGap.h12,
+                    const AuthBrandMark(),
+                    AppGap.h24,
                     Text(
                       'auth.register_title'.tr(),
                       style: AppTextStyles.h1.copyWith(
                         color: PreAuthTheme.textPrimary,
                         fontSize: 28,
+                        letterSpacing: -0.5,
                       ),
                     ),
                     AppGap.h8,

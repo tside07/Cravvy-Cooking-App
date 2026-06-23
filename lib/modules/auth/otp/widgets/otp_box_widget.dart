@@ -1,3 +1,4 @@
+import 'package:cravvy_cooking_app/core/theme/pre_auth_theme.dart';
 import 'package:cravvy_cooking_app/init.dart';
 
 class OtpBoxWidget extends StatelessWidget {
@@ -14,7 +15,7 @@ class OtpBoxWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final appColors = context.appColors;
+    final filled = controller.text.isNotEmpty;
 
     return SizedBox(
       width: 48,
@@ -28,24 +29,22 @@ class OtpBoxWidget extends StatelessWidget {
         onChanged: onChanged,
         style: AppTextStyles.s20.copyWith(
           fontWeight: FontWeight.w800,
-          color: appColors.textPrimary,
+          color: PreAuthTheme.textPrimary,
         ),
         decoration: InputDecoration(
           counterText: '',
           filled: true,
-          fillColor: controller.text.isEmpty
-              ? appColors.inputFieldBg
-              : AppColors.primaryLight,
+          fillColor: filled
+              ? AppColors.primary.withValues(alpha: 0.18)
+              : PreAuthTheme.surface,
           enabledBorder: OutlineInputBorder(
-            borderRadius: AppBorderRadius.a12,
+            borderRadius: AppBorderRadius.a14,
             borderSide: BorderSide(
-              color: controller.text.isEmpty
-                  ? appColors.inputBorder
-                  : AppColors.primary,
+              color: filled ? AppColors.primary : PreAuthTheme.fieldBorder,
             ),
           ),
           focusedBorder: OutlineInputBorder(
-            borderRadius: AppBorderRadius.a12,
+            borderRadius: AppBorderRadius.a14,
             borderSide: const BorderSide(color: AppColors.primary, width: 2),
           ),
           contentPadding: EdgeInsets.zero,

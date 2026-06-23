@@ -1,3 +1,4 @@
+import 'package:cravvy_cooking_app/core/theme/pre_auth_theme.dart';
 import 'package:cravvy_cooking_app/init.dart';
 import 'package:easy_localization/easy_localization.dart';
 
@@ -6,7 +7,6 @@ class ResetPasswordSuccessWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = context.appColors;
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(32),
@@ -17,8 +17,18 @@ class ResetPasswordSuccessWidget extends StatelessWidget {
               width: 96,
               height: 96,
               decoration: BoxDecoration(
-                color: AppColors.successLight,
+                color: AppColors.success.withValues(alpha: 0.16),
                 shape: BoxShape.circle,
+                border: Border.all(
+                  color: AppColors.success.withValues(alpha: 0.35),
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: AppColors.success.withValues(alpha: 0.28),
+                    blurRadius: 32,
+                    spreadRadius: 2,
+                  ),
+                ],
               ),
               child: const Icon(
                 Icons.check_rounded,
@@ -29,15 +39,19 @@ class ResetPasswordSuccessWidget extends StatelessWidget {
             AppGap.h24,
             Text(
               'auth.reset_success_title'.tr(),
-              style: context.themed(AppTextStyles.h1),
+              textAlign: TextAlign.center,
+              style: AppTextStyles.h1.copyWith(
+                color: PreAuthTheme.textPrimary,
+                letterSpacing: -0.4,
+              ),
             ),
             AppGap.h12,
             Text(
               'auth.reset_success_body'.tr(),
               textAlign: TextAlign.center,
-              style: context.themed(
-                AppTextStyles.s14,
-                color: colors.textSecondary,
+              style: AppTextStyles.s14.copyWith(
+                color: PreAuthTheme.textSecondary,
+                height: 1.5,
               ),
             ),
           ],

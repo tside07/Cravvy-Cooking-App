@@ -114,10 +114,11 @@ class _SetupCompleteScreenState extends State<SetupCompleteScreen>
                     gradient: AppColors.primaryGradient,
                     shape: BoxShape.circle,
                   ),
-                  child: Center(
-                    child: Text(
-                      '🎉',
-                      style: AppTextStyles.s20.copyWith(fontSize: 56),
+                  child: const Center(
+                    child: Icon(
+                      Icons.celebration_rounded,
+                      color: Colors.white,
+                      size: 56,
                     ),
                   ),
                 ),
@@ -160,14 +161,14 @@ class _SetupCompleteScreenState extends State<SetupCompleteScreen>
                         children: [
                           if (user?.goal != null) ...[
                             _SummaryRow(
-                              icon: '🎯',
+                              icon: Icons.adjust_rounded,
                               label: 'setup_complete.your_goal'.tr(),
                               value: _goalLabel(user!.goal!),
                             ),
                             const Divider(height: 24, color: AppColors.divider),
                           ],
                           _SummaryRow(
-                            icon: '🌿',
+                            icon: Icons.eco_rounded,
                             label: 'setup_complete.diet_type'.tr(),
                             value: user?.diets.isEmpty ?? true
                                 ? 'setup_complete.no_restrictions'.tr()
@@ -178,13 +179,13 @@ class _SetupCompleteScreenState extends State<SetupCompleteScreen>
                           ),
                           const Divider(height: 24, color: AppColors.divider),
                           _SummaryRow(
-                            icon: '⏱',
+                            icon: Icons.schedule_rounded,
                             label: 'setup_complete.cooking_time'.tr(),
                             value: _cookingTimeLabel(user?.cookingTime),
                           ),
                           const Divider(height: 24, color: AppColors.divider),
                           _SummaryRow(
-                            icon: '📅',
+                            icon: Icons.calendar_today_rounded,
                             label: 'setup_complete.meal_plan'.tr(),
                             value: 'setup_complete.meal_plan_value'.tr(),
                           ),
@@ -196,6 +197,9 @@ class _SetupCompleteScreenState extends State<SetupCompleteScreen>
               ),
 
               const Spacer(),
+              // Guaranteed breathing room so the card never sits flush against
+              // the button when content fills the screen and the Spacer collapses.
+              AppGap.h32,
 
               FadeTransition(
                 opacity: _fadeAnim,
@@ -220,7 +224,7 @@ class _SummaryRow extends StatelessWidget {
     required this.value,
   });
 
-  final String icon;
+  final IconData icon;
   final String label;
   final String value;
 
@@ -229,7 +233,7 @@ class _SummaryRow extends StatelessWidget {
     final colors = context.appColors;
     return Row(
       children: [
-        Text(icon, style: const TextStyle(fontSize: 20)),
+        Icon(icon, size: 20, color: colors.textSecondary),
         AppGap.w12,
         Expanded(
           child: Column(

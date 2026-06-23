@@ -4,6 +4,7 @@ import 'package:cravvy_cooking_app/core/utils/localized_message.dart';
 import 'package:cravvy_cooking_app/init.dart';
 import 'package:cravvy_cooking_app/data/providers/auth_provider.dart';
 import 'package:cravvy_cooking_app/modules/auth/widgets/auth_form_fields_widget.dart';
+import 'package:cravvy_cooking_app/modules/auth/widgets/auth_brand_mark_widget.dart';
 import 'package:cravvy_cooking_app/modules/auth/login/widgets/forgot_password_button_widget.dart';
 import 'package:cravvy_cooking_app/modules/widgets/common/cravvy_button.dart';
 
@@ -126,11 +127,14 @@ class _Body extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     AppGap.h12,
+                    const AuthBrandMark(),
+                    AppGap.h24,
                     Text(
                       'auth.login_title'.tr(),
                       style: AppTextStyles.h1.copyWith(
                         color: PreAuthTheme.textPrimary,
                         fontSize: 28,
+                        letterSpacing: -0.5,
                       ),
                     ),
                     AppGap.h8,

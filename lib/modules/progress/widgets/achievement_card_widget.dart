@@ -3,13 +3,13 @@ import 'package:cravvy_cooking_app/init.dart';
 class AchievementCardWidget extends StatelessWidget {
   const AchievementCardWidget({
     super.key,
-    required this.emoji,
+    required this.icon,
     required this.title,
     required this.desc,
     required this.unlocked,
   });
 
-  final String emoji;
+  final IconData icon;
   final String title;
   final String desc;
   final bool unlocked;
@@ -34,12 +34,12 @@ class AchievementCardWidget extends StatelessWidget {
         children: [
           Row(
             children: [
-              Text(
-                emoji,
-                style: AppTextStyles.s20.copyWith(
-                  fontSize: 22,
-                  color: unlocked ? null : colors.textDisabled.withValues(alpha: 0.6),
-                ),
+              Icon(
+                icon,
+                size: 22,
+                color: unlocked
+                    ? AppColors.primary
+                    : colors.textDisabled.withValues(alpha: 0.6),
               ),
               const Spacer(),
               if (unlocked)
@@ -49,13 +49,10 @@ class AchievementCardWidget extends StatelessWidget {
                     color: AppColors.primaryLight,
                     borderRadius: AppBorderRadius.a6,
                   ),
-                  child: Text(
-                    '✓',
-                    style: AppTextStyles.s10.copyWith(
-                      fontSize: 11,
-                      fontWeight: FontWeight.w700,
-                      color: AppColors.primary,
-                    ),
+                  child: Icon(
+                    Icons.check_circle_rounded,
+                    size: 14,
+                    color: AppColors.primary,
                   ),
                 )
               else

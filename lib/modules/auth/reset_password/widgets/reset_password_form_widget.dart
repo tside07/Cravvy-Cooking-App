@@ -2,7 +2,6 @@ import 'package:cravvy_cooking_app/core/theme/app_input_decoration.dart';
 import 'package:cravvy_cooking_app/core/theme/pre_auth_theme.dart';
 import 'package:cravvy_cooking_app/init.dart';
 import 'package:cravvy_cooking_app/modules/auth/reset_password/widgets/password_rule_widget.dart';
-import 'package:cravvy_cooking_app/modules/auth/widgets/auth_header_widget.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class ResetPasswordFormWidget extends StatelessWidget {
@@ -41,7 +40,6 @@ class ResetPasswordFormWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final appColors = context.appColors;
     final inputStyle = Theme.of(
       context,
     ).textTheme.bodyLarge?.copyWith(color: PreAuthTheme.textPrimary);
@@ -58,25 +56,46 @@ class ResetPasswordFormWidget extends StatelessWidget {
               child: Column(
                 children: [
                   Container(
-                    width: 56,
-                    height: 56,
+                    width: 64,
+                    height: 64,
                     decoration: BoxDecoration(
-                      color: AppColors.primaryLight,
-                      borderRadius: AppBorderRadius.card,
+                      color: AppColors.primary.withValues(alpha: 0.14),
+                      borderRadius: AppBorderRadius.a18,
+                      border: Border.all(
+                        color: AppColors.primary.withValues(alpha: 0.30),
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: AppColors.primary.withValues(alpha: 0.25),
+                          blurRadius: 28,
+                          spreadRadius: 2,
+                        ),
+                      ],
                     ),
                     child: const Icon(
                       Icons.lock_outline_rounded,
                       color: AppColors.primary,
-                      size: 28,
+                      size: 30,
                     ),
                   ),
                   AppGap.h20,
-                  AuthHeaderWidget(
-                    title: 'auth.reset_title'.tr(),
-                    subtitle: 'auth.reset_subtitle'.tr(
-                      namedArgs: {'email': email},
-                    ),
+                  Text(
+                    'auth.reset_title'.tr(),
                     textAlign: TextAlign.center,
+                    style: AppTextStyles.h1.copyWith(
+                      color: PreAuthTheme.textPrimary,
+                      fontSize: 26,
+                      letterSpacing: -0.4,
+                    ),
+                  ),
+                  AppGap.h8,
+                  Text(
+                    'auth.reset_subtitle'.tr(namedArgs: {'email': email}),
+                    textAlign: TextAlign.center,
+                    style: AppTextStyles.s15.copyWith(
+                      color: PreAuthTheme.textSecondary,
+                      height: 1.5,
+                    ),
                   ),
                 ],
               ),
@@ -90,19 +109,11 @@ class ResetPasswordFormWidget extends StatelessWidget {
               obscureText: !showPassword,
               onChanged: onPasswordChanged,
               style: inputStyle,
-              decoration: AppInputDecoration.underline.copyWith(
-                labelText: 'auth.hint_new_password'.tr(),
-                labelStyle: AppTextStyles.s16.copyWith(
-                  color: PreAuthTheme.textSecondary,
-                ),
-                floatingLabelStyle: AppTextStyles.s13.copyWith(
-                  color: PreAuthTheme.textPrimary,
-                ),
-                errorStyle: AppTextStyles.s12.copyWith(color: AppColors.error),
-                contentPadding: const EdgeInsets.symmetric(vertical: 12),
-                prefixIcon: Icon(
+              decoration: AppInputDecoration.preAuthSoft(
+                hint: 'auth.hint_new_password'.tr(),
+                prefixIcon: const Icon(
                   Icons.lock_outline_rounded,
-                  color: appColors.iconInactive,
+                  color: PreAuthTheme.textSecondary,
                   size: 20,
                 ),
                 suffixIcon: GestureDetector(
@@ -111,7 +122,7 @@ class ResetPasswordFormWidget extends StatelessWidget {
                     showPassword
                         ? Icons.visibility_off_outlined
                         : Icons.visibility_outlined,
-                    color: appColors.iconInactive,
+                    color: PreAuthTheme.textSecondary,
                     size: 20,
                   ),
                 ),
@@ -135,7 +146,7 @@ class ResetPasswordFormWidget extends StatelessWidget {
                       borderRadius: const BorderRadius.all(AppRadius.c4),
                       child: LinearProgressIndicator(
                         value: strengthPct,
-                        backgroundColor: appColors.elevated,
+                        backgroundColor: PreAuthTheme.surface,
                         color: strengthColor,
                         minHeight: 6,
                       ),
@@ -173,19 +184,11 @@ class ResetPasswordFormWidget extends StatelessWidget {
               controller: confirmController,
               obscureText: !showConfirm,
               style: inputStyle,
-              decoration: AppInputDecoration.underline.copyWith(
-                labelText: 'auth.hint_confirm_password'.tr(),
-                labelStyle: AppTextStyles.s16.copyWith(
-                  color: PreAuthTheme.textSecondary,
-                ),
-                floatingLabelStyle: AppTextStyles.s13.copyWith(
-                  color: PreAuthTheme.textPrimary,
-                ),
-                errorStyle: AppTextStyles.s12.copyWith(color: AppColors.error),
-                contentPadding: const EdgeInsets.symmetric(vertical: 12),
-                prefixIcon: Icon(
+              decoration: AppInputDecoration.preAuthSoft(
+                hint: 'auth.hint_confirm_password'.tr(),
+                prefixIcon: const Icon(
                   Icons.lock_outline_rounded,
-                  color: appColors.iconInactive,
+                  color: PreAuthTheme.textSecondary,
                   size: 20,
                 ),
                 suffixIcon: GestureDetector(
@@ -194,7 +197,7 @@ class ResetPasswordFormWidget extends StatelessWidget {
                     showConfirm
                         ? Icons.visibility_off_outlined
                         : Icons.visibility_outlined,
-                    color: appColors.iconInactive,
+                    color: PreAuthTheme.textSecondary,
                     size: 20,
                   ),
                 ),

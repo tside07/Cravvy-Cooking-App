@@ -9,8 +9,8 @@ class SettingsGroupWidget extends StatelessWidget {
     this.customRoutes,
   });
 
-  /// Each item: (emoji, label, route, isToggle)
-  final List<(String, String, String, bool)> items;
+  /// Each item: (icon, label, route, isToggle)
+  final List<(IconData, String, String, bool)> items;
   final void Function(String route) onTap;
 
   /// Override route for specific indexes (e.g. dialog actions)
@@ -23,10 +23,10 @@ class SettingsGroupWidget extends StatelessWidget {
       decoration: context.cardBox(radius: 18),
       child: Column(
         children: List.generate(items.length, (i) {
-          final (emoji, label, route, isToggle) = items[i];
+          final (icon, label, route, isToggle) = items[i];
           final resolvedRoute = customRoutes?[i] ?? route;
           return SettingsTileWidget(
-            emoji: emoji,
+            icon: icon,
             label: label,
             isToggle: isToggle,
             showDivider: i < items.length - 1,

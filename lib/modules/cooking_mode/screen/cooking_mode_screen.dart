@@ -268,9 +268,10 @@ class _CookingModeScreenState extends State<CookingModeScreen> {
                       errorBuilder: (_, __, ___) => ColoredBox(
                         color: widget.meal.type.lightColor,
                         child: Center(
-                          child: Text(
-                            widget.meal.type.emoji,
-                            style: const TextStyle(fontSize: 48),
+                          child: Icon(
+                            widget.meal.type.icon,
+                            color: widget.meal.type.color,
+                            size: 48,
                           ),
                         ),
                       ),

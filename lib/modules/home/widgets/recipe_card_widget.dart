@@ -45,8 +45,9 @@ class RecipeCardWidget extends StatelessWidget {
       );
 
   Widget _buildGrid(BuildContext context) {
-    final emoji = MealTypeHelper.emoji(recipe.mealType);
+    final icon = MealTypeHelper.icon(recipe.mealType);
     final lightColor = MealTypeHelper.lightColor(recipe.mealType);
+    final typeColor = MealTypeHelper.color(recipe.mealType);
 
     return GestureDetector(
       onTap: () => context.push(AppRouter.mealDetail, extra: recipe.toMeal()),
@@ -57,7 +58,7 @@ class RecipeCardWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
             child: AspectRatio(
               aspectRatio: 180 / 150,
-              child: _buildRecipePhoto(emoji, lightColor),
+              child: _buildRecipePhoto(icon, lightColor, typeColor),
             ),
           ),
           const SizedBox(height: 10),
@@ -74,7 +75,7 @@ class RecipeCardWidget extends StatelessWidget {
     EdgeInsetsGeometry? margin,
   }) {
     final colors = context.appColors;
-    final emoji = MealTypeHelper.emoji(recipe.mealType);
+    final icon = MealTypeHelper.icon(recipe.mealType);
     final lightColor = MealTypeHelper.lightColor(recipe.mealType);
     final typeColor = MealTypeHelper.color(recipe.mealType);
 
@@ -93,7 +94,7 @@ class RecipeCardWidget extends StatelessWidget {
               child: Stack(
                 fit: StackFit.expand,
                 children: [
-                  _buildRecipePhoto(emoji, lightColor),
+                  _buildRecipePhoto(icon, lightColor, typeColor),
                   const DecoratedBox(
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
@@ -115,7 +116,7 @@ class RecipeCardWidget extends StatelessWidget {
                         color: typeColor,
                         borderRadius: BorderRadius.circular(8),
                       ),
-                      child: Text(emoji, style: AppTextStyles.s12),
+                      child: Icon(icon, size: 14, color: Colors.white),
                     ),
                   ),
                   Positioned(
@@ -150,40 +151,20 @@ class RecipeCardWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildRecipePhoto(String emoji, Color lightColor) {
+  Widget _buildRecipePhoto(IconData icon, Color lightColor, Color typeColor) {
+    final placeholder = ColoredBox(
+      color: lightColor,
+      child: Center(child: Icon(icon, size: 36, color: typeColor)),
+    );
     if (recipe.imageUrl != null && recipe.imageUrl!.isNotEmpty) {
       return CachedNetworkImage(
         imageUrl: recipe.imageUrl!,
         fit: BoxFit.cover,
-        placeholder: (context, url) => ColoredBox(
-          color: lightColor,
-          child: Center(
-            child: Text(
-              emoji,
-              style: AppTextStyles.s20.copyWith(fontSize: 32),
-            ),
-          ),
-        ),
-        errorWidget: (context, url, error) => ColoredBox(
-          color: lightColor,
-          child: Center(
-            child: Text(
-              emoji,
-              style: AppTextStyles.s20.copyWith(fontSize: 32),
-            ),
-          ),
-        ),
+        placeholder: (context, url) => placeholder,
+        errorWidget: (context, url, error) => placeholder,
       );
     }
-    return ColoredBox(
-      color: lightColor,
-      child: Center(
-        child: Text(
-          emoji,
-          style: AppTextStyles.s20.copyWith(fontSize: 32),
-        ),
-      ),
-    );
+    return placeholder;
   }
 
   Widget _buildRecipeMeta(

@@ -23,9 +23,10 @@ class MealDetailHeaderWidget extends StatelessWidget {
               errorBuilder: (_, __, ___) => ColoredBox(
                 color: meal.type.lightColor,
                 child: Center(
-                  child: Text(
-                    meal.type.emoji,
-                    style: AppTextStyles.s20.copyWith(fontSize: 64),
+                  child: Icon(
+                    meal.type.icon,
+                    color: meal.type.color,
+                    size: 64,
                   ),
                 ),
               ),

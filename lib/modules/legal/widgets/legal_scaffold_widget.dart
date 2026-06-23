@@ -139,7 +139,7 @@ class _LastUpdatedBadge extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
 
         decoration: BoxDecoration(
-          color: AppColors.primaryLight,
+          color: AppColors.primary.withValues(alpha: 0.14),
 
           borderRadius: AppBorderRadius.chip,
 

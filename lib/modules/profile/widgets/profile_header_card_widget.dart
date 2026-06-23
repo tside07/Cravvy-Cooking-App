@@ -73,7 +73,7 @@ class ProfileHeaderCardWidget extends StatelessWidget {
           AppGap.h12,
           Text(
             profile.name,
-            style: AppTextStyles.s20.copyWith(fontWeight: FontWeight.w800),
+            style: context.themed(AppTextStyles.s20, fontWeight: FontWeight.w800),
           ),
           AppGap.h4,
           Row(

@@ -71,9 +71,10 @@ class MealCardWidget extends StatelessWidget {
                     // Label bữa (BREAKFAST / LUNCH / ...)
                     Row(
                       children: [
-                        Text(
-                          meal.type.emoji,
-                          style: const TextStyle(fontSize: 12),
+                        Icon(
+                          meal.type.icon,
+                          size: 13,
+                          color: meal.type.color,
                         ),
                         const SizedBox(width: 4),
                         Text(
@@ -267,10 +268,7 @@ class EmptyMealSlotCard extends StatelessWidget {
                 shape: BoxShape.circle,
               ),
               child: Center(
-                child: Text(
-                  mealType.emoji,
-                  style: const TextStyle(fontSize: 15),
-                ),
+                child: Icon(mealType.icon, size: 16, color: mealType.color),
               ),
             ),
             AppGap.w10,
@@ -315,9 +313,7 @@ class _ImagePlaceholder extends StatelessWidget {
     width: 90,
     height: 90,
     color: type.lightColor,
-    child: Center(
-      child: Text(type.emoji, style: const TextStyle(fontSize: 28)),
-    ),
+    child: Center(child: Icon(type.icon, size: 32, color: type.color)),
   );
 }
 

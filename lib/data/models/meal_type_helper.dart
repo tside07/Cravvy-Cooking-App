@@ -1,21 +1,23 @@
-// Helper để lấy emoji/color từ mealType string — tránh toMeal() trong widgets.
+// Helper để lấy icon/color từ mealType string — tránh toMeal() trong widgets.
 
 import 'package:flutter/material.dart';
 import 'package:cravvy_cooking_app/core/theme/app_colors.dart';
 
 abstract final class MealTypeHelper {
-  static String emoji(String mealType) {
+  /// Material rounded icon theo bữa — thay cho emoji, đồng bộ với toàn bộ
+  /// icon `_rounded` trong app. Dùng kèm [color] để có sức sống.
+  static IconData icon(String mealType) {
     switch (mealType) {
       case 'breakfast':
-        return '🌅';
+        return Icons.wb_twilight_rounded;
       case 'lunch':
-        return '☀️';
+        return Icons.wb_sunny_rounded;
       case 'dinner':
-        return '🌙';
+        return Icons.nightlight_round;
       case 'snack':
-        return '🍎';
+        return Icons.cookie_rounded;
       default:
-        return '🍽️';
+        return Icons.restaurant_rounded;
     }
   }
 

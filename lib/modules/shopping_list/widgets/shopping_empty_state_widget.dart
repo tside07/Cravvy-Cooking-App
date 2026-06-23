@@ -13,7 +13,7 @@ class ShoppingEmptyStateWidget extends StatelessWidget {
         elevation: 0,
         title: Text(
           'shopping_list.title'.tr(),
-          style: AppTextStyles.s18.copyWith(fontWeight: FontWeight.w700),
+          style: context.themed(AppTextStyles.s18, fontWeight: FontWeight.w700),
         ),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios_new_rounded),

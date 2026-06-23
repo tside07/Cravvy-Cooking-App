@@ -29,7 +29,7 @@ class ShoppingRecipeDetailScreen extends StatelessWidget {
         ),
         title: Text(
           'shopping_list.cart_title'.tr(),
-          style: AppTextStyles.s18.copyWith(fontWeight: FontWeight.w700),
+          style: context.themed(AppTextStyles.s18, fontWeight: FontWeight.w700),
         ),
       ),
       body: items.isEmpty
@@ -54,8 +54,8 @@ class ShoppingRecipeDetailScreen extends StatelessWidget {
                             padding: const EdgeInsets.only(bottom: 12, left: 4),
                             child: Text(
                               recipeName,
-                              style: AppTextStyles.s16
-                                  .copyWith(fontWeight: FontWeight.w700),
+                              style: context.themed(AppTextStyles.s16,
+                                  fontWeight: FontWeight.w700),
                             ),
                           ),
                         ...items.map(
@@ -165,7 +165,8 @@ class _IngredientCartTile extends StatelessWidget {
             child: Text(
               '${item.quantity}',
               textAlign: TextAlign.center,
-              style: AppTextStyles.s14.copyWith(fontWeight: FontWeight.w700),
+              style: AppTextStyles.s14.copyWith(
+                  fontWeight: FontWeight.w700, color: colors.textPrimary),
             ),
           ),
           _StepperButton(icon: Icons.add_rounded, onTap: onIncrement),
@@ -247,7 +248,8 @@ class _OrderSummaryBar extends StatelessWidget {
             children: [
               Text(
                 'shopping_list.order_info'.tr(),
-                style: AppTextStyles.s14.copyWith(fontWeight: FontWeight.w700),
+                style: AppTextStyles.s14.copyWith(
+                    fontWeight: FontWeight.w700, color: colors.textPrimary),
               ),
               Text(
                 'shopping_list.bought_of_total'.tr(namedArgs: {

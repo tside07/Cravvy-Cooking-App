@@ -33,9 +33,10 @@ class MealScrollCardWidget extends StatelessWidget {
                     errorBuilder: (_, __, ___) => ColoredBox(
                       color: meal.type.lightColor,
                       child: Center(
-                        child: Text(
-                          meal.type.emoji,
-                          style: AppTextStyles.s20.copyWith(fontSize: 36),
+                        child: Icon(
+                          meal.type.icon,
+                          size: 36,
+                          color: meal.type.color,
                         ),
                       ),
                     ),
@@ -60,9 +61,10 @@ class MealScrollCardWidget extends StatelessWidget {
                         color: meal.type.color,
                         borderRadius: AppBorderRadius.a8,
                       ),
-                      child: Text(
-                        meal.type.emoji,
-                        style: AppTextStyles.s12.copyWith(),
+                      child: Icon(
+                        meal.type.icon,
+                        size: 14,
+                        color: Colors.white,
                       ),
                     ),
                   ),

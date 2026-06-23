@@ -376,10 +376,8 @@ class _FAQScreenState extends State<FAQScreen> {
                         Text(
                           'faq.contact_email'.tr(),
 
-                          style: context.themed(
-                            AppTextStyles.s12,
-
-                            color: colors.textSecondary,
+                          style: AppTextStyles.s12.copyWith(
+                            color: AppColors.textSecondary,
                           ),
                         ),
                       ],

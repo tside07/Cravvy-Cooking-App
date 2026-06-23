@@ -33,16 +33,17 @@ extension MealTypeExt on MealType {
     }
   }
 
-  String get emoji {
+  /// Material rounded icon theo bữa — thay cho emoji, dùng kèm [color].
+  IconData get icon {
     switch (this) {
       case MealType.breakfast:
-        return '🌅';
+        return Icons.wb_twilight_rounded;
       case MealType.lunch:
-        return '☀️';
+        return Icons.wb_sunny_rounded;
       case MealType.dinner:
-        return '🌙';
+        return Icons.nightlight_round;
       case MealType.snack:
-        return '🍎';
+        return Icons.cookie_rounded;
     }
   }
 

@@ -1,3 +1,4 @@
+import 'package:cravvy_cooking_app/core/theme/pre_auth_theme.dart';
 import 'package:cravvy_cooking_app/init.dart';
 import 'package:easy_localization/easy_localization.dart';
 
@@ -15,15 +16,13 @@ class ResendSectionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = context.appColors;
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
           secondsLeft > 0 ? 'auth.otp_resend_countdown_prefix'.tr() : '',
-          style: context.themed(
-            AppTextStyles.s14,
-            color: colors.textSecondary,
+          style: AppTextStyles.s14.copyWith(
+            color: PreAuthTheme.textSecondary,
           ),
         ),
         GestureDetector(

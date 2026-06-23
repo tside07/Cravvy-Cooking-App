@@ -3,7 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:cravvy_cooking_app/modules/dashboard/provider/dashboard_tab_provider.dart';
 
 class _Action {
-  final String emoji;
+  final IconData icon;
   final String label;
   final Color bgColor;
   final Color iconColor;
@@ -14,7 +14,7 @@ class _Action {
   /// Route to push when tapped (takes precedence over [tabIndex]).
   final String? route;
   const _Action(
-    this.emoji,
+    this.icon,
     this.label,
     this.bgColor,
     this.iconColor, {
@@ -28,28 +28,28 @@ class QuickActionsGridWidget extends StatelessWidget {
 
   List<_Action> _actions(AppColorExtension colors) => [
         _Action(
-          '🥕',
+          Icons.eco_rounded,
           'home.action_ingredients'.tr(),
           AppColors.primaryLight,
           AppColors.primary,
           tabIndex: 2,
         ),
         _Action(
-          '⚡',
+          Icons.bolt_rounded,
           'home.action_quick'.tr(),
           AppColors.secondaryLight,
           AppColors.secondary,
           tabIndex: 2,
         ),
         _Action(
-          '📋',
+          Icons.calendar_today_rounded,
           'home.action_plan'.tr(),
           colors.elevated,
           AppColors.dinner,
           tabIndex: 1,
         ),
         _Action(
-          '🤖',
+          Icons.smart_toy_rounded,
           'home.action_ai'.tr(),
           AppColors.warningLight,
           AppColors.warning,
@@ -133,9 +133,10 @@ class _ActionCard extends StatelessWidget {
                   borderRadius: AppBorderRadius.a10,
                 ),
                 child: Center(
-                  child: Text(
-                    action.emoji,
-                    style: AppTextStyles.s18,
+                  child: Icon(
+                    action.icon,
+                    color: action.iconColor,
+                    size: 20,
                   ),
                 ),
               ),

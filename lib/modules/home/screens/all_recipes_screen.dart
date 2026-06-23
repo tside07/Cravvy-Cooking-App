@@ -72,15 +72,15 @@ class _AllRecipesScreenState extends State<AllRecipesScreen> {
 
   static const _typeTabs = [
 
-    ('all', 'home.tab_all', '🍽️'),
+    ('all', 'home.tab_all', Icons.restaurant_rounded),
 
-    ('breakfast', 'home.tab_breakfast', '🌅'),
+    ('breakfast', 'home.tab_breakfast', Icons.wb_twilight_rounded),
 
-    ('lunch', 'home.tab_lunch', '☀️'),
+    ('lunch', 'home.tab_lunch', Icons.wb_sunny_rounded),
 
-    ('dinner', 'home.tab_dinner', '🌙'),
+    ('dinner', 'home.tab_dinner', Icons.nightlight_round),
 
-    ('snack', 'home.tab_snack', '🍎'),
+    ('snack', 'home.tab_snack', Icons.cookie_rounded),
 
   ];
 
@@ -374,13 +374,28 @@ class _AllRecipesScreenState extends State<AllRecipesScreen> {
 
                     children: _typeTabs.map((tab) {
 
-                      final (type, labelKey, emoji) = tab;
+                      final (type, labelKey, icon) = tab;
 
                       final selected = draftMealType == type;
 
                       return FilterChip(
 
-                        label: Text('$emoji ${labelKey.tr()}'),
+                        avatar: Icon(
+                          icon,
+                          size: 16,
+                          color: selected
+                              ? AppColors.primary
+                              : context.appColors.textSecondary,
+                        ),
+
+                        label: Text(labelKey.tr()),
+
+                        labelStyle: AppTextStyles.s13.copyWith(
+                          color: selected
+                              ? AppColors.primaryDark
+                              : context.appColors.textSecondary,
+                          fontWeight: FontWeight.w600,
+                        ),
 
                         selected: selected,
 
@@ -429,6 +444,13 @@ class _AllRecipesScreenState extends State<AllRecipesScreen> {
                       return FilterChip(
 
                         label: Text(opt.labelKey.tr()),
+
+                        labelStyle: AppTextStyles.s13.copyWith(
+                          color: selected
+                              ? AppColors.primaryDark
+                              : context.appColors.textSecondary,
+                          fontWeight: FontWeight.w600,
+                        ),
 
                         selected: selected,
 
@@ -712,7 +734,9 @@ class _AllRecipesScreenState extends State<AllRecipesScreen> {
 
                             ),
 
-                            style: AppTextStyles.s18.copyWith(
+                            style: context.themed(
+
+                              AppTextStyles.s18,
 
                               fontWeight: FontWeight.w800,
 
@@ -806,7 +830,11 @@ class _AllRecipesScreenState extends State<AllRecipesScreen> {
 
               children: [
 
-                const Text('😕', style: TextStyle(fontSize: 32)),
+                Icon(
+                  Icons.sentiment_dissatisfied_rounded,
+                  size: 32,
+                  color: context.appColors.textSecondary,
+                ),
 
                 AppGap.h8,
 
@@ -1120,7 +1148,7 @@ class _ToolbarTextButton extends StatelessWidget {
 
             children: [
 
-              const Icon(Icons.sort_rounded, size: 20),
+              Icon(Icons.sort_rounded, size: 20, color: context.appColors.textPrimary),
 
               AppGap.w6,
 
@@ -1128,7 +1156,13 @@ class _ToolbarTextButton extends StatelessWidget {
 
                 label,
 
-                style: AppTextStyles.s12.copyWith(fontWeight: FontWeight.w700),
+                style: context.themed(
+
+                  AppTextStyles.s12,
+
+                  fontWeight: FontWeight.w700,
+
+                ),
 
               ),
 

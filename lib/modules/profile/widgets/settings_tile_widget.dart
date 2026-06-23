@@ -3,14 +3,14 @@ import 'package:cravvy_cooking_app/init.dart';
 class SettingsTileWidget extends StatefulWidget {
   const SettingsTileWidget({
     super.key,
-    required this.emoji,
+    required this.icon,
     required this.label,
     required this.isToggle,
     required this.showDivider,
     required this.onTap,
   });
 
-  final String emoji;
+  final IconData icon;
   final String label;
   final bool isToggle;
   final bool showDivider;
@@ -37,7 +37,9 @@ class _SettingsTileState extends State<SettingsTileWidget> {
               color: colors.elevated,
               borderRadius: AppBorderRadius.a10,
             ),
-            child: Center(child: Text(widget.emoji, style: AppTextStyles.s18)),
+            child: Center(
+              child: Icon(widget.icon, size: 18, color: colors.textPrimary),
+            ),
           ),
           title: Text(
             widget.label,

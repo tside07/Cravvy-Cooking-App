@@ -103,12 +103,8 @@ class _AuthTextFieldWidgetState extends State<AuthTextFieldWidget> {
         : null;
 
     if (widget.preAuth) {
-      return AppInputDecoration.underline.copyWith(
-        labelText: widget.hint,
-        labelStyle: AppTextStyles.s16.copyWith(color: hintColor),
-        floatingLabelStyle: AppTextStyles.s14.copyWith(color: hintColor),
-        errorStyle: AppTextStyles.s12.copyWith(color: AppColors.error),
-        contentPadding: const EdgeInsets.symmetric(vertical: 12),
+      return AppInputDecoration.preAuthSoft(
+        hint: widget.hint,
         prefixIcon: prefix,
         suffixIcon: eyeIcon,
       );

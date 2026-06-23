@@ -7,7 +7,6 @@ class NutritionTipWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _ = context.locale;
-    final colors = context.appColors;
 
     return Container(
       margin: const EdgeInsets.only(
@@ -30,8 +29,12 @@ class NutritionTipWidget extends StatelessWidget {
               color: AppColors.secondary.withValues(alpha: 0.15),
               shape: BoxShape.circle,
             ),
-            child: Center(
-              child: Text('💡', style: AppTextStyles.s20),
+            child: const Center(
+              child: Icon(
+                Icons.lightbulb_rounded,
+                size: 22,
+                color: AppColors.secondaryDark,
+              ),
             ),
           ),
           AppGap.w16,
@@ -50,7 +53,7 @@ class NutritionTipWidget extends StatelessWidget {
                 Text(
                   'home.tip_body'.tr(),
                   style: AppTextStyles.s12.copyWith(
-                    color: colors.textSecondary,
+                    color: AppColors.textSecondary,
                     height: 1.4,
                   ),
                 ),

@@ -162,9 +162,10 @@ class _AddMealSheetState extends State<AddMealSheet> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
-                          widget.mealType.emoji,
-                          style: const TextStyle(fontSize: 40),
+                        Icon(
+                          widget.mealType.icon,
+                          size: 40,
+                          color: widget.mealType.color,
                         ),
                         AppGap.h12,
                         Text(
@@ -235,22 +236,20 @@ class _AddMealSheetState extends State<AddMealSheet> {
                                       placeholder: (_, __) => ColoredBox(
                                         color: widget.mealType.lightColor,
                                         child: Center(
-                                          child: Text(
-                                            widget.mealType.emoji,
-                                            style: const TextStyle(
-                                              fontSize: 28,
-                                            ),
+                                          child: Icon(
+                                            widget.mealType.icon,
+                                            size: 28,
+                                            color: widget.mealType.color,
                                           ),
                                         ),
                                       ),
                                       errorWidget: (_, __, ___) => ColoredBox(
                                         color: widget.mealType.lightColor,
                                         child: Center(
-                                          child: Text(
-                                            widget.mealType.emoji,
-                                            style: const TextStyle(
-                                              fontSize: 28,
-                                            ),
+                                          child: Icon(
+                                            widget.mealType.icon,
+                                            size: 28,
+                                            color: widget.mealType.color,
                                           ),
                                         ),
                                       ),
@@ -258,9 +257,10 @@ class _AddMealSheetState extends State<AddMealSheet> {
                                   : ColoredBox(
                                       color: widget.mealType.lightColor,
                                       child: Center(
-                                        child: Text(
-                                          widget.mealType.emoji,
-                                          style: const TextStyle(fontSize: 28),
+                                        child: Icon(
+                                          widget.mealType.icon,
+                                          size: 28,
+                                          color: widget.mealType.color,
                                         ),
                                       ),
                                     ),

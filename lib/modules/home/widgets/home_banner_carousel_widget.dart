@@ -42,7 +42,7 @@ class _HomeBannerCarouselWidgetState extends State<HomeBannerCarouselWidget> {
           end: Alignment.bottomRight,
           colors: [Color(0xFF6A8A42), Color(0xFF4A6B2E)],
         ),
-        emoji: '📅',
+        icon: Icons.calendar_today_rounded,
         onTap: (ctx) => ctx.read<DashboardTabProvider>().switchTo(1),
       ),
       _BannerSlide(
@@ -53,8 +53,8 @@ class _HomeBannerCarouselWidgetState extends State<HomeBannerCarouselWidget> {
           end: Alignment.bottomRight,
           colors: [Color(0xFFF77C0F), Color(0xFFD97706)],
         ),
-        emoji: '✨',
-        onTap: (ctx) => ctx.push(AppRouter.premium),
+        icon: Icons.celebration_rounded,
+        onTap: (ctx) => ctx.push(AppRouter.subscription),
       ),
     ];
 
@@ -143,7 +143,7 @@ class _BannerSlide {
   final String? subtitleText;
   final String? imageUrl;
   final Gradient? gradient;
-  final String? emoji;
+  final IconData? icon;
   final void Function(BuildContext context)? onTap;
   final Recipe? recipe;
 
@@ -154,7 +154,7 @@ class _BannerSlide {
     this.subtitleText,
     this.imageUrl,
     this.gradient,
-    this.emoji,
+    this.icon,
     this.onTap,
     this.recipe,
   });
@@ -299,9 +299,10 @@ class _GradientBackground extends StatelessWidget {
       ),
       alignment: Alignment.topRight,
       padding: const EdgeInsets.all(20),
-      child: Text(
-        slide.emoji ?? '🍳',
-        style: const TextStyle(fontSize: 56),
+      child: Icon(
+        slide.icon ?? Icons.restaurant_menu_rounded,
+        size: 56,
+        color: Colors.white.withValues(alpha: 0.9),
       ),
     );
   }

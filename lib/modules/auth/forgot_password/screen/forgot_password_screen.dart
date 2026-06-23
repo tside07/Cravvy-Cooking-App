@@ -1,6 +1,7 @@
 import 'package:cravvy_cooking_app/core/theme/pre_auth_theme.dart';
 import 'package:cravvy_cooking_app/core/utils/localized_message.dart';
-import 'package:cravvy_cooking_app/init.dart';import 'package:cravvy_cooking_app/data/providers/auth_provider.dart';
+import 'package:cravvy_cooking_app/init.dart';
+import 'package:cravvy_cooking_app/data/providers/auth_provider.dart';
 import 'package:cravvy_cooking_app/modules/auth/widgets/auth_form_fields_widget.dart';
 import 'package:cravvy_cooking_app/modules/auth/forgot_password/widgets/icon_section_widget.dart';
 import 'package:cravvy_cooking_app/modules/auth/forgot_password/widgets/back_to_login_widget.dart';
@@ -43,10 +44,12 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
           content: Text(
             error,
             style: AppTextStyles.s14.copyWith(color: AppColors.white),
-          ),          backgroundColor: AppColors.error,
+          ),
+          backgroundColor: AppColors.error,
           behavior: SnackBarBehavior.floating,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
         ),
       );
     }
@@ -111,6 +114,7 @@ class _Body extends StatelessWidget {
                       style: AppTextStyles.h1.copyWith(
                         color: PreAuthTheme.textPrimary,
                         fontSize: 26,
+                        letterSpacing: -0.4,
                       ),
                     ),
                     AppGap.h12,
@@ -140,7 +144,8 @@ class _Body extends StatelessWidget {
                             }
                             return null;
                           },
-                        ),                      ],
+                        ),
+                      ],
                     ),
                     AppGap.h28,
                     CravvyButton(

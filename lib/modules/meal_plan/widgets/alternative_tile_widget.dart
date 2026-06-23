@@ -43,9 +43,10 @@ class AlternativeTileWidget extends StatelessWidget {
                     height: 70,
                     color: meal.type.lightColor,
                     child: Center(
-                      child: Text(
-                        meal.type.emoji,
-                        style: AppTextStyles.s20.copyWith(fontSize: 28),
+                      child: Icon(
+                        meal.type.icon,
+                        color: meal.type.color,
+                        size: 28,
                       ),
                     ),
                   ),

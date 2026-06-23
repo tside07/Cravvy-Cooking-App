@@ -146,9 +146,9 @@ class _SetupStep1ScreenState extends State<SetupStep1Screen> {
 
   String get _bmiCategory => _bmiCategoryLabel(_bmi);
 
-  Color _bmiColor(AppColorExtension colors) {
+  Color _bmiColor() {
     final b = _bmi;
-    if (b == null) return colors.textSecondary;
+    if (b == null) return PreAuthTheme.textSecondary;
     if (b < 18.5) return AppColors.warning;
     if (b < 25) return AppColors.success;
     if (b < 30) return AppColors.warning;
@@ -180,7 +180,6 @@ class _SetupStep1ScreenState extends State<SetupStep1Screen> {
 
   @override
   Widget build(BuildContext context) {
-    final colors = context.appColors;
     return _SetupShell(
       child: Column(
         children: [
@@ -201,14 +200,14 @@ class _SetupStep1ScreenState extends State<SetupStep1Screen> {
                         style: AppTextStyles.s20.copyWith(
                           fontWeight: FontWeight.w800,
                           fontSize: 26,
-                          color: colors.textPrimary,
+                          color: PreAuthTheme.textPrimary,
                         ),
                       ),
                       AppGap.h8,
                       Text(
                         'onboarding_setup.personalize_desc'.tr(),
                         style: AppTextStyles.s14.copyWith(
-                          color: colors.textSecondary,
+                          color: PreAuthTheme.textSecondary,
                         ),
                       ),
                       AppGap.h28,
@@ -242,12 +241,12 @@ class _SetupStep1ScreenState extends State<SetupStep1Screen> {
                                       decoration: BoxDecoration(
                                         color: _gender == g
                                             ? AppColors.primary
-                                            : const Color(0xFF2A3A44),
+                                            : PreAuthTheme.surface,
                                         borderRadius: BorderRadius.circular(50),
                                         border: Border.all(
                                           color: _gender == g
                                               ? AppColors.primary
-                                              : colors.textSecondary.withValues(
+                                              : PreAuthTheme.textSecondary.withValues(
                                                   alpha: 0.35,
                                                 ),
                                         ),
@@ -258,7 +257,7 @@ class _SetupStep1ScreenState extends State<SetupStep1Screen> {
                                           style: AppTextStyles.s14.copyWith(
                                             color: _gender == g
                                                 ? Colors.white
-                                                : colors.textPrimary,
+                                                : PreAuthTheme.textPrimary,
                                             fontWeight: FontWeight.w600,
                                           ),
                                         ),
@@ -294,9 +293,9 @@ class _SetupStep1ScreenState extends State<SetupStep1Screen> {
                         Container(
                           padding: AppPad.a16,
                           decoration: BoxDecoration(
-                            color: colors.cardSurface,
+                            color: PreAuthTheme.surface,
                             borderRadius: AppBorderRadius.card,
-                            border: Border.all(color: colors.borderDivider),
+                            border: Border.all(color: PreAuthTheme.border),
                           ),
                           child: Row(
                             children: [
@@ -307,19 +306,18 @@ class _SetupStep1ScreenState extends State<SetupStep1Screen> {
                                     Text(
                                       'onboarding_setup.bmi'.tr(),
                                       style: AppTextStyles.s12.copyWith(
-                                        color: colors.textSecondary,
+                                        color: PreAuthTheme.textSecondary,
                                       ),
                                     ),
                                     AppGap.h4,
                                     Text(
                                       _bmi!.toStringAsFixed(1),
-                                      style: context.themed(
-                                        AppTextStyles.display.copyWith(
-                                          fontSize: 28,
-                                          fontFeatures: const [
-                                            FontFeature.tabularFigures(),
-                                          ],
-                                        ),
+                                      style: AppTextStyles.display.copyWith(
+                                        color: PreAuthTheme.textPrimary,
+                                        fontSize: 28,
+                                        fontFeatures: const [
+                                          FontFeature.tabularFigures(),
+                                        ],
                                       ),
                                     ),
                                   ],
@@ -328,15 +326,13 @@ class _SetupStep1ScreenState extends State<SetupStep1Screen> {
                               Container(
                                 padding: AppPad.h12,
                                 decoration: BoxDecoration(
-                                  color: _bmiColor(
-                                    colors,
-                                  ).withValues(alpha: 0.1),
+                                  color: _bmiColor().withValues(alpha: 0.1),
                                   borderRadius: AppBorderRadius.chip,
                                 ),
                                 child: Text(
                                   _bmiCategory,
                                   style: AppTextStyles.s14.copyWith(
-                                    color: _bmiColor(colors),
+                                    color: _bmiColor(),
                                     fontWeight: FontWeight.w700,
                                   ),
                                 ),
@@ -415,7 +411,6 @@ class _SetupStep2ScreenState extends State<SetupStep2Screen> {
 
   @override
   Widget build(BuildContext context) {
-    final colors = context.appColors;
     return _SetupShell(
       child: Column(
         children: [
@@ -432,14 +427,14 @@ class _SetupStep2ScreenState extends State<SetupStep2Screen> {
                     style: AppTextStyles.s20.copyWith(
                       fontWeight: FontWeight.w800,
                       fontSize: 26,
-                      color: colors.textPrimary,
+                      color: PreAuthTheme.textPrimary,
                     ),
                   ),
                   AppGap.h8,
                   Text(
                     'onboarding_setup.main_goal_desc'.tr(),
                     style: AppTextStyles.s14.copyWith(
-                      color: colors.textSecondary,
+                      color: PreAuthTheme.textSecondary,
                     ),
                   ),
                   AppGap.h28,
@@ -462,12 +457,12 @@ class _SetupStep2ScreenState extends State<SetupStep2Screen> {
                             decoration: BoxDecoration(
                               color: isSelected
                                   ? AppColors.primaryLight
-                                  : colors.cardSurface,
+                                  : PreAuthTheme.surface,
                               borderRadius: AppBorderRadius.a20,
                               border: Border.all(
                                 color: isSelected
                                     ? AppColors.primary
-                                    : AppColors.border,
+                                    : PreAuthTheme.border,
                                 width: isSelected ? 2 : 1,
                               ),
                             ),
@@ -496,7 +491,7 @@ class _SetupStep2ScreenState extends State<SetupStep2Screen> {
                                     fontWeight: FontWeight.w700,
                                     color: isSelected
                                         ? AppColors.primary
-                                        : colors.textPrimary,
+                                        : PreAuthTheme.textPrimary,
                                   ),
                                 ),
                                 AppGap.h4,
@@ -507,7 +502,7 @@ class _SetupStep2ScreenState extends State<SetupStep2Screen> {
                                         ? AppColors.primary.withValues(
                                             alpha: 0.75,
                                           )
-                                        : colors.textSecondary,
+                                        : PreAuthTheme.textSecondary,
                                   ),
                                 ),
                               ],
@@ -582,7 +577,6 @@ class _SetupStep3ScreenState extends State<SetupStep3Screen> {
 
   @override
   Widget build(BuildContext context) {
-    final colors = context.appColors;
     return _SetupShell(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -600,14 +594,14 @@ class _SetupStep3ScreenState extends State<SetupStep3Screen> {
                     style: AppTextStyles.s20.copyWith(
                       fontWeight: FontWeight.w800,
                       fontSize: 26,
-                      color: colors.textPrimary,
+                      color: PreAuthTheme.textPrimary,
                     ),
                   ),
                   AppGap.h8,
                   Text(
                     'onboarding_setup.select_diet'.tr(),
                     style: AppTextStyles.s14.copyWith(
-                      color: colors.textSecondary,
+                      color: PreAuthTheme.textSecondary,
                     ),
                   ),
                   AppGap.h24,
@@ -711,7 +705,6 @@ class _SetupStep4ScreenState extends State<SetupStep4Screen> {
 
   @override
   Widget build(BuildContext context) {
-    final colors = context.appColors;
     return _SetupShell(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -729,14 +722,14 @@ class _SetupStep4ScreenState extends State<SetupStep4Screen> {
                     style: AppTextStyles.s20.copyWith(
                       fontWeight: FontWeight.w800,
                       fontSize: 26,
-                      color: colors.textPrimary,
+                      color: PreAuthTheme.textPrimary,
                     ),
                   ),
                   AppGap.h8,
                   Text(
                     'onboarding_setup.restrictions_desc'.tr(),
                     style: AppTextStyles.s14.copyWith(
-                      color: colors.textSecondary,
+                      color: PreAuthTheme.textSecondary,
                     ),
                   ),
                   AppGap.h24,
@@ -793,18 +786,18 @@ class _SetupStep4ScreenState extends State<SetupStep4Screen> {
                                 child: TextField(
                                   controller: _customCtrl,
                                   style: AppTextStyles.s14.copyWith(
-                                    color: colors.textPrimary,
+                                    color: PreAuthTheme.textPrimary,
                                   ),
-                                  cursorColor: colors.textPrimary,
+                                  cursorColor: PreAuthTheme.textPrimary,
                                   decoration: InputDecoration(
                                     hintText:
                                         'onboarding_setup.hint_restrictions'
                                             .tr(),
                                     hintStyle: AppTextStyles.s14.copyWith(
-                                      color: colors.textSecondary,
+                                      color: PreAuthTheme.textSecondary,
                                     ),
                                     filled: true,
-                                    fillColor: const Color(0xFF2A3A44),
+                                    fillColor: PreAuthTheme.surface,
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(12),
                                       borderSide: BorderSide.none,
@@ -812,7 +805,7 @@ class _SetupStep4ScreenState extends State<SetupStep4Screen> {
                                     enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(12),
                                       borderSide: BorderSide(
-                                        color: colors.textSecondary.withValues(
+                                        color: PreAuthTheme.textSecondary.withValues(
                                           alpha: 0.35,
                                         ),
                                       ),
@@ -820,7 +813,7 @@ class _SetupStep4ScreenState extends State<SetupStep4Screen> {
                                     focusedBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(12),
                                       borderSide: BorderSide(
-                                        color: colors.textPrimary,
+                                        color: PreAuthTheme.textPrimary,
                                       ),
                                     ),
                                     contentPadding: const EdgeInsets.symmetric(
@@ -897,12 +890,12 @@ class _SetupStep4ScreenState extends State<SetupStep4Screen> {
                               decoration: BoxDecoration(
                                 color: _noRestrictions
                                     ? AppColors.primaryLight
-                                    : colors.cardSurface,
+                                    : PreAuthTheme.surface,
                                 borderRadius: AppBorderRadius.a14,
                                 border: Border.all(
                                   color: _noRestrictions
                                       ? AppColors.primary
-                                      : AppColors.border,
+                                      : PreAuthTheme.border,
                                 ),
                               ),
                               child: Row(
@@ -913,7 +906,7 @@ class _SetupStep4ScreenState extends State<SetupStep4Screen> {
                                         : Icons.circle_outlined,
                                     color: _noRestrictions
                                         ? AppColors.primary
-                                        : colors.textDisabled,
+                                        : PreAuthTheme.textDisabled,
                                   ),
                                   AppGap.w10,
                                   Expanded(
@@ -923,7 +916,7 @@ class _SetupStep4ScreenState extends State<SetupStep4Screen> {
                                         fontWeight: FontWeight.w600,
                                         color: _noRestrictions
                                             ? AppColors.primary
-                                            : colors.textPrimary,
+                                            : PreAuthTheme.textPrimary,
                                       ),
                                     ),
                                   ),
@@ -973,9 +966,9 @@ class _SetupStep5ScreenState extends State<SetupStep5Screen> {
   ];
 
   static const _skills = [
-    {'id': 'beginner', 'emoji': '🥚'},
-    {'id': 'intermediate', 'emoji': '🍳'},
-    {'id': 'advanced', 'emoji': '👨‍🍳'},
+    {'id': 'beginner', 'icon': Icons.egg_alt_rounded},
+    {'id': 'intermediate', 'icon': Icons.restaurant_menu_rounded},
+    {'id': 'advanced', 'icon': Icons.local_dining_rounded},
   ];
 
   Future<void> _buildPlan() async {
@@ -991,7 +984,6 @@ class _SetupStep5ScreenState extends State<SetupStep5Screen> {
 
   @override
   Widget build(BuildContext context) {
-    final colors = context.appColors;
     return _SetupShell(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -1009,14 +1001,14 @@ class _SetupStep5ScreenState extends State<SetupStep5Screen> {
                     style: AppTextStyles.s20.copyWith(
                       fontWeight: FontWeight.w800,
                       fontSize: 26,
-                      color: colors.textPrimary,
+                      color: PreAuthTheme.textPrimary,
                     ),
                   ),
                   AppGap.h8,
                   Text(
                     'onboarding_setup.cooking_experience'.tr(),
                     style: AppTextStyles.s14.copyWith(
-                      color: colors.textSecondary,
+                      color: PreAuthTheme.textSecondary,
                     ),
                   ),
                   AppGap.h28,
@@ -1049,12 +1041,12 @@ class _SetupStep5ScreenState extends State<SetupStep5Screen> {
                                   decoration: BoxDecoration(
                                     color: isSelected
                                         ? AppColors.primaryLight
-                                        : colors.cardSurface,
+                                        : PreAuthTheme.surface,
                                     borderRadius: AppBorderRadius.a14,
                                     border: Border.all(
                                       color: isSelected
                                           ? AppColors.primary
-                                          : AppColors.border,
+                                          : PreAuthTheme.border,
                                       width: isSelected ? 2 : 1,
                                     ),
                                   ),
@@ -1065,7 +1057,7 @@ class _SetupStep5ScreenState extends State<SetupStep5Screen> {
                                         size: 20,
                                         color: isSelected
                                             ? AppColors.primary
-                                            : colors.textSecondary,
+                                            : PreAuthTheme.textSecondary,
                                       ),
                                       AppGap.w8,
                                       Flexible(
@@ -1075,7 +1067,7 @@ class _SetupStep5ScreenState extends State<SetupStep5Screen> {
                                           style: AppTextStyles.s14.copyWith(
                                             color: isSelected
                                                 ? AppColors.primary
-                                                : colors.textPrimary,
+                                                : PreAuthTheme.textPrimary,
                                             fontWeight: FontWeight.w600,
                                           ),
                                         ),
@@ -1105,20 +1097,23 @@ class _SetupStep5ScreenState extends State<SetupStep5Screen> {
                                   decoration: BoxDecoration(
                                     color: isSelected
                                         ? AppColors.primaryLight
-                                        : colors.cardSurface,
+                                        : PreAuthTheme.surface,
                                     borderRadius: AppBorderRadius.a14,
                                     border: Border.all(
                                       color: isSelected
                                           ? AppColors.primary
-                                          : AppColors.border,
+                                          : PreAuthTheme.border,
                                       width: isSelected ? 2 : 1,
                                     ),
                                   ),
                                   child: Row(
                                     children: [
-                                      Text(
-                                        s['emoji'] as String,
-                                        style: const TextStyle(fontSize: 24),
+                                      Icon(
+                                        s['icon'] as IconData,
+                                        size: 24,
+                                        color: isSelected
+                                            ? AppColors.primary
+                                            : PreAuthTheme.textSecondary,
                                       ),
                                       AppGap.w14,
                                       Expanded(
@@ -1132,13 +1127,13 @@ class _SetupStep5ScreenState extends State<SetupStep5Screen> {
                                                 fontWeight: FontWeight.w700,
                                                 color: isSelected
                                                     ? AppColors.primary
-                                                    : colors.textPrimary,
+                                                    : PreAuthTheme.textPrimary,
                                               ),
                                             ),
                                             Text(
                                               _skillDesc(s['id'] as String),
                                               style: AppTextStyles.s12.copyWith(
-                                                color: colors.textSecondary,
+                                                color: PreAuthTheme.textSecondary,
                                               ),
                                             ),
                                           ],

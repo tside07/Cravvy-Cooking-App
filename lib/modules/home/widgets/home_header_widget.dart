@@ -39,7 +39,7 @@ class HomeHeaderWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  '${_greeting()}, $firstName! 👋',
+                  '${_greeting()}, $firstName!',
                   style: context.themed(
                     AppTextStyles.h1.copyWith(fontSize: 26),
                   ),
@@ -60,7 +60,11 @@ class HomeHeaderWidget extends StatelessWidget {
             ),
             child: Row(
               children: [
-                const Text('🔥', style: TextStyle(fontSize: 14)),
+                const Icon(
+                  Icons.local_fire_department_rounded,
+                  size: 14,
+                  color: AppColors.primary,
+                ),
                 AppGap.w4,
                 Text(
                   'home.streak_badge'.tr(namedArgs: {'n': '$streak'}),

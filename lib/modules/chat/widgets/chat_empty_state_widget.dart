@@ -31,7 +31,11 @@ class ChatEmptyStateWidget extends StatelessWidget {
               shape: BoxShape.circle,
             ),
             child: const Center(
-              child: Text('🍳', style: TextStyle(fontSize: 30)),
+              child: Icon(
+                Icons.restaurant_menu_rounded,
+                color: AppColors.primary,
+                size: 30,
+              ),
             ),
           ),
           AppGap.h16,
@@ -54,7 +58,7 @@ class ChatEmptyStateWidget extends StatelessWidget {
             children: _suggestionKeys.map((key) {
               final label = key.tr();
               return ActionChip(
-                label: Text(label, style: AppTextStyles.s13),
+                label: Text(label, style: context.themed(AppTextStyles.s13)),
                 backgroundColor: colors.chipBg,
                 side: BorderSide(color: colors.chipBorder),
                 onPressed: () => onSuggestionTap(label),

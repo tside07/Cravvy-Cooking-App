@@ -42,7 +42,7 @@ class ShoppingRecipeCardWidget extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: allDone
                         ? AppColors.success.withValues(alpha: 0.15)
-                        : AppColors.primaryLight,
+                        : AppColors.primary.withValues(alpha: 0.15),
                     borderRadius: AppBorderRadius.a12,
                   ),
                   child: Icon(
