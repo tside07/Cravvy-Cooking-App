@@ -1,7 +1,8 @@
 import 'package:cravvy_cooking_app/init.dart';
 import 'package:cravvy_cooking_app/core/utils/meal_plan_streak.dart';
 import 'package:cravvy_cooking_app/core/widgets/template/custom_app_bar.dart';
-import 'package:cravvy_cooking_app/common/widgets/centered_loading.dart';
+import 'package:cravvy_cooking_app/core/widgets/skeleton.dart';
+import 'package:cravvy_cooking_app/core/widgets/skeleton_layouts.dart';
 import 'package:cravvy_cooking_app/data/models/meal.dart';
 import 'package:cravvy_cooking_app/modules/meal_plan/provider/meal_plan_provider.dart';
 import 'package:cravvy_cooking_app/modules/progress/widgets/stat_card_widget.dart';
@@ -120,33 +121,33 @@ class ProgressScreen extends StatelessWidget {
   }
 
   /// Achievement cards; titles use [easy_localization] `.tr()`.
-  static List<(String, String, String, bool)> _buildAchievements(
+  static List<(IconData, String, String, bool)> _buildAchievements(
     List<DayPlan> weekPlan,
     WeekProgressStats stats,
   ) {
     return [
       (
-        '🔥',
+        Icons.local_fire_department_rounded,
         'progress.achievement.streak7_title'.tr(),
         'progress.achievement.streak7_desc'.tr(),
         stats.streak >= 7,
       ),
       (
-        '🥗',
+        Icons.eco_rounded,
         'progress.achievement.salad_title'.tr(),
         'progress.achievement.salad_desc'.tr(),
         _hasSaladOrHealthyMeal(weekPlan),
       ),
       // TODO: app chưa track nước
       (
-        '💧',
+        Icons.water_drop_rounded,
         'progress.achievement.hydrated_title'.tr(),
         'progress.achievement.hydrated_desc'.tr(),
         false,
       ),
       // TODO: cần lịch sử nhiều tuần để chính xác
       (
-        '🏆',
+        Icons.emoji_events_rounded,
         'progress.achievement.goal_crusher_title'.tr(),
         'progress.achievement.goal_crusher_desc'.tr(),
         stats.mealsLogged >= 10,
@@ -184,9 +185,14 @@ class ProgressScreen extends StatelessWidget {
                 child: Consumer<MealPlanProvider>(
                   builder: (context, provider, _) {
                     if (provider.isLoading) {
-                      return const SizedBox(
-                        height: 88,
-                        child: CenteredLoading(),
+                      return Row(
+                        children: const [
+                          StatCardSkeleton(),
+                          AppGap.w10,
+                          StatCardSkeleton(),
+                          AppGap.w10,
+                          StatCardSkeleton(),
+                        ],
                       );
                     }
                     final stats = _buildWeekStats(
@@ -196,21 +202,21 @@ class ProgressScreen extends StatelessWidget {
                     return Row(
                       children: [
                         StatCardWidget(
-                          emoji: '🔥',
+                          icon: Icons.local_fire_department_rounded,
                           value: '${stats.streak}',
                           label: 'progress.stat_day_streak'.tr(),
                           color: AppColors.primaryLight,
                         ),
                         AppGap.w10,
                         StatCardWidget(
-                          emoji: '✅',
+                          icon: Icons.check_circle_rounded,
                           value: '${stats.mealsLogged}',
                           label: 'progress.stat_meals_logged'.tr(),
                           color: AppColors.successLight,
                         ),
                         AppGap.w10,
                         StatCardWidget(
-                          emoji: '🎯',
+                          icon: Icons.adjust_rounded,
                           value: '${stats.goalHitPercent}%',
                           label: 'progress.stat_goal_hit'.tr(),
                           color: AppColors.secondaryLight,
@@ -239,10 +245,7 @@ class ProgressScreen extends StatelessWidget {
                     Consumer<MealPlanProvider>(
                       builder: (context, provider, _) {
                         if (provider.isLoading) {
-                          return const SizedBox(
-                            height: 150,
-                            child: CenteredLoading(),
-                          );
+                          return const _WeeklyChartSkeleton();
                         }
                         return Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -289,10 +292,7 @@ class ProgressScreen extends StatelessWidget {
                     Consumer<MealPlanProvider>(
                       builder: (context, provider, _) {
                         if (provider.isLoading) {
-                          return const SizedBox(
-                            height: 120,
-                            child: CenteredLoading(),
-                          );
+                          return const _ConsistencySkeleton();
                         }
                         final macros = _buildNutritionConsistency(
                           provider.weekPlan,
@@ -350,11 +350,17 @@ class ProgressScreen extends StatelessWidget {
               sliver: Consumer<MealPlanProvider>(
                 builder: (context, provider, _) {
                   if (provider.isLoading) {
-                    return const SliverToBoxAdapter(
-                      child: SizedBox(
-                        height: 200,
-                        child: CenteredLoading(),
-                      ),
+                    return SliverGrid.count(
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 10,
+                      crossAxisSpacing: 10,
+                      childAspectRatio: 1.5,
+                      children: const [
+                        _AchievementCardSkeleton(),
+                        _AchievementCardSkeleton(),
+                        _AchievementCardSkeleton(),
+                        _AchievementCardSkeleton(),
+                      ],
                     );
                   }
                   final stats = _buildWeekStats(
@@ -373,7 +379,7 @@ class ProgressScreen extends StatelessWidget {
                     children: achievements
                         .map(
                           (a) => AchievementCardWidget(
-                            emoji: a.$1,
+                            icon: a.$1,
                             title: a.$2,
                             desc: a.$3,
                             unlocked: a.$4,
@@ -384,6 +390,116 @@ class ProgressScreen extends StatelessWidget {
                 },
               ),
             ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// ─── Skeleton loading sub-widgets ────────────────────────────────────────────
+
+/// Weekly calorie bar chart placeholder: seven varied-height bars with day
+/// labels under them.
+class _WeeklyChartSkeleton extends StatelessWidget {
+  const _WeeklyChartSkeleton();
+
+  static const _heights = [60.0, 95.0, 50.0, 115.0, 78.0, 102.0, 68.0];
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 150,
+      child: Skeleton(
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            for (final h in _heights)
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 4),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      SkeletonBox(
+                        width: double.infinity,
+                        height: h,
+                        radius: 6,
+                      ),
+                      const SizedBox(height: 8),
+                      const SkeletonBox(width: 16, height: 8, radius: 4),
+                    ],
+                  ),
+                ),
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+/// Nutrition consistency placeholder: three label + progress-bar rows.
+class _ConsistencySkeleton extends StatelessWidget {
+  const _ConsistencySkeleton();
+
+  @override
+  Widget build(BuildContext context) {
+    return Skeleton(
+      child: Column(
+        children: const [
+          _ConsistencyRowSkeleton(),
+          AppGap.h10,
+          _ConsistencyRowSkeleton(),
+          AppGap.h10,
+          _ConsistencyRowSkeleton(),
+        ],
+      ),
+    );
+  }
+}
+
+class _ConsistencyRowSkeleton extends StatelessWidget {
+  const _ConsistencyRowSkeleton();
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: const [
+            SkeletonBox(width: 80, height: 10, radius: 4),
+            SkeletonBox(width: 32, height: 10, radius: 4),
+          ],
+        ),
+        AppGap.h8,
+        const SkeletonBox(height: 8, radius: 4),
+      ],
+    );
+  }
+}
+
+/// Achievement card placeholder: icon badge + two text lines.
+class _AchievementCardSkeleton extends StatelessWidget {
+  const _AchievementCardSkeleton();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: AppPad.a12,
+      decoration: context.cardBox(radius: 16),
+      child: Skeleton(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const SkeletonCircle(size: 32),
+            AppGap.h10,
+            const SkeletonLine(widthFactor: 0.7, height: 10),
+            AppGap.h6,
+            const SkeletonLine(widthFactor: 0.95, height: 8),
           ],
         ),
       ),

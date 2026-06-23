@@ -3,8 +3,8 @@ import 'package:cravvy_cooking_app/core/routes/all_recipes_args.dart';
 import 'package:cravvy_cooking_app/core/utils/featured_recipes_utils.dart';
 import 'package:cravvy_cooking_app/data/providers/recipe_provider.dart';
 import 'package:cravvy_cooking_app/modules/home/widgets/recipe_card_widget.dart';
+import 'package:cravvy_cooking_app/core/widgets/skeleton_layouts.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:shimmer/shimmer.dart';
 
 class FeaturedRecipesWidget extends StatefulWidget {
   const FeaturedRecipesWidget({super.key});
@@ -16,12 +16,12 @@ class FeaturedRecipesWidget extends StatefulWidget {
 class _FeaturedRecipesWidgetState extends State<FeaturedRecipesWidget> {
   String _selectedType = 'all';
 
-  static const _typeTabs = [
-    ('all', 'home.tab_all', '🍽️'),
-    ('breakfast', 'home.tab_breakfast', '🌅'),
-    ('lunch', 'home.tab_lunch', '☀️'),
-    ('dinner', 'home.tab_dinner', '🌙'),
-    ('snack', 'home.tab_snack', '🍎'),
+  static const _typeTabs = <(String, String, IconData)>[
+    ('all', 'home.tab_all', Icons.restaurant_rounded),
+    ('breakfast', 'home.tab_breakfast', Icons.wb_twilight_rounded),
+    ('lunch', 'home.tab_lunch', Icons.wb_sunny_rounded),
+    ('dinner', 'home.tab_dinner', Icons.nightlight_round),
+    ('snack', 'home.tab_snack', Icons.cookie_rounded),
   ];
 
   @override
@@ -98,8 +98,11 @@ class _FeaturedRecipesWidgetState extends State<FeaturedRecipesWidget> {
                     itemCount: _typeTabs.length,
                     separatorBuilder: (_, __) => const SizedBox(width: 8),
                     itemBuilder: (_, i) {
-                      final (type, labelKey, emoji) = _typeTabs[i];
+                      final (type, labelKey, icon) = _typeTabs[i];
                       final isSelected = _selectedType == type;
+                      final tabColor = isSelected
+                          ? Colors.white
+                          : colors.textSecondary;
                       return GestureDetector(
                         onTap: () => setState(() => _selectedType = type),
                         child: AnimatedContainer(
@@ -119,14 +122,19 @@ class _FeaturedRecipesWidgetState extends State<FeaturedRecipesWidget> {
                                   : colors.borderDivider,
                             ),
                           ),
-                          child: Text(
-                            '$emoji ${labelKey.tr()}',
-                            style: AppTextStyles.s12.copyWith(
-                              fontWeight: FontWeight.w700,
-                              color: isSelected
-                                  ? Colors.white
-                                  : colors.textSecondary,
-                            ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Icon(icon, size: 14, color: tabColor),
+                              const SizedBox(width: 5),
+                              Text(
+                                labelKey.tr(),
+                                style: AppTextStyles.s12.copyWith(
+                                  fontWeight: FontWeight.w700,
+                                  color: tabColor,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       );
@@ -158,10 +166,7 @@ class _FeaturedRecipesWidgetState extends State<FeaturedRecipesWidget> {
     final colors = context.appColors;
 
     if (provider.isLoading || provider.status == RecipeStatus.initial) {
-      return _buildShimmer(
-        colors,
-        horizontalPadding: horizontalPadding,
-      );
+      return _buildShimmer(horizontalPadding: horizontalPadding);
     }
 
     if (provider.status == RecipeStatus.error) {
@@ -169,7 +174,11 @@ class _FeaturedRecipesWidgetState extends State<FeaturedRecipesWidget> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text('😕', style: TextStyle(fontSize: 32)),
+            Icon(
+              Icons.sentiment_dissatisfied_rounded,
+              size: 32,
+              color: colors.textSecondary,
+            ),
             AppGap.h8,
             Text(
               'home.load_error'.tr(),
@@ -202,7 +211,11 @@ class _FeaturedRecipesWidgetState extends State<FeaturedRecipesWidget> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text('🔍', style: TextStyle(fontSize: 28)),
+            Icon(
+              Icons.search_off_rounded,
+              size: 28,
+              color: colors.textSecondary,
+            ),
             AppGap.h8,
             Text(
               'home.no_recipes'.tr(),
@@ -227,27 +240,12 @@ class _FeaturedRecipesWidgetState extends State<FeaturedRecipesWidget> {
     );
   }
 
-  Widget _buildShimmer(
-    AppColorExtension colors, {
-    required double horizontalPadding,
-  }) {
+  Widget _buildShimmer({required double horizontalPadding}) {
     return ListView.builder(
       scrollDirection: Axis.horizontal,
       padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
       itemCount: 4,
-      itemBuilder: (_, __) => Shimmer.fromColors(
-        baseColor: colors.shimmerBase,
-        highlightColor: colors.shimmerHighlight,
-        child: Container(
-          width: 180,
-          height: 240,
-          margin: const EdgeInsets.only(right: 12),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(20),
-          ),
-        ),
-      ),
+      itemBuilder: (_, _) => const RecipeCardSkeleton(),
     );
   }
 }

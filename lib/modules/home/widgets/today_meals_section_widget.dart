@@ -2,6 +2,7 @@ import 'package:cravvy_cooking_app/init.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:cravvy_cooking_app/modules/meal_plan/provider/meal_plan_provider.dart';
 import 'package:cravvy_cooking_app/modules/home/widgets/meal_scroll_card_widget.dart';
+import 'package:cravvy_cooking_app/core/widgets/skeleton_layouts.dart';
 import 'package:cravvy_cooking_app/modules/dashboard/provider/dashboard_tab_provider.dart';
 
 class TodayMealsSectionWidget extends StatelessWidget {
@@ -56,14 +57,17 @@ class TodayMealsSectionWidget extends StatelessWidget {
               ),
             ),
 
-            // Loading state
+            // Loading state — skeleton row matching the meal scroll cards.
             if (provider.isLoading)
-              const SizedBox(
-                height: 120,
-                child: Center(
-                  child: CircularProgressIndicator(
-                    color: AppColors.primary,
-                    strokeWidth: 2,
+              SizedBox(
+                height: 200,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  padding: AppPad.h16,
+                  itemCount: 4,
+                  itemBuilder: (_, _) => const RecipeCardSkeleton(
+                    width: 150,
+                    imageHeight: 110,
                   ),
                 ),
               )
@@ -79,7 +83,11 @@ class TodayMealsSectionWidget extends StatelessWidget {
                     decoration: context.cardBox(radius: 16),
                     child: Column(
                       children: [
-                        const Text('🍽️', style: TextStyle(fontSize: 32)),
+                        Icon(
+                          Icons.restaurant_rounded,
+                          size: 32,
+                          color: context.appColors.textSecondary,
+                        ),
                         AppGap.h8,
                         Text(
                           'home.no_meals_title'.tr(),

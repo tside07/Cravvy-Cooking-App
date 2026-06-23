@@ -14,6 +14,8 @@ import 'package:cravvy_cooking_app/modules/meal_plan/widgets/week_strip_widget.d
 import 'package:cravvy_cooking_app/modules/meal_plan/widgets/calorie_summary_widget.dart';
 import 'package:cravvy_cooking_app/modules/meal_plan/widgets/meal_card_widget.dart';
 import 'package:cravvy_cooking_app/modules/meal_plan/screens/add_meal_sheet.dart';
+import 'package:cravvy_cooking_app/core/widgets/skeleton.dart';
+import 'package:cravvy_cooking_app/core/widgets/skeleton_layouts.dart';
 import 'meal_swap_sheet.dart';
 
 class MealPlanScreen extends StatelessWidget {
@@ -30,13 +32,89 @@ class MealPlanScreen extends StatelessWidget {
               subtitle: 'meal_plan.subtitle'.tr(),
               trailing: const _StreakBadge(),
             ),
-            const WeekStripWidget(),
-            const FreeWeekUpsellBanner(),
-            const CalorieSummaryWidget(),
-            const Expanded(child: _MealList()),
+            Expanded(
+              child: Consumer<MealPlanProvider>(
+                builder: (context, provider, _) {
+                  if (provider.isLoading) {
+                    return const MealPlanSkeleton();
+                  }
+                  return Column(
+                    children: const [
+                      WeekStripWidget(),
+                      FreeWeekUpsellBanner(),
+                      CalorieSummaryWidget(),
+                      Expanded(child: _MealList()),
+                    ],
+                  );
+                },
+              ),
+            ),
           ],
         ),
       ),
+    );
+  }
+}
+
+/// Full-page loading state for the meal plan: a week strip, the calorie
+/// summary card, and a few meal rows — all shaped like the real content so
+/// there is no layout jump when the plan finishes loading.
+class MealPlanSkeleton extends StatelessWidget {
+  const MealPlanSkeleton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      padding: const EdgeInsets.only(bottom: 20),
+      children: [
+        const WeekStripSkeleton(),
+        // Calorie summary card (neutral surface while loading).
+        Container(
+          margin: const EdgeInsets.fromLTRB(16, 12, 16, 0),
+          padding: AppPad.a14,
+          decoration: context.cardBox(radius: 20),
+          child: Skeleton(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: const [
+                    SkeletonBox(width: 60, height: 34, radius: 8),
+                    SkeletonBox(width: 50, height: 40, radius: 8),
+                    SkeletonBox(width: 60, height: 34, radius: 8),
+                  ],
+                ),
+                AppGap.h12,
+                const SkeletonBox(height: 8, radius: 4),
+                AppGap.h14,
+                Row(
+                  children: const [
+                    Expanded(child: SkeletonBox(height: 52, radius: 12)),
+                    SizedBox(width: 8),
+                    Expanded(child: SkeletonBox(height: 52, radius: 12)),
+                    SizedBox(width: 8),
+                    Expanded(child: SkeletonBox(height: 52, radius: 12)),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+        const SizedBox(height: 16),
+        // Meal rows.
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          child: Column(
+            children: [
+              MealRowCardSkeleton(),
+              MealRowCardSkeleton(),
+              MealRowCardSkeleton(),
+              MealRowCardSkeleton(),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }
@@ -59,7 +137,11 @@ class _StreakBadge extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Text('🔥', style: AppTextStyles.s14),
+          const Icon(
+            Icons.local_fire_department_rounded,
+            size: 16,
+            color: AppColors.primary,
+          ),
           AppGap.w4,
           Text(
             'meal_plan.streak_days'.tr(namedArgs: {'n': '$streak'}),
@@ -90,31 +172,16 @@ class _MealList extends StatelessWidget {
       builder: (context, provider, _) {
         final colors = context.appColors;
 
-        if (provider.isLoading) {
-          return Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const CircularProgressIndicator(color: AppColors.primary),
-                const SizedBox(height: 16),
-                Text(
-                  'meal_plan.loading'.tr(),
-                  style: context.themed(
-                    AppTextStyles.s14,
-                    color: colors.textSecondary,
-                  ),
-                ),
-              ],
-            ),
-          );
-        }
-
         if (provider.status == MealPlanStatus.error) {
           return Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text('😕', style: TextStyle(fontSize: 36)),
+                Icon(
+                  Icons.sentiment_dissatisfied_rounded,
+                  size: 36,
+                  color: colors.textSecondary,
+                ),
                 AppGap.h12,
                 Text(
                   'meal_plan.load_error'.tr(),
@@ -385,7 +452,13 @@ class _RefreshSuggestionBanner extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Text(onCooldown ? '⏳' : '✨', style: const TextStyle(fontSize: 14)),
+          Icon(
+            onCooldown
+                ? Icons.hourglass_bottom_rounded
+                : Icons.auto_awesome_rounded,
+            size: 16,
+            color: onCooldown ? colors.textSecondary : AppColors.primaryDark,
+          ),
           AppGap.w8,
           Expanded(
             child: Text(
