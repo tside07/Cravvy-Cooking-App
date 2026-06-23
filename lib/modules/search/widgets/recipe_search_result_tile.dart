@@ -11,7 +11,8 @@ class RecipeSearchResultTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appColors = context.appColors;
-    final emoji = MealTypeHelper.emoji(recipe.mealType);
+    final mealIcon = MealTypeHelper.icon(recipe.mealType);
+    final mealColor = MealTypeHelper.color(recipe.mealType);
     final lightColor = MealTypeHelper.lightColor(recipe.mealType);
 
     return Padding(
@@ -32,16 +33,16 @@ class RecipeSearchResultTile extends StatelessWidget {
                       fit: BoxFit.cover,
                       placeholder: (_, __) => ColoredBox(
                         color: lightColor,
-                        child: Center(child: Text(emoji, style: const TextStyle(fontSize: 28))),
+                        child: Center(child: Icon(mealIcon, size: 28, color: mealColor)),
                       ),
                       errorWidget: (_, __, ___) => ColoredBox(
                         color: lightColor,
-                        child: Center(child: Text(emoji, style: const TextStyle(fontSize: 28))),
+                        child: Center(child: Icon(mealIcon, size: 28, color: mealColor)),
                       ),
                     )
                   : ColoredBox(
                       color: lightColor,
-                      child: Center(child: Text(emoji, style: const TextStyle(fontSize: 28))),
+                      child: Center(child: Icon(mealIcon, size: 28, color: mealColor)),
                     ),
             ),
             Expanded(
@@ -90,7 +91,7 @@ class RecipeSearchResultTile extends StatelessWidget {
                           return Container(
                             padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                             decoration: BoxDecoration(
-                              color: AppColors.primaryLight,
+                              color: AppColors.primary.withValues(alpha: 0.12),
                               borderRadius: BorderRadius.circular(6),
                             ),
                             child: Text(

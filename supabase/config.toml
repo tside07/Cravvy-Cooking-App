@@ -20,3 +20,6 @@ verify_jwt = true
 
 [functions.delete-account]
 verify_jwt = true
+
+[functions.suggest-from-ingredients]
+verify_jwt = true

@@ -1,19 +1,36 @@
 import 'package:cravvy_cooking_app/init.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:cravvy_cooking_app/core/utils/profile_recipe_filter.dart';
 import 'package:cravvy_cooking_app/core/widgets/template/custom_app_bar.dart';
+import 'package:cravvy_cooking_app/data/providers/auth_provider.dart';
 import 'package:cravvy_cooking_app/data/providers/recipe_provider.dart';
+import 'package:cravvy_cooking_app/modules/search/provider/ingredient_suggest_provider.dart';
 import 'package:cravvy_cooking_app/modules/search/widgets/filter_sheet_state_widget.dart';
 import 'package:cravvy_cooking_app/modules/search/widgets/coming_soon_tab_widget.dart';
 import 'package:cravvy_cooking_app/modules/search/widgets/type_tab.dart';
 
-class SearchScreen extends StatefulWidget {
+class SearchScreen extends StatelessWidget {
   const SearchScreen({super.key});
 
   @override
-  State<SearchScreen> createState() => _SearchScreenState();
+  Widget build(BuildContext context) {
+    // Provider must sit ABOVE the stateful view so context.read inside the
+    // State (e.g. _suggestAi) can find it.
+    return ChangeNotifierProvider(
+      create: (_) => IngredientSuggestProvider(),
+      child: const _SearchView(),
+    );
+  }
 }
 
-class _SearchScreenState extends State<SearchScreen>
+class _SearchView extends StatefulWidget {
+  const _SearchView();
+
+  @override
+  State<_SearchView> createState() => _SearchViewState();
+}
+
+class _SearchViewState extends State<_SearchView>
     with SingleTickerProviderStateMixin {
   late final TabController _tabController;
   final _searchCtrl = TextEditingController();
@@ -24,13 +41,26 @@ class _SearchScreenState extends State<SearchScreen>
   int? _filterMaxCalories;
   String? _filterDifficulty;
 
+  /// Set once the user accepts the risk of ingredients that clash with their
+  /// profile. Reset whenever the ingredient set changes.
+  bool _riskAcknowledged = false;
+
+  List<IngredientConflict> _conflicts() {
+    final user = context.read<AuthProvider>().user;
+    if (user == null || _addedIngredients.isEmpty) return const [];
+    return ProfileRecipeFilter.detectInputConflicts(
+      ingredients: _addedIngredients,
+      diets: user.diets,
+      avoidFoods: user.avoidFoods,
+    );
+  }
+
   bool get _hasActiveFilter =>
       _filterMealType != null ||
       _filterMaxCalories != null ||
       _filterDifficulty != null;
 
-  /// Keys khớp với JSON search.ingredient.*
-  /// Giá trị clean (không có emoji) dùng để match với _addedIngredients
+  /// Keys khớp với JSON search.ingredient.* — đã là text thuần (không emoji)
   List<String> get _commonIngredients => [
     'search.ingredient.eggs'.tr(),
     'search.ingredient.chicken'.tr(),
@@ -64,17 +94,21 @@ class _SearchScreenState extends State<SearchScreen>
   }
 
   void _addIngredient(String item) {
-    final clean = item.contains(' ')
-        ? item.substring(item.indexOf(' ') + 1)
-        : item;
+    final clean = item.trim();
     if (!_addedIngredients.contains(clean)) {
-      setState(() => _addedIngredients.add(clean));
+      setState(() {
+        _addedIngredients.add(clean);
+        _riskAcknowledged = false; // re-confirm after any change
+      });
       _doSearch(clean);
     }
   }
 
   void _removeIngredient(String item) {
-    setState(() => _addedIngredients.remove(item));
+    setState(() {
+      _addedIngredients.remove(item);
+      _riskAcknowledged = false;
+    });
     if (_addedIngredients.isEmpty) {
       context.read<RecipeProvider>().clearSearch();
     } else {
@@ -84,6 +118,16 @@ class _SearchScreenState extends State<SearchScreen>
 
   void _doSearch(String query) {
     context.read<RecipeProvider>().search(query);
+  }
+
+  void _suggestAi() {
+    if (_addedIngredients.isEmpty) return;
+    // Block until the user accepts the risk of profile-conflicting ingredients.
+    if (_conflicts().isNotEmpty && !_riskAcknowledged) return;
+    context.read<IngredientSuggestProvider>().suggest(
+          ingredients: _addedIngredients,
+          locale: context.locale.languageCode,
+        );
   }
 
   void _showFilterSheet() {
@@ -178,17 +222,22 @@ class _SearchScreenState extends State<SearchScreen>
                     onRemove: _removeIngredient,
                     onSearchChanged: _doSearch,
                     onFilterTap: _showFilterSheet,
+                    onSuggestAi: _suggestAi,
+                    conflicts: _conflicts(),
+                    riskAcknowledged: _riskAcknowledged,
+                    onAcknowledgeRisk: () =>
+                        setState(() => _riskAcknowledged = true),
                     hasActiveFilter: _hasActiveFilter,
                     filterMealType: _filterMealType,
                     filterMaxCalories: _filterMaxCalories,
                     filterDifficulty: _filterDifficulty,
                   ),
                   ComingSoonTabWidget(
-                    icon: '📷',
+                    icon: Icons.photo_camera_rounded,
                     label: 'search.tab_scan'.tr(),
                   ),
                   ComingSoonTabWidget(
-                    icon: '🎙️',
+                    icon: Icons.mic_rounded,
                     label: 'search.tab_voice'.tr(),
                   ),
                 ],

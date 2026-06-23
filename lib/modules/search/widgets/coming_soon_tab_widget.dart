@@ -8,16 +8,17 @@ class ComingSoonTabWidget extends StatelessWidget {
     required this.label,
   });
 
-  final String icon;
+  final IconData icon;
   final String label;
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
     return Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(icon, style: AppTextStyles.s20.copyWith(fontSize: 52)),
+          Icon(icon, size: 52, color: colors.textSecondary),
           AppGap.h16,
           Text(label, style: context.themed(AppTextStyles.h2)),
           AppGap.h8,

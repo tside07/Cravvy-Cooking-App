@@ -101,8 +101,99 @@ const _sugarTokens = [
   'ngọt',
 ];
 
+/// Allergy labels (vs. mere preferences) — conflicts with these are dangerous.
+const kAllergenLabels = {
+  'Peanuts',
+  'Shellfish',
+  'Dairy',
+  'Gluten',
+  'Eggs',
+  'Soy',
+  'Tree Nuts',
+  'Fish',
+};
+
+/// A clash between a user-entered ingredient and their saved profile.
+class IngredientConflict {
+  const IngredientConflict({
+    required this.ingredient,
+    required this.rule,
+    required this.isAllergen,
+  });
+
+  /// The ingredient the user typed/picked that triggered the conflict.
+  final String ingredient;
+
+  /// The profile rule it violates — a diet label ('Vegan') or an avoid label
+  /// ('Peanuts', 'No Pork', or a custom entry).
+  final String rule;
+
+  /// True when [rule] is a declared allergy (highest-risk).
+  final bool isAllergen;
+}
+
 class ProfileRecipeFilter {
   ProfileRecipeFilter._();
+
+  /// Detects ingredients the user just entered that clash with their profile
+  /// (hard diets + avoid foods/allergens). Pure — safe to unit test.
+  static List<IngredientConflict> detectInputConflicts({
+    required List<String> ingredients,
+    required List<String> diets,
+    required List<String> avoidFoods,
+  }) {
+    final conflicts = <IngredientConflict>[];
+    final seen = <String>{};
+
+    void add(String ingredient, String rule, bool isAllergen) {
+      if (seen.add('$ingredient|$rule')) {
+        conflicts.add(IngredientConflict(
+          ingredient: ingredient,
+          rule: rule,
+          isAllergen: isAllergen,
+        ));
+      }
+    }
+
+    bool matches(String ingLower, List<String> tokens) =>
+        tokens.any((t) => ingLower.contains(t) || t.contains(ingLower));
+
+    for (final raw in ingredients) {
+      final ing = raw.trim();
+      if (ing.isEmpty) continue;
+      final ingLower = ing.toLowerCase();
+
+      // Hard dietary rules.
+      for (final diet in diets) {
+        switch (diet) {
+          case 'Vegan':
+            if (matches(ingLower, _animalProductTokens)) {
+              add(ing, 'Vegan', false);
+            }
+            break;
+          case 'Vegetarian':
+            if (matches(ingLower, _meatFishTokens)) {
+              add(ing, 'Vegetarian', false);
+            }
+            break;
+          case 'Gluten-Free':
+            if (matches(ingLower, _glutenTokens)) {
+              add(ing, 'Gluten-Free', false);
+            }
+            break;
+        }
+      }
+
+      // Avoid foods / allergens.
+      for (final label in avoidFoods) {
+        final tokens = expandAvoidTokens(label);
+        if (matches(ingLower, tokens)) {
+          add(ing, label, kAllergenLabels.contains(label));
+        }
+      }
+    }
+    return conflicts;
+  }
 
   static String normalizeDietToken(String value) {
     return value.toLowerCase().replaceAll('-', ' ').trim();

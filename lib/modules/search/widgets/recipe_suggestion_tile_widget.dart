@@ -4,13 +4,13 @@ import 'package:easy_localization/easy_localization.dart';
 class RecipeSuggestionTileWidget extends StatelessWidget {
   const RecipeSuggestionTileWidget({super.key, required this.recipe});
 
-  /// (name, calories, time, emoji, matchPercent)
-  final (String, String, String, String, int) recipe;
+  /// (name, calories, time, icon, matchPercent)
+  final (String, String, String, IconData, int) recipe;
 
   @override
   Widget build(BuildContext context) {
     final colors = context.appColors;
-    final (name, cal, time, emoji, match) = recipe;
+    final (name, cal, time, icon, match) = recipe;
     return Container(
       margin: AppPad.b10,
       padding: AppPad.a14,
@@ -21,14 +21,11 @@ class RecipeSuggestionTileWidget extends StatelessWidget {
             width: 52,
             height: 52,
             decoration: BoxDecoration(
-              color: AppColors.primaryLight,
+              color: AppColors.primary.withValues(alpha: 0.12),
               borderRadius: AppBorderRadius.chip,
             ),
             child: Center(
-              child: Text(
-                emoji,
-                style: AppTextStyles.s20.copyWith(fontSize: 26),
-              ),
+              child: Icon(icon, size: 26, color: AppColors.primary),
             ),
           ),
           AppGap.w14,
@@ -52,7 +49,20 @@ class RecipeSuggestionTileWidget extends StatelessWidget {
                       color: AppColors.primary,
                     ),
                     Text(
-                      ' $cal · ⏱ $time',
+                      ' $cal',
+                      style: context.themed(
+                        AppTextStyles.s12,
+                        color: colors.textSecondary,
+                      ).copyWith(fontSize: 11),
+                    ),
+                    AppGap.w6,
+                    Icon(
+                      Icons.timer_outlined,
+                      size: 13,
+                      color: colors.textSecondary,
+                    ),
+                    Text(
+                      ' $time',
                       style: context.themed(
                         AppTextStyles.s12,
                         color: colors.textSecondary,
