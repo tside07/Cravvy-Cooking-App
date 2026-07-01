@@ -1,6 +1,8 @@
 // Profile-aware recipe filtering for meal plans.
 // Keep logic in sync with lib/core/utils/profile_recipe_filter.dart
 
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2.49.1";
+
 export const SOFT_DIETS = new Set([
   "No Specific Diet",
   "Eat Clean",
@@ -694,7 +696,10 @@ function buildWeekPrompt(
     }, avoid: ${JSON.stringify(profile.avoid_foods ?? [])}.\n` +
     refreshHint +
     avoidRepeat +
-    `Each day: breakfast, lunch, dinner, snack. Max 2 repeats per recipe_id in the week.\n` +
+    `Each day MUST have breakfast, lunch, dinner, snack.\n` +
+    `IMPORTANT — VARIETY: use a DIFFERENT recipe_id for every slot across the whole week. ` +
+    `Do NOT repeat any recipe_id within the week unless that meal_type has fewer than 7 catalog options. ` +
+    `Aim for 28 distinct dishes (7 days x 4 slots).\n` +
     `Catalog (id|meal_type|calories|protein):\n${catalog}\n` +
     `Return JSON: {"days":[{"date":"YYYY-MM-DD","meals":[{"meal_type":"breakfast","recipe_id":"uuid"},...]},...]}`
   );
@@ -874,6 +879,64 @@ function validateAndFillDays(
     result.push({ date, meals });
   }
   return result;
+}
+
+/**
+ * Đảm bảo ĐA DẠNG cấp tuần: với mỗi meal_type, 7 ngày dùng món KHÁC nhau.
+ * Chạy SAU mọi nguồn (Gemini/local) — giữ lựa chọn hợp lệ & không trùng; chỉ
+ * thay món trùng/không hợp lệ bằng món điểm-cao CHƯA dùng trong tuần. Khi pool
+ * < số ngày thì mới buộc lặp (xoay vòng). Path-agnostic nên fix mọi đường sinh.
+ */
+function diversifyWeek(
+  days: DayPlan[],
+  recipes: Record<string, unknown>[],
+  profile: Record<string, unknown>,
+  weekDates: string[],
+): DayPlan[] {
+  const cookingTime = String(profile.cooking_time ?? "any");
+  const byType = new Map<string, Record<string, unknown>[]>();
+  for (const r of recipes) {
+    const t = String(r.meal_type);
+    if (!byType.has(t)) byType.set(t, []);
+    byType.get(t)!.push(r);
+  }
+
+  // Pool id theo điểm giảm dần cho từng meal_type.
+  const pools = new Map<string, string[]>();
+  for (const mt of MEAL_TYPES) {
+    let pool = filterRecipesForProfile(byType.get(mt) ?? [], profile);
+    if (cookingTime === "quick" || cookingTime === "15") {
+      const quick = pool.filter((r) => Number(r.prep_time ?? 999) <= 20);
+      if (quick.length) pool = quick;
+    }
+    pool = [...pool].sort((a, b) => scoreRecipe(b, profile) - scoreRecipe(a, profile));
+    pools.set(mt, pool.map((r) => String(r.id)));
+  }
+
+  const dayByDate = new Map(days.map((d) => [d.date, d]));
+  for (const mt of MEAL_TYPES) {
+    const pool = pools.get(mt) ?? [];
+    if (!pool.length) continue;
+    const poolSet = new Set(pool);
+    const used = new Set<string>();
+    for (const date of weekDates) {
+      const day = dayByDate.get(date);
+      if (!day) continue;
+      const slot = day.meals.find((m) => m.meal_type === mt);
+      const cur = slot?.recipe_id;
+      if (cur && poolSet.has(cur) && !used.has(cur)) {
+        used.add(cur);
+        continue;
+      }
+      // cần thay: ưu tiên món điểm-cao chưa dùng; pool cạn -> xoay vòng.
+      let pick = pool.find((id) => !used.has(id));
+      if (!pick) pick = pool[used.size % pool.length];
+      used.add(pick);
+      if (slot) slot.recipe_id = pick;
+      else day.meals.push({ meal_type: mt, recipe_id: pick });
+    }
+  }
+  return days;
 }
 
 function isPremiumAccess(profile: Record<string, unknown>): boolean {
@@ -1093,8 +1156,8 @@ Deno.serve(async (req) => {
       days = geminiResult.days;
       aiDaysCount = geminiResult.aiDays;
       aiGenerated = aiDaysCount > 0;
+      // Không log user_id (PII) — chỉ giữ chỉ số vận hành để chẩn đoán.
       console.log("Gemini OK", {
-        user_id: user.id,
         force_refresh: forceRefresh,
         refresh_seed: refreshSeed,
         ai_days: aiDaysCount,
@@ -1112,6 +1175,8 @@ Deno.serve(async (req) => {
     }
 
     days = validateAndFillDays(days, weekDates, recipes, profile);
+    // Đa dạng hoá cấp tuần — fix trùng món giữa các ngày (mọi path).
+    days = diversifyWeek(days, recipes, profile, weekDates);
 
     const rows = days.flatMap((day) =>
       day.meals.map((m) => ({

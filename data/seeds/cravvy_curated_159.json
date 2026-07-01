@@ -1,0 +1,5985 @@
+{
+  "version": 3,
+  "project": "Cravvy Cooking App",
+  "catalog_note": "Converted from Cravvy_FoodDB_All.csv (159 APPROVED). is_active=false (staging).",
+  "count": 159,
+  "recipes": [
+    {
+      "name": "Cháo yến mạch sữa chuối mật ong",
+      "description": null,
+      "image_url": null,
+      "calories": 409,
+      "protein": 17,
+      "carbs": 68,
+      "fat": 8,
+      "prep_time": 7,
+      "difficulty": "easy",
+      "meal_type": "breakfast",
+      "tags": [
+        "eat-clean",
+        "chay-lacto",
+        "sua",
+        "it-duong",
+        "chat-xo-cao"
+      ],
+      "steps": [
+        "Cắt chuối thành lát mỏng và để riêng",
+        "Cho yến mạch và sữa tươi vào nồi, nấu lửa nhỏ khoảng 5-7 phút và khuấy đều cho sánh mịn",
+        "Tắt bếp, để cháo hơi nguội rồi rưới mật ong vào trộn đều",
+        "Múc cháo ra tô, xếp lát chuối lên trên và rắc hạt chia rồi dùng ngay"
+      ],
+      "ingredients": [
+        "40g yến mạch cán dẹt",
+        "250ml sữa tươi không đường",
+        "1 quả chuối (~100g)",
+        "5ml mật ong (cho sau khi nấu)",
+        "5g hạt chia (tùy chọn)"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "01_pool_bua_sang_01",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Overnight oats sữa chua trái cây",
+      "description": null,
+      "image_url": null,
+      "calories": 311,
+      "protein": 12,
+      "carbs": 51,
+      "fat": 8,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "breakfast",
+      "tags": [
+        "eat-clean",
+        "chay-lacto",
+        "sua",
+        "probiotic",
+        "chat-xo-cao"
+      ],
+      "steps": [
+        "Buổi tối cho yến mạch, sữa chua không đường và hạt chia vào hũ, trộn đều",
+        "Đậy kín và để ngăn mát tủ lạnh ít nhất 6 tiếng cho yến mạch nở mềm",
+        "Sáng hôm sau lấy ra, cắt nhỏ trái cây tươi (dâu/táo/chuối) xếp lên mặt",
+        "Rưới chút mật ong nếu thích rồi thưởng thức lạnh"
+      ],
+      "ingredients": [
+        "40g yến mạch cán dẹt",
+        "100g sữa chua không đường",
+        "100g trái cây tươi (dâu/táo/chuối)",
+        "5g hạt chia",
+        "5ml mật ong (tùy chọn)"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "01_pool_bua_sang_02",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Phở gà ức gà bỏ da",
+      "description": null,
+      "image_url": null,
+      "calories": 536,
+      "protein": 37,
+      "carbs": 82,
+      "fat": 4,
+      "prep_time": 20,
+      "difficulty": "easy",
+      "meal_type": "breakfast",
+      "tags": [
+        "eat-clean",
+        "giau-dam",
+        "khong-bo"
+      ],
+      "steps": [
+        "Nướng sơ gừng và hành tây cho thơm rồi đập dập",
+        "Hầm xương gà với gừng, hành tây, hoa hồi và quế trong 1-2 tiếng, hớt bọt cho nước dùng trong, nêm vừa miệng",
+        "Hấp ức gà 15-20 phút cho chín rồi xé sợi",
+        "Trụng bánh phở khô qua nước sôi cho mềm, xếp vào tô cùng gà xé",
+        "Chan nước dùng nóng ngập mặt, rắc húng quế, ngò gai và lá chanh thái sợi rồi dùng nóng"
+      ],
+      "ingredients": [
+        "100g ức gà (bỏ da)",
+        "100g bánh phở khô",
+        "300g xương gà (hầm nước dùng)",
+        "10g gừng",
+        "1/2 củ hành tây",
+        "1 hoa hồi, 1/2 thanh quế",
+        "Rau thơm: húng quế, ngò gai, lá chanh"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "01_pool_bua_sang_03",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Trứng ốp la bánh mì nguyên cám rau",
+      "description": null,
+      "image_url": null,
+      "calories": 448,
+      "protein": 22,
+      "carbs": 52,
+      "fat": 17,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "breakfast",
+      "tags": [
+        "eat-clean",
+        "chay-ovo",
+        "trung",
+        "gluten",
+        "chat-xo-cao"
+      ],
+      "steps": [
+        "Rửa sạch xà lách, cắt lát cà chua và dưa leo để ráo",
+        "Nướng hai lát bánh mì nguyên cám cho giòn",
+        "Làm nóng dầu olive, chiên trứng ốp la lửa nhỏ và nêm chút muối tiêu",
+        "Bày bánh mì, trứng ốp la cùng xà lách, cà chua và dưa leo ra đĩa rồi dùng nóng"
+      ],
+      "ingredients": [
+        "2 lát bánh mì nguyên cám (~60g)",
+        "2 quả trứng gà (~100g)",
+        "1 quả cà chua (~80g)",
+        "30g xà lách",
+        "50g dưa leo",
+        "5ml dầu olive",
+        "Muối, tiêu"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "01_pool_bua_sang_04",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Cháo gạo lứt ức gà đậu xanh",
+      "description": null,
+      "image_url": null,
+      "calories": 506,
+      "protein": 42,
+      "carbs": 59,
+      "fat": 10,
+      "prep_time": 30,
+      "difficulty": "medium",
+      "meal_type": "breakfast",
+      "tags": [
+        "eat-clean",
+        "giau-dam",
+        "khong-bo",
+        "gi-thap"
+      ],
+      "steps": [
+        "Ngâm gạo lứt và đậu xanh trước cho mềm rồi vo sạch",
+        "Luộc ức gà chín, vớt ra để nguội và xé sợi",
+        "Nấu gạo lứt và đậu xanh với nước trong 25-30 phút cho cháo nhừ sánh",
+        "Phi thơm hành tím cho vàng giòn",
+        "Cho gà xé vào cháo, nêm xì dầu nhạt, múc ra tô rồi rắc hành phi và hành lá"
+      ],
+      "ingredients": [
+        "50g gạo lứt (ngâm trước)",
+        "30g đậu xanh bóc vỏ",
+        "100g ức gà (luộc xé)",
+        "10g hành tím",
+        "Hành lá, xì dầu nhạt 5ml"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "01_pool_bua_sang_05",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Xôi xéo yến mạch gà xé",
+      "description": null,
+      "image_url": null,
+      "calories": 730,
+      "protein": 59,
+      "carbs": 84,
+      "fat": 16,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "breakfast",
+      "tags": [
+        "eat-clean",
+        "giau-dam",
+        "trung",
+        "khong-bo"
+      ],
+      "steps": [
+        "Hấp đậu xanh cho chín mềm rồi cán mịn, luộc trứng cút và bóc vỏ",
+        "Trộn yến mạch với bột nghệ và dầu olive cho đều màu, hấp khoảng 25 phút cho chín dẻo",
+        "Luộc ức gà rồi xé sợi nhỏ",
+        "Xới yến mạch ra đĩa, phủ lớp đậu xanh cán mịn lên trên",
+        "Xếp gà xé, trứng cút, rắc hành phi và rau thơm rồi dùng nóng"
+      ],
+      "ingredients": [
+        "80g yến mạch cán dẹt",
+        "1/2 mcf bột nghệ",
+        "50g đậu xanh bóc vỏ",
+        "100g ức gà xé",
+        "5ml dầu olive",
+        "Hành phi, trứng cút 2 quả (~30g)",
+        "Rau thơm"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "01_pool_bua_sang_06",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Sinh tố chuối xoài yến mạch sữa hạt",
+      "description": null,
+      "image_url": null,
+      "calories": 366,
+      "protein": 9,
+      "carbs": 71,
+      "fat": 5,
+      "prep_time": 10,
+      "difficulty": "easy",
+      "meal_type": "breakfast",
+      "tags": [
+        "eat-clean",
+        "thuan-chay",
+        "it-duong"
+      ],
+      "steps": [
+        "Ngâm yến mạch khoảng 10 phút cho mềm",
+        "Gọt xoài và chuối, cắt khúc nhỏ",
+        "Cho yến mạch, xoài, chuối và nước dừa (hoặc sữa hạt không đường) vào máy xay 1-2 phút đến khi mịn",
+        "Rót ra ly và uống ngay"
+      ],
+      "ingredients": [
+        "30g yến mạch cán dẹt (ngâm 10p)",
+        "200ml nước dừa hoặc sữa hạt không đường",
+        "1 quả xoài chín (~150g)",
+        "1 quả chuối (~100g)"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "01_pool_bua_sang_07",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Bún lứt thịt nạc rau sống",
+      "description": null,
+      "image_url": null,
+      "calories": 596,
+      "protein": 41,
+      "carbs": 78,
+      "fat": 13,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "breakfast",
+      "tags": [
+        "eat-clean",
+        "giau-dam"
+      ],
+      "steps": [
+        "Nướng hành khô cho thơm, thái mỏng thịt heo nạc",
+        "Phi thơm hành rồi xào thịt, nêm nhẹ cho săn",
+        "Nấu nước dùng với hành nướng, quế và hoa hồi, hớt bọt và nêm vừa miệng",
+        "Trụng bún gạo lứt cho mềm rồi xếp vào tô cùng thịt xào",
+        "Chan nước dùng nóng, ăn kèm xà lách, giá và húng"
+      ],
+      "ingredients": [
+        "100g bún gạo lứt (tươi) hoặc 60g bún khô",
+        "120g thịt heo nạc thái mỏng",
+        "1/2 củ hành khô nướng",
+        "1 mẩu quế, 1 hoa hồi",
+        "Rau sống: xà lách, giá, húng (~50g)"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "01_pool_bua_sang_08",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Cháo yến mạch thịt bằm đậu Hà Lan",
+      "description": null,
+      "image_url": null,
+      "calories": 386,
+      "protein": 36,
+      "carbs": 36,
+      "fat": 11,
+      "prep_time": 10,
+      "difficulty": "easy",
+      "meal_type": "breakfast",
+      "tags": [
+        "eat-clean",
+        "giau-dam"
+      ],
+      "steps": [
+        "Rim thịt heo bằm cùng đậu Hà Lan và ngô hạt cho săn thơm",
+        "Nấu yến mạch với nước trong 5-10 phút cho sánh mịn",
+        "Cho hỗn hợp thịt rim vào nồi yến mạch, nêm nước mắm và tiêu cho vừa miệng",
+        "Múc ra tô rồi rắc hành lá và ngò"
+      ],
+      "ingredients": [
+        "40g yến mạch",
+        "100g thịt heo nạc xay",
+        "30g đậu Hà Lan",
+        "30g ngô hạt",
+        "Hành lá, ngò",
+        "5ml nước mắm, tiêu"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "01_pool_bua_sang_09",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Bánh roti yến mạch cải bó xôi",
+      "description": null,
+      "image_url": null,
+      "calories": 433,
+      "protein": 18,
+      "carbs": 59,
+      "fat": 16,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "breakfast",
+      "tags": [
+        "eat-clean",
+        "thuan-chay",
+        "hat",
+        "chat-xo-cao",
+        "it-dau"
+      ],
+      "steps": [
+        "Xay nhuyễn cải bó xôi và băm nhỏ tỏi",
+        "Trộn bột yến mạch với cải bó xôi, tỏi, muối và từ từ thêm 80-100ml nước, nhào thành khối bột mịn dẻo",
+        "Chia bột thành phần nhỏ rồi cán mỏng",
+        "Nướng trên chảo không dầu lửa vừa, trở đều đến khi bánh phồng và chín vàng hai mặt",
+        "Rắc óc chó sấy lên trên rồi dùng nóng"
+      ],
+      "ingredients": [
+        "80g bột yến mạch",
+        "50g cải bó xôi (xay nhuyễn)",
+        "2 tép tỏi",
+        "80–100ml nước",
+        "1/4 mcf muối",
+        "Topping: 15g óc chó sấy (tùy chọn — gắn tag hat)"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "01_pool_bua_sang_10",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Bánh chuối yến mạch trứng nướng",
+      "description": null,
+      "image_url": null,
+      "calories": 438,
+      "protein": 23,
+      "carbs": 57,
+      "fat": 15,
+      "prep_time": 20,
+      "difficulty": "easy",
+      "meal_type": "breakfast",
+      "tags": [
+        "eat-clean",
+        "chay-ovo",
+        "trung",
+        "it-duong"
+      ],
+      "steps": [
+        "Bóc vỏ chuối chín rồi dùng nĩa nghiền nhuyễn trong tô lớn",
+        "Đập 2 quả trứng gà vào tô chuối, thêm bột quế rồi đánh đều cho hòa quyện",
+        "Cho yến mạch cán dẹt vào, trộn kỹ và để nghỉ 5 phút cho yến mạch ngấm mềm",
+        "Đổ hỗn hợp vào khuôn nướng đã lót giấy hoặc phết chút dầu",
+        "Nướng ở 180°C trong 20 phút đến khi mặt bánh vàng và se lại",
+        "Lấy ra để nguội bớt, cắt miếng vừa ăn và dùng nóng"
+      ],
+      "ingredients": [
+        "1 quả chuối chín (~100g)",
+        "50g yến mạch cán dẹt",
+        "2 quả trứng gà (~100g)",
+        "1/4 mcf bột quế (tùy chọn)"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "01_pool_bua_sang_11",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Trứng chiên rau củ (cà rốt, ớt chuông)",
+      "description": null,
+      "image_url": null,
+      "calories": 329,
+      "protein": 21,
+      "carbs": 13,
+      "fat": 22,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "breakfast",
+      "tags": [
+        "eat-clean",
+        "chay-ovo",
+        "low-carb",
+        "giau-dam",
+        "trung",
+        "it-duong"
+      ],
+      "steps": [
+        "Thái cà rốt và ớt chuông thành hạt lựu nhỏ, băm nhỏ hành tây",
+        "Đập 3 quả trứng ra tô, nêm chút muối tiêu rồi đánh tan đều",
+        "Làm nóng chảo với dầu olive, cho hành tây và cà rốt vào xào khoảng 2-3 phút cho mềm",
+        "Thêm ớt chuông vào xào nhanh 1 phút để giữ độ giòn",
+        "Đổ trứng đánh tan vào chảo, dàn đều phủ kín rau củ",
+        "Chiên lửa nhỏ đến khi mặt dưới se, lật hoặc gập đôi rồi chiên tiếp đến chín vàng",
+        "Trút ra đĩa, rắc thêm chút tiêu và dùng nóng"
+      ],
+      "ingredients": [
+        "3 quả trứng gà (~150g)",
+        "50g cà rốt thái hạt lựu",
+        "50g ớt chuông thái nhỏ",
+        "40g hành tây thái nhỏ",
+        "5ml dầu olive",
+        "Muối, tiêu"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "01_pool_bua_sang_12",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Smoothie cải bó xôi việt quất chuối",
+      "description": null,
+      "image_url": null,
+      "calories": 258,
+      "protein": 5,
+      "carbs": 41,
+      "fat": 9,
+      "prep_time": 5,
+      "difficulty": "easy",
+      "meal_type": "breakfast",
+      "tags": [
+        "eat-clean",
+        "thuan-chay",
+        "it-duong",
+        "chat-xo-cao"
+      ],
+      "steps": [
+        "Rửa sạch cải bó xôi và việt quất, bóc vỏ chuối cắt khúc, gọt lấy phần thịt bơ",
+        "Cho cải bó xôi, việt quất, chuối và bơ vào cối máy xay sinh tố",
+        "Rót sữa hạt không đường vào cùng (thêm vài viên đá nếu thích uống lạnh)",
+        "Xay ở tốc độ cao 1-2 phút đến khi hỗn hợp thật mịn",
+        "Rót ra ly và uống ngay để giữ trọn dưỡng chất"
+      ],
+      "ingredients": [
+        "30g cải bó xôi tươi",
+        "50g việt quất",
+        "1 quả chuối (~100g)",
+        "1/4 quả bơ (~40g)",
+        "200ml sữa hạt không đường"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "01_pool_bua_sang_13",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Bánh mì đen bơ chuối trứng cà chua",
+      "description": null,
+      "image_url": null,
+      "calories": 495,
+      "protein": 22,
+      "carbs": 52,
+      "fat": 23,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "breakfast",
+      "tags": [
+        "eat-clean",
+        "chay-ovo",
+        "trung",
+        "gluten",
+        "chat-xo-cao"
+      ],
+      "steps": [
+        "Bổ đôi cà chua bi; nạo lấy phần thịt bơ rồi dằm nhuyễn với chút muối biển và tiêu",
+        "Nướng hoặc áp chảo 2 lát bánh mì đen đến khi giòn vàng hai mặt",
+        "Phết đều hỗn hợp bơ dằm lên bề mặt bánh mì",
+        "Làm nóng chảo với dầu olive, đập trứng vào chiên ốp la đến khi lòng trắng se, lòng đỏ còn lòng đào",
+        "Xếp trứng ốp la lên bánh, bày cà chua bi quanh bên",
+        "Rắc thêm chút muối biển và tiêu rồi dùng nóng"
+      ],
+      "ingredients": [
+        "2 lát bánh mì đen (~60g)",
+        "1/4 quả bơ (~40g)",
+        "1–2 quả trứng (~50–100g)",
+        "50g cà chua bi",
+        "5ml dầu olive",
+        "Muối biển, tiêu"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "01_pool_bua_sang_14",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Granola sữa chua hạt chia trái cây",
+      "description": null,
+      "image_url": null,
+      "calories": 318,
+      "protein": 9,
+      "carbs": 43,
+      "fat": 11,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "breakfast",
+      "tags": [
+        "eat-clean",
+        "chay-lacto",
+        "sua",
+        "hat",
+        "probiotic",
+        "chat-xo-cao"
+      ],
+      "steps": [
+        "Rửa sạch trái cây tươi, cắt miếng vừa ăn",
+        "Cho sữa chua không đường ra bát",
+        "Rắc đều granola ít đường lên trên",
+        "Thêm hạt chia và trái cây cắt sẵn lên mặt",
+        "Trộn nhẹ và dùng ngay khi granola còn giòn"
+      ],
+      "ingredients": [
+        "40g granola ít đường (<5g đường/100g)",
+        "100g sữa chua không đường",
+        "5g hạt chia",
+        "80g trái cây tươi tùy thích"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "01_pool_bua_sang_15",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Salad ức gà áp chảo sốt chanh dây",
+      "description": null,
+      "image_url": null,
+      "calories": 372,
+      "protein": 35,
+      "carbs": 18,
+      "fat": 19,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "lunch",
+      "tags": [
+        "eat-clean",
+        "giau-dam",
+        "hat",
+        "khong-bo",
+        "khong-heo",
+        "it-dau"
+      ],
+      "steps": [
+        "Rửa sạch xà lách, cà chua bi và dưa leo; xà lách xé miếng, cà chua bổ đôi, dưa leo thái lát",
+        "Ướp ức gà với chút muối tiêu rồi áp chảo (hoặc nướng) mỗi mặt 4-5 phút đến chín vàng, để nguội bớt và thái lát",
+        "Pha sốt bằng cách trộn đều nước chanh leo, mật ong và dầu olive",
+        "Xếp rau, dưa leo, cà chua ra đĩa, đặt ức gà thái lát lên trên",
+        "Rưới sốt chanh leo đều khắp, rắc hạt óc chó và trộn nhẹ trước khi dùng"
+      ],
+      "ingredients": [
+        "100g ức gà (bỏ da, nướng/áp chảo)",
+        "50g xà lách",
+        "80g cà chua bi",
+        "50g dưa leo",
+        "Sốt: 30ml nước chanh leo + 5ml mật ong + 5ml dầu olive",
+        "15g hạt óc chó (tùy chọn — tag hat)"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "02_trua_eat_clean_01",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Cơm gạo lứt tôm luộc rau củ luộc",
+      "description": null,
+      "image_url": null,
+      "calories": 345,
+      "protein": 42,
+      "carbs": 43,
+      "fat": 3,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "lunch",
+      "tags": [
+        "eat-clean",
+        "hai-san",
+        "khong-heo",
+        "khong-bo",
+        "gi-thap",
+        "it-dau"
+      ],
+      "steps": [
+        "Vo sạch gạo lứt rồi nấu với lượng nước phù hợp đến khi cơm chín mềm dẻo",
+        "Bóc vỏ tôm, rút chỉ đen và rửa sạch",
+        "Luộc tôm trong nước sôi có chút muối khoảng 3-4 phút đến khi tôm chuyển màu hồng cam thì vớt ra",
+        "Cắt bông cải xanh thành miếng nhỏ, thái cà rốt khúc vừa ăn rồi hấp hoặc luộc đến khi chín tới mà vẫn giữ độ giòn",
+        "Bày cơm gạo lứt, tôm luộc và rau củ ra đĩa, rắc chút muối tiêu và dùng nóng"
+      ],
+      "ingredients": [
+        "100g gạo lứt (sống) → ~250g cơm chín",
+        "150g tôm tươi (bỏ vỏ)",
+        "100g bông cải xanh",
+        "80g cà rốt",
+        "Muối, tiêu"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "02_trua_eat_clean_02",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Salad rau củ cá ngừ",
+      "description": null,
+      "image_url": null,
+      "calories": 303,
+      "protein": 43,
+      "carbs": 6,
+      "fat": 12,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "lunch",
+      "tags": [
+        "eat-clean",
+        "giau-dam",
+        "ca",
+        "khong-heo",
+        "khong-bo",
+        "omega3",
+        "it-dau"
+      ],
+      "steps": [
+        "Mở hộp cá ngừ, chắt bỏ nước muối và để cá thật ráo",
+        "Rửa sạch xà lách, cà chua và dưa leo; xà lách xé miếng, cà chua bổ múi cau, dưa leo thái lát",
+        "Pha sốt bằng cách trộn đều dầu olive, nước cốt chanh, muối và tiêu",
+        "Cho rau, cà chua, dưa leo và cá ngừ vào tô lớn",
+        "Rưới sốt lên, trộn đều nhẹ tay và dùng ngay"
+      ],
+      "ingredients": [
+        "1 hộp cá ngừ (~160g, ngâm nước muối)",
+        "50g xà lách",
+        "80g cà chua",
+        "50g dưa leo",
+        "10ml dầu olive",
+        "15ml nước cốt chanh",
+        "Muối, tiêu"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "02_trua_eat_clean_03",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Ức gà nướng mật ong cơm gạo lứt rau",
+      "description": null,
+      "image_url": null,
+      "calories": 384,
+      "protein": 41,
+      "carbs": 42,
+      "fat": 5,
+      "prep_time": 30,
+      "difficulty": "medium",
+      "meal_type": "lunch",
+      "tags": [
+        "eat-clean",
+        "giau-dam",
+        "khong-heo",
+        "khong-bo"
+      ],
+      "steps": [
+        "Băm nhỏ tỏi, trộn với mật ong, nước tương và tiêu rồi ướp ức gà trong 30 phút cho thấm",
+        "Vo gạo lứt và nấu thành cơm chín mềm",
+        "Nướng ức gà ở 180°C trong 20-25 phút, lật giữa chừng đến khi chín vàng và thơm",
+        "Cắt bông cải xanh và cà rốt thành miếng vừa ăn rồi luộc chín tới",
+        "Thái ức gà thành lát, bày cùng cơm gạo lứt và rau luộc ra đĩa rồi dùng nóng"
+      ],
+      "ingredients": [
+        "120g ức gà (bỏ da)",
+        "100g gạo lứt (sống) → ~250g cơm chín",
+        "Rau luộc: 100g bông cải + 80g cà rốt",
+        "Ướp: 5ml mật ong + 5ml nước tương + tỏi + tiêu"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "02_trua_eat_clean_04",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Bún gạo lứt ức gà rau củ",
+      "description": null,
+      "image_url": null,
+      "calories": 645,
+      "protein": 57,
+      "carbs": 80,
+      "fat": 9,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "lunch",
+      "tags": [
+        "eat-clean",
+        "giau-dam",
+        "khong-heo",
+        "khong-bo",
+        "chat-xo-cao"
+      ],
+      "steps": [
+        "Luộc ức gà trong nước sôi khoảng 12-15 phút đến chín, vớt ra để nguội rồi xé sợi (giữ lại nước luộc)",
+        "Trụng bún gạo lứt khô trong nước sôi đến khi mềm rồi xả qua nước, để ráo",
+        "Cắt măng tây thành khúc và thái nấm đùi gà thành lát",
+        "Đun nóng nước hầm xương gà, nêm nhạt vừa miệng rồi cho măng tây và nấm vào nấu chín tới",
+        "Xếp bún vào tô, đặt ức gà xé sợi lên trên",
+        "Chan nước dùng nóng cùng măng tây, nấm vào tô, thêm rau thơm và dùng ngay"
+      ],
+      "ingredients": [
+        "150g ức gà (luộc xé)",
+        "100g bún gạo lứt khô → ~200g bún chín",
+        "50g măng tây",
+        "50g nấm đùi gà",
+        "300ml nước hầm xương gà",
+        "Rau thơm"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "02_trua_eat_clean_05",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Thịt bò xào ớt chuông cơm gạo lứt",
+      "description": null,
+      "image_url": null,
+      "calories": 466,
+      "protein": 30,
+      "carbs": 36,
+      "fat": 21,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "lunch",
+      "tags": [
+        "eat-clean",
+        "giau-dam",
+        "khong-heo"
+      ],
+      "steps": [
+        "Vo gạo lứt rồi nấu chín thành khoảng 250g cơm",
+        "Ướp thịt bò thái lát với chút tiêu và tỏi băm trong 5-10 phút",
+        "Rửa sạch ớt chuông đỏ vàng và hành tây rồi thái miếng vừa ăn",
+        "Làm nóng chảo với dầu olive rồi xào thịt bò lửa lớn thật nhanh cho vừa chín tới, trút ra đĩa",
+        "Cho hành tây và ớt chuông vào xào lửa lớn cho hơi giòn",
+        "Trả thịt bò vào đảo chung, nêm nước tương ít muối rồi tắt bếp",
+        "Bày thịt bò xào ra đĩa ăn kèm cơm gạo lứt"
+      ],
+      "ingredients": [
+        "100g thịt bò thăn thái lát",
+        "50g ớt chuông đỏ + 50g ớt chuông vàng",
+        "50g hành tây",
+        "5ml dầu olive",
+        "100g gạo lứt (sống) → ~250g cơm chín",
+        "5ml nước tương ít muối"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "02_trua_eat_clean_06",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Cá basa phi lê áp chảo cơm gạo lứt rau",
+      "description": null,
+      "image_url": null,
+      "calories": 332,
+      "protein": 29,
+      "carbs": 43,
+      "fat": 5,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "lunch",
+      "tags": [
+        "eat-clean",
+        "giau-dam",
+        "ca",
+        "khong-heo",
+        "khong-bo",
+        "it-dau"
+      ],
+      "steps": [
+        "Vo gạo lứt rồi nấu chín thành khoảng 250g cơm",
+        "Rửa sạch cá basa phi lê, thấm khô rồi ướp với bột ớt, muối và tiêu trong 10 phút",
+        "Cắt bông cải xanh thành miếng nhỏ và thái cà rốt rồi hấp chín tới giữ độ giòn",
+        "Áp chảo cá basa mỗi mặt 3-4 phút cho vàng đều và chín (hoặc nướng nồi chiên không dầu)",
+        "Bày cá ra đĩa ăn kèm cơm gạo lứt và rau củ hấp"
+      ],
+      "ingredients": [
+        "150g cá basa phi lê",
+        "100g gạo lứt (sống) → ~250g cơm chín",
+        "100g bông cải xanh",
+        "80g cà rốt",
+        "Ướp: bột ớt + muối + tiêu"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "02_trua_eat_clean_07",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Thịt heo nạc rim nhạt cơm gạo lứt rau xào",
+      "description": null,
+      "image_url": null,
+      "calories": 424,
+      "protein": 38,
+      "carbs": 35,
+      "fat": 15,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "lunch",
+      "tags": [
+        "eat-clean",
+        "giau-dam",
+        "khong-bo"
+      ],
+      "steps": [
+        "Vo gạo lứt rồi nấu chín thành khoảng 250g cơm",
+        "Rửa sạch thịt heo nạc, thái miếng vừa ăn rồi ướp với tỏi băm, chút nước mắm và tiêu trong 10 phút",
+        "Rim thịt heo trên lửa vừa với nước mắm ít cho thấm gia vị và săn lại",
+        "Nhặt rửa rau muống hoặc bông cải rồi xào nhanh với dầu olive cho vừa chín",
+        "Bày thịt rim và rau xào ra đĩa ăn kèm cơm gạo lứt"
+      ],
+      "ingredients": [
+        "120g thịt heo nạc vai/thăn",
+        "100g gạo lứt (sống) → ~250g cơm chín",
+        "Rau xào: 100g rau muống hoặc bông cải",
+        "5ml dầu olive",
+        "5ml nước mắm ít"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "02_trua_eat_clean_08",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Salad diêm mạch rau củ bông cải",
+      "description": null,
+      "image_url": null,
+      "calories": 365,
+      "protein": 12,
+      "carbs": 50,
+      "fat": 14,
+      "prep_time": 20,
+      "difficulty": "easy",
+      "meal_type": "lunch",
+      "tags": [
+        "eat-clean",
+        "thuan-chay",
+        "khong-heo",
+        "khong-bo",
+        "chat-xo-cao",
+        "it-dau"
+      ],
+      "steps": [
+        "Vo diêm mạch rồi nấu với nước trong 15-20 phút cho chín bung, để nguội",
+        "Luộc hoặc hấp bông cải xanh cho vừa chín tới rồi để ráo",
+        "Rửa sạch và bổ đôi cà chua bi, thái dưa leo hạt lựu",
+        "Pha sốt trộn từ dầu olive, giấm táo cùng chút muối tiêu cho đều",
+        "Cho diêm mạch, bông cải, cà chua bi và dưa leo vào tô lớn",
+        "Rưới sốt giấm táo olive lên rồi trộn đều và bày ra đĩa"
+      ],
+      "ingredients": [
+        "60g diêm mạch (quinoa) sống → ~150g chín",
+        "100g bông cải xanh",
+        "80g cà chua bi",
+        "50g dưa leo hạt lựu",
+        "10ml dầu olive + 10ml giấm táo",
+        "Muối, tiêu"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "02_trua_eat_clean_09",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Đậu hũ non sốt cà chua thịt băm cơm",
+      "description": null,
+      "image_url": null,
+      "calories": 578,
+      "protein": 55,
+      "carbs": 43,
+      "fat": 23,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "lunch",
+      "tags": [
+        "eat-clean",
+        "giau-dam",
+        "dau-nanh",
+        "khong-bo"
+      ],
+      "steps": [
+        "Vo gạo lứt rồi nấu chín thành khoảng 250g cơm",
+        "Băm hành tím, cắt cà chua thành múi cau và cắt đậu hũ non thành miếng vuông vừa ăn",
+        "Phi thơm hành tím rồi cho cà chua vào xào mềm dằm nhuyễn lấy màu",
+        "Cho thịt heo xay vào xào tơi rồi nêm hạt nêm, muối và chút nước mắm",
+        "Thêm chút nước, nhẹ nhàng cho đậu hũ non vào nấu sôi liu riu vài phút cho thấm",
+        "Nêm lại vừa ăn rồi múc ra đĩa ăn kèm cơm gạo lứt"
+      ],
+      "ingredients": [
+        "1 hộp đậu hũ non (~300g)",
+        "100g thịt heo nạc xay",
+        "100g cà chua",
+        "30g hành tím",
+        "100g gạo lứt (sống) → ~250g cơm chín",
+        "Gia vị: hạt nêm + muối + nước mắm ít"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "02_trua_eat_clean_10",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Ức gà sốt cam tỏi cơm gạo lứt",
+      "description": null,
+      "image_url": null,
+      "calories": 462,
+      "protein": 50,
+      "carbs": 38,
+      "fat": 11,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "lunch",
+      "tags": [
+        "eat-clean",
+        "giau-dam",
+        "khong-heo",
+        "khong-bo"
+      ],
+      "steps": [
+        "Vo gạo lứt rồi nấu chín thành khoảng 250g cơm",
+        "Vắt cam lấy nước, băm tỏi và thái ức gà thành miếng vừa hoặc để nguyên phi lê",
+        "Áp chảo ức gà với chút dầu olive cho vàng và chín đều hai mặt, trút ra đĩa",
+        "Phi thơm tỏi rồi cho nước cam và mật ong vào đun nhỏ lửa cho sốt sệt lại",
+        "Trả gà vào đảo cho áo đều sốt cam tỏi",
+        "Bày gà ra đĩa, rưới phần sốt còn lại lên trên ăn kèm cơm gạo lứt"
+      ],
+      "ingredients": [
+        "150g ức gà (bỏ da)",
+        "60ml nước cam tươi (~1 quả cam lớn)",
+        "2 tép tỏi băm",
+        "5ml dầu olive + 5ml mật ong",
+        "100g gạo lứt → ~250g cơm chín"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "02_trua_eat_clean_11",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Ức gà áp chảo salad trứng luộc",
+      "description": null,
+      "image_url": null,
+      "calories": 496,
+      "protein": 54,
+      "carbs": 23,
+      "fat": 21,
+      "prep_time": 10,
+      "difficulty": "easy",
+      "meal_type": "lunch",
+      "tags": [
+        "eat-clean",
+        "giau-dam",
+        "trung",
+        "khong-heo",
+        "khong-bo",
+        "it-dau"
+      ],
+      "steps": [
+        "Luộc trứng trong khoảng 10 phút cho chín rồi ngâm nước lạnh, bóc vỏ và bổ đôi",
+        "Gọt vỏ khoai tây, luộc chín rồi cắt miếng vừa ăn",
+        "Áp chảo ức gà với chút dầu olive cho vàng và chín đều, để nguội rồi thái lát",
+        "Rửa sạch xà lách và cà chua rồi cắt miếng vừa ăn",
+        "Xếp xà lách, cà chua, khoai tây, trứng và gà ra đĩa",
+        "Rưới chút dầu olive làm sốt nhẹ lên salad rồi dùng ngay"
+      ],
+      "ingredients": [
+        "120g ức gà (bỏ da, áp chảo)",
+        "2 quả trứng (~100g)",
+        "50g xà lách",
+        "1 củ khoai tây nhỏ (~100g, luộc)",
+        "80g cà chua",
+        "5ml dầu olive"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "02_trua_eat_clean_12",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Cá hồi áp chảo salad súp lơ xanh gạo lứt",
+      "description": null,
+      "image_url": null,
+      "calories": 431,
+      "protein": 26,
+      "carbs": 38,
+      "fat": 19,
+      "prep_time": 5,
+      "difficulty": "easy",
+      "meal_type": "dinner",
+      "tags": [
+        "eat-clean",
+        "giau-dam",
+        "ca",
+        "khong-heo",
+        "khong-bo",
+        "omega3"
+      ],
+      "steps": [
+        "Vo gạo lứt rồi nấu chín thành khoảng 250g cơm nếu dùng kèm",
+        "Thấm khô cá hồi phi lê rồi rắc chút muối và tiêu hai mặt",
+        "Áp chảo cá hồi với chút dầu olive khoảng 2-3 phút mỗi mặt cho chín tới",
+        "Cắt bông cải xanh thành miếng nhỏ rồi hấp chín tới giữ độ giòn",
+        "Bổ đôi cà chua bi, trộn cùng bông cải với dầu olive, muối và tiêu thành salad",
+        "Bày cá hồi ra đĩa ăn kèm salad và cơm gạo lứt"
+      ],
+      "ingredients": [
+        "100g cá hồi phi lê (bỏ da)",
+        "100g bông cải xanh",
+        "80g cà chua bi",
+        "5ml dầu olive",
+        "100g gạo lứt (sống) → ~250g cơm chín (tùy chọn)",
+        "Muối, tiêu"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "03_toi_eat_clean_01",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Ức gà xào nấm rau củ (xào bằng nước)",
+      "description": null,
+      "image_url": null,
+      "calories": 422,
+      "protein": 68,
+      "carbs": 17,
+      "fat": 8,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "dinner",
+      "tags": [
+        "eat-clean",
+        "giau-dam",
+        "khong-heo",
+        "khong-bo",
+        "it-dau"
+      ],
+      "steps": [
+        "Thái ức gà thành miếng vừa ăn, băm tỏi và thái nhỏ hành",
+        "Cắt bông cải thành miếng nhỏ, thái cà rốt và xé hoặc cắt nấm vừa ăn",
+        "Phi thơm tỏi và hành với chút nước, cho ức gà vào xào cho săn lại",
+        "Thêm khoảng 50ml nước thay dầu, cho cà rốt vào xào trước rồi đậy nắp lửa nhỏ cho mềm",
+        "Cho nấm và bông cải vào xào tiếp, đậy nắp cho chín đều",
+        "Nêm muối, tiêu và chút hạt nêm cho vừa ăn rồi tắt bếp và bày ra đĩa"
+      ],
+      "ingredients": [
+        "200g ức gà (bỏ da)",
+        "80g nấm đùi gà hoặc nấm kim châm",
+        "80g bông cải",
+        "60g cà rốt",
+        "2 tép tỏi, hành",
+        "Muối, tiêu, hạt nêm ít",
+        "(Xào bằng 50ml nước, không dầu)"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "03_toi_eat_clean_02",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Súp bí đỏ ức gà",
+      "description": null,
+      "image_url": null,
+      "calories": 249,
+      "protein": 35,
+      "carbs": 18,
+      "fat": 5,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "dinner",
+      "tags": [
+        "eat-clean",
+        "giau-dam",
+        "khong-heo",
+        "khong-bo",
+        "khong-cay"
+      ],
+      "steps": [
+        "Gọt vỏ bí đỏ và cắt miếng nhỏ, thái hành tây, cắt ức gà thành miếng vừa",
+        "Xào hành tây cho thơm rồi cho bí đỏ vào đảo sơ",
+        "Thêm nước ngập rồi cho ức gà vào nấu đến khi bí và gà chín mềm",
+        "Vớt gà ra xé nhỏ, xay nhuyễn phần bí đỏ và nước dùng cho mịn",
+        "Đổ lại nồi, thêm sữa tươi không đường rồi đun lại cho nóng",
+        "Nêm muối và tiêu vừa ăn, múc súp ra tô rồi cho gà xé lên trên"
+      ],
+      "ingredients": [
+        "150g bí đỏ",
+        "100g ức gà (bỏ da)",
+        "50g hành tây",
+        "50ml sữa tươi không đường",
+        "Muối, tiêu"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "03_toi_eat_clean_03",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Cá basa nướng cơm đậu gà bông cải",
+      "description": null,
+      "image_url": null,
+      "calories": 359,
+      "protein": 52,
+      "carbs": 7,
+      "fat": 13,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "dinner",
+      "tags": [
+        "eat-clean",
+        "giau-dam",
+        "ca",
+        "khong-heo",
+        "khong-bo"
+      ],
+      "steps": [
+        "Vo gạo rồi nấu chung với đậu gà thành cơm (hoặc nấu cơm gạo lứt) cho chín mềm.",
+        "Ướp cá basa phi lê với bột ớt, chút muối và tiêu, để thấm khoảng 10 phút.",
+        "Cho cá vào nồi chiên không dầu hoặc áp chảo nướng mỗi mặt 5-7 phút đến khi chín vàng.",
+        "Hấp bông cải xanh khoảng 4-5 phút cho vừa chín tới, còn xanh giòn.",
+        "Bày cá ra đĩa cùng cơm đậu gà và bông cải, dùng nóng."
+      ],
+      "ingredients": [
+        "150g cá basa phi lê",
+        "100g gạo nấu với 30g đậu gà (hoặc 100g gạo lứt)",
+        "100g bông cải xanh hấp",
+        "Ướp: bột ớt 1g + muối + tiêu"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "03_toi_eat_clean_04",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Ức gà cuộn nấm kim châm nướng giấy bạc",
+      "description": null,
+      "image_url": null,
+      "calories": 289,
+      "protein": 49,
+      "carbs": 7,
+      "fat": 6,
+      "prep_time": 20,
+      "difficulty": "easy",
+      "meal_type": "dinner",
+      "tags": [
+        "eat-clean",
+        "giau-dam",
+        "khong-heo",
+        "khong-bo",
+        "chat-xo-cao"
+      ],
+      "steps": [
+        "Thái mỏng ức gà đã bỏ da, băm nhỏ tỏi và hành tím.",
+        "Ướp ức gà với tỏi, hành tím băm, nước mắm, muối và tiêu khoảng 10 phút.",
+        "Đặt lát gà ra, cho nấm kim châm vào giữa rồi cuộn lại cho chắc.",
+        "Gói từng cuộn gà bằng giấy bạc kín lại.",
+        "Nướng trong nồi chiên không dầu ở 180°C trong 15-20 phút đến khi gà chín.",
+        "Mở giấy bạc, bày ra đĩa và dùng nóng."
+      ],
+      "ingredients": [
+        "150g ức gà thái mỏng (bỏ da)",
+        "80g nấm kim châm",
+        "Giấy bạc",
+        "2 tép tỏi, 1 củ hành tím",
+        "5ml nước mắm, muối, tiêu"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "03_toi_eat_clean_05",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Cá thu sốt cà chua cơm gạo lứt rau",
+      "description": null,
+      "image_url": null,
+      "calories": 514,
+      "protein": 35,
+      "carbs": 44,
+      "fat": 22,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "dinner",
+      "tags": [
+        "eat-clean",
+        "giau-dam",
+        "ca",
+        "khong-heo",
+        "khong-bo",
+        "omega3"
+      ],
+      "steps": [
+        "Vo gạo lứt và nấu thành cơm chín mềm.",
+        "Băm nhỏ hành tím và tỏi, cắt cà chua chín thành múi cau nhỏ.",
+        "Áp chảo sơ cá thu phi lê mỗi mặt 2-3 phút cho se mặt rồi gắp ra.",
+        "Phi thơm tỏi hành, cho cà chua vào xào nhuyễn thành sốt.",
+        "Cho cá vào nồi sốt, nêm chút muối, nước mắm và tiêu, đun nhỏ lửa 5-7 phút cho thấm.",
+        "Luộc rau vừa chín tới, bày cá sốt cà cùng cơm gạo lứt và rau luộc."
+      ],
+      "ingredients": [
+        "150g cá thu phi lê",
+        "100g cà chua chín",
+        "30g hành tím",
+        "2 tép tỏi",
+        "100g gạo lứt → ~250g cơm chín",
+        "100g rau luộc",
+        "Muối, nước mắm ít, tiêu"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "03_toi_eat_clean_06",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Thịt heo nạc salad rau củ xé sợi",
+      "description": null,
+      "image_url": null,
+      "calories": 382,
+      "protein": 43,
+      "carbs": 15,
+      "fat": 18,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "dinner",
+      "tags": [
+        "eat-clean",
+        "giau-dam",
+        "khong-bo",
+        "it-dau"
+      ],
+      "steps": [
+        "Luộc hoặc hấp thịt heo nạc thăn đến khi chín mềm, để nguội rồi xé sợi.",
+        "Thái sợi bắp cải tím, bào sợi cà rốt và rửa sạch xà lách.",
+        "Pha sốt trộn gồm dầu mè, giấm táo và chút muối, khuấy đều.",
+        "Cho thịt xé sợi và rau củ vào tô lớn.",
+        "Rưới sốt vào, trộn đều nhẹ tay rồi bày ra đĩa dùng ngay."
+      ],
+      "ingredients": [
+        "150g thịt heo nạc thăn (luộc/hấp xé sợi)",
+        "50g bắp cải tím thái sợi",
+        "50g cà rốt bào sợi",
+        "30g xà lách",
+        "Sốt: 5ml dầu mè + 10ml giấm táo + muối"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "03_toi_eat_clean_07",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Bò xào măng tây nấm cơm gạo lứt",
+      "description": null,
+      "image_url": null,
+      "calories": 478,
+      "protein": 34,
+      "carbs": 35,
+      "fat": 21,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "dinner",
+      "tags": [
+        "eat-clean",
+        "giau-dam",
+        "khong-heo"
+      ],
+      "steps": [
+        "Vo gạo lứt và nấu thành cơm chín.",
+        "Thái lát mỏng thịt bò, cắt khúc măng tây và xắt nấm đùi gà.",
+        "Phi nóng dầu olive, cho thịt bò vào xào nhanh trên lửa lớn đến khi vừa chín tái rồi gắp ra.",
+        "Cho măng tây và nấm vào chảo xào đến khi chín tới.",
+        "Cho thịt bò trở lại chảo, nêm nước tương ít muối, đảo nhanh rồi tắt bếp.",
+        "Bày bò xào cùng cơm gạo lứt, dùng nóng."
+      ],
+      "ingredients": [
+        "100g thịt bò thăn thái lát",
+        "100g măng tây",
+        "80g nấm đùi gà",
+        "5ml dầu olive",
+        "5ml nước tương ít muối",
+        "100g gạo lứt → ~250g cơm chín"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "03_toi_eat_clean_08",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Nui xào bò bắp cải xanh",
+      "description": null,
+      "image_url": null,
+      "calories": 701,
+      "protein": 41,
+      "carbs": 83,
+      "fat": 23,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "dinner",
+      "tags": [
+        "eat-clean",
+        "giau-dam",
+        "gluten",
+        "khong-heo"
+      ],
+      "steps": [
+        "Luộc nui nguyên cám trong nước sôi đến khi al dente rồi vớt ra để ráo.",
+        "Thái lát thịt bò và băm nhỏ tỏi, thái sợi bắp cải xanh.",
+        "Phi thơm tỏi với dầu olive, cho thịt bò vào xào nhanh lửa lớn cho vừa chín.",
+        "Cho bắp cải xanh vào xào đến khi mềm tới.",
+        "Cho nui vào, nêm nước tương ít muối, đảo đều cho thấm.",
+        "Bày ra đĩa và dùng nóng."
+      ],
+      "ingredients": [
+        "80g nui nguyên cám",
+        "100g thịt bò thái lát",
+        "100g bắp cải xanh",
+        "2 tép tỏi",
+        "5ml dầu olive",
+        "10ml nước tương ít muối"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "03_toi_eat_clean_09",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Ức gà áp chảo rau bina bơ trứng ốp la",
+      "description": null,
+      "image_url": null,
+      "calories": 473,
+      "protein": 52,
+      "carbs": 6,
+      "fat": 27,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "dinner",
+      "tags": [
+        "eat-clean",
+        "giau-dam",
+        "trung",
+        "khong-heo",
+        "khong-bo",
+        "it-dau"
+      ],
+      "steps": [
+        "Rửa sạch rau bina, thái lát quả bơ và đập trứng ra chén.",
+        "Phết chút dầu olive, áp chảo ức gà mỗi mặt 4-5 phút đến khi chín vàng rồi rắc tiêu đen.",
+        "Xào nhanh rau bina trong chảo nóng đến khi vừa héo.",
+        "Ốp la trứng đến độ chín mong muốn.",
+        "Bày gà áp chảo, rau bina, trứng ốp la và bơ thái lát ra đĩa, rắc thêm tiêu đen rồi dùng."
+      ],
+      "ingredients": [
+        "120g ức gà (bỏ da, áp chảo)",
+        "50g rau bina/cải bó xôi tươi",
+        "1/4 quả bơ (~40g)",
+        "2 quả trứng (~100g)",
+        "5ml dầu olive",
+        "Tiêu đen"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "03_toi_eat_clean_10",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Tôm hấp rau củ hấp bánh tráng lứt",
+      "description": null,
+      "image_url": null,
+      "calories": 269,
+      "protein": 40,
+      "carbs": 26,
+      "fat": 3,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "dinner",
+      "tags": [
+        "eat-clean",
+        "hai-san",
+        "khong-heo",
+        "khong-bo",
+        "it-dau",
+        "chat-xo-cao"
+      ],
+      "steps": [
+        "Bỏ đầu tôm sú và rửa sạch, cắt cà rốt, bông cải và đậu que thành miếng vừa ăn.",
+        "Hấp tôm khoảng 5-7 phút đến khi chuyển màu đỏ và chín.",
+        "Hấp cà rốt, bông cải và đậu que đến khi vừa chín tới.",
+        "Pha nước chấm muối chanh để chấm kèm.",
+        "Cuộn tôm và rau củ vào bánh tráng gạo lứt hoặc bày riêng ra đĩa, dùng với muối chanh."
+      ],
+      "ingredients": [
+        "150g tôm sú (bỏ đầu)",
+        "150g rau củ hấp: cà rốt + bông cải + đậu que",
+        "2 tấm bánh tráng gạo lứt (~20g)",
+        "Muối, chanh"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "03_toi_eat_clean_11",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Canh gà nấu bí đao hạt sen",
+      "description": null,
+      "image_url": null,
+      "calories": 498,
+      "protein": 59,
+      "carbs": 24,
+      "fat": 17,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "dinner",
+      "tags": [
+        "eat-clean",
+        "giau-dam",
+        "khong-heo",
+        "khong-bo",
+        "it-dau"
+      ],
+      "steps": [
+        "Ngâm hạt sen khô cho mềm, gọt vỏ bí đao và cắt miếng vừa ăn.",
+        "Chặt gà thành miếng, cho vào nồi ninh lấy nước dùng và vớt bọt cho trong.",
+        "Cho hạt sen vào nấu trước đến khi gần mềm.",
+        "Cho bí đao vào nấu thêm đến khi bí mềm trong.",
+        "Nêm muối, nước mắm và tiêu cho vừa miệng, đun nhỏ lửa cho thấm.",
+        "Rắc hành lá thái nhỏ, múc canh ra tô và dùng nóng."
+      ],
+      "ingredients": [
+        "200g gà (ức hoặc đùi bỏ da)",
+        "150g bí đao",
+        "30g hạt sen khô (ngâm trước)",
+        "Hành lá, muối, tiêu",
+        "5ml nước mắm ít"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "03_toi_eat_clean_12",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Sữa chua Hy Lạp granola trái cây",
+      "description": null,
+      "image_url": null,
+      "calories": 233,
+      "protein": 15,
+      "carbs": 30,
+      "fat": 5,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "snack",
+      "tags": [
+        "eat-clean",
+        "chay-lacto",
+        "sua",
+        "hat",
+        "probiotic"
+      ],
+      "steps": [
+        "Rửa sạch và cắt nhỏ trái cây tươi (dâu, việt quất hoặc táo).",
+        "Cho sữa chua Hy Lạp không đường ra ly.",
+        "Rắc granola và hạt chia lên trên.",
+        "Xếp trái cây tươi lên mặt và dùng ngay."
+      ],
+      "ingredients": [
+        "120ml sữa chua Hy Lạp không đường",
+        "20g granola ít đường",
+        "5g hạt chia",
+        "80g trái cây tươi (dâu/việt quất/táo)"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "04_snack_eat_clean_01",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "2 quả trứng luộc",
+      "description": null,
+      "image_url": null,
+      "calories": 155,
+      "protein": 13,
+      "carbs": 1,
+      "fat": 11,
+      "prep_time": 10,
+      "difficulty": "easy",
+      "meal_type": "snack",
+      "tags": [
+        "eat-clean",
+        "giau-dam",
+        "trung"
+      ],
+      "steps": [
+        "Cho trứng gà vào nồi, đổ nước ngập trứng và thêm một nhúm muối",
+        "Đun lửa vừa và luộc trứng 8-10 phút kể từ khi nước sôi",
+        "Vớt trứng ra ngâm ngay vào nước lạnh khoảng 2-3 phút cho dễ bóc vỏ",
+        "Bóc sạch vỏ, cắt đôi và rắc chút muối tiêu trước khi ăn"
+      ],
+      "ingredients": [
+        "2 quả trứng gà (~100g tổng)",
+        "Muối, tiêu (tùy chọn)"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "04_snack_eat_clean_02",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Sinh tố cần tây táo dưa leo",
+      "description": null,
+      "image_url": null,
+      "calories": 133,
+      "protein": 3,
+      "carbs": 29,
+      "fat": 2,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "snack",
+      "tags": [
+        "eat-clean",
+        "thuan-chay",
+        "it-duong",
+        "chat-xo-cao"
+      ],
+      "steps": [
+        "Rửa sạch cần tây, dưa leo và táo xanh dưới vòi nước",
+        "Cắt nhỏ cần tây, dưa leo và táo (bỏ lõi hạt táo) thành miếng vừa",
+        "Cho tất cả vào máy xay cùng 100ml nước lọc",
+        "Xay nhuyễn khoảng 1-2 phút, thêm 50g sữa chua không đường nếu muốn rồi xay đều",
+        "Rót ra ly và uống ngay khi còn tươi"
+      ],
+      "ingredients": [
+        "1 cây cần tây (~80g)",
+        "1/2 quả dưa leo (~80g)",
+        "1 quả táo xanh (~150g)",
+        "100ml nước lọc",
+        "50g sữa chua KĐ (tùy chọn)"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "04_snack_eat_clean_03",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Khoai lang luộc",
+      "description": null,
+      "image_url": null,
+      "calories": 129,
+      "protein": 2,
+      "carbs": 30,
+      "fat": 0,
+      "prep_time": 20,
+      "difficulty": "easy",
+      "meal_type": "snack",
+      "tags": [
+        "eat-clean",
+        "thuan-chay",
+        "gi-thap",
+        "chat-xo-cao"
+      ],
+      "steps": [
+        "Rửa sạch khoai lang, chà bỏ đất bám trên vỏ",
+        "Cho khoai vào nồi, đổ nước xâm xấp hoặc đặt lên xửng hấp",
+        "Luộc hoặc hấp 15-20 phút đến khi xiên đũa thấy mềm",
+        "Vớt ra để nguội bớt, bóc vỏ và ăn ngay không thêm đường hay bơ để kiểm soát đường huyết"
+      ],
+      "ingredients": [
+        "1 củ khoai lang vừa (~150g)",
+        "(Không thêm mật mía, đường hay bơ)"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "04_snack_eat_clean_04",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Hạt mix rang khô (hạnh nhân, bí, hướng dương)",
+      "description": null,
+      "image_url": null,
+      "calories": 230,
+      "protein": 9,
+      "carbs": 8,
+      "fat": 20,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "snack",
+      "tags": [
+        "eat-clean",
+        "thuan-chay",
+        "hat",
+        "chat-beo-tot"
+      ],
+      "steps": [
+        "Cân và chia khẩu phần khoảng 20g hạnh nhân, 10g hạt bí và 10g hạt hướng dương",
+        "Kiểm tra hạt đã rang khô, không tẩm muối hay dầu",
+        "Trộn đều ba loại hạt vào một chén nhỏ",
+        "Ăn từ từ đúng khẩu phần đã chia, không ăn quá nhiều để kiểm soát calo"
+      ],
+      "ingredients": [
+        "20g hạt hạnh nhân rang khô",
+        "10g hạt bí rang khô",
+        "10g hạt hướng dương rang khô",
+        "(Không muối, không dầu)"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "04_snack_eat_clean_05",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Trái cây tươi theo mùa",
+      "description": null,
+      "image_url": null,
+      "calories": 82,
+      "protein": 1,
+      "carbs": 20,
+      "fat": 0,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "snack",
+      "tags": [
+        "eat-clean",
+        "thuan-chay",
+        "it-duong",
+        "chat-xo-cao"
+      ],
+      "steps": [
+        "Chọn khoảng 150g trái cây tươi theo mùa như chuối, táo, cam, bưởi, ổi hoặc thanh long",
+        "Rửa sạch trái cây dưới vòi nước",
+        "Gọt vỏ hoặc bóc vỏ tùy loại rồi cắt thành miếng vừa ăn",
+        "Ăn trực tiếp, tuyệt đối không thêm đường hay muối ớt"
+      ],
+      "ingredients": [
+        "150g trái cây tươi theo mùa",
+        "(Chuối / táo / cam / bưởi / ổi / thanh long)",
+        "Không thêm đường"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "04_snack_eat_clean_06",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Chuối chín",
+      "description": null,
+      "image_url": null,
+      "calories": 89,
+      "protein": 1,
+      "carbs": 23,
+      "fat": 0,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "snack",
+      "tags": [
+        "eat-clean",
+        "thuan-chay",
+        "gi-thap",
+        "chat-xo-cao"
+      ],
+      "steps": [
+        "Chọn một quả chuối chín vừa khoảng 100g, vỏ vàng đều",
+        "Rửa sạch vỏ ngoài rồi lau khô",
+        "Bóc vỏ và ăn trực tiếp như một bữa phụ tiện lợi"
+      ],
+      "ingredients": [
+        "1 quả chuối chín vừa (~100g)"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "04_snack_eat_clean_07",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Bơ tươi ½ quả",
+      "description": null,
+      "image_url": null,
+      "calories": 128,
+      "protein": 2,
+      "carbs": 7,
+      "fat": 12,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "snack",
+      "tags": [
+        "eat-clean",
+        "thuan-chay",
+        "chat-beo-tot",
+        "it-duong"
+      ],
+      "steps": [
+        "Bổ đôi quả bơ chín, lấy nửa quả khoảng 80g và bỏ hạt",
+        "Dùng dao khía nhẹ phần thịt bơ thành ô vuông cho dễ xúc",
+        "Rắc một nhúm muối biển và chút tiêu xay lên mặt bơ",
+        "Dùng thìa xúc ăn trực tiếp ngay trong vỏ"
+      ],
+      "ingredients": [
+        "1/2 quả bơ chín (~80g)",
+        "Muối biển 1 nhúm",
+        "Tiêu xay (tùy chọn)"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "04_snack_eat_clean_08",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Chè đậu xanh nha đam long nhãn",
+      "description": null,
+      "image_url": null,
+      "calories": 295,
+      "protein": 14,
+      "carbs": 59,
+      "fat": 1,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "snack",
+      "tags": [
+        "eat-clean",
+        "thuan-chay",
+        "probiotic",
+        "chat-xo-cao"
+      ],
+      "steps": [
+        "Ngâm 50g đậu xanh bóc vỏ khoảng 1-2 giờ rồi vo sạch",
+        "Sơ chế nha đam: gọt vỏ, lấy phần gel sạch và cắt hạt lựu, chần sơ qua nước sôi cho hết nhớt",
+        "Nấu đậu xanh với 200ml nước dừa tươi đến khi đậu mềm bở",
+        "Cho nha đam và 20g long nhãn vào nồi chè, nấu thêm vài phút",
+        "Nêm 5g đường phèn, khuấy tan rồi tắt bếp, dùng nóng hoặc thêm đá tùy thích"
+      ],
+      "ingredients": [
+        "50g đậu xanh bóc vỏ khô",
+        "30g nha đam (gel sạch)",
+        "20g long nhãn",
+        "5g đường phèn",
+        "200ml nước dừa tươi"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "04_snack_eat_clean_09",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Nước ép táo cần tây gừng",
+      "description": null,
+      "image_url": null,
+      "calories": 95,
+      "protein": 1,
+      "carbs": 24,
+      "fat": 0,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "snack",
+      "tags": [
+        "eat-clean",
+        "thuan-chay",
+        "it-duong",
+        "chat-xo-cao"
+      ],
+      "steps": [
+        "Rửa sạch táo xanh, cần tây và gừng tươi",
+        "Cắt táo bỏ lõi, cắt khúc cần tây và gọt vỏ gừng",
+        "Cho tất cả vào máy ép cùng 100ml nước lọc, hoặc xay nhuyễn rồi lọc qua rây",
+        "Rót ra ly và uống ngay, không thêm đường để giữ vị nguyên bản"
+      ],
+      "ingredients": [
+        "1 quả táo xanh (~150g)",
+        "1 cây cần tây (~80g)",
+        "5g gừng tươi",
+        "100ml nước lọc"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "04_snack_eat_clean_10",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Đậu hũ lắc muối ớt",
+      "description": null,
+      "image_url": null,
+      "calories": 114,
+      "protein": 12,
+      "carbs": 3,
+      "fat": 7,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "snack",
+      "tags": [
+        "eat-clean",
+        "thuan-chay",
+        "dau-nanh",
+        "giau-dam",
+        "it-dau"
+      ],
+      "steps": [
+        "Cắt 150g đậu hũ trắng cứng thành các miếng vuông vừa ăn",
+        "Thấm bớt nước trên bề mặt đậu bằng giấy hoặc khăn sạch",
+        "Cho đậu hũ vào hộp cùng 1g muối ớt rồi đậy nắp lắc đều cho gia vị bám quanh",
+        "Ăn ngay hoặc cho vào tủ lạnh ướp lạnh trước khi dùng"
+      ],
+      "ingredients": [
+        "150g đậu hũ trắng cứng",
+        "1g muối ớt (hoặc 1g muối + 0.5g ớt bột)"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "04_snack_eat_clean_11",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Sữa hạt ngũ cốc không đường",
+      "description": null,
+      "image_url": null,
+      "calories": 70,
+      "protein": 2,
+      "carbs": 6,
+      "fat": 2,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "snack",
+      "tags": [
+        "eat-clean",
+        "thuan-chay",
+        "hat",
+        "chat-beo-tot",
+        "it-duong"
+      ],
+      "steps": [
+        "Chọn loại sữa hạt không đường (hạnh nhân, yến mạch hoặc đậu nành) mua sẵn hoặc tự nấu để ghi đúng nhãn dị ứng.",
+        "Nếu tự làm, ngâm hạt rồi xay với khoảng 200ml nước, lọc qua túi vải bỏ bã lấy phần sữa mịn.",
+        "Đun sữa lửa nhỏ vài phút cho nóng nhẹ, không cho đường, khuấy đều tay tránh khê đáy nồi.",
+        "Rót ra ly khoảng 200ml, dùng lạnh với đá hoặc uống ấm tùy thích."
+      ],
+      "ingredients": [
+        "200ml sữa hạt KĐ",
+        "(Hạnh nhân / yến mạch / đậu nành — ghi rõ loại để tag dị ứng đúng)"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "04_snack_eat_clean_12",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Cơm gạo lứt đậu hũ sốt cà chua nấm",
+      "description": null,
+      "image_url": null,
+      "calories": 636,
+      "protein": 28,
+      "carbs": 94,
+      "fat": 18,
+      "prep_time": 5,
+      "difficulty": "easy",
+      "meal_type": "lunch",
+      "tags": [
+        "chay-lacto",
+        "thuan-chay",
+        "dau-nanh",
+        "khong-heo",
+        "khong-bo",
+        "khong-hai-san",
+        "giau-dam",
+        "gi-thap"
+      ],
+      "steps": [
+        "Vo gạo lứt rồi nấu chín khoảng 100g gạo cho ra cơm dẻo, để riêng.",
+        "Đậu hũ cắt miếng vừa ăn, cà chua thái múi cau, nấm đông cô ngâm nở thái lát, hành tím và tỏi băm nhỏ.",
+        "Phi thơm hành tím tỏi với 5ml dầu olive, cho cà chua vào xào đến khi nhừ thành sốt.",
+        "Cho nấm đông cô và đậu hũ vào, rưới 10ml nước tương, kho nhẹ lửa nhỏ 5 phút cho thấm.",
+        "Nêm muối tiêu vừa ăn rồi rưới sốt cà chua nấm lên đĩa cơm gạo lứt, dùng nóng."
+      ],
+      "ingredients": [
+        "100g gạo lứt sống (~250g cơm chín)",
+        "200g đậu hũ cứng",
+        "100g cà chua",
+        "50g nấm đông cô",
+        "15g hành tím",
+        "2 tép tỏi",
+        "5ml dầu olive",
+        "10ml nước tương",
+        "muối tiêu"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "06_trua_chay_01",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Bún lứt chay nấm bào ngư đậu hũ rau sống",
+      "description": null,
+      "image_url": null,
+      "calories": 596,
+      "protein": 28,
+      "carbs": 102,
+      "fat": 9,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "lunch",
+      "tags": [
+        "chay-lacto",
+        "thuan-chay",
+        "dau-nanh",
+        "khong-heo",
+        "khong-bo",
+        "khong-hai-san",
+        "chat-xo-cao",
+        "it-dau"
+      ],
+      "steps": [
+        "Đun 300ml nước dùng rau củ cho nóng, nêm chút muối cho ngọt thanh.",
+        "Trụng bún gạo lứt khô cho mềm (khoảng 200g bún chín) rồi vớt ra, xả qua nước cho ráo.",
+        "Nấm bào ngư xé sợi, đậu hũ cắt miếng, xào nhẹ cả hai cho săn thơm.",
+        "Nhặt rửa giá đỗ, xà lách và rau thơm để ráo nước.",
+        "Cho bún vào tô, xếp nấm và đậu hũ lên, chan nước dùng nóng, rưới 5ml nước tương.",
+        "Xếp xà lách, giá đỗ và rau thơm lên trên rồi dùng ngay khi còn nóng."
+      ],
+      "ingredients": [
+        "100g bún gạo lứt khô (~200g bún chín)",
+        "150g nấm bào ngư",
+        "100g đậu hũ cứng",
+        "50g giá đỗ",
+        "30g xà lách",
+        "rau thơm",
+        "300ml nước dùng rau củ",
+        "5ml nước tương",
+        "muối"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "06_trua_chay_02",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Salad đậu gà rau xanh sốt chanh dầu olive",
+      "description": null,
+      "image_url": null,
+      "calories": 270,
+      "protein": 23,
+      "carbs": 6,
+      "fat": 17,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "lunch",
+      "tags": [
+        "chay-lacto",
+        "thuan-chay",
+        "khong-heo",
+        "khong-bo",
+        "khong-hai-san",
+        "chat-xo-cao",
+        "giau-dam",
+        "it-dau"
+      ],
+      "steps": [
+        "Ngâm đậu gà khô vài giờ cho nở, luộc chín mềm khoảng 200g rồi để nguội ráo.",
+        "Rửa sạch xà lách, bổ đôi cà chua bi, dưa leo thái lát mỏng.",
+        "Pha sốt từ 10ml dầu olive, 15ml nước cốt chanh cùng chút muối tiêu, khuấy đều cho hòa quyện.",
+        "Cho đậu gà, xà lách, cà chua bi và dưa leo vào tô lớn.",
+        "Rưới sốt chanh dầu olive lên, trộn đều nhẹ tay rồi dọn ra dùng ngay."
+      ],
+      "ingredients": [
+        "80g đậu gà khô (ngâm, luộc chín ~200g)",
+        "50g xà lách",
+        "80g cà chua bi",
+        "50g dưa leo",
+        "10ml dầu olive",
+        "15ml nước cốt chanh",
+        "muối tiêu"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "06_trua_chay_03",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Cơm gạo lứt cà tím rim dừa nấm xào",
+      "description": null,
+      "image_url": null,
+      "calories": 657,
+      "protein": 15,
+      "carbs": 103,
+      "fat": 21,
+      "prep_time": 10,
+      "difficulty": "easy",
+      "meal_type": "lunch",
+      "tags": [
+        "chay-lacto",
+        "thuan-chay",
+        "khong-heo",
+        "khong-bo",
+        "khong-hai-san",
+        "chat-xo-cao",
+        "gi-thap"
+      ],
+      "steps": [
+        "Vo và nấu chín 100g gạo lứt cho ra cơm dẻo, để riêng.",
+        "Cà tím cắt khúc vừa ăn, ngâm nước muối loãng vài phút cho bớt thâm rồi vớt ráo; tỏi băm nhỏ.",
+        "Rim cà tím với 50ml nước cốt dừa, 10ml nước tương và 5g đường thốt nốt, nhỏ lửa 10 phút cho thấm và sệt.",
+        "Nấm đùi gà thái lát, xào riêng với 5ml dầu olive và tỏi cho thơm, săn lại.",
+        "Bày cơm gạo lứt ra đĩa, dọn kèm cà tím rim dừa và nấm xào, dùng nóng."
+      ],
+      "ingredients": [
+        "100g gạo lứt sống",
+        "200g cà tím",
+        "50ml nước cốt dừa",
+        "100g nấm đùi gà",
+        "2 tép tỏi",
+        "5ml dầu olive",
+        "10ml nước tương",
+        "5g đường thốt nốt"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "06_trua_chay_04",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Phở chay nấm đùi gà đậu hũ non",
+      "description": null,
+      "image_url": null,
+      "calories": 598,
+      "protein": 23,
+      "carbs": 111,
+      "fat": 7,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "lunch",
+      "tags": [
+        "chay-lacto",
+        "thuan-chay",
+        "dau-nanh",
+        "khong-heo",
+        "khong-bo",
+        "khong-hai-san",
+        "it-dau",
+        "chat-xo-cao"
+      ],
+      "steps": [
+        "Hầm củ cải 100g, cà rốt 80g và ngô 100g cùng gừng và hoa hồi trong khoảng 1 giờ để lấy nước dùng ngọt thơm.",
+        "Nấm đùi gà thái lát, xào nhẹ cho săn thơm; đậu hũ non cắt miếng vừa ăn nhẹ tay.",
+        "Trụng bánh phở khô cho mềm rồi cho vào tô.",
+        "Chan nước dùng nóng đã lọc trong lên bánh phở.",
+        "Xếp nấm đùi gà, đậu hũ non lên trên, thêm giá đỗ và rau húng quế rồi dùng ngay."
+      ],
+      "ingredients": [
+        "100g bánh phở khô",
+        "150g nấm đùi gà",
+        "100g đậu hũ non",
+        "nước dùng: củ cải 100g + cà rốt 80g + ngô 100g hầm 1h",
+        "gừng 10g",
+        "hoa hồi 1 cái",
+        "rau húng quế",
+        "giá đỗ 50g"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "06_trua_chay_05",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Cơm chiên ngũ sắc gạo lứt rau củ",
+      "description": null,
+      "image_url": null,
+      "calories": 445,
+      "protein": 16,
+      "carbs": 68,
+      "fat": 12,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "lunch",
+      "tags": [
+        "chay-lacto",
+        "thuan-chay",
+        "trung",
+        "khong-heo",
+        "khong-bo",
+        "khong-hai-san",
+        "gi-thap",
+        "chat-xo-cao"
+      ],
+      "steps": [
+        "Chuẩn bị cơm gạo lứt nguội để hạt cơm rời, không bị nát khi chiên.",
+        "Cà rốt thái hạt lựu, hành tây thái nhỏ, để sẵn đậu Hà Lan và ngô ngọt.",
+        "Phi thơm hành tây, cho cà rốt, đậu Hà Lan và ngô vào xào chín tới.",
+        "Đẩy rau sang một bên, đập trứng vào đảo tan rồi trộn đều (bỏ trứng nếu ăn thuần chay).",
+        "Cho cơm gạo lứt vào đảo đều trên lửa lớn cho tơi nóng.",
+        "Nêm 10ml nước tương và 5ml dầu mè, đảo đều rồi dọn ra đĩa dùng nóng."
+      ],
+      "ingredients": [
+        "150g cơm gạo lứt nguội",
+        "50g cà rốt hạt lựu",
+        "50g đậu Hà Lan",
+        "50g ngô ngọt",
+        "30g hành tây",
+        "1 quả trứng (~50g, bỏ nếu thuần chay)",
+        "10ml nước tương",
+        "5ml dầu mè"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "06_trua_chay_06",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Đậu hũ kho sả cơm gạo lứt rau luộc",
+      "description": null,
+      "image_url": null,
+      "calories": 746,
+      "protein": 30,
+      "carbs": 120,
+      "fat": 19,
+      "prep_time": 15,
+      "difficulty": "easy",
+      "meal_type": "lunch",
+      "tags": [
+        "chay-lacto",
+        "thuan-chay",
+        "dau-nanh",
+        "khong-heo",
+        "khong-bo",
+        "khong-hai-san",
+        "giau-dam",
+        "gi-thap"
+      ],
+      "steps": [
+        "Vo và nấu chín 100g gạo lứt cho ra cơm dẻo, để riêng.",
+        "Đậu hũ cắt miếng, ướp với sả đập dập thái lát, tỏi băm, 10ml nước tương và 5g đường trong 15 phút.",
+        "Luộc cải và bông cải vừa chín tới, vớt ra để ráo giữ độ xanh giòn.",
+        "Kho đậu hũ đã ướp trên lửa nhỏ 10-15 phút đến khi nước kho sệt và thấm vị.",
+        "Rưới 5ml dầu mè cho thơm, dọn đậu hũ kho sả kèm cơm gạo lứt và rau luộc."
+      ],
+      "ingredients": [
+        "200g đậu hũ cứng cắt miếng",
+        "2 cây sả đập dập thái lát",
+        "2 tép tỏi",
+        "10ml nước tương",
+        "5ml dầu mè",
+        "5g đường",
+        "100g gạo lứt sống",
+        "150g rau luộc (cải, bông cải)"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "06_trua_chay_07",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Canh chua chay cà chua đậu bắp nấm",
+      "description": null,
+      "image_url": null,
+      "calories": 245,
+      "protein": 14,
+      "carbs": 40,
+      "fat": 7,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "lunch",
+      "tags": [
+        "chay-lacto",
+        "thuan-chay",
+        "dau-nanh",
+        "khong-heo",
+        "khong-bo",
+        "khong-hai-san",
+        "it-dau",
+        "chat-xo-cao"
+      ],
+      "steps": [
+        "Dầm 20g me với nước nóng, lọc bỏ hạt lấy nước cốt chua.",
+        "Đun sôi 500ml nước, cho cà chua thái múi và dứa thơm vào nấu cho ra màu và vị chua ngọt.",
+        "Thêm đậu bắp cắt khúc và nấm rơm vào nấu sôi đến khi chín tới.",
+        "Rót nước cốt me vào, nhẹ tay thả đậu hũ non vào nồi để không bị vỡ.",
+        "Nêm muối và hạt nêm chay vừa ăn, đun sôi lại rồi múc ra tô dùng nóng."
+      ],
+      "ingredients": [
+        "100g cà chua chín",
+        "100g đậu bắp",
+        "50g nấm rơm",
+        "100g đậu hũ non",
+        "20g me",
+        "5g dứa thơm",
+        "500ml nước",
+        "muối hạt nêm chay"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "06_trua_chay_08",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Quinoa xào rau củ đậu hũ",
+      "description": null,
+      "image_url": null,
+      "calories": 455,
+      "protein": 21,
+      "carbs": 62,
+      "fat": 15,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "lunch",
+      "tags": [
+        "chay-lacto",
+        "thuan-chay",
+        "dau-nanh",
+        "khong-heo",
+        "khong-bo",
+        "khong-hai-san",
+        "giau-dam",
+        "gi-thap",
+        "chat-xo-cao"
+      ],
+      "steps": [
+        "Vo quinoa rồi nấu chín khoảng 70g cho ra hạt tơi (~180g chín), để riêng.",
+        "Đậu hũ cắt hạt lựu, ớt chuông và cà rốt thái nhỏ, bông cải tách miếng vừa ăn, tỏi băm.",
+        "Phi thơm tỏi với 5ml dầu olive, cho cà rốt, bông cải, ớt chuông và đậu hũ vào xào chín tới.",
+        "Cho quinoa đã nấu vào chảo, đảo đều cho nóng và hòa quyện.",
+        "Nêm 10ml nước tương, đảo đều thêm chút rồi dọn ra đĩa dùng nóng."
+      ],
+      "ingredients": [
+        "70g quinoa sống (~180g chín)",
+        "100g đậu hũ cứng cắt hạt lựu",
+        "50g ớt chuông",
+        "50g bông cải",
+        "50g cà rốt",
+        "5ml dầu olive",
+        "10ml nước tương",
+        "2 tép tỏi"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "06_trua_chay_09",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Mít non kho tiêu cơm gạo lứt",
+      "description": null,
+      "image_url": null,
+      "calories": 614,
+      "protein": 13,
+      "carbs": 136,
+      "fat": 5,
+      "prep_time": 15,
+      "difficulty": "easy",
+      "meal_type": "lunch",
+      "tags": [
+        "chay-lacto",
+        "thuan-chay",
+        "khong-heo",
+        "khong-bo",
+        "khong-hai-san",
+        "chat-xo-cao"
+      ],
+      "steps": [
+        "Vo gạo lứt rồi nấu với nước cho chín thành cơm",
+        "Xé mít non thành sợi vừa ăn, băm nhỏ tỏi và hành tím",
+        "Phi thơm tỏi hành tím với chút dầu ăn cho vàng",
+        "Cho mít vào đảo săn, thêm nước tương, đường và chút nước xăm xắp",
+        "Kho lửa nhỏ khoảng 15 phút cho mít thấm và nước cạn sệt",
+        "Rắc tiêu xay, đảo đều rồi tắt bếp, dọn ăn kèm cơm gạo lứt"
+      ],
+      "ingredients": [
+        "200g mít non (đóng hộp hoặc tươi)",
+        "2 tép tỏi",
+        "1 củ hành tím 15g",
+        "10ml nước tương",
+        "5g đường",
+        "1 mcf tiêu xay",
+        "100g gạo lứt sống"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "06_trua_chay_10",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Miến xào chay cà rốt mộc nhĩ bắp cải",
+      "description": null,
+      "image_url": null,
+      "calories": 475,
+      "protein": 8,
+      "carbs": 86,
+      "fat": 14,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "lunch",
+      "tags": [
+        "chay-lacto",
+        "thuan-chay",
+        "khong-heo",
+        "khong-bo",
+        "khong-hai-san",
+        "chat-xo-cao",
+        "it-dau"
+      ],
+      "steps": [
+        "Ngâm miến cho mềm, ngâm nở mộc nhĩ rồi thái sợi; thái sợi cà rốt và bắp cải, băm tỏi",
+        "Phi thơm tỏi với chút dầu ăn cho dậy mùi",
+        "Cho cà rốt, mộc nhĩ và bắp cải vào xào lửa lớn cho rau chín tới",
+        "Cho miến vào đảo đều cùng rau củ",
+        "Nêm nước tương và dầu mè, đảo nhanh cho thấm đều",
+        "Tắt bếp, rắc hạt điều rang lên trên rồi dọn ra đĩa"
+      ],
+      "ingredients": [
+        "60g miến (ngâm mềm)",
+        "50g cà rốt thái sợi",
+        "30g mộc nhĩ ngâm nở",
+        "100g bắp cải thái sợi",
+        "2 tép tỏi",
+        "5ml dầu mè",
+        "10ml nước tương",
+        "15g hạt điều rang (tùy chọn — tag hat)"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "06_trua_chay_11",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Bánh tráng cuốn chay nấm rau sống",
+      "description": null,
+      "image_url": null,
+      "calories": 505,
+      "protein": 14,
+      "carbs": 91,
+      "fat": 11,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "lunch",
+      "tags": [
+        "chay-lacto",
+        "thuan-chay",
+        "dau-nanh",
+        "lac",
+        "khong-heo",
+        "khong-bo",
+        "khong-hai-san",
+        "chat-xo-cao",
+        "it-dau"
+      ],
+      "steps": [
+        "Luộc sơ nấm bào ngư, để ráo và xé sợi; trụng bún rồi để ráo",
+        "Bào sợi cà rốt, thái sợi dưa leo và xoài xanh, nhặt rửa rau thơm",
+        "Pha nước chấm: hòa bơ đậu phộng với nước tương và nước cốt chanh cho sánh",
+        "Nhúng bánh tráng qua nước cho mềm rồi trải ra mặt phẳng",
+        "Xếp bún, nấm, cà rốt, dưa leo, xoài xanh và rau thơm lên rồi cuốn chặt",
+        "Dọn cuốn ra đĩa, chấm cùng nước chấm bơ đậu phộng"
+      ],
+      "ingredients": [
+        "4 tấm bánh tráng (~40g)",
+        "100g nấm bào ngư luộc sơ",
+        "50g cà rốt bào sợi",
+        "50g dưa leo",
+        "30g xoài xanh",
+        "50g bún (~30g khô)",
+        "rau thơm",
+        "nước chấm: 20g bơ đậu phộng + 10ml tương + chanh"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "06_trua_chay_12",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Đậu hũ non hấp sốt mè rang",
+      "description": null,
+      "image_url": null,
+      "calories": 328,
+      "protein": 21,
+      "carbs": 11,
+      "fat": 25,
+      "prep_time": 10,
+      "difficulty": "easy",
+      "meal_type": "dinner",
+      "tags": [
+        "chay-lacto",
+        "thuan-chay",
+        "dau-nanh",
+        "khong-heo",
+        "khong-bo",
+        "khong-hai-san",
+        "giau-dam",
+        "it-dau"
+      ],
+      "steps": [
+        "Cắt đậu hũ non thành miếng vừa, thái sợi gừng và cắt nhỏ hành lá",
+        "Xếp đậu hũ ra đĩa rồi hấp cách thủy 7-10 phút cho nóng",
+        "Pha sốt: trộn mè trắng rang xay với nước tương và dầu mè cho đều",
+        "Chắt bớt nước hấp ra khỏi đĩa đậu hũ",
+        "Rưới sốt mè lên đậu hũ, rắc gừng sợi và hành lá rồi dọn ăn nóng"
+      ],
+      "ingredients": [
+        "200g đậu hũ non",
+        "20g mè trắng rang xay",
+        "10ml nước tương",
+        "5ml dầu mè",
+        "hành lá 5g",
+        "gừng 5g"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "07_toi_chay_01",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Cơm gạo lứt đậu hũ non sốt cà chua rau muống xào",
+      "description": null,
+      "image_url": null,
+      "calories": 637,
+      "protein": 30,
+      "carbs": 92,
+      "fat": 18,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "dinner",
+      "tags": [
+        "chay-lacto",
+        "thuan-chay",
+        "dau-nanh",
+        "khong-heo",
+        "khong-bo",
+        "khong-hai-san",
+        "giau-dam",
+        "gi-thap"
+      ],
+      "steps": [
+        "Vo gạo lứt và nấu thành cơm; thái múi cà chua, nhặt rửa rau muống, băm tỏi",
+        "Cắt đậu hũ non thành miếng vừa ăn",
+        "Phi thơm một nửa tỏi, cho cà chua vào xào mềm rồi nhẹ nhàng cho đậu hũ vào, nêm nước tương và chút muối, rim cho thấm",
+        "Phi phần tỏi còn lại với dầu olive, cho rau muống vào xào lửa lớn, nêm chút muối cho chín tới",
+        "Bày cơm gạo lứt ra đĩa, ăn kèm đậu hũ sốt cà chua và rau muống xào tỏi"
+      ],
+      "ingredients": [
+        "100g gạo lứt sống",
+        "200g đậu hũ non",
+        "100g cà chua",
+        "150g rau muống",
+        "2 tép tỏi",
+        "5ml dầu olive",
+        "10ml nước tương",
+        "muối"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "07_toi_chay_02",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Súp bí ngô bạch quả hạt sen",
+      "description": null,
+      "image_url": null,
+      "calories": 206,
+      "protein": 8,
+      "carbs": 42,
+      "fat": 2,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "dinner",
+      "tags": [
+        "chay-lacto",
+        "thuan-chay",
+        "khong-heo",
+        "khong-bo",
+        "khong-hai-san",
+        "gi-thap",
+        "chat-xo-cao",
+        "khong-cay"
+      ],
+      "steps": [
+        "Gọt vỏ và cắt bí ngô thành miếng; ngâm hạt sen khô cho mềm",
+        "Hấp bí ngô và hạt sen cho chín mềm",
+        "Lấy phần bí ngô cùng một ít hạt sen xay nhuyễn với sữa hạt không đường",
+        "Cho hỗn hợp xay vào nồi với 300ml nước, thêm hạt sen nguyên hạt còn lại và bạch quả",
+        "Nấu sôi lăn tăn, nêm muối và tiêu cho vừa ăn rồi tắt bếp dọn ra tô"
+      ],
+      "ingredients": [
+        "200g bí ngô",
+        "30g hạt sen khô (ngâm chín)",
+        "20g bạch quả (tùy chọn)",
+        "50ml sữa hạt không đường",
+        "300ml nước",
+        "muối",
+        "tiêu"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "07_toi_chay_03",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Nấm đùi gà sốt tương Hàn Quốc cơm gạo lứt",
+      "description": null,
+      "image_url": null,
+      "calories": 532,
+      "protein": 16,
+      "carbs": 92,
+      "fat": 9,
+      "prep_time": 15,
+      "difficulty": "easy",
+      "meal_type": "dinner",
+      "tags": [
+        "chay-lacto",
+        "thuan-chay",
+        "khong-heo",
+        "khong-bo",
+        "khong-hai-san",
+        "gi-thap",
+        "chat-xo-cao"
+      ],
+      "steps": [
+        "Vo gạo lứt và nấu thành cơm; cắt nấm đùi gà thành lát dày, băm tỏi và gừng",
+        "Pha sốt: trộn tương Hàn Quốc, mật ong, dầu mè, tỏi và gừng băm",
+        "Ướp nấm với sốt khoảng 15 phút cho thấm",
+        "Áp chảo nấm lửa vừa, trở đều cho hai mặt vàng và thấm sốt sệt",
+        "Dọn nấm ra đĩa, ăn kèm cơm gạo lứt"
+      ],
+      "ingredients": [
+        "200g nấm đùi gà",
+        "100g gạo lứt sống",
+        "15ml tương Hàn Quốc (gochujang chay)",
+        "5ml mật ong hoặc đường",
+        "5ml dầu mè",
+        "2 tép tỏi",
+        "3g gừng băm"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "07_toi_chay_04",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Canh xà lách xoong nấm đông cô",
+      "description": null,
+      "image_url": null,
+      "calories": 156,
+      "protein": 11,
+      "carbs": 9,
+      "fat": 10,
+      "prep_time": 5,
+      "difficulty": "easy",
+      "meal_type": "dinner",
+      "tags": [
+        "chay-lacto",
+        "thuan-chay",
+        "khong-heo",
+        "khong-bo",
+        "khong-hai-san",
+        "it-dau",
+        "chat-xo-cao"
+      ],
+      "steps": [
+        "Nhặt rửa xà lách xoong, thái lát nấm đông cô, cắt đậu hũ non thành miếng và thái sợi gừng",
+        "Đun sôi 500ml nước cùng gừng",
+        "Cho nấm đông cô và đậu hũ non vào nấu khoảng 5 phút",
+        "Nêm muối và hạt nêm chay cho vừa ăn",
+        "Cho xà lách xoong vào, đảo nhẹ rồi tắt bếp ngay",
+        "Rưới dầu mè, dọn canh ra tô dùng nóng"
+      ],
+      "ingredients": [
+        "100g xà lách xoong",
+        "50g nấm đông cô tươi (hoặc 20g khô ngâm nở)",
+        "100g đậu hũ non",
+        "500ml nước",
+        "5ml dầu mè",
+        "gừng 5g",
+        "muối hạt nêm chay"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "07_toi_chay_05",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Cà tím nướng sốt miso chay cơm gạo lứt",
+      "description": null,
+      "image_url": null,
+      "calories": 515,
+      "protein": 12,
+      "carbs": 97,
+      "fat": 9,
+      "prep_time": 15,
+      "difficulty": "easy",
+      "meal_type": "dinner",
+      "tags": [
+        "chay-lacto",
+        "thuan-chay",
+        "dau-nanh",
+        "khong-heo",
+        "khong-bo",
+        "khong-hai-san",
+        "gi-thap",
+        "it-dau"
+      ],
+      "steps": [
+        "Vo gạo lứt và nấu thành cơm; cắt đôi cà tím theo chiều dọc rồi khứa ô trên mặt",
+        "Pha sốt: trộn miso trắng, mật ong và nước tương cho đều",
+        "Phết một lớp sốt miso lên mặt cà tím",
+        "Nướng lò 200°C khoảng 15 phút cho cà tím chín mềm và mặt sốt hơi xém",
+        "Rưới dầu mè lên cà tím, dọn ăn kèm cơm gạo lứt"
+      ],
+      "ingredients": [
+        "2 quả cà tím nhỏ (~200g)",
+        "15g miso trắng chay",
+        "5ml mật ong",
+        "5ml nước tương",
+        "5ml dầu mè",
+        "100g gạo lứt sống"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "07_toi_chay_06",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Bún gạo lứt chay xào thập cẩm",
+      "description": null,
+      "image_url": null,
+      "calories": 559,
+      "protein": 19,
+      "carbs": 92,
+      "fat": 13,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "dinner",
+      "tags": [
+        "chay-lacto",
+        "thuan-chay",
+        "dau-nanh",
+        "khong-heo",
+        "khong-bo",
+        "khong-hai-san",
+        "chat-xo-cao",
+        "it-dau"
+      ],
+      "steps": [
+        "Ngâm bún gạo lứt cho mềm rồi để ráo; cắt đậu hũ cứng thành miếng, thái sợi cà rốt, tách nhỏ súp lơ, thái múi hành tây, băm tỏi",
+        "Áp chảo đậu hũ cho vàng các mặt rồi để riêng",
+        "Phi thơm tỏi, cho cà rốt, súp lơ và hành tây vào xào chín tới",
+        "Cho đậu hũ trở lại chảo, thêm bún vào đảo đều",
+        "Nêm nước tương và dầu mè, đảo nhanh cho thấm rồi tắt bếp dọn ra đĩa"
+      ],
+      "ingredients": [
+        "100g bún gạo lứt khô (~200g chín)",
+        "100g đậu hũ cứng",
+        "50g cà rốt",
+        "50g súp lơ",
+        "30g hành tây",
+        "2 tép tỏi",
+        "10ml nước tương",
+        "5ml dầu mè"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "07_toi_chay_07",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Đậu lăng hầm rau củ cơm gạo lứt",
+      "description": null,
+      "image_url": null,
+      "calories": 607,
+      "protein": 18,
+      "carbs": 115,
+      "fat": 9,
+      "prep_time": 30,
+      "difficulty": "medium",
+      "meal_type": "dinner",
+      "tags": [
+        "chay-lacto",
+        "thuan-chay",
+        "khong-heo",
+        "khong-bo",
+        "khong-hai-san",
+        "giau-dam",
+        "gi-thap",
+        "chat-xo-cao"
+      ],
+      "steps": [
+        "Vo sạch gạo lứt rồi nấu chín mềm thành cơm",
+        "Ngâm đậu lăng đỏ khoảng 30 phút cho nở rồi rửa sạch, cắt cà rốt và khoai tây thành miếng vừa ăn, cà chua bổ múi cau, tỏi băm nhỏ",
+        "Phi thơm tỏi với dầu olive rồi cho cà chua vào xào cho mềm ra nước",
+        "Cho đậu lăng cùng cà rốt và khoai tây vào, đổ nước xâm xấp mặt rồi hầm 20-25 phút đến khi tất cả mềm nhừ",
+        "Nêm muối, tiêu và hạt nêm chay cho vừa miệng",
+        "Múc đậu lăng hầm rau củ ra tô, ăn kèm cơm gạo lứt nóng"
+      ],
+      "ingredients": [
+        "80g đậu lăng đỏ khô",
+        "80g cà rốt",
+        "60g khoai tây",
+        "50g cà chua",
+        "100g gạo lứt sống",
+        "2 tép tỏi",
+        "5ml dầu olive",
+        "muối tiêu hạt nêm chay"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "07_toi_chay_08",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Salad đậu gà bơ cà chua bi rau xanh",
+      "description": null,
+      "image_url": null,
+      "calories": 433,
+      "protein": 30,
+      "carbs": 13,
+      "fat": 30,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "dinner",
+      "tags": [
+        "chay-lacto",
+        "thuan-chay",
+        "khong-heo",
+        "khong-bo",
+        "khong-hai-san",
+        "chat-xo-cao",
+        "chat-beo-tot",
+        "it-dau"
+      ],
+      "steps": [
+        "Rửa sạch xà lách, cà chua bi và dưa leo rồi để ráo, cắt cà chua bi làm đôi, dưa leo thái lát, bơ gọt vỏ cắt miếng vuông",
+        "Cho đậu gà luộc chín cùng xà lách, cà chua bi, dưa leo và bơ vào tô lớn",
+        "Pha sốt gồm nước cốt chanh, dầu olive, muối và tiêu rồi khuấy đều cho hòa quyện",
+        "Rưới sốt lên salad và trộn nhẹ tay để bơ không bị nát",
+        "Bày salad ra đĩa và dùng ngay khi còn tươi"
+      ],
+      "ingredients": [
+        "100g đậu gà luộc chín",
+        "1/2 quả bơ (~80g)",
+        "80g cà chua bi",
+        "50g xà lách",
+        "30g dưa leo",
+        "10ml dầu olive",
+        "15ml nước cốt chanh",
+        "muối tiêu"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "07_toi_chay_09",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Rau củ áp chảo gạo lứt sốt mè",
+      "description": null,
+      "image_url": null,
+      "calories": 569,
+      "protein": 15,
+      "carbs": 97,
+      "fat": 14,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "dinner",
+      "tags": [
+        "chay-lacto",
+        "thuan-chay",
+        "khong-heo",
+        "khong-bo",
+        "khong-hai-san",
+        "gi-thap",
+        "it-dau",
+        "chat-xo-cao"
+      ],
+      "steps": [
+        "Vo sạch gạo lứt rồi nấu chín mềm thành cơm",
+        "Cắt bông cải xanh thành nhánh nhỏ, ớt chuông và cà rốt thái miếng vừa ăn, nấm đùi gà thái lát dày",
+        "Áp chảo lần lượt từng loại rau củ với dầu olive trên lửa lớn đến khi chín tới và xém cạnh thơm",
+        "Pha sốt mè bằng cách trộn mè rang, nước tương và giấm táo cho đều",
+        "Xếp cơm gạo lứt ra đĩa rồi bày rau củ áp chảo lên trên",
+        "Rưới sốt mè lên trên và dùng nóng"
+      ],
+      "ingredients": [
+        "100g gạo lứt sống",
+        "80g bông cải xanh",
+        "80g ớt chuông",
+        "60g cà rốt",
+        "60g nấm đùi gà",
+        "5ml dầu olive",
+        "sốt mè: 10g mè rang + 5ml nước tương + 5ml giấm táo"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "07_toi_chay_10",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Canh rong biển đậu hũ non gừng",
+      "description": null,
+      "image_url": null,
+      "calories": 175,
+      "protein": 13,
+      "carbs": 6,
+      "fat": 12,
+      "prep_time": 15,
+      "difficulty": "easy",
+      "meal_type": "dinner",
+      "tags": [
+        "chay-lacto",
+        "thuan-chay",
+        "dau-nanh",
+        "khong-heo",
+        "khong-bo",
+        "khong-hai-san",
+        "it-dau",
+        "chat-xo-cao"
+      ],
+      "steps": [
+        "Ngâm rong biển khô khoảng 15 phút cho nở rồi xả lại nhiều lần cho sạch",
+        "Cắt đậu hũ non thành miếng vuông vừa ăn và thái gừng thành lát mỏng",
+        "Đun sôi 500ml nước với gừng, thả đậu hũ non vào nấu nhẹ 5 phút",
+        "Cho rong biển đã ngâm vào nấu thêm cho chín mềm",
+        "Nêm muối và hạt nêm chay cho vừa miệng rồi tắt bếp",
+        "Rưới dầu mè vào nồi canh rồi múc ra tô dùng nóng"
+      ],
+      "ingredients": [
+        "20g rong biển khô (ngâm nở ~100g)",
+        "150g đậu hũ non",
+        "10g gừng thái lát",
+        "500ml nước",
+        "5ml dầu mè",
+        "muối hạt nêm chay"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "07_toi_chay_11",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Khoai tây nghiền nấm sốt hành tây",
+      "description": null,
+      "image_url": null,
+      "calories": 417,
+      "protein": 11,
+      "carbs": 60,
+      "fat": 14,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "dinner",
+      "tags": [
+        "chay-lacto",
+        "thuan-chay",
+        "sua",
+        "khong-heo",
+        "khong-bo",
+        "khong-hai-san",
+        "gi-thap",
+        "khong-cay"
+      ],
+      "steps": [
+        "Gọt vỏ khoai tây, cắt miếng rồi luộc đến khi thật mềm",
+        "Nghiền nhuyễn khoai tây cùng sữa tươi và bơ thực vật, nêm chút muối tiêu cho mịn và đậm đà",
+        "Thái nấm đùi gà thành lát và hành tây thái mỏng",
+        "Phi thơm hành tây với dầu olive rồi cho nấm vào xào đến khi chín và ráo nước",
+        "Nêm muối tiêu cho phần nấm hành vừa miệng",
+        "Múc khoai tây nghiền ra đĩa rồi úp nấm xào hành tây lên trên và dùng nóng"
+      ],
+      "ingredients": [
+        "300g khoai tây",
+        "30ml sữa tươi không đường (hoặc sữa hạt)",
+        "10g bơ thực vật",
+        "100g nấm đùi gà",
+        "50g hành tây",
+        "5ml dầu olive",
+        "muối tiêu"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "07_toi_chay_12",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Sữa đậu nành không đường tự làm",
+      "description": null,
+      "image_url": null,
+      "calories": 90,
+      "protein": 7,
+      "carbs": 6,
+      "fat": 4,
+      "prep_time": 15,
+      "difficulty": "easy",
+      "meal_type": "snack",
+      "tags": [
+        "chay-lacto",
+        "thuan-chay",
+        "dau-nanh",
+        "giau-dam",
+        "it-duong"
+      ],
+      "steps": [
+        "Ngâm đậu nành khô khoảng 8 giờ cho nở mềm rồi đãi sạch vỏ",
+        "Xay nhuyễn đậu với 1 lít nước rồi lọc qua túi vải bỏ bã",
+        "Đun sôi nước đậu trên lửa vừa 10-15 phút, vừa đun vừa khuấy và hớt bọt để không trào",
+        "Cho một nhúm muối vào khuấy đều, không thêm đường",
+        "Để nguội bớt rồi rót ra ly dùng nóng hoặc ướp lạnh"
+      ],
+      "ingredients": [
+        "80g đậu nành khô (ngâm, xay, lọc)",
+        "1L nước",
+        "muối 1 nhúm"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "08_snack_chay_01",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Trái cây tươi theo mùa + muối ớt",
+      "description": null,
+      "image_url": null,
+      "calories": 82,
+      "protein": 1,
+      "carbs": 20,
+      "fat": 0,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "snack",
+      "tags": [
+        "chay-lacto",
+        "thuan-chay",
+        "it-duong",
+        "chat-xo-cao"
+      ],
+      "steps": [
+        "Rửa sạch trái cây theo mùa rồi để ráo nước",
+        "Gọt vỏ nếu cần và cắt thành miếng vừa ăn",
+        "Bày trái cây ra đĩa",
+        "Dùng kèm một lượng nhỏ muối ớt để chấm"
+      ],
+      "ingredients": [
+        "150g trái cây (xoài, ổi, thanh long, chuối, táo)",
+        "1g muối ớt"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "08_snack_chay_02",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Hạt dẻ cười rang khô",
+      "description": null,
+      "image_url": null,
+      "calories": 168,
+      "protein": 6,
+      "carbs": 8,
+      "fat": 14,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "snack",
+      "tags": [
+        "chay-lacto",
+        "thuan-chay",
+        "hat",
+        "chat-beo-tot",
+        "it-duong"
+      ],
+      "steps": [
+        "Chia hạt dẻ cười rang khô thành khẩu phần 30g",
+        "Cho ra chén nhỏ",
+        "Ăn trực tiếp, không thêm muối hay gia vị"
+      ],
+      "ingredients": [
+        "30g hạt dẻ cười rang khô không muối"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "08_snack_chay_03",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Khoai lang nước",
+      "description": null,
+      "image_url": null,
+      "calories": 129,
+      "protein": 2,
+      "carbs": 30,
+      "fat": 0,
+      "prep_time": 20,
+      "difficulty": "easy",
+      "meal_type": "snack",
+      "tags": [
+        "chay-lacto",
+        "thuan-chay",
+        "gi-thap",
+        "chat-xo-cao"
+      ],
+      "steps": [
+        "Rửa sạch củ khoai lang nước cho hết đất cát",
+        "Luộc hoặc hấp khoai 15-20 phút đến khi chín mềm",
+        "Để nguội bớt rồi bóc vỏ",
+        "Ăn trực tiếp, không thêm đường"
+      ],
+      "ingredients": [
+        "1 củ khoai lang nước vừa (~150g)"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "08_snack_chay_04",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Sữa chua không đường trái cây",
+      "description": null,
+      "image_url": null,
+      "calories": 105,
+      "protein": 4,
+      "carbs": 15,
+      "fat": 3,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "snack",
+      "tags": [
+        "chay-lacto",
+        "sua",
+        "probiotic",
+        "it-duong"
+      ],
+      "steps": [
+        "Múc sữa chua không đường ra bát",
+        "Rửa sạch trái cây tươi rồi cắt thành miếng nhỏ vừa ăn",
+        "Xếp trái cây lên trên mặt sữa chua",
+        "Dùng ngay, không thêm đường hay mật ong"
+      ],
+      "ingredients": [
+        "100g sữa chua không đường",
+        "80g trái cây tươi tùy thích"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "08_snack_chay_05",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Nước ép cần tây dứa dưa leo",
+      "description": null,
+      "image_url": null,
+      "calories": 65,
+      "protein": 2,
+      "carbs": 16,
+      "fat": 0,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "snack",
+      "tags": [
+        "chay-lacto",
+        "thuan-chay",
+        "it-duong",
+        "chat-xo-cao"
+      ],
+      "steps": [
+        "Rửa sạch cần tây, dứa và dưa leo, cắt khúc vừa miệng máy ép",
+        "Gọt vỏ dứa và bỏ mắt, dưa leo có thể để vỏ nếu sạch",
+        "Cho cần tây, dứa, dưa leo vào ép lấy nước (hoặc xay nhuyễn rồi lọc qua rây bỏ bã)",
+        "Thêm 100ml nước lọc vào khuấy đều cho loãng vừa uống",
+        "Rót ra ly và uống ngay, không thêm đường"
+      ],
+      "ingredients": [
+        "80g cần tây",
+        "80g dứa tươi",
+        "80g dưa leo",
+        "100ml nước lọc"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "08_snack_chay_06",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Xôi đậu xanh muối mè",
+      "description": null,
+      "image_url": null,
+      "calories": 385,
+      "protein": 13,
+      "carbs": 69,
+      "fat": 6,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "snack",
+      "tags": [
+        "chay-lacto",
+        "thuan-chay",
+        "hat",
+        "gi-thap",
+        "chat-xo-cao"
+      ],
+      "steps": [
+        "Vo sạch 60g gạo nếp đã ngâm 4h, để ráo nước",
+        "Đãi sạch 30g đậu xanh bóc vỏ rồi trộn đều với gạo nếp",
+        "Cho gạo nếp và đậu xanh vào xửng, hấp khoảng 25-30 phút đến khi xôi chín mềm dẻo",
+        "Trộn 10g mè rang với 1g muối, giã sơ cho dậy mùi",
+        "Xới xôi ra đĩa, rắc đều muối mè lên trên và dùng nóng"
+      ],
+      "ingredients": [
+        "60g gạo nếp (ngâm 4h)",
+        "30g đậu xanh bóc vỏ",
+        "10g mè rang",
+        "1g muối"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "08_snack_chay_07",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Smoothie rau bina chuối táo gừng",
+      "description": null,
+      "image_url": null,
+      "calories": 178,
+      "protein": 3,
+      "carbs": 46,
+      "fat": 1,
+      "prep_time": 5,
+      "difficulty": "easy",
+      "meal_type": "snack",
+      "tags": [
+        "chay-lacto",
+        "thuan-chay",
+        "it-duong",
+        "chat-xo-cao"
+      ],
+      "steps": [
+        "Rửa sạch 30g rau bina, lột vỏ chuối và gọt vỏ táo rồi cắt miếng nhỏ",
+        "Gọt vỏ và đập dập 5g gừng tươi",
+        "Cho rau bina, chuối, táo, gừng và 150ml nước lọc vào máy xay",
+        "Xay nhuyễn 1-2 phút đến khi hỗn hợp mịn",
+        "Rót ra ly và uống ngay, không thêm đường"
+      ],
+      "ingredients": [
+        "30g rau bina (cải bó xôi)",
+        "1 quả chuối (~100g)",
+        "1 quả táo (~150g)",
+        "5g gừng tươi",
+        "150ml nước lọc"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "08_snack_chay_08",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Đậu bắp hấp mỡ hành chay",
+      "description": null,
+      "image_url": null,
+      "calories": 115,
+      "protein": 4,
+      "carbs": 16,
+      "fat": 5,
+      "prep_time": 10,
+      "difficulty": "easy",
+      "meal_type": "snack",
+      "tags": [
+        "chay-lacto",
+        "thuan-chay",
+        "it-dau",
+        "chat-xo-cao"
+      ],
+      "steps": [
+        "Rửa sạch 200g đậu bắp, cắt bỏ cuống",
+        "Xếp đậu bắp vào xửng, hấp 7-10 phút đến khi chín giòn",
+        "Phi 10g hành lá thái nhỏ với 5ml dầu cho thơm và hơi tái",
+        "Xếp đậu bắp ra đĩa, rưới đều mỡ hành lên trên",
+        "Rắc chút tiêu và dùng nóng"
+      ],
+      "ingredients": [
+        "200g đậu bắp tươi",
+        "10g hành lá thái nhỏ",
+        "5ml dầu phi hành chay",
+        "tiêu"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "08_snack_chay_09",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Chè đậu đỏ hạt sen ít đường",
+      "description": null,
+      "image_url": null,
+      "calories": 305,
+      "protein": 14,
+      "carbs": 61,
+      "fat": 1,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "snack",
+      "tags": [
+        "chay-lacto",
+        "thuan-chay",
+        "chat-xo-cao",
+        "gi-thap"
+      ],
+      "steps": [
+        "Ngâm riêng 50g đậu đỏ khô và 30g hạt sen khô cho nở mềm",
+        "Nấu đậu đỏ với phần nước cho mềm bở, vớt bọt trong khi nấu",
+        "Nấu hạt sen riêng đến khi bở mềm",
+        "Gộp đậu đỏ và hạt sen vào nồi cùng tổng 400ml nước, thêm 10g đường phèn",
+        "Đun nhỏ lửa thêm vài phút cho đường tan và thấm vị",
+        "Múc ra chén, ăn ấm hoặc để nguội ăn lạnh tùy thích"
+      ],
+      "ingredients": [
+        "50g đậu đỏ khô (ngâm, nấu chín)",
+        "30g hạt sen khô (ngâm chín)",
+        "10g đường phèn",
+        "400ml nước"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "08_snack_chay_10",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Bơ tươi + bánh gạo lứt",
+      "description": null,
+      "image_url": null,
+      "calories": 154,
+      "protein": 3,
+      "carbs": 20,
+      "fat": 8,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "snack",
+      "tags": [
+        "chay-lacto",
+        "thuan-chay",
+        "chat-beo-tot",
+        "gi-thap"
+      ],
+      "steps": [
+        "Bổ lấy 1/4 quả bơ chín, dùng nĩa dằm nhẹ cho mịn",
+        "Phết đều bơ dằm lên 2 tấm bánh gạo lứt",
+        "Rắc một nhúm muối biển lên trên",
+        "Dùng ngay để bánh giữ độ giòn"
+      ],
+      "ingredients": [
+        "1/4 quả bơ (~50g)",
+        "2 tấm bánh gạo lứt (~20g)",
+        "muối biển 1 nhúm"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "08_snack_chay_11",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Salad rau mầm đậu hũ chiên giòn nồi chiên",
+      "description": null,
+      "image_url": null,
+      "calories": 144,
+      "protein": 10,
+      "carbs": 6,
+      "fat": 10,
+      "prep_time": 12,
+      "difficulty": "easy",
+      "meal_type": "snack",
+      "tags": [
+        "chay-lacto",
+        "thuan-chay",
+        "dau-nanh",
+        "giau-dam",
+        "chat-xo-cao"
+      ],
+      "steps": [
+        "Cắt 100g đậu hũ cứng thành hạt lựu, thấm khô",
+        "Cho đậu hũ vào nồi chiên không dầu, nướng 180°C trong 12 phút đến khi vàng giòn",
+        "Rửa sạch 50g rau mầm và 30g cà chua bi, cắt đôi cà chua",
+        "Pha sốt từ 5ml dầu olive, 5ml nước tương và vài giọt nước cốt chanh",
+        "Cho đậu hũ giòn, rau mầm và cà chua bi vào tô, rưới sốt và trộn đều",
+        "Bày ra đĩa và dùng ngay khi đậu còn giòn"
+      ],
+      "ingredients": [
+        "100g đậu hũ cứng cắt hạt lựu",
+        "50g rau mầm (cải mầm, đậu mầm)",
+        "30g cà chua bi",
+        "5ml dầu olive",
+        "5ml nước tương",
+        "chanh"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "08_snack_chay_12",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Ức gà nướng mật ong tỏi cơm gạo lứt bông cải",
+      "description": null,
+      "image_url": null,
+      "calories": 691,
+      "protein": 59,
+      "carbs": 92,
+      "fat": 9,
+      "prep_time": 30,
+      "difficulty": "medium",
+      "meal_type": "lunch",
+      "tags": [
+        "eat-clean",
+        "giau-dam",
+        "khong-heo",
+        "khong-bo"
+      ],
+      "steps": [
+        "Ướp 150g ức gà bỏ da với 5ml mật ong, 2 tép tỏi băm và 5ml nước tương, để thấm 30 phút",
+        "Vo và nấu 100g gạo lứt thành cơm chín",
+        "Nướng gà ở 180°C trong 20-25 phút (hoặc áp chảo) đến khi chín vàng, không khô",
+        "Luộc 120g bông cải xanh chín tới còn giòn",
+        "Thái lát ức gà, bày cùng cơm gạo lứt và bông cải lên đĩa rồi dùng nóng"
+      ],
+      "ingredients": [
+        "150g ức gà bỏ da",
+        "5ml mật ong",
+        "2 tép tỏi băm",
+        "5ml nước tương",
+        "100g gạo lứt sống (~250g cơm chín)",
+        "120g bông cải xanh luộc"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "09_trua_giau_dam_01",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Cá hồi áp chảo sốt chanh dây măng tây",
+      "description": null,
+      "image_url": null,
+      "calories": 465,
+      "protein": 34,
+      "carbs": 14,
+      "fat": 31,
+      "prep_time": 5,
+      "difficulty": "easy",
+      "meal_type": "lunch",
+      "tags": [
+        "eat-clean",
+        "giau-dam",
+        "ca",
+        "khong-heo",
+        "khong-bo",
+        "omega3"
+      ],
+      "steps": [
+        "Thấm khô 150g cá hồi phi lê, ướp chút muối tiêu",
+        "Đun nóng 5ml dầu olive, áp chảo cá hồi 3 phút mỗi mặt đến khi vàng",
+        "Pha 30ml nước chanh dây với 5ml mật ong, đun nhỏ lửa cho sệt lại",
+        "Luộc 150g măng tây chín tới còn xanh giòn",
+        "Cắt lát 1/4 quả bơ, bày cá hồi, măng tây và bơ ra đĩa",
+        "Rưới sốt chanh dây mật ong lên cá và dùng nóng"
+      ],
+      "ingredients": [
+        "150g cá hồi phi lê bỏ da",
+        "30ml nước chanh dây (~2 quả)",
+        "5ml mật ong",
+        "5ml dầu olive",
+        "150g măng tây",
+        "1/4 quả bơ (~40g)"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "09_trua_giau_dam_02",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Thịt bò xào đậu cô ve cơm gạo lứt",
+      "description": null,
+      "image_url": null,
+      "calories": 860,
+      "protein": 51,
+      "carbs": 91,
+      "fat": 31,
+      "prep_time": 5,
+      "difficulty": "easy",
+      "meal_type": "lunch",
+      "tags": [
+        "eat-clean",
+        "giau-dam",
+        "khong-heo"
+      ],
+      "steps": [
+        "Ướp 150g thịt bò thăn thái lát với chút nước tương, để thấm vài phút",
+        "Vo và nấu 100g gạo lứt thành cơm chín",
+        "Rửa và cắt khúc 150g đậu cô ve",
+        "Phi thơm 2 tép tỏi băm với 5ml dầu olive, cho bò vào xào lửa lớn 2 phút rồi trút ra",
+        "Cho đậu cô ve vào chảo xào thêm 3 phút, trả bò vào đảo cùng",
+        "Nêm 10ml nước tương ít muối, đảo nhanh rồi tắt bếp, ăn kèm cơm gạo lứt"
+      ],
+      "ingredients": [
+        "150g thịt bò thăn thái lát",
+        "150g đậu cô ve",
+        "2 tép tỏi",
+        "5ml dầu olive",
+        "10ml nước tương ít muối",
+        "100g gạo lứt sống"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "09_trua_giau_dam_03",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Salad tôm trứng luộc sốt bơ ngò",
+      "description": null,
+      "image_url": null,
+      "calories": 478,
+      "protein": 51,
+      "carbs": 10,
+      "fat": 30,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "lunch",
+      "tags": [
+        "eat-clean",
+        "giau-dam",
+        "hai-san",
+        "trung",
+        "khong-heo",
+        "khong-bo",
+        "omega3"
+      ],
+      "steps": [
+        "Luộc tôm sú khoảng 2-3 phút cho vừa chín hồng, vớt ra bóc vỏ và để ráo",
+        "Luộc trứng chín, ngâm nước lạnh rồi bóc vỏ, cắt làm đôi hoặc làm tư",
+        "Rửa sạch xà lách, cà chua bi và ngò rí, để ráo rồi cắt xà lách vừa ăn, bổ đôi cà chua bi",
+        "Nghiền nhuyễn bơ rồi trộn với ngò rí băm nhỏ, nước cốt chanh, dầu olive và chút muối để pha sốt",
+        "Xếp xà lách và cà chua bi ra đĩa, cho tôm và trứng lên trên",
+        "Rưới sốt bơ ngò lên salad và dùng ngay khi còn tươi"
+      ],
+      "ingredients": [
+        "150g tôm sú luộc bỏ vỏ",
+        "2 trứng luộc (~100g)",
+        "50g xà lách",
+        "80g cà chua bi",
+        "30g ngò rí",
+        "1/4 quả bơ (~40g)",
+        "10ml dầu olive",
+        "15ml nước cốt chanh"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "09_trua_giau_dam_04",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Ức gà xào ớt chuông cơm gạo lứt bí ngòi",
+      "description": null,
+      "image_url": null,
+      "calories": 737,
+      "protein": 58,
+      "carbs": 91,
+      "fat": 14,
+      "prep_time": 5,
+      "difficulty": "easy",
+      "meal_type": "lunch",
+      "tags": [
+        "eat-clean",
+        "giau-dam",
+        "khong-heo",
+        "khong-bo"
+      ],
+      "steps": [
+        "Vo sạch gạo lứt rồi nấu chín với lượng nước phù hợp để ăn kèm",
+        "Thái lát ức gà, ướp với chút muối tiêu; cắt ớt chuông đỏ, vàng và bí ngòi thành miếng vừa ăn, băm tỏi",
+        "Đun nóng dầu olive, phi thơm tỏi rồi cho ức gà vào xào lửa lớn đến khi săn và chín tới",
+        "Cho ớt chuông và bí ngòi vào xào nhanh khoảng 3 phút cho rau giòn ngọt",
+        "Nêm nhẹ muối tiêu cho vừa ăn rồi tắt bếp",
+        "Bày gà xào ra đĩa và dùng kèm cơm gạo lứt"
+      ],
+      "ingredients": [
+        "150g ức gà bỏ da thái lát",
+        "80g ớt chuông đỏ",
+        "80g ớt chuông vàng",
+        "80g bí ngòi",
+        "2 tép tỏi",
+        "5ml dầu olive",
+        "100g gạo lứt sống"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "09_trua_giau_dam_05",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Cá thu áp chảo khoai lang luộc rau củ",
+      "description": null,
+      "image_url": null,
+      "calories": 506,
+      "protein": 33,
+      "carbs": 34,
+      "fat": 26,
+      "prep_time": 10,
+      "difficulty": "easy",
+      "meal_type": "lunch",
+      "tags": [
+        "eat-clean",
+        "giau-dam",
+        "ca",
+        "khong-heo",
+        "khong-bo",
+        "omega3"
+      ],
+      "steps": [
+        "Rửa sạch cá thu phi lê, thấm khô rồi ướp với muối tiêu và nước cốt chanh khoảng 10 phút",
+        "Luộc khoai lang và rau củ (cà rốt, su su) chín mềm, vớt ra để ráo",
+        "Đun nóng dầu olive trong chảo, áp chảo cá khoảng 3-4 phút mỗi mặt đến khi vàng đều và chín",
+        "Xếp cá thu ra đĩa cùng khoai lang và rau củ luộc",
+        "Vắt thêm chút chanh lên cá và dùng nóng"
+      ],
+      "ingredients": [
+        "150g cá thu phi lê",
+        "150g khoai lang luộc",
+        "100g rau củ luộc (cà rốt, su su)",
+        "5ml dầu olive",
+        "muối tiêu",
+        "chanh"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "09_trua_giau_dam_06",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Bò cuộn măng tây cơm gạo lứt salad",
+      "description": null,
+      "image_url": null,
+      "calories": 829,
+      "protein": 51,
+      "carbs": 83,
+      "fat": 31,
+      "prep_time": 5,
+      "difficulty": "easy",
+      "meal_type": "lunch",
+      "tags": [
+        "eat-clean",
+        "giau-dam",
+        "khong-heo"
+      ],
+      "steps": [
+        "Vo sạch gạo lứt rồi nấu chín để ăn kèm",
+        "Rửa măng tây, cắt bỏ phần gốc già; ướp thịt bò thái lát mỏng với nước tương, dầu mè, tỏi băm và tiêu khoảng 5 phút",
+        "Cuộn từng lát thịt bò quanh thân măng tây rồi xiên tăm cố định",
+        "Áp chảo các cuộn bò lửa lớn khoảng 3-4 phút, trở đều cho thịt chín và măng tây vừa giòn",
+        "Rửa sạch xà lách, để ráo và bày ra đĩa làm salad",
+        "Xếp bò cuộn măng tây ra đĩa, dùng kèm cơm gạo lứt và salad"
+      ],
+      "ingredients": [
+        "150g thịt bò thăn thái lát mỏng",
+        "100g măng tây",
+        "100g gạo lứt sống",
+        "50g xà lách",
+        "10ml nước tương",
+        "5ml dầu mè",
+        "tỏi",
+        "tiêu"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "09_trua_giau_dam_07",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Trứng cuộn rau củ cơm gạo lứt bông cải",
+      "description": null,
+      "image_url": null,
+      "calories": 718,
+      "protein": 32,
+      "carbs": 92,
+      "fat": 25,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "lunch",
+      "tags": [
+        "eat-clean",
+        "giau-dam",
+        "trung",
+        "khong-heo",
+        "khong-bo"
+      ],
+      "steps": [
+        "Vo sạch gạo lứt rồi nấu chín và luộc bông cải chín tới để ăn kèm",
+        "Bào sợi cà rốt, thái lát nấm đùi gà, cắt nhỏ hành lá",
+        "Đập trứng vào tô, đánh tan rồi cho cà rốt, nấm và hành lá vào trộn đều, nêm chút muối tiêu",
+        "Đun nóng dầu olive, đổ trứng vào chảo tráng mỏng, để se mặt rồi cuộn tròn lại",
+        "Lấy trứng cuộn ra, để nguội bớt rồi thái khúc vừa ăn",
+        "Bày trứng cuộn ra đĩa, dùng kèm cơm gạo lứt và bông cải luộc"
+      ],
+      "ingredients": [
+        "3 trứng (~150g)",
+        "50g cà rốt bào sợi",
+        "30g nấm đùi gà thái lát",
+        "20g hành lá",
+        "100g gạo lứt sống",
+        "100g bông cải luộc",
+        "5ml dầu olive"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "09_trua_giau_dam_08",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Salad ức gà sốt sữa chua mật ong khoai lang",
+      "description": null,
+      "image_url": null,
+      "calories": 428,
+      "protein": 55,
+      "carbs": 37,
+      "fat": 6,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "lunch",
+      "tags": [
+        "eat-clean",
+        "giau-dam",
+        "sua",
+        "khong-heo",
+        "khong-bo"
+      ],
+      "steps": [
+        "Luộc khoai lang chín mềm, vớt ra để ráo và cắt miếng vừa ăn",
+        "Đun nóng chảo với chút dầu, áp chảo ức gà đến khi vàng đều và chín bên trong, để nguội rồi thái lát",
+        "Trộn sữa chua Hy Lạp không đường với mật ong, nước cốt chanh và chút muối để pha sốt",
+        "Rửa sạch xà lách và cà chua bi, để ráo rồi cắt vừa ăn, bổ đôi cà chua bi",
+        "Xếp xà lách, cà chua bi, khoai lang và ức gà ra đĩa",
+        "Rưới sốt sữa chua mật ong lên trên và dùng ngay"
+      ],
+      "ingredients": [
+        "150g ức gà áp chảo",
+        "150g khoai lang luộc",
+        "50g xà lách",
+        "80g cà chua bi",
+        "sốt: 50g sữa chua Hy Lạp KĐ + 5ml mật ong + chanh + muối"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "09_trua_giau_dam_09",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Mực xào ớt chuông cơm gạo lứt cải cầu vồng",
+      "description": null,
+      "image_url": null,
+      "calories": 620,
+      "protein": 35,
+      "carbs": 93,
+      "fat": 11,
+      "prep_time": 5,
+      "difficulty": "easy",
+      "meal_type": "lunch",
+      "tags": [
+        "eat-clean",
+        "giau-dam",
+        "hai-san",
+        "khong-heo",
+        "khong-bo"
+      ],
+      "steps": [
+        "Vo sạch gạo lứt rồi nấu chín và luộc cải cầu vồng chín tới để ăn kèm",
+        "Làm sạch mực, thái khoanh; cắt ớt chuông ba màu miếng vừa ăn và băm tỏi",
+        "Đun nóng dầu olive, phi thơm tỏi rồi cho mực vào xào lửa lớn 2-3 phút, không xào quá lâu kẻo mực dai",
+        "Cho ớt chuông vào xào thêm 2 phút cho giòn",
+        "Nêm nước tương cho vừa ăn rồi tắt bếp",
+        "Bày mực xào ra đĩa, dùng kèm cơm gạo lứt và cải cầu vồng luộc"
+      ],
+      "ingredients": [
+        "150g mực tươi làm sạch thái khoanh",
+        "100g ớt chuông 3 màu",
+        "50g cải cầu vồng luộc",
+        "100g gạo lứt sống",
+        "2 tép tỏi",
+        "5ml dầu olive",
+        "10ml nước tương"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "09_trua_giau_dam_10",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Đậu hũ non sốt thịt bằm cơm gạo lứt",
+      "description": null,
+      "image_url": null,
+      "calories": 742,
+      "protein": 53,
+      "carbs": 89,
+      "fat": 21,
+      "prep_time": 5,
+      "difficulty": "easy",
+      "meal_type": "lunch",
+      "tags": [
+        "eat-clean",
+        "giau-dam",
+        "dau-nanh",
+        "khong-bo"
+      ],
+      "steps": [
+        "Vo sạch gạo lứt rồi nấu chín để ăn kèm",
+        "Cắt đậu hũ non thành miếng vừa ăn, băm hành tím, cắt nhỏ cà chua",
+        "Phi thơm hành tím với chút dầu, cho cà chua vào xào mềm rồi thêm thịt heo xay vào xào săn",
+        "Thêm chút nước, cho đậu hũ non vào nấu nhẹ khoảng 5 phút cho thấm",
+        "Nêm nước mắm và muối tiêu cho vừa miệng rồi tắt bếp",
+        "Múc đậu hũ sốt thịt bằm ra đĩa và dùng kèm cơm gạo lứt"
+      ],
+      "ingredients": [
+        "200g đậu hũ non",
+        "100g thịt heo nạc xay",
+        "100g cà chua",
+        "30g hành tím",
+        "100g gạo lứt sống",
+        "5ml nước mắm",
+        "muối tiêu"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "09_trua_giau_dam_11",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Cá ngừ mayo salad khoai lang ngô luộc",
+      "description": null,
+      "image_url": null,
+      "calories": 523,
+      "protein": 49,
+      "carbs": 53,
+      "fat": 15,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "lunch",
+      "tags": [
+        "eat-clean",
+        "giau-dam",
+        "ca",
+        "trung",
+        "khong-heo",
+        "khong-bo",
+        "omega3"
+      ],
+      "steps": [
+        "Vớt cá ngừ ra khỏi hộp, để ráo nước muối rồi trộn đều với mayo ít béo",
+        "Luộc khoai lang và ngô chín mềm, vớt ra để ráo",
+        "Rửa sạch xà lách, cà chua và ớt chuông, để ráo rồi cắt miếng vừa ăn",
+        "Bày xà lách, cà chua và ớt chuông ra đĩa, cho cá ngừ trộn mayo lên trên",
+        "Dùng kèm khoai lang và ngô luộc"
+      ],
+      "ingredients": [
+        "1 hộp cá ngừ ~160g (ngâm nước muối)",
+        "15g mayo ít béo",
+        "50g xà lách",
+        "80g cà chua",
+        "50g ớt chuông",
+        "150g khoai lang luộc",
+        "1/2 bắp ngô luộc (~80g)"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "09_trua_giau_dam_12",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Cá hồi nướng giấy bạc măng tây cơm gạo lứt",
+      "description": null,
+      "image_url": null,
+      "calories": 756,
+      "protein": 41,
+      "carbs": 82,
+      "fat": 28,
+      "prep_time": 15,
+      "difficulty": "easy",
+      "meal_type": "dinner",
+      "tags": [
+        "eat-clean",
+        "giau-dam",
+        "ca",
+        "khong-heo",
+        "khong-bo",
+        "omega3"
+      ],
+      "steps": [
+        "Vo sạch gạo lứt rồi nấu chín để ăn kèm",
+        "Rửa cá hồi và măng tây, thấm khô; cắt bỏ phần gốc già của măng tây",
+        "Trải giấy bạc, đặt cá hồi và măng tây lên, rưới dầu olive, rắc muối tiêu và vắt chút nước cốt chanh",
+        "Gói kín giấy bạc lại rồi nướng ở 200°C trong 15 phút đến khi cá chín",
+        "Mở giấy bạc, bày cá hồi và măng tây ra đĩa, dùng kèm cơm gạo lứt"
+      ],
+      "ingredients": [
+        "150g cá hồi phi lê bỏ da",
+        "150g măng tây",
+        "5ml dầu olive",
+        "muối tiêu",
+        "chanh",
+        "100g gạo lứt sống"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "10_toi_giau_dam_01",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Ức gà áp chảo sốt chanh dây mật ong bông cải",
+      "description": null,
+      "image_url": null,
+      "calories": 440,
+      "protein": 66,
+      "carbs": 15,
+      "fat": 13,
+      "prep_time": 7,
+      "difficulty": "easy",
+      "meal_type": "dinner",
+      "tags": [
+        "eat-clean",
+        "giau-dam",
+        "khong-heo",
+        "khong-bo"
+      ],
+      "steps": [
+        "Rửa sạch 200g ức gà bỏ da, thấm khô rồi xát chút muối tiêu cho thấm",
+        "Bắc chảo chống dính cho 5ml dầu olive, áp chảo ức gà lửa vừa 5-7 phút mỗi mặt đến khi vàng và chín tới",
+        "Cho 30ml nước chanh dây và 5ml mật ong vào chảo nhỏ, đun lửa nhỏ khuấy đều đến khi sốt hơi sệt",
+        "Thái lát ức gà rồi rưới đều sốt chanh dây mật ong lên trên",
+        "Bày ra đĩa ăn kèm 150g bông cải xanh luộc"
+      ],
+      "ingredients": [
+        "200g ức gà bỏ da",
+        "30ml nước chanh dây",
+        "5ml mật ong",
+        "5ml dầu olive",
+        "150g bông cải xanh luộc"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "10_toi_giau_dam_02",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Thịt bò xào bông cải xanh nấm cơm gạo lứt",
+      "description": null,
+      "image_url": null,
+      "calories": 892,
+      "protein": 55,
+      "carbs": 93,
+      "fat": 32,
+      "prep_time": 5,
+      "difficulty": "easy",
+      "meal_type": "dinner",
+      "tags": [
+        "eat-clean",
+        "giau-dam",
+        "khong-heo"
+      ],
+      "steps": [
+        "Vo sạch 100g gạo lứt rồi nấu chín thành cơm",
+        "Thái lát 150g thịt bò thăn, cắt nhỏ 150g bông cải xanh và 80g nấm đùi gà, băm 2 tép tỏi",
+        "Phi thơm tỏi với 5ml dầu olive, cho bông cải và nấm vào xào trước cho gần chín",
+        "Cho thịt bò vào xào nhanh lửa lớn khoảng 2 phút đến khi bò vừa chín tới",
+        "Nêm 10ml nước tương ít muối, đảo đều rồi tắt bếp",
+        "Bày bò xào ra đĩa, dùng kèm cơm gạo lứt"
+      ],
+      "ingredients": [
+        "150g thịt bò thăn thái lát",
+        "150g bông cải xanh",
+        "80g nấm đùi gà",
+        "2 tép tỏi",
+        "5ml dầu olive",
+        "10ml nước tương ít muối",
+        "100g gạo lứt sống"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "10_toi_giau_dam_03",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Cá hồi mì Ý nguyên cám rau củ nướng",
+      "description": null,
+      "image_url": null,
+      "calories": 696,
+      "protein": 43,
+      "carbs": 69,
+      "fat": 26,
+      "prep_time": 15,
+      "difficulty": "easy",
+      "meal_type": "dinner",
+      "tags": [
+        "giau-dam",
+        "ca",
+        "gluten",
+        "khong-heo",
+        "khong-bo",
+        "omega3"
+      ],
+      "steps": [
+        "Cắt nhỏ 80g bông cải và 50g ớt chuông, trộn cùng chút dầu olive, tỏi băm và muối tiêu",
+        "Nướng rau củ ở 180°C trong 15 phút đến khi mềm và hơi xém cạnh",
+        "Luộc 80g mì Ý nguyên cám đến độ al dente rồi vớt ra để ráo",
+        "Ướp 150g cá hồi phi lê với muối tiêu, áp chảo với chút dầu olive mỗi mặt vài phút đến chín vàng",
+        "Trộn mì Ý với rau củ nướng, đặt cá hồi lên trên rồi bày ra đĩa"
+      ],
+      "ingredients": [
+        "150g cá hồi phi lê",
+        "80g mì Ý nguyên cám khô (~200g chín)",
+        "80g bông cải",
+        "50g ớt chuông",
+        "5ml dầu olive",
+        "tỏi",
+        "muối tiêu"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "10_toi_giau_dam_04",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Tôm hấp sả cơm gạo lứt rau củ luộc",
+      "description": null,
+      "image_url": null,
+      "calories": 704,
+      "protein": 60,
+      "carbs": 107,
+      "fat": 7,
+      "prep_time": 10,
+      "difficulty": "easy",
+      "meal_type": "dinner",
+      "tags": [
+        "eat-clean",
+        "giau-dam",
+        "hai-san",
+        "khong-heo",
+        "khong-bo",
+        "it-dau"
+      ],
+      "steps": [
+        "Vo sạch 100g gạo lứt rồi nấu chín thành cơm",
+        "Rửa sạch 200g tôm sú đã bỏ đầu giữ vỏ, đập dập 2 cây sả xếp dưới đáy xửng",
+        "Xếp tôm lên trên sả, hấp 8-10 phút đến khi tôm chín đỏ",
+        "Luộc chín 150g rau củ (cải ngọt, cà rốt, bí xanh) rồi vớt ra để ráo",
+        "Bày tôm hấp ra đĩa, dùng kèm cơm gạo lứt và rau củ luộc"
+      ],
+      "ingredients": [
+        "200g tôm sú bỏ đầu giữ vỏ",
+        "2 cây sả đập dập",
+        "100g gạo lứt sống",
+        "150g rau củ luộc (cải ngọt, cà rốt, bí xanh)"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "10_toi_giau_dam_05",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Ức gà hấp cải bó xôi bơ tươi",
+      "description": null,
+      "image_url": null,
+      "calories": 477,
+      "protein": 66,
+      "carbs": 8,
+      "fat": 20,
+      "prep_time": 20,
+      "difficulty": "easy",
+      "meal_type": "dinner",
+      "tags": [
+        "eat-clean",
+        "giau-dam",
+        "khong-heo",
+        "khong-bo",
+        "it-dau",
+        "chat-beo-tot"
+      ],
+      "steps": [
+        "Rửa sạch 200g ức gà bỏ da, ướp với muối biển và tiêu đen cho thấm",
+        "Hấp ức gà trong 15-20 phút đến khi chín mềm",
+        "Rửa sạch 100g cải bó xôi, xào nhanh với 5ml dầu olive đến khi vừa mềm",
+        "Thái lát 1/4 quả bơ tươi",
+        "Thái lát ức gà, bày ra đĩa cùng cải bó xôi xào và bơ tươi thái lát"
+      ],
+      "ingredients": [
+        "200g ức gà bỏ da",
+        "100g cải bó xôi tươi",
+        "1/4 quả bơ (~50g)",
+        "muối biển",
+        "tiêu đen",
+        "5ml dầu olive"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "10_toi_giau_dam_06",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Heo sườn non áp chảo rau củ nướng",
+      "description": null,
+      "image_url": null,
+      "calories": 695,
+      "protein": 36,
+      "carbs": 15,
+      "fat": 54,
+      "prep_time": 30,
+      "difficulty": "medium",
+      "meal_type": "dinner",
+      "tags": [
+        "giau-dam",
+        "khong-bo",
+        "khong-hai-san"
+      ],
+      "steps": [
+        "Băm tỏi, ướp 200g sườn non heo với tỏi, 5g mù tạt Dijon và muối tiêu trong 30 phút",
+        "Cắt miếng vừa ăn 80g cà rốt, 80g ớt chuông và 80g bí ngòi, trộn với chút dầu olive và muối tiêu",
+        "Bắc chảo nóng với dầu olive, áp chảo sườn 5 phút mỗi mặt đến khi vàng đều và chín",
+        "Nướng rau củ ở 180°C trong 15 phút đến khi mềm và hơi xém",
+        "Bày sườn áp chảo ra đĩa cùng rau củ nướng"
+      ],
+      "ingredients": [
+        "200g sườn non heo (phần nạc)",
+        "80g cà rốt",
+        "80g ớt chuông",
+        "80g bí ngòi",
+        "5ml dầu olive",
+        "tỏi",
+        "mù tạt Dijon 5g",
+        "muối tiêu"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "10_toi_giau_dam_07",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Đậu phụ nướng rau củ hấp quinoa",
+      "description": null,
+      "image_url": null,
+      "calories": 491,
+      "protein": 28,
+      "carbs": 54,
+      "fat": 19,
+      "prep_time": 12,
+      "difficulty": "easy",
+      "meal_type": "dinner",
+      "tags": [
+        "eat-clean",
+        "giau-dam",
+        "dau-nanh",
+        "khong-heo",
+        "khong-bo"
+      ],
+      "steps": [
+        "Cắt 200g đậu hũ cứng thành miếng vừa ăn, ướp với 10ml nước tương, 5ml dầu mè và tỏi băm",
+        "Cho đậu hũ vào nồi chiên không dầu, nướng ở 180°C trong 12 phút đến khi vàng giòn",
+        "Vo sạch 70g quinoa rồi nấu chín tơi",
+        "Hấp chín 100g rau củ (bông cải, cà rốt) rồi vớt ra để ráo",
+        "Bày đậu hũ nướng ra đĩa cùng quinoa và rau củ hấp"
+      ],
+      "ingredients": [
+        "200g đậu hũ cứng",
+        "70g quinoa sống (~180g chín)",
+        "100g rau củ hấp (bông cải, cà rốt)",
+        "10ml nước tương",
+        "5ml dầu mè",
+        "tỏi"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "10_toi_giau_dam_08",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Cá basa hấp cơm gạo lứt rau củ luộc",
+      "description": null,
+      "image_url": null,
+      "calories": 580,
+      "protein": 38,
+      "carbs": 84,
+      "fat": 9,
+      "prep_time": 15,
+      "difficulty": "easy",
+      "meal_type": "dinner",
+      "tags": [
+        "eat-clean",
+        "giau-dam",
+        "ca",
+        "khong-heo",
+        "khong-bo",
+        "it-dau"
+      ],
+      "steps": [
+        "Vo sạch 100g gạo lứt rồi nấu chín thành cơm",
+        "Rửa sạch 180g cá basa phi lê, thái sợi 5g gừng và cắt khúc hành lá",
+        "Xếp gừng và hành lá lên cá, hấp 12-15 phút đến khi cá chín mềm",
+        "Luộc chín 150g rau củ (su su, cà rốt, bí xanh) rồi vớt ra để ráo",
+        "Rưới 5ml nước tương nhạt lên cá, bày ra đĩa cùng cơm gạo lứt và rau luộc"
+      ],
+      "ingredients": [
+        "180g cá basa phi lê",
+        "100g gạo lứt sống",
+        "150g rau củ luộc (su su, cà rốt, bí xanh)",
+        "5g gừng",
+        "hành lá",
+        "5ml nước tương nhạt"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "10_toi_giau_dam_09",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Gà xé súp bí đỏ rau muống luộc",
+      "description": null,
+      "image_url": null,
+      "calories": 398,
+      "protein": 67,
+      "carbs": 15,
+      "fat": 8,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "dinner",
+      "tags": [
+        "eat-clean",
+        "giau-dam",
+        "khong-heo",
+        "khong-bo"
+      ],
+      "steps": [
+        "Luộc chín 200g ức gà rồi để nguội và xé sợi",
+        "Hấp chín 150g bí đỏ và 50g hành tây cho mềm",
+        "Cho bí đỏ, hành tây và 50ml sữa tươi không đường vào máy xay nhuyễn rồi nấu lại cho nóng sánh",
+        "Luộc chín 150g rau muống rồi vớt ra để ráo",
+        "Múc súp bí đỏ ra tô, rắc gà xé lên trên, dùng kèm rau muống luộc"
+      ],
+      "ingredients": [
+        "200g ức gà luộc xé sợi",
+        "súp: 150g bí đỏ + 50g hành tây + 50ml sữa tươi KĐ xay nhuyễn",
+        "150g rau muống luộc"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "10_toi_giau_dam_10",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Ớt chuông nhồi thịt bò nướng cơm gạo lứt",
+      "description": null,
+      "image_url": null,
+      "calories": 820,
+      "protein": 49,
+      "carbs": 91,
+      "fat": 26,
+      "prep_time": 20,
+      "difficulty": "easy",
+      "meal_type": "dinner",
+      "tags": [
+        "giau-dam",
+        "khong-heo"
+      ],
+      "steps": [
+        "Vo sạch 100g gạo lứt rồi nấu chín thành cơm",
+        "Băm nhỏ 20g hành tây và 30g cà chua, trộn cùng 150g thịt bò xay, tỏi băm và muối tiêu",
+        "Cắt ngang phần đầu 2 quả ớt chuông, bỏ hạt rồi nhồi đầy hỗn hợp thịt bò vào trong",
+        "Nướng ớt chuông nhồi thịt ở 180°C trong 20 phút đến khi thịt chín và ớt mềm",
+        "Bày ớt chuông nhồi thịt ra đĩa, dùng kèm cơm gạo lứt"
+      ],
+      "ingredients": [
+        "2 quả ớt chuông lớn (~200g)",
+        "150g thịt bò xay",
+        "30g cà chua",
+        "20g hành tây",
+        "100g gạo lứt sống",
+        "muối tiêu",
+        "tỏi băm"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "10_toi_giau_dam_11",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Trứng hấp thịt băm nấm cơm gạo lứt",
+      "description": null,
+      "image_url": null,
+      "calories": 793,
+      "protein": 55,
+      "carbs": 79,
+      "fat": 27,
+      "prep_time": 20,
+      "difficulty": "easy",
+      "meal_type": "dinner",
+      "tags": [
+        "eat-clean",
+        "giau-dam",
+        "trung",
+        "khong-bo"
+      ],
+      "steps": [
+        "Vo sạch 100g gạo lứt rồi nấu thành cơm như bình thường.",
+        "Băm nhỏ nấm đùi gà và thái nhỏ hành lá.",
+        "Đập 3 quả trứng vào tô, cho thịt heo xay, nấm băm, hành lá, 5ml nước mắm nhạt và chút tiêu vào.",
+        "Đánh đều hỗn hợp trứng thịt cho tan mịn rồi đổ ra bát chịu nhiệt.",
+        "Hấp cách thủy 15-20 phút đến khi trứng chín và đông lại.",
+        "Rắc thêm chút tiêu, dùng nóng kèm cơm gạo lứt."
+      ],
+      "ingredients": [
+        "3 trứng (~150g)",
+        "100g thịt heo nạc xay",
+        "30g nấm đùi gà băm nhỏ",
+        "100g gạo lứt sống",
+        "5ml nước mắm nhạt",
+        "hành lá",
+        "tiêu"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "10_toi_giau_dam_12",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Sữa chua Hy Lạp không đường + hạt chia",
+      "description": null,
+      "image_url": null,
+      "calories": 152,
+      "protein": 18,
+      "carbs": 15,
+      "fat": 2,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "snack",
+      "tags": [
+        "eat-clean",
+        "giau-dam",
+        "sua",
+        "probiotic"
+      ],
+      "steps": [
+        "Múc 170g sữa chua Hy Lạp không đường ra bát.",
+        "Rửa sạch và cắt nhỏ 50g trái cây tươi tùy chọn.",
+        "Rắc 5g hạt chia đều lên mặt sữa chua.",
+        "Xếp trái cây lên trên rồi để nghỉ vài phút cho hạt chia nở.",
+        "Trộn nhẹ và dùng ngay."
+      ],
+      "ingredients": [
+        "170g sữa chua Hy Lạp không đường",
+        "5g hạt chia",
+        "50g trái cây tươi tùy chọn"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "11_snack_giau_dam_01",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "3 quả trứng luộc",
+      "description": null,
+      "image_url": null,
+      "calories": 232,
+      "protein": 20,
+      "carbs": 2,
+      "fat": 16,
+      "prep_time": 10,
+      "difficulty": "easy",
+      "meal_type": "snack",
+      "tags": [
+        "eat-clean",
+        "giau-dam",
+        "trung"
+      ],
+      "steps": [
+        "Cho 3 quả trứng gà vào nồi, đổ nước ngập trứng.",
+        "Đun sôi rồi luộc 8-10 phút đến khi chín lòng đào hoặc chín kỹ tùy thích.",
+        "Vớt trứng ra ngâm ngay vào nước lạnh cho dễ bóc.",
+        "Bóc vỏ, chấm chút muối tiêu nếu thích và ăn ngay."
+      ],
+      "ingredients": [
+        "3 quả trứng gà (~150g)",
+        "muối tiêu tùy chọn"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "11_snack_giau_dam_02",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Cá ngừ hộp rau sống bánh gạo lứt",
+      "description": null,
+      "image_url": null,
+      "calories": 177,
+      "protein": 23,
+      "carbs": 17,
+      "fat": 1,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "snack",
+      "tags": [
+        "eat-clean",
+        "giau-dam",
+        "ca",
+        "omega3"
+      ],
+      "steps": [
+        "Mở hộp cá ngừ, để ráo hết nước muối.",
+        "Rửa sạch rồi thái lát mỏng 30g dưa leo và bổ đôi 30g cà chua bi.",
+        "Dằm tơi cá ngừ rồi bày đều lên 2 tấm bánh gạo lứt.",
+        "Xếp dưa leo và cà chua bi lên trên.",
+        "Dùng ngay khi bánh còn giòn."
+      ],
+      "ingredients": [
+        "80g cá ngừ hộp ngâm nước muối (để ráo)",
+        "2 tấm bánh gạo lứt (~20g)",
+        "30g dưa leo",
+        "30g cà chua bi"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "11_snack_giau_dam_03",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Phô mai tươi ít béo + bánh mì nguyên cám",
+      "description": null,
+      "image_url": null,
+      "calories": 239,
+      "protein": 13,
+      "carbs": 24,
+      "fat": 10,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "snack",
+      "tags": [
+        "giau-dam",
+        "sua",
+        "gluten"
+      ],
+      "steps": [
+        "Để 40g phô mai tươi ở nhiệt độ phòng vài phút cho mềm.",
+        "Phết đều phô mai lên lát bánh mì nguyên cám.",
+        "Rắc chút tiêu xay lên trên nếu thích.",
+        "Dùng ngay khi bánh còn tươi."
+      ],
+      "ingredients": [
+        "40g phô mai tươi ít béo (cream cheese hoặc cottage cheese)",
+        "1 lát bánh mì nguyên cám (~30g)",
+        "tiêu xay tùy chọn"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "11_snack_giau_dam_04",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Edamame luộc muối biển",
+      "description": null,
+      "image_url": null,
+      "calories": 182,
+      "protein": 18,
+      "carbs": 12,
+      "fat": 8,
+      "prep_time": 5,
+      "difficulty": "easy",
+      "meal_type": "snack",
+      "tags": [
+        "eat-clean",
+        "giau-dam",
+        "dau-nanh",
+        "chat-xo-cao"
+      ],
+      "steps": [
+        "Đun sôi một nồi nước với 1g muối biển.",
+        "Cho 150g đậu edamame còn vỏ vào luộc khoảng 5 phút đến khi chín.",
+        "Vớt ra để ráo, có thể rắc thêm chút muối biển lên vỏ.",
+        "Để nguội bớt rồi bóc vỏ ăn nóng."
+      ],
+      "ingredients": [
+        "150g đậu edamame còn vỏ (tươi hoặc đông lạnh)",
+        "1g muối biển"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "11_snack_giau_dam_05",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Smoothie whey chuối sữa hạt",
+      "description": null,
+      "image_url": null,
+      "calories": 279,
+      "protein": 27,
+      "carbs": 31,
+      "fat": 4,
+      "prep_time": 5,
+      "difficulty": "easy",
+      "meal_type": "snack",
+      "tags": [
+        "giau-dam",
+        "sua",
+        "hat"
+      ],
+      "steps": [
+        "Bóc vỏ và cắt khúc 1 quả chuối.",
+        "Cho chuối, 1 scoop whey protein, 200ml sữa hạt không đường và vài viên đá vào máy xay.",
+        "Xay khoảng 1 phút đến khi hỗn hợp mịn và sánh.",
+        "Rót ra ly và uống ngay sau khi pha."
+      ],
+      "ingredients": [
+        "1 scoop whey protein (~30g)",
+        "1 quả chuối (~100g)",
+        "200ml sữa hạt không đường",
+        "đá viên"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "11_snack_giau_dam_06",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Đậu hũ áp chảo sốt nước tương mè",
+      "description": null,
+      "image_url": null,
+      "calories": 211,
+      "protein": 14,
+      "carbs": 8,
+      "fat": 15,
+      "prep_time": 10,
+      "difficulty": "easy",
+      "meal_type": "snack",
+      "tags": [
+        "eat-clean",
+        "giau-dam",
+        "dau-nanh",
+        "hat"
+      ],
+      "steps": [
+        "Cắt 150g đậu hũ cứng thành miếng vừa ăn, thấm khô bề mặt.",
+        "Băm nhuyễn 2 tép tỏi rồi pha sốt gồm 10ml nước tương, 5ml dầu mè và tỏi băm.",
+        "Ướp đậu hũ với một ít sốt khoảng 10 phút cho thấm.",
+        "Áp chảo đậu hũ không dầu đến khi vàng giòn đều 2 mặt.",
+        "Xếp đậu hũ ra đĩa, rưới phần sốt nước tương mè còn lại lên.",
+        "Rắc 5g mè rang và dùng nóng."
+      ],
+      "ingredients": [
+        "150g đậu hũ cứng cắt miếng",
+        "10ml nước tương",
+        "5ml dầu mè",
+        "5g mè rang",
+        "2 tép tỏi"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "11_snack_giau_dam_07",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Ức gà xé trộn rau sống",
+      "description": null,
+      "image_url": null,
+      "calories": 274,
+      "protein": 33,
+      "carbs": 15,
+      "fat": 9,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "snack",
+      "tags": [
+        "eat-clean",
+        "giau-dam",
+        "khong-heo",
+        "khong-bo",
+        "it-dau"
+      ],
+      "steps": [
+        "Luộc chín 100g ức gà rồi để nguội và xé thành sợi.",
+        "Bào sợi 50g bắp cải tím, 30g cà rốt và thái sợi 30g dưa leo.",
+        "Pha sốt trộn gồm 5ml dầu olive, 10ml giấm táo cùng chút muối tiêu.",
+        "Cho gà xé và rau vào tô lớn, rưới sốt lên.",
+        "Trộn đều cho thấm gia vị rồi nêm lại cho vừa miệng.",
+        "Bày ra đĩa và dùng ngay."
+      ],
+      "ingredients": [
+        "100g ức gà luộc xé sợi",
+        "50g bắp cải tím bào sợi",
+        "30g cà rốt bào sợi",
+        "30g dưa leo",
+        "5ml dầu olive",
+        "10ml giấm táo",
+        "muối tiêu"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "11_snack_giau_dam_08",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Hạt hạnh nhân + bơ đậu phộng tự nhiên",
+      "description": null,
+      "image_url": null,
+      "calories": 230,
+      "protein": 8,
+      "carbs": 14,
+      "fat": 18,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "snack",
+      "tags": [
+        "giau-dam",
+        "hat",
+        "lac",
+        "chat-beo-tot"
+      ],
+      "steps": [
+        "Cân chính xác 20g hạnh nhân rang khô và 15g bơ đậu phộng tự nhiên.",
+        "Rửa sạch và cắt 1 lát táo khoảng 50g.",
+        "Phết bơ đậu phộng lên lát táo hoặc dùng để chấm.",
+        "Ăn kèm hạnh nhân để cân bằng vị béo và vị ngọt tự nhiên của táo."
+      ],
+      "ingredients": [
+        "20g hạt hạnh nhân rang khô",
+        "15g bơ đậu phộng tự nhiên (không thêm đường muối)",
+        "1 lát táo (~50g)"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "11_snack_giau_dam_09",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Sữa tươi ít béo + 1 quả táo",
+      "description": null,
+      "image_url": null,
+      "calories": 178,
+      "protein": 7,
+      "carbs": 31,
+      "fat": 3,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "snack",
+      "tags": [
+        "giau-dam",
+        "sua"
+      ],
+      "steps": [
+        "Rửa sạch quả táo dưới vòi nước rồi để ráo, có thể cắt thành miếng vừa ăn hoặc ăn nguyên quả",
+        "Rót 200ml sữa tươi ít béo không đường ra ly",
+        "Uống sữa kèm ăn táo, nhai kỹ để cảm nhận vị tươi mát"
+      ],
+      "ingredients": [
+        "200ml sữa tươi ít béo không đường",
+        "1 quả táo vừa (~150g)"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "11_snack_giau_dam_10",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Tôm tươi luộc chấm muối chanh",
+      "description": null,
+      "image_url": null,
+      "calories": 148,
+      "protein": 36,
+      "carbs": 0,
+      "fat": 3,
+      "prep_time": 7,
+      "difficulty": "easy",
+      "meal_type": "snack",
+      "tags": [
+        "eat-clean",
+        "giau-dam",
+        "hai-san",
+        "it-dau"
+      ],
+      "steps": [
+        "Rửa sạch 150g tôm tươi, bỏ đầu nhưng giữ nguyên vỏ cho tôm ngọt thịt",
+        "Đun sôi nồi nước với 1g muối, thả tôm vào luộc 5-7 phút đến khi tôm chuyển màu đỏ cam và cong mình thì vớt ra",
+        "Pha nước chấm bằng cách hoà chút muối với 5ml nước cốt chanh, thêm ớt tươi thái lát nếu thích cay",
+        "Bóc vỏ tôm, chấm cùng muối chanh và thưởng thức khi còn ấm"
+      ],
+      "ingredients": [
+        "150g tôm tươi vừa (bỏ đầu giữ vỏ)",
+        "5ml nước cốt chanh",
+        "1g muối",
+        "ớt tươi tùy chọn"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "11_snack_giau_dam_11",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Bánh gạo lứt phết bơ đậu phộng chuối",
+      "description": null,
+      "image_url": null,
+      "calories": 207,
+      "protein": 6,
+      "carbs": 30,
+      "fat": 8,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "snack",
+      "tags": [
+        "giau-dam",
+        "lac",
+        "hat",
+        "chat-xo-cao"
+      ],
+      "steps": [
+        "Lột vỏ nửa quả chuối rồi thái thành lát mỏng đều",
+        "Phết 15g bơ đậu phộng tự nhiên không đường lên bề mặt 2 tấm bánh gạo lứt",
+        "Xếp các lát chuối lên trên lớp bơ đậu phộng cho phủ kín mặt bánh",
+        "Ăn ngay để bánh còn giòn, tránh để lâu bánh bị ỉu"
+      ],
+      "ingredients": [
+        "2 tấm bánh gạo lứt (~20g)",
+        "15g bơ đậu phộng tự nhiên không đường",
+        "1/2 quả chuối (~50g) thái lát"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "11_snack_giau_dam_12",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Ức gà nướng salad rau xanh sốt dầu olive chanh",
+      "description": null,
+      "image_url": null,
+      "calories": 367,
+      "protein": 48,
+      "carbs": 7,
+      "fat": 16,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "lunch",
+      "tags": [
+        "eat-clean",
+        "low-carb",
+        "giau-dam",
+        "khong-heo",
+        "khong-bo",
+        "it-dau"
+      ],
+      "steps": [
+        "Rửa sạch 150g ức gà bỏ da, ướp với muối tiêu và một ít tỏi băm trong 10 phút",
+        "Rửa 60g xà lách mix, 80g cà chua bi và 50g dưa leo cho sạch; cắt đôi cà chua bi và thái lát dưa leo, để ráo",
+        "Nướng hoặc áp chảo ức gà mỗi mặt khoảng 4-5 phút đến khi chín vàng, sau đó để nghỉ rồi thái lát vừa ăn",
+        "Pha sốt bằng cách trộn đều 10ml dầu olive, 15ml nước cốt chanh, phần tỏi băm còn lại cùng chút muối tiêu",
+        "Cho xà lách, cà chua bi và dưa leo ra đĩa, xếp gà lát lên trên, rưới sốt và trộn nhẹ trước khi dùng"
+      ],
+      "ingredients": [
+        "150g ức gà bỏ da",
+        "60g xà lách mix",
+        "80g cà chua bi",
+        "50g dưa leo",
+        "10ml dầu olive",
+        "15ml nước cốt chanh",
+        "tỏi băm",
+        "muối tiêu"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "12_trua_low_carb_01",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Cá phi lê nướng rau củ luộc không tinh bột",
+      "description": null,
+      "image_url": null,
+      "calories": 505,
+      "protein": 39,
+      "carbs": 21,
+      "fat": 31,
+      "prep_time": 15,
+      "difficulty": "easy",
+      "meal_type": "lunch",
+      "tags": [
+        "eat-clean",
+        "low-carb",
+        "giau-dam",
+        "ca",
+        "khong-heo",
+        "khong-bo",
+        "it-dau"
+      ],
+      "steps": [
+        "Rửa sạch 180g cá phi lê, thấm khô rồi ướp với muối tiêu trong 10 phút",
+        "Đặt cá lên khay và nướng hoặc hấp khoảng 15 phút đến khi cá chín và xém vàng nhẹ",
+        "Đun sôi nước rồi luộc riêng 100g bông cải xanh, 80g đậu ve và 80g cà rốt đến vừa chín tới, giữ độ giòn xanh",
+        "Bày cá và rau củ luộc ra đĩa, rưới 5ml dầu olive lên rau, vắt thêm chanh và rắc chút muối tiêu trước khi dùng"
+      ],
+      "ingredients": [
+        "180g cá basa/cá thu phi lê",
+        "100g bông cải xanh luộc",
+        "80g đậu ve luộc",
+        "80g cà rốt luộc",
+        "5ml dầu olive",
+        "muối tiêu",
+        "chanh"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "12_trua_low_carb_02",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Salad tôm trứng rau diếp cá cà chua",
+      "description": null,
+      "image_url": null,
+      "calories": 482,
+      "protein": 60,
+      "carbs": 8,
+      "fat": 26,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "lunch",
+      "tags": [
+        "eat-clean",
+        "low-carb",
+        "giau-dam",
+        "hai-san",
+        "trung",
+        "khong-heo",
+        "khong-bo",
+        "it-dau"
+      ],
+      "steps": [
+        "Đun sôi nước rồi luộc 150g tôm sú đến khi chín đỏ, vớt ra bóc vỏ; luộc 2 quả trứng khoảng 8-10 phút cho chín",
+        "Rửa sạch 50g rau diếp cá, 80g cà chua và 50g dưa leo; thái cà chua múi cau và dưa leo thành lát",
+        "Bóc vỏ trứng luộc rồi thái múi cau hoặc cắt đôi",
+        "Pha sốt bằng cách trộn đều 10ml dầu olive, 15ml giấm táo cùng chút muối tiêu",
+        "Cho rau diếp cá, cà chua, dưa leo, tôm và trứng vào tô, rưới sốt và trộn nhẹ rồi bày ra đĩa"
+      ],
+      "ingredients": [
+        "150g tôm sú luộc bỏ vỏ",
+        "2 trứng luộc (~100g)",
+        "50g rau diếp cá",
+        "80g cà chua",
+        "50g dưa leo",
+        "10ml dầu olive",
+        "15ml giấm táo",
+        "muối tiêu"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "12_trua_low_carb_03",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Thịt bò xào bông cải xanh không cơm",
+      "description": null,
+      "image_url": null,
+      "calories": 511,
+      "protein": 46,
+      "carbs": 18,
+      "fat": 29,
+      "prep_time": 5,
+      "difficulty": "easy",
+      "meal_type": "lunch",
+      "tags": [
+        "eat-clean",
+        "low-carb",
+        "giau-dam",
+        "khong-heo"
+      ],
+      "steps": [
+        "Rửa sạch 200g bông cải xanh, cắt thành các bông nhỏ vừa ăn; thái 150g thịt bò thăn thành lát mỏng và đập dập 2 tép tỏi",
+        "Làm nóng 5ml dầu olive, phi thơm tỏi rồi cho bông cải vào xào khoảng 3 phút đến khi xanh và hơi mềm",
+        "Tăng lửa lớn, cho thịt bò vào xào nhanh 2 phút đến khi bò vừa chín tái để giữ độ mềm",
+        "Nêm 10ml nước tương ít muối và chút tiêu, đảo đều rồi tắt bếp và bày ra đĩa, dùng nóng không kèm cơm"
+      ],
+      "ingredients": [
+        "150g thịt bò thăn thái lát",
+        "200g bông cải xanh cắt bông",
+        "2 tép tỏi",
+        "5ml dầu olive",
+        "10ml nước tương ít muối",
+        "tiêu"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "12_trua_low_carb_04",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Ức gà đùi gà kho tiêu rau muống xào",
+      "description": null,
+      "image_url": null,
+      "calories": 470,
+      "protein": 52,
+      "carbs": 9,
+      "fat": 23,
+      "prep_time": 15,
+      "difficulty": "easy",
+      "meal_type": "lunch",
+      "tags": [
+        "eat-clean",
+        "low-carb",
+        "giau-dam",
+        "khong-heo",
+        "khong-bo"
+      ],
+      "steps": [
+        "Rửa sạch 180g ức hoặc đùi gà bỏ da rồi cắt miếng vừa ăn; nhặt rửa 200g rau muống và đập dập 2 tép tỏi",
+        "Cho gà vào nồi cùng nửa phần tỏi, 5ml nước mắm nhạt và 1g tiêu xay, kho lửa nhỏ khoảng 15 phút đến khi gà thấm và nước kẹo lại",
+        "Làm nóng 5ml dầu olive trong chảo riêng, phi thơm phần tỏi còn lại rồi cho rau muống vào xào lửa lớn đến khi vừa chín tới",
+        "Bày gà kho tiêu và rau muống xào ra đĩa, dùng nóng"
+      ],
+      "ingredients": [
+        "180g ức hoặc đùi gà bỏ da",
+        "200g rau muống",
+        "2 tép tỏi",
+        "5ml nước mắm nhạt",
+        "1g tiêu xay",
+        "5ml dầu olive"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "12_trua_low_carb_05",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Canh rau cải nấu thịt heo nạc ít tinh bột",
+      "description": null,
+      "image_url": null,
+      "calories": 273,
+      "protein": 36,
+      "carbs": 10,
+      "fat": 10,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "lunch",
+      "tags": [
+        "eat-clean",
+        "low-carb",
+        "khong-bo",
+        "khong-hai-san"
+      ],
+      "steps": [
+        "Rửa sạch 200g cải ngọt rồi cắt khúc vừa ăn; bóc và băm 10g hành tím",
+        "Đun sôi 500ml nước, cho 120g thịt heo nạc vào luộc chín rồi vớt ra thái lát mỏng, giữ lại phần nước luộc làm nước dùng",
+        "Phi thơm hành tím, cho thịt heo lát vào đảo sơ rồi đổ nước dùng vào đun sôi lại",
+        "Thả cải ngọt vào nấu khoảng 2-3 phút đến khi rau vừa chín mềm",
+        "Nêm 5ml nước mắm nhạt cùng chút muối tiêu cho vừa miệng, tắt bếp và múc ra tô dùng nóng"
+      ],
+      "ingredients": [
+        "120g thịt heo nạc luộc mỏng",
+        "200g cải ngọt",
+        "500ml nước",
+        "10g hành tím",
+        "5ml nước mắm nhạt",
+        "muối tiêu"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "12_trua_low_carb_06",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Salad bơ thịt bò áp chảo sốt giấm táo",
+      "description": null,
+      "image_url": null,
+      "calories": 620,
+      "protein": 42,
+      "carbs": 13,
+      "fat": 45,
+      "prep_time": 5,
+      "difficulty": "easy",
+      "meal_type": "lunch",
+      "tags": [
+        "eat-clean",
+        "low-carb",
+        "giau-dam",
+        "khong-heo",
+        "chat-beo-tot"
+      ],
+      "steps": [
+        "Ướp 150g thịt bò thăn với chút muối tiêu; rửa sạch 60g xà lách và 80g cà chua bi, cắt đôi cà chua bi để ráo",
+        "Gọt vỏ nửa quả bơ rồi thái lát hoặc miếng vừa ăn",
+        "Làm nóng chảo, áp chảo thịt bò lửa lớn khoảng 2-3 phút mỗi mặt đến độ chín mong muốn rồi để nghỉ và thái lát",
+        "Pha sốt bằng cách trộn đều 10ml dầu olive, 10ml giấm táo cùng chút muối tiêu",
+        "Bày xà lách, cà chua bi và bơ ra đĩa, xếp thịt bò lát lên trên, rưới sốt giấm táo rồi dùng ngay"
+      ],
+      "ingredients": [
+        "150g thịt bò thăn",
+        "1/2 quả bơ (~80g)",
+        "60g xà lách",
+        "80g cà chua bi",
+        "10ml dầu olive",
+        "10ml giấm táo",
+        "muối tiêu"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "12_trua_low_carb_07",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Mực hấp rau củ luộc không tinh bột",
+      "description": null,
+      "image_url": null,
+      "calories": 263,
+      "protein": 36,
+      "carbs": 24,
+      "fat": 3,
+      "prep_time": 10,
+      "difficulty": "easy",
+      "meal_type": "lunch",
+      "tags": [
+        "eat-clean",
+        "low-carb",
+        "giau-dam",
+        "hai-san",
+        "khong-heo",
+        "khong-bo",
+        "it-dau"
+      ],
+      "steps": [
+        "Làm sạch 200g mực, cắt khoanh hoặc khía vảy rồng rồi xóc nhẹ với chút muối và tiêu.",
+        "Xếp mực vào xửng, hấp 8-10 phút đến khi mực săn trắng và vừa chín tới, không hấp quá lâu kẻo dai.",
+        "Luộc riêng từng loại rau củ trong nước sôi có chút muối: cà rốt và đậu ve khoảng 4-5 phút, bông cải 2-3 phút cho chín tới mà vẫn giòn xanh.",
+        "Vớt rau củ ra, để ráo và giữ độ giòn.",
+        "Bày mực và rau củ ra đĩa, vắt chanh lên cùng chút tiêu.",
+        "Pha nước chấm chanh muối tiêu hoặc dùng kèm ít tương ớt rồi thưởng thức khi còn ấm."
+      ],
+      "ingredients": [
+        "200g mực tươi làm sạch",
+        "100g đậu ve luộc",
+        "80g bông cải",
+        "50g cà rốt luộc",
+        "chanh",
+        "muối",
+        "tiêu",
+        "tương ớt ít"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "12_trua_low_carb_08",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Bắp cải nhồi thịt heo nạc hấp",
+      "description": null,
+      "image_url": null,
+      "calories": 392,
+      "protein": 45,
+      "carbs": 27,
+      "fat": 14,
+      "prep_time": 20,
+      "difficulty": "easy",
+      "meal_type": "lunch",
+      "tags": [
+        "eat-clean",
+        "low-carb",
+        "khong-bo",
+        "khong-hai-san"
+      ],
+      "steps": [
+        "Trần sơ 4 lá bắp cải qua nước sôi cho mềm dẻo và dễ cuốn, rồi vớt ra để ráo.",
+        "Băm nhỏ tỏi và 30g hành tây, trộn đều với 150g thịt heo nạc xay, 20g nấm đông cô băm, 5ml nước mắm và chút tiêu cho thấm.",
+        "Múc nhân thịt đặt vào giữa từng lá bắp cải rồi cuốn hoặc gập gọn lại cho kín nhân.",
+        "Xếp các cuốn bắp cải vào xửng, hấp 15-20 phút đến khi thịt chín hẳn.",
+        "Lấy ra, để ráo bớt nước rồi bày lên đĩa và dùng nóng, có thể chấm kèm nước mắm tiêu."
+      ],
+      "ingredients": [
+        "4 lá bắp cải lớn (~120g)",
+        "150g thịt heo nạc xay",
+        "20g nấm đông cô băm",
+        "30g hành tây",
+        "5ml nước mắm",
+        "tiêu",
+        "tỏi"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "12_trua_low_carb_09",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Ức gà đậu ve xào không cơm",
+      "description": null,
+      "image_url": null,
+      "calories": 362,
+      "protein": 50,
+      "carbs": 15,
+      "fat": 11,
+      "prep_time": 5,
+      "difficulty": "easy",
+      "meal_type": "lunch",
+      "tags": [
+        "eat-clean",
+        "low-carb",
+        "giau-dam",
+        "khong-heo",
+        "khong-bo"
+      ],
+      "steps": [
+        "Thái lát mỏng 150g ức gà, ướp với chút tiêu và 5ml nước tương cho thấm vài phút; đập dập băm nhỏ 2 tép tỏi và rửa cắt khúc 150g đậu ve.",
+        "Làm nóng 5ml dầu olive trong chảo, phi thơm tỏi.",
+        "Cho ức gà vào xào lửa lớn đến khi thịt chín và săn lại.",
+        "Cho đậu ve vào xào thêm khoảng 3 phút đến khi chín tới mà vẫn giòn xanh.",
+        "Nêm nhẹ phần nước tương còn lại và chút tiêu, đảo đều rồi tắt bếp.",
+        "Trút ra đĩa và dùng nóng, không ăn kèm cơm."
+      ],
+      "ingredients": [
+        "150g ức gà bỏ da thái lát",
+        "150g đậu ve",
+        "2 tép tỏi",
+        "5ml dầu olive",
+        "10ml nước tương",
+        "tiêu"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "12_trua_low_carb_10",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Súp rau củ thịt bò không tinh bột",
+      "description": null,
+      "image_url": null,
+      "calories": 377,
+      "protein": 28,
+      "carbs": 20,
+      "fat": 20,
+      "prep_time": 20,
+      "difficulty": "easy",
+      "meal_type": "lunch",
+      "tags": [
+        "eat-clean",
+        "low-carb",
+        "khong-heo"
+      ],
+      "steps": [
+        "Thái nhỏ 100g thịt bò thăn, đập dập băm tỏi; gọt và cắt miếng vừa ăn 100g bí đỏ, 80g cà rốt, 60g hành tây.",
+        "Phi thơm tỏi với 5ml dầu olive, cho thịt bò vào xào nhanh lửa lớn cho săn lại.",
+        "Cho hành tây, cà rốt và bí đỏ vào đảo sơ, rồi đổ 500ml nước vào.",
+        "Đun sôi rồi hạ lửa, hầm khoảng 20 phút đến khi rau củ mềm và nước ngọt.",
+        "Nêm nhẹ muối tiêu cho vừa ăn, vớt bọt cho nước trong.",
+        "Múc súp ra tô và dùng nóng."
+      ],
+      "ingredients": [
+        "100g thịt bò thăn thái nhỏ",
+        "100g bí đỏ",
+        "80g cà rốt",
+        "60g hành tây",
+        "500ml nước",
+        "tỏi",
+        "5ml dầu olive",
+        "muối tiêu"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "12_trua_low_carb_11",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Salad cá ngừ rau diếp trứng không tinh bột",
+      "description": null,
+      "image_url": null,
+      "calories": 460,
+      "protein": 57,
+      "carbs": 8,
+      "fat": 23,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "lunch",
+      "tags": [
+        "eat-clean",
+        "low-carb",
+        "giau-dam",
+        "ca",
+        "trung",
+        "khong-heo",
+        "khong-bo",
+        "omega3"
+      ],
+      "steps": [
+        "Luộc 2 quả trứng khoảng 8-10 phút cho chín, ngâm nước lạnh rồi bóc vỏ và cắt múi cau.",
+        "Rửa sạch và để ráo 60g rau diếp, cắt 80g cà chua và 50g dưa leo thành miếng vừa ăn.",
+        "Để cá ngừ thật ráo dầu rồi trộn nhẹ tay cùng rau diếp, cà chua và dưa leo trong tô lớn.",
+        "Xếp các miếng trứng luộc lên trên mặt salad.",
+        "Pha sốt gồm 10ml dầu olive, nước cốt chanh, muối và tiêu, khuấy đều.",
+        "Rưới sốt lên salad ngay trước khi ăn để rau giữ độ giòn tươi."
+      ],
+      "ingredients": [
+        "1 hộp cá ngừ ~160g để ráo",
+        "2 trứng luộc (~100g)",
+        "60g rau diếp",
+        "80g cà chua",
+        "50g dưa leo",
+        "10ml dầu olive",
+        "muối tiêu",
+        "chanh"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "12_trua_low_carb_12",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Cá hồi nướng măng tây súp lơ không tinh bột",
+      "description": null,
+      "image_url": null,
+      "calories": 428,
+      "protein": 36,
+      "carbs": 14,
+      "fat": 25,
+      "prep_time": 15,
+      "difficulty": "easy",
+      "meal_type": "dinner",
+      "tags": [
+        "eat-clean",
+        "low-carb",
+        "giau-dam",
+        "ca",
+        "khong-heo",
+        "khong-bo",
+        "omega3"
+      ],
+      "steps": [
+        "Ướp 150g cá hồi phi lê với muối, tiêu và 2 tép tỏi băm trong vài phút cho thấm.",
+        "Quét chút dầu olive, đặt cá lên giấy bạc rồi gói lại và nướng ở 200°C khoảng 15 phút đến khi cá chín mềm.",
+        "Trong lúc nướng cá, luộc hoặc hấp 150g măng tây và 120g súp lơ xanh khoảng 3-4 phút cho chín tới mà vẫn xanh giòn.",
+        "Vớt rau ra, để ráo và nêm chút muối tiêu.",
+        "Bày cá hồi cùng măng tây và súp lơ ra đĩa, vắt chanh lên trên rồi dùng nóng."
+      ],
+      "ingredients": [
+        "150g cá hồi phi lê bỏ da",
+        "150g măng tây",
+        "120g súp lơ xanh",
+        "5ml dầu olive",
+        "muối tiêu",
+        "chanh",
+        "tỏi 2 tép"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "13_toi_low_carb_01",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Ức gà áp chảo salad cà chua bi không cơm",
+      "description": null,
+      "image_url": null,
+      "calories": 365,
+      "protein": 57,
+      "carbs": 5,
+      "fat": 12,
+      "prep_time": 7,
+      "difficulty": "easy",
+      "meal_type": "dinner",
+      "tags": [
+        "eat-clean",
+        "low-carb",
+        "giau-dam",
+        "khong-heo",
+        "khong-bo",
+        "it-dau"
+      ],
+      "steps": [
+        "Ướp 180g ức gà với muối và tiêu cho thấm vài phút.",
+        "Làm nóng 5ml dầu olive, áp chảo ức gà mỗi mặt khoảng 5-7 phút đến khi vàng đều và chín bên trong.",
+        "Để gà nghỉ vài phút rồi thái lát vừa ăn.",
+        "Rửa sạch để ráo 60g xà lách và bổ đôi 80g cà chua bi, cho vào tô.",
+        "Pha sốt dầu olive, nước cốt chanh, muối và tiêu rồi trộn đều với salad.",
+        "Bày gà lên trên salad và dùng ngay, không ăn kèm cơm."
+      ],
+      "ingredients": [
+        "180g ức gà bỏ da",
+        "80g cà chua bi",
+        "60g xà lách",
+        "5ml dầu olive",
+        "muối tiêu",
+        "chanh"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "13_toi_low_carb_02",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Thịt bò nướng bông cải xanh xào tỏi",
+      "description": null,
+      "image_url": null,
+      "calories": 499,
+      "protein": 45,
+      "carbs": 17,
+      "fat": 28,
+      "prep_time": 5,
+      "difficulty": "easy",
+      "meal_type": "dinner",
+      "tags": [
+        "eat-clean",
+        "low-carb",
+        "giau-dam",
+        "khong-heo"
+      ],
+      "steps": [
+        "Ướp 150g thịt bò thăn với muối và tiêu; tách 200g bông cải xanh thành miếng nhỏ và đập dập băm 2 tép tỏi.",
+        "Nướng hoặc áp chảo thịt bò mỗi mặt khoảng 3 phút cho chín tái theo ý thích, rồi để nghỉ vài phút.",
+        "Phi thơm tỏi với 5ml dầu olive, cho bông cải xanh vào xào khoảng 5 phút đến khi chín tới mà vẫn giòn xanh.",
+        "Nêm nhẹ muối tiêu cho bông cải vừa ăn.",
+        "Thái lát thịt bò, bày ra đĩa cùng bông cải xào tỏi rồi dùng nóng."
+      ],
+      "ingredients": [
+        "150g thịt bò thăn",
+        "200g bông cải xanh",
+        "2 tép tỏi",
+        "5ml dầu olive",
+        "muối tiêu"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "13_toi_low_carb_03",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Ức gà chiên không bột bí đỏ nướng",
+      "description": null,
+      "image_url": null,
+      "calories": 336,
+      "protein": 57,
+      "carbs": 10,
+      "fat": 7,
+      "prep_time": 20,
+      "difficulty": "easy",
+      "meal_type": "dinner",
+      "tags": [
+        "low-carb",
+        "giau-dam",
+        "trung",
+        "khong-heo",
+        "khong-bo"
+      ],
+      "steps": [
+        "Ướp 180g ức gà với muối và tiêu cùng chút tỏi băm cho thấm.",
+        "Lăn đều miếng gà qua 1 lòng trắng trứng để tạo lớp áo thay cho bột chiên.",
+        "Cho gà vào nồi chiên không dầu, chiên ở 180°C khoảng 18 phút đến khi vàng giòn bên ngoài và chín bên trong.",
+        "Cắt miếng 150g bí đỏ và nướng ở 180°C khoảng 20 phút đến khi mềm ngọt.",
+        "Bày ức gà chiên cùng bí đỏ nướng ra đĩa và dùng nóng."
+      ],
+      "ingredients": [
+        "180g ức gà bỏ da (chiên không bột, dùng lòng trắng trứng thay bột)",
+        "150g bí đỏ nướng",
+        "1 lòng trắng trứng",
+        "muối tiêu",
+        "tỏi"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "13_toi_low_carb_04",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Cá hồi bơ tỏi nướng giấy bạc súp lơ",
+      "description": null,
+      "image_url": null,
+      "calories": 433,
+      "protein": 33,
+      "carbs": 10,
+      "fat": 28,
+      "prep_time": 18,
+      "difficulty": "easy",
+      "meal_type": "dinner",
+      "tags": [
+        "eat-clean",
+        "low-carb",
+        "giau-dam",
+        "ca",
+        "sua",
+        "khong-heo",
+        "khong-bo",
+        "omega3"
+      ],
+      "steps": [
+        "Ướp 150g cá hồi phi lê với muối và tiêu, rồi đặt lên một miếng giấy bạc.",
+        "Đun chảy 10g bơ lạt, phi thơm 2 tép tỏi băm cùng nhành hương thảo nếu dùng.",
+        "Rưới đều hỗn hợp bơ tỏi thơm lên mặt cá hồi.",
+        "Gói kín giấy bạc lại và nướng ở 200°C trong 15-18 phút đến khi cá chín mềm.",
+        "Luộc 150g súp lơ xanh khoảng 3 phút cho chín tới mà vẫn xanh giòn, nêm chút muối tiêu.",
+        "Bày cá hồi bơ tỏi cùng súp lơ ra đĩa và dùng nóng."
+      ],
+      "ingredients": [
+        "150g cá hồi phi lê",
+        "10g bơ lạt",
+        "2 tép tỏi băm",
+        "muối tiêu",
+        "1 nhành hương thảo (tùy chọn)",
+        "150g súp lơ xanh luộc"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "13_toi_low_carb_05",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Thịt bò hầm bông cải không tinh bột",
+      "description": null,
+      "image_url": null,
+      "calories": 511,
+      "protein": 44,
+      "carbs": 20,
+      "fat": 28,
+      "prep_time": 40,
+      "difficulty": "medium",
+      "meal_type": "dinner",
+      "tags": [
+        "eat-clean",
+        "low-carb",
+        "khong-heo"
+      ],
+      "steps": [
+        "Thái thịt bò vai thành khối vừa ăn, ướp với chút muối tiêu và tỏi băm khoảng 10 phút",
+        "Cắt bông cải thành nhánh nhỏ, cà rốt thái khúc, cần tây cắt đoạn ngắn",
+        "Phi thơm tỏi với dầu olive, cho thịt bò vào áp chảo lửa lớn đến khi vàng đều các mặt",
+        "Đổ 300ml nước vào nồi, đậy vung hầm thịt bò lửa nhỏ khoảng 30-40 phút cho mềm",
+        "Cho cà rốt và cần tây vào hầm cùng cho đến khi rau củ chín mềm",
+        "Thêm bông cải vào nồi nấu thêm vài phút, nêm lại muối tiêu cho vừa ăn",
+        "Múc ra tô, dùng nóng"
+      ],
+      "ingredients": [
+        "150g thịt bò vai cắt khối",
+        "150g bông cải",
+        "50g cà rốt",
+        "50g cần tây",
+        "2 tép tỏi",
+        "5ml dầu olive",
+        "300ml nước",
+        "muối tiêu"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "13_toi_low_carb_06",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Tôm xào bông cải sup rau củ không tinh bột",
+      "description": null,
+      "image_url": null,
+      "calories": 367,
+      "protein": 56,
+      "carbs": 27,
+      "fat": 10,
+      "prep_time": 5,
+      "difficulty": "easy",
+      "meal_type": "dinner",
+      "tags": [
+        "eat-clean",
+        "low-carb",
+        "giau-dam",
+        "hai-san",
+        "khong-heo",
+        "khong-bo",
+        "it-dau"
+      ],
+      "steps": [
+        "Bóc vỏ tôm sú, rút chỉ đen, rửa sạch và để ráo",
+        "Cắt bông cải thành nhánh nhỏ, cà rốt thái lát mỏng, tỏi băm nhuyễn",
+        "Phi thơm tỏi với dầu olive, cho bông cải và cà rốt vào xào lửa lớn cho hơi chín",
+        "Cho tôm vào xào khoảng 3 phút đến khi tôm chín đỏ",
+        "Nêm nước tương ít muối và tiêu, đảo đều rồi tắt bếp",
+        "Bày ra đĩa, dùng nóng"
+      ],
+      "ingredients": [
+        "200g tôm sú bỏ vỏ",
+        "200g bông cải",
+        "80g cà rốt",
+        "2 tép tỏi",
+        "5ml dầu olive",
+        "10ml nước tương ít muối",
+        "tiêu"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "13_toi_low_carb_07",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Trứng tráng nấm bào ngư rau bina",
+      "description": null,
+      "image_url": null,
+      "calories": 342,
+      "protein": 23,
+      "carbs": 7,
+      "fat": 25,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "dinner",
+      "tags": [
+        "eat-clean",
+        "low-carb",
+        "giau-dam",
+        "trung",
+        "khong-heo",
+        "khong-bo"
+      ],
+      "steps": [
+        "Xé nấm bào ngư thành sợi, rửa rau bina sạch và để ráo",
+        "Đun chảy bơ lạt trong chảo, phi thơm rồi cho nấm bào ngư vào xào đến mềm",
+        "Cho rau bina vào đảo cùng đến khi rau vừa héo chín",
+        "Đập trứng ra tô, nêm muối tiêu rồi đánh tan",
+        "Đổ trứng vào chảo phủ đều mặt rau nấm, hạ lửa nhỏ chiên đến khi gần chín mặt dưới",
+        "Khi trứng gần chín thì nhẹ nhàng gấp đôi lại, để thêm chút cho chín hẳn",
+        "Trút ra đĩa, dùng nóng"
+      ],
+      "ingredients": [
+        "3 trứng (~150g)",
+        "80g nấm bào ngư",
+        "50g rau bina/cải bó xôi",
+        "10g bơ lạt",
+        "muối tiêu"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "13_toi_low_carb_08",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Gà nướng cải bó xôi quinoa",
+      "description": null,
+      "image_url": null,
+      "calories": 572,
+      "protein": 59,
+      "carbs": 48,
+      "fat": 15,
+      "prep_time": 20,
+      "difficulty": "easy",
+      "meal_type": "dinner",
+      "tags": [
+        "eat-clean",
+        "low-carb",
+        "giau-dam",
+        "khong-heo",
+        "khong-bo"
+      ],
+      "steps": [
+        "Ướp ức gà với muối tiêu, tỏi băm và vài giọt nước cốt chanh khoảng 10 phút",
+        "Vo sạch quinoa, nấu với nước khoảng 15 phút đến khi nở mềm rồi để ráo",
+        "Nướng ức gà ở 180°C trong 20 phút đến khi chín vàng",
+        "Phi thơm tỏi với dầu olive, cho cải bó xôi vào xào nhanh đến vừa chín tới, nêm chút muối tiêu",
+        "Thái lát ức gà, bày ra đĩa cùng quinoa và cải bó xôi",
+        "Vắt thêm chanh lên trên trước khi dùng"
+      ],
+      "ingredients": [
+        "150g ức gà bỏ da",
+        "70g quinoa sống (~180g chín)",
+        "100g cải bó xôi",
+        "5ml dầu olive",
+        "muối tiêu",
+        "tỏi",
+        "chanh"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "13_toi_low_carb_09",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Cá basa hấp gừng rau củ luộc không cơm",
+      "description": null,
+      "image_url": null,
+      "calories": 237,
+      "protein": 32,
+      "carbs": 16,
+      "fat": 6,
+      "prep_time": 15,
+      "difficulty": "easy",
+      "meal_type": "dinner",
+      "tags": [
+        "eat-clean",
+        "low-carb",
+        "ca",
+        "khong-heo",
+        "khong-bo",
+        "it-dau"
+      ],
+      "steps": [
+        "Rửa sạch cá basa phi lê, để ráo và xếp ra đĩa hấp",
+        "Trải gừng thái lát và hành lá cắt khúc lên mặt cá",
+        "Hấp cá cùng gừng và hành lá khoảng 12-15 phút đến khi cá chín",
+        "Luộc riêng đậu ve và bông cải đến khi chín tới rồi vớt ra để ráo",
+        "Rưới nước tương nhạt lên cá, bày kèm rau củ luộc và dùng nóng, không ăn kèm cơm"
+      ],
+      "ingredients": [
+        "180g cá basa phi lê",
+        "10g gừng thái lát",
+        "hành lá 10g",
+        "100g đậu ve luộc",
+        "80g bông cải luộc",
+        "5ml nước tương nhạt"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "13_toi_low_carb_10",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Thịt heo nạc luộc bắp cải trộn dầu giấm",
+      "description": null,
+      "image_url": null,
+      "calories": 505,
+      "protein": 46,
+      "carbs": 33,
+      "fat": 24,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "dinner",
+      "tags": [
+        "eat-clean",
+        "low-carb",
+        "khong-bo",
+        "khong-hai-san"
+      ],
+      "steps": [
+        "Luộc thịt heo nạc thăn với chút muối đến khi chín, vớt ra để nguội rồi thái lát mỏng",
+        "Thái sợi bắp cải tím và dưa leo, ngâm qua nước lạnh cho giòn rồi để ráo",
+        "Pha sốt dầu giấm bằng dầu olive, giấm táo, tỏi băm và muối tiêu, khuấy đều",
+        "Cho bắp cải và dưa leo vào tô, rưới sốt dầu giấm và trộn đều",
+        "Bày phần rau trộn ra đĩa, xếp thịt heo lên trên và dùng ngay"
+      ],
+      "ingredients": [
+        "150g thịt heo nạc thăn luộc",
+        "150g bắp cải tím thái sợi",
+        "80g dưa leo",
+        "10ml dầu olive",
+        "10ml giấm táo",
+        "muối tiêu",
+        "tỏi"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "13_toi_low_carb_11",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Ốc bao tử xào sả ớt rau muống luộc",
+      "description": null,
+      "image_url": null,
+      "calories": 373,
+      "protein": 37,
+      "carbs": 38,
+      "fat": 7,
+      "prep_time": 5,
+      "difficulty": "easy",
+      "meal_type": "dinner",
+      "tags": [
+        "eat-clean",
+        "low-carb",
+        "hai-san",
+        "khong-heo",
+        "khong-bo",
+        "it-dau"
+      ],
+      "steps": [
+        "Rửa sạch ốc bao tử, để ráo; thái lát sả, ớt và băm tỏi",
+        "Luộc rau muống đến khi chín tới rồi vớt ra để ráo",
+        "Phi thơm tỏi, sả và ớt với dầu olive cho dậy mùi",
+        "Cho ốc vào xào lửa lớn khoảng 5 phút đến khi ốc chín",
+        "Nêm chút nước mắm, đảo đều rồi tắt bếp",
+        "Bày ốc ra đĩa, dùng kèm rau muống luộc"
+      ],
+      "ingredients": [
+        "200g ốc bao tử làm sạch",
+        "2 cây sả thái lát",
+        "2 quả ớt",
+        "2 tép tỏi",
+        "5ml dầu olive",
+        "200g rau muống luộc",
+        "nước mắm ít"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "13_toi_low_carb_12",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Bơ tươi ½ quả muối biển tiêu",
+      "description": null,
+      "image_url": null,
+      "calories": 128,
+      "protein": 2,
+      "carbs": 7,
+      "fat": 12,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "snack",
+      "tags": [
+        "eat-clean",
+        "low-carb",
+        "chat-beo-tot",
+        "it-duong"
+      ],
+      "steps": [
+        "Bổ đôi quả bơ chín và bỏ hạt",
+        "Rắc một nhúm muối biển và tiêu xay lên phần thịt bơ",
+        "Dùng thìa xúc ăn trực tiếp khi còn tươi"
+      ],
+      "ingredients": [
+        "1/2 quả bơ chín (~80g)",
+        "muối biển 1 nhúm",
+        "tiêu xay"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "14_snack_low_carb_01",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Trứng luộc 2 quả cà chua tươi",
+      "description": null,
+      "image_url": null,
+      "calories": 169,
+      "protein": 14,
+      "carbs": 4,
+      "fat": 11,
+      "prep_time": 10,
+      "difficulty": "easy",
+      "meal_type": "snack",
+      "tags": [
+        "eat-clean",
+        "low-carb",
+        "giau-dam",
+        "trung"
+      ],
+      "steps": [
+        "Cho trứng gà vào nồi nước, luộc khoảng 8-10 phút cho chín",
+        "Vớt trứng ra ngâm nước lạnh rồi bóc vỏ, cắt đôi",
+        "Thái cà chua thành lát",
+        "Bày trứng và cà chua ra đĩa, rắc chút muối tiêu và dùng ngay"
+      ],
+      "ingredients": [
+        "2 trứng gà (~100g)",
+        "1 quả cà chua (~80g)",
+        "muối tiêu"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "14_snack_low_carb_02",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Phô mai con bò cười ít béo",
+      "description": null,
+      "image_url": null,
+      "calories": 100,
+      "protein": 10,
+      "carbs": 0,
+      "fat": 6,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "snack",
+      "tags": [
+        "low-carb",
+        "sua"
+      ],
+      "steps": [
+        "Lấy 2 miếng phô mai con bò cười ít béo ra khỏi hộp và bóc giấy gói",
+        "Ăn trực tiếp như món ăn nhẹ",
+        "Bảo quản phần còn lại trong tủ lạnh"
+      ],
+      "ingredients": [
+        "2 miếng phô mai con bò cười ít béo (~40g)"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "14_snack_low_carb_03",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Sữa chua Hy Lạp không đường việt quất hạnh nhân",
+      "description": null,
+      "image_url": null,
+      "calories": 145,
+      "protein": 12,
+      "carbs": 13,
+      "fat": 6,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "snack",
+      "tags": [
+        "low-carb",
+        "giau-dam",
+        "sua",
+        "hat",
+        "probiotic"
+      ],
+      "steps": [
+        "Rửa sạch việt quất tươi rồi để ráo nước",
+        "Múc 100g sữa chua Hy Lạp không đường ra bát",
+        "Rắc đều 50g việt quất lên trên mặt sữa chua",
+        "Rắc tiếp 10g hạnh nhân rang khô đã bẻ nhỏ",
+        "Dùng ngay khi còn lạnh để giữ độ ngon"
+      ],
+      "ingredients": [
+        "100g sữa chua Hy Lạp không đường",
+        "50g việt quất tươi",
+        "10g hạnh nhân rang khô"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "14_snack_low_carb_04",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Dưa leo cần tây tươi chấm hummus",
+      "description": null,
+      "image_url": null,
+      "calories": 91,
+      "protein": 4,
+      "carbs": 11,
+      "fat": 4,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "snack",
+      "tags": [
+        "low-carb",
+        "giau-dam",
+        "lac",
+        "chat-xo-cao"
+      ],
+      "steps": [
+        "Rửa sạch dưa leo và cần tây dưới vòi nước",
+        "Thái dưa leo và cần tây thành khúc dài vừa cầm tay",
+        "Múc 40g hummus ra chén nhỏ làm nước chấm",
+        "Chấm dưa leo và cần tây vào hummus rồi thưởng thức ngay"
+      ],
+      "ingredients": [
+        "80g dưa leo thái khúc",
+        "80g cần tây thái khúc",
+        "40g hummus (đậu xanh/đậu gà xay, không dầu dừa)"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "14_snack_low_carb_05",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Hạt hạnh nhân rang khô không muối",
+      "description": null,
+      "image_url": null,
+      "calories": 116,
+      "protein": 4,
+      "carbs": 4,
+      "fat": 10,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "snack",
+      "tags": [
+        "low-carb",
+        "hat",
+        "chat-beo-tot"
+      ],
+      "steps": [
+        "Cân chính xác đúng 20g hạnh nhân rang khô không muối",
+        "Cho ra chén nhỏ và ăn từ từ, nhai kỹ",
+        "Chỉ ăn đúng phần đã chia vì hạnh nhân nhiều calo dù low-carb"
+      ],
+      "ingredients": [
+        "20g hạt hạnh nhân rang khô không muối"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "14_snack_low_carb_06",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Rau quả mọng ít đường việt quất dâu tây",
+      "description": null,
+      "image_url": null,
+      "calories": 57,
+      "protein": 1,
+      "carbs": 14,
+      "fat": 0,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "snack",
+      "tags": [
+        "eat-clean",
+        "low-carb",
+        "it-duong",
+        "chat-xo-cao"
+      ],
+      "steps": [
+        "Rửa sạch 100g việt quất hoặc dâu tây dưới vòi nước",
+        "Để ráo nước hoặc thấm nhẹ bằng khăn giấy",
+        "Cho ra bát và ăn ngay khi quả còn tươi mát"
+      ],
+      "ingredients": [
+        "100g việt quất hoặc dâu tây tươi"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "14_snack_low_carb_07",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Ức gà xé rau diếp cuộn",
+      "description": null,
+      "image_url": null,
+      "calories": 149,
+      "protein": 26,
+      "carbs": 3,
+      "fat": 3,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "snack",
+      "tags": [
+        "eat-clean",
+        "low-carb",
+        "giau-dam",
+        "khong-heo",
+        "khong-bo",
+        "it-dau"
+      ],
+      "steps": [
+        "Xé nhỏ 80g ức gà luộc thành sợi vừa ăn",
+        "Rửa sạch 4 lá rau diếp và cà chua bi rồi để ráo, bổ đôi cà chua bi",
+        "Pha 5ml nước tương ít muối với chút tiêu làm nước chấm",
+        "Trải lá rau diếp ra, cho gà xé và cà chua bi vào rồi cuộn lại",
+        "Chấm cuộn vào nước tương pha tiêu và thưởng thức ngay"
+      ],
+      "ingredients": [
+        "80g ức gà luộc xé",
+        "4 lá rau diếp lớn (~40g)",
+        "30g cà chua bi",
+        "5ml nước tương ít muối",
+        "tiêu"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "14_snack_low_carb_08",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Sữa tươi không đường bơ đậu phộng tự nhiên",
+      "description": null,
+      "image_url": null,
+      "calories": 159,
+      "protein": 9,
+      "carbs": 12,
+      "fat": 8,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "snack",
+      "tags": [
+        "low-carb",
+        "sua",
+        "lac",
+        "chat-beo-tot"
+      ],
+      "steps": [
+        "Rót 200ml sữa tươi không đường ít béo ra ly",
+        "Múc 10g bơ đậu phộng tự nhiên không đường muối ra thìa",
+        "Uống sữa kèm ăn bơ đậu phộng để cân bằng đạm và chất béo tốt"
+      ],
+      "ingredients": [
+        "200ml sữa tươi không đường ít béo",
+        "10g bơ đậu phộng tự nhiên không đường muối"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "14_snack_low_carb_09",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Súp trứng rau củ không tinh bột",
+      "description": null,
+      "image_url": null,
+      "calories": 184,
+      "protein": 15,
+      "carbs": 8,
+      "fat": 11,
+      "prep_time": 5,
+      "difficulty": "easy",
+      "meal_type": "snack",
+      "tags": [
+        "eat-clean",
+        "low-carb",
+        "trung"
+      ],
+      "steps": [
+        "Thái nhỏ 50g bông cải và cắt hạt lựu 30g cà rốt",
+        "Đun sôi 300ml nước rồi cho bông cải và cà rốt vào nấu khoảng 5 phút cho mềm",
+        "Đập 2 quả trứng đánh tan rồi từ từ rót vào nồi, khuấy đều tạo vân trứng",
+        "Nêm muối tiêu cho vừa miệng",
+        "Tắt bếp, rắc hành lá thái nhỏ và múc ra bát dùng nóng"
+      ],
+      "ingredients": [
+        "2 trứng (~100g)",
+        "50g bông cải thái nhỏ",
+        "30g cà rốt hạt lựu",
+        "300ml nước",
+        "muối tiêu",
+        "hành lá"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "14_snack_low_carb_10",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Cần tây ớt chuông thái lát bơ",
+      "description": null,
+      "image_url": null,
+      "calories": 118,
+      "protein": 2,
+      "carbs": 12,
+      "fat": 8,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "snack",
+      "tags": [
+        "eat-clean",
+        "low-carb",
+        "chat-xo-cao",
+        "chat-beo-tot"
+      ],
+      "steps": [
+        "Rửa sạch cần tây và ớt chuông rồi để ráo",
+        "Thái cần tây thành khúc và ớt chuông thành lát dài vừa ăn",
+        "Dằm nhẹ 1/4 quả bơ với chút muối biển thành hỗn hợp sệt",
+        "Phết bơ dằm lên rau hoặc dùng làm nước chấm rồi ăn ngay"
+      ],
+      "ingredients": [
+        "80g cần tây thái khúc",
+        "80g ớt chuông thái lát",
+        "1/4 quả bơ (~50g) dằm nhẹ",
+        "muối biển"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "14_snack_low_carb_11",
+      "locale": "vi",
+      "is_active": false
+    },
+    {
+      "name": "Nước ép cần tây gừng chanh không đường",
+      "description": null,
+      "image_url": null,
+      "calories": 34,
+      "protein": 1,
+      "carbs": 7,
+      "fat": 0,
+      "prep_time": 25,
+      "difficulty": "medium",
+      "meal_type": "snack",
+      "tags": [
+        "eat-clean",
+        "low-carb",
+        "thuan-chay",
+        "it-duong"
+      ],
+      "steps": [
+        "Rửa sạch 2 cây cần tây và 10g gừng tươi, cắt khúc nhỏ",
+        "Vắt lấy khoảng 20ml nước cốt từ 1/2 quả chanh",
+        "Cho cần tây, gừng và 100ml nước vào máy ép hoặc xay nhuyễn rồi lọc bỏ bã",
+        "Khuấy nước cốt chanh vào, không thêm đường",
+        "Rót ra ly và uống ngay để giữ vitamin"
+      ],
+      "ingredients": [
+        "2 cây cần tây (~160g)",
+        "10g gừng tươi",
+        "1/2 quả chanh (~20ml nước)",
+        "100ml nước"
+      ],
+      "source": "cravvy_curated_vn",
+      "source_id": "14_snack_low_carb_12",
+      "locale": "vi",
+      "is_active": false
+    }
+  ]
+}

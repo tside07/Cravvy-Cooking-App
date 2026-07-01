@@ -6,6 +6,7 @@
 
 import 'package:cravvy_cooking_app/init.dart';
 import 'package:cravvy_cooking_app/data/models/meal.dart';
+import 'package:cravvy_cooking_app/common/widgets/images/recipe_image_placeholder.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 
@@ -309,11 +310,15 @@ class _ImagePlaceholder extends StatelessWidget {
   final MealType type;
 
   @override
-  Widget build(BuildContext context) => Container(
+  Widget build(BuildContext context) => SizedBox(
     width: 90,
     height: 90,
-    color: type.lightColor,
-    child: Center(child: Icon(type.icon, size: 32, color: type.color)),
+    child: RecipeImagePlaceholder(
+      icon: type.icon,
+      color: type.color,
+      lightColor: type.lightColor,
+      compact: true,
+    ),
   );
 }
 

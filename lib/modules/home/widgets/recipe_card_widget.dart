@@ -1,6 +1,7 @@
 import 'package:cravvy_cooking_app/init.dart';
 import 'package:cravvy_cooking_app/data/models/recipe.dart';
 import 'package:cravvy_cooking_app/data/models/meal_type_helper.dart';
+import 'package:cravvy_cooking_app/common/widgets/images/recipe_image_placeholder.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 
@@ -152,9 +153,11 @@ class RecipeCardWidget extends StatelessWidget {
   }
 
   Widget _buildRecipePhoto(IconData icon, Color lightColor, Color typeColor) {
-    final placeholder = ColoredBox(
-      color: lightColor,
-      child: Center(child: Icon(icon, size: 36, color: typeColor)),
+    final placeholder = RecipeImagePlaceholder(
+      icon: icon,
+      color: typeColor,
+      lightColor: lightColor,
+      name: recipe.name,
     );
     if (recipe.imageUrl != null && recipe.imageUrl!.isNotEmpty) {
       return CachedNetworkImage(

@@ -17,7 +17,28 @@ extension WeekOfYear on DateTime {
 }
 
 class MealSuggester {
-  // Gợi ý cả 4 slots cho 1 ngày — trả Map<mealType, Recipe>
+  /// Hash ổn định (FNV-1a) — KHÔNG phụ thuộc String.hashCode (có thể đổi giữa các
+  /// lần chạy), để gợi ý nhất quán trong cùng tuần.
+  static int _stableHash(String s) {
+    var h = 2166136261;
+    for (final c in s.codeUnits) {
+      h = ((h ^ c) * 16777619) & 0x7fffffff;
+    }
+    return h;
+  }
+
+  /// Số ngày trong cửa sổ cần khác nhau (1 tuần).
+  static const _weekSpan = 7;
+
+  /// Cửa sổ ranking tối đa để xoay vòng — đủ rộng cho cả tuần khác nhau nhưng
+  /// vẫn thiên về món điểm cao.
+  static const _maxWindow = 21;
+
+  // Gợi ý cả 4 slots cho 1 ngày — trả Map<mealType, Recipe>.
+  //
+  // Đa dạng theo tuần: mỗi slot xoay qua cửa sổ món-điểm-cao theo dayOffset
+  // (bước 1) nên 7 ngày liên tiếp KHÁC nhau (khi đủ ≥7 món hợp lệ); base theo
+  // (user, tuần, slot) nên mỗi tuần lại đổi bộ món.
   static Map<String, Recipe> suggestDay({
     required Map<String, List<Recipe>> byType,
     required UserModel user,
@@ -43,15 +64,16 @@ class MealSuggester {
               .compareTo(ProfileRecipeFilter.scoreRecipe(a, user)),
         );
 
-      final topN = scored.take(5).toList();
-      if (topN.isEmpty) continue;
+      // Cửa sổ ≥ 7 (để cả tuần khác nhau) và ≤ _maxWindow (giữ chất lượng).
+      final windowLen = scored.length <= _weekSpan
+          ? scored.length
+          : (scored.length < _maxWindow ? scored.length : _maxWindow);
+      final window = scored.take(windowLen).toList();
+      if (window.isEmpty) continue;
 
-      final seed =
-          (user.id.hashCode.abs()) +
-          (weekNumber * 31) +
-          (mealType.hashCode.abs() % 100) +
-          (dayOffset * 7);
-      result[mealType] = topN[seed % topN.length];
+      final base = _stableHash('${user.id}|$weekNumber|$mealType');
+      final idx = (base + dayOffset) % window.length;
+      result[mealType] = window[idx];
     }
     return result;
   }

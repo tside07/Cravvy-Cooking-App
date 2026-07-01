@@ -1,5 +1,6 @@
 import 'package:cravvy_cooking_app/init.dart';
 import 'package:cravvy_cooking_app/data/models/meal.dart';
+import 'package:cravvy_cooking_app/common/widgets/images/recipe_image_placeholder.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 /// Hero image section with back/bookmark buttons, title, rating, and tags.
@@ -20,15 +21,10 @@ class MealDetailHeaderWidget extends StatelessWidget {
             child: Image.network(
               meal.imageUrl,
               fit: BoxFit.cover,
-              errorBuilder: (_, __, ___) => ColoredBox(
-                color: meal.type.lightColor,
-                child: Center(
-                  child: Icon(
-                    meal.type.icon,
-                    color: meal.type.color,
-                    size: 64,
-                  ),
-                ),
+              errorBuilder: (_, __, ___) => RecipeImagePlaceholder(
+                icon: meal.type.icon,
+                color: meal.type.color,
+                lightColor: meal.type.lightColor,
               ),
             ),
           ),
