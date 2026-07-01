@@ -47,6 +47,14 @@ class ChatMessage {
         'content': content,
       };
 
+  /// Full shape for local persistence (round-trips via [ChatMessage.fromJson]).
+  Map<String, dynamic> toJson() => {
+        'role': isUser ? 'user' : 'assistant',
+        'content': content,
+        'referenced_recipe_ids': referencedRecipeIds,
+        'created_at': createdAt?.toIso8601String(),
+      };
+
   ChatMessage copyWith({
     String? content,
     List<String>? referencedRecipeIds,

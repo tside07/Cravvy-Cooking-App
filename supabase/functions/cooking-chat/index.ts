@@ -5,7 +5,10 @@
 // (via service role) so the per-day cap cannot be bypassed.
 //
 // Auto-injected: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, SUPABASE_ANON_KEY
-// Secrets: GEMINI_API_KEY (required), GEMINI_MODEL (optional, default gemini-2.5-flash)
+// Secrets: GEMINI_API_KEY (required); GEMINI_MODEL (optional, default
+//   gemini-2.5-flash); GEMINI_FALLBACK_MODEL (optional, default gemini-2.0-flash
+//   — used ONLY when the primary is transiently overloaded); DEBUG_CHAT
+//   (optional: "1" surfaces the real model error in the reply for diagnosis).
 
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.49.1";
 
@@ -43,6 +46,11 @@ function geminiModelName(): string {
   return Deno.env.get("GEMINI_MODEL") ?? "gemini-2.5-flash";
 }
 
+// Secondary model, used ONLY when the primary is transiently overloaded.
+function geminiFallbackModelName(): string {
+  return Deno.env.get("GEMINI_FALLBACK_MODEL") ?? "gemini-2.0-flash";
+}
+
 function usesThinkingBudget(model: string): boolean {
   return model.includes("2.5");
 }
@@ -51,9 +59,18 @@ function sleep(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-function isRateLimitError(e: unknown): boolean {
-  const msg = e instanceof Error ? e.message : String(e);
-  return msg.includes("429") || msg.toLowerCase().includes("rate");
+// Transient Gemini failures worth retrying / surfacing as "busy" rather than
+// dumping the user into the canned fallback: 429 (rate) and 5xx / UNAVAILABLE
+// ("high demand", model overloaded).
+function isTransientError(e: unknown): boolean {
+  const msg = (e instanceof Error ? e.message : String(e)).toLowerCase();
+  return msg.includes("429") ||
+    msg.includes("rate") ||
+    msg.includes("503") ||
+    msg.includes("500") ||
+    msg.includes("unavailable") ||
+    msg.includes("overloaded") ||
+    msg.includes("high demand");
 }
 
 function isPremiumTier(tier: string): boolean {
@@ -68,11 +85,14 @@ function startOfTodayUtcIso(): string {
   return start.toISOString();
 }
 
+// Gemini's REST API expects the OpenAPI `Type` enum in UPPERCASE
+// (OBJECT/STRING/ARRAY). Lowercase values are rejected with HTTP 400, which
+// would make every call fall back to the canned "trouble thinking" reply.
 const RESPONSE_SCHEMA = {
-  type: "object",
+  type: "OBJECT",
   properties: {
-    reply: { type: "string" },
-    recipe_ids: { type: "array", items: { type: "string" } },
+    reply: { type: "STRING" },
+    recipe_ids: { type: "ARRAY", items: { type: "STRING" } },
   },
   required: ["reply"],
 } as const;
@@ -133,26 +153,60 @@ async function callGeminiOnce(
   return extractTextFromGeminiResponse(data);
 }
 
-async function callGemini(
+// One model, with bounded retries on transient overload (jittered backoff).
+async function callModelWithRetry(
   apiKey: string,
+  model: string,
   systemPrompt: string,
   contents: Array<{ role: string; parts: Array<{ text: string }> }>,
+  maxAttempts: number,
 ): Promise<string> {
-  const model = geminiModelName();
   let lastErr: unknown;
-  for (let retry = 0; retry < 2; retry++) {
+  for (let attempt = 0; attempt < maxAttempts; attempt++) {
     try {
       return await callGeminiOnce(apiKey, model, systemPrompt, contents);
     } catch (e) {
       lastErr = e;
-      if (isRateLimitError(e) && retry < 1) {
-        await sleep(3000 * (retry + 1));
+      if (isTransientError(e) && attempt < maxAttempts - 1) {
+        // Jittered backoff so retries don't all slam the same spike.
+        await sleep(800 * (attempt + 1) + Math.floor(Math.random() * 400));
         continue;
       }
       break;
     }
   }
   throw lastErr;
+}
+
+// Fallback chain: try the primary model first; ONLY if it is transiently
+// overloaded (429 / 503 UNAVAILABLE) do we drop to the secondary model for this
+// one request. The primary serves the vast majority of traffic, so everyday
+// answer quality is unchanged — the secondary only rescues the rare spike
+// (a decent answer beats "try again later").
+async function callGemini(
+  apiKey: string,
+  systemPrompt: string,
+  contents: Array<{ role: string; parts: Array<{ text: string }> }>,
+): Promise<string> {
+  const primary = geminiModelName();
+  try {
+    return await callModelWithRetry(apiKey, primary, systemPrompt, contents, 2);
+  } catch (e) {
+    const fallback = geminiFallbackModelName();
+    if (isTransientError(e) && fallback && fallback !== primary) {
+      console.warn(
+        `Primary ${primary} overloaded; falling back to ${fallback}`,
+      );
+      return await callModelWithRetry(
+        apiKey,
+        fallback,
+        systemPrompt,
+        contents,
+        2,
+      );
+    }
+    throw e;
+  }
 }
 
 function buildSystemPrompt(
@@ -181,11 +235,19 @@ function buildSystemPrompt(
     `Always answer in ${lang}.`,
     "",
     "User profile:",
+    `- Age: ${profile.age ?? "unknown"}`,
+    `- Sex: ${profile.gender ?? "unknown"}`,
+    `- Height: ${profile.height_cm ?? "unknown"} cm`,
+    `- Weight: ${profile.weight_kg ?? "unknown"} kg`,
     `- Goal: ${profile.goal ?? "maintain"}`,
     `- Diets: ${JSON.stringify(profile.diets ?? [])}`,
     `- Avoid foods/allergens: ${JSON.stringify(profile.avoid_foods ?? [])}`,
     `- Cooking time preference: ${profile.cooking_time ?? "any"}`,
     weekBlock,
+    "When the user asks about calories, TDEE, a deficit/surplus, or macros,",
+    "estimate them from the profile above plus any details in the message,",
+    "briefly explain the numbers, and offer a simple one-day sample of meals",
+    "with a Protein/Carbs/Fat split. Prefer catalog dishes for the sample.",
     "When recommending specific dishes, ONLY use dishes from this catalog and",
     "return their UUIDs in `recipe_ids`. Never invent recipe IDs. You may also",
     "give general advice without referencing a dish.",
@@ -255,7 +317,9 @@ Deno.serve(async (req) => {
     // ── Profile + tier ────────────────────────────────────────────────────
     const { data: profile } = await admin
       .from("profiles")
-      .select("id, goal, diets, avoid_foods, cooking_time, subscription_tier")
+      .select(
+        "id, goal, diets, avoid_foods, cooking_time, subscription_tier, age, gender, height_cm, weight_kg",
+      )
       .eq("id", userId)
       .single();
     const safeProfile = profile ?? {};
@@ -358,20 +422,34 @@ Deno.serve(async (req) => {
         .filter((id) => validIds.has(id));
       if (!reply) throw new Error("Empty reply");
     } catch (e) {
-      // 429 after retry → ask client to retry without consuming the message.
-      if (isRateLimitError(e)) {
+      // Overloaded even after retries (429 / 503 UNAVAILABLE) → ask the client
+      // to retry shortly, without consuming the daily quota or persisting.
+      if (isTransientError(e)) {
         return jsonResponse({ error: "busy", retry_after: 8 }, 200);
       }
-      console.error("Gemini failed, using fallback:", e);
-      reply =
-        "I'm having trouble thinking right now. Meanwhile, here are a few dishes from your catalog you might enjoy.";
+      const detail = e instanceof Error ? e.message : String(e);
+      console.error("Gemini failed, using fallback:", detail);
+      // Set the `DEBUG_CHAT=1` functions secret to surface the real Gemini
+      // error in the chat bubble while diagnosing. Remove it in production.
+      reply = Deno.env.get("DEBUG_CHAT") === "1"
+        ? `⚠️ Gemini call failed: ${detail}`
+        : "I'm having trouble thinking right now. Meanwhile, here are a few dishes from your catalog you might enjoy.";
       referencedIds = shortlist.slice(0, 3).map((r) => String(r.id));
     }
 
     // ── Persist both turns (service role) ──────────────────────────────────
     const userContent = String(lastMessage.content).slice(0, MAX_CONTENT_CHARS);
+    // Both rows must carry the same keys: a heterogeneous bulk insert makes
+    // supabase-js send an explicit NULL for any key missing on a row, which
+    // violates the NOT NULL `referenced_recipe_ids` column (the DEFAULT '{}'
+    // only applies when the column is omitted from every row).
     const { error: insertError } = await admin.from("chat_messages").insert([
-      { user_id: userId, role: "user", content: userContent },
+      {
+        user_id: userId,
+        role: "user",
+        content: userContent,
+        referenced_recipe_ids: [],
+      },
       {
         user_id: userId,
         role: "assistant",
