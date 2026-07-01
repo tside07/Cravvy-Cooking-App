@@ -1,5 +1,6 @@
 // lib/data/services/recipe_service.dart
 
+import 'package:flutter/foundation.dart';
 import 'package:cravvy_cooking_app/core/constants/plan_limits.dart';
 import 'package:cravvy_cooking_app/data/services/supabase_service.dart';
 import 'package:cravvy_cooking_app/data/models/recipe.dart';
@@ -50,14 +51,19 @@ class RecipeService {
   // ─── Lấy 1 recipe theo ID ─────────────────────────────────────────────────
   static Future<Recipe?> fetchById(String id) async {
     try {
+      // maybeSingle: không tồn tại -> trả null KHÔNG ném exception (phân biệt với
+      // lỗi thật bên dưới). Trước đây .single() ném cho cả "không có" lẫn lỗi mạng.
       final data = await SupabaseService.client
           .from('recipes')
           .select()
           .eq('id', id)
           .eq('is_active', true)
-          .single();
-      return Recipe.fromJson(data);
-    } catch (_) {
+          .maybeSingle();
+      return data == null ? null : Recipe.fromJson(data);
+    } catch (e) {
+      // Tới đây là lỗi THẬT (mạng/RLS), không phải "không tìm thấy". Vẫn trả null
+      // để giữ contract với caller (Future.wait, FutureBuilder) nhưng log để chẩn đoán.
+      if (kDebugMode) debugPrint('RecipeService.fetchById($id) failed: $e');
       return null;
     }
   }

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:cravvy_cooking_app/core/constants/plan_limits.dart';
 import 'package:cravvy_cooking_app/data/models/user_model.dart';
 import 'package:cravvy_cooking_app/data/services/supabase_service.dart';
@@ -45,7 +46,9 @@ class UsageLimitService {
           .eq('week_start', _weekStartStr(DateTime.now()))
           .maybeSingle();
       return (row?['swap_count'] as num?)?.toInt() ?? 0;
-    } catch (_) {
+    } catch (e) {
+      // Giới hạn mềm: lỗi -> coi như 0 (fail-open) để app vẫn chạy; log để chẩn đoán.
+      if (kDebugMode) debugPrint('UsageLimit.swapCountThisWeek failed: $e');
       return 0;
     }
   }
@@ -86,8 +89,9 @@ class UsageLimitService {
           'updated_at': DateTime.now().toIso8601String(),
         }).eq('user_id', userId).eq('week_start', week);
       }
-    } catch (_) {
-      // Table missing or RLS — ignore so demo still works
+    } catch (e) {
+      // Table missing or RLS — ignore so demo still works; log để chẩn đoán.
+      if (kDebugMode) debugPrint('UsageLimit.recordSwap failed: $e');
     }
   }
 
@@ -100,7 +104,8 @@ class UsageLimitService {
           .eq('week_start', _weekStartStr(DateTime.now()))
           .maybeSingle();
       return (row?['ai_refresh_count'] as num?)?.toInt() ?? 0;
-    } catch (_) {
+    } catch (e) {
+      if (kDebugMode) debugPrint('UsageLimit.aiRefreshCountThisWeek failed: $e');
       return 0;
     }
   }
@@ -118,7 +123,8 @@ class UsageLimitService {
       final raw = rows.first['last_ai_refresh_at'];
       if (raw == null) return null;
       return DateTime.parse(raw as String).toLocal();
-    } catch (_) {
+    } catch (e) {
+      if (kDebugMode) debugPrint('UsageLimit.lastAiRefreshAt failed: $e');
       return null;
     }
   }
@@ -185,6 +191,8 @@ class UsageLimitService {
           'updated_at': now,
         }).eq('user_id', userId).eq('week_start', week);
       }
-    } catch (_) {}
+    } catch (e) {
+      if (kDebugMode) debugPrint('UsageLimit.recordAiRefresh failed: $e');
+    }
   }
 }

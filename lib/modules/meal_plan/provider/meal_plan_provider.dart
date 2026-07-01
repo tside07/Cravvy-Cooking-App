@@ -397,17 +397,21 @@ class MealPlanProvider extends ChangeNotifier {
             weekStart: _currentWeekStart(),
             forceRefresh: forceRefresh,
           );
-          debugPrint(
-            'AI meal plan: ai_generated=${result.aiGenerated}, '
-            'recipes_changed=${result.recipesChanged}, cached=${result.cached}',
-          );
+          if (kDebugMode) {
+            debugPrint(
+              'AI meal plan: ai_generated=${result.aiGenerated}, '
+              'recipes_changed=${result.recipesChanged}, cached=${result.cached}',
+            );
+          }
           if (forceRefresh) {
             await _applyCooldownAfterForceRefresh();
           }
           await loadWeek(suggestIfEmpty: false);
           return forceRefresh;
         } on AiMealPlanException catch (e) {
-          debugPrint('AI meal plan failed, using local fallback: $e');
+          if (kDebugMode) {
+            debugPrint('AI meal plan failed, using local fallback: $e');
+          }
         }
       }
       await _autoFillWeekLocal();

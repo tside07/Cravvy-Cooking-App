@@ -109,7 +109,7 @@ class ShoppingListProvider extends ChangeNotifier {
         await ShoppingListStorage.save(_items, userId: userId);
       }
     } catch (e) {
-      debugPrint('ShoppingListProvider cloud sync failed: $e');
+      if (kDebugMode) debugPrint('ShoppingListProvider cloud sync failed: $e');
       await _loadLocalOnly();
     } finally {
       _isSyncing = false;
@@ -129,7 +129,7 @@ class ShoppingListProvider extends ChangeNotifier {
     try {
       await ShoppingListService.replaceAll(uid, _items);
     } catch (e) {
-      debugPrint('ShoppingListProvider cloud persist failed: $e');
+      if (kDebugMode) debugPrint('ShoppingListProvider cloud persist failed: $e');
     }
   }
 
