@@ -80,7 +80,8 @@ class _SetupCompleteScreenState extends State<SetupCompleteScreen>
       'Eat Clean' => 'onboarding_setup.diet_eat_clean'.tr(),
       'Low-Carb' => 'onboarding_setup.diet_low_carb'.tr(),
       'Keto' => 'onboarding_setup.diet_keto'.tr(),
-      'Intermittent Fasting' => 'onboarding_setup.diet_intermittent_fasting'.tr(),
+      'Intermittent Fasting' =>
+        'onboarding_setup.diet_intermittent_fasting'.tr(),
       'Vegetarian' => 'onboarding_setup.diet_vegetarian'.tr(),
       'Vegan' => 'onboarding_setup.diet_vegan'.tr(),
       'High-Protein' => 'onboarding_setup.diet_high_protein'.tr(),
@@ -99,118 +100,142 @@ class _SetupCompleteScreenState extends State<SetupCompleteScreen>
 
     return PreAuthScaffold(
       body: SafeArea(
-        child: Padding(
-          padding: AppPad.a24,
-          child: Column(
-            children: [
-              const Spacer(),
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            return SingleChildScrollView(
+              child: ConstrainedBox(
+                constraints: BoxConstraints(minHeight: constraints.maxHeight),
+                child: IntrinsicHeight(
+                  child: Padding(
+                    padding: AppPad.a24,
+                    child: Column(
+                      children: [
+                        const Spacer(),
 
-              ScaleTransition(
-                scale: _scaleAnim,
-                child: Container(
-                  width: 120,
-                  height: 120,
-                  decoration: const BoxDecoration(
-                    gradient: AppColors.primaryGradient,
-                    shape: BoxShape.circle,
-                  ),
-                  child: const Center(
-                    child: Icon(
-                      Icons.celebration_rounded,
-                      color: Colors.white,
-                      size: 56,
-                    ),
-                  ),
-                ),
-              ),
-              AppGap.h32,
-
-              FadeTransition(
-                opacity: _fadeAnim,
-                child: Column(
-                  children: [
-                    Text(
-                      user != null && firstName.isNotEmpty
-                          ? 'setup_complete.all_set_user'.tr(
-                              namedArgs: {'name': firstName},
-                            )
-                          : 'setup_complete.all_set'.tr(),
-                      style: AppTextStyles.s20.copyWith(
-                        fontWeight: FontWeight.w800,
-                        color: PreAuthTheme.textPrimary,
-                        fontSize: 28,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                    AppGap.h12,
-                    Text(
-                      'setup_complete.personalized_desc'.tr(),
-                      style: AppTextStyles.s15.copyWith(
-                        color: PreAuthTheme.textSecondary,
-                        height: 1.5,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                    AppGap.h36,
-
-                    // Summary card — dùng data thật từ Supabase
-                    Container(
-                      padding: AppPad.a20,
-                      decoration: context.cardBox(),
-                      child: Column(
-                        children: [
-                          if (user?.goal != null) ...[
-                            _SummaryRow(
-                              icon: Icons.adjust_rounded,
-                              label: 'setup_complete.your_goal'.tr(),
-                              value: _goalLabel(user!.goal!),
+                        ScaleTransition(
+                          scale: _scaleAnim,
+                          child: Container(
+                            width: 120,
+                            height: 120,
+                            decoration: const BoxDecoration(
+                              gradient: AppColors.primaryGradient,
+                              shape: BoxShape.circle,
                             ),
-                            const Divider(height: 24, color: AppColors.divider),
-                          ],
-                          _SummaryRow(
-                            icon: Icons.eco_rounded,
-                            label: 'setup_complete.diet_type'.tr(),
-                            value: user?.diets.isEmpty ?? true
-                                ? 'setup_complete.no_restrictions'.tr()
-                                : user!.diets
-                                    .take(3)
-                                    .map(_dietLabel)
-                                    .join(', '),
+                            child: const Center(
+                              child: Icon(
+                                Icons.celebration_rounded,
+                                color: Colors.white,
+                                size: 56,
+                              ),
+                            ),
                           ),
-                          const Divider(height: 24, color: AppColors.divider),
-                          _SummaryRow(
-                            icon: Icons.schedule_rounded,
-                            label: 'setup_complete.cooking_time'.tr(),
-                            value: _cookingTimeLabel(user?.cookingTime),
+                        ),
+                        AppGap.h32,
+
+                        FadeTransition(
+                          opacity: _fadeAnim,
+                          child: Column(
+                            children: [
+                              Text(
+                                user != null && firstName.isNotEmpty
+                                    ? 'setup_complete.all_set_user'.tr(
+                                        namedArgs: {'name': firstName},
+                                      )
+                                    : 'setup_complete.all_set'.tr(),
+                                style: AppTextStyles.s20.copyWith(
+                                  fontWeight: FontWeight.w800,
+                                  color: PreAuthTheme.textPrimary,
+                                  fontSize: 28,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                              AppGap.h12,
+                              Text(
+                                'setup_complete.personalized_desc'.tr(),
+                                style: AppTextStyles.s15.copyWith(
+                                  color: PreAuthTheme.textSecondary,
+                                  height: 1.5,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                              AppGap.h36,
+
+                              // Summary card — dùng data thật từ Supabase
+                              Container(
+                                padding: AppPad.a20,
+                                decoration: context.cardBox(),
+                                child: Column(
+                                  children: [
+                                    if (user?.goal != null) ...[
+                                      _SummaryRow(
+                                        icon: Icons.adjust_rounded,
+                                        label: 'setup_complete.your_goal'.tr(),
+                                        value: _goalLabel(user!.goal!),
+                                      ),
+                                      const Divider(
+                                        height: 24,
+                                        color: AppColors.divider,
+                                      ),
+                                    ],
+                                    _SummaryRow(
+                                      icon: Icons.eco_rounded,
+                                      label: 'setup_complete.diet_type'.tr(),
+                                      value: user?.diets.isEmpty ?? true
+                                          ? 'setup_complete.no_restrictions'
+                                                .tr()
+                                          : user!.diets
+                                                .take(3)
+                                                .map(_dietLabel)
+                                                .join(', '),
+                                    ),
+                                    const Divider(
+                                      height: 24,
+                                      color: AppColors.divider,
+                                    ),
+                                    _SummaryRow(
+                                      icon: Icons.schedule_rounded,
+                                      label: 'setup_complete.cooking_time'.tr(),
+                                      value: _cookingTimeLabel(
+                                        user?.cookingTime,
+                                      ),
+                                    ),
+                                    const Divider(
+                                      height: 24,
+                                      color: AppColors.divider,
+                                    ),
+                                    _SummaryRow(
+                                      icon: Icons.calendar_today_rounded,
+                                      label: 'setup_complete.meal_plan'.tr(),
+                                      value: 'setup_complete.meal_plan_value'
+                                          .tr(),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
                           ),
-                          const Divider(height: 24, color: AppColors.divider),
-                          _SummaryRow(
-                            icon: Icons.calendar_today_rounded,
-                            label: 'setup_complete.meal_plan'.tr(),
-                            value: 'setup_complete.meal_plan_value'.tr(),
+                        ),
+
+                        const Spacer(),
+                        // Guaranteed breathing room so the card never sits flush against
+                        // the button when content fills the screen and the Spacer collapses.
+                        AppGap.h32,
+
+                        FadeTransition(
+                          opacity: _fadeAnim,
+                          child: CravvyButton(
+                            label: 'setup_complete.view_meal_plan'.tr(),
+                            onTap: () => context.go(AppRouter.app),
                           ),
-                        ],
-                      ),
+                        ),
+                        AppGap.h12,
+                      ],
                     ),
-                  ],
+                  ),
                 ),
               ),
-
-              const Spacer(),
-              // Guaranteed breathing room so the card never sits flush against
-              // the button when content fills the screen and the Spacer collapses.
-              AppGap.h32,
-
-              FadeTransition(
-                opacity: _fadeAnim,
-                child: CravvyButton(
-                  label: 'setup_complete.view_meal_plan'.tr(),
-                  onTap: () => context.go(AppRouter.app),
-                ),
-              ),
-              AppGap.h12,
-            ],
-          ),
+            );
+          },
         ),
       ),
     );
