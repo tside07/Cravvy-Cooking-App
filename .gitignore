@@ -2,6 +2,7 @@
 *.class
 *.log
 *.pyc
+__pycache__/
 *.swp
 .DS_Store
 .atom/
@@ -53,6 +54,21 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
+# Build outputs & signing material — chặn ở gốc phòng khi lỡ copy ra ngoài
+# /build/ hoặc android/ (vd. để tiện tay chạy firebase_distribute.ps1).
+*.apk
+*.aab
+*.ipa
+*.jks
+*.keystore
+*.p12
+*.mobileprovision
+key.properties
+
+# Cache của Firebase CLI (tạo ra khi chạy `firebase login`/`firebase deploy` cục bộ)
+# firebase-debug.log đã khớp rule *.log ở đầu file, không cần lặp lại.
+.firebase/
+
 # Environment
 .env
 *.env
@@ -71,3 +87,10 @@ memory/
 # AI / editor tool folders (local only — not part of the project)
 .claude/
 .cursor/
+
+# Recipe image-gen working set & scratch artifacts (ảnh đã upload lên Supabase; local only)
+tools/_gen_images/
+tools/_*.csv
+tools/_*.html
+tools/_*.json
+data/seeds/*.bak.json
