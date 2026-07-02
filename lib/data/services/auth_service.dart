@@ -1,7 +1,7 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:cravvy_cooking_app/core/constants/oauth_config.dart';
-import 'package:cravvy_cooking_app/core/constants/plan_limits.dart';
 import 'package:cravvy_cooking_app/data/models/user_model.dart';
 import 'package:cravvy_cooking_app/data/services/auth_oauth_exception.dart';
 import 'package:cravvy_cooking_app/data/services/supabase_service.dart';
@@ -23,11 +23,14 @@ class AuthService {
 
     if (response.user == null) return null;
 
-    // TODO: Trigger đã tạo profile, nhưng full_name có thể chưa có — update thêm
-    await _client
-        .from('profiles')
-        .update({'full_name': fullName, 'email': email})
-        .eq('id', response.user!.id);
+    // Trigger handle_new_user có thể đã tạo profile nhưng chưa có full_name; cũng
+    // có thể chưa kịp tạo (race). Upsert theo id để set chắc chắn dù row đã tồn
+    // tại hay chưa — tránh trường hợp .update() không khớp row nào -> tên trống.
+    await _client.from('profiles').upsert({
+      'id': response.user!.id,
+      'full_name': fullName,
+      'email': email,
+    });
 
     return await getProfile(response.user!.id);
   }
@@ -85,7 +88,11 @@ class AuthService {
     } catch (e) {
       try {
         await _client.auth.signOut();
-      } catch (_) {}
+      } catch (signOutErr) {
+        if (kDebugMode) {
+          debugPrint('OAuth cleanup signOut failed: $signOutErr');
+        }
+      }
       rethrow;
     } finally {
       _cancelCompleter = null;
@@ -245,39 +252,20 @@ class AuthService {
     return await getProfile(userId);
   }
 
-  /// Activates 14-day Premium trial on `profiles` (no payment).
+  /// Kích hoạt gói dùng thử Premium 14 ngày (một lần) qua Edge Function
+  /// `start-trial`. Client không còn được ghi trực tiếp `subscription_tier` /
+  /// `premium_until` (đã bị trigger DB khoá) — server ghi bằng service_role sau
+  /// khi xác thực + kiểm tra điều kiện, rồi ta đọc lại hồ sơ.
+  ///
+  /// Trả `null` nếu không kích hoạt được (vd: đã dùng trial trước đó -> 409,
+  /// hoặc lỗi server). [AuthProvider] map `null` thành thông báo lỗi trial.
   static Future<UserModel?> startPremiumTrial(String userId) async {
-    final until = DateTime.now().add(
-      const Duration(days: PlanLimits.premiumTrialDays),
-    );
-    await _client.from('profiles').update({
-      'subscription_tier': PlanLimits.tierTrial,
-      'premium_until': until.toUtc().toIso8601String(),
-    }).eq('id', userId);
-
-    return getProfile(userId);
-  }
-
-  /// Activates a paid Premium plan on `profiles` after a (mock) payment.
-  /// [planId] is `monthly` or `annual`; the access window extends from the
-  /// later of now / current `premium_until` so re-purchasing stacks time.
-  static Future<UserModel?> activatePaidPlan(
-    String userId,
-    String planId, {
-    DateTime? currentPremiumUntil,
-  }) async {
-    final days = planId == 'annual' ? 365 : 30;
-    final now = DateTime.now();
-    final base = (currentPremiumUntil != null && currentPremiumUntil.isAfter(now))
-        ? currentPremiumUntil
-        : now;
-    final until = base.add(Duration(days: days));
-    await _client.from('profiles').update({
-      'subscription_tier': PlanLimits.tierPremium,
-      'premium_until': until.toUtc().toIso8601String(),
-    }).eq('id', userId);
-
-    return getProfile(userId);
+    final response = await _client.functions.invoke('start-trial');
+    final data = response.data;
+    if (data is Map && data['success'] == true) {
+      return getProfile(userId);
+    }
+    return null;
   }
 
   static Future<UserModel?> updateSetupData({

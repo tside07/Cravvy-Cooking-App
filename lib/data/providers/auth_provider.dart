@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:cravvy_cooking_app/core/constants/plan_limits.dart';
 import 'package:cravvy_cooking_app/core/utils/auth_oauth_error_mapper.dart';
@@ -191,7 +191,9 @@ class AuthProvider extends ChangeNotifier {
       if (SupabaseService.currentUser != null) {
         await AuthService.logout();
       }
-    } catch (_) {}
+    } catch (e) {
+      if (kDebugMode) debugPrint('cleanupPartialOAuthSession failed: $e');
+    }
     _user = null;
   }
 
@@ -354,31 +356,6 @@ class AuthProvider extends ChangeNotifier {
     if (!isLoggedIn) return false;
     try {
       _user = await AuthService.startPremiumTrial(_user!.id);
-      if (_user == null) {
-        _setError('auth.err_trial_failed');
-        return false;
-      }
-      _trialExpiryHandled = false;
-      _status = AuthStatus.authenticated;
-      _syncUserToProviders();
-      notifyListeners();
-      return true;
-    } catch (e) {
-      _setError('auth.err_trial_migration');
-      return false;
-    }
-  }
-
-  /// Activates a paid plan ([planId] = `monthly` | `annual`) after a (mock)
-  /// payment. Unlike the trial this sets the `premium` tier (no auto-cancel).
-  Future<bool> activatePaidPlan(String planId) async {
-    if (!isLoggedIn) return false;
-    try {
-      _user = await AuthService.activatePaidPlan(
-        _user!.id,
-        planId,
-        currentPremiumUntil: _user!.premiumUntil,
-      );
       if (_user == null) {
         _setError('auth.err_trial_failed');
         return false;
