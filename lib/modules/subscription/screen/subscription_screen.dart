@@ -359,17 +359,11 @@ class _CtaBar extends StatelessWidget {
       isTrial: isTrial,
     );
     if (ok != true || !context.mounted) return;
+    // Chỉ TRIAL trả true (kích hoạt ngay). Gói trả phí: sheet tự hiển thị màn
+    // "chờ duyệt" (admin kích hoạt thủ công sau khi xác minh bill) -> không báo
+    // "thành công" ở đây nữa.
     if (isTrial) {
-      // Celebratory trial-unlocked screen.
       context.push(AppRouter.trialActivation);
-    } else {
-      // Real purchase: stay here (CTA flips to "Current plan") + confirm.
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('subscription.upgrade_success'.tr()),
-          behavior: SnackBarBehavior.floating,
-        ),
-      );
     }
   }
 }
